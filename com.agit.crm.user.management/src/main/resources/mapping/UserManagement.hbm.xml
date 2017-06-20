@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-access="field">
+  <class mutable="true" name="com.agit.crm.user.management.domain.user.User" table="MST_USER">
+    <!--<cache usage="read-only"/>-->
+    <id column="id_user" name="id">
+      <!--<generator class="sequence"/>-->
+      <generator class="increment"/>
+    </id>
+    <property column="userName" name="userName" not-null="true" unique="true" update="false"/>
+    <property column="password" name="password" not-null="true" update="true"/>
+    <property column="userID" name="userID" not-null="false" update="false"/>
+    <property column="nip" name="nip" not-null="false" update="false"/>
+    <property column="userStatus" name="userStatus" not-null="true" update="true">
+      <type name="org.hibernate.type.EnumType">
+        <param name="enumClass">com.agit.crm.shared.type.StatusData</param>
+        <param name="type">12</param>
+      </type>
+    </property>
+    <many-to-one cascade="all" class="com.agit.crm.user.management.domain.role.Role" column="roleID" lazy="false" name="role" update="true"/>
+    <component name="userSpecification" update="true">
+      <property column="fullName" name="fullName" not-null="false"/>
+      <property column="email" name="email" not-null="false"/>
+      <property column="mobilePhone" name="mobilePhone" not-null="false"/>
+      <property column="immediateSupervisorUserName" name="immediateSupervisorUserName"/>
+      <property column="primaryBranchID" name="primaryBranchID"/>
+      <property column="escute" name="escute"/>
+      <property column="jobDivision" name="jobDivision" not-null="false">
+        <type name="org.hibernate.type.EnumType">
+          <param name="enumClass">com.agit.crm.shared.type.JobDivision</param>
+          <param name="type">12</param>
+        </type>
+      </property>
+      <property column="jobLocation" name="jobLocation" not-null="false">
+        <type name="org.hibernate.type.EnumType">
+          <param name="enumClass">com.agit.crm.shared.type.JobLocation</param>
+          <param name="type">12</param>
+        </type>
+      </property>
+      <component name="accessTime">
+        <property column="mondayStart" name="mondayStart"/>
+        <property column="mondayEnd" name="mondayEnd"/>
+        <property column="tuesdayStart" name="tuesdayStart"/>
+        <property column="tuesdayEnd" name="tuesdayEnd"/>
+        <property column="wednesdayStart" name="wednesdayStart"/>
+        <property column="wednesdayEnd" name="wednesdayEnd"/>
+        <property column="thursdayStart" name="thursdayStart"/>
+        <property column="thursdayEnd" name="thursdayEnd"/>
+        <property column="fridayStart" name="fridayStart"/>
+        <property column="fridayEnd" name="fridayEnd"/>
+        <property column="saturdayStart" name="saturdayStart"/>
+        <property column="saturdayEnd" name="saturdayEnd"/>
+        <property column="sundayStart" name="sundayStart"/>
+        <property column="sundayEnd" name="sundayEnd"/>
+      </component>
+      <component name="userLoginInfo">
+        <property column="lastLogin" name="lastLogin"/>
+        <property column="lastLoginFailed" name="lastLoginFailed"/>
+        <property column="loginAttempt" name="loginAttempt"/>
+        <property column="loginDate" name="loginDate"/>
+        <property column="logoutDate" name="logoutDate"/>
+        <property column="credentialsExpiredDate" name="credentialsExpiredDate"/>
+        <property column="remoteAddress" name="remoteAddress"/>
+        <property column="remoteHost" name="remoteHost"/>
+        <property column="sessionID" name="sessionID"/>
+      </component>
+    </component>
+    <property column="creationalDate" name="creationalDate" not-null="true" update="true"/>
+    <property column="creationalBy" name="creationalBy" unique="false" update="true"/>
+  </class>
+</hibernate-mapping>

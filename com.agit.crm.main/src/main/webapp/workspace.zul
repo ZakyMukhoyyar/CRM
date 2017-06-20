@@ -1,0 +1,83 @@
+<?page id="index" title="E-Procurement - Project"?>
+<?link rel="icon" type="image/png" href="/images/logoagit-new.png"?>
+<?taglib uri="/WEB-INF/security.tld" prefix="sec"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<!--<?link rel="stylesheet" type="text/css"	href="/styles/css/bootstrap.css" ?>-->
+<!--<?link rel="stylesheet" type="text/css"	href="/styles/css/default.css" ?>-->
+<zk xmlns="http://www.zkoss.org/2005/zul">
+    <window border="none"
+            apply="org.zkoss.bind.BindComposer"
+            viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.WorkspaceVM')"
+            height="100%" width="100%">
+        
+        <!-- Right Click Tab -->
+        <menupopup id="popupClose">
+            <menuitem label="Close" onClick="@command('menuRightTab', popupRight=1)"/>
+            <menuitem label="Close All" onClick="@command('menuRightTab', popupRight=2)"/>
+            <menuitem label="Close Other" onClick="@command('menuRightTab', popupRight=3)"/>
+        </menupopup>
+        <!-- Header -->
+        <borderlayout>
+            <north height="60px" border="none">
+                <borderlayout>
+                    <west border="none" size="20%">
+                        <image src="@bind(vm.uriPhoto)" />
+                    </west>
+                    <east border="none">
+                        <div>
+                            <label value="Logged in as"/>
+                            <label value="@load(vm.concat(vm.user.userSpecificationDTO.fullName, vm.concat(' - ',vm.user.roleDTO.roleName)))" style="font-weight:bold" />
+                            <label value="|"/>
+                            <a href="/processLogout" style="color:black" onClick="@command('buttonLogout')" >
+                                <label value="Logout"/>
+                            </a>
+                            <!--<label value="Version : ${labels.buildNumber}"/>-->
+                        </div>
+                    </east>
+                </borderlayout>
+            </north>
+
+            <!-- Menu -->
+            <west splittable="true" width="20%" collapsible="true" border="none"
+                  title="${labels.workspace.label.menu}" flex="true" autoscroll="true">
+                <tree model="@load(vm.model)">
+                    <template name="model">
+                        <treeitem label="@load(each.menuName)" onClick="@command('menuClick', obj=each)" visible="${sec:isAllGranted(each.privilegeID)}" />
+                    </template>
+                </tree>
+            </west>
+
+            <!-- Main -->
+            <center border="none" autoscroll="true">
+                <tabbox id="tabbox" height="100%">
+                    <tabs id="tabs">
+                        <tab label="Dashboard" iconSclass="icon icon-home" />
+                    </tabs>
+                    <tabpanels id="tabPanels">
+                        <tabpanel style="overflow: auto">
+                            <include src="@load(vm.sourceDashboard)" />
+                        </tabpanel>
+                    </tabpanels>
+                </tabbox>
+            </center>
+
+            <!-- Footer -->
+            <south border="none" size="25px">
+                <borderlayout>
+                    <west border="none" style="padding: 5px 10px 0px 0px">
+                        Copyright 2016 &#169; Bitozen
+                    </west>
+                    <east border="none" style="padding: 5px 5px 0px 0px">
+                        <div align="left">
+                            <label value="@load(vm.concatDate('Date: ',vm.user.userSpecificationDTO.userLoginInfoDTO.loginDate))" />
+                            <space/>
+                            <label value="@load(vm.concatDate('Last Login : ',vm.user.userSpecificationDTO.userLoginInfoDTO.lastLogin))" />
+                            <space/>
+                            <label value="@load(vm.concatDate('Last Login Failed: ', vm.user.userSpecificationDTO.userLoginInfoDTO.lastLoginFailed))" />
+                        </div>
+                    </east>
+                </borderlayout>
+            </south>
+        </borderlayout>
+    </window>
+</zk>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?taglib uri="/WEB-INF/security.tld" prefix="sec"?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<zk xmlns="http://www.zkoss.org/2005/zul">
+    <window apply="org.zkoss.bind.BindComposer"
+            viewModel="@id('vm') @init('com.bitozen.skk.user.management.interfaces.web.ui.viewmodel.CompanyVM')"
+            form="@id('fx') @load(vm.companyProfileDTO) @save(vm.companyProfileDTO, before='buttonSave')">
+        
+        <separator/>
+        <groupbox closable="false" mold="3d">
+            <caption label="Search Company"/>
+            <grid>
+                
+                <columns>
+                    <column width="20%"/>
+                    <column width="30%"/>
+                </columns>
+                
+                <rows>
+                    <row>
+                        <label value="Company Full Name" />
+                        <textbox value="@bind(vm.fullname)" width="300px"/>
+                    </row>
+          
+                </rows>               
+            </grid>
+            
+            <grid style="border:0">
+                <columns>
+                    <column width="267px"></column>
+                    <column width="120px"></column>
+                    <column width="300px"></column>
+                </columns>
+                <rows>
+                    <row>
+                        <label></label>
+                        <button label="Search" mold="trendy" width="100px" onClick="@command('buttonSearch')"/>
+                        <button label="Creat Company" mold="trendy" width="220px" onClick="@command('buttonNewCompany')"/>
+                    </row>
+                </rows>
+            </grid>
+                
+            
+        </groupbox>
+        <groupbox closable="false">
+            
+            <listbox rows="@load(vm.pageSize)" pageSize="@load(vm.pageSize)" pagingPosition="top" mold="paging" emptyMessage="${labels.common.noDataFound}" model="@bind(vm.companyProfileDTOs)">
+                <listhead>
+                    <listheader label="Company Full Name" width="15%" align="center"/>
+                    <listheader label="Address" width="15%" align="center"/>
+                    <listheader label="Country" width="15%" align="center"/>
+                    <listheader label="Telephone" width="15%" align="center"/>
+                    <listheader label="Person Name" width="15%" align="center"/>
+                    <listheader label="Mobile Phone" width="15%" align="center"/>
+                    <listheader label="Aksi" width="10%" align="center"/>
+                </listhead>
+                <template name="model">
+                    <listitem value="${each}">
+                        <listcell >
+                            <label width="100%" value="@bind(each.fullname)"/>
+                        </listcell>
+                        <listcell >
+                            <label width="100%" value="@bind(each.address1)"/>
+                        </listcell>
+                        <listcell >
+                            <label width="100%" value="@bind(each.country)"/>
+                        </listcell>
+                        <listcell >
+                            <label width="100%" value="@bind(each.telepon)"/>
+                        </listcell>
+                        <listcell >
+                            <label width="100%" value="@bind(each.personname1)"/>
+                        </listcell>
+                        <listcell >
+                            <label width="100%" value="@bind(each.mobilephone1)"/>
+                        </listcell>
+                        <listcell>
+                            <a label="Detail" style="text-decoration:underline; color:blue" onClick="@command('detailCompanyProfile', object=each)"></a>
+                            <a></a>
+                            <a label="Hapus" style="text-decoration:underline; color:blue" onClick="@command('deleteCompany', object=each)"></a>
+                        </listcell>
+                    </listitem>
+                </template>
+            </listbox>
+        </groupbox>
+    </window>
+</zk>

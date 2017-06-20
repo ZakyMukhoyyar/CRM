@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?taglib uri="/WEB-INF/security.tld" prefix="sec"?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<zk xmlns="http://www.zkoss.org/2005/zul">
+    <window apply="org.zkoss.bind.BindComposer"
+            viewModel="@id('vm') @init('com.bitozen.skk.user.management.interfaces.web.ui.viewmodel.CompanyVM')"
+            form="@id('fx') @load(vm.companyProfileDTO) @save(vm.companyProfileDTO, before='buttonSave')">
+        <groupbox closable="false" mold="3d" width="575px">
+            <caption label="Company Info"/>
+            <groupbox  width="600px">
+                <caption label="Company Info" style="font-size:16pt;" />
+                <grid style="border:0" width="800px">
+                    <columns>
+                        <column width="20%"></column>
+                        <column width="80%"></column>
+                    </columns>
+                    <rows>
+                        <row spans="2"></row>
+                        <row>
+                            <label value="Full Name*"/>
+                            <textbox width="60%" disabled="false" value="@bind(fx.fullname)" constraint="No Empty : Tidak boleh kosong"/>
+                        </row>
+                        <row>
+                            <label value="Short Name*"/>
+                            <textbox width="60%" disabled="false" value="@bind(fx.shortname)" constraint="No Empty : Tidak boleh kosong"/>
+                        </row>
+                        <row>
+                            <label value="Display Name*"/>
+                            <textbox width="60%" disabled="false" value="@bind(fx.displayname)" constraint="No Empty : Tidak boleh kosong"/>
+                        </row>
+                        <row>
+                            <label value="Bank Code"/>
+                            <combobox width="60%" placeholder="- Silahkan Pilih -" model="@load(vm.listBankCode)" selectedItem="@bind(fx.bankcode)" readonly="true">
+                                <template name="model" var="items">
+                                    <comboitem label="@load(items)" value="@load(items)"/>
+                                </template>
+                            </combobox>
+                        </row>
+                        <row>
+                            <label value="Tax ID*"/>
+                            <textbox width="60%" disabled="false" value="@bind(fx.taxID)" constraint="No Empty : Tidak boleh kosong"/>
+                        </row>
+                        <row>
+                            <label value="Address 1*"/>
+                            <textbox width="60%" disabled="false" value="@bind(fx.address1)" constraint="No Empty : Tidak boleh kosong"/>
+                        </row>
+                        <row>
+                            <label value="Address 2"/>
+                            <textbox width="60%" disabled="false" value="@bind(fx.address2)" />
+                        </row>
+                        <row>
+                            <label value="Address 3"/>
+                            <textbox width="60%" disabled="false" value="@bind(fx.address3)" />
+                        </row>
+                        <row>
+                            <label value="Address 4"/>
+                            <textbox width="60%" disabled="false" value="@bind(fx.address4)" />
+                        </row>
+                    
+                        <row>
+                            <label value="Country"/>
+                            <combobox width="60%" placeholder="- Silahkan Pilih -" model="@load(vm.listCountry)" selectedItem="@bind(fx.country)" readonly="true">
+                                <template name="model" var="items">
+                                    <comboitem label="@load(items)" value="@load(items)"/>
+                                </template>
+                            </combobox>
+                        </row>
+                        <row>
+                            <label value="Province"/>
+                            <combobox width="60%" placeholder="- Silahkan Pilih -" model="@load(vm.listProvince)" selectedItem="@bind(fx.province)" readonly="true">
+                                <template name="model" var="items">
+                                    <comboitem label="@load(items)" value="@load(items)"/>
+                                </template>
+                            </combobox>
+                        </row>
+                        <row>
+                            <label value="City"/>
+                            <combobox width="60%" placeholder="- Silahkan Pilih -" model="@load(vm.listCity)" selectedItem="@bind(fx.city)" readonly="true">
+                                <template name="model" var="items">
+                                    <comboitem label="@load(items)" value="@load(items)"/>
+                                </template>
+                            </combobox>
+                        </row>
+                        <row>
+                            <label value="Post Code"/>
+                            <textbox width="60%" disabled="false" value="@bind(fx.postcode)" constraint="No Empty : Tidak boleh kosong"/>
+                        </row>
+                        <row>
+                            <label value="Telephone"/>
+                            <textbox width="60%" disabled="false" value="@bind(fx.telepon)" constraint="No Empty : Tidak boleh kosong"/>
+                        </row>
+                        <row>
+                            <label value="Fax"/>
+                            <textbox width="60%" disabled="false" value="@bind(fx.fax)" constraint="No Empty : Tidak boleh kosong"/>
+                        </row>
+                        <row>
+                            <label value="Person Name"/>
+                            <textbox width="60%" disabled="false" value="@bind(fx.personname1)" constraint="No Empty : Tidak boleh kosong"/>
+                        </row>
+                        <row>
+                            <label value="Office Phone"/>
+                            <textbox width="60%" disabled="false" value="@bind(fx.officephone1)" constraint="No Empty : Tidak boleh kosong"/>
+                        </row>
+                        <row>
+                            <label value="Mobile Phone"/>
+                            <textbox width="60%" disabled="false" value="@bind(fx.mobilephone1)" constraint="No Empty : Tidak boleh kosong"/>
+                        </row>
+                        <row>
+                            <label value="Email"/>
+                            <textbox width="60%" disabled="false" value="@bind(fx.email1)" constraint="No Empty : Tidak boleh kosong"/>
+                        </row>
+                        <row>
+                            <label value="Person Name 2"/>
+                            <textbox width="60%" disabled="false" value="@bind(fx.personname2)" constraint="No Empty : Tidak boleh kosong"/>
+                        </row>
+                        <row>
+                            <label value="Office Phone 2"/>
+                            <textbox width="60%" disabled="false" value="@bind(fx.officephone2)" constraint="No Empty : Tidak boleh kosong"/>
+                        </row>
+                        <row>
+                            <label value="Mobile Phone 2"/>
+                            <textbox width="60%" disabled="false" value="@bind(fx.mobilephone2)" constraint="No Empty : Tidak boleh kosong"/>
+                        </row>
+                        <row>
+                            <label value="Email 2"/>
+                            <textbox width="60%" disabled="false" value="@bind(fx.email2)" constraint="No Empty : Tidak boleh kosong"/>
+                        </row>
+                    </rows>
+                </grid>
+            </groupbox>
+            <separator height="10px"/>
+            <groupbox width="560px">
+                <space width="60%"/>
+                <button label="Kembali" width="100px" onClick="@command('buttonCancel')"/>
+                <space width="3%"/>
+                <button label="Simpan" width="100px" onClick="@command('buttonSave')"/>
+            </groupbox>
+        </groupbox>
+    </window>
+</zk>

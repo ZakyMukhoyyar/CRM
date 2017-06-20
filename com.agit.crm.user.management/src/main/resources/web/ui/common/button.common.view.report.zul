@@ -1,0 +1,8 @@
+<zk>
+    <div align="center">
+        <separator/>        
+        <button label="${labels.common.button.view}" onClick=""/>
+        <button label="${labels.common.button.close}" onClick="@command('buttonClose')"/>
+        <separator/>  
+    </div>
+</zk>

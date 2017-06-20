@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+        http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.2.xsd">
+
+    <!--REPOSITORY-->
+    <bean id="privilegeRepository" class="com.agit.crm.user.management.infrastructure.persistence.hibernate.PrivilegeRepositoryHibernate">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean id="roleRepository" class="com.agit.crm.user.management.infrastructure.persistence.hibernate.RoleRepositoryHibernate">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean id="userRepository" class="com.agit.crm.user.management.infrastructure.persistence.hibernate.UserRepositoryHibernate">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+<!--    <bean id="companyProfileRepository" class="com.agit.crm.user.management.infrastructure.persistence.hibernate.CompanyProfileHibernateRepository">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>-->
+    
+</beans>

@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+    <!-- APPLICATION SERVICE -->
+    <bean id="privilegeService" class="com.agit.crm.user.management.application.impl.PrivilegeServiceImpl">
+        <property name="privilegeRepository" ref="privilegeRepository"/>
+        <property name="privilegeDTOAssembler" ref="privilegeDTOAssembler"/>
+    </bean>
+    <bean id="roleService" class="com.agit.crm.user.management.application.impl.RoleServiceImpl">
+        <property name="privilegeRepository" ref="privilegeRepository"/>
+        <property name="roleRepository" ref="roleRepository"/>
+        <property name="roleDTOAssembler" ref="roleDTOAssembler"/>
+        <property name="rolePrivilegeDTOAssembler" ref="rolePrivilegeDTOAssembler"/>
+    </bean>
+    <bean id="userService" class="com.agit.crm.user.management.application.impl.UserServiceImpl">
+        <property name="userRepository" ref="userRepository"/>
+        <property name="userDTOAssembler" ref="userDTOAssembler"/>
+    </bean>
+<!--    <bean id="companyProfileService" class="com.agit.crm.user.management.application.impl.CompanyProfileImpl">
+        <property name="companyProfileRepository" ref="companyProfileRepository"/>
+        <property name="companyProfileDTOAssembler" ref="companyProfileDTOAssembler"/>
+    </bean> -->
+    
+    <!--ASSEMBLER-->
+    
+    <!--PRIVILEGE-->
+    <bean id="privilegeDTOAssembler" class="com.agit.crm.user.management.interfaces.web.facade.dto.assembler.privilege.PrivilegeDTOAssembler">
+        <property name="privilegeRepository" ref="privilegeRepository"/>
+    </bean>
+    
+    <!--ROLE-->
+    <bean id="rolePrivilegeDTOAssembler" class="com.agit.crm.user.management.interfaces.web.facade.dto.assembler.role.RolePrivilegeDTOAssembler">
+        <property name="privilegeRepository" ref="privilegeRepository"/>
+        <property name="privilegeDTOAssembler" ref="privilegeDTOAssembler"/>
+    </bean>
+    <bean id="roleDTOAssembler" class="com.agit.crm.user.management.interfaces.web.facade.dto.assembler.role.RoleDTOAssembler">
+        <property name="rolePrivilegeDTOAssembler" ref="rolePrivilegeDTOAssembler"/>
+    </bean>
+    
+    <!--USER-->
+    <bean id="accessTimeDTOAssembler" class="com.agit.crm.user.management.interfaces.web.facade.dto.assembler.user.AccessTimeDTOAssembler"/>
+    <bean id="userLoginInfoDTOAssembler" class="com.agit.crm.user.management.interfaces.web.facade.dto.assembler.user.UserLoginInfoDTOAssembler"/>
+    <bean id="userSpecificationDTOAssembler" class="com.agit.crm.user.management.interfaces.web.facade.dto.assembler.user.UserSpecificationDTOAssembler"/>
+    <bean id="userDTOAssembler" class="com.agit.crm.user.management.interfaces.web.facade.dto.assembler.user.UserDTOAssembler">
+        <property name="roleDTOAssembler" ref="roleDTOAssembler"/>
+        <property name="roleRepository" ref="roleRepository"/>
+    </bean>
+    
+    <!--Company Profile-->
+<!--    <bean id="companyProfileDTOAssembler" class="com.agit.crm.user.management.interfaces.web.facade.dto.assembler.companyprofile.CompanyProfileDTOAssembler">
+    </bean> -->
+    
+    
+</beans>

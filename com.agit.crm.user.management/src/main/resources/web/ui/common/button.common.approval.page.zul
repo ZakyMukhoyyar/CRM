@@ -1,0 +1,31 @@
+<zk>         
+    <separator />                
+    <groupbox closable="false" mold="3d" visible="@load(vm.previous eq 'VIEW' ? false:true)">
+        <caption label="${labels.common.title.rejectionnote}"></caption>
+        <grid fixedLayout="true">
+            <columns>
+                <column width="100%" label="" />				
+            </columns>
+            <rows>
+                <row>
+                    <label value="${labels.common.title.rejectionmessage}" />
+                </row>
+                <row>
+                    <div>
+                        <textbox value="@load(vm.processDecisionReason eq 'NONE' ? '' : vm.processDecisionReason) @save(vm.processDecisionReason)" rows="4" maxlength="255" width="99%"></textbox>                            
+                        <label value="@bind(vmsgs['processDecisionReason'])" style="color: red;" />
+                    </div>
+                </row>
+            </rows>
+        </grid>
+    </groupbox>                
+    <separator />    
+    <div align="center">
+        <separator />
+        <button label="${labels.common.button.back}" visible="@load(vm.previous eq 'VIEW' ? false:true)" onClick="@command('buttonBack')"/>
+        <button label="${labels.common.button.approve}" visible="@load(vm.previous eq 'VIEW' ? false:true)" onClick="@command('buttonApprove')"/>
+        <button label="${labels.common.button.reject}" visible="@load(vm.previous eq 'VIEW' ? false:true)" onClick="@command('buttonReject')"/>
+        <button label="${labels.common.button.close}" onClick="@command('buttonClose')"/>
+        <separator />  
+    </div>
+</zk>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zk xmlns="http://www.zkoss.org/2005/zul">
+    <groupbox closable="false" mold="3d" height="100%">
+        <caption label="Dashboard Cabang"/>
+        <groupbox height="100%"> 
+            <caption label="Selamat Datang Di Halaman Cabang"/>
+            <grid style="border:0;">
+                <columns>
+                    <column/>
+                </columns>
+                <rows>
+                    <row align="center" height="30%">
+                        <label value="Selamat Datang Di Halaman Cabang" style="font-weight:bold ;color:black ; font-size:25pt"/>
+                    </row>
+                </rows>
+            </grid>   
+        </groupbox>
+    </groupbox>
+</zk>

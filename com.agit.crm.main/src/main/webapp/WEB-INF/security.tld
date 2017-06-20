@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--<!DOCTYPE taglib PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.2//EN" "http://java.sun.com/dtd/web-jsptaglibrary_1_2.dtd">-->
+<!--<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE taglib PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.2//EN" "http://java.sun.com/dtd/web-jsptaglibrary_1_2.dtd">-->
+<taglib>
+    <uri>http://www.zkoss.org/demo/integration/security</uri>
+    <description>
+        Methods and actions for ZK + Spring Security
+    </description>
+    <function>
+        <name>isAllGranted</name>
+        <function-class>com.agit.crm.common.security.SecurityUtil</function-class>
+        <function-signature> boolean isAllGranted(java.lang.String authorities) 
+        </function-signature>
+        <description> 
+            Return true if the authenticated principal is granted authorities of ALL the specified roles.
+        </description>
+    </function>
+</taglib>

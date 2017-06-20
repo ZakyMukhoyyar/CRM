@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?taglib uri="/WEB-INF/security.tld" prefix="sec"?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<?component name="signLabel" class="com.agit.crm.shared.zul.SignLabel" ?>
+<zk xmlns="http://www.zkoss.org/2005/zul">
+    <window border="none"
+            apply="org.zkoss.bind.BindComposer"
+            viewModel="@id('fx') @init('com.agit.crm.user.management.interfaces.web.ui.viewmodel.GroupVM')"
+            form="@id('vm') @load(fx) @save(fx, before='buttonSubmit') @validator('com.bitozen.skk.user.management.interfaces.web.ui.validator.GroupValidator')"
+            validationMessages="@id('vmsgs')">
+        <groupbox>
+            <caption label="${labels.group.title.groupdetail}"/>
+            <grid>
+                <columns>
+                    <column width="20%" />
+                    <column width="80%" />
+                </columns>
+                <rows>
+                    <row>
+                        <label value="${labels.group.label.code}"/>
+                        <div>                        
+                            <label value="@load(fx.roleDTO.roleID)" maxlength="15" width="25%"/>
+                        </div>
+                    </row>
+                    <row>
+                        <signLabel value="${labels.group.label.name}"/>
+                        <div>
+                            <textbox value="@bind(vm.roleDTO.roleName)" maxlength="60" width="25%"/>
+                            <label value="@load(vmsgs['roleName'])" style="color:red"/>
+                        </div>
+                    </row>
+                    <row>
+                        <signLabel value="${labels.group.label.description}" />
+                        <div>
+                            <textbox value="@bind(vm.roleDTO.roleDescription)" maxlength="200" width="25%"/>
+                            <label value="@load(vmsgs['roleDescription'])" style="color:red"/>
+                        </div>
+                    </row>
+                    <row>
+                        <label value="${labels.group.label.status}" />
+                        <radiogroup children="@bind(fx.statusList)" onCheck="@command('selectGroupStatus', obj=self.getSelectedItem().getValue())">
+                            <template name="children">
+                                <radio label="@load(fx.toSentenceCase(each))" value="@load(each)" selected="@load(fx.roleDTO.roleStatus eq each)"/>
+                                <space/>
+                            </template>
+                        </radiogroup>                
+                    </row>
+                </rows>
+            </grid>
+        </groupbox>
+        <separator />
+        <groupbox>
+            <caption label="${labels.group.title.privilegelist}" />
+            <tree model="@load(fx.model)">
+                <treecols>
+                    <treecol label="${labels.group.label.privilege}" />
+                    <treecol label="${labels.group.label.accesstype}"/>
+                </treecols>
+                <template name="model" var="item" status="s" >
+                    <treeitem onDoubleClick="@command('onDoubleClickTree', obj=item)">
+                        <treerow>
+                            <treecell label="@load(item.privilegeName)" />
+                            <treecell>
+                                <radiogroup children="@load(fx.accessTypes)" onCheck="@command('onCheckRadioButton', privilege=item, accessType=self.getSelectedItem().getValue(), index=s.index)">
+                                    <template name="children">
+                                        <radio label="@load(fx.toSentenceCase(each))" value="@load(each)" selected="@load(fx.checkedRadio(item.privilegeID) eq each)" />
+                                        <space/>                                
+                                    </template>
+                                </radiogroup>
+                            </treecell>
+                        </treerow>
+                    </treeitem>
+                </template>
+            </tree>
+        </groupbox>
+        <include src="~./ui/common/button.common.update.page.zul"/>    
+    </window>
+</zk>

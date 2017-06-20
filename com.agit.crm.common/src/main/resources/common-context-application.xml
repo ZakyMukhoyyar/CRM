@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+<!--    <bean id="orderDTOAssembler" class="com.bitozen.skk.common.interfaces.web.facade.dto.assembler.order.OrderDTOAssembler">
+    </bean>
+    <bean id="orderService" class="com.bitozen.skk.common.application.impl.OrderServiceImpl">
+        <property name="orderRepository" ref="orderRepository"/>
+        <property name="orderDTOAssembler" ref="orderDTOAssembler"/>
+    </bean>-->
+        
+</beans>

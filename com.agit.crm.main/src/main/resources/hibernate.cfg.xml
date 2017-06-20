@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
+        <!--
+        <property name="hibernate.cache.use_second_level_cache">true</property> 
+        <property name="hibernate.cache.use_query_cache">true</property> 
+        <property name="hibernate.cache.provider_class">net.sf.ehcache.hibernate.EhCacheProvider</property>
+        -->
+        <property name="hibernate.c3p0.min_size">20</property>
+        <property name="hibernate.c3p0.max_size">100</property>
+        <property name="hibernate.c3p0.timeout">300</property>
+        <property name="hibernate.c3p0.max_statements">50</property>
+        <property name="hibernate.c3p0.idle_test_period">3000</property>
+        <property name="hibernate.jdbc.batch_size">20</property>
+        <!--<property name="hibernate.dialect">org.hibernate.dialect.OracleDialect</property>-->
+        <property name="hibernate.show_sql">false</property>
+        
+        <!-- additional hibernate property for websphere-->
+<!--        <property name="hibernate.transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory</property>
+        <property name="org.hibernate.service.jta.platform.internal.TransactionManagerLookupBridge">org.hibernate.transaction.WebSphereExtendedJTATransactionLookup</property>
+        <property name="hibernate.transaction.jta.platform">org.hibernate.service.jta.platform.internal.WebSphereExtendedJtaPlatform</property>
+         ./ additional hibernate property for websphere-->
+        
+
+        <!--<property name="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</property>-->
+        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+        
+    </session-factory>
+</hibernate-configuration>

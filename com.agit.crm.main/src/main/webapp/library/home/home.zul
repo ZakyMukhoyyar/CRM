@@ -1,0 +1,43 @@
+<zk xmlns:n="native">
+    <window apply="org.zkoss.bind.BindComposer"
+            viewModel="@id('vm') @init('com.bitozen.skk.main.viewmodel.HomeVM')">
+        
+        <!-- Begin Menu -->
+        <menubar id="menubar" autodrop="true">
+            <menu label="Data Buku">
+                <menupopup>
+                    <menu label="Input Data Buku">
+                        <menupopup>
+                            <menuitem label="Dashboard Buku" onClick="@command('buttonKlikInputDataBuku')" />
+                            <menuitem label="Menu 2" onClick="alert(self.label)" />
+                            <menuitem label="Menu 3" onClick="alert(self.label)" />
+                        </menupopup>
+                    </menu>
+                    <menu label="Transaksi">
+                        <menupopup>
+                            <menu label="Data Transaksi">
+                                <menupopup>
+                                    <menuitem label="Peminjaman" onClick="alert(self.label)" />
+                                    <menuitem label="Pengembalian" onClick="alert(self.label)" />
+                                </menupopup>
+                            </menu>
+                            <menuitem label="Reports" onClick="alert(self.label)" />
+                        </menupopup>
+                    </menu>
+                    <menuseparator></menuseparator>
+                    <menuitem label="Others" onClick="alert(self.label)" />
+                </menupopup>
+            </menu>
+            <menu label="Data User">
+                <menupopup>
+                    <menuitem label="Input Data Users" onClick="alert(self.label)" />
+                    <menuitem label="Others" onClick="alert(self.label)" />
+                </menupopup>
+            </menu>
+            <menuitem label="Menu 1" onClick="@command('buttonKlikInputDataBuku')" />
+            <menuitem label="Menu 2" onClick="alert(self.label)" />
+            <menuitem label="Menu 3" onClick="alert(self.label)" />
+            <menuitem label="LogOut" onClick="alert(self.label)" />
+        </menubar>
+    </window>
+</zk>

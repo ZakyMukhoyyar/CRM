@@ -1,0 +1,9 @@
+<zk>
+    <div align="center">
+        <separator />
+        <button label="${labels.common.button.back}" onClick="@command('buttonBack')"/>
+        <button label="${labels.common.button.confirm}" onClick="@command('buttonConfirm')"/>
+        <button label="${labels.common.button.close}" onClick="@command('buttonClose')"/>
+        <separator />  
+    </div>
+</zk>

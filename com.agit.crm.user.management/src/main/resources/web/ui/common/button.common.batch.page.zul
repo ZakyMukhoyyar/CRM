@@ -1,0 +1,11 @@
+<zk>
+    <div align="center">
+        <separator />
+        <button label="${labels.common.button.back}" onClick="@command('buttonBack')"/>
+        <button label="${labels.common.button.batch}"/>
+        <button label="${labels.common.button.reject}"/>
+        <separator />  
+    </div>
+</zk>
+
+

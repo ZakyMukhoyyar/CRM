@@ -1,0 +1,85 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="
+	http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+	http://www.springframework.org/schema/security
+	http://www.springframework.org/schema/security/spring-security-3.2.xsd">
+
+    <http use-expressions="true" entry-point-ref="loginUrlAuthenticationEntryPoint" access-denied-page="/403">
+        <intercept-url pattern="/login.zul" access="permitAll"/>
+        <intercept-url pattern="/workspace.zul" access="isAuthenticated()" />   
+        <intercept-url pattern="/" access="isAuthenticated()" />
+        <custom-filter ref="customAuthenticationFilter" position="FORM_LOGIN_FILTER"/>
+        <custom-filter ref="concurrencyFilter" position="CONCURRENT_SESSION_FILTER"/>
+        <session-management session-authentication-strategy-ref="sas"/>
+        <logout invalidate-session="false" logout-success-url="/" logout-url="/processLogout" />
+    </http>
+    
+    <!-- ====================================================== -->
+    <!-- Session Handler -->
+    <!-- ====================================================== -->
+    <beans:bean id="sas" class="org.springframework.security.web.authentication.session.ConcurrentSessionControlStrategy">
+        <beans:constructor-arg name="sessionRegistry" ref="sessionRegistry"/>
+        <beans:property name="maximumSessions" value="1"/>
+    </beans:bean>
+    
+    <beans:bean id="concurrencyFilter" class="org.springframework.security.web.session.ConcurrentSessionFilter">
+        <beans:property name="sessionRegistry" ref="sessionRegistry" />
+        <beans:property name="expiredUrl" value="/login.zul" />
+    </beans:bean>
+    <beans:bean id="sessionRegistry" class="org.springframework.security.core.session.SessionRegistryImpl" />
+    
+    <!-- ====================================================== -->
+    <!-- Login Handler -->
+    <!-- ====================================================== -->
+    <beans:bean id="loginUrlAuthenticationEntryPoint" class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
+        <beans:property name="loginFormUrl" value="/login.zul"/>
+    </beans:bean>
+    <beans:bean id="customAuthenticationFilter" class="com.agit.crm.user.management.application.security.AuthenticationFilter">
+        <beans:constructor-arg type="java.lang.String" value="/processLogin"/>
+        <beans:property name="usernameParameter" value="username" />
+        <beans:property name="passwordParameter" value="password" />
+        <beans:property name="ldapDomainParameter" value="ldapDomain" />
+        <beans:property name="authenticationManager" ref="authenticationManager" />
+        <beans:property name="authenticationFailureHandler" ref="loginFailureHandler" />
+        <beans:property name="authenticationSuccessHandler" ref="loginSuccessHandler" />
+    </beans:bean>
+
+    <authentication-manager alias="authenticationManager">
+        <authentication-provider ref="authenticationProvider" />
+    </authentication-manager>
+
+    <beans:bean id="authenticationProvider" class="com.agit.crm.user.management.application.security.CustomAuthenticationProvider">
+        <beans:property name="userDetailsService" ref="userDetailsService" />
+        <beans:property name="userService" ref="userService" />
+    </beans:bean>
+
+    <beans:bean id="userDetailsService" class="com.agit.crm.user.management.application.security.UserDetailsService" >
+        <beans:property name="userService" ref="userService" />
+        <beans:property name="roleService" ref="roleService" />
+    </beans:bean>
+
+    <beans:bean id="loginFailureHandler" class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
+        <beans:property name="defaultFailureUrl" value="/login.zul?login_error=1" />
+    </beans:bean>
+    
+    <beans:bean id="loginSuccessHandler" class="com.agit.crm.user.management.application.security.CustomAuthenticationSuccessHandler" >
+        <beans:property name="userService" ref="userService" />
+    </beans:bean>
+
+    <!-- ====================================================== -->
+    <!-- Message Handler -->
+    <!-- ====================================================== -->
+    
+    <!--<beans:bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">-->
+    <beans:bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">    
+        <beans:property name="basenames">
+            <beans:list>
+                <beans:value>messages</beans:value>
+                <beans:value>org.springframework.security.messages</beans:value>
+            </beans:list>
+        </beans:property>
+    </beans:bean>
+
+</beans:beans>

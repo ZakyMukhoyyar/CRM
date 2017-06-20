@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-access="field">
+  <class mutable="true" name="com.agit.crm.user.management.domain.role.Role" table="MST_ROLE">
+    <!--        <id column="id_role" name="id">
+            <generator class="sequence"/>
+        </id>-->
+    <id column="id_role" name="id">
+      <!--<generator class="sequence"/>-->
+      <generator class="increment"/>
+    </id>
+    <property column="roleID" name="roleID" not-null="true" unique="true" update="false"/>
+    <property column="roleName" name="roleName" not-null="true" update="true"/>
+    <property column="roleDescription" name="roleDescription" not-null="false" update="true"/>
+    <list lazy="false" name="rolePrivileges" table="MST_ROLE_PRIVILEGE">
+      <key column="roleID"/>
+      <list-index column="role_privilege_index"/>
+      <composite-element class="com.agit.crm.user.management.domain.role.RolePrivilege">
+        <many-to-one cascade="all" class="com.agit.crm.user.management.domain.privilege.Privilege" column="privilegeID" lazy="false" name="privilege" not-null="true"/>
+        <property column="accessType" name="accessType" not-null="true" update="true">
+          <type name="org.hibernate.type.EnumType">
+            <param name="enumClass">com.agit.crm.shared.type.AccessType</param>
+            <param name="type">12</param>
+          </type>
+        </property>
+      </composite-element>
+    </list>
+    <property column="roleStatus" name="roleStatus" not-null="true" update="true">
+      <type name="org.hibernate.type.EnumType">
+        <param name="enumClass">com.agit.crm.shared.type.StatusData</param>
+        <param name="type">12</param>
+      </type>
+    </property>
+    <property column="creationalDate" name="creationalDate" not-null="true" update="true"/>
+    <property column="creationalBy" name="creationalBy" unique="false" update="true"/>
+  </class>
+</hibernate-mapping>

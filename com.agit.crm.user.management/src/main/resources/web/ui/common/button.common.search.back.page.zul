@@ -1,0 +1,8 @@
+<zk>
+    <div align="center">
+        <separator />
+        <button label="${labels.common.button.search}" onClick="@command('buttonSearch')"/>
+        <button label="${labels.common.button.back}" onClick="@command('buttonBack')"/>
+        <separator />  
+    </div>
+</zk>

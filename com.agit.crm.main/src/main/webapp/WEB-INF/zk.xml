@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zk>
+    <listener>
+        <listener-class>com.agit.crm.shared.zul.AppInit</listener-class>
+    </listener>
+    <library-property>
+        <name>org.zkoss.bind.DebuggerFactory.enable</name>
+        <value>true</value>
+    </library-property>
+<!--    <system-config>
+        <id-generator-class>com.agit.crm.util.loadtest.SequenceIdGenerator</id-generator-class>
+    </system-config>-->
+    <session-config>
+        <device-type>ajax</device-type>
+        <timeout-message>label:application.timeoutMessage</timeout-message>
+    </session-config>
+    <!--    <device-config>
+        <device-type>ajax</device-type>
+        <timeout-uri>/timeout.zul</timeout-uri>
+    </device-config>-->
+<!--    <language-config>
+        <addon-uri>/WEB-INF/my-addon.xml</addon-uri>
+    </language-config>	-->
+</zk>

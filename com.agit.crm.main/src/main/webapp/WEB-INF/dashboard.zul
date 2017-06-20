@@ -1,0 +1,8 @@
+<window border="none"
+            apply="org.zkoss.bind.BindComposer"
+            viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.DashboardVM')">
+    <div align="center" style="padding: 50px 5px 0px 0px">
+        <image src="@bind(vm.uriPhoto)" />
+    </div>
+</window>
+

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?taglib uri="/WEB-INF/security.tld" prefix="sec"?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<zk xmlns="http://www.zkoss.org/2005/zul">
+    <window border="none" 
+            apply="org.zkoss.bind.BindComposer"
+            viewModel="@id('vm') @init('com.agit.crm.user.management.interfaces.web.ui.viewmodel.UserVM')">
+        <grid>
+            <columns>
+                <column width="20%" />
+                <column width="80%" />
+            </columns>
+            <rows>
+                <row>
+                    <label value="${labels.user.label.username}"/>
+                    <label value="@load(vm.userDTO.userName)"/>
+                </row>
+                <row>
+                    <label value="${labels.common.label.status}"/>
+                    <radiogroup onCheck="@command('checkedLock', obj=self.getSelectedItem().getValue())">
+                        <radio label="${labels.user.radio.lock}"  value="true" selected="@load(vm.userDTO.userSpecificationDTO.userLoginInfoDTO.loginAttempt eq 3)"/>
+                        <radio label="${labels.user.radio.unlock}" value="false" selected="@load(vm.userDTO.userSpecificationDTO.userLoginInfoDTO.loginAttempt ne 3)"/>
+                    </radiogroup>
+                </row>
+            </rows>
+        </grid>
+        <separator />
+        <div align="center">
+            <button label="${labels.common.button.save}" onClick="@command('buttonSaveLockUnlock')"/>
+            <button label="${labels.common.button.back}" onClick="@command('buttonBack')"/>
+        </div>
+        <separator />
+    </window>
+</zk>

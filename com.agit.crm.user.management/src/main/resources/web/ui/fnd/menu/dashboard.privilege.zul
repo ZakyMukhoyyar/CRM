@@ -1,0 +1,73 @@
+ <zk xmlns="http://www.zkoss.org/2005/zul">
+    <window apply="org.zkoss.bind.BindComposer"
+            viewModel="@id('vm') @init('com.agit.crm.user.management.interfaces.web.ui.viewmodel.MenuVM')"
+            form="@id('fx') @load(vm.privilegeDTO) @save(vm.privilegeDTO, before='buttonSavePrivilege')">
+        <groupbox closable="false" mold="3d">
+            <caption label="Form Dashboard Menu" />
+            <groupbox closable="false">
+                <caption label="Parameter Pencarian" />
+                <grid>
+                    <columns>
+                        <column width="15%" />
+                        <column width="30%" />
+                    </columns>
+                    <rows>
+                        <row>
+                            <label value="ID Privilege" />
+                            <textbox width="100%" value="@bind(vm.privilegeID)"/>
+                        </row>
+                        <row>
+                            <label value="Nama Privilege" />
+                            <textbox width="100%" value="@bind(vm.privilegeName)"/>
+                        </row>
+                        <row>
+                            <cell></cell>
+                            <cell align="left">
+                                <button width="40%" label="Pencarian" image="/images/crm_search.png" mold="trendy" onClick="@command('buttonSearch')"/>
+                                <space width="10px"></space>
+                                <button width="53%" label="Membuat Menu" image="/images/crm_add.png" mold="trendy" onClick="@command('buttonNewPrivilege')"/>
+                            </cell>
+                            <cell colspan="2"></cell> 
+                        </row>
+                    </rows>
+                </grid>
+                <separator></separator>
+            </groupbox>
+            <groupbox closable="false">
+                <paging forward="onPaging" />
+                <listbox rows="5" emptyMessage="${labels.common.noDataFound}" model="@bind(vm.privilegeDTOs)">
+                    <listhead>
+                        <listheader label="ID Privilege" width="15%" align="center"/>
+                        <listheader label="ID Parent" width="15%" align="center"/>
+                        <listheader label="Nama Privilege" width="25%" align="center"/>
+                        <listheader label="Nama Menu" width="25%" align="center"/>
+                        <listheader label="Status" width="10%" align="center"/>
+                        <listheader label="Aksi" width="10%" align="center"/>
+                    </listhead>
+                    <template name="model">
+                        <listitem value="${each}">
+                            <listcell >
+                                <label width="100%" value="@bind(each.privilegeID)"/>
+                            </listcell>
+                            <listcell >
+                                <label width="100%" value="@bind(each.parentID)"/>
+                            </listcell>
+                            <listcell >
+                                <label width="100%" value="@bind(each.privilegeName)"/>
+                            </listcell>
+                            <listcell >
+                                <label width="100%" value="@bind(each.menuName)"/>
+                            </listcell>
+                            <listcell >
+                                <label width="100%" value="@bind(each.privilegeStatus)"/>
+                            </listcell>
+                            <listcell>
+                                <a label="Detail" style="text-decoration:underline ;color:blue" onClick="@command('detailPrivilege', object=each)"></a>
+                            </listcell>
+                        </listitem>
+                    </template>
+                </listbox>
+            </groupbox>
+        </groupbox>
+    </window>
+</zk>

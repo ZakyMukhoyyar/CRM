@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<language-addon>
+    <addon-name>ecosmos</addon-name>
+    <language-name>xul/html</language-name>
+
+    <component>
+        <component-name>phonebox</component-name>
+        <component-class>com.bitozen.skk.main.chapter2.Phonebox</component-class>
+        <extends>textbox</extends>
+    </component>
+
+    <component>
+        <component-name>EIN</component-name>
+        <component-class>com.bitozen.skk.main.chapter2.EIN</component-class>
+        <extends>textbox</extends>
+    </component>
+
+    <component>
+        <component-name>NPI</component-name>
+        <component-class>com.bitozen.skk.main.chapter2.NPI</component-class>
+        <extends>textbox</extends>
+    </component>
+
+    <component>
+        <component-name>Extension</component-name>
+        <component-class>com.bitozen.skk.main.chapter2.Extension</component-class>
+        <extends>textbox</extends>
+    </component>
+
+
+    <component>
+        <component-name>ZipCode</component-name>
+        <component-class>com.bitozen.skk.main.chapter2.ZipCode</component-class>
+        <extends>textbox</extends>
+    </component>
+
+    <component>
+        <component-name>AlphaNumeric</component-name>
+        <component-class>com.bitozen.skk.main.chapter2.AlphaNumeric</component-class>
+        <extends>textbox</extends>
+    </component>
+    
+    <addon-name>my.extension</addon-name><!-- any name you like -->
+    <javascript src="/js/jquery.maskedinput-1.3.js" /> <!-- assume you package it as /myjs/foo.js -->
+
+</language-addon>

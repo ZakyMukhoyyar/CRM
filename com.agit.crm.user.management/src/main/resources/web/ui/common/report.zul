@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul">
+    <window apply="org.zkoss.bind.BindComposer"
+            viewModel="@id('vm') @init('com.bitozen.project.ui.common.ReportVM')"
+            title="@load(vm.concat('Report ', vm.reportName))" border="normal" width="800px" height="600px" closable="true" mode="modal" maximizable="true">
+        <grid>
+            <columns>
+                <column width="20%"/>
+                <column/>
+            </columns>
+            <rows>
+                <row>
+                    <label value="Choose a file type"/>
+                    <div>
+                        <listbox width="25%" mold="select" model="@load(vm.formats)" onSelect="@command('selectFormat', obj=self.getSelectedItem().getValue())">
+                            <template name="model">
+                                <listitem label="@load(each.format)" selected="@load(vm.reportFormat eq each)"/>
+                            </template>
+                        </listbox>
+                        <button label="Download" onClick="@command('download')"/>
+                    </div>
+                </row>
+            </rows>
+        </grid>
+        <vbox pack="stretch" align="stretch" width="100%" height="100%">
+            <iframe id="reportframe" width="100%" height="100%"/>
+        </vbox>
+    </window>
+</zk>

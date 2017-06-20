@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-access="field">
+  <class mutable="true" name="com.agit.crm.user.management.domain.privilege.Privilege" table="MST_PRIVILEGE">
+    <id column="id_privilege" name="id">
+      <generator class="increment"/>
+    </id>
+    <property column="privilegeID" name="privilegeID" not-null="true" unique="true" update="false"/>
+    <property column="privilegeName" name="privilegeName" not-null="true" update="true"/>
+    <property column="privilegeStatus" name="privilegeStatus" not-null="true" update="true">
+      <type name="org.hibernate.type.EnumType">
+        <param name="enumClass">com.agit.crm.shared.type.StatusData</param>
+        <param name="type">12</param>
+      </type>
+    </property>
+    <property column="parentID" name="parentID"/>
+    <property column="menu" name="menu"/>
+    <property column="menuName" name="menuName"/>
+    <property column="tabName" name="tabName" unique="true"/>
+    <property column="icon" name="icon"/>
+    <property column="url" name="url"/>
+    <property column="creationalDate" name="creationalDate" not-null="true" update="true"/>
+    <property column="creationalBy" name="creationalBy" unique="false" update="true"/>
+  </class>
+</hibernate-mapping>

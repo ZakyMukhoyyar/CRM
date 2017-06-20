@@ -1,0 +1,10 @@
+<zk>
+    <div align="center">
+        <separator />
+        <button label="${labels.common.button.back}" onClick="@command('buttonBack')"/>
+        <button label="${labels.common.button.generate}" onClick="@command('buttonGenerate')"/>
+        <button label="${labels.common.button.reject}" onClick="@command('buttonReject')"/>
+        <button label="${labels.common.button.cancel}" onClick="@command('buttonClose')"/>
+        <separator />  
+    </div>
+</zk>

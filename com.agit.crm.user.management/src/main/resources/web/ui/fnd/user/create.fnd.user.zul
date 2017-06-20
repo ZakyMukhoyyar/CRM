@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?taglib uri="/WEB-INF/security.tld" prefix="sec"?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<?component name="signLabel" class="com.agit.crm.shared.zul.SignLabel" ?>
+<zk xmlns="http://www.zkoss.org/2005/zul">
+    <window border="none"
+            apply="org.zkoss.bind.BindComposer"
+            viewModel="@id('fx') @init('com.agit.crm.user.management.interfaces.web.ui.viewmodel.UserVM')"
+            form="@id('vm') @load(fx) @save(fx, before='buttonSubmit') @validator('com.bitozen.skk.user.management.interfaces.web.ui.validator.UserValidator',
+            roleID=fx.userDTO.roleDTO.roleID, accessTime=fx.userDTO.userSpecificationDTO.accessTimeDTO)"
+            validationMessages="@id('vmsgs')">
+        <tabbox>
+            <tabs>
+                <tab label="${labels.user.label.userinfo}"/>
+                <tab label="${labels.user.label.accesstime}"/>
+            </tabs>
+            <tabpanels>
+                <tabpanel>
+                    <grid>
+                        <columns>
+                            <column width="20%" />
+                            <column width="80%" />
+                        </columns>
+                        <rows>
+                            <row>
+                                <signLabel value="${labels.user.label.fullname} "/>
+                                <div>
+                                    <textbox value="@bind(vm.userDTO.userSpecificationDTO.fullName)" width="25%"/>
+                                    <label value="@load(vmsgs['fullName'])" style="color:red"/>
+                                </div>
+                            </row>
+                            <row>
+                                <signLabel value="${labels.user.label.assignedrole} "/>
+                                <div>
+                                    <listbox model="@load(fx.roleList)"
+                                             mold="select"
+                                             width="25%"
+                                             onSelect="@command('selectRole', obj=self.getSelectedItem().getValue())">
+                                        <template name="model">
+                                            <listitem selected="@load(fx.userDTO.roleDTO.roleID eq each.roleID)" label="@load(each.roleName)" disabled="@load(empty each.roleID)"/>
+                                        </template>
+                                    </listbox>
+                                    <label value="@load(vmsgs['roleDTO'])" style="color:red"/>
+                                </div>
+                            </row>
+                            <row>
+                                <signLabel value="NIP"/>
+                                <div>
+                                    <textbox value="@bind(vm.userDTO.nip)" width="25%"/>
+                                </div>
+                            </row>
+                            <row>
+                                <signLabel value="${labels.user.label.username} "/>
+                                <div>
+                                    <textbox id="userName" value="@bind(vm.userDTO.userName)" width="25%"/>
+                                    <button label="${labels.user.label.verify}" width="75px" onClick="@command('verifyUserName', obj=userName.getValue())"/>
+                                    <label value="@load(vmsgs['userName'])" style="color:red"/>
+                                </div>
+                            </row>
+                            <row>
+                                <label value="${labels.user.label.password} " width="25%" />
+                                <textbox type="password" value="xxxxxxxxxxx" width="25%" disabled="true"/>
+                            </row>
+                            <row>
+                                <label />
+                                <checkbox label="${labels.user.label.passwordneverexpired}" checked="@load(fx.checked)"
+                                          onCheck="@command('onCheckPasswordExpired', obj=self.isChecked())"/>
+                            </row>
+                            <row>
+                                <signLabel value="${labels.user.label.email} "/>
+                                <div>
+                                    <textbox value="@bind(vm.userDTO.userSpecificationDTO.email)" width="25%" />
+                                    <label value="@load(vmsgs['email'])" style="color:red"/>
+                                </div>
+                            </row>
+                            <row>
+                                <signLabel value="${labels.user.label.mobilephone} "/>
+                                <div>
+                                    <textbox value="@bind(vm.userDTO.userSpecificationDTO.mobilePhone)" width="25%" />
+                                    <label value="@load(vmsgs['mobilePhone'])" style="color:red"/>
+                                </div>
+                            </row>
+                            <row>
+                                <signLabel value="Job Division"/>
+                                <div>
+                                    <combobox model="@load(vm.listJobDivision)" width="25%" selectedItem="@bind(vm.userDTO.userSpecificationDTO.jobDivision)" readonly="true" placeholder="- Silahkan Pilih -">
+                                        <template name="model" var="items">
+                                            <comboitem label="@load(items)" value="@load(items)"/>
+                                        </template>
+                                    </combobox>
+                                </div>
+                            </row>
+                            <row>
+                                <signLabel value="Job Location"/>
+                                <div>
+                                    <combobox model="@load(vm.listJobLocation)" width="25%" selectedItem="@bind(vm.userDTO.userSpecificationDTO.jobLocation)" readonly="true" placeholder="- Silahkan Pilih -">
+                                        <template name="model" var="items">
+                                            <comboitem label="@load(items)" value="@load(items)"/>
+                                        </template>
+                                    </combobox>
+                                </div>
+                            </row>
+                            <row>
+                                <signLabel value="User Status"/>
+                                <div>
+                                    <combobox model="@load(vm.listStatus)" width="25%" selectedItem="@bind(vm.userDTO.userStatus)" readonly="true" placeholder="- Silahkan Pilih -">
+                                        <template name="model" var="items">
+                                            <comboitem label="@load(items)" value="@load(items)"/>
+                                        </template>
+                                    </combobox>
+                                </div>
+                            </row>
+                        </rows>
+                    </grid>
+                </tabpanel>
+
+                <tabpanel>
+                    <div>
+                        <grid>
+                            <columns>
+                                <column label="${labels.user.label.day}" width="40%"/>
+                                <column label="${labels.user.label.start}" width="30%"/>
+                                <column label="${labels.user.label.end}" width="30%"/>
+                            </columns>
+                            <rows>
+                                <row> 
+                                    <label value="${labels.user.label.monday}"/>
+                                    <timebox value="@bind(fx.userDTO.userSpecificationDTO.accessTimeDTO.mondayStart)" format="HH:mm"/>
+                                    <timebox value="@bind(fx.userDTO.userSpecificationDTO.accessTimeDTO.mondayEnd)" format="HH:mm"/>
+                                </row>
+                                <row> 
+                                    <label value="${labels.user.label.tuesday}"/>
+                                    <timebox value="@bind(fx.userDTO.userSpecificationDTO.accessTimeDTO.tuesdayStart)" format="HH:mm"/>
+                                    <timebox value="@bind(fx.userDTO.userSpecificationDTO.accessTimeDTO.tuesdayEnd)" format="HH:mm"/>
+                                </row>
+                                <row> 
+                                    <label value="${labels.user.label.wednesday}"/>
+                                    <timebox value="@bind(fx.userDTO.userSpecificationDTO.accessTimeDTO.wednesdayStart)" format="HH:mm"/>
+                                    <timebox value="@bind(fx.userDTO.userSpecificationDTO.accessTimeDTO.wednesdayEnd)" format="HH:mm"/>
+                                </row>
+                                <row> 
+                                    <label value="${labels.user.label.thursday}"/>
+                                    <timebox value="@bind(fx.userDTO.userSpecificationDTO.accessTimeDTO.thursdayStart)" format="HH:mm"/>
+                                    <timebox value="@bind(fx.userDTO.userSpecificationDTO.accessTimeDTO.thursdayEnd)" format="HH:mm"/>
+                                </row>
+                                <row> 
+                                    <label value="${labels.user.label.friday}"/>
+                                    <timebox value="@bind(fx.userDTO.userSpecificationDTO.accessTimeDTO.fridayStart)" format="HH:mm"/>
+                                    <timebox value="@bind(fx.userDTO.userSpecificationDTO.accessTimeDTO.fridayEnd)" format="HH:mm"/>
+                                </row>
+                                <row> 
+                                    <label value="${labels.user.label.saturday}"/>
+                                    <timebox value="@bind(fx.userDTO.userSpecificationDTO.accessTimeDTO.saturdayStart)" format="HH:mm"/>
+                                    <timebox value="@bind(fx.userDTO.userSpecificationDTO.accessTimeDTO.saturdayEnd)" format="HH:mm"/>
+                                </row>
+                                <row> 
+                                    <label value="${labels.user.label.sunday}"/>
+                                    <timebox value="@bind(fx.userDTO.userSpecificationDTO.accessTimeDTO.sundayStart)" format="HH:mm"/>
+                                    <timebox value="@bind(fx.userDTO.userSpecificationDTO.accessTimeDTO.sundayEnd)" format="HH:mm"/>
+                                </row>
+                            </rows>
+                        </grid>
+                        <label value="@load(vmsgs['accessTime'])" style="color:red"/>
+                    </div>
+                </tabpanel>
+            </tabpanels>
+        </tabbox>
+        <include src="~./ui/common/button.common.create.page.zul"/>
+    </window>
+</zk>

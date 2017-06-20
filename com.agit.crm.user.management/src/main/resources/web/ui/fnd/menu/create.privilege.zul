@@ -1,0 +1,77 @@
+<zk xmlns="http://www.zkoss.org/2005/zul">
+    <window apply="org.zkoss.bind.BindComposer"
+            viewModel="@id('vm') @init('com.agit.crm.user.management.interfaces.web.ui.viewmodel.MenuVM')"
+            form="@id('fx') @load(vm.privilegeDTO) @save(vm.privilegeDTO, before='buttonSavePrivilege')">
+        <groupbox closable="false" mold="3d">
+            <caption label="Form Edit Menu"/>  
+            <groupbox width="600px">
+                <caption label="Membuat Menu" style="font-size:16pt"/>
+                <grid style="border:0">
+                    <columns>
+                        <column width="35%"></column>
+                        <column ></column>
+                    </columns>
+                    <rows>
+                        <row>
+                            <label value="ID Menu"/>
+                            <textbox width="100%" disabled="false" value="@bind(fx.privilegeID)" constraint="no empty : ID Menu Tidak Boleh Kosong"/>
+                        </row>
+                        <row>
+                            <label value="ID Parent"/>
+                            <combobox width="100%" model="@load(vm.listCodeParent)" selectedItem="@bind(fx.parentID)" readonly="true" placeholder="- Silahkan Pilih -">
+                                <template name="model" var="items">
+                                    <comboitem label="@load(items)" value="@load(items)"/>
+                                </template>
+                            </combobox>
+                        </row>
+                        <row>
+                            <label value="Nama Privilege"/>
+                            <textbox width="100%" disabled="false" value="@bind(fx.privilegeName)" constraint="no empty : Nama Privilege Tidak Boleh Kosong"/>
+                        </row>
+                        <row>
+                            <label value="Nama Menu"/>
+                            <textbox width="100%" disabled="false" value="@bind(fx.menuName)" constraint="no empty : Nama Menu Tidak Boleh Kosong"/>
+                        </row>
+                        <row>
+                            <label value="Nama Tab"/>
+                            <textbox width="100%" disabled="false" value="@bind(fx.tabName)"/>
+                        </row>
+                        <row>
+                            <label value="Alamat Form"/>
+                            <textbox width="100%" disabled="false" value="@bind(fx.url)"/>
+                        </row>
+                        <row>
+                            <label value="Status Privilege"/>
+                            <combobox width="100px" model="@load(vm.listStatusPrivilege)" selectedItem="@bind(fx.privilegeStatus)" readonly="true" placeholder="- Silahkan Pilih -" constraint="no empty : Status Privilege Tidak Boleh Kosong">
+                                <template name="model" var="items">
+                                    <comboitem label="@load(items)" value="@load(items)"/>
+                                </template>
+                            </combobox>
+                        </row>
+                    </rows>
+                </grid>
+            </groupbox>
+      
+            <separator height="10px"/>
+            <groupbox width="600px" contentStyle="border:1;">
+                <grid style="border:0">
+                    <columns>
+                        <column width="50%"></column>
+                        <column width="25%" align="right"></column>
+                        <column width="25%" align="right"></column>
+                    </columns>
+                    <rows>
+                        <row>
+                            <label></label>
+                            <button label="Kembali" mold="trendy" width="100px" onClick="@command('buttonCancel')"/>
+                            <button label="Simpan" mold="trendy" width="120px" onClick="@command('buttonSavePrivilege')"/>
+                        </row>
+                    </rows>
+                </grid>
+                
+            </groupbox>
+
+        </groupbox>
+        <separator height="30px"/>
+    </window>
+</zk>

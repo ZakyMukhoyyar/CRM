@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?taglib uri="/WEB-INF/security.tld" prefix="sec"?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<zk xmlns="http://www.zkoss.org/2005/zul">
+    <window border="none"
+            apply="org.zkoss.bind.BindComposer"
+            viewModel="@id('vm') @init('com.agit.crm.user.management.interfaces.web.ui.viewmodel.GroupVM')">
+        <groupbox>
+            <caption label="${labels.group.label.groupinfo}"/>
+            <grid>
+                <columns>
+                    <column width="20%" />
+                    <column width="80%" />
+                </columns>
+                <rows>
+                    <row>
+                        <label value="${labels.group.label.code}"/>
+                        <label value="@load(vm.roleDTO.roleID)"/>
+                    </row>
+                    <row>
+                        <label value="${labels.group.label.name}" />
+                        <label value="@load(vm.roleDTO.roleName)"/>
+                    </row>      
+                    <row>
+                        <label value="${labels.group.label.description}" />
+                        <label value="@load(vm.roleDTO.roleDescription)"/>
+                    </row>
+                    <row visible="@load(vm.previous ne 'CREATE')">
+                        <label value="${labels.group.label.status}"/>
+                        <label value="@load(vm.toSentenceCase(vm.roleDTO.roleStatus))"/>
+                    </row>                         
+                </rows>
+            </grid>
+        </groupbox>
+        <separator />
+        <groupbox>
+            <caption label="${labels.group.title.privilegelist}" />
+            <grid>
+                <columns sizable="true">
+                    <column label="${labels.group.label.privilege}"/>
+                    <column label="${labels.group.label.accesstype}"/>
+                </columns>
+                <rows children="@load(vm.roleDTO.rolePrivilegeDTOs)">
+                    <template name="children">
+                        <row>
+                            <label value="@load(each.privilegeDTO.privilegeName)"/>
+                            <label value="@load(vm.toSentenceCase(each.accessType))"/>
+                        </row>
+                    </template>
+                </rows>
+            </grid>
+        </groupbox>
+        <include src="~./ui/common/button.common.view.page.zul" visible="@load(vm.previous eq 'SEARCH'?(vm.deleted eq null ? true:false):false)"/>        
+        <include src="~./ui/common/button.common.confirm.page.zul" visible="@load(vm.previous eq 'SEARCH'?(vm.deleted eq null ? false : true ):true)"/> 
+    </window>
+</zk>

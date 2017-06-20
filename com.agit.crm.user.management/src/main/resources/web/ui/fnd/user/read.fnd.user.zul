@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?taglib uri="/WEB-INF/security.tld" prefix="sec"?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<zk xmlns="http://www.zkoss.org/2005/zul">
+    <window border="none" apply="org.zkoss.bind.BindComposer"
+            viewModel="@id('vm') @init('com.agit.crm.user.management.interfaces.web.ui.viewmodel.UserVM')">
+        <tabbox>
+            <tabs>
+                <tab label="${labels.user.label.userinfo}"/>
+                <tab label="${labels.user.label.accesstime}"/>
+            </tabs>
+            <tabpanels>
+                <tabpanel>
+                    <grid>
+                        <columns>
+                            <column width="20%" />
+                            <column width="80%" />
+                        </columns>
+                        <rows>
+                            <row>
+                                <label value="${labels.user.label.fullname}"/>
+                                <label value="@load(vm.userDTO.userSpecificationDTO.fullName)"/>
+                            </row>
+                            <row>
+                                <label value="${labels.user.label.assignedrole}"/>
+                                <label value="@load(vm.userDTO.roleDTO.roleName)"/>
+                            </row>
+                            <row>
+                                <label value="NIP"/>
+                                <label value="@load(vm.userDTO.nip)"/>
+                            </row>
+                            <row>
+                                <label value="${labels.user.label.username}"/>
+                                <label value="@load(vm.userDTO.userName)"/>
+                            </row>
+                            <row>
+                                <label value="${labels.user.label.password}"/>
+                                <label value="xxxxxxxxxxx"/>
+                            </row>
+                            <row>
+                                <label />
+                                <checkbox label="${labels.user.label.passwordneverexpired}" checked="@load(vm.checked)"
+                                          onCheck="@command('onCheckPasswordExpired', obj=self.isChecked())" disabled="true"/>
+                            </row>
+                            <row>
+                                <label value="${labels.user.label.email}"/>
+                                <label value="@load(vm.userDTO.userSpecificationDTO.email)"/>
+                            </row>
+                            <row>
+                                <label value="${labels.user.label.mobilephone}"/>
+                                <label value="@load(vm.userDTO.userSpecificationDTO.mobilePhone)"/>
+                            </row>
+                            <row>
+                                <label value="Job Division"/>
+                                <label value="@load(vm.userDTO.userSpecificationDTO.jobDivision)"/>
+                            </row>
+                            <row>
+                                <label value="Job Location"/>
+                                <label value="@load(vm.userDTO.userSpecificationDTO.jobLocation)"/>
+                            </row>
+                            <row>
+                                <label value="User Status"/>
+                                <label value="@load(vm.userDTO.userStatus)"/>
+                            </row>
+                        </rows>
+                    </grid>
+                </tabpanel>
+
+                <tabpanel>
+                    <grid>
+                        <columns>
+                            <column label="${labels.user.label.day}" width="40%"/>
+                            <column label="${labels.user.label.start}" width="30%"/>
+                            <column label="${labels.user.label.end}" width="30%"/>
+                        </columns>
+                        <rows>
+                            <row> 
+                                <label value="${labels.user.label.monday}"/>
+                                <label value="@load(vm.timeToString(vm.userDTO.userSpecificationDTO.accessTimeDTO.mondayStart))"/>
+                                <label value="@load(vm.timeToString(vm.userDTO.userSpecificationDTO.accessTimeDTO.mondayEnd))" />
+                            </row>
+                            <row> 
+                                <label value="${labels.user.label.tuesday}"/>
+                                <label value="@load(vm.timeToString(vm.userDTO.userSpecificationDTO.accessTimeDTO.tuesdayStart))" />
+                                <label value="@load(vm.timeToString(vm.userDTO.userSpecificationDTO.accessTimeDTO.tuesdayEnd))" />
+                            </row>
+                            <row> 
+                                <label value="${labels.user.label.wednesday}"/>
+                                <label value="@load(vm.timeToString(vm.userDTO.userSpecificationDTO.accessTimeDTO.wednesdayStart))" />
+                                <label value="@load(vm.timeToString(vm.userDTO.userSpecificationDTO.accessTimeDTO.wednesdayEnd))" />
+                            </row>
+                            <row> 
+                                <label value="${labels.user.label.thursday}"/>
+                                <label value="@load(vm.timeToString(vm.userDTO.userSpecificationDTO.accessTimeDTO.thursdayStart))" />
+                                <label value="@load(vm.timeToString(vm.userDTO.userSpecificationDTO.accessTimeDTO.thursdayEnd))" />
+                            </row>
+                            <row> 
+                                <label value="${labels.user.label.friday}"/>
+                                <label value="@load(vm.timeToString(vm.userDTO.userSpecificationDTO.accessTimeDTO.fridayStart))" />
+                                <label value="@load(vm.timeToString(vm.userDTO.userSpecificationDTO.accessTimeDTO.fridayEnd))" />
+                            </row>
+                            <row> 
+                                <label value="${labels.user.label.saturday}"/>
+                                <label value="@load(vm.timeToString(vm.userDTO.userSpecificationDTO.accessTimeDTO.saturdayStart))" />
+                                <label value="@load(vm.timeToString(vm.userDTO.userSpecificationDTO.accessTimeDTO.saturdayEnd))" />
+                            </row>
+                            <row> 
+                                <label value="${labels.user.label.sunday}"/>
+                                <label value="@load(vm.timeToString(vm.userDTO.userSpecificationDTO.accessTimeDTO.sundayStart))" />
+                                <label value="@load(vm.timeToString(vm.userDTO.userSpecificationDTO.accessTimeDTO.sundayEnd))" />
+                            </row>
+                        </rows>
+                    </grid>
+                </tabpanel>            
+            </tabpanels>
+        </tabbox>
+        <include src="~./ui/common/button.common.view.page.zul" visible="@load(vm.previous eq 'SEARCH'?(vm.deleted eq null ? true:false):false)"/>        
+        <include src="~./ui/common/button.common.confirm.page.zul" visible="@load(vm.previous eq 'SEARCH'?(vm.deleted eq null ? false : true ):true)"/> 
+    </window>
+</zk>
