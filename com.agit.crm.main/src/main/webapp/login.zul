@@ -1,19 +1,19 @@
 <?page id="index" title="E-Procurement - Project"?>
 <?link rel="icon" type="image/png" href="/images/logoagit-new.png"?>
 <zk xmlns="http://www.zkoss.org/2005/zul">
-    <window width="400px" position="center" mode="overlapped" style="background-color:#323B55;"
+    <window width="400px" position="center" mode="overlapped" style="background-color:#65001e;"
             apply="org.zkoss.bind.BindComposer"
             viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.LoginVM')">
         <h:form id="f" name="f" action="/crm/processLogin" method="POST" xmlns:h="native">
-            <image src="/images/background-library.jpg" style='position: fixed; top: 0px; left: 0px; width: 100%; z-index: -1;' />
+            <image src="/images/background_crm.jpg" style='position: fixed; top: 0px; left: 0px; width: 100%; z-index: -1;' />
             <groupbox mold="3d" >
                 <vbox width="100%" height="100%" align="center">
                     <image src="/images/logoagit-new.png"/>
-                    <label style="color:gray;font-size:20px">Sign In To Start App E-Procurement</label>
+                    <label style="color:65001e;font-size:20px">Sign In App Candidate Recruitment Management</label>
                 </vbox>
                 <style>
                     .z-separator-hor-bar {
-                    background: #eeeeee;	
+                    background: #65001e;	
                     height: 5px;		
                     }
                 </style>
@@ -21,15 +21,15 @@
                 <grid style="border:none;">
                     <rows>
                         <row>
-                            <label style="font-weight:bold;" value="${labels.user.label.username}" />
+                            <label style="font-weight:bold;color:#65001e" value="${labels.user.label.username}" />
                             <textbox name="username" width="150px" placeholder="username" />
                         </row>
                         <row>
-                            <label style="font-weight:bold" value="${labels.user.label.password}" />
+                            <label style="font-weight:bold;color:#65001e" value="${labels.user.label.password}" />
                             <textbox type="password" name="password" width="150px" placeholder="Password"/>
                         </row>
                         <row visible="false">
-                            <label value="${labels.user.label.domain}" style="font-weight:bold" />
+                            <label value="${labels.user.label.domain}" style="font-weight:bold;color:#65001e" />
                             <listbox name="ldapDomain" model="@load(vm.domains)" mold="select" width="150px">
                                 <template name="model" status="s">  
                                     <listitem label="@load(each.key)" value="@load(each.value)" selected="@load(s.index eq 0)"/>
@@ -42,7 +42,7 @@
                 <grid style="border:none;">
                     <rows>
                         <row spans="2">
-                            <a href="http://localhost:9091/crm-migas" label="I Forgot My Password"/>
+                            <a href="http://localhost:9091/crm-migas" label="I Forgot My Password" style="font-weight:bold;color:#65001e"/>
                             <div align="center">
                                 <h:input type="submit" value="${labels.user.label.login}" style="width: 120px; height : 30px" />
                             </div>

@@ -2,7 +2,7 @@
 <web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
     
     <!-- Display application name -->
-    <display-name>Agit-ZK-SKK Application V.1.0.0-SNAPSHOT</display-name>
+    <display-name>Agit-ZK-CRM Application V.1.0.0-SNAPSHOT</display-name>
     
     <!-- Define the welcome page -->
     <welcome-file-list>
