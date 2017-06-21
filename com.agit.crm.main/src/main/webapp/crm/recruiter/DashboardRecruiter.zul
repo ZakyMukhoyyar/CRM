@@ -1,0 +1,84 @@
+<zk xmlns="http://www.zkoss.org/2005/zul">
+    <window>
+        <groupbox closable="false" mold="3d">
+            <caption label="Dashboard Recruiter" />
+            <groupbox closable="false">
+                <caption label="Parameter Pencarian" />
+                <grid style="border:0">
+                    <columns>
+                        <column width="20%" />
+                        <column width="30%" />
+                        <column width="20%" />
+                        <column width="30%" />
+                    </columns>
+                    <rows>
+                        <row>
+                            <label value="Nama Lowongan" />
+                            <textbox width="100%" value="@bind(vm.idDataBank)"/>
+                            <label value="Tanggal Berakhir" />
+                            <datebox width="100%" value="@bind(vm.noRekening)"/>                            
+                        </row>
+                        <row>
+                            <label value="Lokasi Kerja" />
+                            <textbox width="100%" value="@bind(vm.idDataBank)"/>
+                            <label value="Fungsi Pekerjaan" />
+                            <combobox width="100%" placeholder="- Silahkan Pilih -" model="@load(vm.bankTypes)" selectedItem="@bind(vm.namaBank)">
+                                <template name="model" var="items">
+                                    <comboitem label="@load(items)" value="@load(items)"/>
+                                </template>
+                            </combobox>
+                        </row>
+                        <row>
+                            <cell></cell>
+                            <cell></cell>
+                            <cell align="left">
+                                <button width="60%" label="Pencarian" mold="trendy" onClick="@command('searchDataBank')"/>
+                                
+                            </cell>
+                            <cell colspan="2"></cell> 
+                        </row>
+                    </rows>
+                </grid>
+                <separator></separator>
+            </groupbox>
+            <groupbox closable="false">
+                <paging forward="onPaging" />
+                <listbox rows="@load(vm.pageSize)" mold="paging" pageSize="@load(vm.pageSize)" emptyMessage="${labels.common.noDataFound}">
+                    <listhead>
+                        <listheader label="ID" width="5%" align="center" sortDirection="ascending" sort="auto(idDataBank)"/>
+                        <listheader label="Nama Lowongan" width="20%" align="center"/>
+                        <listheader label="Tanggal Mulai" width="14%" align="center"/>
+                        <listheader label="Tanggal Berakhir" width="14%" align="center"/>
+                        <listheader label="Fungsi Pekerjaan" width="14%" align="center"/>
+                        <listheader label="Lokasi" width="14%" align="center"/>
+                        <listheader label="Aksi" width="10%" align="center"/>
+                    </listhead>
+                    <template name="model">
+                        <listitem value="${each}">
+                            <listcell>
+                                <label width="100%"/>
+                            </listcell>
+                            <listcell>
+                                <label width="100%"/>
+                            </listcell>
+                            <listcell>
+                                <label width="100%"/>
+                            </listcell>
+                            <listcell>
+                                <label width="100%"/>
+                            </listcell>
+                            <listcell>
+                                <label width="100%"/>
+                            </listcell>
+                            <listcell>
+                                <a label="Detail" style="text-decoration:underline ;color:blue" onClick="@command('detailDataBank', object=each)"></a>
+                                <!--                                <a label=" | " style="font-size:12pt ;color:black"></a>
+                                <a label="Delete" style="text-decoration:underline ;color:blue" onClick="@command('deleteDataBank', object=each)"></a>-->
+                            </listcell>
+                        </listitem>
+                    </template>
+                </listbox>
+            </groupbox>
+        </groupbox>
+    </window>
+</zk>

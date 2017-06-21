@@ -1,4 +1,4 @@
-<?page id="index" title="E-Procurement - Project"?>
+<?page id="index" title="Candidate Recruitment Management - Project"?>
 <?link rel="icon" type="image/png" href="/images/logoagit-new.png"?>
 <zk xmlns="http://www.zkoss.org/2005/zul">
     <window width="400px" position="center" mode="overlapped" style="background-color:#65001e;"

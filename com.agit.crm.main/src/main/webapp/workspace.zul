@@ -1,4 +1,4 @@
-<?page id="index" title="E-Procurement - Project"?>
+<?page id="index" title="Candidate Recruitment Management - Project"?>
 <?link rel="icon" type="image/png" href="/images/logoagit-new.png"?>
 <?taglib uri="/WEB-INF/security.tld" prefix="sec"?>
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>

@@ -1,0 +1,116 @@
+<zk xmlns="http://www.zkoss.org/2005/zul">
+    <window>
+        <separator spacing="5px"/>
+        <groupbox width="500px" closable="true">
+            <caption label="Form Registrasi Recruiter" style="font-size:16pt; font-weight: bold"/>
+            <groupbox>
+                <caption label="Data Login" style="font-size:12pt; font-weight: bold"/>
+                <grid style="border:0">
+                    <columns>
+                        <column width="3%"></column>
+                        <column width="30%"></column>
+                        <column width="40%"></column>
+                        <column></column>
+                    </columns>
+                    <rows>
+                        <row>
+                            <label value="*) " style="color:red"/>
+                            <label value="ID Recruiter" style="font-weight: bold"/>
+                            <textbox width="100%" disabled="false" value="@bind(fx.idUser)" />
+                        </row>
+                        <row>
+                            <label value="*) " style="color:red"/>
+                            <label value="Username " style="font-weight: bold"/>
+                            <textbox width="100%" disabled="false" constraint="no empty : Username Tidak Boleh Kosong"/>
+                        </row>
+                        <row>
+                            <label value="*) " style="color:red"/>
+                            <label value="Password" style="font-weight: bold"/>
+                            <textbox width="100%" disabled="false" type="password" constraint="no empty : Password Tidak Boleh Kosong"/>
+                        </row>
+                        <row>
+                            <label value="*) " style="color:red"/>
+                            <label value="Retype Password" style="font-weight: bold"/>
+                            <textbox width="100%" disabled="false" type="password" constraint="no empty : Retype Password Tidak Boleh Kosong" />
+                        </row>
+                    </rows>
+                </grid>
+            </groupbox>
+            <groupbox>
+                <caption label="Data PenanggungJawab" style="font-size:12pt; font-weight: bold"/>
+                <grid style="border:0">
+                    <columns>
+                        <column width="3%"></column>
+                        <column width="30%"></column>
+                        <column width="40%"></column>
+                        <column></column>
+                    </columns>
+                    <rows>
+                        <row>
+                            <label value="*) " style="color:red"/>
+                            <label value="NPK" style="font-weight: bold"/>
+                            <textbox width="100%" disabled="false" constraint="/.[0-9]+/: no empty : NPK Tidak Boleh Kosong"/>
+                        </row>
+                        <row>
+                            <label value="*) " style="color:red"/>
+                            <label value="Nama Recruiter" style="font-weight: bold"/>
+                            <textbox width="100%" disabled="false" constraint="no empty : Nama Recruiter Tidak Boleh Kosong"/>
+                        </row>
+                        <row>
+                            <label value="*) " style="color:red"/>
+                            <label value="Alamat Email" style="font-weight: bold"/>
+                            <textbox width="100%" disabled="false" type="password" constraint="/.+@.+\.[a-z]+/: Email tidak sesuai dengan format" />
+                        </row>
+                        <row>
+                            <label value="*) " style="color:red"/>
+                            <label value="No Telephone" style="font-weight: bold"/>
+                            <textbox width="100%" disabled="false" type="password" constraint="no empty : Retype Password Tidak Boleh Kosong"/>
+                        </row>
+                        <row>
+                            <label value="*) " style="color:red"/>
+                            <label value="No Handphone" style="font-weight: bold"/>
+                            <textbox width="100%" disabled="false" type="password" constraint="no empty : Retype Password Tidak Boleh Kosong"/>
+                        </row>
+                        <row>
+                            <label value="*)" style="color:red"/>
+                            <label value="Jabatan" style="font-weight: bold"/>
+                            <combobox autodrop="true" model="@load(vm.kualifikasiTypes)" selectedItem="@bind(fx.kualifikasiType)" readonly="true" width="100%" placeholder="- Pilihan Jabatan -">
+                                <template name="model" var="items">
+                                    <comboitem label="@load(items)" value="@load(items)"/>
+                                </template>
+                            </combobox>
+                        </row>
+                        <row>
+                            <label value="*)" style="color:red"/>
+                            <label value="Divisi" style="font-weight: bold"/>
+                            <combobox autodrop="true" model="@load(vm.kualifikasiTypes)" selectedItem="@bind(fx.kualifikasiType)" readonly="true" width="100%" placeholder="- Pilihan Divisi -">
+                                <template name="model" var="items">
+                                    <comboitem label="@load(items)" value="@load(items)"/>
+                                </template>
+                            </combobox>
+                        </row>
+                    </rows>
+                </grid>
+                <groupbox>
+                    <label value="*) Username dan Password akan di gunakan saat login" style="color:red"/>
+                    <separator></separator>
+                    <label value="*) Password minimal 8 karakter, kombinasi huruf besar, kecil dan angka" style="color:red"/>
+                
+                </groupbox>
+                <grid style="border:0">
+                    <columns>
+                        <column width="50%" align="right"/>
+                        <column width="50%"/>
+                    </columns>
+                
+                    <rows>
+                        <row>
+                            <button label="Kembali" onClick="@command('buttonKlikBackDataBankForm')" width="40%" />
+                            <button label="Simpan" onClick="@command('buttonSaveDataBank')" width="40%"/>
+                        </row>
+                    </rows>
+                </grid>            
+            </groupbox>
+        </groupbox>
+    </window>
+</zk>
