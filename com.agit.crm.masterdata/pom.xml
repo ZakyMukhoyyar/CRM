@@ -6,22 +6,17 @@
         <artifactId>com.agit.crm.parent</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <artifactId>com.agit.crm.core</artifactId>
+    <artifactId>com.agit.crm.masterdata</artifactId>
     <packaging>jar</packaging>
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>com.agit.crm.common</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>com.agit.crm.user.management</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
             <artifactId>com.agit.crm.shared</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>com.agit.crm.common</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
@@ -31,7 +26,7 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>com.agit.crm.masterdata</artifactId>
+            <artifactId>com.agit.crm.user.management</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>

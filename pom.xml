@@ -12,6 +12,7 @@
         <module>com.agit.crm.main</module>
         <module>com.agit.crm.common</module>
         <module>com.agit.crm.core</module>
+        <module>com.agit.crm.masterdata</module>
     </modules>
     <properties>
         <!-- Properties for POM -->

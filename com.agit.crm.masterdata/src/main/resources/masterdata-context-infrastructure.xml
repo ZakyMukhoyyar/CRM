@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+    <import resource="core-context-infrastructure-persistence.xml"/>   
+    <!--<import resource="data-context-infrastructure-messaging.xml"/>-->
+    <!--<import resource="data-context-infrastructure-file.xml"/>-->  
+    <!--<import resource="data-context-infrastructure-rest.xml"/>--> 
+    <!--<import resource="data-context-infrastructure-rule.xml"/>--> 
+    <!--<import resource="data-context-infrastructure-scheduler.xml"/>--> 
+</beans>
