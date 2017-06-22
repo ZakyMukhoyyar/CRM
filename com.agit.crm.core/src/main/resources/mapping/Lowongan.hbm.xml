@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-access="field">
+    <class mutable="true" name="com.agit.crm.domain.crm.Lowongan" table="AGIT_LOWONGAN">
+        <!--<cache usage="read-only"/>-->
+        <id column="id" name="id">
+            <generator class="org.hibernate.id.IdentityGenerator"/>
+        </id>
+        <property column="idLowongan" name="idLowongan" not-null="false"/>
+        <property column="namaLowongan" name="namaLowongan" not-null="false"/>
+        <property column="deskripsiLowongan" name="deskripsiLowongan" not-null="false"/>
+        <property column="tanggalMulai" name="tanggalMulai" not-null="false"/>
+        <property column="tanggalBerakhir" name="tanggalBerakhir"/>
+        <property column="minatPekerjaan" name="minatPekerjaan" not-null="false"/>
+        <property column="persyaratan" name="persyaratan" not-null="false"/>
+        <property column="lokasiKerja" name="lokasiKerja"/>
+        <property column="createdDate" name="createdDate" not-null="false"/>
+        <property column="createdBy" name="createdBy"/>
+        <property column="modifiedDate" name="modifiedDate" not-null="false"/>
+        <property column="modifiedBy" name="modifiedBy" not-null="false"/>
+    </class>
+</hibernate-mapping>
