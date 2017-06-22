@@ -1,0 +1,10 @@
+<zk xmlns="http://www.zkoss.org/2005/zul">
+    <window apply="org.zkoss.bind.BindComposer">
+        <groupbox closable="false" mold="3d" width="800px">
+            <caption  label="Form Create Job"/>
+            <groupbox closable="false" width="100%">
+                
+            </groupbox>
+        </groupbox>
+    </window>
+</zk>
