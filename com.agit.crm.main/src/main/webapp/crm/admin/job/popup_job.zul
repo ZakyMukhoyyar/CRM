@@ -1,0 +1,29 @@
+<window apply="org.zkoss.bind.BindComposer" closable="true" width="400px">
+    <groupbox closable="false" mold="3d">
+        <caption label="Minat"/>
+        <groupbox closable="false">
+            <grid style="border:0;">
+                <columns>
+                    <column width="25%"/>
+                    <column />
+                </columns>
+                <rows>
+                    <row>
+                        <image src="/images/iconcheck.png;" align="right" />
+                        <label value="Apakah anda yakin menyimpan data ini?" />
+					
+                    </row>
+                </rows>
+            </grid>
+            <separator height="10px"/>
+        </groupbox>
+        <separator/>
+        <groupbox contentStyle="border:0; padding-left:20%; ">
+            <hbox align="center">
+                <button label="Kembali" mold="trendy" width="100px" onClick="@command('buttonCancel')"/>
+                <space width="1%"/>
+                <button label="Simpan" width="100px" onClick="@command('buttonKonfirmasi', object=vm.ticketDTO)"/>
+            </hbox>
+        </groupbox>
+    </groupbox>
+</window>
