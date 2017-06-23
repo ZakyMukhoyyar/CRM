@@ -30,6 +30,10 @@
     <bean id="minatRepository" class="com.agit.crm.domain.infrastructure.persistance.hibernate.MinatHibernateRepository">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
+    
+    <bean id="keterampilanRepository" class="com.agit.crm.domain.infrastructure.persistance.hibernate.KeterampilanHibernateRepository">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
   
     
 </beans>

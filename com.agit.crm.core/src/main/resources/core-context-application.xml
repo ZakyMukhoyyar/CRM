@@ -41,5 +41,11 @@
         <property name="minatRepository" ref="minatRepository"/>
         <property name="minatDTOAssembler" ref="minatDTOAssembler"/>
     </bean>
+    
+    <bean id="keterampilanDTOAssembler" class="com.agit.crm.interfaces.web.facade.dto.assembler.crm.KeterampilanDTOAssembler"></bean>
+    <bean id="keterampilanService" class="com.agit.crm.application.impl.KeterampilanServiceImpl">
+        <property name="keterampilanRepository" ref="keterampilanRepository"/>
+        <property name="keterampilanDTOAssembler" ref="keterampilanDTOAssembler"/>
+    </bean>
    
 </beans>
