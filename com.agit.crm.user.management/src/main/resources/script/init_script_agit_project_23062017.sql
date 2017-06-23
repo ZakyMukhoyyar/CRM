@@ -20,6 +20,12 @@ INSERT INTO "public"."mst_privilege" VALUES ('15', 'USER_CREATE', 'User Create',
 INSERT INTO "public"."mst_privilege" VALUES ('16', 'USER_RELEASE', 'User Release', 'ACTIVE', 'USER_MANAGEMENT', 't', 'Release', 'User - Release', null, '~./ui/fnd/user/release.fnd.user.zul', '2016-01-01 00:00:00', 'SYSTEM');
 INSERT INTO "public"."mst_privilege" VALUES ('17', 'MENU', 'Menu Dashboard', 'ACTIVE', 'ADMINISTRATOR', 't', 'Menu Management', null, null, null, '2016-01-01 00:00:00', 'SYSTEM');
 INSERT INTO "public"."mst_privilege" VALUES ('18', 'MENU_MANAGEMENT', 'Menu Dashboard', 'ACTIVE', 'MENU', 't', 'Menu - Dashboard', 'Menu - Dashboard', null, '~./ui/fnd/menu/dashboard.privilege.zul', '2016-01-01 00:00:00', 'SYSTEM');
+INSERT INTO "public"."mst_privilege" VALUES ('19', 'ADMIN_MANAGEMENT', 'Admin', 'ACTIVE', 'ADMINISTRATOR', 't', 'Admin Management', null, null, null, '2016-01-01 00:00:00', 'SYSTEM');
+INSERT INTO "public"."mst_privilege" VALUES ('20', 'EVENT_MANAGEMENT', 'Event Management', 'ACTIVE', 'ADMIN_MANAGEMENT', 't', 'Event - Dashboard', 'Event - Dashboard', null, '/crm/admin/event/dashboard_event.zul', '2016-01-01 00:00:00', 'SYSTEM');
+INSERT INTO "public"."mst_privilege" VALUES ('21', 'FORUM_MANAGEMENT', 'Forum Management', 'ACTIVE', 'ADMIN_MANAGEMENT', 't', 'Forums - Dashboard', 'Forums - Dashboard', null, '/crm/admin/forum/dashboard_forum.zul', '2016-01-01 00:00:00', 'SYSTEM');
+INSERT INTO "public"."mst_privilege" VALUES ('22', 'JOBS_MANAGEMENT', 'Jobs Management', 'ACTIVE', 'ADMIN_MANAGEMENT', 't', 'Jobs - Dashboard', 'Jobs - Dashboard', null, '/crm/admin/job/dashboard_job.zul', '2016-01-01 00:00:00', 'SYSTEM');
+INSERT INTO "public"."mst_privilege" VALUES ('23', 'KETRAMPILAN_MANAGEMENT', 'Ketrampilan Management', 'ACTIVE', 'ADMIN_MANAGEMENT', 't', 'Ketrampilan - Dashboard', 'Ketrampilan - Dashboard', null, '/crm/admin/ketrampilan/dashboard_ketrampilan.zul', '2016-01-01 00:00:00', 'SYSTEM');
+INSERT INTO "public"."mst_privilege" VALUES ('24', 'MINAT_MANAGEMENT', 'Minat Management', 'ACTIVE', 'ADMIN_MANAGEMENT', 't', 'Minat - Dashboard', 'Minat - Dashboard', null, '/crm/admin/minat/dashboard_minat.zul', '2016-01-01 00:00:00', 'SYSTEM');
 
 
 -- ----------------------------
@@ -34,6 +40,7 @@ INSERT INTO "public"."mst_role" VALUES ('2', 'ADMIN', 'ADMIN', 'ADMIN', 'ACTIVE'
 INSERT INTO "public"."mst_role_privilege" VALUES ('1', '1', 'ALLOW', '0');
 INSERT INTO "public"."mst_role_privilege" VALUES ('2', '2', 'ALLOW', '0');
 INSERT INTO "public"."mst_role_privilege" VALUES ('2', '8', 'ALLOW', '1');
+INSERT INTO "public"."mst_role_privilege" VALUES ('2', '19', 'ALLOW', '2');
 
 -- ----------------------------
 -- Records of mst_user
