@@ -21,5 +21,25 @@
         <property name="lowonganRepository" ref="lowonganRepository"/>
         <property name="lowonganDTOAssembler" ref="lowonganDTOAssembler"/>
     </bean>
+    
+    <bean id="forumDTOAssembler" class="com.agit.crm.interfaces.web.facade.dto.assembler.crm.ForumDTOAssembler">
+    </bean>
+    <bean id="forumService" class="com.agit.crm.application.impl.ForumServiceImpl">
+        <property name="forumRepository" ref="forumRepository"/>
+        <property name="forumDTOAssembler" ref="forumDTOAssembler"/>
+    </bean>
+    
+    <bean id="eventDTOAssembler" class="com.agit.crm.interfaces.web.facade.dto.assembler.crm.EventDTOAssembler">
+    </bean>
+    <bean id="eventService" class="com.agit.crm.application.impl.EventServiceImpl">
+        <property name="eventRepository" ref="eventRepository"/>
+        <property name="eventDTOAssembler" ref="eventDTOAssembler"/>
+    </bean>
+    
+    <bean id="minatDTOAssembler" class="com.agit.crm.interfaces.web.facade.dto.assembler.crm.MinatDTOAssembler"></bean>
+    <bean id="minatService" class="com.agit.crm.application.impl.MinatServiceImpl">
+        <property name="minatRepository" ref="minatRepository"/>
+        <property name="minatDTOAssembler" ref="minatDTOAssembler"/>
+    </bean>
    
 </beans>
