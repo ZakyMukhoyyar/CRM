@@ -1,5 +1,6 @@
 package com.agit.crm.common.dto.crm;
 
+import com.agit.crm.shared.type.JenisKelaminType;
 import com.agit.crm.shared.type.PendidikanType;
 import java.io.Serializable;
 import java.util.Date;
@@ -20,6 +21,9 @@ public class MahasiswaDTO implements Serializable {
     private Date tanggalLahir;
     private String domisili;
     private String noHP;
+    private String noKTP;
+    private String ipk;
+    private JenisKelaminType jenisKelaminType;
     private PendidikanType pendidikanType;
     private String namaCivitas;
     private String minat;
@@ -39,11 +43,12 @@ public class MahasiswaDTO implements Serializable {
     private Date createdDate;
     private String modifiedBy;
     private Date modifiedDate;
+    private Boolean statusApprove;
 
     public MahasiswaDTO() {
     }
 
-    public MahasiswaDTO(String idMahasiswa, String username, String password, String retypedPassword, String namaLengkap, String email, Date tanggalLahir, String domisili, String noHP, PendidikanType pendidikanType, String namaCivitas, String minat, String ketrampilan1, String ketrampilan2, String ketrampilan3, String ketrampilan4, String ketrampilan5, String tingkat1, String tingkat2, String tingkat3, String tingkat4, String tingkat5, String uploadCV, List<LowonganDTO> lowongansDTO, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate) {
+    public MahasiswaDTO(String idMahasiswa, String username, String password, String retypedPassword, String namaLengkap, String email, Date tanggalLahir, String domisili, String noHP, String noKTP, String ipk, JenisKelaminType jenisKelaminType, PendidikanType pendidikanType, String namaCivitas, String minat, String ketrampilan1, String ketrampilan2, String ketrampilan3, String ketrampilan4, String ketrampilan5, String tingkat1, String tingkat2, String tingkat3, String tingkat4, String tingkat5, String uploadCV, List<LowonganDTO> lowongansDTO, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate, Boolean statusApprove) {
         this.idMahasiswa = idMahasiswa;
         this.username = username;
         this.password = password;
@@ -53,6 +58,9 @@ public class MahasiswaDTO implements Serializable {
         this.tanggalLahir = tanggalLahir;
         this.domisili = domisili;
         this.noHP = noHP;
+        this.noKTP = noKTP;
+        this.ipk = ipk;
+        this.jenisKelaminType = jenisKelaminType;
         this.pendidikanType = pendidikanType;
         this.namaCivitas = namaCivitas;
         this.minat = minat;
@@ -72,6 +80,7 @@ public class MahasiswaDTO implements Serializable {
         this.createdDate = createdDate;
         this.modifiedBy = modifiedBy;
         this.modifiedDate = modifiedDate;
+        this.statusApprove = statusApprove;
     }
 
     public String getIdMahasiswa() {
@@ -144,6 +153,30 @@ public class MahasiswaDTO implements Serializable {
 
     public void setNoHP(String noHP) {
         this.noHP = noHP;
+    }
+
+    public String getNoKTP() {
+        return noKTP;
+    }
+
+    public void setNoKTP(String noKTP) {
+        this.noKTP = noKTP;
+    }
+
+    public String getIpk() {
+        return ipk;
+    }
+
+    public void setIpk(String ipk) {
+        this.ipk = ipk;
+    }
+
+    public JenisKelaminType getJenisKelaminType() {
+        return jenisKelaminType;
+    }
+
+    public void setJenisKelaminType(JenisKelaminType jenisKelaminType) {
+        this.jenisKelaminType = jenisKelaminType;
     }
 
     public PendidikanType getPendidikanType() {
@@ -298,9 +331,19 @@ public class MahasiswaDTO implements Serializable {
         this.modifiedDate = modifiedDate;
     }
 
-    @Override
-    public String toString() {
-        return "MahasiswaDTO{" + "idMahasiswa=" + idMahasiswa + ", username=" + username + ", password=" + password + ", retypedPassword=" + retypedPassword + ", namaLengkap=" + namaLengkap + ", email=" + email + ", tanggalLahir=" + tanggalLahir + ", domisili=" + domisili + ", noHP=" + noHP + ", pendidikanType=" + pendidikanType + ", namaCivitas=" + namaCivitas + ", minat=" + minat + ", ketrampilan1=" + ketrampilan1 + ", ketrampilan2=" + ketrampilan2 + ", ketrampilan3=" + ketrampilan3 + ", ketrampilan4=" + ketrampilan4 + ", ketrampilan5=" + ketrampilan5 + ", tingkat1=" + tingkat1 + ", tingkat2=" + tingkat2 + ", tingkat3=" + tingkat3 + ", tingkat4=" + tingkat4 + ", tingkat5=" + tingkat5 + ", uploadCV=" + uploadCV + ", lowongansDTO=" + lowongansDTO + ", createdBy=" + createdBy + ", createdDate=" + createdDate + ", modifiedBy=" + modifiedBy + ", modifiedDate=" + modifiedDate + '}';
+    public Boolean getStatusApprove() {
+        return statusApprove;
     }
 
+    public void setStatusApprove(Boolean statusApprove) {
+        this.statusApprove = statusApprove;
+    }
+
+    @Override
+    public String toString() {
+        return "MahasiswaDTO{" + "idMahasiswa=" + idMahasiswa + ", username=" + username + ", password=" + password + ", retypedPassword=" + retypedPassword + ", namaLengkap=" + namaLengkap + ", email=" + email + ", tanggalLahir=" + tanggalLahir + ", domisili=" + domisili + ", noHP=" + noHP + ", noKTP=" + noKTP + ", ipk=" + ipk + ", jenisKelaminType=" + jenisKelaminType + ", pendidikanType=" + pendidikanType + ", namaCivitas=" + namaCivitas + ", minat=" + minat + ", ketrampilan1=" + ketrampilan1 + ", ketrampilan2=" + ketrampilan2 + ", ketrampilan3=" + ketrampilan3 + ", ketrampilan4=" + ketrampilan4 + ", ketrampilan5=" + ketrampilan5 + ", tingkat1=" + tingkat1 + ", tingkat2=" + tingkat2 + ", tingkat3=" + tingkat3 + ", tingkat4=" + tingkat4 + ", tingkat5=" + tingkat5 + ", uploadCV=" + uploadCV + ", lowongansDTO=" + lowongansDTO + ", createdBy=" + createdBy + ", createdDate=" + createdDate + ", modifiedBy=" + modifiedBy + ", modifiedDate=" + modifiedDate + ", statusApprove=" + statusApprove + '}';
+    }
+    
+    
+    
 }

@@ -41,6 +41,9 @@ public class MahasiswaDTOAssembler implements IObjectAssembler<Mahasiswa, Mahasi
                 .setTanggalLahir(domainObject.getTanggalLahir())
                 .setDomisili(domainObject.getDomisili())
                 .setNoHP(domainObject.getNoHP())
+                .setNoKTP(domainObject.getNoKTP())
+                .setIpk(domainObject.getIpk())
+                .setJenisKelaminType(domainObject.getJenisKelaminType())
                 .setPendidikanType(domainObject.getPendidikanType())
                 .setNamaCivitas(domainObject.getNamaCivitas())
                 .setMinat(domainObject.getMinat())
@@ -60,6 +63,7 @@ public class MahasiswaDTOAssembler implements IObjectAssembler<Mahasiswa, Mahasi
                 .setCreatedDate(domainObject.getCreatedDate())
                 .setModifiedBy(domainObject.getModifiedBy())
                 .setModifiedDate(domainObject.getCreatedDate())
+                .setStatusApprove(domainObject.getStatusApprove())
                 .createMahasiswaDTO();
     }
 
@@ -75,6 +79,9 @@ public class MahasiswaDTOAssembler implements IObjectAssembler<Mahasiswa, Mahasi
                 .setTanggalLahir(dtoObject.getTanggalLahir())
                 .setDomisili(dtoObject.getDomisili())
                 .setNoHP(dtoObject.getNoHP())
+                .setNoKTP(dtoObject.getNoKTP())
+                .setIpk(dtoObject.getIpk())
+                .setJenisKelaminType(dtoObject.getJenisKelaminType())
                 .setPendidikanType(dtoObject.getPendidikanType())
                 .setNamaCivitas(dtoObject.getNamaCivitas())
                 .setMinat(dtoObject.getMinat())
@@ -94,6 +101,7 @@ public class MahasiswaDTOAssembler implements IObjectAssembler<Mahasiswa, Mahasi
                 .setCreatedDate(dtoObject.getCreatedDate())
                 .setModifiedBy(dtoObject.getModifiedBy())
                 .setModifiedDate(dtoObject.getCreatedDate())
+                .setStatusApprove(dtoObject.getStatusApprove())
                 .createMahasiswa();
     }
 

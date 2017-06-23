@@ -10,6 +10,7 @@ import com.agit.crm.domain.crm.MahasiswaBuilder;
 import com.agit.crm.domain.crm.MahasiswaRepository;
 import com.agit.crm.interfaces.web.facade.dto.assembler.crm.LowonganDTOAssembler;
 import com.agit.crm.interfaces.web.facade.dto.assembler.crm.MahasiswaDTOAssembler;
+import com.agit.crm.shared.type.JenisKelaminType;
 import com.agit.crm.shared.type.PendidikanType;
 import java.util.ArrayList;
 import java.util.Date;
@@ -111,6 +112,9 @@ public class MahasiswaServiceImpl implements MahasiswaService {
                 .setTanggalLahir(new Date())
                 .setDomisili("domisili")
                 .setNoHP("noHP")
+                .setNoKTP("noKTP")
+                .setIpk("nilaiIpk")
+                .setJenisKelaminType(JenisKelaminType.WANITA)
                 .setPendidikanType(PendidikanType.DIII)
                 .setNamaCivitas("namaCivitas")
                 .setMinat("minat")
@@ -130,6 +134,7 @@ public class MahasiswaServiceImpl implements MahasiswaService {
                 .setCreatedDate(new Date())
                 .setModifiedBy("modifiedBy")
                 .setModifiedDate(new Date())
+                .setStatusApprove(Boolean.TRUE)
                 .createMahasiswa();
         return mahasiswaDTOAssembler.toDTO(mahasiswa);
     }

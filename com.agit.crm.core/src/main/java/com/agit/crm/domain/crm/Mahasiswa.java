@@ -1,6 +1,7 @@
 package com.agit.crm.domain.crm;
 
 import com.agit.crm.shared.object.EntityObject;
+import com.agit.crm.shared.type.JenisKelaminType;
 import com.agit.crm.shared.type.PendidikanType;
 import java.util.Date;
 import java.util.List;
@@ -22,6 +23,9 @@ public class Mahasiswa implements EntityObject<Mahasiswa> {
     private Date tanggalLahir;
     private String domisili;
     private String noHP;
+    private String noKTP;
+    private String ipk;
+    private JenisKelaminType jenisKelaminType;
     private PendidikanType pendidikanType;
     private String namaCivitas;
     private String minat;
@@ -41,11 +45,12 @@ public class Mahasiswa implements EntityObject<Mahasiswa> {
     private Date createdDate;
     private String modifiedBy;
     private Date modifiedDate;
+    private Boolean statusApprove;
 
     public Mahasiswa() {
     }
 
-    public Mahasiswa(String idMahasiswa, String username, String password, String retypedPassword, String namaLengkap, String email, Date tanggalLahir, String domisili, String noHP, PendidikanType pendidikanType, String namaCivitas, String minat, String ketrampilan1, String ketrampilan2, String ketrampilan3, String ketrampilan4, String ketrampilan5, String tingkat1, String tingkat2, String tingkat3, String tingkat4, String tingkat5, String uploadCV, List<Lowongan> lowongans, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate) {
+    public Mahasiswa(String idMahasiswa, String username, String password, String retypedPassword, String namaLengkap, String email, Date tanggalLahir, String domisili, String noHP, String noKTP, String ipk, JenisKelaminType jenisKelaminType, PendidikanType pendidikanType, String namaCivitas, String minat, String ketrampilan1, String ketrampilan2, String ketrampilan3, String ketrampilan4, String ketrampilan5, String tingkat1, String tingkat2, String tingkat3, String tingkat4, String tingkat5, String uploadCV, List<Lowongan> lowongans, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate, Boolean statusApprove) {
         this.idMahasiswa = idMahasiswa;
         this.username = username;
         this.password = password;
@@ -55,6 +60,9 @@ public class Mahasiswa implements EntityObject<Mahasiswa> {
         this.tanggalLahir = tanggalLahir;
         this.domisili = domisili;
         this.noHP = noHP;
+        this.noKTP = noKTP;
+        this.ipk = ipk;
+        this.jenisKelaminType = jenisKelaminType;
         this.pendidikanType = pendidikanType;
         this.namaCivitas = namaCivitas;
         this.minat = minat;
@@ -74,6 +82,7 @@ public class Mahasiswa implements EntityObject<Mahasiswa> {
         this.createdDate = createdDate;
         this.modifiedBy = modifiedBy;
         this.modifiedDate = modifiedDate;
+        this.statusApprove = statusApprove;
     }
 
     public String getIdMahasiswa() {
@@ -146,6 +155,30 @@ public class Mahasiswa implements EntityObject<Mahasiswa> {
 
     public void setNoHP(String noHP) {
         this.noHP = noHP;
+    }
+
+    public String getNoKTP() {
+        return noKTP;
+    }
+
+    public void setNoKTP(String noKTP) {
+        this.noKTP = noKTP;
+    }
+
+    public String getIpk() {
+        return ipk;
+    }
+
+    public void setIpk(String ipk) {
+        this.ipk = ipk;
+    }
+
+    public JenisKelaminType getJenisKelaminType() {
+        return jenisKelaminType;
+    }
+
+    public void setJenisKelaminType(JenisKelaminType jenisKelaminType) {
+        this.jenisKelaminType = jenisKelaminType;
     }
 
     public PendidikanType getPendidikanType() {
@@ -260,6 +293,14 @@ public class Mahasiswa implements EntityObject<Mahasiswa> {
         this.uploadCV = uploadCV;
     }
 
+    public List<Lowongan> getLowongans() {
+        return lowongans;
+    }
+
+    public void setLowongans(List<Lowongan> lowongans) {
+        this.lowongans = lowongans;
+    }
+
     public String getCreatedBy() {
         return createdBy;
     }
@@ -292,53 +333,54 @@ public class Mahasiswa implements EntityObject<Mahasiswa> {
         this.modifiedDate = modifiedDate;
     }
 
-    public List<Lowongan> getLowongans() {
-        return lowongans;
+    public Boolean getStatusApprove() {
+        return statusApprove;
     }
 
-    public void setLowongans(List<Lowongan> lowongans) {
-        this.lowongans = lowongans;
+    public void setStatusApprove(Boolean statusApprove) {
+        this.statusApprove = statusApprove;
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 29 * hash + Objects.hashCode(this.idMahasiswa);
-        hash = 29 * hash + Objects.hashCode(this.username);
-        hash = 29 * hash + Objects.hashCode(this.password);
-        hash = 29 * hash + Objects.hashCode(this.retypedPassword);
-        hash = 29 * hash + Objects.hashCode(this.namaLengkap);
-        hash = 29 * hash + Objects.hashCode(this.email);
-        hash = 29 * hash + Objects.hashCode(this.tanggalLahir);
-        hash = 29 * hash + Objects.hashCode(this.domisili);
-        hash = 29 * hash + Objects.hashCode(this.noHP);
-        hash = 29 * hash + Objects.hashCode(this.pendidikanType);
-        hash = 29 * hash + Objects.hashCode(this.namaCivitas);
-        hash = 29 * hash + Objects.hashCode(this.minat);
-        hash = 29 * hash + Objects.hashCode(this.ketrampilan1);
-        hash = 29 * hash + Objects.hashCode(this.ketrampilan2);
-        hash = 29 * hash + Objects.hashCode(this.ketrampilan3);
-        hash = 29 * hash + Objects.hashCode(this.ketrampilan4);
-        hash = 29 * hash + Objects.hashCode(this.ketrampilan5);
-        hash = 29 * hash + Objects.hashCode(this.tingkat1);
-        hash = 29 * hash + Objects.hashCode(this.tingkat2);
-        hash = 29 * hash + Objects.hashCode(this.tingkat3);
-        hash = 29 * hash + Objects.hashCode(this.tingkat4);
-        hash = 29 * hash + Objects.hashCode(this.tingkat5);
-        hash = 29 * hash + Objects.hashCode(this.uploadCV);
-        hash = 29 * hash + Objects.hashCode(this.lowongans);
-        hash = 29 * hash + Objects.hashCode(this.createdBy);
-        hash = 29 * hash + Objects.hashCode(this.createdDate);
-        hash = 29 * hash + Objects.hashCode(this.modifiedBy);
-        hash = 29 * hash + Objects.hashCode(this.modifiedDate);
+        int hash = 3;
+        hash = 97 * hash + Objects.hashCode(this.idMahasiswa);
+        hash = 97 * hash + Objects.hashCode(this.username);
+        hash = 97 * hash + Objects.hashCode(this.password);
+        hash = 97 * hash + Objects.hashCode(this.retypedPassword);
+        hash = 97 * hash + Objects.hashCode(this.namaLengkap);
+        hash = 97 * hash + Objects.hashCode(this.email);
+        hash = 97 * hash + Objects.hashCode(this.tanggalLahir);
+        hash = 97 * hash + Objects.hashCode(this.domisili);
+        hash = 97 * hash + Objects.hashCode(this.noHP);
+        hash = 97 * hash + Objects.hashCode(this.noKTP);
+        hash = 97 * hash + Objects.hashCode(this.ipk);
+        hash = 97 * hash + Objects.hashCode(this.jenisKelaminType);
+        hash = 97 * hash + Objects.hashCode(this.pendidikanType);
+        hash = 97 * hash + Objects.hashCode(this.namaCivitas);
+        hash = 97 * hash + Objects.hashCode(this.minat);
+        hash = 97 * hash + Objects.hashCode(this.ketrampilan1);
+        hash = 97 * hash + Objects.hashCode(this.ketrampilan2);
+        hash = 97 * hash + Objects.hashCode(this.ketrampilan3);
+        hash = 97 * hash + Objects.hashCode(this.ketrampilan4);
+        hash = 97 * hash + Objects.hashCode(this.ketrampilan5);
+        hash = 97 * hash + Objects.hashCode(this.tingkat1);
+        hash = 97 * hash + Objects.hashCode(this.tingkat2);
+        hash = 97 * hash + Objects.hashCode(this.tingkat3);
+        hash = 97 * hash + Objects.hashCode(this.tingkat4);
+        hash = 97 * hash + Objects.hashCode(this.tingkat5);
+        hash = 97 * hash + Objects.hashCode(this.uploadCV);
+        hash = 97 * hash + Objects.hashCode(this.lowongans);
+        hash = 97 * hash + Objects.hashCode(this.createdBy);
+        hash = 97 * hash + Objects.hashCode(this.createdDate);
+        hash = 97 * hash + Objects.hashCode(this.modifiedBy);
+        hash = 97 * hash + Objects.hashCode(this.modifiedDate);
+        hash = 97 * hash + Objects.hashCode(this.statusApprove);
         return hash;
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
         if (obj == null) {
             return false;
         }
@@ -351,8 +393,9 @@ public class Mahasiswa implements EntityObject<Mahasiswa> {
         }
         return true;
     }
-
+    
     public void assignNewMahasiswa(Mahasiswa mahasiswa) {
+        this.idMahasiswa = mahasiswa.idMahasiswa;
         this.username = mahasiswa.username;
         this.password = mahasiswa.password;
         this.retypedPassword = mahasiswa.retypedPassword;
@@ -361,6 +404,9 @@ public class Mahasiswa implements EntityObject<Mahasiswa> {
         this.tanggalLahir = mahasiswa.tanggalLahir;
         this.domisili = mahasiswa.domisili;
         this.noHP = mahasiswa.noHP;
+        this.noKTP = mahasiswa.noKTP;
+        this.ipk = mahasiswa.ipk;
+        this.jenisKelaminType = mahasiswa.jenisKelaminType;
         this.pendidikanType = mahasiswa.pendidikanType;
         this.namaCivitas = mahasiswa.namaCivitas;
         this.minat = mahasiswa.minat;
@@ -376,8 +422,11 @@ public class Mahasiswa implements EntityObject<Mahasiswa> {
         this.tingkat5 = mahasiswa.tingkat5;
         this.uploadCV = mahasiswa.uploadCV;
         this.lowongans = mahasiswa.lowongans;
+        this.createdBy = mahasiswa.createdBy;
+        this.createdDate = mahasiswa.createdDate;
         this.modifiedBy = mahasiswa.modifiedBy;
         this.modifiedDate = mahasiswa.modifiedDate;
+        this.statusApprove = mahasiswa.statusApprove;
     }
 
     @Override

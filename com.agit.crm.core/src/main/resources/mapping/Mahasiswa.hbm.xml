@@ -14,6 +14,14 @@
         <property column="tanggalLahir" name="tanggalLahir" not-null="false"/>
         <property column="domisili" name="domisili" not-null="false"/>
         <property column="noHP" name="noHP"/>
+        <property column="noKTP" name="noKTP"/>
+        <property column="ipk" name="ipk"/>
+        <property column="jenisKelaminType" name="jenisKelaminType" not-null="false">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">com.agit.crm.shared.type.JenisKelaminType</param>
+                <param name="type">12</param>
+            </type>
+        </property>        
         <property column="pendidikanType" name="pendidikanType" not-null="false">
             <type name="org.hibernate.type.EnumType">
                 <param name="enumClass">com.agit.crm.shared.type.PendidikanType</param>
@@ -42,5 +50,6 @@
         <property column="createdBy" name="createdBy"/>
         <property column="modifiedDate" name="modifiedDate" not-null="false"/>
         <property column="modifiedBy" name="modifiedBy" not-null="false"/>
+        <property column="statusApprove" name="statusApprove" not-null="false"/>
     </class>
 </hibernate-mapping>

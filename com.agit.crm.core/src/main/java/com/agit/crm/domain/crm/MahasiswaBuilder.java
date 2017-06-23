@@ -1,17 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.agit.crm.domain.crm;
 
+import com.agit.crm.shared.type.JenisKelaminType;
 import com.agit.crm.shared.type.PendidikanType;
 import java.util.Date;
 import java.util.List;
 
 
 public class MahasiswaBuilder {
-
     private String idMahasiswa;
     private String username;
     private String password;
@@ -21,6 +16,9 @@ public class MahasiswaBuilder {
     private Date tanggalLahir;
     private String domisili;
     private String noHP;
+    private String noKTP;
+    private String ipk;
+    private JenisKelaminType jenisKelaminType;
     private PendidikanType pendidikanType;
     private String namaCivitas;
     private String minat;
@@ -40,6 +38,7 @@ public class MahasiswaBuilder {
     private Date createdDate;
     private String modifiedBy;
     private Date modifiedDate;
+    private Boolean statusApprove;
 
     public MahasiswaBuilder() {
     }
@@ -86,6 +85,21 @@ public class MahasiswaBuilder {
 
     public MahasiswaBuilder setNoHP(String noHP) {
         this.noHP = noHP;
+        return this;
+    }
+
+    public MahasiswaBuilder setNoKTP(String noKTP) {
+        this.noKTP = noKTP;
+        return this;
+    }
+
+    public MahasiswaBuilder setIpk(String ipk) {
+        this.ipk = ipk;
+        return this;
+    }
+
+    public MahasiswaBuilder setJenisKelaminType(JenisKelaminType jenisKelaminType) {
+        this.jenisKelaminType = jenisKelaminType;
         return this;
     }
 
@@ -184,8 +198,13 @@ public class MahasiswaBuilder {
         return this;
     }
 
+    public MahasiswaBuilder setStatusApprove(Boolean statusApprove) {
+        this.statusApprove = statusApprove;
+        return this;
+    }
+
     public Mahasiswa createMahasiswa() {
-        return new Mahasiswa(idMahasiswa, username, password, retypedPassword, namaLengkap, email, tanggalLahir, domisili, noHP, pendidikanType, namaCivitas, minat, ketrampilan1, ketrampilan2, ketrampilan3, ketrampilan4, ketrampilan5, tingkat1, tingkat2, tingkat3, tingkat4, tingkat5, uploadCV, lowongans, createdBy, createdDate, modifiedBy, modifiedDate);
+        return new Mahasiswa(idMahasiswa, username, password, retypedPassword, namaLengkap, email, tanggalLahir, domisili, noHP, noKTP, ipk, jenisKelaminType, pendidikanType, namaCivitas, minat, ketrampilan1, ketrampilan2, ketrampilan3, ketrampilan4, ketrampilan5, tingkat1, tingkat2, tingkat3, tingkat4, tingkat5, uploadCV, lowongans, createdBy, createdDate, modifiedBy, modifiedDate, statusApprove);
     }
     
 }
