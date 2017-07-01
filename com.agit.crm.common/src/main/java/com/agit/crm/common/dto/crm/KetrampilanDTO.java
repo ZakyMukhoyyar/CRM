@@ -7,22 +7,22 @@ import java.util.Date;
  *
  * @author Zaky
  */
-public class KeterampilanDTO implements Serializable{
+public class KetrampilanDTO implements Serializable{
     
-    private String idKeterampilan;
-    private String namaKeterampilan;
+    private String idKetrampilan;
+    private String namaKetrampilan;
     private String createdBy;
     private Date createdDate;
     private String modifiedBy;
     private Date modifiedDate;
     private Boolean status;
 
-    public KeterampilanDTO() {
+    public KetrampilanDTO() {
     }
 
-    public KeterampilanDTO(String idKeterampilan, String namaKeterampilan, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate, Boolean status) {
-        this.idKeterampilan = idKeterampilan;
-        this.namaKeterampilan = namaKeterampilan;
+    public KetrampilanDTO(String idKetrampilan, String namaKetrampilan, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate, Boolean status) {
+        this.idKetrampilan = idKetrampilan;
+        this.namaKetrampilan = namaKetrampilan;
         this.createdBy = createdBy;
         this.createdDate = createdDate;
         this.modifiedBy = modifiedBy;
@@ -30,20 +30,20 @@ public class KeterampilanDTO implements Serializable{
         this.status = status;
     }
 
-    public String getIdKeterampilan() {
-        return idKeterampilan;
+    public String getIdKetrampilan() {
+        return idKetrampilan;
     }
 
-    public void setIdKeterampilan(String idKeterampilan) {
-        this.idKeterampilan = idKeterampilan;
+    public void setIdKetrampilan(String idKetrampilan) {
+        this.idKetrampilan = idKetrampilan;
     }
 
-    public String getNamaKeterampilan() {
-        return namaKeterampilan;
+    public String getNamaKetrampilan() {
+        return namaKetrampilan;
     }
 
-    public void setNamaKeterampilan(String namaKeterampilan) {
-        this.namaKeterampilan = namaKeterampilan;
+    public void setNamaKetrampilan(String namaKetrampilan) {
+        this.namaKetrampilan = namaKetrampilan;
     }
 
     public String getCreatedBy() {
@@ -88,7 +88,7 @@ public class KeterampilanDTO implements Serializable{
 
     @Override
     public String toString() {
-        return "KeterampilanDTO{" + "idKeterampilan=" + idKeterampilan + ", namaKeterampilan=" + namaKeterampilan + ", createdBy=" + createdBy + ", createdDate=" + createdDate + ", modifiedBy=" + modifiedBy + ", modifiedDate=" + modifiedDate + ", status=" + status + '}';
+        return "KetrampilanDTO{" + "idKetrampilan=" + idKetrampilan + ", namaKetrampilan=" + namaKetrampilan + ", createdBy=" + createdBy + ", createdDate=" + createdDate + ", modifiedBy=" + modifiedBy + ", modifiedDate=" + modifiedDate + ", status=" + status + '}';
     }
        
 }

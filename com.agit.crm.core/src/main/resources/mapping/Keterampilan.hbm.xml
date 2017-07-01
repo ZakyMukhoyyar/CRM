@@ -5,13 +5,13 @@
   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping default-access="field">
-    <class mutable="true" name="com.agit.crm.domain.crm.Keterampilan" table="AGIT_KETERAMPILAN">
+    <class mutable="true" name="com.agit.crm.domain.crm.Ketrampilan" table="AGIT_KETRAMPILAN">
         <!--<cache usage="read-only"/>-->
         <id column="id" name="id">
             <generator class="org.hibernate.id.IdentityGenerator"/>
         </id>
-        <property column="idKeterampilan" name="idKeterampilan" not-null="false"/>
-        <property column="namaKeterampilan" name="namaKeterampilan" not-null="false"/>
+        <property column="idKetrampilan" name="idKetrampilan" not-null="false"/>
+        <property column="namaKetrampilan" name="namaKetrampilan" not-null="false"/>
         <property column="createdBy" name="createdBy" not-null="false"/>
         <property column="createdDate" name="createdDate" not-null="false"/>
         <property column="modifiedDate" name="modifiedDate" not-null="false"/>

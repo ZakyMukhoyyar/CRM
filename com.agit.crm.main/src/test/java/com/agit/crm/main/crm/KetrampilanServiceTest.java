@@ -1,8 +1,8 @@
 package com.agit.crm.main.crm;
 
-import com.agit.crm.common.application.KeterampilanService;
-import com.agit.crm.common.dto.crm.KeterampilanDTO;
-import com.agit.crm.domain.crm.KeterampilanRepository;
+import com.agit.crm.common.application.KetrampilanService;
+import com.agit.crm.common.dto.crm.KetrampilanDTO;
+import com.agit.crm.domain.crm.KetrampilanRepository;
 import java.util.List;
 import static org.activiti.engine.impl.scripting.JuelScriptEngine.print;
 import org.apache.commons.lang.Validate;
@@ -21,38 +21,38 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
     "classpath:/crm-context-application.xml",
     "classpath:/crm-context-infrastructure.xml"    
 })
-public class KeterampilanServiceTest {
+public class KetrampilanServiceTest {
     
     @Autowired
-    private KeterampilanRepository keterampilanRepository;
+    private KetrampilanRepository ketrampilanRepository;
     
     @Autowired
-    private KeterampilanService keterampilanService;
+    private KetrampilanService ketrampilanService;
     
     @Test
-    public void testEnd2EndKeterampilan() {
-        Validate.notNull(keterampilanRepository);
+    public void testEnd2EndKetrampilan() {
+        Validate.notNull(ketrampilanRepository);
         /* Header*/
-        print("Data Keterampilan Processing");
+        print("Data Ketrampilan Processing");
 
         /* Incident Record*/
-        KeterampilanDTO m = keterampilanService.getDummyData();
+        KetrampilanDTO m = ketrampilanService.getDummyData();
 
         System.out.println("Incident Record : " + m.toString());
 
-        keterampilanService.SaveOrUpdate(m);
+        ketrampilanService.SaveOrUpdate(m);
         System.out.println("Incident Record has been saved succesfully");
 
         System.out.println("");
         System.out.println("Find by ID");
-        KeterampilanDTO b = keterampilanService.findByID(m.getIdKeterampilan());
-        System.out.println("Keterampilan :" + b.toString());
+        KetrampilanDTO b = ketrampilanService.findByID(m.getIdKetrampilan());
+        System.out.println("Ketrampilan :" + b.toString());
 
         System.out.println("");
         System.out.println("Find ALL");
-        List<KeterampilanDTO> listKeterampilan = (List<KeterampilanDTO>) keterampilanService.findAll();
-        for (KeterampilanDTO bt : listKeterampilan) {
-            System.out.println("Keterampilan :" + bt.toString());
+        List<KetrampilanDTO> listKetrampilan = (List<KetrampilanDTO>) ketrampilanService.findAll();
+        for (KetrampilanDTO bt : listKetrampilan) {
+            System.out.println("Ketrampilan :" + bt.toString());
 
         }
 

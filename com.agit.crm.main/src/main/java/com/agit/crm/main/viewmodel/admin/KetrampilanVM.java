@@ -1,8 +1,8 @@
 package com.agit.crm.main.viewmodel.admin;
 
-import com.agit.crm.common.application.KeterampilanService;
-import com.agit.crm.common.dto.crm.KeterampilanDTO;
-import com.agit.crm.common.dto.crm.KeterampilanDTOBuilder;
+import com.agit.crm.common.application.KetrampilanService;
+import com.agit.crm.common.dto.crm.KetrampilanDTO;
+import com.agit.crm.common.dto.crm.KetrampilanDTOBuilder;
 import com.agit.crm.common.security.SecurityUtil;
 import com.agit.crm.shared.zul.CommonViewModel;
 import static com.agit.crm.shared.zul.CommonViewModel.showInformationMessagebox;
@@ -33,17 +33,17 @@ import org.zkoss.zul.Window;
  * @author 3AD
  */
 @VariableResolver(org.zkoss.zkplus.spring.DelegatingVariableResolver.class)
-public class KeterampilanVM {
+public class KetrampilanVM {
 
     @WireVariable
-    KeterampilanService keterampilanService;
+    KetrampilanService ketrampilanService;
 
-    private KeterampilanDTO keterampilanDTO = new KeterampilanDTO();
-    private List<KeterampilanDTO> keterampilanDTOs = new ArrayList<>();
+    private KetrampilanDTO ketrampilanDTO = new KetrampilanDTO();
+    private List<KetrampilanDTO> ketrampilanDTOs = new ArrayList<>();
 
     /* Parameter Filter */
-    private String idKeterampilan;
-    private String namaKeterampilan;
+    private String idKetrampilan;
+    private String namaKetrampilan;
     private Boolean status;
 
     private PageNavigation previous;
@@ -55,37 +55,37 @@ public class KeterampilanVM {
 
     @Init
     public void init(
-            @ExecutionArgParam("keterampilanDTO") KeterampilanDTO keterampilan,
+            @ExecutionArgParam("ketrampilanDTO") KetrampilanDTO ketrampilan,
             @ExecutionArgParam("previous") PageNavigation previous) {
         initData();
-        checkValidity(keterampilan, previous);
+        checkValidity(ketrampilan, previous);
 
     }
 
     private void initData() {
-        keterampilanDTOs = keterampilanService.findAll();
-        if (keterampilanDTOs.isEmpty()) {
-            keterampilanDTOs = Collections.emptyList();
+        ketrampilanDTOs = ketrampilanService.findAll();
+        if (ketrampilanDTOs.isEmpty()) {
+            ketrampilanDTOs = Collections.emptyList();
         }
     }
 
-    private void checkValidity(KeterampilanDTO keterampilan, PageNavigation previous) {
-        if (keterampilan == null) {
-            ListModelList<KeterampilanDTO> parameterList = new ListModelList<>(keterampilanService.findAll());
-            String idKeterampilan = "";
+    private void checkValidity(KetrampilanDTO ketrampilan, PageNavigation previous) {
+        if (ketrampilan == null) {
+            ListModelList<KetrampilanDTO> parameterList = new ListModelList<>(ketrampilanService.findAll());
+            String idKetrampilan = "";
             if (parameterList.isEmpty()) {
-                idKeterampilan = "1";
+                idKetrampilan = "1";
             } else {
-                idKeterampilan = getLatestObjectID(parameterList, "idKeterampilan");
+                idKetrampilan = getLatestObjectID(parameterList, "idKetrampilan");
             }
-            keterampilanDTO = new KeterampilanDTOBuilder()
-                    .setIdKeterampilan(idKeterampilan)
+            ketrampilanDTO = new KetrampilanDTOBuilder()
+                    .setIdKetrampilan(idKetrampilan)
                     .setCreatedBy(SecurityUtil.getUserName())
                     .setCreatedDate(new Date())
-                    .createKeterampilanDTO();
+                    .createKetrampilanDTO();
         } else {
-            this.keterampilanDTO = keterampilan;
-            idKeterampilan = keterampilanDTO.getIdKeterampilan();
+            this.ketrampilanDTO = ketrampilan;
+            idKetrampilan = ketrampilanDTO.getIdKetrampilan();
             this.previous = previous;
         }
     }
@@ -138,76 +138,76 @@ public class KeterampilanVM {
         return s + String.format("%0" + count + "d", max + 1);
     }
 
-    @Command("buttonNewKeterampilan")
-    @NotifyChange("keterampilanDTO")
-    public void buttonNewKeterampilan(@BindingParam("object") KeterampilanDTO obj, @ContextParam(ContextType.VIEW) Window window) {
+    @Command("buttonNewKetrampilan")
+    @NotifyChange("ketrampilanDTO")
+    public void buttonNewKetrampilan(@BindingParam("object") KetrampilanDTO obj, @ContextParam(ContextType.VIEW) Window window) {
         Map<String, Object> params = new HashMap<>();
-        params.put("keterampilanDTO", obj);
+        params.put("ketrampilanDTO", obj);
         CommonViewModel.navigateToWithoutDetach("/crm/admin/ketrampilan/add_ketrampilan.zul", window, params);
     }
 
-    @Command("searchKeterampilan")
-    @NotifyChange("keterampilanDTOs")
-    public void searchKeterampilan(@ContextParam(ContextType.VIEW) Window window) {
+    @Command("searchKetrampilan")
+    @NotifyChange("ketrampilanDTOs")
+    public void searchKetrampilan(@ContextParam(ContextType.VIEW) Window window) {
         Map params = new HashMap();
-        params.put("idKeterampilan", idKeterampilan);
-        params.put("namaKeterampilan", namaKeterampilan);
+        params.put("idKetrampilan", idKetrampilan);
+        params.put("namaKetrampilan", namaKetrampilan);
         params.put("status", status);
 
-        keterampilanDTOs = keterampilanService.findByParams(params);
+        ketrampilanDTOs = ketrampilanService.findByParams(params);
     }
 
-    @Command("detailKeterampilan")
-    @NotifyChange("keterampilan")
-    public void detailKeterampilan(@BindingParam("object") KeterampilanDTO obj, @ContextParam(ContextType.VIEW) Window window) {
+    @Command("detailKetrampilan")
+    @NotifyChange("ketrampilan")
+    public void detailKetrampilan(@BindingParam("object") KetrampilanDTO obj, @ContextParam(ContextType.VIEW) Window window) {
         Map<String, Object> params = new HashMap<>();
-        params.put("keterampilanDTO", obj);
+        params.put("ketrampilanDTO", obj);
         CommonViewModel.navigateToWithoutDetach("/crm/admin/ketrampilan/add_ketrampilan.zul", window, params);
     }
 
     @Command("buttonKembaliKetrampilan")
-    @NotifyChange("keterampilanDTO")
-    public void buttonKembaliKetrampilan(@BindingParam("object") KeterampilanDTO obj, @ContextParam(ContextType.VIEW) Window window) {
+    @NotifyChange("ketrampilanDTO")
+    public void buttonKembaliKetrampilan(@BindingParam("object") KetrampilanDTO obj, @ContextParam(ContextType.VIEW) Window window) {
         window.detach();
     }
 
-    @Command("buttonSaveKeterampilan")
-    @NotifyChange({"keterampilanDTO", "keterampilanDTOs"})
-    public void buttonSaveKeterampilan(@BindingParam("object") KeterampilanDTO obj, @ContextParam(ContextType.VIEW) Window window) {
-        keterampilanService.SaveOrUpdate(keterampilanDTO);
+    @Command("buttonSaveKetrampilan")
+    @NotifyChange({"ketrampilanDTO", "ketrampilanDTOs"})
+    public void buttonSaveKetrampilan(@BindingParam("object") KetrampilanDTO obj, @ContextParam(ContextType.VIEW) Window window) {
+        ketrampilanService.SaveOrUpdate(ketrampilanDTO);
         showInformationMessagebox("Data Ketrampilan Berhasil Disimpan");
-        BindUtils.postGlobalCommand(null, null, "refreshKeterampilan", null);
+        BindUtils.postGlobalCommand(null, null, "refreshKetrampilan", null);
         window.detach();
     }
 
     @GlobalCommand
-    @NotifyChange("keterampilanDTOs")
-    public void refreshKeterampilan() {
-        keterampilanDTOs = keterampilanService.findAll();
+    @NotifyChange("ketrampilanDTOs")
+    public void refreshKetrampilan() {
+        ketrampilanDTOs = ketrampilanService.findAll();
     }
 
-    public List<KeterampilanDTO> getKeterampilanDTOs() {
-        return keterampilanDTOs;
+    public List<KetrampilanDTO> getKetrampilanDTOs() {
+        return ketrampilanDTOs;
     }
 
-    public void setKeterampilanDTOs(List<KeterampilanDTO> keterampilanDTOs) {
-        this.keterampilanDTOs = keterampilanDTOs;
+    public void setKetrampilanDTOs(List<KetrampilanDTO> ketrampilanDTOs) {
+        this.ketrampilanDTOs = ketrampilanDTOs;
     }
 
-    public String getIdKeterampilan() {
-        return idKeterampilan;
+    public String getIdKetrampilan() {
+        return idKetrampilan;
     }
 
-    public void setIdKeterampilan(String idKeterampilan) {
-        this.idKeterampilan = idKeterampilan;
+    public void setIdKetrampilan(String idKetrampilan) {
+        this.idKetrampilan = idKetrampilan;
     }
 
-    public String getNamaKeterampilan() {
-        return namaKeterampilan;
+    public String getNamaKetrampilan() {
+        return namaKetrampilan;
     }
 
-    public void setNamaKeterampilan(String namaKeterampilan) {
-        this.namaKeterampilan = namaKeterampilan;
+    public void setNamaKetrampilan(String namaKetrampilan) {
+        this.namaKetrampilan = namaKetrampilan;
     }
 
     public Boolean getStatus() {
@@ -258,12 +258,12 @@ public class KeterampilanVM {
         this.totalSize = totalSize;
     }
 
-    public KeterampilanDTO getKeterampilanDTO() {
-        return keterampilanDTO;
+    public KetrampilanDTO getKetrampilanDTO() {
+        return ketrampilanDTO;
     }
 
-    public void setKeterampilanDTO(KeterampilanDTO keterampilanDTO) {
-        this.keterampilanDTO = keterampilanDTO;
+    public void setKetrampilanDTO(KetrampilanDTO ketrampilanDTO) {
+        this.ketrampilanDTO = ketrampilanDTO;
     }
 
     public int getSelectedIndex() {

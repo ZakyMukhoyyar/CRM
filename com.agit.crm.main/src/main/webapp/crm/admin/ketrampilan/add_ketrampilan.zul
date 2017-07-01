@@ -1,7 +1,7 @@
 <zk xmlns="http://www.zkoss.org/2005/zul">
     <window apply="org.zkoss.bind.BindComposer"
-        viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.admin.KeterampilanVM')"
-        form="@id('fx') @load(vm.keterampilanDTO) @save(vm.keterampilanDTO, before='buttonSaveKeterampilan')">
+        viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.admin.KetrampilanVM')"
+        form="@id('fx') @load(vm.ketrampilanDTO) @save(vm.ketrampilanDTO, before='buttonSaveKetrampilan')">
         <separator spacing="5px"/>
         <groupbox width="500px" closable="true">
             <caption label="Form Tambah Ketrampilan" style="font-size:16pt; font-weight: bold"/>
@@ -17,12 +17,12 @@
                         <row>
                             <label value="*) " style="color:red"/>
                             <label value="ID Ketrampilan" style="font-weight: bold"/>
-                            <textbox width="20%" disabled="true" value="@bind(fx.idKeterampilan)" />
+                            <textbox width="20%" disabled="true" value="@bind(fx.idKetrampilan)" />
                         </row>
                         <row>
                             <label value="*) " style="color:red"/>
                             <label value="Nama Ketrampilan " style="font-weight: bold"/>
-                            <textbox rows="2" value="@bind(fx.namaKeterampilan)" width="100%" disabled="false" constraint="no empty : Nama Ketrampilan Tidak Boleh Kosong"/>
+                            <textbox rows="2" value="@bind(fx.namaKetrampilan)" width="100%" disabled="false" constraint="no empty : Nama Ketrampilan Tidak Boleh Kosong"/>
                         </row>
                         <row>
                             <label value="*)" style="color:red"/>
@@ -45,7 +45,7 @@
                     <rows>
                         <row>
                             <button label="Kembali" width="40%" onClick = "@command('buttonKembaliKetrampilan')"/>
-                            <button label="Save" width="40%" onClick = "@command('buttonSaveKeterampilan')"/>
+                            <button label="Save" width="40%" onClick = "@command('buttonSaveKetrampilan')"/>
                         </row>
                     </rows>
                 </grid>

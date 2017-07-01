@@ -31,7 +31,7 @@
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
     
-    <bean id="keterampilanRepository" class="com.agit.crm.domain.infrastructure.persistance.hibernate.KeterampilanHibernateRepository">
+    <bean id="ketrampilanRepository" class="com.agit.crm.domain.infrastructure.persistance.hibernate.KetrampilanHibernateRepository">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
   

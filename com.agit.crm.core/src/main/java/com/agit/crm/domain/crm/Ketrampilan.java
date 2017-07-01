@@ -8,23 +8,23 @@ import java.util.Objects;
  *
  * @author Zaky
  */
-public class Keterampilan implements EntityObject<Keterampilan> {
+public class Ketrampilan implements EntityObject<Ketrampilan> {
 
     long id;
-    private String idKeterampilan;
-    private String namaKeterampilan;
+    private String idKetrampilan;
+    private String namaKetrampilan;
     private String createdBy;
     private Date createdDate;
     private String modifiedBy;
     private Date modifiedDate;
     private Boolean status;
 
-    public Keterampilan() {
+    public Ketrampilan() {
     }
 
-    public Keterampilan(String idKeterampilan, String namaKeterampilan, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate, Boolean status) {
-        this.idKeterampilan = idKeterampilan;
-        this.namaKeterampilan = namaKeterampilan;
+    public Ketrampilan(String idKetrampilan, String namaKetrampilan, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate, Boolean status) {
+        this.idKetrampilan = idKetrampilan;
+        this.namaKetrampilan = namaKetrampilan;
         this.createdBy = createdBy;
         this.createdDate = createdDate;
         this.modifiedBy = modifiedBy;
@@ -32,20 +32,20 @@ public class Keterampilan implements EntityObject<Keterampilan> {
         this.status = status;
     }
 
-    public String getIdKeterampilan() {
-        return idKeterampilan;
+    public String getIdKetrampilan() {
+        return idKetrampilan;
     }
 
-    public void setIdKeterampilan(String idKeterampilan) {
-        this.idKeterampilan = idKeterampilan;
+    public void setIdKetrampilan(String idKetrampilan) {
+        this.idKetrampilan = idKetrampilan;
     }
 
-    public String getNamaKeterampilan() {
-        return namaKeterampilan;
+    public String getNamaKetrampilan() {
+        return namaKetrampilan;
     }
 
-    public void setNamaKeterampilan(String namaKeterampilan) {
-        this.namaKeterampilan = namaKeterampilan;
+    public void setNamaKetrampilan(String namaKetrampilan) {
+        this.namaKetrampilan = namaKetrampilan;
     }
 
     public String getCreatedBy() {
@@ -91,8 +91,8 @@ public class Keterampilan implements EntityObject<Keterampilan> {
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 17 * hash + Objects.hashCode(this.idKeterampilan);
-        hash = 17 * hash + Objects.hashCode(this.namaKeterampilan);
+        hash = 17 * hash + Objects.hashCode(this.idKetrampilan);
+        hash = 17 * hash + Objects.hashCode(this.namaKetrampilan);
         hash = 17 * hash + Objects.hashCode(this.createdBy);
         hash = 17 * hash + Objects.hashCode(this.createdDate);
         hash = 17 * hash + Objects.hashCode(this.modifiedBy);
@@ -109,25 +109,25 @@ public class Keterampilan implements EntityObject<Keterampilan> {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Keterampilan other = (Keterampilan) obj;
+        final Ketrampilan other = (Ketrampilan) obj;
         if (this.id != other.id) {
             return false;
         }
         return true;
     }
     
-    public void assignNewKeterampilan (Keterampilan keterampilan){
-        this.idKeterampilan = keterampilan.idKeterampilan;
-        this.namaKeterampilan = keterampilan.namaKeterampilan;
-        this.createdBy = keterampilan.createdBy;
-        this.createdDate = keterampilan.createdDate;
-        this.modifiedBy = keterampilan.modifiedBy;
-        this.modifiedDate = keterampilan.modifiedDate;
-        this.status = keterampilan.status;
+    public void assignNewKetrampilan (Ketrampilan Ketrampilan){
+        this.idKetrampilan = Ketrampilan.idKetrampilan;
+        this.namaKetrampilan = Ketrampilan.namaKetrampilan;
+        this.createdBy = Ketrampilan.createdBy;
+        this.createdDate = Ketrampilan.createdDate;
+        this.modifiedBy = Ketrampilan.modifiedBy;
+        this.modifiedDate = Ketrampilan.modifiedDate;
+        this.status = Ketrampilan.status;
     }
 
     @Override
-    public boolean sameIdentityAs(Keterampilan other) {
+    public boolean sameIdentityAs(Ketrampilan other) {
         return this.equals(other);
     }
 
