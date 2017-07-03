@@ -1,9 +1,9 @@
 package com.agit.crm.main.viewmodel.mahasiswa;
 
-import com.agit.crm.common.application.KeterampilanService;
+import com.agit.crm.common.application.KetrampilanService;
 import com.agit.crm.common.application.LowonganService;
 import com.agit.crm.common.application.MahasiswaService;
-import com.agit.crm.common.dto.crm.KeterampilanDTO;
+import com.agit.crm.common.dto.crm.KetrampilanDTO;
 import com.agit.crm.common.dto.crm.LowonganDTO;
 import com.agit.crm.common.dto.crm.LowonganDTOBuilder;
 import com.agit.crm.common.dto.crm.MahasiswaDTO;
@@ -61,7 +61,7 @@ public class MahasiswaVM extends SelectorComposer<Window> {
     LowonganService lowonganService;
 
     @WireVariable
-    KeterampilanService keterampilanService;
+    KetrampilanService ketrampilanService;
 
     /* Object Binding for Form CRM */
     private MahasiswaDTO mahasiswaDTO = new MahasiswaDTO();
@@ -84,7 +84,7 @@ public class MahasiswaVM extends SelectorComposer<Window> {
     private ListModelList<TingkatanType> tingkatanTypes3;
     private ListModelList<TingkatanType> tingkatanTypes4;
     private ListModelList<TingkatanType> tingkatanTypes5;
-    private List<KeterampilanDTO> keterampilans = new ArrayList<KeterampilanDTO>();
+    private List<KetrampilanDTO> ketrampilans = new ArrayList<KetrampilanDTO>();
 
 
     /* attribut for upload file CV */
@@ -116,7 +116,7 @@ public class MahasiswaVM extends SelectorComposer<Window> {
             lowonganDTOs = Collections.emptyList();
         }
 
-        keterampilans = keterampilanService.findAll();
+        ketrampilans = ketrampilanService.findAll();
 
     }
 
@@ -375,12 +375,12 @@ public class MahasiswaVM extends SelectorComposer<Window> {
         this.jenisKelaminTypes = jenisKelaminTypes;
     }
 
-    public List<KeterampilanDTO> getKeterampilans() {
-        return keterampilans;
+    public List<KetrampilanDTO> getKetrampilans() {
+        return ketrampilans;
     }
 
-    public void setKeterampilans(List<KeterampilanDTO> keterampilans) {
-        this.keterampilans = keterampilans;
+    public void setKetrampilans(List<KetrampilanDTO> ketrampilans) {
+        this.ketrampilans = ketrampilans;
     }
 
     public ListModelList<TingkatanType> getTingkatanTypes1() {
