@@ -59,6 +59,7 @@ public class LowonganServiceImpl implements LowonganService {
                 .setMinatPekerjaan("minatPekerjaan")
                 .setPersyaratan("persyaratan")
                 .setLokasiKerja("lokasiKerja")
+                .setGaji("Rp 2.000.000 - Rp 3.000.000")
                 .setCreatedBy("created by")
                 .setCreatedDate(new Date())
                 .setModifiedBy("modified by")

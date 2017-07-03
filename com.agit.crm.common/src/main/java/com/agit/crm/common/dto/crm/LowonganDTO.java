@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.agit.crm.common.dto.crm;
 
 import java.util.Date;
@@ -21,6 +16,7 @@ public class LowonganDTO {
     private String minatPekerjaan;
     private String persyaratan;
     private String lokasiKerja;
+    private String gaji;
     private String createdBy;
     private Date createdDate;
     private String modifiedBy;
@@ -29,7 +25,7 @@ public class LowonganDTO {
     public LowonganDTO() {
     }
 
-    public LowonganDTO(String idLowongan, String namaLowongan, String deskripsiLowongan, Date tanggalMulai, Date tanggalBerakhir, String minatPekerjaan, String persyaratan, String lokasiKerja, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate) {
+    public LowonganDTO(String idLowongan, String namaLowongan, String deskripsiLowongan, Date tanggalMulai, Date tanggalBerakhir, String minatPekerjaan, String persyaratan, String lokasiKerja, String gaji, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate) {
         this.idLowongan = idLowongan;
         this.namaLowongan = namaLowongan;
         this.deskripsiLowongan = deskripsiLowongan;
@@ -38,6 +34,7 @@ public class LowonganDTO {
         this.minatPekerjaan = minatPekerjaan;
         this.persyaratan = persyaratan;
         this.lokasiKerja = lokasiKerja;
+        this.gaji = gaji;
         this.createdBy = createdBy;
         this.createdDate = createdDate;
         this.modifiedBy = modifiedBy;
@@ -108,6 +105,14 @@ public class LowonganDTO {
         this.lokasiKerja = lokasiKerja;
     }
 
+    public String getGaji() {
+        return gaji;
+    }
+
+    public void setGaji(String gaji) {
+        this.gaji = gaji;
+    }
+
     public String getCreatedBy() {
         return createdBy;
     }
@@ -142,7 +147,7 @@ public class LowonganDTO {
 
     @Override
     public String toString() {
-        return "LowonganDTO{" + "idLowongan=" + idLowongan + ", namaLowongan=" + namaLowongan + ", deskripsiLowongan=" + deskripsiLowongan + ", tanggalMulai=" + tanggalMulai + ", tanggalBerakhir=" + tanggalBerakhir + ", minatPekerjaan=" + minatPekerjaan + ", persyaratan=" + persyaratan + ", lokasiKerja=" + lokasiKerja + ", createdBy=" + createdBy + ", createdDate=" + createdDate + ", modifiedBy=" + modifiedBy + ", modifiedDate=" + modifiedDate + '}';
+        return "LowonganDTO{" + "idLowongan=" + idLowongan + ", namaLowongan=" + namaLowongan + ", deskripsiLowongan=" + deskripsiLowongan + ", tanggalMulai=" + tanggalMulai + ", tanggalBerakhir=" + tanggalBerakhir + ", minatPekerjaan=" + minatPekerjaan + ", persyaratan=" + persyaratan + ", lokasiKerja=" + lokasiKerja + ", gaji=" + gaji + ", createdBy=" + createdBy + ", createdDate=" + createdDate + ", modifiedBy=" + modifiedBy + ", modifiedDate=" + modifiedDate + '}';
     }
 
 }

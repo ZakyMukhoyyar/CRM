@@ -1,0 +1,80 @@
+<?component name="signLabel" class="com.agit.crm.shared.zul.SignLabel" ?>
+<zk xmlns="http://www.zkoss.org/2005/zul">
+    <window border="30" apply="org.zkoss.bind.BindComposer"
+            viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.admin.LowonganVM')"
+            form="@id('fx') @load(vm.lowonganDTO) @save(vm.lowonganDTO, before='buttonSaveLowongan')">
+        <separator spacing="5px"/>
+        <groupbox width="700px" closable="true">
+            <caption label="Form Tambah Lowongan" style="font-size:16pt; font-weight: bold"/>
+            <groupbox>
+                <grid style="border:0">
+                    <columns>
+                        <column width="20%"></column>
+                        <column width="80%"></column>
+                        <column></column>
+                    </columns>
+                    <rows>
+                        <row>
+                            <signLabel value="ID Lowongan" style="font-weight: bold"/>
+                            <textbox width="20%" disabled="true" value="@bind(fx.idLowongan)"/>
+                        </row>
+                        <row>
+                            <signLabel value="Nama Lowongan " style="font-weight: bold"/>
+                            <textbox rows="2" width="100%" disabled="false" constraint="no empty : Nama Lowongan Tidak Boleh Kosong" value="@bind(fx.namaLowongan)"/>
+                        </row>
+                        <row>
+                            <signLabel value="Deskripsi " style="font-weight: bold"/>
+                            <textbox rows="10" width="100%" maxlength="2000" disabled="false" constraint="no empty : Deskripsi Tidak Boleh Kosong" value="@bind(fx.deskripsiLowongan)"/>
+                        </row>
+                        <row>
+                            <signLabel value="Tanggal Mulai" style="font-weight: bold"/>
+                            <datebox format="dd/MM/yyyy" width="50%" readonly="true" constraint="no empty : Tanggal Mulai Tidak Boleh Kosong" value="@bind(fx.tanggalMulai)"/>
+                        </row> 
+                        <row>
+                            <signLabel value="Tanggal Berakhir" style="font-weight: bold"/>
+                            <datebox format="dd/MM/yyyy" width="50%" readonly="true" constraint="no empty : Tanggal Berakhir Tidak Boleh Kosong" value="@bind(fx.tanggalBerakhir)"/>
+                        </row>     
+                        <row>
+                            <signLabel value="Kategori Pekerjaan" style="font-weight: bold"/>
+                            <combobox autodrop="true" readonly="true" width="50%" model="@load(vm.minats)" selectedItem="@bind(fx.minatPekerjaan)" placeholder="- Pilihan Kategori -">
+                                <template name="model" var="items">
+                                    <comboitem label="@load(items.getNamaMinat())" value="@load(items.getNamaMinat())"/>
+                                </template>
+                            </combobox>
+                        </row>  
+                        <row>
+                            <signLabel value="Perkiraan Gaji" style="font-weight: bold"/>
+                            <combobox width="50%" model="@load(vm.gaji)" selectedItem="@bind(fx.gaji)" readonly="true" placeholder="- Silahkan Pilih -" constraint="no empty : Pendidikan Terakhir Tidak Boleh Kosong">
+                                <template name="model" var="items">
+                                    <comboitem label="@load(items)" value="@load(items)"/>
+                                </template>
+                            </combobox>
+                        </row> 
+                        <row>
+                            <signLabel value="Persyaratan " style="font-weight: bold"/>
+                            <textbox rows="10" width="100%" disabled="false" constraint="no empty : Persyaratan Tidak Boleh Kosong" value="@bind(fx.persyaratan)"/>
+                        </row>
+                        <row>
+                            <signLabel value="Lokasi Kerja" style="font-weight: bold"/>
+                            <textbox rows="2" width="100%" disabled="false" constraint="no empty : Lokasi Kerja Tidak Boleh Kosong" value="@bind(fx.lokasiKerja)"/>
+                        </row>                 
+                    </rows>
+                </grid>
+                <grid style="border:0">
+                
+                    <columns>
+                        <column align="right" width="50%"/>
+                        <column align="left" width="50%"/>
+                    </columns>
+                
+                    <rows>
+                        <row>
+                            <button label="Kembali" width="40%" onClick="@command('buttonKembaliLowongan')"/>
+                            <button label="Save" width="40%" onClick="@command('buttonSaveLowongan')"/>
+                        </row>
+                    </rows>
+                </grid>
+            </groupbox>
+        </groupbox>
+    </window>
+</zk>

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.agit.crm.domain.crm;
 
 import java.util.Date;
@@ -18,6 +13,7 @@ public class LowonganBuilder {
     private String minatPekerjaan;
     private String persyaratan;
     private String lokasiKerja;
+    private String gaji;
     private String createdBy;
     private Date createdDate;
     private String modifiedBy;
@@ -66,6 +62,11 @@ public class LowonganBuilder {
         return this;
     }
 
+    public LowonganBuilder setGaji(String gaji) {
+        this.gaji = gaji;
+        return this;
+    }
+
     public LowonganBuilder setCreatedBy(String createdBy) {
         this.createdBy = createdBy;
         return this;
@@ -87,7 +88,7 @@ public class LowonganBuilder {
     }
 
     public Lowongan createLowongan() {
-        return new Lowongan(idLowongan, namaLowongan, deskripsiLowongan, tanggalMulai, tanggalBerakhir, minatPekerjaan, persyaratan, lokasiKerja, createdBy, createdDate, modifiedBy, modifiedDate);
+        return new Lowongan(idLowongan, namaLowongan, deskripsiLowongan, tanggalMulai, tanggalBerakhir, minatPekerjaan, persyaratan, lokasiKerja, gaji, createdBy, createdDate, modifiedBy, modifiedDate);
     }
     
 }

@@ -30,7 +30,7 @@ public class LowonganHibernateRepository extends HibernateRepository implements 
     public Lowongan findByID(String idLowongan) {
         return (Lowongan) getSession()
                 .createQuery("from com.agit.crm.domain.crm.Lowongan where idLowongan = :tid")
-                .setParameter("tid", new IdLowongan(idLowongan))
+                .setParameter("tid", idLowongan)
                 .uniqueResult();
     }
 
@@ -45,7 +45,7 @@ public class LowonganHibernateRepository extends HibernateRepository implements 
     public List<Lowongan> findByParams(Map map) {
         Criteria criteria = getSession().createCriteria(Lowongan.class);
         if (StringUtil.hasValue(map.get("idLowongan"))) {
-            criteria.add(Restrictions.eq("idLowongan", map.get("idLowongan")));
+            criteria.add(Restrictions.like("idLowongan", "%" + map.get("idLowongan") + "%").ignoreCase());
         }
         if (StringUtil.hasValue(map.get("namaLowongan"))) {
             criteria.add(Restrictions.like("namaLowongan", "%" + map.get("namaLowongan") + "%").ignoreCase());

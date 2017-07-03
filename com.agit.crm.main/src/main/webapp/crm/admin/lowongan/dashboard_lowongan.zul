@@ -1,5 +1,7 @@
 <zk xmlns="http://www.zkoss.org/2005/zul">
-    <window>
+    <window border="30" apply="org.zkoss.bind.BindComposer"
+            viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.admin.LowonganVM')"
+            form="@id('fx') @load(vm.lowonganDTO) @save(vm.lowonganDTO, before='buttonSaveLowongan')">
         <groupbox closable="false" mold="3d">
             <caption label="Dashboard Lowongan" />
             <groupbox closable="false">
@@ -8,21 +10,21 @@
                     <columns>
                         <column width="10%" />
                         <column width="30%" />
-                        <column width="10%" />
+                        <column width="20%" />
                         <column width="30%" />
                     </columns>
                     <rows>
                         <row>
                             <label value="ID Lowongan" />
-                            <textbox width="50%" value="@bind(vm.idDataBank)"/>
+                            <textbox width="70%" value="@bind(vm.idLowongan)"/>
                             <label value="Tanggal Berakhir" />
-                            <datebox width="50%" value="@bind(vm.noRekening)"/>                            
+                            <datebox width="70%" value="@bind(vm.tanggalBerakhir)"/>                            
                         </row>
                         <row>
                             <label value="Nama Lowongan" />
-                            <textbox width="50%" value="@bind(vm.idDataBank)"/>
+                            <textbox width="70%" value="@bind(vm.namaLowongan)"/>    
                             <label value="Status" />
-                            <combobox width="50%" placeholder="- Silahkan Pilih -" model="@load(vm.bankTypes)" selectedItem="@bind(vm.namaBank)">
+                            <combobox width="70%" placeholder="- Silahkan Pilih -">
                                 <template name="model" var="items">
                                     <comboitem label="@load(items)" value="@load(items)"/>
                                 </template>
@@ -30,9 +32,12 @@
                         </row>
                         <row>
                             <cell></cell>
-                            <cell></cell>
+                            <cell align="right">
+                                <button width="35%" label="Create" mold="trendy" onClick="@command('buttonKlikCreateLowongan')"/>
+                                
+                            </cell>
                             <cell align="left">
-                                <button width="60%" label="Pencarian" mold="trendy" onClick="@command('searchDataBank')"/>
+                                <button width="55%" label="Pencarian" mold="trendy" onClick="@command('searchLowongan')"/>
                                 
                             </cell>
                             <cell colspan="2"></cell> 
@@ -43,37 +48,36 @@
             </groupbox>
             <groupbox closable="false">
                 <paging forward="onPaging" />
-                <listbox rows="@load(vm.pageSize)" mold="paging" pageSize="@load(vm.pageSize)" emptyMessage="${labels.common.noDataFound}">
+                <listbox rows="@load(vm.pageSize)" pageSize="@load(vm.pageSize)" mold="paging" emptyMessage="${labels.common.noDataFound}" model="@bind(vm.lowonganDTOs)">
                     <listhead>
-                        <listheader label="ID Lowongan" width="5%" align="center" sortDirection="ascending" sort="auto(idDataBank)"/>
+                        <listheader label="ID Lowongan" width="10%" align="center" sortDirection="ascending"/>
                         <listheader label="Nama Lowongan" width="20%" align="center"/>
                         <listheader label="Tanggal Mulai" width="14%" align="center"/>
                         <listheader label="Tanggal Berakhir" width="14%" align="center"/>
-                        <listheader label="Fungsi Pekerjaan" width="14%" align="center"/>
-                        <listheader label="Status" width="14%" align="center"/>
+                        <listheader label="Lokasi Kerja" width="14%" align="center"/>
                         <listheader label="Aksi" width="10%" align="center"/>
                     </listhead>
                     <template name="model">
                         <listitem value="${each}">
                             <listcell>
-                                <label width="100%"/>
+                                <label width="100%" value="@bind(each.idLowongan)"/>
                             </listcell>
                             <listcell>
-                                <label width="100%"/>
+                                <label width="100%" value="@bind(each.namaLowongan)"/>
                             </listcell>
                             <listcell>
-                                <label width="100%"/>
+                                <label width="100%" value="@bind(each.tanggalMulai)"/>
                             </listcell>
                             <listcell>
-                                <label width="100%"/>
+                                <label width="100%" value="@bind(each.tanggalBerakhir)"/>
                             </listcell>
                             <listcell>
-                                <label width="100%"/>
+                                <label width="100%" value="@bind(each.lokasiKerja)"/>
                             </listcell>
                             <listcell>
-                                <a label="Detail" style="text-decoration:underline ;color:blue" onClick="@command('detailDataBank', object=each)"></a>
-                                <!--                                <a label=" | " style="font-size:12pt ;color:black"></a>
-                                <a label="Delete" style="text-decoration:underline ;color:blue" onClick="@command('deleteDataBank', object=each)"></a>-->
+                                <a label="Detail" style="text-decoration:underline ;color:blue" onClick="@command('detailLowongan', object=each)"></a>
+                                <a label=" | " style="font-size:12pt ;color:black"></a>
+                                <a label="Delete" style="text-decoration:underline ;color:blue" onClick="@command('deleteLowongan', object=each)"></a>
                             </listcell>
                         </listitem>
                     </template>

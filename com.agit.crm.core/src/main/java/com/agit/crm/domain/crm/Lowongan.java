@@ -19,6 +19,7 @@ public class Lowongan implements EntityObject<Lowongan> {
     private String minatPekerjaan;
     private String persyaratan;
     private String lokasiKerja;
+    private String gaji;
     private String createdBy;
     private Date createdDate;
     private String modifiedBy;
@@ -27,7 +28,7 @@ public class Lowongan implements EntityObject<Lowongan> {
     public Lowongan() {
     }
 
-    public Lowongan(String idLowongan, String namaLowongan, String deskripsiLowongan, Date tanggalMulai, Date tanggalBerakhir, String minatPekerjaan, String persyaratan, String lokasiKerja, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate) {
+    public Lowongan(String idLowongan, String namaLowongan, String deskripsiLowongan, Date tanggalMulai, Date tanggalBerakhir, String minatPekerjaan, String persyaratan, String lokasiKerja, String gaji, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate) {
         this.idLowongan = idLowongan;
         this.namaLowongan = namaLowongan;
         this.deskripsiLowongan = deskripsiLowongan;
@@ -36,6 +37,7 @@ public class Lowongan implements EntityObject<Lowongan> {
         this.minatPekerjaan = minatPekerjaan;
         this.persyaratan = persyaratan;
         this.lokasiKerja = lokasiKerja;
+        this.gaji = gaji;
         this.createdBy = createdBy;
         this.createdDate = createdDate;
         this.modifiedBy = modifiedBy;
@@ -138,21 +140,30 @@ public class Lowongan implements EntityObject<Lowongan> {
         this.modifiedDate = modifiedDate;
     }
 
+    public String getGaji() {
+        return gaji;
+    }
+
+    public void setGaji(String gaji) {
+        this.gaji = gaji;
+    }
+
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 37 * hash + Objects.hashCode(this.idLowongan);
-        hash = 37 * hash + Objects.hashCode(this.namaLowongan);
-        hash = 37 * hash + Objects.hashCode(this.deskripsiLowongan);
-        hash = 37 * hash + Objects.hashCode(this.tanggalMulai);
-        hash = 37 * hash + Objects.hashCode(this.tanggalBerakhir);
-        hash = 37 * hash + Objects.hashCode(this.minatPekerjaan);
-        hash = 37 * hash + Objects.hashCode(this.persyaratan);
-        hash = 37 * hash + Objects.hashCode(this.lokasiKerja);
-        hash = 37 * hash + Objects.hashCode(this.createdBy);
-        hash = 37 * hash + Objects.hashCode(this.createdDate);
-        hash = 37 * hash + Objects.hashCode(this.modifiedBy);
-        hash = 37 * hash + Objects.hashCode(this.modifiedDate);
+        hash = 89 * hash + Objects.hashCode(this.idLowongan);
+        hash = 89 * hash + Objects.hashCode(this.namaLowongan);
+        hash = 89 * hash + Objects.hashCode(this.deskripsiLowongan);
+        hash = 89 * hash + Objects.hashCode(this.tanggalMulai);
+        hash = 89 * hash + Objects.hashCode(this.tanggalBerakhir);
+        hash = 89 * hash + Objects.hashCode(this.minatPekerjaan);
+        hash = 89 * hash + Objects.hashCode(this.persyaratan);
+        hash = 89 * hash + Objects.hashCode(this.lokasiKerja);
+        hash = 89 * hash + Objects.hashCode(this.gaji);
+        hash = 89 * hash + Objects.hashCode(this.createdBy);
+        hash = 89 * hash + Objects.hashCode(this.createdDate);
+        hash = 89 * hash + Objects.hashCode(this.modifiedBy);
+        hash = 89 * hash + Objects.hashCode(this.modifiedDate);
         return hash;
     }
 
@@ -183,6 +194,7 @@ public class Lowongan implements EntityObject<Lowongan> {
         this.minatPekerjaan = lowongan.minatPekerjaan;
         this.persyaratan = lowongan.persyaratan;
         this.lokasiKerja = lowongan.lokasiKerja;
+        this.gaji = lowongan.gaji;
         this.modifiedBy = lowongan.modifiedBy;
         this.modifiedDate = lowongan.modifiedDate;
     }

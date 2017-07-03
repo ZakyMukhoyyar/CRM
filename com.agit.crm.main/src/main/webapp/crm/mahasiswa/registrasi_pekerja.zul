@@ -131,7 +131,7 @@
                             <row>
                                 <combobox autodrop="true" readonly="true" width="100%" model="@load(vm.ketrampilans)" selectedItem="@bind(fx.ketrampilan1)" placeholder="- Pilihan Ketrampilan 1 -">
                                     <template name="model" var="items">
-                                        <comboitem label="@load(items.getNamaKeterampilan())" value="@load(items.getNamaKeterampilan())"/>
+                                        <comboitem label="@load(items.getNamaKetrampilan())" value="@load(items.getNamaKetrampilan())"/>
                                     </template>
                                 </combobox>
                                 <combobox autodrop="true" readonly="true" width="100%" model="@load(vm.tingkatanTypes1)" selectedItem="@bind(fx.tingkatanType1)" placeholder="- Pilihan Tingkat 1 -">
@@ -143,7 +143,7 @@
                             <row>
                                 <combobox autodrop="true" readonly="true" width="100%" model="@load(vm.ketrampilans)" selectedItem="@bind(fx.ketrampilan2)" placeholder="- Pilihan Ketrampilan 2 -">
                                     <template name="model" var="items">
-                                        <comboitem label="@load(items.getNamaKeterampilan())" value="@load(items.getNamaKeterampilan())"/>
+                                        <comboitem label="@load(items.getNamaKetrampilan())" value="@load(items.getNamaKetrampilan())"/>
                                     </template>
                                 </combobox>
                                 <combobox autodrop="true" readonly="true" width="100%" model="@load(vm.tingkatanTypes2)" selectedItem="@bind(fx.tingkatanType2)" placeholder="- Pilihan Tingkat 2 -">
@@ -155,7 +155,7 @@
                             <row>
                                 <combobox autodrop="true" readonly="true" width="100%" model="@load(vm.ketrampilans)" selectedItem="@bind(fx.ketrampilan3)" placeholder="- Pilihan Ketrampilan 3 -">
                                     <template name="model" var="items">
-                                        <comboitem label="@load(items.getNamaKeterampilan())" value="@load(items.getNamaKeterampilan())"/>
+                                        <comboitem label="@load(items.getNamaKetrampilan())" value="@load(items.getNamaKetrampilan())"/>
                                     </template>
                                 </combobox>
                                 <combobox autodrop="true" readonly="true" width="100%" model="@load(vm.tingkatanTypes3)" selectedItem="@bind(fx.tingkatanType3)" placeholder="- Pilihan Tingkat 3 -">
@@ -167,7 +167,7 @@
                             <row>
                                 <combobox autodrop="true" readonly="true" width="100%" model="@load(vm.ketrampilans)" selectedItem="@bind(fx.ketrampilan4)" placeholder="- Pilihan Ketrampilan 4 -">
                                     <template name="model" var="items">
-                                        <comboitem label="@load(items.getNamaKeterampilan())" value="@load(items.getNamaKeterampilan())"/>
+                                        <comboitem label="@load(items.getNamaKetrampilan())" value="@load(items.getNamaKetrampilan())"/>
                                     </template>
                                 </combobox>
                                 <combobox autodrop="true" readonly="true" width="100%" model="@load(vm.tingkatanTypes4)" selectedItem="@bind(fx.tingkatanType4)" placeholder="- Pilihan Tingkat 4-">
@@ -179,7 +179,7 @@
                             <row>
                                 <combobox autodrop="true" readonly="true" width="100%" model="@load(vm.ketrampilans)" selectedItem="@bind(fx.ketrampilan5)" placeholder="- Pilihan Ketrampilan 5 -">
                                     <template name="model" var="items">
-                                        <comboitem label="@load(items.getNamaKeterampilan())" value="@load(items.getNamaKeterampilan())"/>
+                                        <comboitem label="@load(items.getNamaKetrampilan())" value="@load(items.getNamaKetrampilan())"/>
                                     </template>
                                 </combobox>
                                 <combobox autodrop="true" readonly="true" width="100%" model="@load(vm.tingkatanTypes5)" selectedItem="@bind(fx.tingkatanType5)" placeholder="- Pilihan Tingkat 5-">
