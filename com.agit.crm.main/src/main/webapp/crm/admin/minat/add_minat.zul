@@ -1,5 +1,7 @@
 <zk xmlns="http://www.zkoss.org/2005/zul">
-    <window>
+    <window apply="org.zkoss.bind.BindComposer"
+            viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.admin.MinatVM')"
+            form="@id('fx') @load(vm.minatDTO) @save(vm.minatDTO, before='buttonSaveMinat')">
         <separator spacing="5px"/>
         <groupbox width="500px" closable="true">
             <caption label="Form Tambah Minat" style="font-size:16pt; font-weight: bold"/>
@@ -15,12 +17,12 @@
                         <row>
                             <label value="*) " style="color:red"/>
                             <label value="ID Minat" style="font-weight: bold"/>
-                            <textbox width="20%" disabled="true" value="@bind(fx.idUser)" />
+                            <textbox width="20%" disabled="true" value="@bind(fx.idMinat)" />
                         </row>
                         <row>
                             <label value="*) " style="color:red"/>
                             <label value="Nama Minat " style="font-weight: bold"/>
-                            <textbox rows="2" width="100%" disabled="false" constraint="no empty : Nama Lowongan Tidak Boleh Kosong"/>
+                            <textbox rows="2" value="@bind(fx.namaMinat)" width="100%" disabled="false" constraint="no empty : Nama Lowongan Tidak Boleh Kosong"/>
                         </row>
                         <row>
                             <label value="*)" style="color:red"/>
@@ -42,8 +44,8 @@
                 
                     <rows>
                         <row>
-                            <button label="Kembali" width="40%" onClick = ""/>
-                            <button label="Save" width="40%" onClick = ""/>
+                            <button label="Kembali" width="40%" onClick = "@command('buttonKembaliMinat')"/>
+                            <button label="Save" width="40%" onClick = "@command('buttonSaveMinat')"/>
                         </row>
                     </rows>
                 </grid>

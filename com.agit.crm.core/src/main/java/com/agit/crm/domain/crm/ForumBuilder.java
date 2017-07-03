@@ -7,6 +7,7 @@ public class ForumBuilder {
     private String idForum;
     private String namaForum;
     private String deskripsiForum;
+    private Date tanggalBerakhir;
     private String createdBy;
     private Date createdDate;
     private String modifiedBy;
@@ -28,6 +29,11 @@ public class ForumBuilder {
 
     public ForumBuilder setDeskripsiForum(String deskripsiForum) {
         this.deskripsiForum = deskripsiForum;
+        return this;
+    }
+
+    public ForumBuilder setTanggalBerakhir(Date tanggalBerakhir) {
+        this.tanggalBerakhir = tanggalBerakhir;
         return this;
     }
 
@@ -57,7 +63,7 @@ public class ForumBuilder {
     }
 
     public Forum createForum() {
-        return new Forum(idForum, namaForum, deskripsiForum, createdBy, createdDate, modifiedBy, modifiedDate, status);
+        return new Forum(idForum, namaForum, deskripsiForum, tanggalBerakhir, createdBy, createdDate, modifiedBy, modifiedDate, status);
     }
     
 }

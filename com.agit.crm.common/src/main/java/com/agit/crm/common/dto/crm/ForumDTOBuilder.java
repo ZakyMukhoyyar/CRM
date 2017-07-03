@@ -7,6 +7,7 @@ public class ForumDTOBuilder {
     private String idForum;
     private String namaForum;
     private String deskripsiForum;
+    private Date tanggalBerakhir;
     private String createdBy;
     private Date createdDate;
     private String modifiedBy;
@@ -28,6 +29,11 @@ public class ForumDTOBuilder {
 
     public ForumDTOBuilder setDeskripsiForum(String deskripsiForum) {
         this.deskripsiForum = deskripsiForum;
+        return this;
+    }
+
+    public ForumDTOBuilder setTanggalBerakhir(Date tanggalBerakhir) {
+        this.tanggalBerakhir = tanggalBerakhir;
         return this;
     }
 
@@ -57,7 +63,7 @@ public class ForumDTOBuilder {
     }
 
     public ForumDTO createForumDTO() {
-        return new ForumDTO(idForum, namaForum, deskripsiForum, createdBy, createdDate, modifiedBy, modifiedDate, status);
+        return new ForumDTO(idForum, namaForum, deskripsiForum, tanggalBerakhir, createdBy, createdDate, modifiedBy, modifiedDate, status);
     }
     
 }

@@ -1,5 +1,7 @@
 <zk xmlns="http://www.zkoss.org/2005/zul">
-    <window>
+    <window apply="org.zkoss.bind.BindComposer"
+            viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.admin.ForumVM')"
+            form="@id('fx') @load(vm.forumDTO) @save(vm.forumDTO, before='buttonSaveForum')">
         <groupbox closable="false" mold="3d">
             <caption label="Dashboard Forum" />
             <groupbox closable="false">
@@ -14,15 +16,15 @@
                     <rows>
                         <row>
                             <label value="ID Forum" />
-                            <textbox width="50%" value="@bind(vm.idDataBank)"/>
+                            <textbox width="50%" value="@bind(vm.idForum)"/>
                             <label value="Tanggal Berakhir" />
-                            <datebox width="50%" value="@bind(vm.noRekening)"/>                            
+                            <datebox width="50%" value="@bind(vm.tanggalBerakhir)"/>                            
                         </row>
                         <row>
                             <label value="Nama Forum" />
-                            <textbox width="50%" value="@bind(vm.idDataBank)"/>
+                            <textbox width="50%" value="@bind(vm.namaForum)"/>
                             <label value="Status" />
-                            <combobox width="50%" placeholder="- Silahkan Pilih -" model="@load(vm.bankTypes)" selectedItem="@bind(vm.namaBank)">
+                            <combobox width="50%" placeholder="- Silahkan Pilih -" model="@load(vm.status)" selectedItem="@bind(vm.status)">
                                 <template name="model" var="items">
                                     <comboitem label="@load(items)" value="@load(items)"/>
                                 </template>
@@ -30,10 +32,11 @@
                         </row>
                         <row>
                             <cell></cell>
-                            <cell></cell>
+                            <cell align="right">
+                                <button width="30%" label="Pencarian" mold="trendy" onClick="@command('searchForum')" />
+                            </cell>
                             <cell align="left">
-                                <button width="60%" label="Pencarian" mold="trendy" onClick="@command('searchDataBank')"/>
-                                
+                                <button width="100%" label="Create Forum" mold="trendy" onClick="@command('buttonNewForum')"/>
                             </cell>
                             <cell colspan="2"></cell> 
                         </row>
@@ -43,9 +46,9 @@
             </groupbox>
             <groupbox closable="false">
                 <paging forward="onPaging" />
-                <listbox rows="@load(vm.pageSize)" mold="paging" pageSize="@load(vm.pageSize)" emptyMessage="${labels.common.noDataFound}">
+                <listbox rows="@load(vm.pageSize)" mold="paging" pageSize="@load(vm.pageSize)" emptyMessage="${labels.common.noDataFound}" model="@bind(vm.forumDTOs)">
                     <listhead>
-                        <listheader label="ID Forum" width="5%" align="center" sortDirection="ascending" sort="auto(idDataBank)"/>
+                        <listheader label="ID Forum" width="5%" align="center" sortDirection="ascending" sort="auto(idForum)"/>
                         <listheader label="Nama Forum" width="20%" align="center"/>
                         <listheader label="Tanggal Mulai" width="14%" align="center"/>
                         <listheader label="Tanggal Berakhir" width="14%" align="center"/>

@@ -54,6 +54,7 @@ public class ForumServiceImpl implements ForumService{
                 .setIdForum("11")
                 .setNamaForum("namaForum")
                 .setDeskripsiForum("deskripsiForum")
+                .setTanggalBerakhir(new Date())
                 .setCreatedBy("created by")
                 .setCreatedDate(new Date())
                 .setModifiedBy("modified by")
