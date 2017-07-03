@@ -1,12 +1,19 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.agit.crm.domain.crm;
 
 import com.agit.crm.shared.type.JenisKelaminType;
 import com.agit.crm.shared.type.PendidikanType;
+import com.agit.crm.shared.type.TingkatanType;
 import java.util.Date;
 import java.util.List;
 
 
 public class MahasiswaBuilder {
+
     private String idMahasiswa;
     private String username;
     private String password;
@@ -27,11 +34,11 @@ public class MahasiswaBuilder {
     private String ketrampilan3;
     private String ketrampilan4;
     private String ketrampilan5;
-    private String tingkat1;
-    private String tingkat2;
-    private String tingkat3;
-    private String tingkat4;
-    private String tingkat5;
+    private TingkatanType tingkatanType1;
+    private TingkatanType tingkatanType2;
+    private TingkatanType tingkatanType3;
+    private TingkatanType tingkatanType4;
+    private TingkatanType tingkatanType5;
     private String uploadCV;
     private List<Lowongan> lowongans;
     private String createdBy;
@@ -143,28 +150,28 @@ public class MahasiswaBuilder {
         return this;
     }
 
-    public MahasiswaBuilder setTingkat1(String tingkat1) {
-        this.tingkat1 = tingkat1;
+    public MahasiswaBuilder setTingkatanType1(TingkatanType tingkatanType1) {
+        this.tingkatanType1 = tingkatanType1;
         return this;
     }
 
-    public MahasiswaBuilder setTingkat2(String tingkat2) {
-        this.tingkat2 = tingkat2;
+    public MahasiswaBuilder setTingkatanType2(TingkatanType tingkatanType2) {
+        this.tingkatanType2 = tingkatanType2;
         return this;
     }
 
-    public MahasiswaBuilder setTingkat3(String tingkat3) {
-        this.tingkat3 = tingkat3;
+    public MahasiswaBuilder setTingkatanType3(TingkatanType tingkatanType3) {
+        this.tingkatanType3 = tingkatanType3;
         return this;
     }
 
-    public MahasiswaBuilder setTingkat4(String tingkat4) {
-        this.tingkat4 = tingkat4;
+    public MahasiswaBuilder setTingkatanType4(TingkatanType tingkatanType4) {
+        this.tingkatanType4 = tingkatanType4;
         return this;
     }
 
-    public MahasiswaBuilder setTingkat5(String tingkat5) {
-        this.tingkat5 = tingkat5;
+    public MahasiswaBuilder setTingkatanType5(TingkatanType tingkatanType5) {
+        this.tingkatanType5 = tingkatanType5;
         return this;
     }
 
@@ -204,7 +211,7 @@ public class MahasiswaBuilder {
     }
 
     public Mahasiswa createMahasiswa() {
-        return new Mahasiswa(idMahasiswa, username, password, retypedPassword, namaLengkap, email, tanggalLahir, domisili, noHP, noKTP, ipk, jenisKelaminType, pendidikanType, namaCivitas, minat, ketrampilan1, ketrampilan2, ketrampilan3, ketrampilan4, ketrampilan5, tingkat1, tingkat2, tingkat3, tingkat4, tingkat5, uploadCV, lowongans, createdBy, createdDate, modifiedBy, modifiedDate, statusApprove);
+        return new Mahasiswa(idMahasiswa, username, password, retypedPassword, namaLengkap, email, tanggalLahir, domisili, noHP, noKTP, ipk, jenisKelaminType, pendidikanType, namaCivitas, minat, ketrampilan1, ketrampilan2, ketrampilan3, ketrampilan4, ketrampilan5, tingkatanType1, tingkatanType2, tingkatanType3, tingkatanType4, tingkatanType5, uploadCV, lowongans, createdBy, createdDate, modifiedBy, modifiedDate, statusApprove);
     }
     
 }

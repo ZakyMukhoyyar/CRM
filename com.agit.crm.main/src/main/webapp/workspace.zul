@@ -25,11 +25,11 @@
                     </west>
                     <east border="none">
                         <div>
-                            <label value="Logged in as"/>
+                            <label value="Logged" style="font-weight:bold"/>
                             <label value="@load(vm.concat(vm.user.userSpecificationDTO.fullName, vm.concat(' - ',vm.user.roleDTO.roleName)))" style="font-weight:bold" />
                             <label value="|"/>
                             <a href="/processLogout" style="color:black" onClick="@command('buttonLogout')" >
-                                <label value="Logout"/>
+                                <label value="Logout" style="font-weight:bold"/>
                             </a>
                             <!--<label value="Version : ${labels.buildNumber}"/>-->
                         </div>

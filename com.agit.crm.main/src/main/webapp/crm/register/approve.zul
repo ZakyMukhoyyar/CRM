@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?taglib uri="/WEB-INF/security.tld" prefix="sec"?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<?link rel="icon" type="image/png" href="/images/logoagit-new.png"?>
+<zk xmlns="http://www.zkoss.org/2005/zul">
+    <window border="none" apply="org.zkoss.bind.BindComposer"
+            viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.register.RegisterVM')">
+        <tabbox>
+            <tabs>
+                <tab label="Register"/>
+            </tabs>
+            <tabpanels>
+                <tabpanel>
+                    <grid>
+                        <columns>
+                            <column width="20%" />
+                            <column width="80%" />
+                        </columns>
+                        <rows>
+                            <row>
+                                <label value="${labels.user.label.fullname}"/>
+                                <label value="@load(vm.userDTO.userSpecificationDTO.fullName)"/>
+                            </row>
+                            <row>
+                                <label value="${labels.user.label.assignedrole}"/>
+                                <label value="@load(vm.userDTO.roleDTO.roleName)"/>
+                            </row>
+                            <row>
+                                <label value="${labels.user.label.username}"/>
+                                <label value="@load(vm.userDTO.userName)"/>
+                            </row>
+                            <row>
+                                <label value="${labels.user.label.password}"/>
+                                <label value="xxxxxxxxxxx"/>
+                            </row>
+                            <row>
+                                <label />
+                                <checkbox label="${labels.user.label.passwordneverexpired}" checked="@load(vm.checked)"
+                                          onCheck="@command('onCheckPasswordExpired', obj=self.isChecked())" disabled="true"/>
+                            </row>
+                            <row>
+                                <label value="${labels.user.label.email}"/>
+                                <label value="@load(vm.userDTO.userSpecificationDTO.email)"/>
+                            </row>
+                            <row>
+                                <label value="${labels.user.label.mobilephone}"/>
+                                <label value="@load(vm.userDTO.userSpecificationDTO.mobilePhone)"/>
+                            </row>
+                        </rows>
+                    </grid>
+                </tabpanel>
+
+            </tabpanels>
+        </tabbox>
+        <div align="center">
+            <separator />
+            <button label="Back" onClick="@command('buttonBack')"/>
+            <button label="Confirm" onClick="@command('buttonConfirm')"/>
+            <button label="Close" onClick="@command('buttonClose')"/>
+            <separator />
+        </div> 
+    </window>
+</zk>

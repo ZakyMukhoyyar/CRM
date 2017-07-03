@@ -12,6 +12,7 @@ import com.agit.crm.interfaces.web.facade.dto.assembler.crm.LowonganDTOAssembler
 import com.agit.crm.interfaces.web.facade.dto.assembler.crm.MahasiswaDTOAssembler;
 import com.agit.crm.shared.type.JenisKelaminType;
 import com.agit.crm.shared.type.PendidikanType;
+import com.agit.crm.shared.type.TingkatanType;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -23,48 +24,48 @@ import org.apache.commons.lang.Validate;
  * @author Bayu Hendra Setiawan
  */
 public class MahasiswaServiceImpl implements MahasiswaService {
-    
+
     private MahasiswaRepository mahasiswaRepository;
     private MahasiswaDTOAssembler mahasiswaDTOAssembler;
     private LowonganRepository lowonganRepository;
     private LowonganDTOAssembler lowonganDTOAssembler;
-    
+
     public void setMahasiswaRepository(MahasiswaRepository mahasiswaRepository) {
         this.mahasiswaRepository = mahasiswaRepository;
     }
-    
+
     public void setMahasiswaDTOAssembler(MahasiswaDTOAssembler mahasiswaDTOAssembler) {
         this.mahasiswaDTOAssembler = mahasiswaDTOAssembler;
     }
-    
+
     public void setLowonganRepository(LowonganRepository lowonganRepository) {
         this.lowonganRepository = lowonganRepository;
     }
-    
+
     public void setLowonganDTOAssembler(LowonganDTOAssembler lowonganDTOAssembler) {
         this.lowonganDTOAssembler = lowonganDTOAssembler;
     }
-    
+
     @Override
     public void SaveOrUpdate(MahasiswaDTO mahasiswa) {
         Mahasiswa t = mahasiswaRepository.findByID(mahasiswa.getIdMahasiswa());
-        
+
         if (t == null) {
             t = mahasiswaDTOAssembler.toDomain(mahasiswa);
         } else {
             Mahasiswa newMahasiswa = mahasiswaDTOAssembler.toDomain(mahasiswa);
             t.assignNewMahasiswa(newMahasiswa);
-            
+
         }
         mahasiswaRepository.saveOrUpdate(t);
     }
-    
+
     @Override
     public void deleteData(MahasiswaDTO mahasiswa) {
         Mahasiswa p = mahasiswaDTOAssembler.toDomain(mahasiswa);
         mahasiswaRepository.deleteData(p);
     }
-    
+
     @Override
     public MahasiswaDTO getDummyData() {
         Lowongan lowongan1 = new LowonganBuilder()
@@ -101,7 +102,7 @@ public class MahasiswaServiceImpl implements MahasiswaService {
         List<Lowongan> lowongans = new ArrayList<>();
         lowongans.add(lowongan1);
         lowongans.add(lowongan2);
-        
+
         Mahasiswa mahasiswa = new MahasiswaBuilder()
                 .setIdMahasiswa("11")
                 .setUsername("username")
@@ -123,11 +124,11 @@ public class MahasiswaServiceImpl implements MahasiswaService {
                 .setKetrampilan3("ketrampilan3")
                 .setKetrampilan4("ketrampilan4")
                 .setKetrampilan5("ketrampilan5")
-                .setTingkat1("tingkat1")
-                .setTingkat2("tingkat2")
-                .setTingkat3("tingkat3")
-                .setTingkat4("tingkat4")
-                .setTingkat5("tingkat5")
+                .setTingkatanType1(TingkatanType.KOMPETEN)
+                .setTingkatanType2(TingkatanType.MENENGAH)
+                .setTingkatanType3(TingkatanType.MENENGAH)
+                .setTingkatanType4(TingkatanType.PEMULA)
+                .setTingkatanType5(TingkatanType.PEMULA)
                 .setUploadCV("uploadCV")
                 .setLowongans(lowongans)
                 .setCreatedBy("createdBy")
@@ -138,7 +139,7 @@ public class MahasiswaServiceImpl implements MahasiswaService {
                 .createMahasiswa();
         return mahasiswaDTOAssembler.toDTO(mahasiswa);
     }
-    
+
     @Override
     public MahasiswaDTO findByID(String idMahasiswa) {
         Validate.notNull(mahasiswaRepository);
@@ -148,7 +149,7 @@ public class MahasiswaServiceImpl implements MahasiswaService {
         }
         return null;
     }
-    
+
     @Override
     public List<MahasiswaDTO> findAll() {
         Validate.notNull(mahasiswaRepository);
@@ -158,7 +159,7 @@ public class MahasiswaServiceImpl implements MahasiswaService {
         }
         return null;
     }
-    
+
     @Override
     public List<MahasiswaDTO> findByParams(Map map) {
         Validate.notNull(mahasiswaRepository);
@@ -168,5 +169,5 @@ public class MahasiswaServiceImpl implements MahasiswaService {
         }
         return null;
     }
-    
+
 }

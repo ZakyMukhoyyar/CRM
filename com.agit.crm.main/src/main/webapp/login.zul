@@ -42,7 +42,7 @@
                 <grid style="border:none;">
                     <rows>
                         <row spans="2">
-                            <a href="http://localhost:9091/crm-migas" label="I Forgot My Password" style="font-weight:bold;color:#65001e"/>
+                            <a href="http://localhost:9091/crm/crm/register/register.zul" target="_blank" label="Belum Punya Account User?" style="font-weight:bold;color:#65001e"/>
                             <div align="center">
                                 <h:input type="submit" value="${labels.user.label.login}" style="width: 120px; height : 30px" />
                             </div>

@@ -35,11 +35,36 @@
         <property column="ketrampilan3" name="ketrampilan3"/>
         <property column="ketrampilan4" name="ketrampilan4"/>
         <property column="ketrampilan5" name="ketrampilan5"/>
-        <property column="tingkat1" name="tingkat1"/>
-        <property column="tingkat2" name="tingkat2"/>        
-        <property column="tingkat3" name="tingkat3"/>
-        <property column="tingkat4" name="tingkat4"/>
-        <property column="tingkat5" name="tingkat5"/>
+        <property column="tingkatanType1" name="tingkatanType1" not-null="false">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">com.agit.crm.shared.type.TingkatanType</param>
+                <param name="type">12</param>
+            </type>
+        </property>
+        <property column="tingkatanType2" name="tingkatanType2" not-null="false">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">com.agit.crm.shared.type.TingkatanType</param>
+                <param name="type">12</param>
+            </type>
+        </property>
+        <property column="tingkatanType3" name="tingkatanType3" not-null="false">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">com.agit.crm.shared.type.TingkatanType</param>
+                <param name="type">12</param>
+            </type>
+        </property>
+        <property column="tingkatanType4" name="tingkatanType4" not-null="false">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">com.agit.crm.shared.type.TingkatanType</param>
+                <param name="type">12</param>
+            </type>
+        </property>
+        <property column="tingkatanType5" name="tingkatanType5" not-null="false">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">com.agit.crm.shared.type.TingkatanType</param>
+                <param name="type">12</param>
+            </type>
+        </property>
         <property column="uploadCV" name="uploadCV"/>
         <list cascade="all" lazy="false" name="lowongans">
             <key column="idMahasiswa" foreign-key="idMahasiswa"/>

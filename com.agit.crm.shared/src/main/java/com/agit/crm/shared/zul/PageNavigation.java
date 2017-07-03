@@ -11,5 +11,7 @@ public enum PageNavigation {
     VIEW,
     CONFIRM,
     SEARCH,
-    UPLOAD
+    UPLOAD,
+    REGISTER
+    
 }

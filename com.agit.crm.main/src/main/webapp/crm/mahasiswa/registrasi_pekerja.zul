@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?component name="signLabel" class="com.agit.crm.shared.zul.SignLabel" ?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul">
+    <window border="30" apply="org.zkoss.bind.BindComposer"
+            viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.mahasiswa.MahasiswaVM')"
+            form="@id('fx') @load(vm.mahasiswaDTO) @save(vm.mahasiswaDTO, before='buttonSaveMahasiswa')">
+        <separator spacing="5px"/>
+        <groupbox width="700px" closable="true">
+<!--            <caption label="Form Data Mahasiswa" style="font-size:16pt; font-weight: bold"/>-->
+            <!--            <groupbox >
+                <caption label="Data Login" style="font-size:12pt; font-weight: bold"/>
+                <grid style="border:0">
+                    <columns>
+                        <column width="3%"></column>
+                        <column width="20%"></column>
+                        <column width="40%"></column>
+                        <column></column>
+                    </columns>
+                    <rows>
+                        <row>
+                            <label value=" " style="color:red"/>
+                            <label value="ID " style="font-weight: bold"/>
+                            <textbox width="30%" readonly="true" value="@bind(fx.idMahasiswa)"/>
+                        </row>
+                        <row>
+                            <label value="*) " style="color:red"/>
+                            <label value="Username " style="font-weight: bold"/>
+                            <textbox width="70%" disabled="false" constraint="no empty : Username Tidak Boleh Kosong" value="@bind(fx.username)"/>
+                        </row>
+                        <row>
+                            <label value="*) " style="color:red"/>
+                            <label value="Password" style="font-weight: bold"/>
+                            <textbox width="70%" disabled="false" type="password" constraint="no empty : Password Tidak Boleh Kosong" value="@bind(fx.password)"/>
+                        </row>
+                        <row>
+                            <label value="*) " style="color:red"/>
+                            <label value="Retype Password" style="font-weight: bold"/>
+                            <textbox width="70%" disabled="false" type="password" constraint="no empty : Retype Password Tidak Boleh Kosong" value="@bind(fx.retypedPassword)"/>
+                        </row>
+                    </rows>
+                </grid>
+            </groupbox>-->
+            <groupbox>
+                <caption label="Data Pribadi" style="font-size:12pt; font-weight: bold"/>
+                <grid style="border:0">
+                    <columns>
+                        <column width="30%"></column>
+                        <column width="40%"></column>
+                        <column ></column>
+                    </columns>
+                    <rows>
+                        <row>
+                            <label value="ID " style="font-weight: bold"/>
+                            <textbox width="30%" readonly="true" value="@bind(fx.idMahasiswa)"/>
+                        </row>
+                        <row>
+                            <signLabel value="Nama Lengkap" style="font-weight: bold"/>
+                            <textbox width="100%" disabled="false" constraint="no empty : Nama Tidak Boleh Kosong" value="@bind(fx.namaLengkap)"/>
+                        </row>
+                        <row>
+                            <signLabel value="Alamat Email" style="font-weight: bold"/>
+                            <textbox width="100%" disabled="false" constraint="/.+@.+\.[a-z]+/: Email tidak sesuai dengan format" value="@bind(fx.email)"/>
+                        </row>
+                        <row>
+                            <signLabel value="Tanggal Lahir" style="font-weight: bold" />
+                            <datebox width="100%" readonly="true" value="@bind(fx.tanggalLahir)"/> 
+                        </row>
+                        <row>
+                            <signLabel value="No KTP" style="font-weight: bold"/>
+                            <textbox width="100%" disabled="false" constraint="/.[0-9]+/: no empty : No KTP Tidak Boleh Kosong" value="@bind(fx.noKTP)"/>
+                        </row>
+                        
+                        <row>
+                            <signLabel value="Jenis Kelamin" style="font-weight: bold"/>
+                            <combobox width="100%" model="@load(vm.jenisKelaminTypes)" selectedItem="@bind(fx.jenisKelaminType)" readonly="true" placeholder="- Silahkan Pilih -" constraint="no empty : Jenis Kelamin Tidak Boleh Kosong">
+                                <template name="model" var="items">
+                                    <comboitem label="@load(items)" value="@load(items)"/>
+                                </template>
+                            </combobox>
+                        </row>
+                        
+                        <row>
+                            <signLabel value="Domisili" style="font-weight: bold"/>
+                            <textbox width="100%" disabled="false" constraint=" no empty : Domisili Tidak Boleh Kosong" value="@bind(fx.domisili)"/>
+                        </row>
+                        
+                        <row>
+                            <signLabel value="No Handphone" style="font-weight: bold"/>
+                            <textbox width="100%" disabled="false" constraint="/.[0-9]+/: no empty : No Handphone Tidak Boleh Kosong" value="@bind(fx.noHP)"/>
+                        </row>
+                        <row>
+                            <signLabel value="Pendidikan Terakhir" style="font-weight: bold"/>
+                            <combobox width="100%" model="@load(vm.pendidikanTypes)" selectedItem="@bind(fx.pendidikanType)" readonly="true" placeholder="- Silahkan Pilih -" constraint="no empty : Pendidikan Terakhir Tidak Boleh Kosong">
+                                <template name="model" var="items">
+                                    <comboitem label="@load(items)" value="@load(items)"/>
+                                </template>
+                            </combobox>
+                        </row>
+                        <row>
+                            <signLabel value="Nama Civitas" style="font-weight: bold"/>
+                            <textbox width="100%" disabled="false" value="@bind(fx.namaCivitas)" />
+                        </row>
+                        <row>
+                            <signLabel value="IPK" style="font-weight: bold"/>
+                            <textbox width="100%" disabled="false" value="@bind(fx.ipk)"/>
+                        </row>
+                        <row>
+                            <signLabel value="Minat" style="font-weight: bold"/>
+                            <combobox autodrop="true" readonly="true" width="100%" placeholder="- Pilihan Minat -">
+                                <template name="model" var="items">
+                                    <comboitem label="@load(items)" value="@load(items)"/>
+                                </template>
+                            </combobox>
+                        </row>
+                    </rows>
+                </grid>
+                <groupbox >
+                    <caption label="Skills" style="font-size:12pt; font-weight: bold"/>
+                    <grid style="border:0">
+                        <columns>
+                            <column width="40%"></column>
+                            <column width="40%"></column>
+                            <column></column>
+                        </columns>
+                        <rows>
+                            <row>
+                                <signLabel value="Ketrampilan" style="font-weight: bold; alignment: center"/>
+                                <signLabel value="Tingkat" style="font-weight: bold"/>
+                            </row>
+                            <row>
+                                <combobox autodrop="true" readonly="true" width="100%" model="@load(vm.keterampilans)" selectedItem="@bind(fx.ketrampilan1)" placeholder="- Pilihan Ketrampilan 1 -">
+                                    <template name="model" var="items">
+                                        <comboitem label="@load(items.getNamaKeterampilan())" value="@load(items.getNamaKeterampilan())"/>
+                                    </template>
+                                </combobox>
+                                <combobox autodrop="true" readonly="true" width="100%" model="@load(vm.tingkatanTypes1)" selectedItem="@bind(fx.tingkatanType1)" placeholder="- Pilihan Tingkat 1 -">
+                                    <template name="model" var="items">
+                                        <comboitem label="@load(items)" value="@load(items)"/>
+                                    </template>
+                                </combobox>
+                            </row>
+                            <row>
+                                <combobox autodrop="true" readonly="true" width="100%" model="@load(vm.keterampilans)" selectedItem="@bind(fx.ketrampilan2)" placeholder="- Pilihan Ketrampilan 2 -">
+                                    <template name="model" var="items">
+                                        <comboitem label="@load(items.getNamaKeterampilan())" value="@load(items.getNamaKeterampilan())"/>
+                                    </template>
+                                </combobox>
+                                <combobox autodrop="true" readonly="true" width="100%" model="@load(vm.tingkatanTypes2)" selectedItem="@bind(fx.tingkatanType2)" placeholder="- Pilihan Tingkat 2 -">
+                                    <template name="model" var="items">
+                                        <comboitem label="@load(items)" value="@load(items)"/>
+                                    </template>
+                                </combobox>
+                            </row>
+                            <row>
+                                <combobox autodrop="true" readonly="true" width="100%" model="@load(vm.keterampilans)" selectedItem="@bind(fx.ketrampilan3)" placeholder="- Pilihan Ketrampilan 3 -">
+                                    <template name="model" var="items">
+                                        <comboitem label="@load(items.getNamaKeterampilan())" value="@load(items.getNamaKeterampilan())"/>
+                                    </template>
+                                </combobox>
+                                <combobox autodrop="true" readonly="true" width="100%" model="@load(vm.tingkatanTypes3)" selectedItem="@bind(fx.tingkatanType3)" placeholder="- Pilihan Tingkat 3 -">
+                                    <template name="model" var="items">
+                                        <comboitem label="@load(items)" value="@load(items)"/>
+                                    </template>
+                                </combobox>
+                            </row>
+                            <row>
+                                <combobox autodrop="true" readonly="true" width="100%" model="@load(vm.keterampilans)" selectedItem="@bind(fx.ketrampilan4)" placeholder="- Pilihan Ketrampilan 4 -">
+                                    <template name="model" var="items">
+                                        <comboitem label="@load(items.getNamaKeterampilan())" value="@load(items.getNamaKeterampilan())"/>
+                                    </template>
+                                </combobox>
+                                <combobox autodrop="true" readonly="true" width="100%" model="@load(vm.tingkatanTypes4)" selectedItem="@bind(fx.tingkatanType4)" placeholder="- Pilihan Tingkat 4-">
+                                    <template name="model" var="items">
+                                        <comboitem label="@load(items)" value="@load(items)"/>
+                                    </template>
+                                </combobox>
+                            </row>
+                            <row>
+                                <combobox autodrop="true" readonly="true" width="100%" model="@load(vm.keterampilans)" selectedItem="@bind(fx.ketrampilan5)" placeholder="- Pilihan Ketrampilan 5 -">
+                                    <template name="model" var="items">
+                                        <comboitem label="@load(items.getNamaKeterampilan())" value="@load(items.getNamaKeterampilan())"/>
+                                    </template>
+                                </combobox>
+                                <combobox autodrop="true" readonly="true" width="100%" model="@load(vm.tingkatanTypes5)" selectedItem="@bind(fx.tingkatanType5)" placeholder="- Pilihan Tingkat 5-">
+                                    <template name="model" var="items">
+                                        <comboitem label="@load(items)" value="@load(items)"/>
+                                    </template>
+                                </combobox>
+                            </row>
+                            <row>
+                                <label value=""/>
+                                <label value=""/>
+                                <label value=""/>
+                            </row>
+                           
+                        </rows>
+                    </grid>
+                </groupbox>
+                <groupbox>
+                    <caption label="Upload CV" style="font-size:12pt; font-weight: bold"/>
+                    <grid style="border:0">
+                        <columns>
+                            <column width="3%"></column>
+                            <column width="40%"></column>
+                            <column width="20%"></column>
+                            <column></column>
+                        </columns> 
+                        <rows>
+                            <row>
+                                <label value="" />
+                                <textbox width="100%" readonly="true" value="@bind(vm.mediaNameUploadCV)"/>
+                                <button label="Upload" upload="true" onUpload="@command('uploadFileCV')" width="80%">
+                                </button>
+                            </row>
+                        </rows>
+                    </grid>
+                </groupbox>
+                <groupbox>
+                    <label value="*) Username dan Password akan di gunakan saat login" style="color:red"/>
+                    <separator></separator>
+                    <label value="*) Password minimal 8 karakter, kombinasi huruf besar, kecil dan angka" style="color:red"/>
+                
+                </groupbox>
+                <grid style="border:0">
+                    <columns>
+                        <column width="95%" align="right"/>
+                        <column width="5%" />
+                    </columns>
+                
+                    <rows>
+                        <row>
+                            <button label="Simpan" onClick="@command('buttonSaveMahasiswa')" width="15%" />
+                        </row>
+                    </rows>
+                </grid>            
+            </groupbox>
+        </groupbox>
+    </window>
+</zk>

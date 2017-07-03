@@ -2,6 +2,7 @@ package com.agit.crm.common.dto.crm;
 
 import com.agit.crm.shared.type.JenisKelaminType;
 import com.agit.crm.shared.type.PendidikanType;
+import com.agit.crm.shared.type.TingkatanType;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -32,11 +33,11 @@ public class MahasiswaDTO implements Serializable {
     private String ketrampilan3;
     private String ketrampilan4;
     private String ketrampilan5;
-    private String tingkat1;
-    private String tingkat2;
-    private String tingkat3;
-    private String tingkat4;
-    private String tingkat5;
+    private TingkatanType tingkatanType1;
+    private TingkatanType tingkatanType2;
+    private TingkatanType tingkatanType3;
+    private TingkatanType tingkatanType4;
+    private TingkatanType tingkatanType5;
     private String uploadCV;
     private List<LowonganDTO> lowongansDTO;
     private String createdBy;
@@ -48,7 +49,7 @@ public class MahasiswaDTO implements Serializable {
     public MahasiswaDTO() {
     }
 
-    public MahasiswaDTO(String idMahasiswa, String username, String password, String retypedPassword, String namaLengkap, String email, Date tanggalLahir, String domisili, String noHP, String noKTP, String ipk, JenisKelaminType jenisKelaminType, PendidikanType pendidikanType, String namaCivitas, String minat, String ketrampilan1, String ketrampilan2, String ketrampilan3, String ketrampilan4, String ketrampilan5, String tingkat1, String tingkat2, String tingkat3, String tingkat4, String tingkat5, String uploadCV, List<LowonganDTO> lowongansDTO, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate, Boolean statusApprove) {
+    public MahasiswaDTO(String idMahasiswa, String username, String password, String retypedPassword, String namaLengkap, String email, Date tanggalLahir, String domisili, String noHP, String noKTP, String ipk, JenisKelaminType jenisKelaminType, PendidikanType pendidikanType, String namaCivitas, String minat, String ketrampilan1, String ketrampilan2, String ketrampilan3, String ketrampilan4, String ketrampilan5, TingkatanType tingkatanType1, TingkatanType tingkatanType2, TingkatanType tingkatanType3, TingkatanType tingkatanType4, TingkatanType tingkatanType5, String uploadCV, List<LowonganDTO> lowongansDTO, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate, Boolean statusApprove) {
         this.idMahasiswa = idMahasiswa;
         this.username = username;
         this.password = password;
@@ -69,11 +70,11 @@ public class MahasiswaDTO implements Serializable {
         this.ketrampilan3 = ketrampilan3;
         this.ketrampilan4 = ketrampilan4;
         this.ketrampilan5 = ketrampilan5;
-        this.tingkat1 = tingkat1;
-        this.tingkat2 = tingkat2;
-        this.tingkat3 = tingkat3;
-        this.tingkat4 = tingkat4;
-        this.tingkat5 = tingkat5;
+        this.tingkatanType1 = tingkatanType1;
+        this.tingkatanType2 = tingkatanType2;
+        this.tingkatanType3 = tingkatanType3;
+        this.tingkatanType4 = tingkatanType4;
+        this.tingkatanType5 = tingkatanType5;
         this.uploadCV = uploadCV;
         this.lowongansDTO = lowongansDTO;
         this.createdBy = createdBy;
@@ -243,44 +244,44 @@ public class MahasiswaDTO implements Serializable {
         this.ketrampilan5 = ketrampilan5;
     }
 
-    public String getTingkat1() {
-        return tingkat1;
+    public TingkatanType getTingkatanType1() {
+        return tingkatanType1;
     }
 
-    public void setTingkat1(String tingkat1) {
-        this.tingkat1 = tingkat1;
+    public void setTingkatanType1(TingkatanType tingkatanType1) {
+        this.tingkatanType1 = tingkatanType1;
     }
 
-    public String getTingkat2() {
-        return tingkat2;
+    public TingkatanType getTingkatanType2() {
+        return tingkatanType2;
     }
 
-    public void setTingkat2(String tingkat2) {
-        this.tingkat2 = tingkat2;
+    public void setTingkatanType2(TingkatanType tingkatanType2) {
+        this.tingkatanType2 = tingkatanType2;
     }
 
-    public String getTingkat3() {
-        return tingkat3;
+    public TingkatanType getTingkatanType3() {
+        return tingkatanType3;
     }
 
-    public void setTingkat3(String tingkat3) {
-        this.tingkat3 = tingkat3;
+    public void setTingkatanType3(TingkatanType tingkatanType3) {
+        this.tingkatanType3 = tingkatanType3;
     }
 
-    public String getTingkat4() {
-        return tingkat4;
+    public TingkatanType getTingkatanType4() {
+        return tingkatanType4;
     }
 
-    public void setTingkat4(String tingkat4) {
-        this.tingkat4 = tingkat4;
+    public void setTingkatanType4(TingkatanType tingkatanType4) {
+        this.tingkatanType4 = tingkatanType4;
     }
 
-    public String getTingkat5() {
-        return tingkat5;
+    public TingkatanType getTingkatanType5() {
+        return tingkatanType5;
     }
 
-    public void setTingkat5(String tingkat5) {
-        this.tingkat5 = tingkat5;
+    public void setTingkatanType5(TingkatanType tingkatanType5) {
+        this.tingkatanType5 = tingkatanType5;
     }
 
     public String getUploadCV() {
@@ -341,9 +342,7 @@ public class MahasiswaDTO implements Serializable {
 
     @Override
     public String toString() {
-        return "MahasiswaDTO{" + "idMahasiswa=" + idMahasiswa + ", username=" + username + ", password=" + password + ", retypedPassword=" + retypedPassword + ", namaLengkap=" + namaLengkap + ", email=" + email + ", tanggalLahir=" + tanggalLahir + ", domisili=" + domisili + ", noHP=" + noHP + ", noKTP=" + noKTP + ", ipk=" + ipk + ", jenisKelaminType=" + jenisKelaminType + ", pendidikanType=" + pendidikanType + ", namaCivitas=" + namaCivitas + ", minat=" + minat + ", ketrampilan1=" + ketrampilan1 + ", ketrampilan2=" + ketrampilan2 + ", ketrampilan3=" + ketrampilan3 + ", ketrampilan4=" + ketrampilan4 + ", ketrampilan5=" + ketrampilan5 + ", tingkat1=" + tingkat1 + ", tingkat2=" + tingkat2 + ", tingkat3=" + tingkat3 + ", tingkat4=" + tingkat4 + ", tingkat5=" + tingkat5 + ", uploadCV=" + uploadCV + ", lowongansDTO=" + lowongansDTO + ", createdBy=" + createdBy + ", createdDate=" + createdDate + ", modifiedBy=" + modifiedBy + ", modifiedDate=" + modifiedDate + ", statusApprove=" + statusApprove + '}';
+        return "MahasiswaDTO{" + "idMahasiswa=" + idMahasiswa + ", username=" + username + ", password=" + password + ", retypedPassword=" + retypedPassword + ", namaLengkap=" + namaLengkap + ", email=" + email + ", tanggalLahir=" + tanggalLahir + ", domisili=" + domisili + ", noHP=" + noHP + ", noKTP=" + noKTP + ", ipk=" + ipk + ", jenisKelaminType=" + jenisKelaminType + ", pendidikanType=" + pendidikanType + ", namaCivitas=" + namaCivitas + ", minat=" + minat + ", ketrampilan1=" + ketrampilan1 + ", ketrampilan2=" + ketrampilan2 + ", ketrampilan3=" + ketrampilan3 + ", ketrampilan4=" + ketrampilan4 + ", ketrampilan5=" + ketrampilan5 + ", tingkatanType1=" + tingkatanType1 + ", tingkatanType2=" + tingkatanType2 + ", tingkatanType3=" + tingkatanType3 + ", tingkatanType4=" + tingkatanType4 + ", tingkatanType5=" + tingkatanType5 + ", uploadCV=" + uploadCV + ", lowongansDTO=" + lowongansDTO + ", createdBy=" + createdBy + ", createdDate=" + createdDate + ", modifiedBy=" + modifiedBy + ", modifiedDate=" + modifiedDate + ", statusApprove=" + statusApprove + '}';
     }
-    
-    
-    
+
 }
