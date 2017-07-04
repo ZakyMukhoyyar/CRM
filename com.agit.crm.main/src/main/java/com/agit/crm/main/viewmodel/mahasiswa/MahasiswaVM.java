@@ -261,7 +261,7 @@ public class MahasiswaVM extends SelectorComposer<Window> {
         BindUtils.postGlobalCommand(null, null, "refreshMahasiswa", null);
         Map<String, Object> params = new HashMap<>();
         params.put("mahasiswaDTO", obj);
-        CommonViewModel.navigateTo("/crm/mahasiswa/registrasi_pekerja.zul", window, params);
+        CommonViewModel.navigateTo("/crm/mahasiswa/registrasi_mahasiswa.zul", window, params);
     }
 
     /* Function refresh data mahasiswa */
