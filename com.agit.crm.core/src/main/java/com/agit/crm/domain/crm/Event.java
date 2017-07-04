@@ -1,6 +1,7 @@
 package com.agit.crm.domain.crm;
 
 import com.agit.crm.shared.object.EntityObject;
+import com.agit.crm.shared.status.Status;
 import java.util.Date;
 import java.util.Objects;
 
@@ -21,12 +22,12 @@ public class Event implements EntityObject<Event> {
     private Date createdDate;
     private String modifiedBy;
     private Date modifiedDate;
-    private Boolean status;
+    private Status status;
 
     public Event() {
     }
 
-    public Event(String idEvent, String namaEvent, String deskripsiEvent, Date startDate, Date endDate, String attachment, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate, Boolean status) {
+    public Event(String idEvent, String namaEvent, String deskripsiEvent, Date startDate, Date endDate, String attachment, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate, Status status) {
         this.idEvent = idEvent;
         this.namaEvent = namaEvent;
         this.deskripsiEvent = deskripsiEvent;
@@ -120,11 +121,11 @@ public class Event implements EntityObject<Event> {
         this.modifiedDate = modifiedDate;
     }
 
-    public Boolean getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(Boolean status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 

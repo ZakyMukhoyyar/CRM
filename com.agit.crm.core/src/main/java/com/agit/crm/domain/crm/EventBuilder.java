@@ -1,5 +1,6 @@
 package com.agit.crm.domain.crm;
 
+import com.agit.crm.shared.status.Status;
 import java.util.Date;
 
 
@@ -14,7 +15,7 @@ public class EventBuilder {
     private Date createdDate;
     private String modifiedBy;
     private Date modifiedDate;
-    private Boolean status;
+    private Status status;
 
     public EventBuilder() {
     }
@@ -69,7 +70,7 @@ public class EventBuilder {
         return this;
     }
 
-    public EventBuilder setStatus(Boolean status) {
+    public EventBuilder setStatus(Status status) {
         this.status = status;
         return this;
     }

@@ -6,6 +6,7 @@ import com.agit.crm.domain.crm.Event;
 import com.agit.crm.domain.crm.EventBuilder;
 import com.agit.crm.domain.crm.EventRepository;
 import com.agit.crm.interfaces.web.facade.dto.assembler.crm.EventDTOAssembler;
+import com.agit.crm.shared.status.Status;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -61,7 +62,7 @@ public class EventServiceImpl implements EventService {
                 .setCreatedDate(new Date())
                 .setModifiedBy("modified by")
                 .setModifiedDate(new Date())
-                .setStatus(true)
+                .setStatus(Status.ACTIVE)
                 .createEvent();
         return eventDTOAssembler.toDTO(event);
     }

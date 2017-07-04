@@ -1,5 +1,6 @@
 package com.agit.crm.common.dto.crm;
 
+import com.agit.crm.shared.status.Status;
 import java.util.Date;
 
 
@@ -14,7 +15,7 @@ public class EventDTOBuilder {
     private Date createdDate;
     private String modifiedBy;
     private Date modifiedDate;
-    private Boolean status;
+    private Status status;
 
     public EventDTOBuilder() {
     }
@@ -69,7 +70,7 @@ public class EventDTOBuilder {
         return this;
     }
 
-    public EventDTOBuilder setStatus(Boolean status) {
+    public EventDTOBuilder setStatus(Status status) {
         this.status = status;
         return this;
     }
