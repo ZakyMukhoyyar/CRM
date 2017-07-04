@@ -7,16 +7,16 @@
     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
     http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-    <!--    <context:component-scan base-package="com.dv.acction.adira.bitozen.interfaces.web" />
+    <context:component-scan base-package="com.agit.crm.interfaces.web" />
     <mvc:annotation-driven>
         <mvc:message-converters>
-             Use the HibernateAware mapper instead of the default 
+            <!--Use the HibernateAware mapper instead of the default--> 
             <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
                 <property name="objectMapper">
-                    <bean class="com.dv.acction.adira.bitozen.interfaces.web.rest.hibernate.HibernateAwareObjectMapper" />
+                    <bean class="com.agit.crm.interfaces.web.rest.hibernate.HibernateAwareObjectMapper" />
                 </property>
             </bean>
         </mvc:message-converters>
-    </mvc:annotation-driven>-->
+    </mvc:annotation-driven>
 
 </beans>

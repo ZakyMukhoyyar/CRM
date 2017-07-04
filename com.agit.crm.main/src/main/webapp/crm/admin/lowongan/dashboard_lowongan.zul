@@ -54,7 +54,7 @@
                         <listheader label="Nama Lowongan" width="20%" align="center"/>
                         <listheader label="Tanggal Mulai" width="14%" align="center"/>
                         <listheader label="Tanggal Berakhir" width="14%" align="center"/>
-                        <listheader label="Lokasi Kerja" width="14%" align="center"/>
+                        <listheader label="Kategori Kerja" width="14%" align="center"/>
                         <listheader label="Aksi" width="10%" align="center"/>
                     </listhead>
                     <template name="model">
@@ -72,7 +72,7 @@
                                 <label width="100%" value="@bind(each.tanggalBerakhir)"/>
                             </listcell>
                             <listcell>
-                                <label width="100%" value="@bind(each.lokasiKerja)"/>
+                                <label width="100%"/>
                             </listcell>
                             <listcell>
                                 <a label="Detail" style="text-decoration:underline ;color:blue" onClick="@command('detailLowongan', object=each)"></a>
