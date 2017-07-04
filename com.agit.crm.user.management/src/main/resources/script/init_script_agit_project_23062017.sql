@@ -26,9 +26,11 @@ INSERT INTO "public"."mst_privilege" VALUES ('21', 'FORUM_MANAGEMENT', 'Forum Ma
 INSERT INTO "public"."mst_privilege" VALUES ('23', 'KETRAMPILAN_MANAGEMENT', 'Ketrampilan Management', 'ACTIVE', 'ADMIN_MANAGEMENT', 't', 'Ketrampilan - Dashboard', 'Ketrampilan - Dashboard', null, '/crm/admin/ketrampilan/dashboard_ketrampilan.zul', '2016-01-01 00:00:00', 'SYSTEM');
 INSERT INTO "public"."mst_privilege" VALUES ('24', 'MINAT_MANAGEMENT', 'Minat Management', 'ACTIVE', 'ADMIN_MANAGEMENT', 't', 'Minat - Dashboard', 'Minat - Dashboard', null, '/crm/admin/minat/dashboard_minat.zul', '2016-01-01 00:00:00', 'SYSTEM');
 INSERT INTO "public"."mst_privilege" VALUES ('25', 'LOWONGAN_MANAGEMENT', 'Lowongan Management', 'ACTIVE', 'ADMIN_MANAGEMENT', 't', 'Lowongan - Dashboard', 'Lowongan - Dashboard', null, '/crm/admin/lowongan/dashboard_lowongan.zul', '2016-01-01 00:00:00', 'SYSTEM');
-INSERT INTO "public"."mst_privilege" VALUES ('26', 'MAHASISWA_MANAGEMENT', 'Admin', 'ACTIVE', 'ADMINISTRATOR', 't', 'Mahasiswa Management', null, null, null, '2016-01-01 00:00:00', 'SYSTEM');
-INSERT INTO "public"."mst_privilege" VALUES ('27', 'REGISTER', 'Register', 'ACTIVE', 'MAHASISWA_MANAGEMENT', 't', 'Register', 'Register', null, '/crm/mahasiswa/registrasi_mahasiswa.zul', '2016-01-01 00:00:00', 'SYSTEM');
-INSERT INTO "public"."mst_privilege" VALUES ('28', 'LOWONGAN', 'Beranda Lowongan', 'ACTIVE', 'MAHASISWA_MANAGEMENT', 't', 'Beranda Lowongan', 'Beranda Lowongan', null, '/crm/mahasiswa/beranda_lowongan_mahasiswa.zul', '2016-01-01 00:00:00', 'SYSTEM');
+INSERT INTO "public"."mst_privilege" VALUES ('26', 'DATA_MAHASISWA', 'Dashboard Data Mahasiswa', 'ACTIVE', 'ADMIN_MANAGEMENT', 't', 'Data Mahasiswa - Dashboard', 'Data Mahasiswa - Dashboard', null, '/crm/mahasiswa/dashboard_data_register_mahasiswa.zul', '2016-01-01 00:00:00', 'SYSTEM');
+INSERT INTO "public"."mst_privilege" VALUES ('27', 'MAHASISWA_MANAGEMENT', 'Admin', 'ACTIVE', 'ADMINISTRATOR', 't', 'Mahasiswa Management', null, null, null, '2016-01-01 00:00:00', 'SYSTEM');
+INSERT INTO "public"."mst_privilege" VALUES ('28', 'REGISTER', 'Register', 'ACTIVE', 'MAHASISWA_MANAGEMENT', 't', 'Register', 'Register', null, '/crm/mahasiswa/registrasi_mahasiswa.zul', '2016-01-01 00:00:00', 'SYSTEM');
+INSERT INTO "public"."mst_privilege" VALUES ('29', 'LOWONGAN', 'Beranda Lowongan', 'ACTIVE', 'MAHASISWA_MANAGEMENT', 't', 'Beranda Lowongan', 'Beranda Lowongan', null, '/crm/mahasiswa/beranda_lowongan_mahasiswa.zul', '2016-01-01 00:00:00', 'SYSTEM');
+
 
 
 -- ----------------------------
@@ -45,7 +47,7 @@ INSERT INTO "public"."mst_role_privilege" VALUES ('1', '1', 'ALLOW', '0');
 INSERT INTO "public"."mst_role_privilege" VALUES ('2', '2', 'ALLOW', '0');
 INSERT INTO "public"."mst_role_privilege" VALUES ('2', '8', 'ALLOW', '1');
 INSERT INTO "public"."mst_role_privilege" VALUES ('2', '19', 'ALLOW', '2');
-INSERT INTO "public"."mst_role_privilege" VALUES ('3', '26', 'ALLOW', '0');
+INSERT INTO "public"."mst_role_privilege" VALUES ('3', '27', 'ALLOW', '0');
 
 -- ----------------------------
 -- Records of mst_user

@@ -3,7 +3,7 @@
 <zk xmlns="http://www.zkoss.org/2005/zul">
     <window>
         <groupbox closable="false" mold="3d">
-            <caption label="Dashboard Register Mahasiswa" />
+            <caption label="Dashboard Data Register Mahasiswa" />
             <groupbox closable="false">
                 <caption label="Parameter Pencarian" />
                 <grid style="border:0">
@@ -15,15 +15,15 @@
                     </columns>
                     <rows>
                         <row>
-                            <label value="Nama Lowongan" />
+                            <label value="Nama Lengkap" />
                             <textbox width="60%"/>
-                            <label value="Tanggal Berakhir" />
-                            <datebox width="60%"/>                            
+                            <label value="KTP" />
+                            <textbox width="60%"/>                        
                         </row>
                         <row>
-                            <label value="Lokasi Kerja" />
-                            <textbox width="60%" value="@bind(vm.idDataBank)"/>
-                            <label value="Jenis Pekerjaan" />
+                            <label value="Domisili" />
+                            <textbox width="60%"/>
+                            <label value="Minat Pekerjaan" />
                             <combobox width="60%" placeholder="- Silahkan Pilih -">
                                 <template name="model" var="items">
                                     <comboitem label="@load(items)" value="@load(items)"/>
@@ -48,11 +48,11 @@
                 <listbox mold="paging" emptyMessage="${labels.common.noDataFound}">
                     <listhead>
                         <listheader label="ID" width="5%" align="center" sortDirection="ascending"/>
-                        <listheader label="Nama Lowongan" width="20%" align="center"/>
-                        <listheader label="Tanggal Mulai" width="14%" align="center"/>
-                        <listheader label="Tanggal Berakhir" width="14%" align="center"/>
-                        <listheader label="Fungsi Pekerjaan" width="14%" align="center"/>
-                        <listheader label="Lokasi" width="14%" align="center"/>
+                        <listheader label="Nama Lengkap" width="20%" align="center"/>
+                        <listheader label="Domisili" width="14%" align="center"/>
+                        <listheader label="No KTP" width="14%" align="center"/>
+                        <listheader label="IPK" width="14%" align="center"/>
+                        <listheader label="Minat" width="14%" align="center"/>
                         <listheader label="Aksi" width="10%" align="center"/>
                     </listhead>
                     <template name="model">
