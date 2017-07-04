@@ -6,6 +6,7 @@ import com.agit.crm.domain.crm.Ketrampilan;
 import com.agit.crm.domain.crm.KetrampilanBuilder;
 import com.agit.crm.domain.crm.KetrampilanRepository;
 import com.agit.crm.interfaces.web.facade.dto.assembler.crm.KetrampilanDTOAssembler;
+import com.agit.crm.shared.status.Status;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -57,7 +58,7 @@ public class KetrampilanServiceImpl implements KetrampilanService{
                 .setCreatedDate(new Date())
                 .setModifiedBy("modified by")
                 .setModifiedDate(new Date())
-                .setStatus(true)
+                .setStatus(Status.ACTIVE)
                 .createKetrampilan();
         return ketrampilanDTOAssembler.toDTO(ketrampilan);
     }

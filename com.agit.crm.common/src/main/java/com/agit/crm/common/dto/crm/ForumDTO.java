@@ -1,5 +1,6 @@
 package com.agit.crm.common.dto.crm;
 
+import com.agit.crm.shared.status.Status;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -17,12 +18,12 @@ public class ForumDTO implements Serializable{
     private Date createdDate;
     private String modifiedBy;
     private Date modifiedDate;
-    private Boolean status;
+    private Status status;
 
     public ForumDTO() {
     }
 
-    public ForumDTO(String idForum, String namaForum, String deskripsiForum, Date tanggalBerakhir, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate, Boolean status) {
+    public ForumDTO(String idForum, String namaForum, String deskripsiForum, Date tanggalBerakhir, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate, Status status) {
         this.idForum = idForum;
         this.namaForum = namaForum;
         this.deskripsiForum = deskripsiForum;
@@ -90,11 +91,11 @@ public class ForumDTO implements Serializable{
         this.modifiedDate = modifiedDate;
     }
 
-    public Boolean getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(Boolean status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 

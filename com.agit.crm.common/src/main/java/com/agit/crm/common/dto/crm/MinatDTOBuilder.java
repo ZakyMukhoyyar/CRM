@@ -1,5 +1,6 @@
 package com.agit.crm.common.dto.crm;
 
+import com.agit.crm.shared.status.Status;
 import java.util.Date;
 
 
@@ -10,7 +11,7 @@ public class MinatDTOBuilder {
     private Date createdDate;
     private String modifiedBy;
     private Date modifiedDate;
-    private Boolean status;
+    private Status status;
 
     public MinatDTOBuilder() {
     }
@@ -45,7 +46,7 @@ public class MinatDTOBuilder {
         return this;
     }
 
-    public MinatDTOBuilder setStatus(Boolean status) {
+    public MinatDTOBuilder setStatus(Status status) {
         this.status = status;
         return this;
     }

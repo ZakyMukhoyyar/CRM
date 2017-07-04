@@ -6,6 +6,7 @@ import com.agit.crm.domain.crm.Forum;
 import com.agit.crm.domain.crm.ForumBuilder;
 import com.agit.crm.domain.crm.ForumRepository;
 import com.agit.crm.interfaces.web.facade.dto.assembler.crm.ForumDTOAssembler;
+import com.agit.crm.shared.status.Status;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -59,7 +60,7 @@ public class ForumServiceImpl implements ForumService{
                 .setCreatedDate(new Date())
                 .setModifiedBy("modified by")
                 .setModifiedDate(new Date())
-                .setStatus(true)
+                .setStatus(Status.ACTIVE)
                 .createForum();
         return forumDTOAssembler.toDTO(forum);
     }

@@ -1,10 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.agit.crm.common.dto.crm;
 
+import com.agit.crm.shared.status.Status;
 import java.util.Date;
 
 public class KetrampilanDTOBuilder {
@@ -15,7 +11,7 @@ public class KetrampilanDTOBuilder {
     private Date createdDate;
     private String modifiedBy;
     private Date modifiedDate;
-    private Boolean status;
+    private Status status;
 
     public KetrampilanDTOBuilder() {
     }
@@ -50,7 +46,7 @@ public class KetrampilanDTOBuilder {
         return this;
     }
 
-    public KetrampilanDTOBuilder setStatus(Boolean status) {
+    public KetrampilanDTOBuilder setStatus(Status status) {
         this.status = status;
         return this;
     }

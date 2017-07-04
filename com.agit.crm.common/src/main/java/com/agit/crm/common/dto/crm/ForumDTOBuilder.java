@@ -1,5 +1,6 @@
 package com.agit.crm.common.dto.crm;
 
+import com.agit.crm.shared.status.Status;
 import java.util.Date;
 
 
@@ -12,7 +13,7 @@ public class ForumDTOBuilder {
     private Date createdDate;
     private String modifiedBy;
     private Date modifiedDate;
-    private Boolean status;
+    private Status status;
 
     public ForumDTOBuilder() {
     }
@@ -57,7 +58,7 @@ public class ForumDTOBuilder {
         return this;
     }
 
-    public ForumDTOBuilder setStatus(Boolean status) {
+    public ForumDTOBuilder setStatus(Status status) {
         this.status = status;
         return this;
     }

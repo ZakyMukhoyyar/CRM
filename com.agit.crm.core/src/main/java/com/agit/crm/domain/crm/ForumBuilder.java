@@ -1,5 +1,6 @@
 package com.agit.crm.domain.crm;
 
+import com.agit.crm.shared.status.Status;
 import java.util.Date;
 
 
@@ -12,7 +13,7 @@ public class ForumBuilder {
     private Date createdDate;
     private String modifiedBy;
     private Date modifiedDate;
-    private Boolean status;
+    private Status status;
 
     public ForumBuilder() {
     }
@@ -57,7 +58,7 @@ public class ForumBuilder {
         return this;
     }
 
-    public ForumBuilder setStatus(Boolean status) {
+    public ForumBuilder setStatus(Status status) {
         this.status = status;
         return this;
     }

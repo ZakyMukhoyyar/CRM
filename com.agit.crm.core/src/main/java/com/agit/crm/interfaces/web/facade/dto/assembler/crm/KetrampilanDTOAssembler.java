@@ -6,6 +6,7 @@ import com.agit.crm.domain.crm.Ketrampilan;
 import com.agit.crm.domain.crm.KetrampilanBuilder;
 import com.agit.crm.domain.crm.KetrampilanRepository;
 import com.agit.crm.shared.object.IObjectAssembler;
+import com.agit.crm.shared.status.Status;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,6 +36,7 @@ public class KetrampilanDTOAssembler implements IObjectAssembler<Ketrampilan, Ke
                 .setCreatedDate(domainObject.getCreatedDate())
                 .setModifiedBy(domainObject.getModifiedBy())
                 .setModifiedDate(domainObject.getModifiedDate())
+                .setStatus(Status.ACTIVE)
                 .createKetrampilanDTO();
     }
 
@@ -47,6 +49,7 @@ public class KetrampilanDTOAssembler implements IObjectAssembler<Ketrampilan, Ke
                 .setCreatedDate(dtoObject.getCreatedDate())
                 .setModifiedBy(dtoObject.getModifiedBy())
                 .setModifiedDate(dtoObject.getModifiedDate())
+                .setStatus(Status.ACTIVE)
                 .createKetrampilan();
     }
     

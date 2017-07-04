@@ -1,6 +1,7 @@
 package com.agit.crm.domain.crm;
 
 import com.agit.crm.shared.object.EntityObject;
+import com.agit.crm.shared.status.Status;
 import java.util.Date;
 import java.util.Objects;
 
@@ -17,12 +18,12 @@ public class Ketrampilan implements EntityObject<Ketrampilan> {
     private Date createdDate;
     private String modifiedBy;
     private Date modifiedDate;
-    private Boolean status;
+    private Status status;
 
     public Ketrampilan() {
     }
 
-    public Ketrampilan(String idKetrampilan, String namaKetrampilan, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate, Boolean status) {
+    public Ketrampilan(String idKetrampilan, String namaKetrampilan, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate, Status status) {
         this.idKetrampilan = idKetrampilan;
         this.namaKetrampilan = namaKetrampilan;
         this.createdBy = createdBy;
@@ -80,11 +81,11 @@ public class Ketrampilan implements EntityObject<Ketrampilan> {
         this.modifiedDate = modifiedDate;
     }
 
-    public Boolean getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(Boolean status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 

@@ -1,12 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.agit.crm.domain.crm;
 
+import com.agit.crm.shared.status.Status;
 import java.util.Date;
 
+/**
+ *
+ * @author Zaky
+ */
 public class KetrampilanBuilder {
 
     private String idKetrampilan;
@@ -15,7 +15,7 @@ public class KetrampilanBuilder {
     private Date createdDate;
     private String modifiedBy;
     private Date modifiedDate;
-    private Boolean status;
+    private Status status;
 
     public KetrampilanBuilder() {
     }
@@ -50,7 +50,7 @@ public class KetrampilanBuilder {
         return this;
     }
 
-    public KetrampilanBuilder setStatus(Boolean status) {
+    public KetrampilanBuilder setStatus(Status status) {
         this.status = status;
         return this;
     }

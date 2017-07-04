@@ -6,6 +6,7 @@ import com.agit.crm.domain.crm.Minat;
 import com.agit.crm.domain.crm.MinatBuilder;
 import com.agit.crm.domain.crm.MinatRepository;
 import com.agit.crm.interfaces.web.facade.dto.assembler.crm.MinatDTOAssembler;
+import com.agit.crm.shared.status.Status;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -57,7 +58,7 @@ public class MinatServiceImpl implements MinatService {
                 .setCreatedDate(new Date())
                 .setModifiedBy("modified by")
                 .setModifiedDate(new Date())
-                .setStatus(true)
+                .setStatus(Status.ACTIVE)
                 .createMinat();
         return minatDTOAssembler.toDTO(minat);
     }

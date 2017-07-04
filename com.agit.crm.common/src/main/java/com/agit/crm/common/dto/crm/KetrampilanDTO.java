@@ -1,5 +1,6 @@
 package com.agit.crm.common.dto.crm;
 
+import com.agit.crm.shared.status.Status;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -15,12 +16,12 @@ public class KetrampilanDTO implements Serializable{
     private Date createdDate;
     private String modifiedBy;
     private Date modifiedDate;
-    private Boolean status;
+    private Status status;
 
     public KetrampilanDTO() {
     }
 
-    public KetrampilanDTO(String idKetrampilan, String namaKetrampilan, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate, Boolean status) {
+    public KetrampilanDTO(String idKetrampilan, String namaKetrampilan, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate, Status status) {
         this.idKetrampilan = idKetrampilan;
         this.namaKetrampilan = namaKetrampilan;
         this.createdBy = createdBy;
@@ -78,11 +79,11 @@ public class KetrampilanDTO implements Serializable{
         this.modifiedDate = modifiedDate;
     }
 
-    public Boolean getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(Boolean status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 

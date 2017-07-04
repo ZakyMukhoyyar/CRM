@@ -1,5 +1,6 @@
 package com.agit.crm.domain.crm;
 
+import com.agit.crm.shared.status.Status;
 import java.util.Date;
 
 
@@ -10,7 +11,7 @@ public class MinatBuilder {
     private Date createdDate;
     private String modifiedBy;
     private Date modifiedDate;
-    private Boolean status;
+    private Status status;
 
     public MinatBuilder() {
     }
@@ -45,7 +46,7 @@ public class MinatBuilder {
         return this;
     }
 
-    public MinatBuilder setStatus(Boolean status) {
+    public MinatBuilder setStatus(Status status) {
         this.status = status;
         return this;
     }
