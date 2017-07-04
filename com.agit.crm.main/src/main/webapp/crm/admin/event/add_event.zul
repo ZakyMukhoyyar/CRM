@@ -1,5 +1,7 @@
 <zk xmlns="http://www.zkoss.org/2005/zul">
-    <window>
+    <window apply="org.zkoss.bind.BindComposer"
+            viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.admin.EventAgitVM')"
+            form="@id('fx') @load(vm.eventAgitDTO) @save(vm.eventAgitDTO, before='buttonSaveEventAgit')">
         <separator spacing="5px"/>
         <groupbox width="500px" closable="true">
             <caption label="Form Tambah Event" style="font-size:16pt; font-weight: bold"/>
@@ -15,28 +17,37 @@
                         <row>
                             <label value="*) " style="color:red"/>
                             <label value="ID Event" style="font-weight: bold"/>
-                            <textbox width="20%" disabled="true" value="@bind(fx.idUser)" />
+                            <textbox width="20%" disabled="true" value="@bind(fx.idEvent)" />
                         </row>
                         <row>
                             <label value="*) " style="color:red"/>
                             <label value="Nama Event " style="font-weight: bold"/>
-                            <textbox rows="2" width="100%" disabled="false" constraint="no empty : Nama Lowongan Tidak Boleh Kosong"/>
+                            <textbox rows="2" value="@bind(fx.namaEvent)" width="100%" disabled="false" constraint="no empty : Nama Lowongan Tidak Boleh Kosong"/>
                         </row>
                         <row>
                             <label value="*) " style="color:red"/>
                             <label value="Deskripsi " style="font-weight: bold"/>
-                            <textbox rows="7" width="100%" disabled="false" constraint="no empty : Deskripsi Tidak Boleh Kosong"/>
+                            <textbox rows="7" width="100%" disabled="false" value="@bind(fx.deskripsiEvent)" constraint="no empty : Deskripsi Tidak Boleh Kosong"/>
                         </row>
                         <row>
                             <label value="*)" style="color:red"/>
                             <label value="Tanggal Mulai" style="font-weight: bold"/>
-                            <datebox format="dd/MM/yyyy" width="60%" readonly="true" constraint="no empty : Tanggal Mulai Tidak Boleh Kosong"/>
+                            <datebox format="dd/MM/yyyy" width="60%" readonly="true" value="@bind(fx.startDate)" constraint="no empty : Tanggal Mulai Tidak Boleh Kosong"/>
                         </row> 
                         <row>
                             <label value="*)" style="color:red"/>
                             <label value="Tanggal Berakhir" style="font-weight: bold"/>
-                            <datebox format="dd/MM/yyyy" width="60%" readonly="true" constraint="no empty : Tanggal Berakhir Tidak Boleh Kosong"/>
-                        </row>     
+                            <datebox format="dd/MM/yyyy" width="60%" readonly="true" value="@bind(fx.endDate)" constraint="no empty : Tanggal Berakhir Tidak Boleh Kosong"/>
+                        </row> 
+                        <row>
+                            <label value="*)" style="color:red"/>
+                            <label value="Status" style="font-weight: bold"/>
+                            <combobox autodrop="true" readonly="true" width="60%" placeholder="- Pilihan Status -" model="@load(vm.statuses)" selectedItem="@bind(fx.status)">
+                                <template name="model" var="items">
+                                    <comboitem label="@load(items)" value="@load(items)"/>
+                                </template>
+                            </combobox>
+                        </row>          
                              
                     </rows>
                 </grid>
@@ -52,8 +63,8 @@
                             <row>
                                 <label value="*)" style="color:red"/>
                                 <label value="File Attacthment" style="font-weight: bold"/>
-                                <textbox width="100%" readonly="true" value="@bind(vm.mediaNameUploadHeaderImage)"/>
-                                <button label="Upload" upload="true" onUpload="@command('uploadFileHeaderImage')" width="40%">
+                                <textbox width="100%" readonly="true" value="@bind(vm.mediaNameUploadEventAgit)"/>
+                                <button label="Upload" upload="true" onUpload="@command('uploadEventAgit')" width="40%">
                                 </button>
                             </row>  
                         </rows>
@@ -68,8 +79,8 @@
                 
                     <rows>
                         <row>
-                            <button label="Kembali" width="40%" onClick = ""/>
-                            <button label="Save" width="40%" onClick = ""/>
+                            <button label="Kembali" width="40%" onClick = "@command('buttonKembaliEvent')"/>
+                            <button label="Save" width="40%" onClick = "@command('buttonSaveEventAgit')"/>
                         </row>
                     </rows>
                 </grid>

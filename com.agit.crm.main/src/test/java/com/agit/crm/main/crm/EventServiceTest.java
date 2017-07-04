@@ -1,8 +1,8 @@
 package com.agit.crm.main.crm;
 
-import com.agit.crm.common.application.EventService;
-import com.agit.crm.common.dto.crm.EventDTO;
-import com.agit.crm.domain.crm.EventRepository;
+import com.agit.crm.common.application.EventAgitService;
+import com.agit.crm.common.dto.crm.EventAgitDTO;
+import com.agit.crm.domain.crm.EventAgitRepository;
 import java.util.List;
 import static org.activiti.engine.impl.scripting.JuelScriptEngine.print;
 import org.apache.commons.lang.Validate;
@@ -25,34 +25,34 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class EventServiceTest {    
     
     @Autowired
-    private EventRepository eventRepository;
+    private EventAgitRepository eventAgitRepository;
     
     @Autowired
-    private EventService eventService;
+    private EventAgitService eventAgitService;
     
     @Test
     public void testEnd2EndEvent() {
-        Validate.notNull(eventRepository);
+        Validate.notNull(eventAgitRepository);
         /* Header*/
-        print("Data Event Processing");
+        print("Data EventAgit Processing");
 
         /* Incident Record*/
-        EventDTO m = eventService.getDummyData();
+        EventAgitDTO m = eventAgitService.getDummyData();
 
         System.out.println("Incident Record : " + m.toString());
 
-        eventService.SaveOrUpdate(m);
+        eventAgitService.SaveOrUpdate(m);
         System.out.println("Incident Record has been saved succesfully");
 
         System.out.println("");
         System.out.println("Find by ID");
-        EventDTO b = eventService.findByID(m.getIdEvent());
-        System.out.println("Event :" + b.toString());
+        EventAgitDTO b = eventAgitService.findByID(m.getIdEvent());
+        System.out.println("EventAgit :" + b.toString());
 
         System.out.println("");
         System.out.println("Find ALL");
-        List<EventDTO> listEvent = (List<EventDTO>) eventService.findAll();
-        for (EventDTO bt : listEvent) {
+        List<EventAgitDTO> listEventAgit = (List<EventAgitDTO>) eventAgitService.findAll();
+        for (EventAgitDTO bt : listEventAgit) {
             System.out.println("Event :" + bt.toString());
 
         }

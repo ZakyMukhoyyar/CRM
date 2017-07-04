@@ -1,10 +1,10 @@
 package com.agit.crm.interfaces.web.facade.dto.assembler.crm;
 
-import com.agit.crm.common.dto.crm.EventDTO;
-import com.agit.crm.common.dto.crm.EventDTOBuilder;
-import com.agit.crm.domain.crm.Event;
-import com.agit.crm.domain.crm.EventBuilder;
-import com.agit.crm.domain.crm.EventRepository;
+import com.agit.crm.common.dto.crm.EventAgitDTO;
+import com.agit.crm.common.dto.crm.EventAgitDTOBuilder;
+import com.agit.crm.domain.crm.EventAgit;
+import com.agit.crm.domain.crm.EventAgitBuilder;
+import com.agit.crm.domain.crm.EventAgitRepository;
 import com.agit.crm.shared.object.IObjectAssembler;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,22 +13,22 @@ import java.util.List;
  *
  * @author Zaky
  */
-public class EventDTOAssembler implements IObjectAssembler<Event, EventDTO> {
+public class EventAgitDTOAssembler implements IObjectAssembler<EventAgit, EventAgitDTO> {
     
-    private EventRepository eventRepository;
-    private EventDTOAssembler eventDTOAssembler;
+    private EventAgitRepository eventAgitRepository;
+    private EventAgitDTOAssembler eventAgitDTOAssembler;
 
-    public void setEventRepository(EventRepository eventRepository) {
-        this.eventRepository = eventRepository;
+    public void setEventAgitRepository(EventAgitRepository eventAgitRepository) {
+        this.eventAgitRepository = eventAgitRepository;
     }
 
-    public void setEventDTOAssembler(EventDTOAssembler eventDTOAssembler) {
-        this.eventDTOAssembler = eventDTOAssembler;
+    public void setEventAgitDTOAssembler(EventAgitDTOAssembler eventAgitDTOAssembler) {
+        this.eventAgitDTOAssembler = eventAgitDTOAssembler;
     }
 
     @Override
-    public EventDTO toDTO(Event domainObject) {
-        return new EventDTOBuilder()
+    public EventAgitDTO toDTO(EventAgit domainObject) {
+        return new EventAgitDTOBuilder()
                 .setIdEvent(domainObject.getIdEvent())
                 .setNamaEvent(domainObject.getNamaEvent())
                 .setDeskripsiEvent(domainObject.getDeskripsiEvent())
@@ -40,12 +40,12 @@ public class EventDTOAssembler implements IObjectAssembler<Event, EventDTO> {
                 .setModifiedBy(domainObject.getModifiedBy())
                 .setModifiedDate(domainObject.getCreatedDate())
                 .setStatus(domainObject.getStatus())
-                .createEventDTO();
+                .createEventAgitDTO();
     }
 
     @Override
-    public Event toDomain(EventDTO dtoObject) {
-        return new EventBuilder()
+    public EventAgit toDomain(EventAgitDTO dtoObject) {
+        return new EventAgitBuilder()
                 .setIdEvent(dtoObject.getIdEvent())
                 .setNamaEvent(dtoObject.getNamaEvent())
                 .setDeskripsiEvent(dtoObject.getDeskripsiEvent())
@@ -57,20 +57,20 @@ public class EventDTOAssembler implements IObjectAssembler<Event, EventDTO> {
                 .setModifiedBy(dtoObject.getModifiedBy())
                 .setModifiedDate(dtoObject.getCreatedDate())
                 .setStatus(dtoObject.getStatus())
-                .createEvent();
+                .createEventAgit();
     }
     
-    public List<Event> toDomains(List<EventDTO> arg0) {
-        List<Event> res = new ArrayList<>();
-        for (EventDTO t : arg0) {
-            res.add(new EventDTOAssembler().toDomain(t));
+    public List<EventAgit> toDomains(List<EventAgitDTO> arg0) {
+        List<EventAgit> res = new ArrayList<>();
+        for (EventAgitDTO t : arg0) {
+            res.add(new EventAgitDTOAssembler().toDomain(t));
         }
         return res;
     }
 
-    public List<EventDTO> toDTOs(List<Event> arg0) {
-        List<EventDTO> res = new ArrayList<>();
-        for (Event t : arg0) {
+    public List<EventAgitDTO> toDTOs(List<EventAgit> arg0) {
+        List<EventAgitDTO> res = new ArrayList<>();
+        for (EventAgit t : arg0) {
             res.add(this.toDTO(t));
         }
         return res;

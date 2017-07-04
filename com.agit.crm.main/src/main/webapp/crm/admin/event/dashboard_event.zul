@@ -1,5 +1,7 @@
 <zk xmlns="http://www.zkoss.org/2005/zul">
-    <window>
+    <window apply="org.zkoss.bind.BindComposer"
+            viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.admin.EventAgitVM')"
+            form="@id('fx') @load(vm.eventAgitDTO) @save(vm.eventAgitDTO, before='buttonSaveEventAgit')">
         <groupbox closable="false" mold="3d">
             <caption label="Dashboard Event" />
             <groupbox closable="false">
@@ -14,15 +16,15 @@
                     <rows>
                         <row>
                             <label value="ID Event" />
-                            <textbox width="50%" value="@bind(vm.idDataBank)"/>
+                            <textbox width="50%" value="@bind(vm.idEvent)"/>
                             <label value="Tanggal Berakhir" />
-                            <datebox width="50%" value="@bind(vm.noRekening)"/>                            
+                            <datebox width="50%" value="@bind(vm.endDate)"/>                            
                         </row>
                         <row>
                             <label value="Nama Event" />
-                            <textbox width="50%" value="@bind(vm.idDataBank)"/>
+                            <textbox width="50%" value="@bind(vm.namaEvent)"/>
                             <label value="Status" />
-                            <combobox width="50%" placeholder="- Silahkan Pilih -" model="@load(vm.bankTypes)" selectedItem="@bind(vm.namaBank)">
+                            <combobox width="50%" placeholder="- Silahkan Pilih -" model="@load(vm.statuses)" selectedItem="@bind(vm.status)">
                                 <template name="model" var="items">
                                     <comboitem label="@load(items)" value="@load(items)"/>
                                 </template>
@@ -30,9 +32,11 @@
                         </row>
                         <row>
                             <cell></cell>
-                            <cell></cell>
+                            <cell align="right">
+                                <button width="30%" label="Create Event" mold="trendy" onClick="@command('buttonNewEvent')"/>
+                            </cell>
                             <cell align="left">
-                                <button width="60%" label="Pencarian" mold="trendy" onClick="@command('searchDataBank')"/>
+                                <button width="80%" label="Pencarian" mold="trendy" onClick="@command('searchEvent')"/>
                                 
                             </cell>
                             <cell colspan="2"></cell> 
@@ -43,35 +47,35 @@
             </groupbox>
             <groupbox closable="false">
                 <paging forward="onPaging" />
-                <listbox rows="@load(vm.pageSize)" mold="paging" pageSize="@load(vm.pageSize)" emptyMessage="${labels.common.noDataFound}">
+                <listbox rows="@load(vm.pageSize)" mold="paging" pageSize="@load(vm.pageSize)" emptyMessage="${labels.common.noDataFound}"  model="@bind(vm.eventAgitDTOs)">
                     <listhead>
-                        <listheader label="ID Event" width="5%" align="center" sortDirection="ascending" sort="auto(idDataBank)"/>
+                        <listheader label="ID Event" width="5%" align="center" sortDirection="ascending" sort="auto(idEvent)"/>
                         <listheader label="Nama Event" width="20%" align="center"/>
                         <listheader label="Tanggal Mulai" width="14%" align="center"/>
                         <listheader label="Tanggal Berakhir" width="14%" align="center"/>
-                        <listheader label="Fungsi Pekerjaan" width="14%" align="center"/>
+                        <!--                        <listheader label="Deskripsi" width="14%" align="center"/>-->
                         <listheader label="Status" width="14%" align="center"/>
                         <listheader label="Aksi" width="10%" align="center"/>
                     </listhead>
                     <template name="model">
                         <listitem value="${each}">
                             <listcell>
-                                <label width="100%"/>
+                                <label width="100%" value="@bind(each.idEvent)" />
                             </listcell>
                             <listcell>
-                                <label width="100%"/>
+                                <label width="100%" value="@bind(each.namaEvent)"/>
                             </listcell>
                             <listcell>
-                                <label width="100%"/>
+                                <label width="100%" value="@bind(each.startDate)"/>
                             </listcell>
                             <listcell>
-                                <label width="100%"/>
+                                <label width="100%" value="@bind(each.endDate)"/>
                             </listcell>
                             <listcell>
-                                <label width="100%"/>
+                                <label width="100%" value="@bind(each.status)"/>
                             </listcell>
                             <listcell>
-                                <a label="Detail" style="text-decoration:underline ;color:blue" onClick="@command('detailDataBank', object=each)"></a>
+                                <a label="Detail" style="text-decoration:underline ;color:blue" onClick="@command('detailEventAgit', object=each)"></a>
                                 <!--                                <a label=" | " style="font-size:12pt ;color:black"></a>
                                 <a label="Delete" style="text-decoration:underline ;color:blue" onClick="@command('deleteDataBank', object=each)"></a>-->
                             </listcell>

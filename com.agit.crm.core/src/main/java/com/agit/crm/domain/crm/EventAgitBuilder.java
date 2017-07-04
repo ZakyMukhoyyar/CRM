@@ -1,10 +1,15 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.agit.crm.domain.crm;
 
 import com.agit.crm.shared.status.Status;
 import java.util.Date;
 
+public class EventAgitBuilder {
 
-public class EventBuilder {
     private String idEvent;
     private String namaEvent;
     private String deskripsiEvent;
@@ -17,66 +22,66 @@ public class EventBuilder {
     private Date modifiedDate;
     private Status status;
 
-    public EventBuilder() {
+    public EventAgitBuilder() {
     }
 
-    public EventBuilder setIdEvent(String idEvent) {
+    public EventAgitBuilder setIdEvent(String idEvent) {
         this.idEvent = idEvent;
         return this;
     }
 
-    public EventBuilder setNamaEvent(String namaEvent) {
+    public EventAgitBuilder setNamaEvent(String namaEvent) {
         this.namaEvent = namaEvent;
         return this;
     }
 
-    public EventBuilder setDeskripsiEvent(String deskripsiEvent) {
+    public EventAgitBuilder setDeskripsiEvent(String deskripsiEvent) {
         this.deskripsiEvent = deskripsiEvent;
         return this;
     }
 
-    public EventBuilder setStartDate(Date startDate) {
+    public EventAgitBuilder setStartDate(Date startDate) {
         this.startDate = startDate;
         return this;
     }
 
-    public EventBuilder setEndDate(Date endDate) {
+    public EventAgitBuilder setEndDate(Date endDate) {
         this.endDate = endDate;
         return this;
     }
 
-    public EventBuilder setAttachment(String attachment) {
+    public EventAgitBuilder setAttachment(String attachment) {
         this.attachment = attachment;
         return this;
     }
 
-    public EventBuilder setCreatedBy(String createdBy) {
+    public EventAgitBuilder setCreatedBy(String createdBy) {
         this.createdBy = createdBy;
         return this;
     }
 
-    public EventBuilder setCreatedDate(Date createdDate) {
+    public EventAgitBuilder setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
         return this;
     }
 
-    public EventBuilder setModifiedBy(String modifiedBy) {
+    public EventAgitBuilder setModifiedBy(String modifiedBy) {
         this.modifiedBy = modifiedBy;
         return this;
     }
 
-    public EventBuilder setModifiedDate(Date modifiedDate) {
+    public EventAgitBuilder setModifiedDate(Date modifiedDate) {
         this.modifiedDate = modifiedDate;
         return this;
     }
 
-    public EventBuilder setStatus(Status status) {
+    public EventAgitBuilder setStatus(Status status) {
         this.status = status;
         return this;
     }
 
-    public Event createEvent() {
-        return new Event(idEvent, namaEvent, deskripsiEvent, startDate, endDate, attachment, createdBy, createdDate, modifiedBy, modifiedDate, status);
+    public EventAgit createEventAgit() {
+        return new EventAgit(idEvent, namaEvent, deskripsiEvent, startDate, endDate, attachment, createdBy, createdDate, modifiedBy, modifiedDate, status);
     }
-    
+
 }

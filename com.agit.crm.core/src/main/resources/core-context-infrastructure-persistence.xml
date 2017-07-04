@@ -23,7 +23,7 @@
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
     
-    <bean id="eventRepository" class="com.agit.crm.domain.infrastructure.persistance.hibernate.EventHibernateRepository">
+    <bean id="eventAgitRepository" class="com.agit.crm.domain.infrastructure.persistance.hibernate.EventAgitHibernateRepository">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
     

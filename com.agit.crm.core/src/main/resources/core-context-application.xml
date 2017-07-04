@@ -29,11 +29,11 @@
         <property name="forumDTOAssembler" ref="forumDTOAssembler"/>
     </bean>
     
-    <bean id="eventDTOAssembler" class="com.agit.crm.interfaces.web.facade.dto.assembler.crm.EventDTOAssembler">
+    <bean id="eventAgitDTOAssembler" class="com.agit.crm.interfaces.web.facade.dto.assembler.crm.EventAgitDTOAssembler">
     </bean>
-    <bean id="eventService" class="com.agit.crm.application.impl.EventServiceImpl">
-        <property name="eventRepository" ref="eventRepository"/>
-        <property name="eventDTOAssembler" ref="eventDTOAssembler"/>
+    <bean id="eventAgitService" class="com.agit.crm.application.impl.EventAgitServiceImpl">
+        <property name="eventAgitRepository" ref="eventAgitRepository"/>
+        <property name="eventAgitDTOAssembler" ref="eventAgitDTOAssembler"/>
     </bean>
     
     <bean id="minatDTOAssembler" class="com.agit.crm.interfaces.web.facade.dto.assembler.crm.MinatDTOAssembler"></bean>

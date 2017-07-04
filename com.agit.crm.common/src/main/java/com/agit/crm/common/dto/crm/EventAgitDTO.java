@@ -1,17 +1,15 @@
-package com.agit.crm.domain.crm;
+package com.agit.crm.common.dto.crm;
 
-import com.agit.crm.shared.object.EntityObject;
 import com.agit.crm.shared.status.Status;
+import java.io.Serializable;
 import java.util.Date;
-import java.util.Objects;
 
 /**
  *
  * @author Zaky
  */
-public class Event implements EntityObject<Event> {
+public class EventAgitDTO implements Serializable {
 
-    long id;
     private String idEvent;
     private String namaEvent;
     private String deskripsiEvent;
@@ -24,10 +22,10 @@ public class Event implements EntityObject<Event> {
     private Date modifiedDate;
     private Status status;
 
-    public Event() {
+    public EventAgitDTO() {
     }
 
-    public Event(String idEvent, String namaEvent, String deskripsiEvent, Date startDate, Date endDate, String attachment, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate, Status status) {
+    public EventAgitDTO(String idEvent, String namaEvent, String deskripsiEvent, Date startDate, Date endDate, String attachment, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate, Status status) {
         this.idEvent = idEvent;
         this.namaEvent = namaEvent;
         this.deskripsiEvent = deskripsiEvent;
@@ -130,54 +128,8 @@ public class Event implements EntityObject<Event> {
     }
 
     @Override
-    public int hashCode() {
-        int hash = 5;
-        hash = 97 * hash + Objects.hashCode(this.idEvent);
-        hash = 97 * hash + Objects.hashCode(this.namaEvent);
-        hash = 97 * hash + Objects.hashCode(this.deskripsiEvent);
-        hash = 97 * hash + Objects.hashCode(this.startDate);
-        hash = 97 * hash + Objects.hashCode(this.endDate);
-        hash = 97 * hash + Objects.hashCode(this.attachment);
-        hash = 97 * hash + Objects.hashCode(this.createdBy);
-        hash = 97 * hash + Objects.hashCode(this.createdDate);
-        hash = 97 * hash + Objects.hashCode(this.modifiedBy);
-        hash = 97 * hash + Objects.hashCode(this.modifiedDate);
-        hash = 97 * hash + Objects.hashCode(this.status);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Event other = (Event) obj;
-        if (this.id != other.id) {
-            return false;
-        }
-        return true;
-    }
-    
-    public void assignNewEvent(Event event){
-        this.idEvent = event.idEvent;
-        this.namaEvent = event.namaEvent;
-        this.deskripsiEvent = event.deskripsiEvent;
-        this.startDate = event.startDate;
-        this.endDate = event.endDate;
-        this.attachment = event.attachment;
-        this.createdBy = event.createdBy;
-        this.createdDate = event.createdDate;
-        this.modifiedBy = event.modifiedBy;
-        this.modifiedDate = event.modifiedDate;
-        this.status = event.status;
-    }
-
-    @Override
-    public boolean sameIdentityAs(Event other) {
-        return this.equals(other);
+    public String toString() {
+        return "EventAgitDTO{" + "idEvent=" + idEvent + ", namaEvent=" + namaEvent + ", deskripsiEvent=" + deskripsiEvent + ", startDate=" + startDate + ", endDate=" + endDate + ", attachment=" + attachment + ", createdBy=" + createdBy + ", createdDate=" + createdDate + ", modifiedBy=" + modifiedBy + ", modifiedDate=" + modifiedDate + ", status=" + status + '}';
     }
 
 }
