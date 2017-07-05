@@ -4,6 +4,7 @@ import com.agit.crm.common.application.KetrampilanService;
 import com.agit.crm.common.dto.crm.KetrampilanDTO;
 import com.agit.crm.common.dto.crm.KetrampilanDTOBuilder;
 import com.agit.crm.common.security.SecurityUtil;
+import com.agit.crm.shared.status.Status;
 import com.agit.crm.shared.zul.CommonViewModel;
 import static com.agit.crm.shared.zul.CommonViewModel.showInformationMessagebox;
 import com.agit.crm.shared.zul.PageNavigation;
@@ -44,11 +45,12 @@ public class KetrampilanVM {
     /* Parameter Filter */
     private String idKetrampilan;
     private String namaKetrampilan;
-    private Boolean status;
+    private Status status;
+    private ListModelList<Status> listStatus;
 
     private PageNavigation previous;
     private boolean checked;
-    private int pageSize = 5;
+    private int pageSize = 7;
     private int activePage = 0;
     private int selectedIndex;
     private int totalSize = 0;
@@ -210,11 +212,11 @@ public class KetrampilanVM {
         this.namaKetrampilan = namaKetrampilan;
     }
 
-    public Boolean getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(Boolean status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 
@@ -272,6 +274,14 @@ public class KetrampilanVM {
 
     public void setSelectedIndex(int selectedIndex) {
         this.selectedIndex = selectedIndex;
+    }
+
+    public ListModelList<Status> getListStatus() {
+        return new ListModelList<>(Status.values());
+    }
+
+    public void setListStatus(ListModelList<Status> listStatus) {
+        this.listStatus = listStatus;
     }
 
 }

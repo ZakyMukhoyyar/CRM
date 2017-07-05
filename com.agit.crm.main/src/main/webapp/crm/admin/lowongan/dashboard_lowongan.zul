@@ -48,9 +48,9 @@
             </groupbox>
             <groupbox closable="false">
                 <paging forward="onPaging" />
-                <listbox rows="@load(vm.pageSize)" pageSize="@load(vm.pageSize)" mold="paging" emptyMessage="${labels.common.noDataFound}" model="@bind(vm.lowonganDTOs)">
+                <listbox rows="@load(vm.pageSizeCreateLowongan)" pageSize="@load(vm.pageSizeCreateLowongan)" mold="paging" emptyMessage="${labels.common.noDataFound}" model="@bind(vm.lowonganDTOs)">
                     <listhead>
-                        <listheader label="ID Lowongan" width="10%" align="center" sortDirection="ascending"/>
+                        <listheader label="ID Lowongan" width="10%" align="center" sortDirection="ascending" sort="auto(idLowongan)"/>
                         <listheader label="Nama Lowongan" width="20%" align="center"/>
                         <listheader label="Tanggal Mulai" width="14%" align="center"/>
                         <listheader label="Tanggal Berakhir" width="14%" align="center"/>

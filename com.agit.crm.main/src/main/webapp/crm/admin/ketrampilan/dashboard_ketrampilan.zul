@@ -22,12 +22,11 @@
                         </row>
                         <row>
                             <label value="Status" />
-                            <combobox width="50%" placeholder="- Silahkan Pilih -" model="@load(vm.status)" selectedItem="@bind(vm.status)">
+                            <combobox autodrop="true" model="@load(vm.listStatus)" selectedItem="@bind(fx.status)" readonly="true" width="50%" placeholder="- Pilihan Status -">
                                 <template name="model" var="items">
                                     <comboitem label="@load(items)" value="@load(items)"/>
                                 </template>
                             </combobox>
-                            
                         </row>
                         
                     </rows>
@@ -58,7 +57,6 @@
                 </grid>
             </groupbox>
             <groupbox closable="false">
-                <paging forward="onPaging" />
                 <listbox rows="@load(vm.pageSize)" mold="paging" pageSize="@load(vm.pageSize)" emptyMessage="${labels.common.noDataFound}" model="@bind(vm.ketrampilanDTOs)">
                     <listhead>
                         <listheader label="ID Ketrampilan" width="10%" align="center" sortDirection="ascending" sort="auto(idKetrampilan)"/>

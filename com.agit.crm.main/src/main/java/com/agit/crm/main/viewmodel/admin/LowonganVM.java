@@ -61,7 +61,8 @@ public class LowonganVM {
 
     private PageNavigation previous;
     private boolean checked;
-    private int pageSize = 7;
+    private int pageSize = 2;
+    private int pageSizeCreateLowongan = 7;
     private int activePage = 0;
     private int selectedIndex;
     private int totalSize = 0;
@@ -350,6 +351,14 @@ public class LowonganVM {
 
     public void setMinats(List<MinatDTO> minats) {
         this.minats = minats;
+    }
+
+    public int getPageSizeCreateLowongan() {
+        return pageSizeCreateLowongan;
+    }
+
+    public void setPageSizeCreateLowongan(int pageSizeCreateLowongan) {
+        this.pageSizeCreateLowongan = pageSizeCreateLowongan;
     }
 
 }
