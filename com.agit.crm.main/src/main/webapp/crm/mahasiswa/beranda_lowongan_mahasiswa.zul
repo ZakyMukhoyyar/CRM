@@ -5,7 +5,6 @@
             form="@id('fx') @load(vm.lowonganDTO) @save(vm.lowonganDTO, before='buttonSaveLowongan')">
         <style>
             .labelstyle {
-            font-weight: bold;
             font-family: 'Kristen ITC';
             color: black
             }
