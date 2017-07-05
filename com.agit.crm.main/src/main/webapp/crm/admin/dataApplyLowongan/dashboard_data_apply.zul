@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <zk xmlns="http://www.zkoss.org/2005/zul">
     <window>
         <groupbox closable="false" mold="3d">
-            <caption label="Dashboard Data Register Mahasiswa" />
+            <caption label="Dashboard Data Apply Lowongan" />
             <groupbox closable="false">
                 <caption label="Parameter Pencarian" />
                 <grid style="border:0">
@@ -34,8 +33,7 @@
                             <cell></cell>
                             <cell></cell>
                             <cell align="left">
-                                <button width="60%" label="Pencarian" mold="trendy" onClick="@command('searchDataBank')"/>
-                                
+                                <button width="60%" label="Pencarian" mold="trendy"/>
                             </cell>
                             <cell colspan="2"></cell> 
                         </row>
@@ -73,7 +71,9 @@
                                 <label width="100%"/>
                             </listcell>
                             <listcell>
-                                <a label="Detail" style="text-decoration:underline ;color:blue" onClick="@command('detailDataBank', object=each)"></a>
+                                <a label="Detail" style="text-decoration:underline ;color:blue"></a>
+                                <a label=" | " style="font-size:12pt ;color:black"></a>
+                                <checkbox id="l" label="Approve"/>
                             </listcell>
                         </listitem>
                     </template>

@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zk xmlns="http://www.zkoss.org/2005/zul">
-    <window>
+    <window border="30" apply="org.zkoss.bind.BindComposer"
+            viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.admin.LowonganVM')"
+            form="@id('fx') @load(vm.lowonganDTO) @save(vm.lowonganDTO, before='buttonSaveLowongan')">
         <groupbox closable="false">
             <caption label="Parameter Pencarian" />
             <grid style="border:0">
@@ -13,11 +15,11 @@
                 <rows>
                     <row>
                         <label value="Tanggal Mulai" />
-                        <datebox width="60%"/>  
+                        <datebox width="70%"/>  
                         <label value="Tanggal Berakhir" />
-                        <datebox width="60%"/>    
+                        <datebox width="70%"/>    
                         <label value="Gaji" />
-                        <combobox width="60%" placeholder="- Silahkan Pilih -">
+                        <combobox width="70%" placeholder="- Silahkan Pilih -">
                             <template name="model" var="items">
                                 <comboitem label="@load(items)" value="@load(items)"/>
                             </template>
@@ -25,9 +27,9 @@
                     </row>
                     <row>
                         <label value="Nama Lowongan" />
-                        <textbox width="60%"/>
+                        <textbox width="70%"/>
                         <label value="Jenis Pekerjaan" />
-                        <combobox width="60%" placeholder="- Silahkan Pilih -" readonly="true">
+                        <combobox width="70%" placeholder="- Silahkan Pilih -" readonly="true">
                             <template name="model" var="items">
                                 <comboitem label="@load(items)" value="@load(items)"/>
                             </template>
@@ -35,13 +37,13 @@
                     </row>
                     <row>
                         <label value="Gaji" />
-                        <combobox width="60%" placeholder="- Silahkan Pilih -" readonly="true">
+                        <combobox width="70%" model="@load(vm.gaji)" selectedItem="@bind(fx.gaji)" readonly="true" placeholder="- Silahkan Pilih -" constraint="no empty : Pendidikan Terakhir Tidak Boleh Kosong">
                             <template name="model" var="items">
                                 <comboitem label="@load(items)" value="@load(items)"/>
                             </template>
                         </combobox>
                         <label value="Status" />
-                        <combobox width="60%" placeholder="- Silahkan Pilih -" readonly="true">
+                        <combobox width="70%" placeholder="- Silahkan Pilih -" readonly="true">
                             <template name="model" var="items">
                                 <comboitem label="@load(items)" value="@load(items)"/>
                             </template>
