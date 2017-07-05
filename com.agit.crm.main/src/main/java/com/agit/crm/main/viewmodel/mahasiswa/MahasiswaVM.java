@@ -3,11 +3,13 @@ package com.agit.crm.main.viewmodel.mahasiswa;
 import com.agit.crm.common.application.KetrampilanService;
 import com.agit.crm.common.application.LowonganService;
 import com.agit.crm.common.application.MahasiswaService;
+import com.agit.crm.common.application.MinatService;
 import com.agit.crm.common.dto.crm.KetrampilanDTO;
 import com.agit.crm.common.dto.crm.LowonganDTO;
 import com.agit.crm.common.dto.crm.LowonganDTOBuilder;
 import com.agit.crm.common.dto.crm.MahasiswaDTO;
 import com.agit.crm.common.dto.crm.MahasiswaDTOBuilder;
+import com.agit.crm.common.dto.crm.MinatDTO;
 import com.agit.crm.common.security.SecurityUtil;
 import com.agit.crm.shared.type.JenisKelaminType;
 import com.agit.crm.shared.type.PendidikanType;
@@ -63,6 +65,9 @@ public class MahasiswaVM extends SelectorComposer<Window> {
     @WireVariable
     KetrampilanService ketrampilanService;
 
+    @WireVariable
+    MinatService minatService;
+
     /* Object Binding for Form CRM */
     private MahasiswaDTO mahasiswaDTO = new MahasiswaDTO();
     private List<MahasiswaDTO> mahasiswaDTOs = new ArrayList();
@@ -75,6 +80,10 @@ public class MahasiswaVM extends SelectorComposer<Window> {
     /* Paramater Objek Mahasiswa */
     private String idMahasiswa;
     private String idLowongan;
+    private String namaLengkap;
+    private String noKTP;
+    private String domisili;
+    private MinatDTO minatSelect;
 
     /* Function For Combobox  */
     private ListModelList<PendidikanType> pendidikanTypes;
@@ -85,7 +94,7 @@ public class MahasiswaVM extends SelectorComposer<Window> {
     private ListModelList<TingkatanType> tingkatanTypes4;
     private ListModelList<TingkatanType> tingkatanTypes5;
     private List<KetrampilanDTO> ketrampilans = new ArrayList<KetrampilanDTO>();
-
+    private List<MinatDTO> minats = new ArrayList<MinatDTO>();
 
     /* attribut for upload file CV */
     Media mediaUploadCV;
@@ -117,6 +126,7 @@ public class MahasiswaVM extends SelectorComposer<Window> {
         }
 
         ketrampilans = ketrampilanService.findAll();
+        minats = minatService.findAll();
 
     }
 
@@ -271,6 +281,27 @@ public class MahasiswaVM extends SelectorComposer<Window> {
         mahasiswaDTOs = mahasiswaService.findAll();
     }
 
+    /*--------------------------- Admin Register Mahasiswa ----------------------- */
+    @Command("searchRegMahasiswa")
+    @NotifyChange("mahasiswaDTOs")
+    public void searchRegMahasiswa(@ContextParam(ContextType.VIEW) Window window) {
+        Map params = new HashMap();
+        params.put("namaLengkap", namaLengkap);
+        params.put("noKTP", noKTP);
+        params.put("domisili", domisili);
+        params.put("minatSelect", minatSelect.getNamaMinat());
+
+        mahasiswaDTOs = mahasiswaService.findByParams(params);
+    }
+
+    @Command("detailRegMahasiswa")
+    @NotifyChange("mahasiswa")
+    public void detailRegMahasiswa(@BindingParam("object") MahasiswaDTO obj, @ContextParam(ContextType.VIEW) Window window) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("mahasiswaDTO", obj);
+        CommonViewModel.navigateToWithoutDetach("/crm/mahasiswa/registrasi_mahasiswa.zul", window, params);
+    }
+
     public MahasiswaDTO getMahasiswaDTO() {
         return mahasiswaDTO;
     }
@@ -421,6 +452,46 @@ public class MahasiswaVM extends SelectorComposer<Window> {
 
     public void setTingkatanTypes5(ListModelList<TingkatanType> tingkatanTypes5) {
         this.tingkatanTypes5 = tingkatanTypes5;
+    }
+
+    public String getNamaLengkap() {
+        return namaLengkap;
+    }
+
+    public void setNamaLengkap(String namaLengkap) {
+        this.namaLengkap = namaLengkap;
+    }
+
+    public String getNoKTP() {
+        return noKTP;
+    }
+
+    public void setNoKTP(String noKTP) {
+        this.noKTP = noKTP;
+    }
+
+    public String getDomisili() {
+        return domisili;
+    }
+
+    public void setDomisili(String domisili) {
+        this.domisili = domisili;
+    }
+
+    public MinatDTO getMinatSelect() {
+        return minatSelect;
+    }
+
+    public void setMinatSelect(MinatDTO minatSelect) {
+        this.minatSelect = minatSelect;
+    }
+
+    public List<MinatDTO> getMinats() {
+        return minats;
+    }
+
+    public void setMinats(List<MinatDTO> minats) {
+        this.minats = minats;
     }
 
 }

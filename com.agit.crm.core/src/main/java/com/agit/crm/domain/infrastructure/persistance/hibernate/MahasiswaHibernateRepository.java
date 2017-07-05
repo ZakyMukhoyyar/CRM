@@ -46,8 +46,17 @@ public class MahasiswaHibernateRepository extends HibernateRepository implements
         if (StringUtil.hasValue(map.get("idMahasiswa"))) {
             criteria.add(Restrictions.eq("idMahasiswa", map.get("idMahasiswa")));
         }
-        if (StringUtil.hasValue(map.get("namaMahasiswa"))) {
-            criteria.add(Restrictions.like("namaMahasiswa", "%" + map.get("namaMahasiswa") + "%").ignoreCase());
+        if (StringUtil.hasValue(map.get("namaLengkap"))) {
+            criteria.add(Restrictions.like("namaLengkap", "%" + map.get("namaLengkap") + "%").ignoreCase());
+        }
+        if (StringUtil.hasValue(map.get("noKTP"))) {
+            criteria.add(Restrictions.like("noKTP", "%" + map.get("noKTP") + "%").ignoreCase());
+        }
+        if (StringUtil.hasValue(map.get("domisili"))) {
+            criteria.add(Restrictions.like("domisili", "%" + map.get("domisili") + "%").ignoreCase());
+        }
+        if (StringUtil.hasValue(map.get("minatSelect"))) {
+            criteria.add(Restrictions.eq("minat", map.get("minatSelect")));
         }
 
         return criteria.list();

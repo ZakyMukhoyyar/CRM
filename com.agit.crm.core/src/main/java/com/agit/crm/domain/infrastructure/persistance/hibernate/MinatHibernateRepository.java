@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Repository
 @Transactional
-public class MinatHibernateRepository extends HibernateRepository implements MinatRepository{
+public class MinatHibernateRepository extends HibernateRepository implements MinatRepository {
 
     @Override
     public void saveOrUpdate(Minat minat) {
@@ -49,13 +49,16 @@ public class MinatHibernateRepository extends HibernateRepository implements Min
     @Override
     public List<Minat> findByParams(Map map) {
         Criteria criteria = getSession().createCriteria(Minat.class);
-        if(StringUtil.hasValue(map.get("idMinat"))){
+        if (StringUtil.hasValue(map.get("idMinat"))) {
             criteria.add(Restrictions.eq("idMinat", map.get("idMinat")));
         }
-        if(StringUtil.hasValue(map.get("idMinat"))){
-            criteria.add(Restrictions.like("namaMinat", "%" +map.get("namaMinat")+ "%" ).ignoreCase());
+        if (StringUtil.hasValue(map.get("namaMinat"))) {
+            criteria.add(Restrictions.like("namaMinat", "%" + map.get("namaMinat") + "%").ignoreCase());
+        }
+        if (StringUtil.hasValue(map.get("status"))) {
+            criteria.add(Restrictions.eq("status", map.get("status")));
         }
         return criteria.list();
     }
-    
+
 }

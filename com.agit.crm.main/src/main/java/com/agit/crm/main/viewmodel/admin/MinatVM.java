@@ -4,6 +4,7 @@ import com.agit.crm.common.application.MinatService;
 import com.agit.crm.common.dto.crm.MinatDTO;
 import com.agit.crm.common.dto.crm.MinatDTOBuilder;
 import com.agit.crm.common.security.SecurityUtil;
+import com.agit.crm.shared.status.Status;
 import com.agit.crm.shared.zul.CommonViewModel;
 import static com.agit.crm.shared.zul.CommonViewModel.showInformationMessagebox;
 import com.agit.crm.shared.zul.PageNavigation;
@@ -42,7 +43,9 @@ public class MinatVM {
     /* Parameter Filter */
     private String idMinat;
     private String namaMinat;
-    private Boolean status;
+    private Status status;
+
+    private ListModelList<Status> listStatus;
 
     private PageNavigation previous;
     private int pageSize = 5;
@@ -54,14 +57,14 @@ public class MinatVM {
         initData();
         checkValidity(minat, previous);
     }
-    
-    private void initData(){
+
+    private void initData() {
         minatDTOs = minatService.findAll();
-        if(minatDTOs.isEmpty()){
+        if (minatDTOs.isEmpty()) {
             minatDTOs = Collections.emptyList();
         }
     }
-    
+
     private void checkValidity(MinatDTO minat, PageNavigation previous) {
         if (minat == null) {
             ListModelList<MinatDTO> parameterList = new ListModelList<>(minatService.findAll());
@@ -82,7 +85,7 @@ public class MinatVM {
             this.previous = previous;
         }
     }
-    
+
     protected String getLatestObjectID(ListModelList list, String attribute) {
         int count = 0;
         int pointer = 0;
@@ -126,30 +129,32 @@ public class MinatVM {
         }
         return s + String.format("%0" + count + "d", max + 1);
     }
-    
+
     @GlobalCommand
     @NotifyChange("minatDTOs")
-    public void refreshMinat(){
+    public void refreshMinat() {
         minatDTOs = minatService.findAll();
     }
-    
+
     @Command("buttonNewMinat")
     @NotifyChange("minatDTO")
-    public void buttonNewMinat(@BindingParam("object") MinatDTO obj, @ContextParam(ContextType.VIEW) Window window){
+    public void buttonNewMinat(@BindingParam("object") MinatDTO obj, @ContextParam(ContextType.VIEW) Window window) {
         Map<String, Object> params = new HashMap<>();
         params.put("minatDTO", obj);
         CommonViewModel.navigateToWithoutDetach("/crm/admin/minat/add_minat.zul", window, params);
     }
-    
+
     @Command("searchMinat")
     @NotifyChange("minatDTOs")
-    public void searchMinat(@ContextParam(ContextType.VIEW) Window window){
+    public void searchMinat(@ContextParam(ContextType.VIEW) Window window) {
         Map params = new HashMap();
         params.put("idMinat", idMinat);
         params.put("namaMinat", namaMinat);
         params.put("status", status);
+
+        minatDTOs = minatService.findByParams(params);
     }
-    
+
     @Command("detailMinat")
     @NotifyChange("minatDTO")
     public void detailMinat(@BindingParam("object") MinatDTO obj, @ContextParam(ContextType.VIEW) Window window) {
@@ -157,13 +162,13 @@ public class MinatVM {
         params.put("minatDTO", obj);
         CommonViewModel.navigateToWithoutDetach("/crm/admin/minat/add_minat.zul", window, params);
     }
-    
+
     @Command("buttonKembaliMinat")
     @NotifyChange("minatDTO")
     public void buttonKembaliMinat(@BindingParam("object") MinatDTO obj, @ContextParam(ContextType.VIEW) Window window) {
         window.detach();
     }
-    
+
     @Command("buttonSaveMinat")
     @NotifyChange({"minatDTO", "minatDTOs"})
     public void buttonSaveMinat(@BindingParam("object") MinatDTO obj, @ContextParam(ContextType.VIEW) Window window) {
@@ -171,9 +176,8 @@ public class MinatVM {
         showInformationMessagebox("Data Minat Berhasil Disimpan");
         BindUtils.postGlobalCommand(null, null, "refreshMinat", null);
         window.detach();
-    }    
-    
-    
+    }
+
     /* getter setter */
     public MinatService getMinatService() {
         return minatService;
@@ -215,12 +219,20 @@ public class MinatVM {
         this.namaMinat = namaMinat;
     }
 
-    public Boolean getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(Boolean status) {
+    public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public ListModelList<Status> getListStatus() {
+        return new ListModelList<>(Status.values());
+    }
+
+    public void setListStatus(ListModelList<Status> listStatus) {
+        this.listStatus = listStatus;
     }
 
     public PageNavigation getPrevious() {

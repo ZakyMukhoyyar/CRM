@@ -7,7 +7,7 @@
             form="@id('fx') @load(vm.mahasiswaDTO) @save(vm.mahasiswaDTO, before='buttonSaveMahasiswa')">
         <separator spacing="5px"/>
         <groupbox width="700px" closable="true">
-<!--            <caption label="Form Data Mahasiswa" style="font-size:16pt; font-weight: bold"/>-->
+            <!--            <caption label="Form Data Mahasiswa" style="font-size:16pt; font-weight: bold"/>-->
             <!--            <groupbox >
                 <caption label="Data Login" style="font-size:12pt; font-weight: bold"/>
                 <grid style="border:0">
@@ -107,9 +107,9 @@
                         </row>
                         <row>
                             <signLabel value="Minat" style="font-weight: bold"/>
-                            <combobox autodrop="true" readonly="true" width="100%" placeholder="- Pilihan Minat -">
+                            <combobox width="100%" placeholder="- Silahkan Pilih -" model="@load(vm.minats)" selectedItem="@bind(vm.minatSelect)">
                                 <template name="model" var="items">
-                                    <comboitem label="@load(items)" value="@load(items)"/>
+                                    <comboitem label="@load(items.getNamaMinat())" value="@load(items.getNamaMinat())"/>
                                 </template>
                             </combobox>
                         </row>

@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zk xmlns="http://www.zkoss.org/2005/zul">
-    <window>
+    <window apply="org.zkoss.bind.BindComposer"
+            viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.mahasiswa.MahasiswaVM')"
+            form="@id('fx') @load(vm.mahasiswaDTO) @save(vm.mahasiswaDTO, before='buttonSaveMahasiswa')">
         <groupbox closable="false" mold="3d">
             <caption label="Dashboard Data Register Mahasiswa" />
             <groupbox closable="false">
@@ -15,25 +17,25 @@
                     <rows>
                         <row>
                             <label value="Nama Lengkap" />
-                            <textbox width="60%"/>
+                            <textbox width="60%" value="@bind(vm.namaLengkap)"/>
                             <label value="KTP" />
-                            <textbox width="60%"/>                        
+                            <textbox width="60%" value="@bind(vm.noKTP)"/>                        
                         </row>
                         <row>
                             <label value="Domisili" />
-                            <textbox width="60%"/>
+                            <textbox width="60%"  value="@bind(vm.domisili)"/>
                             <label value="Minat Pekerjaan" />
-                            <combobox width="60%" placeholder="- Silahkan Pilih -">
+                            <combobox width="60%" placeholder="- Silahkan Pilih -" model="@load(vm.minats)" selectedItem="@bind(vm.minatSelect)">
                                 <template name="model" var="items">
-                                    <comboitem label="@load(items)" value="@load(items)"/>
+                                    <comboitem label="@load(items.getNamaMinat())" value="@load(items.getNamaMinat())"/>
                                 </template>
                             </combobox>
                         </row>
                         <row>
                             <cell></cell>
                             <cell></cell>
-                            <cell align="left">
-                                <button width="60%" label="Pencarian" mold="trendy"/>
+                            <cell>
+                                <button width="80%"  label="Pencarian" mold="trendy" onClick="@command('searchRegMahasiswa')"/>
                             </cell>
                             <cell colspan="2"></cell> 
                         </row>
@@ -43,9 +45,9 @@
             </groupbox>
             <groupbox closable="false">
                 <paging forward="onPaging" />
-                <listbox mold="paging" emptyMessage="${labels.common.noDataFound}">
+                <listbox mold="paging" emptyMessage="${labels.common.noDataFound}"  model="@bind(vm.mahasiswaDTOs)">
                     <listhead>
-                        <listheader label="ID" width="5%" align="center" sortDirection="ascending"/>
+                        <listheader label="ID" width="5%" align="center" sortDirection="ascending" sort="auto(idMahasiswa)"/>
                         <listheader label="Nama Lengkap" width="20%" align="center"/>
                         <listheader label="Domisili" width="14%" align="center"/>
                         <listheader label="No KTP" width="14%" align="center"/>
@@ -56,23 +58,26 @@
                     <template name="model">
                         <listitem value="${each}">
                             <listcell>
-                                <label width="100%"/>
+                                <label width="100%" value="@bind(each.idMahasiswa)"/>
                             </listcell>
                             <listcell>
-                                <label width="100%"/>
+                                <label width="100%" value="@bind(each.namaLengkap)"/>
                             </listcell>
                             <listcell>
-                                <label width="100%"/>
+                                <label width="100%" value="@bind(each.domisili)"/>
                             </listcell>
                             <listcell>
-                                <label width="100%"/>
+                                <label width="100%" value="@bind(each.noKTP)"/>
                             </listcell>
                             <listcell>
-                                <label width="100%"/>
+                                <label width="100%" value="@bind(each.ipk)"/>
                             </listcell>
                             <listcell>
-                                <a label="Detail" style="text-decoration:underline ;color:blue"></a>
-<!--                                <a label=" | " style="font-size:12pt ;color:black"></a>
+                                <label width="100%" value="@bind(each.minat)"/>
+                            </listcell>
+                            <listcell>
+                                <a label="Detail" style="text-decoration:underline ;color:blue" onClick="@command('detailRegMahasiswa', object=each)"></a>
+                                <!--                                <a label=" | " style="font-size:12pt ;color:black"></a>
                                 <checkbox id="l" label="Approve"/>-->
                             </listcell>
                         </listitem>

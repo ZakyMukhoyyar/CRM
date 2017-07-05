@@ -22,7 +22,7 @@
                         </row>
                         <row>
                             <label value="Status" />
-                            <combobox width="50%" placeholder="- Silahkan Pilih -" model="@load(vm.status)" selectedItem="@bind(vm.status)">
+                            <combobox width="50%" placeholder="- Silahkan Pilih -" model="@load(vm.listStatus)" selectedItem="@bind(vm.status)">
                                 <template name="model" var="items">
                                     <comboitem label="@load(items)" value="@load(items)"/>
                                 </template>
@@ -77,7 +77,7 @@
                                 <label width="100%" value="@bind(each.status)"/>
                             </listcell>
                             <listcell>
-                                <a label="Detail" style="text-decoration:underline ;color:blue" onClick="@command('detailDataBank', object=each)"></a>
+                                <a label="Detail" style="text-decoration:underline ;color:blue" onClick="@command('detailMinat', object=each)"></a>
                                 <!--                                <a label=" | " style="font-size:12pt ;color:black"></a>
                                 <a label="Delete" style="text-decoration:underline ;color:blue" onClick="@command('deleteDataBank', object=each)"></a>-->
                             </listcell>
