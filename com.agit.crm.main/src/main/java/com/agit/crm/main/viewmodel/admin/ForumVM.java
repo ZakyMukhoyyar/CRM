@@ -3,20 +3,40 @@ package com.agit.crm.main.viewmodel.admin;
 import com.agit.crm.common.application.ForumService;
 import com.agit.crm.common.dto.crm.ForumDTO;
 import com.agit.crm.common.dto.crm.ForumDTOBuilder;
+import com.agit.crm.common.dto.crm.ForumDTO;
 import com.agit.crm.common.security.SecurityUtil;
+import com.agit.crm.shared.status.Status;
+import com.agit.crm.shared.zul.CommonViewModel;
+import static com.agit.crm.shared.zul.CommonViewModel.showInformationMessagebox;
 import com.agit.crm.shared.zul.PageNavigation;
 import com.agit.crm.util.CommonUtil;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.zkoss.bind.BindContext;
+import org.zkoss.bind.BindUtils;
+import org.zkoss.bind.annotation.BindingParam;
+import org.zkoss.bind.annotation.Command;
+import org.zkoss.bind.annotation.ContextParam;
+import org.zkoss.bind.annotation.ContextType;
 import org.zkoss.bind.annotation.ExecutionArgParam;
 import org.zkoss.bind.annotation.GlobalCommand;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
+import org.zkoss.io.Files;
+import org.zkoss.util.media.Media;
+import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.event.UploadEvent;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 import org.zkoss.zul.ListModelList;
+import org.zkoss.zul.Messagebox;
+import org.zkoss.zul.Window;
 
 /**
  *
@@ -34,16 +54,27 @@ public class ForumVM {
     private String idForum;
     private String namaForum;
     private Date tanggalBerakhir;
-    private Boolean status;
+    private Status status;
 
     private PageNavigation previous;
     private int pageSize = 5;
+    private ListModelList<Status> statuses;
+    
+    /* attribut for upload file forum*/
+    Media mediaUploadFileForum;
+    String mediaNameUploadFileForum;
+    private String filePathUploadFileForum;
+    private String pathLocationUploadFileForum;
 
     @Init
     public void init(
             @ExecutionArgParam("forumDTO") ForumDTO forum,
             @ExecutionArgParam("previous") PageNavigation previous){
+        /* Load Data */
+        initData();
         
+        /* Check Validity */
+        checkValidity(forum, previous);
     }
     
     private void initData(){
@@ -124,17 +155,88 @@ public class ForumVM {
         forumDTOs = forumService.findAll();
     }
     
+    @Command("buttonNewForum")
+    @NotifyChange("forumDTO")
+    public void buttonNewForum(@BindingParam("object") ForumDTO obj, @ContextParam(ContextType.VIEW) Window window){
+        Map<String, Object> params = new HashMap<>();
+        params.put("forumDTO", obj);
+        CommonViewModel.navigateToWithoutDetach("/crm/admin/forum/add_forum.zul", window, params);
+    }
+    
+    @Command("searchForum")
+    @NotifyChange("forumDTOs")
+    public void searchForum(@ContextParam(ContextType.VIEW) Window window){
+        Map params = new HashMap();
+        params.put("idForum", idForum);
+        params.put("namaForum", namaForum);
+        params.put("status", status);
+    }
+    
+    @Command("detailForum")
+    @NotifyChange("forumDTO")
+    public void detailForum(@BindingParam("object") ForumDTO obj, @ContextParam(ContextType.VIEW) Window window) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("forumDTO", obj);
+        CommonViewModel.navigateToWithoutDetach("/crm/admin/forum/add_forum.zul", window, params);
+    }
+    
+    @Command("buttonKembaliForum")
+    @NotifyChange("forumDTO")
+    public void buttonKembaliForum(@BindingParam("object") ForumDTO obj, @ContextParam(ContextType.VIEW) Window window) {
+        window.detach();
+    }
+    
+    /* Function upload File Forum */
+    @Command("uploadFileForum")
+    @NotifyChange({"mediaNameUploadFileForum", "pathLocationUploadFileForum"})
+    public void uploadFileForum(@ContextParam(ContextType.BIND_CONTEXT) BindContext ctx) throws IOException {
+        UploadEvent upEvent = null;
+        Object objUploadEvent = ctx.getTriggerEvent();
+
+        if (objUploadEvent != null && (objUploadEvent instanceof UploadEvent)) {
+            upEvent = (UploadEvent) objUploadEvent;
+        }
+
+        if (upEvent != null) {
+            mediaUploadFileForum = upEvent.getMedia();
+            Calendar now = Calendar.getInstance();
+            int year = now.get(Calendar.YEAR);
+            int month = now.get(Calendar.MONTH);
+            int day = now.get(Calendar.DAY_OF_MONTH);
+            filePathUploadFileForum = Executions.getCurrent().getDesktop().getWebApp().getRealPath("/");
+            filePathUploadFileForum = filePathUploadFileForum + "\\" + "files" + "\\" + "crm-cv" + "\\" + year + "\\" + month + "\\" + day + "\\";
+
+            File baseDir = new File(filePathUploadFileForum);
+            if (!baseDir.exists()) {
+                baseDir.mkdirs();
+            }
+
+            Files.copy(new File(filePathUploadFileForum + mediaUploadFileForum.getName()), mediaUploadFileForum.getStreamData());
+            setMediaNameUploadFileForum(filePathUploadFileForum + mediaUploadFileForum.getName());
+            pathLocationUploadFileForum = "/" + "files" + "/" + "crm-cv" + "/" + year + "/" + month + "/" + day + "/" + mediaUploadFileForum.getName();
+        } else {
+            Calendar now = Calendar.getInstance();
+            int year = now.get(Calendar.YEAR);
+            int month = now.get(Calendar.MONTH);
+            int day = now.get(Calendar.DAY_OF_MONTH);
+            mediaNameUploadFileForum = "";
+            pathLocationUploadFileForum = "/" + "files" + "/" + "crm-cv" + "/" + year + "/" + month + "/" + day + "/" + mediaUploadFileForum.getName();
+            Messagebox.show("File : " + mediaUploadFileForum + " Bukan File PDF", "Error", Messagebox.OK, Messagebox.ERROR);
+        }
+
+    }
+    
+    @Command("buttonSaveForum")
+    @NotifyChange({"forumDTO", "forumDTOs"})
+    public void buttonSaveForum(@BindingParam("object") ForumDTO obj, @ContextParam(ContextType.VIEW) Window window) {
+        forumService.SaveOrUpdate(forumDTO);
+        showInformationMessagebox("Data Forum Berhasil Disimpan");
+        BindUtils.postGlobalCommand(null, null, "refreshForum", null);
+        window.detach();
+    }
+    
     
     /* getter setter */
-
-    public ForumService getForumService() {
-        return forumService;
-    }
-
-    public void setForumService(ForumService forumService) {
-        this.forumService = forumService;
-    }
-
     public ForumDTO getForumDTO() {
         return forumDTO;
     }
@@ -175,11 +277,11 @@ public class ForumVM {
         this.tanggalBerakhir = tanggalBerakhir;
     }
 
-    public Boolean getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(Boolean status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 
@@ -197,6 +299,46 @@ public class ForumVM {
 
     public void setPageSize(int pageSize) {
         this.pageSize = pageSize;
+    }
+
+    public Media getMediaUploadFileForum() {
+        return mediaUploadFileForum;
+    }
+
+    public void setMediaUploadFileForum(Media mediaUploadFileForum) {
+        this.mediaUploadFileForum = mediaUploadFileForum;
+    }
+
+    public String getMediaNameUploadFileForum() {
+        return mediaNameUploadFileForum;
+    }
+
+    public void setMediaNameUploadFileForum(String mediaNameUploadFileForum) {
+        this.mediaNameUploadFileForum = mediaNameUploadFileForum;
+    }
+
+    public String getFilePathUploadFileForum() {
+        return filePathUploadFileForum;
+    }
+
+    public void setFilePathUploadFileForum(String filePathUploadFileForum) {
+        this.filePathUploadFileForum = filePathUploadFileForum;
+    }
+
+    public String getPathLocationUploadFileForum() {
+        return pathLocationUploadFileForum;
+    }
+
+    public void setPathLocationUploadFileForum(String pathLocationUploadFileForum) {
+        this.pathLocationUploadFileForum = pathLocationUploadFileForum;
+    }
+
+    public ListModelList<Status> getStatuses() {
+        return new ListModelList<>(Status.values());
+    }
+
+    public void setStatuses(ListModelList<Status> statuses) {
+        this.statuses = statuses;
     }
     
     

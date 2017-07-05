@@ -1,5 +1,7 @@
-<zk xmlns="http://www.zkoss.org/2005/zul">
-    <window>
+<zk xmlns="http://www.zkoss.org/2005/zul">    
+    <window apply="org.zkoss.bind.BindComposer"
+            viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.admin.ForumVM')"
+            form="@id('fx') @load(vm.forumDTO) @save(vm.forumDTO, before='buttonSaveForum')">
         <separator spacing="5px"/>
         <groupbox width="500px" closable="true">
             <caption label="Form Tambah Forum" style="font-size:16pt; font-weight: bold"/>
@@ -15,7 +17,7 @@
                         <row>
                             <label value="*) " style="color:red"/>
                             <label value="ID Forum" style="font-weight: bold"/>
-                            <textbox width="20%" disabled="true" value="@bind(fx.idUser)" />
+                            <textbox width="20%" disabled="true" value="@bind(fx.idForum)" />
                         </row>
                         <row>
                             <label value="*) " style="color:red"/>
@@ -40,7 +42,7 @@
                         <row>
                             <label value="*)" style="color:red"/>
                             <label value="Status" style="font-weight: bold"/>
-                            <combobox autodrop="true" readonly="true" width="60%" placeholder="- Pilihan Status -">
+                            <combobox autodrop="true" readonly="true" width="60%" placeholder="- Pilihan Status -" model="@load(vm.statuses)" selectedItem="@bind(fx.status)">
                                 <template name="model" var="items">
                                     <comboitem label="@load(items)" value="@load(items)"/>
                                 </template>
@@ -61,8 +63,8 @@
                             <row>
                                 <label value="*)" style="color:red"/>
                                 <label value="File Attacthment" style="font-weight: bold"/>
-                                <textbox width="100%" readonly="true" value="@bind(vm.mediaNameUploadHeaderImage)"/>
-                                <button label="Upload" upload="true" onUpload="@command('uploadFileHeaderImage')" width="40%">
+                                <textbox width="100%" readonly="true" value=""/>
+                                <button label="Upload" upload="true" onUpload="" width="40%">
                                 </button>
                             </row>  
                         </rows>
@@ -77,8 +79,8 @@
                 
                     <rows>
                         <row>
-                            <button label="Kembali" width="40%" onClick = ""/>
-                            <button label="Save" width="40%" onClick = ""/>
+                            <button label="Kembali" width="40%" onClick = "@command('buttonKembaliForum')"/>
+                            <button label="Save" width="40%" onClick = "@command('uploadFileForum')"/>
                         </row>
                     </rows>
                 </grid>

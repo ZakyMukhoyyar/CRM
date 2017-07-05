@@ -9,6 +9,7 @@
         <property column="idForum" name="idForum" not-null="false"/>
         <property column="namaForum" name="namaForum" not-null="false"/>
         <property column="deskripsiForum" name="deskripsiForum" not-null="false"/>
+        <property column="tanggalBerakhir" name="tanggalBerakhir" not-null="false"/>
         <property column="createdBy" name="createdBy" not-null="false"/>
         <property column="createdDate" name="createdDate" not-null="false"/>
         <property column="modifiedDate" name="modifiedDate" not-null="false"/>

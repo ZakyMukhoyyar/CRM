@@ -26,7 +26,7 @@ public class ForumServiceRestImpl implements ForumServiceFacade{
     private ForumService forumService;
 
     @Override
-    @RequestMapping(value = "/agit.service.forum", method = RequestMethod.POST)
+    @RequestMapping(value = "/agit.service.forum.submit", method = RequestMethod.POST)
     public ResponseEntity<Void> submitForum(@RequestBody ForumDTO forumDTO) {
         Validate.notNull(forumService);
         forumService.SaveOrUpdate(forumDTO);
