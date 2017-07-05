@@ -22,7 +22,7 @@
                         </row>
                         <row>
                             <label value="Status" />
-                            <combobox autodrop="true" model="@load(vm.listStatus)" selectedItem="@bind(fx.status)" readonly="true" width="50%" placeholder="- Pilihan Status -">
+                            <combobox autodrop="true" model="@load(vm.listStatus)" selectedItem="@bind(vm.status)" readonly="true" width="50%" placeholder="- Pilihan Status -">
                                 <template name="model" var="items">
                                     <comboitem label="@load(items)" value="@load(items)"/>
                                 </template>

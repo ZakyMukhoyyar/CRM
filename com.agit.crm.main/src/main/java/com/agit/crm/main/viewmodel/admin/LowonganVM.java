@@ -55,6 +55,7 @@ public class LowonganVM {
     private LowonganDTO lowonganDTO = new LowonganDTO();
     private List<LowonganDTO> lowonganDTOs = new ArrayList();
     private List<MinatDTO> minats = new ArrayList<MinatDTO>();
+    private List<String> listNamaMinat = new ArrayList<>();
     private UserDTO user;
 
     /* Function For Combobox  */
@@ -107,6 +108,9 @@ public class LowonganVM {
         gaji.add(" > Rp 15.000.000");
 
         minats = minatService.findAll();
+        for (MinatDTO m : minats) {
+            listNamaMinat.add(m.getNamaMinat());
+        }
 
         user = userService.findByID(SecurityUtil.getUserName());
         if (user.getRoleDTO().getRoleID().contains("MAHASISWA")) {
@@ -243,17 +247,17 @@ public class LowonganVM {
 
         Messagebox.show("Apakah anda yakin ingin menghapus Lowongan?", "Konfirmasi", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION,
                 new org.zkoss.zk.ui.event.EventListener() {
-            @Override
-            public void onEvent(Event evt) throws InterruptedException {
-                if (evt.getName().equals("onOK")) {
-                    lowonganService.deleteData(lowonganDTO);
-                    showInformationMessagebox("Lowongan Berhasil Dihapus");
-                    BindUtils.postGlobalCommand(null, null, "refreshLowongan", null);
-                } else {
-                    System.out.println("Operation Canceled !");
+                    @Override
+                    public void onEvent(Event evt) throws InterruptedException {
+                        if (evt.getName().equals("onOK")) {
+                            lowonganService.deleteData(lowonganDTO);
+                            showInformationMessagebox("Lowongan Berhasil Dihapus");
+                            BindUtils.postGlobalCommand(null, null, "refreshLowongan", null);
+                        } else {
+                            System.out.println("Operation Canceled !");
+                        }
+                    }
                 }
-            }
-        }
         );
 
     }
@@ -392,6 +396,14 @@ public class LowonganVM {
 
     public void setDisableButtonSave(boolean disableButtonSave) {
         this.disableButtonSave = disableButtonSave;
+    }
+
+    public List<String> getListNamaMinat() {
+        return listNamaMinat;
+    }
+
+    public void setListNamaMinat(List<String> listNamaMinat) {
+        this.listNamaMinat = listNamaMinat;
     }
 
 }

@@ -20,14 +20,14 @@ import org.springframework.transaction.annotation.Transactional;
 public class KetrampilanHibernateRepository extends HibernateRepository implements KetrampilanRepository {
 
     @Override
-    public void saveOrUpdate(Ketrampilan Ketrampilan) {
-        getSession().saveOrUpdate(Ketrampilan);
+    public void saveOrUpdate(Ketrampilan ketrampilan) {
+        getSession().saveOrUpdate(ketrampilan);
     }
 
     @Override
-    public void deleteData(Ketrampilan Ketrampilan) {
+    public void deleteData(Ketrampilan ketrampilan) {
         Query query = getSession().createQuery("delete from com.agit.crm.domain.crm.Ketrampilan where idKetrampilan = :tid");
-        query.setParameter("tid", Ketrampilan.getIdKetrampilan());
+        query.setParameter("tid", ketrampilan.getIdKetrampilan());
         query.executeUpdate();
     }
 
@@ -54,6 +54,9 @@ public class KetrampilanHibernateRepository extends HibernateRepository implemen
         }
         if (StringUtil.hasValue(map.get("namaKetrampilan"))) {
             criteria.add(Restrictions.like("namaKetrampilan", "%" + map.get("namaKetrampilan") + "%").ignoreCase());
+        }
+        if (StringUtil.hasValue(map.get("status"))) {
+            criteria.add(Restrictions.eq("status", map.get("status")));
         }
 
         return criteria.list();

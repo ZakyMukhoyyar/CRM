@@ -14,8 +14,8 @@ import java.util.List;
  *
  * @author Zaky
  */
-public class KetrampilanDTOAssembler implements IObjectAssembler<Ketrampilan, KetrampilanDTO>{
-    
+public class KetrampilanDTOAssembler implements IObjectAssembler<Ketrampilan, KetrampilanDTO> {
+
     private KetrampilanRepository ketrampilanRepository;
     private KetrampilanDTOAssembler ketrampilanDTOAssembler;
 
@@ -36,7 +36,7 @@ public class KetrampilanDTOAssembler implements IObjectAssembler<Ketrampilan, Ke
                 .setCreatedDate(domainObject.getCreatedDate())
                 .setModifiedBy(domainObject.getModifiedBy())
                 .setModifiedDate(domainObject.getModifiedDate())
-                .setStatus(Status.ACTIVE)
+                .setStatus(domainObject.getStatus())
                 .createKetrampilanDTO();
     }
 
@@ -49,10 +49,10 @@ public class KetrampilanDTOAssembler implements IObjectAssembler<Ketrampilan, Ke
                 .setCreatedDate(dtoObject.getCreatedDate())
                 .setModifiedBy(dtoObject.getModifiedBy())
                 .setModifiedDate(dtoObject.getModifiedDate())
-                .setStatus(Status.ACTIVE)
+                .setStatus(dtoObject.getStatus())
                 .createKetrampilan();
     }
-    
+
     public List<Ketrampilan> toDomains(List<KetrampilanDTO> arg0) {
         List<Ketrampilan> res = new ArrayList<>();
         for (KetrampilanDTO t : arg0) {
@@ -68,5 +68,5 @@ public class KetrampilanDTOAssembler implements IObjectAssembler<Ketrampilan, Ke
         }
         return res;
     }
-    
+
 }

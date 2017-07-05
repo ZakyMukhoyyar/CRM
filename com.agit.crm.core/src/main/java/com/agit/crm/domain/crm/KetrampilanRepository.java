@@ -9,9 +9,9 @@ import java.util.Map;
  */
 public interface KetrampilanRepository {
     
-    void saveOrUpdate(Ketrampilan Ketrampilan);
+    void saveOrUpdate(Ketrampilan ketrampilan);
     
-    void deleteData(Ketrampilan Ketrampilan);
+    void deleteData(Ketrampilan ketrampilan);
     
     Ketrampilan findByID(String idKetrampilan);
     

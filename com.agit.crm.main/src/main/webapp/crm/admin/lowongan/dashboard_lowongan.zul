@@ -23,12 +23,12 @@
                         <row>
                             <label value="Nama Lowongan" />
                             <textbox width="70%" value="@bind(vm.namaLowongan)"/>    
-                            <label value="Status" />
+                            <!--                            <label value="Status" />
                             <combobox width="70%" placeholder="- Silahkan Pilih -">
                                 <template name="model" var="items">
                                     <comboitem label="@load(items)" value="@load(items)"/>
                                 </template>
-                            </combobox>
+                            </combobox>-->
                         </row>
                         <row>
                             <cell></cell>
@@ -72,7 +72,7 @@
                                 <label width="100%" value="@bind(each.tanggalBerakhir)"/>
                             </listcell>
                             <listcell>
-                                <label width="100%"/>
+                                <label width="100%" value="@bind(each.minatPekerjaan)"/>
                             </listcell>
                             <listcell>
                                 <a label="Detail" style="text-decoration:underline ;color:blue" onClick="@command('detailLowongan', object=each)"></a>

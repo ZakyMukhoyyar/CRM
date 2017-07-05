@@ -10,9 +10,9 @@ import java.util.Map;
  */
 public interface KetrampilanService {
     
-    void SaveOrUpdate(KetrampilanDTO Ketrampilan);
+    void SaveOrUpdate(KetrampilanDTO ketrampilan);
 
-    void deleteData(KetrampilanDTO Ketrampilan);
+    void deleteData(KetrampilanDTO ketrampilan);
 
     KetrampilanDTO getDummyData();
 
