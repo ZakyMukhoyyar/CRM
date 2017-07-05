@@ -3,8 +3,15 @@
     <window border="30" apply="org.zkoss.bind.BindComposer"
             viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.admin.LowonganVM')"
             form="@id('fx') @load(vm.lowonganDTO) @save(vm.lowonganDTO, before='buttonSaveLowongan')">
+        <style>
+            .labelstyle {
+            font-weight: bold;
+            font-family: 'Kristen ITC';
+            color: black
+            }
+        </style>
         <groupbox closable="false">
-            <caption label="Parameter Pencarian" />
+            <caption sclass="labelstyle" label="Parameter Pencarian" />
             <grid style="border:0">
                 <columns>
                     <column width="20%" />
@@ -14,9 +21,9 @@
                 </columns>
                 <rows>
                     <row>
-                        <label value="ID Lowongan" />
+                        <label sclass="labelstyle" value="ID Lowongan" />
                         <textbox width="70%"/>  
-                        <label value="Jenis Pekerjaan" />
+                        <label sclass="labelstyle" value="Jenis Pekerjaan" />
                         <combobox autodrop="true" readonly="true" width="70%" model="@load(vm.minats)" selectedItem="@bind(fx.minatPekerjaan)" placeholder="- Pilihan Kategori -">
                             <template name="model" var="items">
                                 <comboitem label="@load(items.getNamaMinat())" value="@load(items.getNamaMinat())"/>
@@ -24,9 +31,9 @@
                         </combobox>
                     </row>
                     <row>
-                        <label value="Nama Lowongan" />
+                        <label sclass="labelstyle" value="Nama Lowongan" />
                         <textbox width="70%" value="@bind(vm.namaLowongan)"/>
-                        <label value="Status" />
+                        <label sclass="labelstyle" value="Status" />
                         <combobox width="70%" placeholder="- Silahkan Pilih -" readonly="true">
                             <template name="model" var="items">
                                 <comboitem label="@load(items)" value="@load(items)"/>
@@ -34,7 +41,7 @@
                         </combobox>
                     </row>
                     <row>
-                        <label value="Gaji" />
+                        <label sclass="labelstyle" value="Gaji" />
                         <combobox width="70%" model="@load(vm.gaji)" selectedItem="@bind(fx.gaji)" readonly="true" placeholder="- Silahkan Pilih -">
                             <template name="model" var="items">
                                 <comboitem label="@load(items)" value="@load(items)"/>
@@ -60,18 +67,18 @@
                 <template name="model">
                     <listitem value="${each}">
                         <listcell>
-                            <label width="100%" value="@bind(each.namaLowongan)" style="text-align: left;"/>
+                            <label sclass="labelstyle" width="100%" value="@bind(each.namaLowongan)" style="text-align: left;font-weight:bold;color:#65001e"/>
                             <separator></separator>
-                            <label width="100%" value="@bind(each.persyaratan)" style="text-align: justify; display: block;" />
+                            <label sclass="labelstyle" width="100%" value="@bind(each.persyaratan)" style="text-align: justify; display: block;" />
                             <separator></separator>                           
-                            <label width="100%" value="@bind(each.gaji)" style="text-align: left;"/>
+                            <label sclass="labelstyle" width="100%" value="@bind(each.gaji)" style="text-align: left;"/>
                             <separator></separator>
-                            <label width="100%" value="@bind(each.lokasiKerja)" style="text-align: left;"/>
+                            <label sclass="labelstyle" width="100%" value="@bind(each.lokasiKerja)" style="text-align: left;"/>
                         </listcell>
                         <listcell>
-                            <a label="Detail" style="text-decoration:underline ;color:blue" onClick="@command('detailLowongan', object=each)"></a>
-                            <a label=" | " style="font-size:12pt ;color:black"></a>
-                            <a label="Apply" style="text-decoration:underline ;color:blue"></a>
+                            <a sclass="labelstyle" label="Detail" style="text-decoration:underline ;color:blue" onClick="@command('detailLowongan', object=each)"></a>
+                            <a sclass="labelstyle" label=" | " style="font-size:12pt ;color:black"></a>
+                            <a sclass="labelstyle" label="Apply" style="text-decoration:underline ;color:blue" onClick="@command('buttonApplyLowongan', object=each)"></a>
                         </listcell>
                     </listitem>
                 </template>
