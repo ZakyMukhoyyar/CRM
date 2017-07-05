@@ -5,10 +5,12 @@ import com.agit.crm.common.application.MinatService;
 import com.agit.crm.common.dto.crm.LowonganDTO;
 import com.agit.crm.common.dto.crm.LowonganDTOBuilder;
 import com.agit.crm.common.dto.crm.MinatDTO;
+import com.agit.crm.common.dto.usermanagement.UserDTO;
 import com.agit.crm.common.security.SecurityUtil;
 import com.agit.crm.shared.zul.CommonViewModel;
 import static com.agit.crm.shared.zul.CommonViewModel.showInformationMessagebox;
 import com.agit.crm.shared.zul.PageNavigation;
+import com.agit.crm.user.management.application.UserService;
 import com.agit.crm.util.CommonUtil;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -46,10 +48,14 @@ public class LowonganVM {
     @WireVariable
     MinatService minatService;
 
+    @WireVariable
+    UserService userService;
+
     /* Object Binding for Form CRM */
     private LowonganDTO lowonganDTO = new LowonganDTO();
     private List<LowonganDTO> lowonganDTOs = new ArrayList();
     private List<MinatDTO> minats = new ArrayList<MinatDTO>();
+    private UserDTO user;
 
     /* Function For Combobox  */
     private ListModelList<String> gaji = new ListModelList<>();
@@ -69,6 +75,9 @@ public class LowonganVM {
 
     /* Paramater Objek Lowongan */
     private String idLowongan;
+
+    /* Function For Objek Disable  */
+    private boolean disableButtonSave;
 
     @Init
     public void init(
@@ -98,6 +107,14 @@ public class LowonganVM {
         gaji.add(" > Rp 15.000.000");
 
         minats = minatService.findAll();
+
+        user = userService.findByID(SecurityUtil.getUserName());
+        if (user.getRoleDTO().getRoleID().contains("MAHASISWA")) {
+            disableButtonSave = true;
+        } else {
+            disableButtonSave = false;
+        }
+
     }
 
     private void checkValidity(LowonganDTO lowongan, PageNavigation previous) {
@@ -359,6 +376,22 @@ public class LowonganVM {
 
     public void setPageSizeCreateLowongan(int pageSizeCreateLowongan) {
         this.pageSizeCreateLowongan = pageSizeCreateLowongan;
+    }
+
+    public UserDTO getUser() {
+        return user;
+    }
+
+    public void setUser(UserDTO user) {
+        this.user = user;
+    }
+
+    public boolean isDisableButtonSave() {
+        return disableButtonSave;
+    }
+
+    public void setDisableButtonSave(boolean disableButtonSave) {
+        this.disableButtonSave = disableButtonSave;
     }
 
 }

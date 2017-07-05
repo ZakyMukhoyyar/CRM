@@ -20,23 +20,23 @@
                         </row>
                         <row>
                             <signLabel value="Nama Lowongan " style="font-weight: bold"/>
-                            <textbox rows="2" width="100%" disabled="false" constraint="no empty : Nama Lowongan Tidak Boleh Kosong" value="@bind(fx.namaLowongan)"/>
+                            <textbox readonly="@bind(vm.disableButtonSave)" rows="2" width="100%" constraint="no empty : Nama Lowongan Tidak Boleh Kosong" value="@bind(fx.namaLowongan)"/>
                         </row>
                         <row>
                             <signLabel value="Deskripsi " style="font-weight: bold"/>
-                            <textbox rows="10" width="100%" maxlength="2000" disabled="false" constraint="no empty : Deskripsi Tidak Boleh Kosong" value="@bind(fx.deskripsiLowongan)"/>
+                            <textbox readonly="@bind(vm.disableButtonSave)"  rows="10" width="100%" maxlength="2000" disabled="false" constraint="no empty : Deskripsi Tidak Boleh Kosong" value="@bind(fx.deskripsiLowongan)"/>
                         </row>
                         <row>
                             <signLabel value="Tanggal Mulai" style="font-weight: bold"/>
-                            <datebox format="dd/MM/yyyy" width="50%" readonly="true" constraint="no empty : Tanggal Mulai Tidak Boleh Kosong" value="@bind(fx.tanggalMulai)"/>
+                            <datebox disabled="@bind(vm.disableButtonSave)"  format="dd/MM/yyyy" width="50%" readonly="true" constraint="no empty : Tanggal Mulai Tidak Boleh Kosong" value="@bind(fx.tanggalMulai)"/>
                         </row> 
                         <row>
                             <signLabel value="Tanggal Berakhir" style="font-weight: bold"/>
-                            <datebox format="dd/MM/yyyy" width="50%" readonly="true" constraint="no empty : Tanggal Berakhir Tidak Boleh Kosong" value="@bind(fx.tanggalBerakhir)"/>
+                            <datebox disabled="@bind(vm.disableButtonSave)" format="dd/MM/yyyy" width="50%" readonly="true" constraint="no empty : Tanggal Berakhir Tidak Boleh Kosong" value="@bind(fx.tanggalBerakhir)"/>
                         </row>     
                         <row>
                             <signLabel value="Kategori Pekerjaan" style="font-weight: bold"/>
-                            <combobox autodrop="true" readonly="true" width="50%" model="@load(vm.minats)" selectedItem="@bind(fx.minatPekerjaan)" placeholder="- Pilihan Kategori -">
+                            <combobox disabled="@bind(vm.disableButtonSave)" autodrop="true" width="50%" model="@load(vm.minats)" selectedItem="@bind(fx.minatPekerjaan)" placeholder="- Pilihan Kategori -">
                                 <template name="model" var="items">
                                     <comboitem label="@load(items.getNamaMinat())" value="@load(items.getNamaMinat())"/>
                                 </template>
@@ -44,7 +44,7 @@
                         </row>  
                         <row>
                             <signLabel value="Perkiraan Gaji" style="font-weight: bold"/>
-                            <combobox width="50%" model="@load(vm.gaji)" selectedItem="@bind(fx.gaji)" readonly="true" placeholder="- Silahkan Pilih -" constraint="no empty : Pendidikan Terakhir Tidak Boleh Kosong">
+                            <combobox disabled="@bind(vm.disableButtonSave)" width="50%" model="@load(vm.gaji)" selectedItem="@bind(fx.gaji)" readonly="true" placeholder="- Silahkan Pilih -" constraint="no empty : Pendidikan Terakhir Tidak Boleh Kosong">
                                 <template name="model" var="items">
                                     <comboitem label="@load(items)" value="@load(items)"/>
                                 </template>
@@ -52,11 +52,11 @@
                         </row> 
                         <row>
                             <signLabel value="Persyaratan " style="font-weight: bold"/>
-                            <textbox rows="10" width="100%" disabled="false" constraint="no empty : Persyaratan Tidak Boleh Kosong" value="@bind(fx.persyaratan)"/>
+                            <textbox readonly="@bind(vm.disableButtonSave)" rows="10" width="100%" constraint="no empty : Persyaratan Tidak Boleh Kosong" value="@bind(fx.persyaratan)"/>
                         </row>
                         <row>
                             <signLabel value="Lokasi Kerja" style="font-weight: bold"/>
-                            <textbox rows="2" width="100%" disabled="false" constraint="no empty : Lokasi Kerja Tidak Boleh Kosong" value="@bind(fx.lokasiKerja)"/>
+                            <textbox readonly="@bind(vm.disableButtonSave)" rows="2" width="100%" constraint="no empty : Lokasi Kerja Tidak Boleh Kosong" value="@bind(fx.lokasiKerja)"/>
                         </row>                 
                     </rows>
                 </grid>
@@ -70,7 +70,7 @@
                     <rows>
                         <row>
                             <button label="Kembali" width="40%" onClick="@command('buttonKembaliLowongan')"/>
-                            <button label="Save" width="40%" onClick="@command('buttonSaveLowongan')"/>
+                            <button label="Save" width="40%" onClick="@command('buttonSaveLowongan')" disabled="@bind(vm.disableButtonSave)"/>
                         </row>
                     </rows>
                 </grid>
