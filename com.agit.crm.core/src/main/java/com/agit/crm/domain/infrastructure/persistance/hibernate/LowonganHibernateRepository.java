@@ -50,7 +50,12 @@ public class LowonganHibernateRepository extends HibernateRepository implements 
         if (StringUtil.hasValue(map.get("namaLowongan"))) {
             criteria.add(Restrictions.like("namaLowongan", "%" + map.get("namaLowongan") + "%").ignoreCase());
         }
-
+        if (StringUtil.hasValue(map.get("tanggalBerakhir"))) {
+            criteria.add(Restrictions.eq("tanggalBerakhir", map.get("tanggalBerakhir")));
+        }
+        if (StringUtil.hasValue(map.get("minatPekerjaan"))) {
+            criteria.add(Restrictions.eq("minatPekerjaan", map.get("minatPekerjaan")));
+        }
         return criteria.list();
     }
 

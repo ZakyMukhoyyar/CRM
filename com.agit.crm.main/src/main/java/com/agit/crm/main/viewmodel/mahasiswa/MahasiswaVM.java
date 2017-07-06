@@ -73,6 +73,8 @@ public class MahasiswaVM extends SelectorComposer<Window> {
     private List<MahasiswaDTO> mahasiswaDTOs = new ArrayList();
     private LowonganDTO lowonganDTO = new LowonganDTO();
     private List<LowonganDTO> lowonganDTOs = new ArrayList();
+    private List<KetrampilanDTO> ketrampilans = new ArrayList<KetrampilanDTO>();
+    private List<MinatDTO> minats = new ArrayList<MinatDTO>();
 
     /* attribut for CRM */
     private PageNavigation previous;
@@ -83,7 +85,8 @@ public class MahasiswaVM extends SelectorComposer<Window> {
     private String namaLengkap;
     private String noKTP;
     private String domisili;
-    private MinatDTO minatSelect;
+    private String minatSelect;
+    private String minat;
 
     /* Function For Combobox  */
     private ListModelList<PendidikanType> pendidikanTypes;
@@ -93,8 +96,9 @@ public class MahasiswaVM extends SelectorComposer<Window> {
     private ListModelList<TingkatanType> tingkatanTypes3;
     private ListModelList<TingkatanType> tingkatanTypes4;
     private ListModelList<TingkatanType> tingkatanTypes5;
-    private List<KetrampilanDTO> ketrampilans = new ArrayList<KetrampilanDTO>();
-    private List<MinatDTO> minats = new ArrayList<MinatDTO>();
+
+    private List<String> listNamaMinat = new ArrayList<>();
+    private List<String> listNamaKetrampilan = new ArrayList<>();
 
     /* attribut for upload file CV */
     Media mediaUploadCV;
@@ -126,7 +130,13 @@ public class MahasiswaVM extends SelectorComposer<Window> {
         }
 
         ketrampilans = ketrampilanService.findAll();
+        for (KetrampilanDTO k : ketrampilans) {
+            listNamaKetrampilan.add(k.getNamaKetrampilan());
+        }
         minats = minatService.findAll();
+        for (MinatDTO m : minats) {
+            listNamaMinat.add(m.getNamaMinat());
+        }
 
     }
 
@@ -289,7 +299,7 @@ public class MahasiswaVM extends SelectorComposer<Window> {
         params.put("namaLengkap", namaLengkap);
         params.put("noKTP", noKTP);
         params.put("domisili", domisili);
-        params.put("minatSelect", minatSelect.getNamaMinat());
+        params.put("minatSelect", minatSelect);
 
         mahasiswaDTOs = mahasiswaService.findByParams(params);
     }
@@ -478,11 +488,18 @@ public class MahasiswaVM extends SelectorComposer<Window> {
         this.domisili = domisili;
     }
 
-    public MinatDTO getMinatSelect() {
+//    public MinatDTO getMinatSelect() {
+//        return minatSelect;
+//    }
+//
+//    public void setMinatSelect(MinatDTO minatSelect) {
+//        this.minatSelect = minatSelect;
+//    }
+    public String getMinatSelect() {
         return minatSelect;
     }
 
-    public void setMinatSelect(MinatDTO minatSelect) {
+    public void setMinatSelect(String minatSelect) {
         this.minatSelect = minatSelect;
     }
 
@@ -492,6 +509,30 @@ public class MahasiswaVM extends SelectorComposer<Window> {
 
     public void setMinats(List<MinatDTO> minats) {
         this.minats = minats;
+    }
+
+    public List<String> getListNamaMinat() {
+        return listNamaMinat;
+    }
+
+    public void setListNamaMinat(List<String> listNamaMinat) {
+        this.listNamaMinat = listNamaMinat;
+    }
+
+    public List<String> getListNamaKetrampilan() {
+        return listNamaKetrampilan;
+    }
+
+    public void setListNamaKetrampilan(List<String> listNamaKetrampilan) {
+        this.listNamaKetrampilan = listNamaKetrampilan;
+    }
+
+    public String getMinat() {
+        return minat;
+    }
+
+    public void setMinat(String minat) {
+        this.minat = minat;
     }
 
 }

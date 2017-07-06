@@ -65,6 +65,7 @@ public class LowonganVM {
     private Date tanggalBerakhir;
     private String namaLowongan;
     private String idLowonganParams;
+    private String minatPekerjaan;
 
     private PageNavigation previous;
     private boolean checked;
@@ -213,6 +214,7 @@ public class LowonganVM {
         params.put("idLowongan", idLowongan);
         params.put("namaLowongan", namaLowongan);
         params.put("tanggalBerakhir", tanggalBerakhir);
+        params.put("minatPekerjaan", minatPekerjaan);
 
         lowonganDTOs = lowonganService.findByParams(params);
     }
@@ -256,17 +258,17 @@ public class LowonganVM {
 
         Messagebox.show("Apakah anda yakin ingin menghapus Lowongan?", "Konfirmasi", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION,
                 new org.zkoss.zk.ui.event.EventListener() {
-            @Override
-            public void onEvent(Event evt) throws InterruptedException {
-                if (evt.getName().equals("onOK")) {
-                    lowonganService.deleteData(lowonganDTO);
-                    showInformationMessagebox("Lowongan Berhasil Dihapus");
-                    BindUtils.postGlobalCommand(null, null, "refreshLowongan", null);
-                } else {
-                    System.out.println("Operation Canceled !");
+                    @Override
+                    public void onEvent(Event evt) throws InterruptedException {
+                        if (evt.getName().equals("onOK")) {
+                            lowonganService.deleteData(lowonganDTO);
+                            showInformationMessagebox("Lowongan Berhasil Dihapus");
+                            BindUtils.postGlobalCommand(null, null, "refreshLowongan", null);
+                        } else {
+                            System.out.println("Operation Canceled !");
+                        }
+                    }
                 }
-            }
-        }
         );
 
     }
@@ -413,6 +415,14 @@ public class LowonganVM {
 
     public void setListNamaMinat(List<String> listNamaMinat) {
         this.listNamaMinat = listNamaMinat;
+    }
+
+    public String getMinatPekerjaan() {
+        return minatPekerjaan;
+    }
+
+    public void setMinatPekerjaan(String minatPekerjaan) {
+        this.minatPekerjaan = minatPekerjaan;
     }
 
 }

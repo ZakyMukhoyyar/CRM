@@ -25,9 +25,9 @@
                             <label value="Domisili" />
                             <textbox width="60%"  value="@bind(vm.domisili)"/>
                             <label value="Minat Pekerjaan" />
-                            <combobox width="60%" placeholder="- Silahkan Pilih -" model="@load(vm.minats)" selectedItem="@bind(vm.minatSelect)">
+                            <combobox width="60%" placeholder="- Silahkan Pilih -" model="@load(vm.listNamaMinat)" selectedItem="@bind(vm.minatSelect)">
                                 <template name="model" var="items">
-                                    <comboitem label="@load(items.getNamaMinat())" value="@load(items.getNamaMinat())"/>
+                                    <comboitem label="@load(items)" value="@load(items)"/>
                                 </template>
                             </combobox>
                         </row>

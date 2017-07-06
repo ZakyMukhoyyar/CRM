@@ -23,12 +23,12 @@
                         <row>
                             <label value="Nama Lowongan" />
                             <textbox width="70%" value="@bind(vm.namaLowongan)"/>    
-                            <!--                            <label value="Status" />
-                            <combobox width="70%" placeholder="- Silahkan Pilih -">
+                            <label value="Kategori Pekerjaan" />
+                            <combobox width="70%" placeholder="- Silahkan Pilih -" model="@load(vm.listNamaMinat)" selectedItem="@bind(vm.minatPekerjaan)">
                                 <template name="model" var="items">
                                     <comboitem label="@load(items)" value="@load(items)"/>
                                 </template>
-                            </combobox>-->
+                            </combobox>
                         </row>
                         <row>
                             <cell></cell>
