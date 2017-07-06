@@ -66,7 +66,7 @@
                 <template name="model">
                     <listitem value="${each}">
                         <listcell>
-                            <label sclass="labelstyle" width="100%" value="@bind(each.namaLowongan)" style="text-align: left;font-weight:bold;color:#65001e"/>
+                            <label sclass="labelstyle" width="100%" value="@bind(each.namaLowongan)" style="text-align: left;font-weight:bold;color:#65001e;background:#008db7;color:white;"/>
                             <separator></separator>
                             <label sclass="labelstyle" width="100%" value="@bind(each.persyaratan)" style="text-align: justify; display: block;" />
                             <separator></separator>                           

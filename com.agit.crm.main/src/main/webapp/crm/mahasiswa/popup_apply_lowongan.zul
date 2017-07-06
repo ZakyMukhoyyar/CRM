@@ -9,14 +9,12 @@
                     <column width="25%"/>
                     <column width="50%"/>
                     <column width="25%"/>
-                    <column width="25%"/>
                 </columns>
                 <rows>
                     <row>
                         <image src="/images/iconcheck.png;" align="right" />
                         <label value="Apakah anda yakin apply lowongan ini?" />
                         <checkbox id="Iya" label="Iya"/>
-                        <checkbox id="Tidak" label="Tidak"/>
                     </row>
                 </rows>
             </grid>
