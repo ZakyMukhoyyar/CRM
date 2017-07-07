@@ -76,5 +76,6 @@
         <property column="modifiedDate" name="modifiedDate" not-null="false"/>
         <property column="modifiedBy" name="modifiedBy" not-null="false"/>
         <property column="statusApprove" name="statusApprove" not-null="false"/>
+        <property column="jurusan" name="jurusan" not-null="false"/>
     </class>
 </hibernate-mapping>

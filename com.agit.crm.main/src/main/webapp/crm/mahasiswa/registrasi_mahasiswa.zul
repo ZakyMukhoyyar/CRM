@@ -106,6 +106,14 @@
                             <textbox width="100%" disabled="false" value="@bind(fx.ipk)"/>
                         </row>
                         <row>
+                            <signLabel value="Jurusan" style="font-weight: bold"/>
+                            <combobox width="100%" placeholder="- Silahkan Pilih -" >
+                                <template name="model" var="items">
+                                    <comboitem label="@load(items)" value="@load(items)"/>
+                                </template>
+                            </combobox>
+                        </row>
+                        <row>
                             <signLabel value="Minat" style="font-weight: bold"/>
                             <combobox width="100%" placeholder="- Silahkan Pilih -" model="@load(vm.listNamaMinat)" selectedItem="@bind(fx.minat)">
                                 <template name="model" var="items">

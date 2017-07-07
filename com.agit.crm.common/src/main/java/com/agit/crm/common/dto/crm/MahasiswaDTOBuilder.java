@@ -11,7 +11,6 @@ import com.agit.crm.shared.type.TingkatanType;
 import java.util.Date;
 import java.util.List;
 
-
 public class MahasiswaDTOBuilder {
 
     private String idMahasiswa;
@@ -46,6 +45,7 @@ public class MahasiswaDTOBuilder {
     private String modifiedBy;
     private Date modifiedDate;
     private Boolean statusApprove;
+    private String jurusan;
 
     public MahasiswaDTOBuilder() {
     }
@@ -210,8 +210,13 @@ public class MahasiswaDTOBuilder {
         return this;
     }
 
-    public MahasiswaDTO createMahasiswaDTO() {
-        return new MahasiswaDTO(idMahasiswa, username, password, retypedPassword, namaLengkap, email, tanggalLahir, domisili, noHP, noKTP, ipk, jenisKelaminType, pendidikanType, namaCivitas, minat, ketrampilan1, ketrampilan2, ketrampilan3, ketrampilan4, ketrampilan5, tingkatanType1, tingkatanType2, tingkatanType3, tingkatanType4, tingkatanType5, uploadCV, lowongansDTO, createdBy, createdDate, modifiedBy, modifiedDate, statusApprove);
+    public MahasiswaDTOBuilder setJurusan(String jurusan) {
+        this.jurusan = jurusan;
+        return this;
     }
-    
+
+    public MahasiswaDTO createMahasiswaDTO() {
+        return new MahasiswaDTO(idMahasiswa, username, password, retypedPassword, namaLengkap, email, tanggalLahir, domisili, noHP, noKTP, ipk, jenisKelaminType, pendidikanType, namaCivitas, minat, ketrampilan1, ketrampilan2, ketrampilan3, ketrampilan4, ketrampilan5, tingkatanType1, tingkatanType2, tingkatanType3, tingkatanType4, tingkatanType5, uploadCV, lowongansDTO, createdBy, createdDate, modifiedBy, modifiedDate, statusApprove, jurusan);
+    }
+
 }

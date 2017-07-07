@@ -47,11 +47,12 @@ public class Mahasiswa implements EntityObject<Mahasiswa> {
     private String modifiedBy;
     private Date modifiedDate;
     private Boolean statusApprove;
+    private String jurusan;
 
     public Mahasiswa() {
     }
 
-    public Mahasiswa(String idMahasiswa, String username, String password, String retypedPassword, String namaLengkap, String email, Date tanggalLahir, String domisili, String noHP, String noKTP, String ipk, JenisKelaminType jenisKelaminType, PendidikanType pendidikanType, String namaCivitas, String minat, String ketrampilan1, String ketrampilan2, String ketrampilan3, String ketrampilan4, String ketrampilan5, TingkatanType tingkatanType1, TingkatanType tingkatanType2, TingkatanType tingkatanType3, TingkatanType tingkatanType4, TingkatanType tingkatanType5, String uploadCV, List<Lowongan> lowongans, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate, Boolean statusApprove) {
+    public Mahasiswa(String idMahasiswa, String username, String password, String retypedPassword, String namaLengkap, String email, Date tanggalLahir, String domisili, String noHP, String noKTP, String ipk, JenisKelaminType jenisKelaminType, PendidikanType pendidikanType, String namaCivitas, String minat, String ketrampilan1, String ketrampilan2, String ketrampilan3, String ketrampilan4, String ketrampilan5, TingkatanType tingkatanType1, TingkatanType tingkatanType2, TingkatanType tingkatanType3, TingkatanType tingkatanType4, TingkatanType tingkatanType5, String uploadCV, List<Lowongan> lowongans, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate, Boolean statusApprove, String jurusan) {
         this.idMahasiswa = idMahasiswa;
         this.username = username;
         this.password = password;
@@ -84,6 +85,7 @@ public class Mahasiswa implements EntityObject<Mahasiswa> {
         this.modifiedBy = modifiedBy;
         this.modifiedDate = modifiedDate;
         this.statusApprove = statusApprove;
+        this.jurusan = jurusan;
     }
 
     public String getIdMahasiswa() {
@@ -342,6 +344,14 @@ public class Mahasiswa implements EntityObject<Mahasiswa> {
         this.tingkatanType5 = tingkatanType5;
     }
 
+    public String getJurusan() {
+        return jurusan;
+    }
+
+    public void setJurusan(String jurusan) {
+        this.jurusan = jurusan;
+    }
+
     @Override
     public int hashCode() {
         int hash = 3;
@@ -377,6 +387,7 @@ public class Mahasiswa implements EntityObject<Mahasiswa> {
         hash = 89 * hash + Objects.hashCode(this.modifiedBy);
         hash = 89 * hash + Objects.hashCode(this.modifiedDate);
         hash = 89 * hash + Objects.hashCode(this.statusApprove);
+        hash = 89 * hash + Objects.hashCode(this.jurusan);
         return hash;
     }
 
@@ -431,6 +442,7 @@ public class Mahasiswa implements EntityObject<Mahasiswa> {
         this.modifiedBy = mahasiswa.modifiedBy;
         this.modifiedDate = mahasiswa.modifiedDate;
         this.statusApprove = mahasiswa.statusApprove;
+        this.jurusan = mahasiswa.jurusan;
     }
 
     @Override

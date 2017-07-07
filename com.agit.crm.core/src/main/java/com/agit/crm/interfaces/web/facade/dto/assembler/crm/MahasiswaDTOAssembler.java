@@ -64,6 +64,7 @@ public class MahasiswaDTOAssembler implements IObjectAssembler<Mahasiswa, Mahasi
                 .setModifiedBy(domainObject.getModifiedBy())
                 .setModifiedDate(domainObject.getCreatedDate())
                 .setStatusApprove(domainObject.getStatusApprove())
+                .setJurusan(domainObject.getJurusan())
                 .createMahasiswaDTO();
     }
 
@@ -102,6 +103,7 @@ public class MahasiswaDTOAssembler implements IObjectAssembler<Mahasiswa, Mahasi
                 .setModifiedBy(dtoObject.getModifiedBy())
                 .setModifiedDate(dtoObject.getCreatedDate())
                 .setStatusApprove(dtoObject.getStatusApprove())
+                .setJurusan(dtoObject.getJurusan())
                 .createMahasiswa();
     }
 
