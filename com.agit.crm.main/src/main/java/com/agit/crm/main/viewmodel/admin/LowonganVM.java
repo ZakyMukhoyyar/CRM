@@ -1,9 +1,11 @@
 package com.agit.crm.main.viewmodel.admin;
 
 import com.agit.crm.common.application.LowonganService;
+import com.agit.crm.common.application.MahasiswaService;
 import com.agit.crm.common.application.MinatService;
 import com.agit.crm.common.dto.crm.LowonganDTO;
 import com.agit.crm.common.dto.crm.LowonganDTOBuilder;
+import com.agit.crm.common.dto.crm.MahasiswaDTO;
 import com.agit.crm.common.dto.crm.MinatDTO;
 import com.agit.crm.common.dto.usermanagement.UserDTO;
 import com.agit.crm.common.security.SecurityUtil;
@@ -44,6 +46,9 @@ public class LowonganVM {
     /* Import Service */
     @WireVariable
     LowonganService lowonganService;
+    
+    @WireVariable
+    MahasiswaService mahasiswaService;
 
     @WireVariable
     MinatService minatService;
@@ -54,6 +59,8 @@ public class LowonganVM {
     /* Object Binding for Form CRM */
     private LowonganDTO lowonganDTO = new LowonganDTO();
     private List<LowonganDTO> lowonganDTOs = new ArrayList();
+    private MahasiswaDTO mahasiswaDTO = new MahasiswaDTO();
+    private List<MahasiswaDTO> mahasiswaDTOs = new ArrayList();
     private List<MinatDTO> minats = new ArrayList<MinatDTO>();
     private List<String> listNamaMinat = new ArrayList<>();
     private UserDTO user;
@@ -69,7 +76,7 @@ public class LowonganVM {
 
     private PageNavigation previous;
     private boolean checked;
-    private int pageSize = 2;
+    private int pageSize = 5;
     private int pageSizeCreateLowongan = 7;
     private int activePage = 0;
     private int selectedIndex;
@@ -84,6 +91,7 @@ public class LowonganVM {
     @Init
     public void init(
             @ExecutionArgParam("lowonganDTO") LowonganDTO lowongan,
+            @ExecutionArgParam("mahasiswaDTO") MahasiswaDTO mahasiswa,
             @ExecutionArgParam("previous") PageNavigation previous) {
 
         /* Load Data */
@@ -98,6 +106,11 @@ public class LowonganVM {
         if (lowonganDTOs.isEmpty()) {
             lowonganDTOs = Collections.emptyList();
         }
+        mahasiswaDTOs = mahasiswaService.findAll();
+        if (mahasiswaDTOs.isEmpty()){
+            mahasiswaDTOs = Collections.emptyList();
+        }
+                
         gaji.add(" < Rp 1.000.000");
         gaji.add("Rp 1.000.000 - Rp 3.000.000");
         gaji.add("Rp 3.000.000 - Rp 5.000.000");
@@ -243,19 +256,10 @@ public class LowonganVM {
         lowonganDTOs = lowonganService.findAll();
     }
 
-    @Command("detailLowongan")
-    @NotifyChange("lowonganDTO")
-    public void detailKetrampilan(@BindingParam("object") LowonganDTO obj, @ContextParam(ContextType.VIEW) Window window) {
-        Map<String, Object> params = new HashMap<>();
-        params.put("lowonganDTO", obj);
-        CommonViewModel.navigateToWithoutDetach("/crm/admin/lowongan/create_lowongan.zul", window, params);
-    }
-
     @Command("deleteLowongan")
     @NotifyChange("lowonganDTOs")
     public void deletePetunjuk(@BindingParam("object") LowonganDTO obj, @ContextParam(ContextType.VIEW) Window window) {
         lowonganDTO = (LowonganDTO) obj;
-
         Messagebox.show("Apakah anda yakin ingin menghapus Lowongan?", "Konfirmasi", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION,
                 new org.zkoss.zk.ui.event.EventListener() {
                     @Override
@@ -270,9 +274,25 @@ public class LowonganVM {
                     }
                 }
         );
-
     }
-
+    
+    /* for data apply functionality */
+    @Command("detailMahasiswa")
+    @NotifyChange("mahasiswaDTOs")
+    public void detailMahasiswa(@BindingParam("object") MahasiswaDTO obj, @ContextParam(ContextType.VIEW) Window window) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("mahasiswaDTO", obj);
+        CommonViewModel.navigateToWithoutDetach("/crm/admin/dataApplyLowongan/dashboard_applicant.zul", window, params);
+    }
+    
+    @Command("buttonBackApplicant")
+    @NotifyChange({"lowonganDTO", "mahasiswaDTOs"})
+    public void buttonBackApplicant(@BindingParam("object") LowonganDTO obj, MahasiswaDTO obj2, @ContextParam(ContextType.VIEW) Window window){
+        window.detach();
+    }
+    
+    
+    /* getter setter */
     public LowonganDTO getLowonganDTO() {
         return lowonganDTO;
     }
@@ -425,4 +445,20 @@ public class LowonganVM {
         this.minatPekerjaan = minatPekerjaan;
     }
 
+    public MahasiswaDTO getMahasiswaDTO() {
+        return mahasiswaDTO;
+    }
+
+    public void setMahasiswaDTO(MahasiswaDTO mahasiswaDTO) {
+        this.mahasiswaDTO = mahasiswaDTO;
+    }
+
+    public List<MahasiswaDTO> getMahasiswaDTOs() {
+        return mahasiswaDTOs;
+    }
+
+    public void setMahasiswaDTOs(List<MahasiswaDTO> mahasiswaDTOs) {
+        this.mahasiswaDTOs = mahasiswaDTOs;
+    }
+    
 }

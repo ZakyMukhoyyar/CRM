@@ -1,0 +1,67 @@
+<zk xmlns="http://www.zkoss.org/2005/zul">
+    <window border="30" apply="org.zkoss.bind.BindComposer"
+            viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.admin.ApplicantVM')">
+        <style>
+            .labelstyle {
+            font-family: 'Kristen ITC';
+            color: black
+            }
+        </style>
+        <groupbox closable="false" mold="3d">
+            <caption label="Dashboard Daftar Lowongan" />
+            <groupbox closable="false">
+                <grid style="border:0" >
+                    <columns>
+                        <column width="10%" />
+                        <column/>
+                    </columns>
+                    <rows>
+                        <row>
+                            <label value="ID Lowongan" />
+                            <label value="123456"/>
+                        </row>
+                        <row>
+                            <label value="Nama Lowongan" />
+                            <label value="test nama" />
+                        </row>
+                        <row>
+                            <label value="Tanggal Mulai" />
+                            <label value="01-01-2017" />
+                        </row>
+                        <row>
+                            <label value="Tanggal Berakhir" />
+                            <label value="08-01-2017" />
+                        </row>
+                    </rows>
+                </grid>
+                <separator></separator>
+            </groupbox>
+            <groupbox closable="false">
+                <listbox rows="@load(vm.pageSize)" pageSize="@load(vm.pageSize)" mold="paging" model="@bind(vm.lowonganDTOs)" emptyMessage="${labels.common.noDataFound}" >
+                    <listhead>
+                        <listheader label="Nama Lowongan" width="50%" align="center" />
+                        <listheader label="Aksi" width="7%" align="center"/>
+                    </listhead>
+                    <template name="model">
+                        <listitem value="${each}">
+                            <listcell>
+                                <label sclass="labelstyle" width="100%" value="@bind(each.idLowongan)" style="text-align: left;font-weight:bold;color:#65001e"/>
+                                <separator></separator>
+                                <label sclass="labelstyle" width="100%" value="@bind(each.persyaratan)" style="text-align: justify; display: block;" />
+                                <separator></separator>                           
+                                <label sclass="labelstyle" width="100%" value="@bind(each.gaji)" style="text-align: left;"/>
+                                <separator></separator>
+                                <label sclass="labelstyle" width="100%" value="@bind(each.lokasiKerja)" style="text-align: left;"/>
+                            </listcell>
+                            <listcell>
+                                <a sclass="labelstyle" label="Detail" style="text-decoration:underline ;color:blue" onClick="@command('detailLowongan', object=each)"></a>
+                                <!--                            <a sclass="labelstyle" label=" | " style="font-size:12pt ;color:black"></a>
+                                <a sclass="labelstyle" label="Apply" style="text-decoration:underline ;color:blue" onClick="@command('buttonApplyLowongan', object=each)"></a>-->
+                            </listcell>
+                        </listitem>
+                    </template>
+                </listbox>
+            </groupbox>
+        </groupbox>
+    </window>
+</zk>

@@ -1,0 +1,126 @@
+<zk xmlns="http://www.zkoss.org/2005/zul">
+    <window border="30" apply="org.zkoss.bind.BindComposer"
+            viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.admin.LowonganVM')">
+            <!--form="@id('fx') @load(vm.mahasiswaDTO) @save(vm.mahasiswaDTO, before='buttonSaveMahasiswa')">-->
+        <groupbox closable="false" mold="3d">
+            <caption label="Daftar Applicant" />
+            <paging forward="onPaging"/>
+            <listbox mold="paging" model="@bind(vm.mahasiswaDTOs)" emptyMessage="${labels.common.noDataFound}" >
+                <listhead>
+                    <listheader label="ID Applicant" width="10%" align="center" sortDirection="ascending" sort="5"/>
+                    <listheader label="Nama Applicant" width="30%" align="center"/>
+                    <listheader label="Domisili" width="20%" align="center"/>
+                    <listheader label="Minat" width="20%" align="center"/>
+                    <listheader label="IPK" width="10%" align="center"/>
+                    <listheader label="Aksi" width="10%" align="center"/>
+                </listhead>
+                <template name="model">
+                    <listitem value="${each}">
+                        <listcell>
+                            <label width="100%" value="@bind(each.idMahasiswa)"/>
+                        </listcell>
+                        <listcell>
+                            <label width="100%" value="@bind(each.namaLengkap)"/>
+                        </listcell>
+                        <listcell>
+                            <label width="100%" value="@bind(each.domisili)"/>
+                        </listcell>
+                        <listcell>
+                            <label width="100%" value="@bind(each.minat)"/>
+                        </listcell>
+                        <listcell>
+                            <label width="100%" value="@bind(each.ipk)" />
+                        </listcell>
+                        <listcell>
+                            <a label="Detail" style="text-decoration:underline ;color:blue" onClick="@command('', object=each)"></a>
+                        </listcell>
+                    </listitem>
+                </template>
+            </listbox>
+        </groupbox>
+        <separator></separator>
+        
+        <groupbox closable="false" mold="3d">
+            <caption label="Data Applicant" />
+            <grid style="border:0">
+                <columns>
+                    <column width="30%" align="right"/>
+                    <column width="40%"/>
+                    <column ></column>
+                </columns>
+                <rows>
+                    <row>
+                        <label value="ID " style="font-weight: bold"/>
+                        <textbox width="30%" readonly="true" value="@bind(fx.idMahasiswa)"/>
+                    </row>
+                    <row>
+                        <label value="Nama Lengkap" style="font-weight: bold"/>
+                        <textbox width="100%" readonly="true" value="@bind(fx.namaLengkap)"/>
+                    </row>
+                    <row>
+                        <label value="Alamat Email" style="font-weight: bold"/>
+                        <textbox width="100%" readonly="true" value="@bind(fx.email)"/>
+                    </row>
+                    <row>
+                        <label value="Tanggal Lahir" style="font-weight: bold" />
+                        <datebox width="100%" readonly="true" value="@bind(fx.tanggalLahir)"/> 
+                    </row>
+                    <row>
+                        <label value="No KTP" style="font-weight: bold"/>
+                        <textbox width="100%" readonly="true" value="@bind(fx.noKTP)"/>
+                    </row>
+                        
+                    <row>
+                        <label value="Jenis Kelamin" style="font-weight: bold"/>
+                        <textbox width="100%" readonly="true" value="@bind(fx.jenisKelaminType)" />
+<!--                        <combobox width="100%" model="@load(vm.jenisKelaminTypes)" selectedItem="@bind(fx.jenisKelaminType)" readonly="true" placeholder="- Silahkan Pilih -" constraint="no empty : Jenis Kelamin Tidak Boleh Kosong">
+                            <template name="model" var="items">
+                                <comboitem label="@load(items)" value="@load(items)"/>
+                            </template>
+                        </combobox>-->
+                    </row>
+                        
+                    <row>
+                        <label value="Domisili" style="font-weight: bold"/>
+                        <textbox width="100%" readonly="true" value="@bind(fx.domisili)"/>
+                    </row>
+                        
+                    <row>
+                        <label value="No Handphone" style="font-weight: bold"/>
+                        <textbox width="100%" readonly="true" value="@bind(fx.noHP)"/>
+                    </row>
+                    <row>
+                        <label value="Pendidikan Terakhir" style="font-weight: bold"/>
+                        <textbox width="100%" readonly="true" value="@bind(fx.pendidikanType)" />
+<!--                        <combobox width="100%" model="@load(vm.pendidikanTypes)" selectedItem="@bind(fx.pendidikanType)" readonly="true" placeholder="- Silahkan Pilih -" constraint="no empty : Pendidikan Terakhir Tidak Boleh Kosong">
+                            <template name="model" var="items">
+                                <comboitem label="@load(items)" value="@load(items)"/>
+                            </template>
+                        </combobox>-->
+                    </row>
+                    <row>
+                        <label value="Nama Civitas" style="font-weight: bold"/>
+                        <textbox width="100%" readonly="true" value="@bind(fx.namaCivitas)" />
+                    </row>
+                    <row>
+                        <label value="IPK" style="font-weight: bold"/>
+                        <textbox width="100%" readonly="true" value="@bind(fx.ipk)"/>
+                    </row>
+                    <row>
+                        <label value="Minat" style="font-weight: bold"/>
+                        <textbox width="100%" readonly="true" value="@bind(fx.minat)" />
+<!--                        <combobox width="100%" placeholder="- Silahkan Pilih -" model="@load(vm.listNamaMinat)" selectedItem="@bind(fx.minat)" readonly="true">
+                            <template name="model" var="items">
+                                <comboitem label="@load(items)" value="@load(items)"/>
+                            </template>
+                        </combobox>-->
+                    </row>
+                    <row>
+                        <label/>
+                        <button label="Kembali" onClick="@command('buttonBackApplicant')"/>
+                    </row>
+                </rows>
+            </grid>
+        </groupbox>
+    </window>
+</zk>

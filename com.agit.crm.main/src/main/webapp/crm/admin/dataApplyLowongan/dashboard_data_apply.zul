@@ -72,10 +72,10 @@
                                 <label width="100%" value="@bind(each.tanggalBerakhir)"/>
                             </listcell>-->
                             <listcell>
-                                <label width="100%"/>
+                                <label width="100%" value="@bind(each.minatPekerjaan)" />
                             </listcell>
                             <listcell>
-                                <a label="Pelamar" style="text-decoration:underline ;color:blue" onClick="@command('detailLowongan', object=each)"></a>
+                                <a label="Pelamar" style="text-decoration:underline ;color:blue" onClick="@command('detailDataApplicant', object=each)"></a>
 <!--                                <a label=" | " style="font-size:12pt ;color:black"></a>
                                 <a label="Delete" style="text-decoration:underline ;color:blue" onClick="@command('deleteLowongan', object=each)"></a>-->
                             </listcell>

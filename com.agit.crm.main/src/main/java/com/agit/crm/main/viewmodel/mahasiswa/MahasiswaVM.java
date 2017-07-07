@@ -10,6 +10,7 @@ import com.agit.crm.common.dto.crm.LowonganDTOBuilder;
 import com.agit.crm.common.dto.crm.MahasiswaDTO;
 import com.agit.crm.common.dto.crm.MahasiswaDTOBuilder;
 import com.agit.crm.common.dto.crm.MinatDTO;
+import com.agit.crm.common.dto.usermanagement.UserDTO;
 import com.agit.crm.common.security.SecurityUtil;
 import com.agit.crm.shared.type.JenisKelaminType;
 import com.agit.crm.shared.type.PendidikanType;
@@ -17,9 +18,11 @@ import com.agit.crm.shared.type.TingkatanType;
 import com.agit.crm.shared.zul.CommonViewModel;
 import static com.agit.crm.shared.zul.CommonViewModel.showInformationMessagebox;
 import com.agit.crm.shared.zul.PageNavigation;
+import com.agit.crm.user.management.application.UserService;
 import com.agit.crm.util.CommonUtil;
 import java.io.File;
 import java.io.IOException;
+import java.security.Security;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -67,6 +70,9 @@ public class MahasiswaVM extends SelectorComposer<Window> {
 
     @WireVariable
     MinatService minatService;
+    
+    @WireVariable
+    UserService userService;
 
     /* Object Binding for Form CRM */
     private MahasiswaDTO mahasiswaDTO = new MahasiswaDTO();
@@ -75,6 +81,7 @@ public class MahasiswaVM extends SelectorComposer<Window> {
     private List<LowonganDTO> lowonganDTOs = new ArrayList();
     private List<KetrampilanDTO> ketrampilans = new ArrayList<KetrampilanDTO>();
     private List<MinatDTO> minats = new ArrayList<MinatDTO>();
+    private UserDTO user;
 
     /* attribut for CRM */
     private PageNavigation previous;
@@ -105,6 +112,9 @@ public class MahasiswaVM extends SelectorComposer<Window> {
     String mediaNameUploadCV;
     private String filepathUploadCV;
     private String pathLocationUploadCV;
+    
+    /* Disable Button */
+    private boolean disableButtonBack;
 
     @Init
     public void init(
@@ -136,6 +146,13 @@ public class MahasiswaVM extends SelectorComposer<Window> {
         minats = minatService.findAll();
         for (MinatDTO m : minats) {
             listNamaMinat.add(m.getNamaMinat());
+        }
+        
+        user = userService.findByID(SecurityUtil.getUserName());
+        if (user.getRoleDTO().getRoleID().contains("MAHASISWA")){
+            disableButtonBack = false;
+        }else{
+            disableButtonBack = true;
         }
 
     }
@@ -267,6 +284,13 @@ public class MahasiswaVM extends SelectorComposer<Window> {
             Messagebox.show("File : " + mediaUploadCV + " Bukan File PDF", "Error", Messagebox.OK, Messagebox.ERROR);
         }
 
+    }
+    
+    /* Function buttan back register mahasiswa */
+    @Command("buttonKembaliMahasiswa")
+    @NotifyChange("mahasiswaDTO")
+    public void buttonKembaliMahasiswa(@BindingParam("object") MahasiswaDTO obj, @ContextParam(ContextType.VIEW) Window window){
+        window.detach();
     }
 
     /* Function button save register mahasiswa */
@@ -535,4 +559,20 @@ public class MahasiswaVM extends SelectorComposer<Window> {
         this.minat = minat;
     }
 
+    public boolean isDisableButtonBack() {
+        return disableButtonBack;
+    }
+
+    public void setDisableButtonBack(boolean disableButtonBack) {
+        this.disableButtonBack = disableButtonBack;
+    }
+
+    public UserDTO getUser() {
+        return user;
+    }
+
+    public void setUser(UserDTO user) {
+        this.user = user;
+    }
+    
 }

@@ -1,0 +1,53 @@
+<zk xmlns="http://www.zkoss.org/2005/zul">
+    <window border="30" apply="org.zkoss.bind.BindComposer"
+            viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.admin.ApplicantVM')">
+        <groupbox closable="false" mold="3d">
+            <caption label="Dashboard Daftar Applicant" />
+            <groupbox closable="false">
+                <listbox rows="@load(vm.pageSize)" pageSize="@load(vm.pageSize)" mold="paging" model="@bind(vm.mahasiswaDTOs)" emptyMessage="${labels.common.noDataFound}" >
+                    <!--model="" pageSize="5" mold="paging"-->
+                    <listhead>
+                        <listheader label="ID Applicant" width="10%" align="center" sortDirection="ascending" sort="5"/>
+                        <listheader label="Nama Applicant" width="30%" align="center"/>
+                        <listheader label="Domisili" width="20%" align="center"/>
+                        <listheader label="Minat" width="20%" align="center"/>
+                        <listheader label="IPK" width="10%" align="center"/>
+                        <listheader label="Aksi" width="10%" align="center"/>
+                    </listhead>
+                    <template name="model">
+                        <listitem value="${each}">
+                            <listcell>
+                                <label width="100%" value="@load(each.idMahasiswa)"/>
+                            </listcell>
+                            <listcell>
+                                <label width="100%" value="@load(each.namaLengkap)"/>
+                            </listcell>
+                            <listcell>
+                                <label width="100%" value="@load(each.domisili)"/>
+                            </listcell>
+                            <listcell>
+                                <label width="100%" value="@load(each.minat)"/>
+                            </listcell>
+                            <listcell>
+                                <label width="100%" value="@load(each.ipk)" />
+                            </listcell>
+                            <listcell>
+                                <a label="Detail" style="text-decoration:underline ;color:blue" onClick="@command('detailApplicant', object=each)"></a>
+                            </listcell>
+                        </listitem>
+                    </template>
+                </listbox>
+            </groupbox>
+            <grid style="border:0">
+                <columns>
+                    <column align="center"/>
+                </columns>
+                <rows>
+                    <row>
+                        <button label="Kembali" onClick="@command('buttonKembaliApplicantContain')"/>
+                    </row>
+                </rows>
+            </grid>
+        </groupbox>
+    </window>
+</zk>

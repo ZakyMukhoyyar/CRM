@@ -224,13 +224,14 @@
                 </groupbox>
                 <grid style="border:0">
                     <columns>
-                        <column width="95%" align="right"/>
-                        <column width="5%" />
+                        <column width="50%" align="right"/>
+                        <column width="50%" />
                     </columns>
                 
                     <rows>
                         <row>
-                            <button label="Simpan" onClick="@command('buttonSaveMahasiswa')" width="15%" />
+                            <button label="Kembali" onClick="@command('buttonKembaliMahasiswa')" visible="@bind(vm.disableButtonBack)" />
+                            <button label="Simpan" onClick="@command('buttonSaveMahasiswa')" />
                         </row>
                     </rows>
                 </grid>            
