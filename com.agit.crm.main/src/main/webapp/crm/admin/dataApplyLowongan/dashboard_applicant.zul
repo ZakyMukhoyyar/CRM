@@ -1,7 +1,7 @@
 <zk xmlns="http://www.zkoss.org/2005/zul">
     <window border="30" apply="org.zkoss.bind.BindComposer"
-            viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.admin.LowonganVM')">
-            <!--form="@id('fx') @load(vm.mahasiswaDTO) @save(vm.mahasiswaDTO, before='buttonSaveMahasiswa')">-->
+            viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.admin.LowonganVM')"
+            form="@id('fx') @load(vm.mahasiswaDTO) @save(vm.mahasiswaDTO, before='buttonBackApplicant')">
         <groupbox closable="false" mold="3d">
             <caption label="Daftar Applicant" />
             <paging forward="onPaging"/>
@@ -32,7 +32,7 @@
                             <label width="100%" value="@bind(each.ipk)" />
                         </listcell>
                         <listcell>
-                            <a label="Detail" style="text-decoration:underline ;color:blue" onClick="@command('', object=each)"></a>
+                            <a label="Detail" style="text-decoration:underline ;color:blue" onClick="@command('AddDetailApplicant', object=each)"></a>
                         </listcell>
                     </listitem>
                 </template>
@@ -63,7 +63,7 @@
                     </row>
                     <row>
                         <label value="Tanggal Lahir" style="font-weight: bold" />
-                        <datebox width="100%" readonly="true" value="@bind(fx.tanggalLahir)"/> 
+                        <textbox width="100%" readonly="true" value="@bind(fx.tanggalLahir)"/> 
                     </row>
                     <row>
                         <label value="No KTP" style="font-weight: bold"/>
@@ -73,11 +73,6 @@
                     <row>
                         <label value="Jenis Kelamin" style="font-weight: bold"/>
                         <textbox width="100%" readonly="true" value="@bind(fx.jenisKelaminType)" />
-<!--                        <combobox width="100%" model="@load(vm.jenisKelaminTypes)" selectedItem="@bind(fx.jenisKelaminType)" readonly="true" placeholder="- Silahkan Pilih -" constraint="no empty : Jenis Kelamin Tidak Boleh Kosong">
-                            <template name="model" var="items">
-                                <comboitem label="@load(items)" value="@load(items)"/>
-                            </template>
-                        </combobox>-->
                     </row>
                         
                     <row>
@@ -92,11 +87,6 @@
                     <row>
                         <label value="Pendidikan Terakhir" style="font-weight: bold"/>
                         <textbox width="100%" readonly="true" value="@bind(fx.pendidikanType)" />
-<!--                        <combobox width="100%" model="@load(vm.pendidikanTypes)" selectedItem="@bind(fx.pendidikanType)" readonly="true" placeholder="- Silahkan Pilih -" constraint="no empty : Pendidikan Terakhir Tidak Boleh Kosong">
-                            <template name="model" var="items">
-                                <comboitem label="@load(items)" value="@load(items)"/>
-                            </template>
-                        </combobox>-->
                     </row>
                     <row>
                         <label value="Nama Civitas" style="font-weight: bold"/>
@@ -109,11 +99,6 @@
                     <row>
                         <label value="Minat" style="font-weight: bold"/>
                         <textbox width="100%" readonly="true" value="@bind(fx.minat)" />
-<!--                        <combobox width="100%" placeholder="- Silahkan Pilih -" model="@load(vm.listNamaMinat)" selectedItem="@bind(fx.minat)" readonly="true">
-                            <template name="model" var="items">
-                                <comboitem label="@load(items)" value="@load(items)"/>
-                            </template>
-                        </combobox>-->
                     </row>
                     <row>
                         <label/>
