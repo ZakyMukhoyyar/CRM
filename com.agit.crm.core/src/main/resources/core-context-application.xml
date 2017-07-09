@@ -47,5 +47,12 @@
         <property name="ketrampilanRepository" ref="ketrampilanRepository"/>
         <property name="ketrampilanDTOAssembler" ref="ketrampilanDTOAssembler"/>
     </bean>
+    
+    <bean id="jurusanDTOAssembler" class="com.agit.crm.interfaces.web.facade.dto.assembler.crm.JurusanDTOAssembler"></bean>
+    <bean id="jurusanService" class="com.agit.crm.application.impl.JurusanServiceImpl">
+        <property name="jurusanRepository" ref="jurusanRepository"/>
+        <property name="jurusanDTOAssembler" ref="jurusanDTOAssembler"/>
+    </bean>
+    
    
 </beans>
