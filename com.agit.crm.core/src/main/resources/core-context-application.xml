@@ -54,5 +54,9 @@
         <property name="jurusanDTOAssembler" ref="jurusanDTOAssembler"/>
     </bean>
     
-   
+    <bean id="civitasDTOAssembler" class="com.agit.crm.interfaces.web.facade.dto.assembler.crm.CivitasDTOAssembler"></bean>
+    <bean id="civitasService" class="com.agit.crm.application.impl.CivitasServiceImpl">
+        <property name="civitasRepository" ref="civitasRepository"/>
+        <property name="civitasDTOAssembler" ref="civitasDTOAssembler"/>
+    </bean>
 </beans>

@@ -127,6 +127,11 @@
             <artifactId>com.agit.crm.masterdata</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>com.agit.crm.infrastructure.component</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
     <name>com.agit.crm.main</name>
 </project>

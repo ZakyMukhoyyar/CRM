@@ -38,4 +38,8 @@
     <bean id="jurusanRepository" class="com.agit.crm.domain.infrastructure.persistance.hibernate.JurusanHibernateRepository">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
+    
+    <bean id="civitasRepository" class="com.agit.crm.domain.infrastructure.persistance.hibernate.CivitasHibernateRepository">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
 </beans>
