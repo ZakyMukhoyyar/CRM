@@ -46,9 +46,8 @@ INSERT INTO "public"."mst_role" VALUES ('3', 'MAHASISWA', 'MAHASISWA', 'MAHASISW
 -- Records of mst_role_privilege
 -- ----------------------------
 INSERT INTO "public"."mst_role_privilege" VALUES ('1', '1', 'ALLOW', '0');
-INSERT INTO "public"."mst_role_privilege" VALUES ('2', '2', 'ALLOW', '0');
-INSERT INTO "public"."mst_role_privilege" VALUES ('2', '8', 'ALLOW', '1');
-INSERT INTO "public"."mst_role_privilege" VALUES ('2', '19', 'ALLOW', '2');
+INSERT INTO "public"."mst_role_privilege" VALUES ('2', '19', 'ALLOW', '0');
+INSERT INTO "public"."mst_role_privilege" VALUES ('2', '28', 'ALLOW', '1');
 INSERT INTO "public"."mst_role_privilege" VALUES ('3', '28', 'ALLOW', '0');
 
 -- ----------------------------
