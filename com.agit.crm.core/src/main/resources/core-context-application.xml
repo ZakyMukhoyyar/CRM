@@ -16,11 +16,16 @@
     </bean>
     
     <bean id="lowonganDTOAssembler" class="com.agit.crm.interfaces.web.facade.dto.assembler.crm.LowonganDTOAssembler">
+        <property name="riwayatApplyMahasiswaRepository" ref="riwayatApplyMahasiswaRepository"/>
+        <property name="riwayatApplyMahasiswaDTOAssembler" ref="riwayatApplyMahasiswaDTOAssembler"/>
     </bean>
     <bean id="lowonganService" class="com.agit.crm.application.impl.LowonganServiceImpl">
         <property name="lowonganRepository" ref="lowonganRepository"/>
         <property name="lowonganDTOAssembler" ref="lowonganDTOAssembler"/>
+        <property name="riwayatApplyMahasiswaRepository" ref="riwayatApplyMahasiswaRepository"/>
+        <property name="riwayatApplyMahasiswaDTOAssembler" ref="riwayatApplyMahasiswaDTOAssembler"/>
     </bean>
+	
     
     <bean id="forumDTOAssembler" class="com.agit.crm.interfaces.web.facade.dto.assembler.crm.ForumDTOAssembler">
     </bean>
@@ -58,5 +63,11 @@
     <bean id="civitasService" class="com.agit.crm.application.impl.CivitasServiceImpl">
         <property name="civitasRepository" ref="civitasRepository"/>
         <property name="civitasDTOAssembler" ref="civitasDTOAssembler"/>
+    </bean>
+    
+    <bean id="riwayatApplyMahasiswaDTOAssembler" class="com.agit.crm.interfaces.web.facade.dto.assembler.crm.RiwayatApplyMahasiswaDTOAssembler"></bean>
+    <bean id="riwayatApplyMahasiswaService" class="com.agit.crm.application.impl.RiwayatApplyMahasiswaServiceImpl">
+        <property name="riwayatApplyMahasiswaRepository" ref="riwayatApplyMahasiswaRepository"/>
+        <property name="riwayatApplyMahasiswaDTOAssembler" ref="riwayatApplyMahasiswaDTOAssembler"/>
     </bean>
 </beans>

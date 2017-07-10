@@ -42,4 +42,8 @@
     <bean id="civitasRepository" class="com.agit.crm.domain.infrastructure.persistance.hibernate.CivitasHibernateRepository">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
+    
+    <bean id="riwayatApplyMahasiswaRepository" class="com.agit.crm.domain.infrastructure.persistance.hibernate.RiwayatApplyMahasiswaHibernateRepository">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
 </beans>

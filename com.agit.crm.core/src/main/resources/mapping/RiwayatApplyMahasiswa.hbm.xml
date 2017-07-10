@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-access="field">
+    <class mutable="true" name="com.agit.crm.domain.crm.RiwayatApplyMahasiswa" table="AGIT_RIWAYAT_APPLY_MAHASISWA">
+        <!--<cache usage="read-only"/>-->
+        <id column="id" name="id">
+            <generator class="org.hibernate.id.IdentityGenerator"/>
+        </id>
+        <property column="idRiwayatApplyMahasiswa" name="idRiwayatApplyMahasiswa" not-null="false"/>
+        <property column="namaLowonganApply" name="namaLowonganApply" not-null="false"/>
+        <property column="createdBy" name="createdBy" not-null="false"/>
+        <property column="createdDate" name="createdDate" not-null="false"/>
+        <property column="modifiedDate" name="modifiedDate" not-null="false"/>
+        <property column="modifiedBy" name="modifiedBy" not-null="false"/>
+        <property column="lowonganState" name="lowonganState" not-null="false">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">com.agit.crm.shared.state.LowonganState</param>
+                <param name="type">12</param>
+            </type>
+        </property>
+    </class>
+</hibernate-mapping>

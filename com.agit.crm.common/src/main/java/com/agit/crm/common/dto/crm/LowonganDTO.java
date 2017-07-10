@@ -1,6 +1,8 @@
 package com.agit.crm.common.dto.crm;
 
+import com.agit.crm.shared.state.LowonganState;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -9,6 +11,7 @@ import java.util.Date;
 public class LowonganDTO {
 
     private String idLowongan;
+    private String idUser;
     private String namaLowongan;
     private String deskripsiLowongan;
     private Date tanggalMulai;
@@ -17,6 +20,8 @@ public class LowonganDTO {
     private String persyaratan;
     private String lokasiKerja;
     private String gaji;
+    private LowonganState lowonganState;
+    private List<RiwayatApplyMahasiswaDTO> listRiwayatApplyMahasiswaDTO;
     private String createdBy;
     private Date createdDate;
     private String modifiedBy;
@@ -25,8 +30,9 @@ public class LowonganDTO {
     public LowonganDTO() {
     }
 
-    public LowonganDTO(String idLowongan, String namaLowongan, String deskripsiLowongan, Date tanggalMulai, Date tanggalBerakhir, String minatPekerjaan, String persyaratan, String lokasiKerja, String gaji, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate) {
+    public LowonganDTO(String idLowongan, String idUser, String namaLowongan, String deskripsiLowongan, Date tanggalMulai, Date tanggalBerakhir, String minatPekerjaan, String persyaratan, String lokasiKerja, String gaji, LowonganState lowonganState, List<RiwayatApplyMahasiswaDTO> listRiwayatApplyMahasiswaDTO, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate) {
         this.idLowongan = idLowongan;
+        this.idUser = idUser;
         this.namaLowongan = namaLowongan;
         this.deskripsiLowongan = deskripsiLowongan;
         this.tanggalMulai = tanggalMulai;
@@ -35,6 +41,8 @@ public class LowonganDTO {
         this.persyaratan = persyaratan;
         this.lokasiKerja = lokasiKerja;
         this.gaji = gaji;
+        this.lowonganState = lowonganState;
+        this.listRiwayatApplyMahasiswaDTO = listRiwayatApplyMahasiswaDTO;
         this.createdBy = createdBy;
         this.createdDate = createdDate;
         this.modifiedBy = modifiedBy;
@@ -47,6 +55,14 @@ public class LowonganDTO {
 
     public void setIdLowongan(String idLowongan) {
         this.idLowongan = idLowongan;
+    }
+
+    public String getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(String idUser) {
+        this.idUser = idUser;
     }
 
     public String getNamaLowongan() {
@@ -113,6 +129,22 @@ public class LowonganDTO {
         this.gaji = gaji;
     }
 
+    public LowonganState getLowonganState() {
+        return lowonganState;
+    }
+
+    public void setLowonganState(LowonganState lowonganState) {
+        this.lowonganState = lowonganState;
+    }
+
+    public List<RiwayatApplyMahasiswaDTO> getListRiwayatApplyMahasiswaDTO() {
+        return listRiwayatApplyMahasiswaDTO;
+    }
+
+    public void setListRiwayatApplyMahasiswaDTO(List<RiwayatApplyMahasiswaDTO> listRiwayatApplyMahasiswaDTO) {
+        this.listRiwayatApplyMahasiswaDTO = listRiwayatApplyMahasiswaDTO;
+    }
+
     public String getCreatedBy() {
         return createdBy;
     }
@@ -147,7 +179,7 @@ public class LowonganDTO {
 
     @Override
     public String toString() {
-        return "LowonganDTO{" + "idLowongan=" + idLowongan + ", namaLowongan=" + namaLowongan + ", deskripsiLowongan=" + deskripsiLowongan + ", tanggalMulai=" + tanggalMulai + ", tanggalBerakhir=" + tanggalBerakhir + ", minatPekerjaan=" + minatPekerjaan + ", persyaratan=" + persyaratan + ", lokasiKerja=" + lokasiKerja + ", gaji=" + gaji + ", createdBy=" + createdBy + ", createdDate=" + createdDate + ", modifiedBy=" + modifiedBy + ", modifiedDate=" + modifiedDate + '}';
+        return "LowonganDTO{" + "idLowongan=" + idLowongan + ", idUser=" + idUser + ", namaLowongan=" + namaLowongan + ", deskripsiLowongan=" + deskripsiLowongan + ", tanggalMulai=" + tanggalMulai + ", tanggalBerakhir=" + tanggalBerakhir + ", minatPekerjaan=" + minatPekerjaan + ", persyaratan=" + persyaratan + ", lokasiKerja=" + lokasiKerja + ", gaji=" + gaji + ", lowonganState=" + lowonganState + ", listRiwayatApplyMahasiswaDTO=" + listRiwayatApplyMahasiswaDTO + ", createdBy=" + createdBy + ", createdDate=" + createdDate + ", modifiedBy=" + modifiedBy + ", modifiedDate=" + modifiedDate + '}';
     }
 
 }

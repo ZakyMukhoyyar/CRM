@@ -1,11 +1,14 @@
 package com.agit.crm.common.dto.crm;
 
+import com.agit.crm.shared.state.LowonganState;
 import java.util.Date;
+import java.util.List;
 
 
 public class LowonganDTOBuilder {
 
     private String idLowongan;
+    private String idUser;
     private String namaLowongan;
     private String deskripsiLowongan;
     private Date tanggalMulai;
@@ -14,6 +17,8 @@ public class LowonganDTOBuilder {
     private String persyaratan;
     private String lokasiKerja;
     private String gaji;
+    private LowonganState lowonganState;
+    private List<RiwayatApplyMahasiswaDTO> listRiwayatApplyMahasiswaDTO;
     private String createdBy;
     private Date createdDate;
     private String modifiedBy;
@@ -24,6 +29,11 @@ public class LowonganDTOBuilder {
 
     public LowonganDTOBuilder setIdLowongan(String idLowongan) {
         this.idLowongan = idLowongan;
+        return this;
+    }
+
+    public LowonganDTOBuilder setIdUser(String idUser) {
+        this.idUser = idUser;
         return this;
     }
 
@@ -67,6 +77,16 @@ public class LowonganDTOBuilder {
         return this;
     }
 
+    public LowonganDTOBuilder setLowonganState(LowonganState lowonganState) {
+        this.lowonganState = lowonganState;
+        return this;
+    }
+
+    public LowonganDTOBuilder setListRiwayatApplyMahasiswaDTO(List<RiwayatApplyMahasiswaDTO> listRiwayatApplyMahasiswaDTO) {
+        this.listRiwayatApplyMahasiswaDTO = listRiwayatApplyMahasiswaDTO;
+        return this;
+    }
+
     public LowonganDTOBuilder setCreatedBy(String createdBy) {
         this.createdBy = createdBy;
         return this;
@@ -88,7 +108,7 @@ public class LowonganDTOBuilder {
     }
 
     public LowonganDTO createLowonganDTO() {
-        return new LowonganDTO(idLowongan, namaLowongan, deskripsiLowongan, tanggalMulai, tanggalBerakhir, minatPekerjaan, persyaratan, lokasiKerja, gaji, createdBy, createdDate, modifiedBy, modifiedDate);
+        return new LowonganDTO(idLowongan, idUser, namaLowongan, deskripsiLowongan, tanggalMulai, tanggalBerakhir, minatPekerjaan, persyaratan, lokasiKerja, gaji, lowonganState, listRiwayatApplyMahasiswaDTO, createdBy, createdDate, modifiedBy, modifiedDate);
     }
     
 }

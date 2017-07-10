@@ -50,7 +50,9 @@
                     </row>
                     <row>
                         <cell></cell>
-                        <cell></cell>
+                        <cell align="right">
+                            <button width="40%" label="History" mold="trendy" onClick="@command('buttonRiwayatLowongan')"/>
+                        </cell>
                         <cell align="left">
                             <button width="60%" label="Pencarian" mold="trendy" onClick="@command('searchDataBank')"/>
                         </cell>
@@ -66,7 +68,7 @@
                 <template name="model">
                     <listitem value="${each}">
                         <listcell>
-                            <label sclass="labelstyle" width="100%" value="@bind(each.namaLowongan)" style="text-align: left;font-weight:bold;color:#65001e;background:#008db7;color:white;"/>
+                            <label sclass="labelstyle" width="100%" value="@bind(each.namaLowongan)" style="text-align: center display: block;"/>
                             <separator></separator>
                             <label sclass="labelstyle" width="100%" value="@bind(each.persyaratan)" style="text-align: justify; display: block;" />
                             <separator></separator>                           
@@ -75,7 +77,7 @@
                             <label sclass="labelstyle" width="100%" value="@bind(each.lokasiKerja)" style="text-align: left;"/>
                         </listcell>
                         <listcell>
-                            <a sclass="labelstyle" label="Detail" style="text-decoration:underline ;color:blue" onClick="@command('detailLowongan', object=each)"></a>
+                            <a sclass="labelstyle" label="Detail" style="text-decoration:underline ;color:blue" onClick="@command('buttonDetailLowongan', object=each)"></a>
                             <a sclass="labelstyle" label=" | " style="font-size:12pt ;color:black"></a>
                             <a sclass="labelstyle" label="Apply" style="text-decoration:underline ;color:blue" onClick="@command('buttonApplyLowongan', object=each)"></a>
                         </listcell>
