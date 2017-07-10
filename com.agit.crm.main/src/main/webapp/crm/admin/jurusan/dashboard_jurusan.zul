@@ -1,9 +1,9 @@
 <zk xmlns="http://www.zkoss.org/2005/zul">
     <window apply="org.zkoss.bind.BindComposer"
-            viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.admin.KetrampilanVM')"
-            form="@id('fx') @load(vm.ketrampilanDTO) @save(vm.ketrampilanDTO, before='buttonSaveKetrampilan')">
+            viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.admin.JurusanVM')"
+            form="@id('fx') @load(vm.jurusanDTO) @save(vm.jurusanDTO, before='buttonSaveJurusan')">
         <groupbox closable="false" mold="3d">
-            <caption label="Dashboard Ketrampilan" />
+            <caption label="Dashboard Jurusan" />
             <groupbox closable="false">
                 <caption label="Parameter Pencarian" />
                 <grid style="border:0">
@@ -15,19 +15,11 @@
                     </columns>
                     <rows>
                         <row>
-                            <label value="ID Ketrampilan" />
-                            <textbox width="50%" value="@bind(vm.idKetrampilan)"/>
-                            <label value="Nama Ketrampilan" />
-                            <textbox width="50%" value="@bind(vm.namaKetrampilan)"/>                           
+                            <label value="ID Jurusan" />
+                            <textbox width="50%" value=""/>
+                            <label value="Nama Jurusan" />
+                            <textbox width="50%" value=""/>
                         </row>
-                        <row>
-                            <label value="Status" />
-                            <combobox autodrop="true" model="@load(vm.listStatus)" selectedItem="@bind(vm.status)" readonly="true" width="50%" placeholder="- Pilihan Status -">
-                                <template name="model" var="items">
-                                    <comboitem label="@load(items)" value="@load(items)"/>
-                                </template>
-                            </combobox>
-                        </row>                        
                     </rows>
                 </grid>
                 <separator></separator>
@@ -44,11 +36,10 @@
                         <row>
                             <cell width=""></cell>
                             <cell>
-                                <button width="80%"  label="Pencarian" mold="trendy" onClick="@command('searchKetrampilan')"/>
+                                <button width="80%"  label="Pencarian" mold="trendy" onClick="@command('buttonSearchJurusan')"/>
                             </cell>
                             <cell align="left">
-                                <button width="80%" label="Create Ketrampilan" mold="trendy" onClick="@command('buttonNewKetrampilan')"/>
-                                
+                                <button width="80%" label="Create Jurusan" mold="trendy" onClick="@command('buttonNewJurusan')"/>                                
                             </cell>
                             <cell></cell> 
                         </row>
@@ -56,26 +47,23 @@
                 </grid>
             </groupbox>
             <groupbox closable="false">
-                <listbox rows="@load(vm.pageSize)" mold="paging" pageSize="@load(vm.pageSize)" emptyMessage="${labels.common.noDataFound}" model="@bind(vm.ketrampilanDTOs)">
+                <paging forward="onPaging" />
+                <listbox rows="10" mold="paging" emptyMessage="${labels.common.noDataFound}" model="@bind(vm.jurusanDTOs)">
                     <listhead>
-                        <listheader label="ID Ketrampilan" width="10%" align="center" sortDirection="ascending" sort="auto(idKetrampilan)"/>
-                        <listheader label="Nama Ketrampilan" width="20%" align="center"/>
-                        <listheader label="Status" width="14%" align="center"/>
+                        <listheader label="ID Jurusan" width="10%" align="center" sortDirection="ascending" sort="auto(idJurusan)"/>
+                        <listheader label="Nama Jurusan" width="20%" align="center"/>
                         <listheader label="Aksi" width="10%" align="center"/>
                     </listhead>
                     <template name="model">
                         <listitem value="${each}">
                             <listcell>
-                                <label width="100%" value="@bind(each.idKetrampilan)"/>
+                                <label width="100%" value="@bind(each.idJurusan)"/>
                             </listcell>
                             <listcell>
-                                <label width="100%" value="@bind(each.namaKetrampilan)"/>
+                                <label width="100%" value="@bind(each.namaJurusan)"/>
                             </listcell>
                             <listcell>
-                                <label width="100%" value="@bind(each.status)"/>
-                            </listcell>
-                            <listcell>
-                                <a label="Detail" style="text-decoration:underline ;color:blue" onClick="@command('detailKetrampilan', object=each)"></a>
+                                <a label="Detail" style="text-decoration:underline ;color:blue" onClick="@command('detailJurusan', object=each)"></a>
                                 <!--                                <a label=" | " style="font-size:12pt ;color:black"></a>
                                 <a label="Delete" style="text-decoration:underline ;color:blue" onClick="@command('deleteDataBank', object=each)"></a>-->
                             </listcell>

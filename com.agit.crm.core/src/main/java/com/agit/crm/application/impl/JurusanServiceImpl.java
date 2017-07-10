@@ -52,7 +52,7 @@ public class JurusanServiceImpl implements JurusanService {
     public JurusanDTO getDummyData() {
         Jurusan jurusan = new JurusanBuilder()
                 .setIdJurusan("1")
-                .setNamaJurusan("namaJurusan")
+                .setNamaJurusan("Teknik Informatika")
                 .setCreatedBy("created by")
                 .setCreatedDate(new Date())
                 .setModifiedBy("modified by")

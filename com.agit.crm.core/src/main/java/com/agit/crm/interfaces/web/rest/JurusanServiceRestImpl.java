@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  *
  * @author Zaky
  */
-public class JurusanServiceImpl implements JurusanServiceFacade {
+public class JurusanServiceRestImpl implements JurusanServiceFacade {
     
     @Autowired
     private JurusanService jurusanService;
