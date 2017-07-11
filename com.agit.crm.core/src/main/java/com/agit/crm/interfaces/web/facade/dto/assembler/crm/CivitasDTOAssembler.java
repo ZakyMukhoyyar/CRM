@@ -24,7 +24,6 @@ public class CivitasDTOAssembler implements IObjectAssembler<Civitas, CivitasDTO
                 .setModifiedDate(domainObject.getModifiedDate())
                 .setNamaCivitas(domainObject.getNamaCivitas())
                 .setStatus(domainObject.getStatus())
-                .setUploadCivitas(domainObject.getUploadCivitas())
                 .createCivitasDTO();
     }
 
@@ -38,7 +37,6 @@ public class CivitasDTOAssembler implements IObjectAssembler<Civitas, CivitasDTO
                 .setModifiedDate(dtoObject.getModifiedDate())
                 .setNamaCivitas(dtoObject.getNamaCivitas())
                 .setStatus(dtoObject.getStatus())
-                .setUploadCivitas(dtoObject.getUploadCivitas())
                 .createCivitas();
     }
 

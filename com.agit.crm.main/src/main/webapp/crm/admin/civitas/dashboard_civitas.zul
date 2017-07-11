@@ -1,0 +1,60 @@
+    <zk xmlns="http://www.zkoss.org/2005/zul">
+    <window apply="org.zkoss.bind.BindComposer"
+            viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.admin.CivitasVM')"
+            form="@id('fx') @load(vm.civitasDTO) @save(vm.civitasDTO, before='buttonSaveDataCivitas')">
+        <groupbox closable="false" mold="3d">
+            <caption label="Form Dashboard Data Civitas" />
+            <groupbox closable="false">
+                <caption label="Form Upload File Data Civitas" />
+                <grid>
+                    <columns>
+                        <column width="15%" />
+                        <column width="25%" />
+                    </columns>
+                    <rows>
+                        <row> 
+                            <label value="File Upload" style="font-weight:bold"/>
+                            <textbox width="100%"  readonly="true" value="@bind(vm.mediaNameCivitas)"/>
+                            <cell align="left">
+                                <button width="20%" label="Mengunggah" upload="true" onUpload="@command('uploadFile')"/>
+                                <space width="10px"></space>
+                                <button width="20%" label="Upload"  onClick="@command('buttonSaveDataCivitas')"/>
+                            </cell>
+                        </row>
+                        <row>
+                            <label value="Civitas" style="font-weight:bold"/>
+                            <textbox width="100%" value="@bind(vm.namaCivitas)"/>
+                            <cell align="left">
+                                <button width="20%" label="Search" mold="trendy" onClick="@command('buttonPencarian')"/>
+                            </cell>
+                        </row>
+                    </rows>
+                </grid>
+                <separator></separator>
+            </groupbox>
+            <groupbox closable="false">
+                <caption label="Tab 1" style="font-size:14pt"/>
+                <paging forward="onPaging" />
+                <listbox rows="7" emptyMessage="${labels.common.noDataFound}" 
+                         model="@bind(vm.civitasDTOs)">
+                    <listhead>
+                        <listheader label="Nama Civitas" width="10%" align="center"/>
+                        <listheader label="Status" width="15%" align="center"/>
+                                           
+                    </listhead>
+                    <template name="model">
+                        <listitem value="${each}">
+                            <listcell >
+                                <label width="100%" value="@bind(each.namaCivitas)"/>
+                            </listcell>
+                            <listcell >
+                                <label width="100%" value="@bind(each.status)"/>
+                            </listcell>
+                        </listitem>
+                    </template>
+                </listbox>
+            </groupbox>
+            <separator height="30px"/>
+        </groupbox>
+    </window>
+</zk>

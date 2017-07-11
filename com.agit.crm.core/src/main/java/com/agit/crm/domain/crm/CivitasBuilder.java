@@ -5,15 +5,13 @@
  */
 package com.agit.crm.domain.crm;
 
-import com.agit.crm.shared.status.Status;
 import java.util.Date;
 
 public class CivitasBuilder {
 
     private String civitasID;
-    private String uploadCivitas;
     private String namaCivitas;
-    private Status status;
+    private String status;
     private String createdBy;
     private Date createdDate;
     private String modifiedBy;
@@ -27,17 +25,12 @@ public class CivitasBuilder {
         return this;
     }
 
-    public CivitasBuilder setUploadCivitas(String uploadCivitas) {
-        this.uploadCivitas = uploadCivitas;
-        return this;
-    }
-
     public CivitasBuilder setNamaCivitas(String namaCivitas) {
         this.namaCivitas = namaCivitas;
         return this;
     }
 
-    public CivitasBuilder setStatus(Status status) {
+    public CivitasBuilder setStatus(String status) {
         this.status = status;
         return this;
     }
@@ -63,7 +56,7 @@ public class CivitasBuilder {
     }
 
     public Civitas createCivitas() {
-        return new Civitas(civitasID, uploadCivitas, namaCivitas, status, createdBy, createdDate, modifiedBy, modifiedDate);
+        return new Civitas(civitasID, namaCivitas, status, createdBy, createdDate, modifiedBy, modifiedDate);
     }
 
 }

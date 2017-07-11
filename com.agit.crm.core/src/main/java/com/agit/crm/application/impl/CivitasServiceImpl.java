@@ -58,8 +58,7 @@ public class CivitasServiceImpl implements CivitasService {
                 .setModifiedBy("aa")
                 .setModifiedDate(new Date())
                 .setNamaCivitas("UDINUS")
-                .setStatus(Status.ACTIVE)
-                .setUploadCivitas("1")
+                .setStatus("Active")
                 .createCivitas();
         return civitasDTOAssembler.toDTO(civitas);
     }

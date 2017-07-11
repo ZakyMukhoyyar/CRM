@@ -12,16 +12,16 @@
         </id>
         <property column="civitasID" name="civitasID" not-null="false"/>
         <property column="namaCivitas" name="namaCivitas" not-null="false"/>
-        <property column="uploadCivitas" name="uploadCivitas" not-null="false"/>
+        <property column="status" name="status" not-null="false"/>
         <property column="createdBy" name="createdBy" not-null="false"/>
         <property column="createdDate" name="createdDate" not-null="false"/>
         <property column="modifiedDate" name="modifiedDate" not-null="false"/>
         <property column="modifiedBy" name="modifiedBy" not-null="false"/>
-        <property column="status" name="status" not-null="false">
+        <!--        <property column="status" name="status" not-null="false">
             <type name="org.hibernate.type.EnumType">
                 <param name="enumClass">com.agit.crm.shared.status.Status</param>
                 <param name="type">12</param>
             </type>
-        </property>
+        </property>-->
     </class>
 </hibernate-mapping>

@@ -5,15 +5,13 @@
  */
 package com.agit.crm.common.dto.crm;
 
-import com.agit.crm.shared.status.Status;
 import java.util.Date;
 
 public class CivitasDTOBuilder {
 
     private String civitasID;
-    private String uploadCivitas;
     private String namaCivitas;
-    private Status status;
+    private String status;
     private String createdBy;
     private Date createdDate;
     private String modifiedBy;
@@ -27,17 +25,12 @@ public class CivitasDTOBuilder {
         return this;
     }
 
-    public CivitasDTOBuilder setUploadCivitas(String uploadCivitas) {
-        this.uploadCivitas = uploadCivitas;
-        return this;
-    }
-
     public CivitasDTOBuilder setNamaCivitas(String namaCivitas) {
         this.namaCivitas = namaCivitas;
         return this;
     }
 
-    public CivitasDTOBuilder setStatus(Status status) {
+    public CivitasDTOBuilder setStatus(String status) {
         this.status = status;
         return this;
     }
@@ -63,7 +56,7 @@ public class CivitasDTOBuilder {
     }
 
     public CivitasDTO createCivitasDTO() {
-        return new CivitasDTO(civitasID, uploadCivitas, namaCivitas, status, createdBy, createdDate, modifiedBy, modifiedDate);
+        return new CivitasDTO(civitasID, namaCivitas, status, createdBy, createdDate, modifiedBy, modifiedDate);
     }
 
 }

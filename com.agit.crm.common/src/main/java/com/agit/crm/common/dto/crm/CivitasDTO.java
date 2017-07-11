@@ -11,9 +11,8 @@ import java.util.Date;
 public class CivitasDTO implements Serializable {
 
     private String civitasID;
-    private String uploadCivitas;
     private String namaCivitas;
-    private Status status;
+    private String status;
     private String createdBy;
     private Date createdDate;
     private String modifiedBy;
@@ -22,9 +21,8 @@ public class CivitasDTO implements Serializable {
     public CivitasDTO() {
     }
 
-    public CivitasDTO(String civitasID, String uploadCivitas, String namaCivitas, Status status, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate) {
+    public CivitasDTO(String civitasID, String namaCivitas, String status, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate) {
         this.civitasID = civitasID;
-        this.uploadCivitas = uploadCivitas;
         this.namaCivitas = namaCivitas;
         this.status = status;
         this.createdBy = createdBy;
@@ -41,14 +39,6 @@ public class CivitasDTO implements Serializable {
         this.civitasID = civitasID;
     }
 
-    public String getUploadCivitas() {
-        return uploadCivitas;
-    }
-
-    public void setUploadCivitas(String uploadCivitas) {
-        this.uploadCivitas = uploadCivitas;
-    }
-
     public String getNamaCivitas() {
         return namaCivitas;
     }
@@ -57,11 +47,11 @@ public class CivitasDTO implements Serializable {
         this.namaCivitas = namaCivitas;
     }
 
-    public Status getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Status status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
@@ -99,7 +89,7 @@ public class CivitasDTO implements Serializable {
 
     @Override
     public String toString() {
-        return "CivitasDTO{" + "civitasID=" + civitasID + ", uploadCivitas=" + uploadCivitas + ", namaCivitas=" + namaCivitas + ", status=" + status + ", createdBy=" + createdBy + ", createdDate=" + createdDate + ", modifiedBy=" + modifiedBy + ", modifiedDate=" + modifiedDate + '}';
+        return "CivitasDTO{" + "civitasID=" + civitasID + ", namaCivitas=" + namaCivitas + ", status=" + status + ", createdBy=" + createdBy + ", createdDate=" + createdDate + ", modifiedBy=" + modifiedBy + ", modifiedDate=" + modifiedDate + '}';
     }
 
 }

@@ -1,7 +1,6 @@
 package com.agit.crm.domain.crm;
 
 import com.agit.crm.shared.object.EntityObject;
-import com.agit.crm.shared.status.Status;
 import java.util.Date;
 import java.util.Objects;
 
@@ -13,9 +12,8 @@ public class Civitas implements EntityObject<Civitas> {
 
     long id;
     private String civitasID;
-    private String uploadCivitas;
     private String namaCivitas;
-    private Status status;
+    private String status;
     private String createdBy;
     private Date createdDate;
     private String modifiedBy;
@@ -24,9 +22,8 @@ public class Civitas implements EntityObject<Civitas> {
     public Civitas() {
     }
 
-    public Civitas(String civitasID, String uploadCivitas, String namaCivitas, Status status, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate) {
+    public Civitas(String civitasID, String namaCivitas, String status, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate) {
         this.civitasID = civitasID;
-        this.uploadCivitas = uploadCivitas;
         this.namaCivitas = namaCivitas;
         this.status = status;
         this.createdBy = createdBy;
@@ -51,14 +48,6 @@ public class Civitas implements EntityObject<Civitas> {
         this.civitasID = civitasID;
     }
 
-    public String getUploadCivitas() {
-        return uploadCivitas;
-    }
-
-    public void setUploadCivitas(String uploadCivitas) {
-        this.uploadCivitas = uploadCivitas;
-    }
-
     public String getNamaCivitas() {
         return namaCivitas;
     }
@@ -67,11 +56,11 @@ public class Civitas implements EntityObject<Civitas> {
         this.namaCivitas = namaCivitas;
     }
 
-    public Status getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Status status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
@@ -111,7 +100,6 @@ public class Civitas implements EntityObject<Civitas> {
     public int hashCode() {
         int hash = 7;
         hash = 11 * hash + Objects.hashCode(this.civitasID);
-        hash = 11 * hash + Objects.hashCode(this.uploadCivitas);
         hash = 11 * hash + Objects.hashCode(this.namaCivitas);
         hash = 11 * hash + Objects.hashCode(this.status);
         hash = 11 * hash + Objects.hashCode(this.createdBy);
@@ -138,7 +126,6 @@ public class Civitas implements EntityObject<Civitas> {
 
     public void assignNewCivitas(Civitas civitas) {
         this.civitasID = civitas.civitasID;
-        this.uploadCivitas = civitas.uploadCivitas;
         this.namaCivitas = civitas.namaCivitas;
         this.status = civitas.status;
         this.createdBy = civitas.createdBy;
