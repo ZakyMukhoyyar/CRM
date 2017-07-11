@@ -39,6 +39,7 @@
         <hibernate.version>3.3.1.GA</hibernate.version>
         <hibernate.annotation.version>3.4.0.GA</hibernate.annotation.version>
         <hibernate.javax.jpa.version>1.0.0.Final</hibernate.javax.jpa.version>
+        <hibernate.audit.version>4.2.4.Final</hibernate.audit.version>
         
         <!--log4j-->
         <log4j.version>1.2.17</log4j.version> 
@@ -188,7 +189,7 @@
         </dependency>
         
         <!-- Zkoss Dependencies -->
-                <dependency>
+        <dependency>
             <groupId>org.zkoss.zk</groupId>
             <artifactId>zul</artifactId>
             <version>${zkoss.version}</version>
@@ -221,7 +222,7 @@
         
         
         <!--This dependency is only run on Lev's Macpro, comment it if necessary-->
-<!--        <dependency>
+        <!--        <dependency>
             <groupId>zk-bitozen</groupId>
             <artifactId>zk-bitozen-calendar</artifactId>
             <version>1.0.0.1-RELEASE</version>
@@ -325,6 +326,11 @@
             <groupId>org.hibernate.javax.persistence</groupId>
             <artifactId>hibernate-jpa-2.0-api</artifactId>
             <version>${hibernate.javax.jpa.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-envers</artifactId>
+            <version>${hibernate.audit.version}</version>
         </dependency>
         
         <!--log4j-->
@@ -497,7 +503,7 @@
         </dependency>
     </dependencies>
     
-<!--    <repositories>
+    <!--    <repositories>
         <repository>
             <id>bitozen_repository</id>
             <name>bitozen_repository</name>
