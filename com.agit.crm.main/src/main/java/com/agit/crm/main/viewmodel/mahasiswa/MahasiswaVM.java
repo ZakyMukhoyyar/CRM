@@ -1,9 +1,13 @@
 package com.agit.crm.main.viewmodel.mahasiswa;
 
+import com.agit.crm.common.application.CivitasService;
+import com.agit.crm.common.application.JurusanService;
 import com.agit.crm.common.application.KetrampilanService;
 import com.agit.crm.common.application.LowonganService;
 import com.agit.crm.common.application.MahasiswaService;
 import com.agit.crm.common.application.MinatService;
+import com.agit.crm.common.dto.crm.CivitasDTO;
+import com.agit.crm.common.dto.crm.JurusanDTO;
 import com.agit.crm.common.dto.crm.KetrampilanDTO;
 import com.agit.crm.common.dto.crm.LowonganDTO;
 import com.agit.crm.common.dto.crm.LowonganDTOBuilder;
@@ -69,9 +73,15 @@ public class MahasiswaVM extends SelectorComposer<Window> {
 
     @WireVariable
     MinatService minatService;
-    
+
     @WireVariable
     UserService userService;
+
+    @WireVariable
+    CivitasService civitasService;
+
+    @WireVariable
+    JurusanService jurusanService;
 
     /* Object Binding for Form CRM */
     private MahasiswaDTO mahasiswaDTO = new MahasiswaDTO();
@@ -81,6 +91,10 @@ public class MahasiswaVM extends SelectorComposer<Window> {
     private List<KetrampilanDTO> ketrampilans = new ArrayList<KetrampilanDTO>();
     private List<MinatDTO> minats = new ArrayList<MinatDTO>();
     private UserDTO user;
+    private List<CivitasDTO> civitas = new ArrayList<CivitasDTO>();
+    private List<String> listCivitas = new ArrayList<>();
+    private List<JurusanDTO> jurusans = new ArrayList<JurusanDTO>();
+    private List<String> listJurusan = new ArrayList<>();
 
     /* attribut for CRM */
     private PageNavigation previous;
@@ -111,7 +125,7 @@ public class MahasiswaVM extends SelectorComposer<Window> {
     String mediaNameUploadCV;
     private String filepathUploadCV;
     private String pathLocationUploadCV;
-    
+
     /* Disable Button */
     private boolean disableButtonBack;
 
@@ -146,14 +160,21 @@ public class MahasiswaVM extends SelectorComposer<Window> {
         for (MinatDTO m : minats) {
             listNamaMinat.add(m.getNamaMinat());
         }
-        
+
         user = userService.findByID(SecurityUtil.getUserName());
-        if (user.getRoleDTO().getRoleID().contains("MAHASISWA")){
+        if (user.getRoleDTO().getRoleID().contains("MAHASISWA")) {
             disableButtonBack = false;
-        }else{
+        } else {
             disableButtonBack = true;
         }
-
+        civitas = civitasService.findAll();
+        for (CivitasDTO m : civitas) {
+            listCivitas.add(m.getNamaCivitas());
+        }
+        jurusans = jurusanService.findAll();
+        for (JurusanDTO m : jurusans) {
+            listJurusan.add(m.getNamaJurusan());
+        }
     }
 
     private void checkValidity(MahasiswaDTO mahasiswa, LowonganDTO lowongan, PageNavigation previous) {
@@ -284,11 +305,11 @@ public class MahasiswaVM extends SelectorComposer<Window> {
         }
 
     }
-    
+
     /* Function buttan back register mahasiswa */
     @Command("buttonKembaliMahasiswa")
     @NotifyChange("mahasiswaDTO")
-    public void buttonKembaliMahasiswa(@BindingParam("object") MahasiswaDTO obj, @ContextParam(ContextType.VIEW) Window window){
+    public void buttonKembaliMahasiswa(@BindingParam("object") MahasiswaDTO obj, @ContextParam(ContextType.VIEW) Window window) {
         window.detach();
     }
 
@@ -573,5 +594,37 @@ public class MahasiswaVM extends SelectorComposer<Window> {
     public void setUser(UserDTO user) {
         this.user = user;
     }
-    
+
+    public List<CivitasDTO> getCivitas() {
+        return civitas;
+    }
+
+    public void setCivitas(List<CivitasDTO> civitas) {
+        this.civitas = civitas;
+    }
+
+    public List<String> getListCivitas() {
+        return listCivitas;
+    }
+
+    public void setListCivitas(List<String> listCivitas) {
+        this.listCivitas = listCivitas;
+    }
+
+    public List<JurusanDTO> getJurusans() {
+        return jurusans;
+    }
+
+    public void setJurusans(List<JurusanDTO> jurusans) {
+        this.jurusans = jurusans;
+    }
+
+    public List<String> getListJurusan() {
+        return listJurusan;
+    }
+
+    public void setListJurusan(List<String> listJurusan) {
+        this.listJurusan = listJurusan;
+    }
+
 }

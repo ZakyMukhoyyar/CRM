@@ -21,22 +21,22 @@
                         <row>
                             <label value=" " style="color:red"/>
                             <label value="ID " style="font-weight: bold"/>
-                            <textbox width="30%" readonly="true" value="@bind(fx.idMahasiswa)"/>
+                            <textbox class="form-control" width="30%" readonly="true" value="@bind(fx.idMahasiswa)"/>
                         </row>
                         <row>
                             <label value="*) " style="color:red"/>
                             <label value="Username " style="font-weight: bold"/>
-                            <textbox width="70%" disabled="false" constraint="no empty : Username Tidak Boleh Kosong" value="@bind(fx.username)"/>
+                            <textbox class="form-control" width="70%" disabled="false" constraint="no empty : Username Tidak Boleh Kosong" value="@bind(fx.username)"/>
                         </row>
                         <row>
                             <label value="*) " style="color:red"/>
                             <label value="Password" style="font-weight: bold"/>
-                            <textbox width="70%" disabled="false" type="password" constraint="no empty : Password Tidak Boleh Kosong" value="@bind(fx.password)"/>
+                            <textbox class="form-control" width="70%" disabled="false" type="password" constraint="no empty : Password Tidak Boleh Kosong" value="@bind(fx.password)"/>
                         </row>
                         <row>
                             <label value="*) " style="color:red"/>
                             <label value="Retype Password" style="font-weight: bold"/>
-                            <textbox width="70%" disabled="false" type="password" constraint="no empty : Retype Password Tidak Boleh Kosong" value="@bind(fx.retypedPassword)"/>
+                            <textbox class="form-control" width="70%" disabled="false" type="password" constraint="no empty : Retype Password Tidak Boleh Kosong" value="@bind(fx.retypedPassword)"/>
                         </row>
                     </rows>
                 </grid>
@@ -52,15 +52,15 @@
                     <rows>
                         <row>
                             <label sclass="labelstyle" value="ID " style="font-weight: bold"/>
-                            <textbox width="30%" readonly="true" value="@bind(fx.idMahasiswa)"/>
+                            <textbox class="form-control" width="30%" readonly="true" value="@bind(fx.idMahasiswa)"/>
                         </row>
                         <row>
                             <signLabel sclass="labelstyle" value="Nama Lengkap" style="font-weight: bold"/>
-                            <textbox width="100%" disabled="false" constraint="no empty : Nama Tidak Boleh Kosong" value="@bind(fx.namaLengkap)"/>
+                            <textbox class="form-control" width="100%" disabled="false" constraint="no empty : Nama Tidak Boleh Kosong" value="@bind(fx.namaLengkap)"/>
                         </row>
                         <row>
                             <signLabel sclass="labelstyle" value="Alamat Email" style="font-weight: bold"/>
-                            <textbox width="100%" disabled="false" constraint="/.+@.+\.[a-z]+/: Email tidak sesuai dengan format" value="@bind(fx.email)"/>
+                            <textbox class="form-control" width="100%" disabled="false" constraint="/.+@.+\.[a-z]+/: Email tidak sesuai dengan format" value="@bind(fx.email)"/>
                         </row>
                         <row>
                             <signLabel sclass="labelstyle" value="Tanggal Lahir" style="font-weight: bold" />
@@ -68,7 +68,7 @@
                         </row>
                         <row>
                             <signLabel sclass="labelstyle" value="No KTP" style="font-weight: bold"/>
-                            <textbox width="100%" disabled="false" constraint="/.[0-9]+/: no empty : No KTP Tidak Boleh Kosong" value="@bind(fx.noKTP)"/>
+                            <textbox class="form-control" width="100%" disabled="false" constraint="/.[0-9]+/: no empty : No KTP Tidak Boleh Kosong" value="@bind(fx.noKTP)"/>
                         </row>
                         
                         <row>
@@ -82,12 +82,12 @@
                         
                         <row>
                             <signLabel sclass="labelstyle" value="Domisili" style="font-weight: bold"/>
-                            <textbox width="100%" disabled="false" constraint=" no empty : Domisili Tidak Boleh Kosong" value="@bind(fx.domisili)"/>
+                            <textbox class="form-control" width="100%" disabled="false" constraint=" no empty : Domisili Tidak Boleh Kosong" value="@bind(fx.domisili)"/>
                         </row>
                         
                         <row>
                             <signLabel sclass="labelstyle" value="No Handphone" style="font-weight: bold"/>
-                            <textbox width="100%" disabled="false" constraint="/.[0-9]+/: no empty : No Handphone Tidak Boleh Kosong" value="@bind(fx.noHP)"/>
+                            <textbox class="form-control" width="100%" disabled="false" constraint="/.[0-9]+/: no empty : No Handphone Tidak Boleh Kosong" value="@bind(fx.noHP)"/>
                         </row>
                         <row>
                             <signLabel sclass="labelstyle" value="Pendidikan Terakhir" style="font-weight: bold"/>
@@ -99,15 +99,19 @@
                         </row>
                         <row>
                             <signLabel sclass="labelstyle" value="Nama Civitas" style="font-weight: bold"/>
-                            <textbox width="100%" disabled="false" value="@bind(fx.namaCivitas)" />
+                            <combobox sclass="labelstyle" width="100%" placeholder="- Silahkan Pilih -" readonly="true" model="@load(vm.listCivitas)" selectedItem="@bind(fx.namaCivitas)">
+                                <template name="model" var="items">
+                                    <comboitem label="@load(items)" value="@load(items)"/>
+                                </template>
+                            </combobox>
                         </row>
                         <row>
                             <signLabel sclass="labelstyle" value="IPK" style="font-weight: bold"/>
-                            <textbox width="100%" disabled="false" value="@bind(fx.ipk)"/>
+                            <textbox class="form-control" width="100%" disabled="false" value="@bind(fx.ipk)"/>
                         </row>
                         <row>
                             <signLabel sclass="labelstyle" value="Jurusan" style="font-weight: bold"/>
-                            <combobox sclass="labelstyle" width="100%" placeholder="- Silahkan Pilih -" readonly="true">
+                            <combobox sclass="labelstyle" width="100%" placeholder="- Silahkan Pilih -" readonly="true" model="@load(vm.listJurusan)" selectedItem="@bind(fx.jurusan)">
                                 <template name="model" var="items">
                                     <comboitem label="@load(items)" value="@load(items)"/>
                                 </template>
@@ -217,7 +221,7 @@
                         <rows>
                             <row>
                                 <label value="" />
-                                <textbox width="100%" readonly="true" value="@bind(vm.mediaNameUploadCV)"/>
+                                <textbox class="form-control" width="100%" readonly="true" value="@bind(vm.mediaNameUploadCV)"/>
                                 <button sclass="btn btn-success" label="Upload" upload="true" onUpload="@command('uploadFileCV')" width="80%">
                                 </button>
                             </row>
