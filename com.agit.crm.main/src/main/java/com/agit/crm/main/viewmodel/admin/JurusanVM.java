@@ -64,7 +64,7 @@ public class JurusanVM {
 
     /* attribut for UI */
     private PageNavigation previous;
-    private int pageSize = 10;
+    private int pageSize = 15;
 
     /* attribut for File Upload */
     Media mediaJurusan;

@@ -2,86 +2,81 @@
     <window apply="org.zkoss.bind.BindComposer"
             viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.admin.ForumVM')"
             form="@id('fx') @load(vm.forumDTO) @save(vm.forumDTO, before='buttonSaveForum')">
-        <groupbox closable="false" mold="3d">
-            <caption label="Dashboard Forum" />
-            <groupbox closable="false">
-                <caption label="Parameter Pencarian" />
-                <grid style="border:0">
-                    <columns>
-                        <column width="10%" />
-                        <column width="30%" />
-                        <column width="10%" />
-                        <column width="30%" />
-                    </columns>
-                    <rows>
-                        <row>
-                            <label value="ID Forum" />
-                            <textbox width="50%" value="@bind(vm.idForum)"/>
-                            <label value="Tanggal Berakhir" />
-                            <datebox width="50%" value="@bind(vm.tanggalBerakhir)"/>                            
-                        </row>
-                        <row>
-                            <label value="Nama Forum" />
-                            <textbox width="50%" value="@bind(vm.namaForum)"/>
-                            <label value="Status" />
-                            <combobox width="50%" placeholder="- Silahkan Pilih -" model="@load(vm.statuses)" selectedItem="@bind(vm.status)">
-                                <template name="model" var="items">
-                                    <comboitem label="@load(items)" value="@load(items)"/>
-                                </template>
-                            </combobox>
-                        </row>
-                        <row>
-                            <cell></cell>
-                            <cell align="right">
-                                <button width="30%" label="Pencarian" mold="trendy" onClick="@command('searchForum')" />
-                            </cell>
-                            <cell align="left">
-                                <button width="100%" label="Create Forum" mold="trendy" onClick="@command('buttonNewForum')"/>
-                            </cell>
-                            <cell colspan="2"></cell> 
-                        </row>
-                    </rows>
-                </grid>
-                <separator></separator>
-            </groupbox>
-            <groupbox closable="false">
-                <paging forward="onPaging" />
-                <listbox rows="@load(vm.pageSize)" mold="paging" pageSize="@load(vm.pageSize)" emptyMessage="${labels.common.noDataFound}" model="@bind(vm.forumDTOs)">
-                    <listhead>
-                        <listheader label="ID Forum" width="5%" align="center" sortDirection="ascending" sort="auto(idForum)"/>
-                        <listheader label="Nama Forum" width="20%" align="center"/>
-                        <listheader label="Tanggal Mulai" width="14%" align="center"/>
-                        <listheader label="Tanggal Berakhir" width="14%" align="center"/>
-                        <!--<listheader label="Fungsi Pekerjaan" width="14%" align="center"/>-->
-                        <listheader label="Status" width="14%" align="center"/>
-                        <listheader label="Aksi" width="10%" align="center"/>
-                    </listhead>
-                    <template name="model">
-                        <listitem value="${each}">
-                            <listcell>
-                                <label width="100%" value="@bind(each.idForum)" />
-                            </listcell>
-                            <listcell>
-                                <label width="100%" value="@bind(each.namaForum)" />
-                            </listcell>
-                            <listcell>
-                                <label width="100%" value="@bind(each.createdDate)" />
-                            </listcell>
-                            <listcell>
-                                <label width="100%" value="@bind(each.tanggalBerakhir)" />
-                            </listcell>
-                            <listcell>
-                                <label width="100%" value="@bind(each.status)" />
-                            </listcell>
-                            <listcell>
-                                <a label="Detail" style="text-decoration:underline ;color:blue" onClick="@command('detailForum', object=each)"></a>
-                                <!--                                <a label=" | " style="font-size:12pt ;color:black"></a>
-                                <a label="Delete" style="text-decoration:underline ;color:blue" onClick="@command('deleteDataBank', object=each)"></a>-->
-                            </listcell>
-                        </listitem>
-                    </template>
-                </listbox>
-            </groupbox>
+        <groupbox closable="false" mold="3d" style="background:#f5f5f5" sclass="col-md-12 nopadding" >
+            <caption label="Dashboard Jurusan" />
+            <div sclass="col-md-3 nopadding">
+                <div class="form-group" style="font-style:bold;">
+                    <label sclass="labelstyle" value="Filter Pencarian :" />
+                    <separator bar="true"/>
+                </div>
+                <div class="form-group">
+                    <label sclass="labelstyle" value="ID Forum" />
+                    <textbox class="form-control" width="100%" value="@bind(vm.idForum)" />
+                </div>
+                <div class="form-group">
+                    <label sclass="labelstyle" value="Nama Forum" />
+                    <textbox class="form-control" width="100%" value="@bind(vm.namaForum)" />
+                </div>
+                <div class="form-group">
+                    <label sclass="labelstyle" value="Tanggal Berakhir" />
+                    <datebox width="100%" value="@bind(vm.tanggalBerakhir)" />
+                </div>
+                <div class="form-group">
+                    <label sclass="labelstyle" value="Status" />
+                    <combobox width="50%" placeholder="- Silahkan Pilih -" model="@load(vm.statuses)" selectedItem="@bind(vm.status)">
+                        <template name="model" var="items">
+                            <comboitem label="@load(items)" value="@load(items)"/>
+                        </template>
+                    </combobox>
+                </div>
+                <div>
+                    <button type="button" sclass="btn btn-info" width="100%" label="Pencarian" mold="trendy" onClick="@command('buttonSearchJurusan')"/>
+                    <button type="button"  sclass="btn btn-info" width="100%" label="Tambah Minat" onClick="@command('buttonNewJurusan')"/>
+                </div>
+            </div>
+            
+            
+            <div sclass="col-md-9 nopadding">
+                <groupbox closable="false" sclass="col-md-12">
+                    <paging forward="onPaging" />
+                    <listbox rows="@load(vm.pageSize)" mold="paging" pageSize="@load(vm.pageSize)" emptyMessage="${labels.common.noDataFound}" model="@bind(vm.forumDTOs)">
+                        <listhead>
+                            <listheader label="ID Forum" width="10%" align="center" sortDirection="ascending" sort="auto(idForum)"/>
+                            <listheader label="Nama Forum" width="30%" align="center"/>
+                            <listheader label="Tanggal Mulai" width="15%" align="center"/>
+                            <listheader label="Tanggal Berakhir" width="15%" align="center"/>
+                            <listheader label="Status" width="10%" align="center"/>
+                            <listheader label="Aksi" width="10%" align="center"/>
+                        </listhead>
+                        <template name="model">
+                            <listitem value="${each}">
+                                <listcell>
+                                    <label width="100%" value="@bind(each.idForum)" />
+                                </listcell>
+                                <listcell>
+                                    <label width="100%" value="@bind(each.namaForum)" />
+                                </listcell>
+                                <listcell>
+                                    <label width="100%" value="@bind(each.createdDate)" />
+                                </listcell>
+                                <listcell>
+                                    <label width="100%" value="@bind(each.tanggalBerakhir)" />
+                                </listcell>
+                                <listcell>
+                                    <label width="100%" value="@bind(each.status)" />
+                                </listcell>
+                                <listcell>
+                                    <a label="Detail" style="text-decoration:underline ;color:blue" onClick="@command('detailForum', object=each)"></a>
+                                    <!--                                <a label=" | " style="font-size:12pt ;color:black"></a>
+                                    <a label="Delete" style="text-decoration:underline ;color:blue" onClick="@command('deleteDataBank', object=each)"></a>-->
+                                </listcell>
+                            </listitem>
+                        </template>
+                    </listbox>
+                </groupbox>
+            </div>
+            
+            
         </groupbox>
     </window>
 </zk>

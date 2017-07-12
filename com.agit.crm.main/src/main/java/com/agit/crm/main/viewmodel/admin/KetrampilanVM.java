@@ -50,7 +50,7 @@ public class KetrampilanVM {
 
     private PageNavigation previous;
     private boolean checked;
-    private int pageSize = 7;
+    private int pageSize = 15;
     private int activePage = 0;
     private int selectedIndex;
     private int totalSize = 0;

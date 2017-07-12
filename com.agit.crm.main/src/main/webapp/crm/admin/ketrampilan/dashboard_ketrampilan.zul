@@ -31,9 +31,6 @@
                     <button type="button"  sclass="btn btn-info" width="100%" label="Tambah Minat" onClick="@command('buttonNewKetrampilan')"/>
                 </div>                
             </div>
-            <separator/>
-            <separator/>
-            <separator/>
         
             
             <div sclass="col-md-9 nopadding">
