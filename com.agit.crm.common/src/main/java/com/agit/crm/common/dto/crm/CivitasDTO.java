@@ -12,7 +12,7 @@ public class CivitasDTO implements Serializable {
 
     private String civitasID;
     private String namaCivitas;
-    private String status;
+    private Status status;
     private String createdBy;
     private Date createdDate;
     private String modifiedBy;
@@ -21,7 +21,7 @@ public class CivitasDTO implements Serializable {
     public CivitasDTO() {
     }
 
-    public CivitasDTO(String civitasID, String namaCivitas, String status, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate) {
+    public CivitasDTO(String civitasID, String namaCivitas, Status status, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate) {
         this.civitasID = civitasID;
         this.namaCivitas = namaCivitas;
         this.status = status;
@@ -47,11 +47,11 @@ public class CivitasDTO implements Serializable {
         this.namaCivitas = namaCivitas;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 

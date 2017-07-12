@@ -1,6 +1,7 @@
 package com.agit.crm.domain.crm;
 
 import com.agit.crm.shared.object.EntityObject;
+import com.agit.crm.shared.status.Status;
 import java.util.Date;
 import java.util.Objects;
 
@@ -13,7 +14,7 @@ public class Civitas implements EntityObject<Civitas> {
     long id;
     private String civitasID;
     private String namaCivitas;
-    private String status;
+    private Status status;
     private String createdBy;
     private Date createdDate;
     private String modifiedBy;
@@ -22,7 +23,7 @@ public class Civitas implements EntityObject<Civitas> {
     public Civitas() {
     }
 
-    public Civitas(String civitasID, String namaCivitas, String status, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate) {
+    public Civitas(String civitasID, String namaCivitas, Status status, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate) {
         this.civitasID = civitasID;
         this.namaCivitas = namaCivitas;
         this.status = status;
@@ -56,11 +57,11 @@ public class Civitas implements EntityObject<Civitas> {
         this.namaCivitas = namaCivitas;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 

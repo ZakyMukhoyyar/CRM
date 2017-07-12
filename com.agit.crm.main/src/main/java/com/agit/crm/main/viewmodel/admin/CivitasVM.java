@@ -6,6 +6,7 @@ import com.agit.crm.common.dto.crm.CivitasDTOBuilder;
 import com.agit.crm.common.dto.crm.CivitasSecondary;
 import com.agit.crm.common.security.SecurityUtil;
 import com.agit.crm.infrastructure.component.xls.XlsReader;
+import com.agit.crm.shared.status.Status;
 import com.agit.crm.shared.zul.CommonViewModel;
 import static com.agit.crm.shared.zul.CommonViewModel.showInformationMessagebox;
 import com.agit.crm.shared.zul.PageNavigation;
@@ -34,7 +35,6 @@ import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.io.Files;
 import org.zkoss.util.media.Media;
-import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.UploadEvent;
 import org.zkoss.zk.ui.select.annotation.VariableResolver;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
@@ -52,10 +52,12 @@ public class CivitasVM {
     @WireVariable
     CivitasService civitasService;
 
-    private static final String FILE_LOC = "D:\\Work\\AgitCRM\\CRM\\template-mapping\\insert-template-civitas.xlsx";
+    private static final String FILE_LOC = "E:\\PEKERJAAN\\Agit\\Project\\Project2\\CRM\\template-mapping\\insert-template-civitas.xlsx";
 
     private CivitasDTO civitasDTO = new CivitasDTO();
     private List<CivitasDTO> civitasDTOs = new ArrayList<>();
+
+    private ListModelList<Status> statuses = new ListModelList<>();
 
     private PageNavigation previous;
     private boolean checked;
@@ -217,10 +219,10 @@ public class CivitasVM {
 
         return s + String.format("%0" + count + "d", max + 1);
     }
-    
+
     @Command("buttonSaveCivitas")
     @NotifyChange("civitasDTO")
-    public void buttonSaveCivitas (@BindingParam("object") CivitasDTO obj, @ContextParam(ContextType.VIEW) Window window ){
+    public void buttonSaveCivitas(@BindingParam("object") CivitasDTO obj, @ContextParam(ContextType.VIEW) Window window) {
         civitasService.SaveOrUpdate(civitasDTO);
         showInformationMessagebox("Data Civitas Berhasil Disimpan");
         BindUtils.postGlobalCommand(null, null, "refreshData", null);
@@ -240,10 +242,17 @@ public class CivitasVM {
         XlsReader<CivitasSecondary> jxr = new XlsReader<>(CivitasSecondary.class);
         List<CivitasSecondary> ls = jxr.getJavaObjectFromThisFile(filepathCivitas);
         for (CivitasSecondary s : ls) {
+            Status status = null;
+
+            if ("ACTIVE".equals(s.getStatus())) {
+                status = Status.ACTIVE;
+            } else {
+                status = Status.INACTIVE;
+            }
             CivitasDTO m = new CivitasDTOBuilder()
                     .setCivitasID(s.getNo())
                     .setNamaCivitas(s.getNamaCivitas())
-                    .setStatus(s.getStatus())
+                    .setStatus(status)
                     .setCreatedBy("SYSTEM")
                     .setCreatedDate(new Date())
                     .setModifiedBy("SYSTEM")
@@ -379,6 +388,14 @@ public class CivitasVM {
 
     public void setCivitasID(String civitasID) {
         this.civitasID = civitasID;
+    }
+
+    public ListModelList<Status> getStatuses() {
+        return new ListModelList<>(Status.values());
+    }
+
+    public void setStatuses(ListModelList<Status> statuses) {
+        this.statuses = statuses;
     }
 
 }

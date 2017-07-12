@@ -6,6 +6,7 @@ import com.agit.crm.common.dto.crm.CivitasDTOBuilder;
 import com.agit.crm.common.dto.crm.CivitasSecondary;
 import com.agit.crm.domain.crm.CivitasRepository;
 import com.agit.crm.infrastructure.component.xls.XlsReader;
+import com.agit.crm.shared.status.Status;
 import java.beans.IntrospectionException;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -47,10 +48,17 @@ public class InsertDataCivitasFromExcelTest {
         List<CivitasSecondary> ls = jxr.getJavaObjectFromThisFile(ABS_FILE_LOC);
 
         for (CivitasSecondary s : ls) {
+            Status status = null;
+
+            if (s.getStatus() == "ACTIVE") {
+                status = Status.ACTIVE;
+            } else {
+                status = Status.INACTIVE;
+            }
             CivitasDTO m = new CivitasDTOBuilder()
                     .setCivitasID(s.getNo())
                     .setNamaCivitas(s.getNamaCivitas())
-                    .setStatus(s.getStatus())
+                    .setStatus(status)
                     .setCreatedBy("SYSTEM")
                     .setCreatedDate(new Date())
                     .setModifiedBy("SYSTEM")

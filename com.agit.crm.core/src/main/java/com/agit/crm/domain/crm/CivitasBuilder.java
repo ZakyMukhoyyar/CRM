@@ -5,13 +5,14 @@
  */
 package com.agit.crm.domain.crm;
 
+import com.agit.crm.shared.status.Status;
 import java.util.Date;
 
 public class CivitasBuilder {
 
     private String civitasID;
     private String namaCivitas;
-    private String status;
+    private Status status;
     private String createdBy;
     private Date createdDate;
     private String modifiedBy;
@@ -30,7 +31,7 @@ public class CivitasBuilder {
         return this;
     }
 
-    public CivitasBuilder setStatus(String status) {
+    public CivitasBuilder setStatus(Status status) {
         this.status = status;
         return this;
     }

@@ -5,13 +5,14 @@
  */
 package com.agit.crm.common.dto.crm;
 
+import com.agit.crm.shared.status.Status;
 import java.util.Date;
 
 public class CivitasDTOBuilder {
 
     private String civitasID;
     private String namaCivitas;
-    private String status;
+    private Status status;
     private String createdBy;
     private Date createdDate;
     private String modifiedBy;
@@ -30,7 +31,7 @@ public class CivitasDTOBuilder {
         return this;
     }
 
-    public CivitasDTOBuilder setStatus(String status) {
+    public CivitasDTOBuilder setStatus(Status status) {
         this.status = status;
         return this;
     }
