@@ -25,7 +25,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
@@ -117,7 +116,6 @@ public class LowonganVM {
     private void initData() {
 
 //        lowonganDTOs = lowonganService.findByID(user.getUserName());
-        
         lowonganDTOs = lowonganService.findAll();
         if (lowonganDTOs.isEmpty()) {
             lowonganDTOs = Collections.emptyList();
@@ -152,6 +150,7 @@ public class LowonganVM {
 
         Map<String, Object> map = new HashMap();
         map.put("userID", user.getUserName());
+//        map.put("userID", user.getUserSpecificationDTO().getFullName());
 
         user = userService.findByID(SecurityUtil.getUserName());
         if (user.getRoleDTO().getRoleID().contains("MAHASISWA")) {
@@ -263,6 +262,14 @@ public class LowonganVM {
         CommonViewModel.navigateToWithoutDetach("/crm/mahasiswa/riwayat_apply_lowongan.zul", window, params);
     }
 
+    @Command("buttonViewDataPribadi")
+    @NotifyChange("mahasiswaDTO")
+    public void buttonViewDataPribadi(@BindingParam("object") LowonganDTO obj, @ContextParam(ContextType.VIEW) Window window) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("lowonganDTO", obj);
+        CommonViewModel.navigateToWithoutDetach("/crm/mahasiswa/riwayat_apply_lowongan.zul", window, params);
+    }
+
     @Command("buttonCancelRiwayatLowongan")
     @NotifyChange("lowonganDTO")
     public void buttonCancelRiwayatLowongan(@BindingParam("object") LowonganDTO obj, @ContextParam(ContextType.VIEW) Window window) {
@@ -322,6 +329,7 @@ public class LowonganVM {
         RiwayatApplyMahasiswaDTO r = new RiwayatApplyMahasiswaDTOBuilder()
                 .setIdRiwayatApplyMahasiswa(idLowongan)
                 .setNamaLowonganApply(lowonganDTO.getNamaLowongan())
+                .setNamaApplyLowongan(user.getUserSpecificationDTO().getFullName())
                 .setLowonganState(LowonganState.APPLY)
                 .setCreatedBy(SecurityUtil.getUserName())
                 .setCreatedDate(new Date())
@@ -393,6 +401,22 @@ public class LowonganVM {
         Map<String, Object> params = new HashMap<>();
         params.put("mahasiswaDTO", obj);
         CommonViewModel.navigateToWithoutDetach("/crm/admin/dataApplyLowongan/dashboard_applicant.zul", window, params);
+    }
+
+    @Command("KlikDataPelamar")
+    @NotifyChange({"mahasiswaDTO", "mahasiswaDTOs", "lowonganDTO", "lowonganDTOs", "riwayatApplyMahasiswaDTOs", "riwayatApplyMahasiswaDTO"})
+    public void KlikDataPelamar(@BindingParam("object") LowonganDTO obj, @ContextParam(ContextType.VIEW) Window window) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("lowonganDTO", obj);
+        CommonViewModel.navigateToWithoutDetach("/crm/admin/dataApplyLowongan/dashboard_pelamar.zul", window, params);
+    }
+
+    @Command("KlikDetailDataPelamar")
+    @NotifyChange({"mahasiswaDTO", "mahasiswaDTOs", "lowonganDTO", "lowonganDTOs", "riwayatApplyMahasiswaDTOs", "riwayatApplyMahasiswaDTO"})
+    public void KlikDetailDataPelamar(@BindingParam("object") LowonganDTO obj, @ContextParam(ContextType.VIEW) Window window) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("lowonganDTO", obj);
+        CommonViewModel.navigateToWithoutDetach("/crm/admin/dataApplyLowongan/detail_apply_pelamar.zul", window, params);
     }
 
     @Command("AddDetailApplicant")

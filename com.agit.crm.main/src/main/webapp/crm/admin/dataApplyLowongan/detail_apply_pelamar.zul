@@ -1,45 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
 <zk xmlns="http://www.zkoss.org/2005/zul">
     <window border="30" apply="org.zkoss.bind.BindComposer"
             viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.admin.LowonganVM')"
             form="@id('fx') @load(vm.mahasiswaDTO) @save(vm.mahasiswaDTO, before='buttonBackApplicant')">
-        <groupbox closable="false" mold="3d">
-            <caption label="Daftar Applicant" />
-            <paging forward="onPaging"/>
-            <listbox mold="paging" model="@bind(vm.mahasiswaDTOs)" emptyMessage="${labels.common.noDataFound}" >
-                <listhead>
-                    <listheader label="ID Applicant" width="10%" align="center" sortDirection="ascending" sort="5"/>
-                    <listheader label="Nama Applicant" width="30%" align="center"/>
-                    <listheader label="Domisili" width="20%" align="center"/>
-                    <listheader label="Minat" width="20%" align="center"/>
-                    <listheader label="IPK" width="10%" align="center"/>
-                    <listheader label="Aksi" width="10%" align="center"/>
-                </listhead>
-                <template name="model">
-                    <listitem value="${each}">
-                        <listcell>
-                            <label width="100%" value="@bind(each.idMahasiswa)"/>
-                        </listcell>
-                        <listcell>
-                            <label width="100%" value="@bind(each.namaLengkap)"/>
-                        </listcell>
-                        <listcell>
-                            <label width="100%" value="@bind(each.domisili)"/>
-                        </listcell>
-                        <listcell>
-                            <label width="100%" value="@bind(each.minat)"/>
-                        </listcell>
-                        <listcell>
-                            <label width="100%" value="@bind(each.ipk)" />
-                        </listcell>
-                        <listcell>
-                            <a label="Detail" style="text-decoration:underline ;color:blue" onClick="@command('AddDetailApplicant', object=each)"></a>
-                        </listcell>
-                    </listitem>
-                </template>
-            </listbox>
-        </groupbox>
-        <separator></separator>
-        
         <groupbox closable="false" mold="3d">
             <caption label="Data Applicant" />
             <grid style="border:0">

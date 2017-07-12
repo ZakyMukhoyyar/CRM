@@ -104,7 +104,7 @@ public class WorkspaceVM {
 
         sourceDashboard = "/WEB-INF/dashboard.zul";
 //        sourceDashboard = "/acction/monitoring/Order_Monitoring.zul";
-        uriPhoto = "/images/logoagit-new.png";
+//        uriPhoto = "/images/logoagit-new.png";
 
     }
 

@@ -7,7 +7,9 @@
             <generator class="org.hibernate.id.IdentityGenerator"/>
         </id>
         <property column="idRiwayatApplyMahasiswa" name="idRiwayatApplyMahasiswa" not-null="false"/>
+        <property column="idRiwayatLowongan" name="idRiwayatLowongan" not-null="false"/>
         <property column="namaLowonganApply" name="namaLowonganApply" not-null="false"/>
+        <property column="namaApplyLowongan" name="namaApplyLowongan" not-null="false"/>
         <property column="createdBy" name="createdBy" not-null="false"/>
         <property column="createdDate" name="createdDate" not-null="false"/>
         <property column="modifiedDate" name="modifiedDate" not-null="false"/>

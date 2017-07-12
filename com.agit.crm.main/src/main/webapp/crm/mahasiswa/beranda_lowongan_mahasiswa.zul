@@ -1,89 +1,93 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zk xmlns="http://www.zkoss.org/2005/zul">
-    <window border="30" apply="org.zkoss.bind.BindComposer"
+    <window border="0" apply="org.zkoss.bind.BindComposer"
             viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.admin.LowonganVM')"
             form="@id('fx') @load(vm.lowonganDTO) @save(vm.lowonganDTO, before='buttonSaveLowongan')">
-        <style>
-            .labelstyle {
-            font-family: 'Kristen ITC';
-            color: black
-            }
-        </style>
-        <groupbox closable="false">
-            <caption sclass="labelstyle" label="Parameter Pencarian" />
-            <grid style="border:0">
-                <columns>
-                    <column width="20%" />
-                    <column width="30%" />
-                    <column width="20%" />
-                    <column width="30%" />
-                </columns>
-                <rows>
-                    <row>
+        <groupbox id="gb" mold="3d" sclass="col-md-12 nopadding "  style="background:#f5f5f5;">
+            <caption sclass="labelstyle" label="Lowongan Kerja" />	
+            <div sclass="col-md-3 nopadding">
+                
+                <div >
+                    <div class="form-group" style="font-style:bold;">
+                        <label sclass="labelstyle" value="Filter Pencarian :" />
+                        <separator bar="true"/>
+                    </div>
+                    <div class="form-group">
                         <label sclass="labelstyle" value="ID Lowongan" />
-                        <textbox width="70%"/>  
+                        <textbox  width="100%" />  
+                    </div>
+                    
+                    <div class="form-group">
                         <label sclass="labelstyle" value="Jenis Pekerjaan" />
-                        <combobox autodrop="true" readonly="true" width="70%" model="@load(vm.minats)" selectedItem="@bind(fx.minatPekerjaan)" placeholder="- Pilihan Kategori -">
+                        <combobox autodrop="true" readonly="true" width="100%" model="@load(vm.minats)" selectedItem="@bind(fx.minatPekerjaan)" placeholder="- Pilihan Kategori -">
                             <template name="model" var="items">
                                 <comboitem label="@load(items.getNamaMinat())" value="@load(items.getNamaMinat())"/>
                             </template>
-                        </combobox>
-                    </row>
-                    <row>
+                        </combobox> 
+                    </div>
+                    
+                    <div class="form-group">
                         <label sclass="labelstyle" value="Nama Lowongan" />
-                        <textbox width="70%" value="@bind(vm.namaLowongan)"/>
-                        <label sclass="labelstyle" value="Status" />
-                        <combobox width="70%" placeholder="- Silahkan Pilih -" readonly="true">
+                        <textbox   width="100%" value="@bind(vm.namaLowongan)"/>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label sclass="labelstyle" value="Status" />   
+                        <combobox sclass="labelstyle" width="100%" placeholder="- Silahkan Pilih -" readonly="true">
                             <template name="model" var="items">
                                 <comboitem label="@load(items)" value="@load(items)"/>
                             </template>
                         </combobox>
-                    </row>
-                    <row>
+                    </div>
+                
+                    <div class="form-group">
                         <label sclass="labelstyle" value="Gaji" />
-                        <combobox width="70%" model="@load(vm.gaji)" selectedItem="@bind(fx.gaji)" readonly="true" placeholder="- Silahkan Pilih -">
+                        <combobox sclass="labelstyle" width="100%" model="@load(vm.gaji)" selectedItem="@bind(fx.gaji)" readonly="true" placeholder="- Silahkan Pilih -">
                             <template name="model" var="items">
                                 <comboitem label="@load(items)" value="@load(items)"/>
                             </template>
                         </combobox>
-                 
-                    </row>
-                    <row>
-                        <cell></cell>
-                        <cell align="right">
-                            <button width="40%" label="History" mold="trendy" onClick="@command('buttonRiwayatLowongan')"/>
-                        </cell>
-                        <cell align="left">
-                            <button width="60%" label="Pencarian" mold="trendy" onClick="@command('searchDataBank')"/>
-                        </cell>
-                        <cell colspan="2"></cell> 
-                    </row>
-                </rows>
-            </grid>
-            <listbox rows="@load(vm.pageSize)" pageSize="@load(vm.pageSize)" mold="paging" emptyMessage="${labels.common.noDataFound}" model="@bind(vm.lowonganDTOs)">
-                <listhead>
-                    <listheader label="Nama Lowongan" width="50%" align="center "/>
-                    <listheader label="Aksi" width="7%" align="center"/>
-                </listhead>
-                <template name="model">
-                    <listitem value="${each}">
-                        <listcell>
-                            <label sclass="labelstyle" width="100%" value="@bind(each.namaLowongan)" style="text-align: center display: block;"/>
-                            <separator></separator>
-                            <label sclass="labelstyle" width="100%" value="@bind(each.persyaratan)" style="text-align: justify; display: block;" />
-                            <separator></separator>                           
-                            <label sclass="labelstyle" width="100%" value="@bind(each.gaji)" style="text-align: left;"/>
-                            <separator></separator>
-                            <label sclass="labelstyle" width="100%" value="@bind(each.lokasiKerja)" style="text-align: left;"/>
-                        </listcell>
-                        <listcell>
-                            <a sclass="labelstyle" label="Detail" style="text-decoration:underline ;color:blue" onClick="@command('buttonDetailLowongan', object=each)"></a>
-                            <a sclass="labelstyle" label=" | " style="font-size:12pt ;color:black"></a>
-                            <a sclass="labelstyle" label="Apply" style="text-decoration:underline ;color:blue" onClick="@command('buttonApplyLowongan', object=each)"></a>
-                        </listcell>
-                    </listitem>
-                </template>
-            </listbox>
+                    </div>
+                    
+                    <div>
+                        <button type="button" sclass="btn btn-success" width="100%" label="Pencarian" mold="trendy" onClick="@command('searchDataBank')"/>
+                        <button type="button"  sclass="btn btn-success" width="100%" label="History" onClick="@command('buttonRiwayatLowongan')"/>
+                    </div>
+                </div>
+            </div>
+            <div sclass="col-md-9 nopadding">
+                <groupbox sclass="col-md-12">
+                    <listbox  rows="@load(vm.pageSize)" pageSize="@load(vm.pageSize)" mold="paging" emptyMessage="${labels.common.noDataFound}" model="@bind(vm.lowonganDTOs)">
+                        <listhead>
+                            <listheader label="Nama Lowongan" width="50%" align="center "/>
+                            <listheader label="Aksi" width="7%" align="center"/>
+                        </listhead>
+                        <template name="model">
+                            <listitem value="${each}" style="margin-bottom:20px;">
+                                <listcell style="border:1px solid #dcdcdc;">
+                                    <label sclass="judul" width="100%" value="@bind(each.namaLowongan)" style="text-align: left;"/>
+                                    <separator></separator>
+                                    <label sclass="labelstyle bold" value="Penempatan : "/>
+                                    <label sclass="labelstyle" width="100%" value="@bind(each.lokasiKerja)" style="text-align: left;"/>
+                                    <separator bar="true"/>
+                                    <label sclass="isi" width="100%" value="@bind(each.persyaratan)" style="text-align: justify; display: block; padding:10px;" />
+                                    <separator></separator>   
+                                    <label sclass="labelstyle bold" value="Gaji : "/>                        
+                                    <label sclass="labelstyle label label-success" width="100%" value="@bind(each.gaji)" style="text-align: left;"/>
+                                    <separator></separator>
+                                </listcell>
+                                <listcell>
+                                    <a sclass="btn btn-primary" label="Detail"  onClick="@command('detailLowongan', object=each)"></a>
+                                    <!--                            <a sclass="s" label=" | "></a>-->
+                                    <separator></separator>  
+                                    <a sclass="btn btn-warning" label="Apply"  onClick="@command('buttonApplyLowongan', object=each)"></a>
+                                </listcell>
+                            </listitem>
+                        </template>
+                    </listbox>
+                </groupbox>
+            </div>
         </groupbox>
+        
     </window>
 </zk>

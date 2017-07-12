@@ -19,8 +19,10 @@ public class RiwayatApplyMahasiswaDTOAssembler implements IObjectAssembler<Riway
     public RiwayatApplyMahasiswaDTO toDTO(RiwayatApplyMahasiswa domainObject) {
         return new RiwayatApplyMahasiswaDTOBuilder()
                 .setIdRiwayatApplyMahasiswa(domainObject.getIdRiwayatApplyMahasiswa())
+                .setIdRiwayatLowongan(domainObject.getIdRiwayatLowongan())
                 .setCreatedBy(domainObject.getCreatedBy())
                 .setNamaLowonganApply(domainObject.getNamaLowonganApply())
+                .setNamaApplyLowongan(domainObject.getNamaApplyLowongan())
                 .setCreatedDate(domainObject.getCreatedDate())
                 .setModifiedBy(domainObject.getModifiedBy())
                 .setModifiedDate(domainObject.getModifiedDate())
@@ -32,8 +34,10 @@ public class RiwayatApplyMahasiswaDTOAssembler implements IObjectAssembler<Riway
     public RiwayatApplyMahasiswa toDomain(RiwayatApplyMahasiswaDTO dtoObject) {
         return new RiwayatApplyMahasiswaBuilder()
                 .setIdRiwayatApplyMahasiswa(dtoObject.getIdRiwayatApplyMahasiswa())
+                .setIdRiwayatLowongan(dtoObject.getIdRiwayatLowongan())
                 .setCreatedBy(dtoObject.getCreatedBy())
                 .setNamaLowonganApply(dtoObject.getNamaLowonganApply())
+                .setNamaApplyLowongan(dtoObject.getNamaApplyLowongan())
                 .setCreatedDate(dtoObject.getCreatedDate())
                 .setModifiedBy(dtoObject.getModifiedBy())
                 .setModifiedDate(dtoObject.getModifiedDate())

@@ -41,7 +41,7 @@
                     </columns>
                     <rows>
                         <row>
-                            <button label="Kembali" mold="trendy" width="120px" onClick="@command('buttonCancelRiwayatLowongan')"/>
+                            <button sclass="btn btn-success" label="Kembali" mold="trendy" width="120px" onClick="@command('buttonCancelRiwayatLowongan')"/>
                         </row>
                     </rows>
                 </grid>

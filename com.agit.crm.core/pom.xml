@@ -16,11 +16,6 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>com.agit.crm.user.management</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
             <artifactId>com.agit.crm.shared</artifactId>
             <version>${project.version}</version>
         </dependency>

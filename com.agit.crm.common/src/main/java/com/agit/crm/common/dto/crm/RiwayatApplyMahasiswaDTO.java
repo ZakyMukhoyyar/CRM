@@ -10,8 +10,10 @@ import java.util.Date;
 public class RiwayatApplyMahasiswaDTO {
 
     private String idRiwayatApplyMahasiswa;
+    private String idRiwayatLowongan;
     private LowonganState lowonganState;
     private String namaLowonganApply;
+    private String namaApplyLowongan;
     private String createdBy;
     private Date createdDate;
     private String modifiedBy;
@@ -20,10 +22,12 @@ public class RiwayatApplyMahasiswaDTO {
     public RiwayatApplyMahasiswaDTO() {
     }
 
-    public RiwayatApplyMahasiswaDTO(String idRiwayatApplyMahasiswa, LowonganState lowonganState, String namaLowonganApply, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate) {
+    public RiwayatApplyMahasiswaDTO(String idRiwayatApplyMahasiswa, String idRiwayatLowongan, LowonganState lowonganState, String namaLowonganApply, String namaApplyLowongan, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate) {
         this.idRiwayatApplyMahasiswa = idRiwayatApplyMahasiswa;
+        this.idRiwayatLowongan = idRiwayatLowongan;
         this.lowonganState = lowonganState;
         this.namaLowonganApply = namaLowonganApply;
+        this.namaApplyLowongan = namaApplyLowongan;
         this.createdBy = createdBy;
         this.createdDate = createdDate;
         this.modifiedBy = modifiedBy;
@@ -36,6 +40,14 @@ public class RiwayatApplyMahasiswaDTO {
 
     public void setIdRiwayatApplyMahasiswa(String idRiwayatApplyMahasiswa) {
         this.idRiwayatApplyMahasiswa = idRiwayatApplyMahasiswa;
+    }
+
+    public String getIdRiwayatLowongan() {
+        return idRiwayatLowongan;
+    }
+
+    public void setIdRiwayatLowongan(String idRiwayatLowongan) {
+        this.idRiwayatLowongan = idRiwayatLowongan;
     }
 
     public LowonganState getLowonganState() {
@@ -52,6 +64,14 @@ public class RiwayatApplyMahasiswaDTO {
 
     public void setNamaLowonganApply(String namaLowonganApply) {
         this.namaLowonganApply = namaLowonganApply;
+    }
+
+    public String getNamaApplyLowongan() {
+        return namaApplyLowongan;
+    }
+
+    public void setNamaApplyLowongan(String namaApplyLowongan) {
+        this.namaApplyLowongan = namaApplyLowongan;
     }
 
     public String getCreatedBy() {
@@ -88,7 +108,7 @@ public class RiwayatApplyMahasiswaDTO {
 
     @Override
     public String toString() {
-        return "RiwayatApplyMahasiswaDTO{" + "idRiwayatApplyMahasiswa=" + idRiwayatApplyMahasiswa + ", lowonganState=" + lowonganState + ", namaLowonganApply=" + namaLowonganApply + ", createdBy=" + createdBy + ", createdDate=" + createdDate + ", modifiedBy=" + modifiedBy + ", modifiedDate=" + modifiedDate + '}';
+        return "RiwayatApplyMahasiswaDTO{" + "idRiwayatApplyMahasiswa=" + idRiwayatApplyMahasiswa + ", idRiwayatLowongan=" + idRiwayatLowongan + ", lowonganState=" + lowonganState + ", namaLowonganApply=" + namaLowonganApply + ", namaApplyLowongan=" + namaApplyLowongan + ", createdBy=" + createdBy + ", createdDate=" + createdDate + ", modifiedBy=" + modifiedBy + ", modifiedDate=" + modifiedDate + '}';
     }
 
 }

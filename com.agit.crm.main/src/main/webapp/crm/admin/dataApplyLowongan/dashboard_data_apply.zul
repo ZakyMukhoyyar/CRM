@@ -67,7 +67,7 @@
                                 <label width="100%" value="@bind(each.minatPekerjaan)" />
                             </listcell>
                             <listcell>
-                                <a label="Pelamar" style="text-decoration:underline ;color:blue" onClick="@command('detailDataApplicant', object=each)"></a>
+                                <a label="Pelamar" style="text-decoration:underline ;color:blue" onClick="@command('KlikDataPelamar', object=each)"></a>
                             </listcell>
                         </listitem>
                     </template>

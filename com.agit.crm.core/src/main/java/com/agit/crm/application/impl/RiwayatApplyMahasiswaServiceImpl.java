@@ -40,6 +40,7 @@ public class RiwayatApplyMahasiswaServiceImpl implements RiwayatApplyMahasiswaSe
         RiwayatApplyMahasiswa riwayatApplyMahasiswa = new RiwayatApplyMahasiswaBuilder()
                 .setIdRiwayatApplyMahasiswa("11")
                 .setNamaLowonganApply("namaLowonganApply")
+                .setNamaApplyLowongan("namaApplyLowongan")
                 .setCreatedBy("created by")
                 .setCreatedDate(new Date())
                 .setModifiedBy("modified by")
