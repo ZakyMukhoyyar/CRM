@@ -52,7 +52,7 @@ public class CivitasVM {
     @WireVariable
     CivitasService civitasService;
 
-    private static final String ABS_FILE_LOC = "E:\\PEKERJAAN\\Agit\\Project\\Project2\\CRM\\template-mapping\\insert-template-civitas.xlsx";
+    private static final String FILE_LOC = "D:\\Work\\AgitCRM\\CRM\\template-mapping\\insert-template-civitas.xlsx";
 
     private CivitasDTO civitasDTO = new CivitasDTO();
     private List<CivitasDTO> civitasDTOs = new ArrayList<>();
@@ -117,9 +117,9 @@ public class CivitasVM {
         civitasDTOs = civitasService.findAll();
     }
 
-    @Command("uploadFile")
+    @Command("buttonUploadFile")
     @NotifyChange({"mediaNameCivitas", "pathLocationCivitas"})
-    public void uploadFile(@ContextParam(ContextType.BIND_CONTEXT) BindContext ctx) throws IOException {
+    public void buttonUploadFile(@ContextParam(ContextType.BIND_CONTEXT) BindContext ctx) throws IOException {
         UploadEvent upEvent = null;
         Object objUploadEvent = ctx.getTriggerEvent();
 
@@ -135,7 +135,7 @@ public class CivitasVM {
             int day = now.get(Calendar.DAY_OF_MONTH);
 //            filepathCivitas = Executions.getCurrent().getDesktop().getWebApp().getRealPath("/");
 //            filepath = filepath + "\\" + "files" + "\\" + "rkap" + "\\" + year + "\\" + month + "\\" + day + "\\" + media.getName();
-            filepathCivitas = "E:\\PEKERJAAN\\Agit\\Project\\Project2\\CRM\\template-mapping\\insert-template-civitas.xlsx";
+            filepathCivitas = FILE_LOC;
             File baseDir = new File(filepathCivitas);
             if (!baseDir.exists()) {
                 baseDir.mkdirs();

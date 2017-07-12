@@ -227,7 +227,7 @@ public class JurusanVM {
             }
         }
         showInformationMessagebox("Data History Berhasil Diupload");
-        BindUtils.postGlobalCommand(null, null, "refreshData", null);
+        BindUtils.postGlobalCommand(null, null, "refreshJurusan", null);
     }
 
     @Command("buttonUploadFile")
