@@ -5,8 +5,9 @@ package com.agit.crm.shared.type;
  * @author bayutridewanto
  */
 public enum MessageNameType {
-    APPROVED("APPROVED"),
+  APPROVED("APPROVED"),
     REJECTED("REJECTED"),
+    ESCALATED("ESCALATED"),
     CANCELED("CANCELED");
     
     private String messageName;

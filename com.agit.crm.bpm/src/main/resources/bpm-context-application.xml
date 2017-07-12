@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+    <!--task query-->
+    <bean id="taskQueryService" class="com.agit.crm.bpm.application.impl.TaskQueryServiceImpl">
+        <property name="workflowAPI" ref="workflowAPI" />
+        <property name="projectService" ref="projectService" />
+        <!--<property name="acmAdapter" ref="acmAdapter" />-->
+    </bean>
+    
+    <!--wf api-->    
+    <bean id="workflowAPI" class="com.agit.crm.bpm.application.impl.WorkflowAPIImpl">
+        <property name="processEngine" ref="processEngine" />
+    </bean>
+    
+    <!--Adapter Spring Bean-->
+    <bean id="projectAdapter" class="com.agit.crm.bpm.adapter.impl.ProjectAdapterImpl">
+        <property name="projectService" ref="projectService" />
+    </bean> 
+    
+</beans>

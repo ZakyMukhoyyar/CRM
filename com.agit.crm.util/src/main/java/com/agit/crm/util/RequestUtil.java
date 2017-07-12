@@ -8,7 +8,7 @@ import org.springframework.http.MediaType;
 
 /**
  *
- * @author bitozen
+ * @author bayutridewanto
  */
 public class RequestUtil {
     

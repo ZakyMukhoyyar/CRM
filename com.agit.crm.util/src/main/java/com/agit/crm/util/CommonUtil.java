@@ -8,7 +8,7 @@ import java.util.Map;
 
 /**
  *
- * @author bitozen
+ * @author bayutridewanto
  */
 public class CommonUtil {
     public static Map<String, Object> convertObject2Map(Object o) {

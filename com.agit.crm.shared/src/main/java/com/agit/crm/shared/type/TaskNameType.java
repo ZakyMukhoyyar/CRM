@@ -6,15 +6,11 @@ package com.agit.crm.shared.type;
  */
 public enum TaskNameType {
 
-    IDE("IDE"),
-    SA("SA"),
-    SRE("SRE"),
-    CA("CA"),
-    DV("DV"),
-    PO("PO"),
-    FDE("FDE"),
-    DR("DR"),
-    PPD("PPD");
+    START("START"),
+    SUBMIT_PROJECT("SUBMIT_PROJECT"),
+    CONFIRM_PROJECT("CONFIRM_PROJECT"),
+    REOPEN("REOPEN"),
+    FINISH("FINISH");
 
     private String taskName;
 

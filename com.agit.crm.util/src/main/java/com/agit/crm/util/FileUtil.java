@@ -5,7 +5,7 @@ import java.io.FilenameFilter;
 
 /**
  *
- * @author bitozen
+ * @author bayutridewanto
  */
 public class FileUtil {
 

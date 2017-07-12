@@ -2,7 +2,7 @@ package com.agit.crm.util;
 
 /**
  *
- * @author bitozen
+ * @author bayutridewanto
  */
 public class HibernateUtil {
     

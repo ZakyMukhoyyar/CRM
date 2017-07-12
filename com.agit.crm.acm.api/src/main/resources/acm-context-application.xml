@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+    <bean id="acmAdapter" class="com.agit.crm.acm.api.adapter.impl.AcmAdapterImpl">
+        <property name="userRepository" ref="userRepository"/>
+        <property name="acmRole" ref="acmRole"/>
+    </bean> 
+    
+    <bean id="acmUserManager" class="com.agit.crm.acm.api.model.ACMUserManager">
+        <property name="userRepository" ref="userRepository"/>
+    </bean> 
+    
+    <bean id="acmRole" class="com.agit.crm.acm.api.model.ACMRole">
+        <property name="user1" value="USER1"/>
+        <property name="user2" value="USER2"/>
+        <property name="user3" value="USER3"/>
+        <property name="user4" value="USER4"/>
+        <property name="user5" value="USER5"/>
+        <property name="user6" value="USER6"/>
+        <property name="user7" value="USER7"/>
+        <property name="user8" value="USER8"/>
+        <property name="user9" value="USER9"/>
+        <property name="user10" value="USER10"/>
+    </bean>
+    
+</beans>

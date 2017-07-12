@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 
 /**
  *
- * @author bitozen
+ * @author bayutridewanto
  */
 public class ValidatorUtil {
     public static final Pattern    ALPHANUM                    = Pattern

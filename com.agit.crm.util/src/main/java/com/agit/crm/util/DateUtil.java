@@ -8,7 +8,7 @@ import java.util.GregorianCalendar;
 
 /**
  * 
- * @author bitozen
+ * @author bayutridewanto
  */
 public final class DateUtil {
     public final static String TIMEZONE = "GMT+7:00";

@@ -14,6 +14,11 @@
         <module>com.agit.crm.core</module>
         <module>com.agit.crm.masterdata</module>
         <module>com.agit.crm.infrastrucrture</module>
+        <module>com.agit.crm.script</module>
+        <module>com.agit.crm.bpm</module>
+        <module>com.agit.crm.bpm.api</module>
+        <module>com.agit.crm.acm.api</module>
+        <module>com.agit.crm.event</module>
     </modules>
     <properties>
         <!-- Properties for POM -->

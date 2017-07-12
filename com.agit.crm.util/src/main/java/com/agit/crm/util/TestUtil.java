@@ -4,7 +4,7 @@ import java.security.SecureRandom;
 
 /**
  *
- * @author bitozen
+ * @author bayutridewanto
  */
 public class TestUtil {
 
