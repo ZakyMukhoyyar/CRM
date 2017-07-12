@@ -48,7 +48,7 @@ public class MinatVM {
     private ListModelList<Status> listStatus;
 
     private PageNavigation previous;
-    private int pageSize = 5;
+    private int pageSize = 15;
 
     @Init
     public void init(

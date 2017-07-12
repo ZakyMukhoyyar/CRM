@@ -64,6 +64,7 @@ public class JurusanVM {
 
     /* attribut for UI */
     private PageNavigation previous;
+    private int pageSize = 10;
 
     /* attribut for File Upload */
     Media mediaJurusan;
@@ -343,4 +344,12 @@ public class JurusanVM {
         this.pathLocationJurusan = pathLocationJurusan;
     }
 
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
+    }
+    
 }

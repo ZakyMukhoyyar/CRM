@@ -52,7 +52,7 @@ public class CivitasVM {
     @WireVariable
     CivitasService civitasService;
 
-    private static final String FILE_LOC = "E:\\PEKERJAAN\\Agit\\Project\\Project2\\CRM\\template-mapping\\insert-template-civitas.xlsx";
+    private static final String FILE_LOC = "D:\\Work\\AgitCRM\\CRM\\template-mapping\\insert-template-civitas.xlsx";
 
     private CivitasDTO civitasDTO = new CivitasDTO();
     private List<CivitasDTO> civitasDTOs = new ArrayList<>();
@@ -61,7 +61,7 @@ public class CivitasVM {
 
     private PageNavigation previous;
     private boolean checked;
-    private int pageSize = 15;
+    private int pageSize = 10;
     private int activePage = 0;
     private int selectedIndex;
     private int totalSize = 0;
