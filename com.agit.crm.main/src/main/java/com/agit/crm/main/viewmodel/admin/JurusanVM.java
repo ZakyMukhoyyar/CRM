@@ -3,17 +3,26 @@ package com.agit.crm.main.viewmodel.admin;
 import com.agit.crm.common.application.JurusanService;
 import com.agit.crm.common.dto.crm.JurusanDTO;
 import com.agit.crm.common.dto.crm.JurusanDTOBuilder;
+import com.agit.crm.common.dto.crm.JurusanSecondary;
 import com.agit.crm.common.security.SecurityUtil;
+import com.agit.crm.infrastructure.component.xls.XlsReader;
 import com.agit.crm.shared.zul.CommonViewModel;
 import static com.agit.crm.shared.zul.CommonViewModel.showInformationMessagebox;
 import com.agit.crm.shared.zul.PageNavigation;
 import com.agit.crm.util.CommonUtil;
+import java.beans.IntrospectionException;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.zkoss.bind.BindContext;
 import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
@@ -23,9 +32,14 @@ import org.zkoss.bind.annotation.ExecutionArgParam;
 import org.zkoss.bind.annotation.GlobalCommand;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
+import org.zkoss.io.Files;
+import org.zkoss.util.media.Media;
+import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.event.UploadEvent;
 import org.zkoss.zk.ui.select.annotation.VariableResolver;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 import org.zkoss.zul.ListModelList;
+import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Window;
 
 /**
@@ -38,6 +52,8 @@ public class JurusanVM {
     @WireVariable
     JurusanService jurusanService;
 
+    private static final String FILE_LOC = "D:\\Work\\AgitCRM\\CRM\\template-mapping\\insert-template-jurusan.xlsx";
+
     /* Object Binding UI*/
     private JurusanDTO jurusanDTO = new JurusanDTO();
     private List<JurusanDTO> jurusanDTOs = new ArrayList<>();
@@ -49,6 +65,12 @@ public class JurusanVM {
     /* attribut for UI */
     private PageNavigation previous;
 
+    /* attribut for File Upload */
+    Media mediaJurusan;
+    String mediaNameJurusan;
+    private String filePathJurusan;
+    private String pathLocationJurusan;
+
     @Init
     public void init(
             @ExecutionArgParam("jurusanDTO") JurusanDTO jurusan,
@@ -57,7 +79,7 @@ public class JurusanVM {
 
         /* Load Data */
         initData();
-        
+
         /* Check Validity */
         checkValidity(jurusan, previous);
     }
@@ -137,14 +159,13 @@ public class JurusanVM {
 
         return s + String.format("%0" + count + "d", max + 1);
     }
-    
-    
+
     @GlobalCommand
     @NotifyChange("jurusanDTOs")
     public void refreshJurusan() {
         jurusanDTOs = jurusanService.findAll();
     }
-    
+
     @Command("buttonSearchJurusan")
     @NotifyChange("jurusanDTOs")
     public void buttonSearchJurusan(@ContextParam(ContextType.VIEW) Window window) {
@@ -154,7 +175,7 @@ public class JurusanVM {
 
         jurusanDTOs = jurusanService.findByParams(params);
     }
-    
+
     @Command("buttonNewJurusan")
     @NotifyChange("jurusanDTO")
     public void buttonNewJurusan(@BindingParam("object") JurusanDTO obj, @ContextParam(ContextType.VIEW) Window window) {
@@ -162,7 +183,7 @@ public class JurusanVM {
         params.put("jurusanDTO", obj);
         CommonViewModel.navigateToWithoutDetach("/crm/admin/jurusan/add_jurusan.zul", window, params);
     }
-    
+
     @Command("detailJurusan")
     @NotifyChange("jurusanDTO")
     public void detailJurusan(@BindingParam("object") JurusanDTO obj, @ContextParam(ContextType.VIEW) Window window) {
@@ -175,6 +196,69 @@ public class JurusanVM {
     @NotifyChange({"jurusanDTO", "jurusanDTOs"})
     public void buttonKembaliJurusan(@BindingParam("object") JurusanDTO obj, @ContextParam(ContextType.VIEW) Window window) {
         window.detach();
+    }
+
+    @Command("buttonSaveDataJurusan")
+    @NotifyChange({"jurusanDTO", "jurusanDTOs"})
+    public void buttonSaveDataJurusan(@BindingParam("object") JurusanDTO obj, @ContextParam(ContextType.VIEW) Window window) throws IOException, FileNotFoundException, IllegalAccessException, InstantiationException, IllegalArgumentException,
+            InvocationTargetException, IntrospectionException {
+
+        if (mediaNameJurusan == null) {
+            Messagebox.show("Silakan Pilih File yang akan diupload!", "Peringatan", Messagebox.OK, Messagebox.EXCLAMATION);
+            return;
+        }
+
+        XlsReader<JurusanSecondary> jxr = new XlsReader<>(JurusanSecondary.class);
+        List<JurusanSecondary> ls = jxr.getJavaObjectFromThisFile(filePathJurusan);
+        for (JurusanSecondary s : ls) {
+            JurusanDTO m = new JurusanDTOBuilder()
+                    .setIdJurusan(s.getIdJurusan())
+                    .setNamaJurusan(s.getNamaJurusan())
+                    .setCreatedBy("SYSTEM")
+                    .setCreatedDate(new Date())
+                    .setModifiedBy("SYSTEM")
+                    .setModifiedDate(new Date())
+                    .createJurusanDTO();
+            try {
+                jurusanService.SaveOrUpdate(m);
+                System.out.println("Row " + s.getIdJurusan() + " SUCCESS");
+            } catch (Exception e) {
+                System.out.println("Row " + s.getIdJurusan() + " FAILED");
+            }
+        }
+        showInformationMessagebox("Data History Berhasil Diupload");
+        BindUtils.postGlobalCommand(null, null, "refreshData", null);
+    }
+
+    @Command("buttonUploadFile")
+    @NotifyChange({"mediaNameJurusan", "pathLocationJurusan"})
+    public void buttonUploadFile(@ContextParam(ContextType.BIND_CONTEXT) BindContext ctx) throws IOException {
+        UploadEvent upEvent = null;
+        Object objUploadEvent = ctx.getTriggerEvent();
+
+        if (objUploadEvent != null && (objUploadEvent instanceof UploadEvent)) {
+            upEvent = (UploadEvent) objUploadEvent;
+        }
+
+        if (upEvent != null) {
+            mediaJurusan = upEvent.getMedia();
+            Calendar now = Calendar.getInstance();
+            int year = now.get(Calendar.YEAR);
+            int month = now.get(Calendar.MONTH);
+            int day = now.get(Calendar.DAY_OF_MONTH);
+
+//            filePathJurusan = Executions.getCurrent().getDesktop().getWebApp().getRealPath("/");
+//            filepath = filepath + "\\" + "files" + "\\" + "rkap" + "\\" + year + "\\" + month + "\\" + day + "\\" + media.getName();
+            filePathJurusan = FILE_LOC;
+            File baseDir = new File(filePathJurusan);
+            if (!baseDir.exists()) {
+                baseDir.mkdirs();
+            }
+
+            Files.copy(new File(filePathJurusan + mediaJurusan.getName()), mediaJurusan.getStreamData());
+            setMediaNameJurusan(mediaJurusan.getName());
+//            pathLocationJurusan = "/" + "files" + "/" + "rkap" + "/" + year + "/" + month + "/" + day + "/" + mediaJurusan.getName();
+        }
     }
 
     @Command("buttonSaveJurusan")
@@ -218,13 +302,45 @@ public class JurusanVM {
     public void setNamaJurusan(String namaJurusan) {
         this.namaJurusan = namaJurusan;
     }
-    
+
     public PageNavigation getPrevious() {
         return previous;
     }
 
     public void setPrevious(PageNavigation previous) {
         this.previous = previous;
+    }
+
+    public Media getMediaJurusan() {
+        return mediaJurusan;
+    }
+
+    public void setMediaJurusan(Media mediaJurusan) {
+        this.mediaJurusan = mediaJurusan;
+    }
+
+    public String getMediaNameJurusan() {
+        return mediaNameJurusan;
+    }
+
+    public void setMediaNameJurusan(String mediaNameJurusan) {
+        this.mediaNameJurusan = mediaNameJurusan;
+    }
+
+    public String getFilePathJurusan() {
+        return filePathJurusan;
+    }
+
+    public void setFilePathJurusan(String filePathJurusan) {
+        this.filePathJurusan = filePathJurusan;
+    }
+
+    public String getPathLocationJurusan() {
+        return pathLocationJurusan;
+    }
+
+    public void setPathLocationJurusan(String pathLocationJurusan) {
+        this.pathLocationJurusan = pathLocationJurusan;
     }
 
 }

@@ -16,8 +16,8 @@
                             <label value="File Upload" style="font-weight:bold"/>
                             <textbox width="100%"  readonly="true" value="@bind(vm.mediaNameCivitas)"/>
                             <cell align="left">
-                                <button width="20%" label="Mengunggah" upload="true" onUpload="@command('uploadFile')"/>
-                                <space width="10px"></space>
+                                <button width="20%" label="Mengunggah" upload="true" onUpload="@command('buttonUploadFile')"/>
+                                <space width="10px"/>
                                 <button width="20%" label="Upload"  onClick="@command('buttonSaveDataCivitas')"/>
                             </cell>
                         </row>
@@ -26,6 +26,8 @@
                             <textbox width="100%" value="@bind(vm.namaCivitas)"/>
                             <cell align="left">
                                 <button width="20%" label="Search" mold="trendy" onClick="@command('buttonPencarian')"/>
+                                <space width="10px"/>
+                                <button width="20%" label="Tambah Civitas" mold="trendy" onClick="@command('buttonNewCivitas')"/>
                             </cell>
                         </row>
                     </rows>

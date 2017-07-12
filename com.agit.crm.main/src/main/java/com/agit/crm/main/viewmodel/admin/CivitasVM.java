@@ -4,9 +4,12 @@ import com.agit.crm.common.application.CivitasService;
 import com.agit.crm.common.dto.crm.CivitasDTO;
 import com.agit.crm.common.dto.crm.CivitasDTOBuilder;
 import com.agit.crm.common.dto.crm.CivitasSecondary;
+import com.agit.crm.common.security.SecurityUtil;
 import com.agit.crm.infrastructure.component.xls.XlsReader;
+import com.agit.crm.shared.zul.CommonViewModel;
 import static com.agit.crm.shared.zul.CommonViewModel.showInformationMessagebox;
 import com.agit.crm.shared.zul.PageNavigation;
+import com.agit.crm.util.CommonUtil;
 import java.beans.IntrospectionException;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -14,6 +17,7 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -34,6 +38,7 @@ import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.UploadEvent;
 import org.zkoss.zk.ui.select.annotation.VariableResolver;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
+import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Window;
 
@@ -80,12 +85,23 @@ public class CivitasVM {
 
     private void initData() {
         civitasDTOs = civitasService.findAll();
+        if (civitasDTOs.isEmpty()) {
+            civitasDTOs = Collections.emptyList();
+        }
     }
 
     private void checkValidity(CivitasDTO civitas, PageNavigation previous) {
         if (civitas == null) {
+            ListModelList<CivitasDTO> parameterList = new ListModelList<>(civitasService.findAll());
+            String civitasID = "";
+            if (parameterList.isEmpty()) {
+                civitasID = "C1";
+            } else {
+                civitasID = getLatestObjectID(parameterList, "civitasID");
+            }
             civitasDTO = new CivitasDTOBuilder()
-                    .setCreatedBy("System")
+                    .setCivitasID(civitasID)
+                    .setCreatedBy(SecurityUtil.getUserName())
                     .setCreatedDate(new Date())
                     .createCivitasDTO();
         } else {
@@ -99,6 +115,116 @@ public class CivitasVM {
     @NotifyChange("civitasDTOs")
     public void refreshData() {
         civitasDTOs = civitasService.findAll();
+    }
+
+    @Command("uploadFile")
+    @NotifyChange({"mediaNameCivitas", "pathLocationCivitas"})
+    public void uploadFile(@ContextParam(ContextType.BIND_CONTEXT) BindContext ctx) throws IOException {
+        UploadEvent upEvent = null;
+        Object objUploadEvent = ctx.getTriggerEvent();
+
+        if (objUploadEvent != null && (objUploadEvent instanceof UploadEvent)) {
+            upEvent = (UploadEvent) objUploadEvent;
+        }
+
+        if (upEvent != null) {
+            mediaCivitas = upEvent.getMedia();
+            Calendar now = Calendar.getInstance();
+            int year = now.get(Calendar.YEAR);
+            int month = now.get(Calendar.MONTH);
+            int day = now.get(Calendar.DAY_OF_MONTH);
+//            filepathCivitas = Executions.getCurrent().getDesktop().getWebApp().getRealPath("/");
+//            filepath = filepath + "\\" + "files" + "\\" + "rkap" + "\\" + year + "\\" + month + "\\" + day + "\\" + media.getName();
+            filepathCivitas = "E:\\PEKERJAAN\\Agit\\Project\\Project2\\CRM\\template-mapping\\insert-template-civitas.xlsx";
+            File baseDir = new File(filepathCivitas);
+            if (!baseDir.exists()) {
+                baseDir.mkdirs();
+            }
+
+            Files.copy(new File(filepathCivitas + mediaCivitas.getName()), mediaCivitas.getStreamData());
+            setMediaNameCivitas(mediaCivitas.getName());
+            pathLocationCivitas = "/" + "files" + "/" + "rkap" + "/" + year + "/" + month + "/" + day + "/" + mediaCivitas.getName();
+        }
+    }
+
+    @Command("buttonPencarian")
+    @NotifyChange("civitasDTOs")
+    public void buttonPencarian(@ContextParam(ContextType.VIEW) Window window) {
+        Map params = new HashMap();
+        params.put("namaCivitas", namaCivitas);
+        params.put("status", status);
+        civitasDTOs = civitasService.findByParams(params);
+    }
+
+    @Command("buttonNewCivitas")
+    @NotifyChange("civitasDTO")
+    public void buttonNewCivitas(@BindingParam("object") CivitasDTO obj, @ContextParam(ContextType.VIEW) Window window) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("civitasDTO", obj);
+        CommonViewModel.navigateToWithoutDetach("/crm/admin/civitas/add_civitas.zul", window, params);
+    }
+
+    @Command("buttonKembaliCivitas")
+    @NotifyChange({"civitasDTO", "civitasDTOs"})
+    public void buttonKembaliCivitas(@BindingParam("object") CivitasDTO obj, @ContextParam(ContextType.VIEW) Window window) {
+        window.detach();
+    }
+
+    protected String getLatestObjectID(ListModelList list, String attribute) {
+        int count = 0;
+        int pointer = 0;
+        int max = 0;
+        String s = "";
+        for (Object obj : list) {
+            Map<String, Object> map = CommonUtil.convertObject2Map(obj);
+            String att = attribute;
+            String[] arr = new String[attribute.length()];
+            String key = "";
+
+            if (att.contains(".")) {
+                arr = att.split("\\.");
+                int f = 1;
+                for (Object x : arr) {
+                    if (f != arr.length) {
+                        map = CommonUtil.convertObject2Map(map.get(x.toString()));
+                    } else {
+                        key = x.toString();
+                    }
+                    f += 1;
+                }
+            } else {
+                key = att;
+            }
+
+            att = map.get(key).toString();
+
+            String temp = "";
+            int countTemp = 0;
+            for (int i = att.length(); i > 0; i--) {
+                if (Character.isLetter(att.charAt(i - 1))) {
+                    pointer = i;
+                    s = att.substring(0, pointer);
+                    break;
+                }
+                countTemp += 1;
+                temp = att.charAt(i - 1) + temp;
+            }
+            if (Integer.parseInt(temp) > max) {
+                max = Integer.parseInt(temp);
+            }
+            count = countTemp;
+        }
+
+        return s + String.format("%0" + count + "d", max + 1);
+    }
+    
+    @Command("buttonSaveCivitas")
+    @NotifyChange("civitasDTO")
+    public void buttonSaveCivitas (@BindingParam("object") CivitasDTO obj, @ContextParam(ContextType.VIEW) Window window ){
+        civitasService.SaveOrUpdate(civitasDTO);
+        showInformationMessagebox("Data Civitas Berhasil Disimpan");
+        BindUtils.postGlobalCommand(null, null, "refreshData", null);
+        window.detach();
     }
 
     @Command("buttonSaveDataCivitas")
@@ -134,48 +260,7 @@ public class CivitasVM {
         BindUtils.postGlobalCommand(null, null, "refreshData", null);
     }
 
-    @Command("uploadFile")
-    @NotifyChange({"mediaNameCivitas", "pathLocationCivitas"})
-    public void uploadFile(@ContextParam(ContextType.BIND_CONTEXT) BindContext ctx) throws IOException {
-        UploadEvent upEvent = null;
-        Object objUploadEvent = ctx.getTriggerEvent();
-
-        if (objUploadEvent != null && (objUploadEvent instanceof UploadEvent)) {
-            upEvent = (UploadEvent) objUploadEvent;
-        }
-
-        if (upEvent != null) {
-            mediaCivitas = upEvent.getMedia();
-            Calendar now = Calendar.getInstance();
-            int year = now.get(Calendar.YEAR);
-            int month = now.get(Calendar.MONTH);
-            int day = now.get(Calendar.DAY_OF_MONTH);
-            filepathCivitas = Executions.getCurrent().getDesktop().getWebApp().getRealPath("/");
-//            filepath = filepath + "\\" + "files" + "\\" + "rkap" + "\\" + year + "\\" + month + "\\" + day + "\\" + media.getName();
-
-            filepathCivitas = "E:\\PEKERJAAN\\Agit\\Project\\Project2\\CRM\\template-mapping\\insert-template-civitas.xlsx";
-            File baseDir = new File(filepathCivitas);
-            if (!baseDir.exists()) {
-                baseDir.mkdirs();
-            }
-
-            Files.copy(new File(filepathCivitas + mediaCivitas.getName()), mediaCivitas.getStreamData());
-            setMediaNameCivitas(mediaCivitas.getName());
-            pathLocationCivitas = "/" + "files" + "/" + "rkap" + "/" + year + "/" + month + "/" + day + "/" + mediaCivitas.getName();
-        }
-    }
-
-    @Command("buttonPencarian")
-    @NotifyChange("civitasDTOs")
-    public void buttonPencarian(@ContextParam(ContextType.VIEW) Window window) {
-
-        Map params = new HashMap();
-        params.put("namaCivitas", namaCivitas);
-        params.put("status", status);
-
-        civitasDTOs = civitasService.findByParams(params);
-    }
-
+    /* getter setter */
     public CivitasDTO getCivitasDTO() {
         return civitasDTO;
     }
