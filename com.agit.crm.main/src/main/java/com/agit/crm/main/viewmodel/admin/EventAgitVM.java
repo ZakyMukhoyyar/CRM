@@ -69,7 +69,7 @@ public class EventAgitVM {
     /* attribut for CRM */
     private PageNavigation previous;
     private boolean checked;
-    private int pageSize = 7;
+    private int pageSize = 10;
     private int activePage = 0;
     private int selectedIndex;
     private int totalSize = 0;
@@ -237,9 +237,9 @@ public class EventAgitVM {
         CommonViewModel.navigateToWithoutDetach("/crm/admin/event/add_event.zul", window, params);
     }
 
-    @Command("searchEvent")
+    @Command("buttonSearchEvent")
     @NotifyChange("eventAgitDTOs")
-    public void searchEvent(@ContextParam(ContextType.VIEW) Window window) {
+    public void buttonSearchEvent(@ContextParam(ContextType.VIEW) Window window) {
         Map params = new HashMap();
         params.put("idEvent", idEvent);
         params.put("namaEvent", namaEvent);

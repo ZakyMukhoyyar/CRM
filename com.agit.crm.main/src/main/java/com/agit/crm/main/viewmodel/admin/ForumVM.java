@@ -163,9 +163,9 @@ public class ForumVM {
         CommonViewModel.navigateToWithoutDetach("/crm/admin/forum/add_forum.zul", window, params);
     }
     
-    @Command("searchForum")
+    @Command("buttonSearchForum")
     @NotifyChange("forumDTOs")
-    public void searchForum(@ContextParam(ContextType.VIEW) Window window){
+    public void buttonSearchForum(@ContextParam(ContextType.VIEW) Window window){
         Map params = new HashMap();
         params.put("idForum", idForum);
         params.put("namaForum", namaForum);

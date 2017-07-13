@@ -64,7 +64,7 @@
                                 <label sclass="labelstyle" value="*)" style="color:red"/>
                                 <label sclass="labelstyle" value="File Attacthment" style="font-weight: bold"/>
                                 <textbox sclass="labelstyle" width="100%" readonly="true" value="@bind(vm.mediaNameUploadEventAgit)"/>
-                                <button label="Upload" sclass="btn btn-success" upload="true" onUpload="@command('uploadEventAgit')" width="40%">
+                                <button sclass="btn btn-success" label="Upload" upload="true" onUpload="@command('uploadEventAgit')" width="40%">
                                 </button>
                             </row>  
                         </rows>

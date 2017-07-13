@@ -148,9 +148,9 @@ public class KetrampilanVM {
         CommonViewModel.navigateToWithoutDetach("/crm/admin/ketrampilan/add_ketrampilan.zul", window, params);
     }
 
-    @Command("searchKetrampilan")
+    @Command("buttonSearchKetrampilan")
     @NotifyChange("ketrampilanDTOs")
-    public void searchKetrampilan(@ContextParam(ContextType.VIEW) Window window) {
+    public void buttonSearchKetrampilan(@ContextParam(ContextType.VIEW) Window window) {
         Map params = new HashMap();
         params.put("idKetrampilan", idKetrampilan);
         params.put("namaKetrampilan", namaKetrampilan);

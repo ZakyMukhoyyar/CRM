@@ -30,8 +30,8 @@
                     </combobox>
                 </div>
                 <div>
-                    <button type="button" sclass="btn btn-info" width="100%" label="Pencarian" mold="trendy" onClick="@command('buttonSearchJurusan')"/>
-                    <button type="button"  sclass="btn btn-info" width="100%" label="Tambah Minat" onClick="@command('buttonNewJurusan')"/>
+                    <button type="button" sclass="btn btn-success" width="100%" label="Pencarian" mold="trendy" onClick="@command('buttonSearchForum')"/>
+                    <button type="button"  sclass="btn btn-success" width="100%" label="Tambah Forum" onClick="@command('buttonNewForum')"/>
                 </div>
             </div>
             

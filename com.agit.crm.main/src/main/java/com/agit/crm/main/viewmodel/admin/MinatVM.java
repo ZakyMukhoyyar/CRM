@@ -144,9 +144,9 @@ public class MinatVM {
         CommonViewModel.navigateToWithoutDetach("/crm/admin/minat/add_minat.zul", window, params);
     }
 
-    @Command("searchMinat")
+    @Command("buttonSearchMinat")
     @NotifyChange("minatDTOs")
-    public void searchMinat(@ContextParam(ContextType.VIEW) Window window) {
+    public void buttonSearchMinat(@ContextParam(ContextType.VIEW) Window window) {
         Map params = new HashMap();
         params.put("idMinat", idMinat);
         params.put("namaMinat", namaMinat);

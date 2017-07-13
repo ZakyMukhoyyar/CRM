@@ -44,8 +44,8 @@
                 
                     <rows>
                         <row>
-                            <button label="Kembali" width="40%" onClick = "@command('buttonKembaliMinat')"/>
-                            <button label="Save" width="40%" onClick = "@command('buttonSaveMinat')"/>
+                            <button sclass="btn btn-success" label="Kembali" width="40%" onClick = "@command('buttonKembaliMinat')"/>
+                            <button sclass="btn btn-success" label="Save" width="40%" onClick = "@command('buttonSaveMinat')"/>
                         </row>
                     </rows>
                 </grid>

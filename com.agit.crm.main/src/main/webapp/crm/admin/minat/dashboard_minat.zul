@@ -28,8 +28,8 @@
                     </div>
                 
                     <div>
-                        <button type="button" sclass="btn btn-info" width="100%" label="Pencarian" mold="trendy" onClick="@command('searchMinat')"/>
-                        <button type="button"  sclass="btn btn-info" width="100%" label="Tambah Minat" onClick="@command('buttonNewMinat')"/>
+                        <button type="button" sclass="btn btn-success" width="100%" label="Pencarian" mold="trendy" onClick="@command('buttonSearchMinat')"/>
+                        <button type="button"  sclass="btn btn-success" width="100%" label="Tambah Minat" onClick="@command('buttonNewMinat')"/>
                     </div>
                 
             </div>

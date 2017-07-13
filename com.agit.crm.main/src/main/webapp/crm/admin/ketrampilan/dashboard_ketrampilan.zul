@@ -27,8 +27,8 @@
                     </combobox>
                 </div>
                 <div>
-                    <button type="button" sclass="btn btn-info" width="100%" label="Pencarian" mold="trendy" onClick="@command('searchKetrampilan')"/>
-                    <button type="button"  sclass="btn btn-info" width="100%" label="Tambah Minat" onClick="@command('buttonNewKetrampilan')"/>
+                    <button type="button" sclass="btn btn-success" width="100%" label="Pencarian" mold="trendy" onClick="@command('buttonSearchKetrampilan')"/>
+                    <button type="button"  sclass="btn btn-success" width="100%" label="Tambah Minat" onClick="@command('buttonNewKetrampilan')"/>
                 </div>                
             </div>
         

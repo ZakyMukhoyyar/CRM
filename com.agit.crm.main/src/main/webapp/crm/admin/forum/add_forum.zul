@@ -3,7 +3,7 @@
             viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.admin.ForumVM')"
             form="@id('fx') @load(vm.forumDTO) @save(vm.forumDTO, before='buttonSaveForum')">
         <separator spacing="5px"/>
-        <groupbox width="500px" closable="true">
+        <groupbox width="500px" closable="true" >
             <caption label="Form Tambah Forum" style="font-size:16pt; font-weight: bold"/>
             <groupbox>
                 <grid style="border:0">
@@ -62,10 +62,9 @@
                         <rows>
                             <row>
                                 <label value="*)" style="color:red"/>
-                                <label value="File Attacthment" style="font-weight: bold"/>
+                                <label value="File Attachment" style="font-weight: bold"/>
                                 <textbox width="100%" readonly="true" value=""/>
-                                <button label="Upload" upload="true" onUpload="" width="40%">
-                                </button>
+                                <button sclass="btn btn-success" label="Upload" upload="true" onUpload="" width="40%"/>
                             </row>  
                         </rows>
                     </grid>
@@ -79,8 +78,8 @@
                 
                     <rows>
                         <row>
-                            <button label="Kembali" width="40%" onClick = "@command('buttonKembaliForum')"/>
-                            <button label="Save" width="40%" onClick = "@command('uploadFileForum')"/>
+                            <button sclass="btn btn-success" label="Kembali" width="40%" onClick = "@command('buttonKembaliForum')"/>
+                            <button sclass="btn btn-success" label="Save" width="40%" onClick = "@command('uploadFileForum')"/>
                         </row>
                     </rows>
                 </grid>

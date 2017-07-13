@@ -17,8 +17,19 @@
                     </div>
                     
                     <div class="form-group">
-                        <label sclass="labelstyle" value="Status" />   
-                        <combobox sclass="labelstyle" width="100%" placeholder="- Silahkan Pilih -" readonly="false" model="@load(vm.statuses)" selectedItem="@bind(vm.status)">
+                        <label sclass="labelstyle" value="Status" /> 
+                        
+<!--                        <zscript><![CDATA[String[] languages = {"ACTIVE","INACTIVE"};]]></zscript>
+                        <bandbox id="bd" autodrop="true">  
+                            <bandpopup>
+                                <listbox sclass="form-control" height="100%" width="180px" mold="paging" autopaging="true" onSelect="bd.value=self.selectedItem.label; bd.close();">
+                                    <listitem label="${each}" forEach="${languages}" />
+                                </listbox>
+                            </bandpopup>
+                        </bandbox>-->
+                        
+                        
+                        <combobox sclass="labelstyle" width="100%" placeholder="- Silahkan Pilih -" readonly="true" model="@load(vm.statuses)" selectedItem="@bind(vm.status)">
                             <template name="model" var="items">
                                 <comboitem label="@load(items)" value="@load(items)"/>
                             </template>
@@ -36,8 +47,8 @@
                     </div>
                     
                     <div>
-                        <button type="button" sclass="btn btn-success" width="100%" label="Pencarian" mold="trendy" onClick="@command('searchEvent')"/>
-                        <button type="button"  sclass="btn btn-success" width="100%" label="Create Event" onClick="@command('buttonNewEvent')"/>
+                        <button type="button" sclass="btn btn-success" width="100%" label="Pencarian" mold="trendy" onClick="@command('buttonSearchEvent')"/>
+                        <button type="button"  sclass="btn btn-success" width="100%" label="Tambah Event" onClick="@command('buttonNewEvent')"/>
                     </div>
                 </div>
             </div>
@@ -46,13 +57,12 @@
                     <paging forward="onPaging" />
                     <listbox rows="@load(vm.pageSize)" mold="paging" pageSize="@load(vm.pageSize)" emptyMessage="${labels.common.noDataFound}"  model="@bind(vm.eventAgitDTOs)">
                         <listhead>
-                            <listheader sclass="labelstyle bold" label="ID Event" width="5%" align="center" sortDirection="ascending" sort="auto(idEvent)"/>
-                            <listheader sclass="labelstyle bold"  label="Nama Event" width="20%" align="center"/>
-                            <listheader sclass="labelstyle bold"  label="Tanggal Mulai" width="14%" align="center"/>
-                            <listheader sclass="labelstyle bold"  label="Tanggal Berakhir" width="14%" align="center"/>
-                            <!--                        <listheader label="Deskripsi" width="14%" align="center"/>-->
-                            <listheader sclass="labelstyle bold"  label="Status" width="14%" align="center"/>
-                            <listheader sclass="labelstyle bold"  label="Aksi" width="10%" align="center"/>
+                            <listheader sclass="labelstyle bold" label="ID Event" width="10%" align="center" sortDirection="ascending" sort="auto(idEvent)"/>
+                            <listheader sclass="labelstyle bold" label="Nama Event" width="35%" align="center"/>
+                            <listheader sclass="labelstyle bold" label="Tanggal Mulai" width="17.5%" align="center"/>
+                            <listheader sclass="labelstyle bold" label="Tanggal Berakhir" width="17.5%" align="center"/>
+                            <listheader sclass="labelstyle bold" label="Status" width="10%" align="center"/>
+                            <listheader sclass="labelstyle bold" label="Aksi" width="10%" align="center"/>
                         </listhead>
                         <template name="model">
                             <listitem value="${each}">

@@ -149,9 +149,9 @@ public class CivitasVM {
         }
     }
 
-    @Command("buttonPencarian")
+    @Command("buttonSearchCivitas")
     @NotifyChange("civitasDTOs")
-    public void buttonPencarian(@ContextParam(ContextType.VIEW) Window window) {
+    public void buttonSearchCivitas(@ContextParam(ContextType.VIEW) Window window) {
         Map params = new HashMap();
         params.put("namaCivitas", namaCivitas);
         params.put("status", status);

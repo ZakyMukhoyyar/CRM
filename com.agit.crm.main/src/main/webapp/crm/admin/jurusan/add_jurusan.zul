@@ -32,8 +32,8 @@
                     </columns>                
                     <rows>
                         <row>
-                            <button label="Kembali" width="40%" onClick = "@command('buttonKembaliJurusan')"/>
-                            <button label="Save" width="40%" onClick = "@command('buttonSaveJurusan')"/>
+                            <button sclass="btn btn-success" label="Kembali" width="40%" onClick = "@command('buttonKembaliJurusan')"/>
+                            <button sclass="btn btn-success" label="Save" width="40%" onClick = "@command('buttonSaveJurusan')"/>
                         </row>
                     </rows>
                 </grid>

@@ -15,8 +15,8 @@
                     <textbox class="form-control" width="100%" value="@bind(vm.namaJurusan)" />
                 </div>                
                 <div>
-                    <button type="button" sclass="btn btn-info" width="100%" label="Pencarian" mold="trendy" onClick="@command('buttonSearchJurusan')"/>
-                    <button type="button"  sclass="btn btn-info" width="100%" label="Tambah Minat" onClick="@command('buttonNewJurusan')"/>
+                    <button type="button" sclass="btn btn-success" width="100%" label="Pencarian" onClick="@command('buttonSearchJurusan')"/>
+                    <button type="button"  sclass="btn btn-success" width="100%" label="Tambah Minat" onClick="@command('buttonNewJurusan')"/>
                 </div>
                 <separator/>
                 <separator/>
@@ -27,11 +27,11 @@
                 </div>
                 <div class="form-group">
                     <label sclass="labelstyle" value="File Upload" />
-                    <textbox class="form-control" width="100%" value="@bind(vm.namaJurusan)" />
+                    <textbox class="form-control" width="100%" value="@bind(vm.mediaNameJurusan)" />
                 </div>                
                 <div>
-                    <button type="button" sclass="btn btn-info" width="100%" label="Search" upload="true" onUpload="@command('buttonUploadFile')"/>
-                    <button type="button" sclass="btn btn-info" width="100%" label="Upload"  onClick="@command('buttonSaveDataJurusan')"/>
+                    <button type="button" sclass="btn btn-success" width="100%" label="Browse" upload="true" onUpload="@command('buttonUploadFile')"/>
+                    <button type="button" sclass="btn btn-success" width="100%" label="Upload"  onClick="@command('buttonSaveDataJurusan')"/>
                 </div>                
             </div>
             
