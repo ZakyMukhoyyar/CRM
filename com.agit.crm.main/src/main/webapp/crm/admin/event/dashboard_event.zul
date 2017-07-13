@@ -2,87 +2,85 @@
     <window apply="org.zkoss.bind.BindComposer"
             viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.admin.EventAgitVM')"
             form="@id('fx') @load(vm.eventAgitDTO) @save(vm.eventAgitDTO, before='buttonSaveEventAgit')">
-        <groupbox closable="false" mold="3d">
-            <caption label="Dashboard Event" />
-            <groupbox closable="false">
-                <caption label="Parameter Pencarian" />
-                <grid style="border:0">
-                    <columns>
-                        <column width="10%" />
-                        <column width="30%" />
-                        <column width="10%" />
-                        <column width="30%" />
-                    </columns>
-                    <rows>
-                        <row>
-                            <label value="ID Event" />
-                            <textbox width="50%" value="@bind(vm.idEvent)"/>
-                            <label value="Tanggal Berakhir" />
-                            <datebox width="50%" value="@bind(vm.endDate)"/>                            
-                        </row>
-                        <row>
-                            <label value="Nama Event" />
-                            <textbox width="50%" value="@bind(vm.namaEvent)"/>
-                            <label value="Status" />
-                            <combobox width="50%" placeholder="- Silahkan Pilih -" model="@load(vm.statuses)" selectedItem="@bind(vm.status)">
-                                <template name="model" var="items">
-                                    <comboitem label="@load(items)" value="@load(items)"/>
-                                </template>
-                            </combobox>
-                        </row>
-                        <row>
-                            <cell></cell>
-                            <cell align="right">
-                                <button width="30%" label="Create Event" mold="trendy" onClick="@command('buttonNewEvent')"/>
-                            </cell>
-                            <cell align="left">
-                                <button width="80%" label="Pencarian" mold="trendy" onClick="@command('searchEvent')"/>
-                                
-                            </cell>
-                            <cell colspan="2"></cell> 
-                        </row>
-                    </rows>
-                </grid>
-                <separator></separator>
-            </groupbox>
-            <groupbox closable="false">
-                <paging forward="onPaging" />
-                <listbox rows="@load(vm.pageSize)" mold="paging" pageSize="@load(vm.pageSize)" emptyMessage="${labels.common.noDataFound}"  model="@bind(vm.eventAgitDTOs)">
-                    <listhead>
-                        <listheader label="ID Event" width="5%" align="center" sortDirection="ascending" sort="auto(idEvent)"/>
-                        <listheader label="Nama Event" width="20%" align="center"/>
-                        <listheader label="Tanggal Mulai" width="14%" align="center"/>
-                        <listheader label="Tanggal Berakhir" width="14%" align="center"/>
-                        <!--                        <listheader label="Deskripsi" width="14%" align="center"/>-->
-                        <listheader label="Status" width="14%" align="center"/>
-                        <listheader label="Aksi" width="10%" align="center"/>
-                    </listhead>
-                    <template name="model">
-                        <listitem value="${each}">
-                            <listcell>
-                                <label width="100%" value="@bind(each.idEvent)" />
-                            </listcell>
-                            <listcell>
-                                <label width="100%" value="@bind(each.namaEvent)"/>
-                            </listcell>
-                            <listcell>
-                                <label width="100%" value="@bind(each.startDate)"/>
-                            </listcell>
-                            <listcell>
-                                <label width="100%" value="@bind(each.endDate)"/>
-                            </listcell>
-                            <listcell>
-                                <label width="100%" value="@bind(each.status)"/>
-                            </listcell>
-                            <listcell>
-                                <a label="Detail" style="text-decoration:underline ;color:blue" onClick="@command('detailEventAgit', object=each)"></a>
-                                <!--                                <a label=" | " style="font-size:12pt ;color:black"></a>
-                                <a label="Delete" style="text-decoration:underline ;color:blue" onClick="@command('deleteDataBank', object=each)"></a>-->
-                            </listcell>
-                        </listitem>
-                    </template>
-                </listbox>
-            </groupbox>
+        <groupbox id="gb" closable="false" mold="3d" sclass="col-md-12 nopadding "  style="background:#f5f5f5;" width="100%" height="100%">
+            <caption sclass="labelstyle"   label="Dashboard Event" />   
+            <div sclass="col-md-3 nopadding">
+                
+                <div >
+                    <div class="form-group" style="font-style:bold;">
+                        <label sclass="labelstyle" value="Filter Pencarian :" />
+                        <separator bar="true"/>
+                    </div>
+                    <div class="form-group">
+                        <label sclass="labelstyle" value="ID Event" />
+                        <textbox class="form-control" width="100%" value="@bind(vm.idEvent)"/>  
+                    </div>
+                    
+                    <div class="form-group">
+                        <label sclass="labelstyle" value="Status" />   
+                        <combobox sclass="labelstyle" width="100%" placeholder="- Silahkan Pilih -" readonly="false" model="@load(vm.statuses)" selectedItem="@bind(vm.status)">
+                            <template name="model" var="items">
+                                <comboitem label="@load(items)" value="@load(items)"/>
+                            </template>
+                        </combobox>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label sclass="labelstyle" value="Nama Event" />
+                        <textbox class="form-control" width="100%" value="@bind(vm.namaEvent)"/>
+                    </div>
+                        
+                    <div class="form-group">
+                        <label sclass="labelstyle" value="Tanggal Berakhir" />
+                        <datebox sclass="labelstyle" width="100%"  readonly="false" placeholder="- Silahkan Pilih -" value="@bind(vm.endDate)"></datebox>
+                    </div>
+                    
+                    <div>
+                        <button type="button" sclass="btn btn-success" width="100%" label="Pencarian" mold="trendy" onClick="@command('searchEvent')"/>
+                        <button type="button"  sclass="btn btn-success" width="100%" label="Create Event" onClick="@command('buttonNewEvent')"/>
+                    </div>
+                </div>
+            </div>
+            <div sclass="col-md-9 nopadding">
+                <groupbox closable="false" sclass="col-md-12">
+                    <paging forward="onPaging" />
+                    <listbox rows="@load(vm.pageSize)" mold="paging" pageSize="@load(vm.pageSize)" emptyMessage="${labels.common.noDataFound}"  model="@bind(vm.eventAgitDTOs)">
+                        <listhead>
+                            <listheader sclass="labelstyle bold" label="ID Event" width="5%" align="center" sortDirection="ascending" sort="auto(idEvent)"/>
+                            <listheader sclass="labelstyle bold"  label="Nama Event" width="20%" align="center"/>
+                            <listheader sclass="labelstyle bold"  label="Tanggal Mulai" width="14%" align="center"/>
+                            <listheader sclass="labelstyle bold"  label="Tanggal Berakhir" width="14%" align="center"/>
+                            <!--                        <listheader label="Deskripsi" width="14%" align="center"/>-->
+                            <listheader sclass="labelstyle bold"  label="Status" width="14%" align="center"/>
+                            <listheader sclass="labelstyle bold"  label="Aksi" width="10%" align="center"/>
+                        </listhead>
+                        <template name="model">
+                            <listitem value="${each}">
+                                <listcell>
+                                    <label sclass="labelstylegrid " width="100%" value="@bind(each.idEvent)" />
+                                </listcell>
+                                <listcell>
+                                    <label  sclass="labelstylegrid " width="100%" value="@bind(each.namaEvent)"/>
+                                </listcell>
+                                <listcell>
+                                    <label sclass="labelstylegrid " width="100%" value="@bind(each.startDate)"/>
+                                </listcell>
+                                <listcell>
+                                    <label sclass="labelstylegrid "  width="100%" value="@bind(each.endDate)"/>
+                                </listcell>
+                                <listcell>
+                                    <label sclass="labelstylegrid "  width="100%" value="@bind(each.status)"/>
+                                </listcell>
+                                <listcell>
+                                    <a sclass="labelstylegrid " label="Detail" style="text-decoration:underline ;color:blue" onClick="@command('detailEventAgit', object=each)"></a>
+                                    <!--                                <a label=" | " style="font-size:12pt ;color:black"></a>
+                                    <a label="Delete" style="text-decoration:underline ;color:blue" onClick="@command('deleteDataBank', object=each)"></a>-->
+                                </listcell>
+                            </listitem>
+                        </template>
+                    </listbox>
+                </groupbox>
+            </div>
         </groupbox>
     </window>
 </zk>

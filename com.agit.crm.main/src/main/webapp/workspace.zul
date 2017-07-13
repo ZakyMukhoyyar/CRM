@@ -112,8 +112,16 @@
                     color: black
                     background:#000;
                     padding-top:10px;
-                    letter-spacing: 3px;
+                    letter-spacing: 1px;
                     margin-bottom:2px;
+                    }
+                    .labelstylegrid {
+                    font-family: 'Open Sans', sans-serif;
+                    color: black
+                    background:#000;
+                    padding-top:9px;
+                    letter-spacing: 1px;
+                    margin-bottom:1px;
                     }
                     .isi{
                     letter-spacing: 1px;

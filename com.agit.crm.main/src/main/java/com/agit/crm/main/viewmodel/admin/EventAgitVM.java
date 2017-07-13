@@ -3,6 +3,7 @@ package com.agit.crm.main.viewmodel.admin;
 import com.agit.crm.common.application.EventAgitService;
 import com.agit.crm.common.dto.crm.EventAgitDTO;
 import com.agit.crm.common.dto.crm.EventAgitDTOBuilder;
+import com.agit.crm.common.dto.crm.MahasiswaDTO;
 import com.agit.crm.common.security.SecurityUtil;
 import com.agit.crm.shared.status.Status;
 import com.agit.crm.shared.zul.CommonViewModel;
@@ -68,7 +69,7 @@ public class EventAgitVM {
     /* attribut for CRM */
     private PageNavigation previous;
     private boolean checked;
-    private int pageSize = 5;
+    private int pageSize = 7;
     private int activePage = 0;
     private int selectedIndex;
     private int totalSize = 0;
@@ -197,24 +198,25 @@ public class EventAgitVM {
             mediaNameUploadEventAgit = "";
             pathLocationUploadEventAgit = "/" + "files" + "/" + "crm-event" + "/" + year + "/" + month + "/" + day + "/" + mediaUploadEventAgit.getName();
             Messagebox.show("File : " + mediaUploadEventAgit + " Bukan File PDF", "Error", Messagebox.OK, Messagebox.ERROR);
-        }
 
+        }
     }
 
-    /* Function button save register mahasiswa */
+    /* Function button save Event */
     @Command("buttonSaveEventAgit")
     @NotifyChange({"eventAgitDTO"})
     public void buttonSaveEventAgit(@BindingParam("object") EventAgitDTO obj, @ContextParam(ContextType.VIEW) Window window) {
         if (pathLocationUploadEventAgit == null) {
             pathLocationUploadEventAgit = eventAgitDTO.getAttachment();
         }
+        eventAgitDTO.setAttachment(pathLocationUploadEventAgit);
         eventAgitService.SaveOrUpdate(eventAgitDTO);
         showInformationMessagebox("Data EventAgit Berhasil Disimpan");
         BindUtils.postGlobalCommand(null, null, "refreshEventAgit", null);
         window.detach();
     }
 
-    /* Function refresh data mahasiswa */
+    /* Function refresh data Event */
     @GlobalCommand
     @NotifyChange("eventAgitDTOs")
     public void refreshEventAgit() {
