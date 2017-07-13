@@ -51,7 +51,7 @@
                             </template>
                         </tree>
                     </west>-->
-                    <west sclass="isi" splittable="true" width="20%" collapsible="true" border="none"
+                    <west sclass="isi" splittable="true" width="23%" collapsible="true" border="none"
                                        title="${labels.workspace.label.menu}" flex="true" autoscroll="true">
                         <tree model="@load(vm.model)" >
                             <template name="model" >

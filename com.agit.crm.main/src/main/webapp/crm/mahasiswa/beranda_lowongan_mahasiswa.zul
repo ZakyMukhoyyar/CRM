@@ -4,7 +4,6 @@
             viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.admin.LowonganVM')"
             form="@id('fx') @load(vm.lowonganDTO) @save(vm.lowonganDTO, before='buttonSaveLowongan')">
         <groupbox id="gb" mold="3d" sclass="col-md-12 nopadding "  style="background:#f5f5f5;">
-            <caption sclass="labelstyle" label="Lowongan Kerja" />	
             <div sclass="col-md-3 nopadding">
                 
                 <div >
@@ -19,7 +18,7 @@
                     
                     <div class="form-group">
                         <label sclass="labelstyle" value="Jenis Pekerjaan" />
-                        <combobox autodrop="true" readonly="true" width="100%" model="@load(vm.minats)" selectedItem="@bind(fx.minatPekerjaan)" placeholder="- Pilihan Kategori -">
+                        <combobox sclass="labelstyle" autodrop="true" readonly="true" width="100%" model="@load(vm.minats)" selectedItem="@bind(fx.minatPekerjaan)" placeholder="- Pilihan Kategori -">
                             <template name="model" var="items">
                                 <comboitem label="@load(items.getNamaMinat())" value="@load(items.getNamaMinat())"/>
                             </template>

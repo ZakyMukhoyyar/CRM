@@ -315,11 +315,12 @@ public class MahasiswaVM extends SelectorComposer<Window> {
 
     /* Function button save register mahasiswa */
     @Command("buttonSaveMahasiswa")
-    @NotifyChange({"mahasiswaDTO"})
+    @NotifyChange({"mahasiswaDTO","pathLocationUploadCV"})
     public void buttonSaveMahasiswa(@BindingParam("object") MahasiswaDTO obj, @ContextParam(ContextType.VIEW) Window window) {
         if (pathLocationUploadCV == null) {
             pathLocationUploadCV = mahasiswaDTO.getUploadCV();
         }
+        mahasiswaDTO.setUploadCV(pathLocationUploadCV);
         mahasiswaService.SaveOrUpdate(mahasiswaDTO);
         showInformationMessagebox("Data Mahasiswa Berhasil Disimpan");
         BindUtils.postGlobalCommand(null, null, "refreshMahasiswa", null);
