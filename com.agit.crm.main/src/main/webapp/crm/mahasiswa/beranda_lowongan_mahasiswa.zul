@@ -52,57 +52,38 @@
                         <button type="button" sclass="btn btn-success" width="100%" label="Pencarian" mold="trendy" onClick="@command('searchDataBank')"/>
                         <button type="button"  sclass="btn btn-success" width="100%" label="History" onClick="@command('buttonRiwayatLowongan')"/>
                     </div>
-                    <separator></separator>
-                    <separator></separator>
-                    <div>
-                        <listbox model="@bind(vm.mahasiswaDTOs)">
-                            <template name="model">
-                                <listitem value="${each}">
-                                    <listcell>
-                                        <a sclass="btn btn-primary" label="Lihat Profile"  onClick="@command('detailProfileMahasiswa', object=each)"></a>
-                                    </listcell>
-                                </listitem>
-                            </template>
-                        </listbox>
-                    </div>
-<!--                    <div>
-                      
-                        <button type="button"  sclass="btn btn-success" width="100%" label="Lihat Profile" onClick="@command('detail')"/>
-                    </div>-->
                 </div>
             </div>
             <div sclass="col-md-9 nopadding">
                 <groupbox sclass="col-md-12">
                     <listbox  rows="@load(vm.pageSize)" pageSize="@load(vm.pageSize)" mold="paging" emptyMessage="${labels.common.noDataFound}" model="@bind(vm.lowonganDTOs)">
-                        <listhead>
+                        <listhead >
                             <listheader label="Nama Lowongan" width="50%" align="center "/>
                             <listheader label="Aksi" width="7%" align="center"/>
                         </listhead>
                         <template name="model">
-                            <template name="model">
-                                <listitem value="${each}" style="margin-bottom:20px;">
-                                    <listcell style="border:1px solid #dcdcdc;">
-                                        <label sclass="judul" width="100%" value="@bind(each.namaLowongan)" style="text-align: left;"/>
-                                        <separator></separator>
-                                        <label sclass="labelstyle bold" value="Penempatan : "/>
-                                        <label sclass="labelstyle" width="100%" value="@bind(each.lokasiKerja)" style="text-align: left;"/>
-                                        <separator bar="true"/>
-                                        <label sclass="isi" width="100%" value="@bind(each.persyaratan)" style="text-align: justify; display: block; padding:10px;" />
-                                        <separator></separator>   
-                                        <label sclass="labelstyle bold" value="Gaji : "/>                        
-                                        <label sclass="labelstyle label label-success" width="100%" value="@bind(each.gaji)" style="text-align: left;"/>
-                                        <separator></separator>
-                                        <label sclass="labelstyle bold" value="Status : "/> 
-                                        <label sclass="labelstyle label label-danger" width="100%" value="@bind(each.lowonganState)" style="text-align: left;"/>
-                                    </listcell>
-                                    <listcell>
-                                        <a sclass="btn btn-primary" label="Detail"  onClick="@command('buttonDetailLowongan', object=each)"></a>
-                                        <!--                            <a sclass="s" label=" | "></a>-->
-                                        <separator></separator>  
-                                        <a sclass="btn btn-warning" disabled="@bind(vm.disableButtonApply)" label="Apply"  onClick="@command('buttonApplyLowongan', object=each)"></a>
-                                    </listcell>
-                                </listitem>
-                            </template>
+                            <listitem value="${each}" style="margin-bottom:20px;">
+                                <listcell style="border:1px solid #dcdcdc;">
+                                    <label sclass="judul" width="100%" value="@bind(each.namaLowongan)" style="text-align: left;"/>
+                                    <separator></separator>
+                                    <label sclass="labelstyle bold" value="Penempatan : "/>
+                                    <label sclass="labelstyle" width="100%" value="@bind(each.lokasiKerja)" style="text-align: left;"/>
+                                    <separator bar="true"/>
+                                    <label sclass="isi" width="100%" value="@bind(each.persyaratan)" style="text-align: justify; display: block; padding:10px;" />
+                                    <separator></separator>   
+                                    <label sclass="labelstyle bold" value="Gaji : "/>                        
+                                    <label sclass="labelstyle label label-success" width="100%" value="@bind(each.gaji)" style="text-align: left;"/>
+                                    <separator></separator>
+                                    <label sclass="labelstyle bold" value="Status : "/> 
+                                    <label sclass="labelstyle label label-danger" width="100%" value="@bind(each.lowonganState)" style="text-align: left;"/>
+                                </listcell>
+                                <listcell>
+                                    <a sclass="btn btn-primary" label="Detail"  onClick="@command('buttonDetailLowongan', object=each)"></a>
+                                    <!--                            <a sclass="s" label=" | "></a>-->
+                                    <separator></separator>  
+                                    <a sclass="btn btn-warning" disabled="@bind(vm.disableButtonApply)" label="Apply"  onClick="@command('buttonApplyLowongan', object=each)"></a>
+                                </listcell>
+                            </listitem>
                         </template>
                     </listbox>
                 </groupbox>
