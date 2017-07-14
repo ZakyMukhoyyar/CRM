@@ -101,6 +101,7 @@ public class LowonganVM {
 
     /* Function For Objek Disable  */
     private boolean disableButtonSave;
+    private boolean disableButtonApply;
 
     @Init
     public void init(
@@ -382,17 +383,17 @@ public class LowonganVM {
         lowonganDTO = (LowonganDTO) obj;
         Messagebox.show("Apakah anda yakin ingin menghapus Lowongan?", "Konfirmasi", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION,
                 new org.zkoss.zk.ui.event.EventListener() {
-                    @Override
-                    public void onEvent(Event evt) throws InterruptedException {
-                        if (evt.getName().equals("onOK")) {
-                            lowonganService.deleteData(lowonganDTO);
-                            showInformationMessagebox("Lowongan Berhasil Dihapus");
-                            BindUtils.postGlobalCommand(null, null, "refreshLowongan", null);
-                        } else {
-                            System.out.println("Operation Canceled !");
-                        }
-                    }
+            @Override
+            public void onEvent(Event evt) throws InterruptedException {
+                if (evt.getName().equals("onOK")) {
+                    lowonganService.deleteData(lowonganDTO);
+                    showInformationMessagebox("Lowongan Berhasil Dihapus");
+                    BindUtils.postGlobalCommand(null, null, "refreshLowongan", null);
+                } else {
+                    System.out.println("Operation Canceled !");
                 }
+            }
+        }
         );
     }
 
@@ -671,6 +672,14 @@ public class LowonganVM {
 
     public void setNamaApplyLowongan(String namaApplyLowongan) {
         this.namaApplyLowongan = namaApplyLowongan;
+    }
+
+    public boolean isDisableButtonApply() {
+        return disableButtonApply;
+    }
+
+    public void setDisableButtonApply(boolean disableButtonApply) {
+        this.disableButtonApply = disableButtonApply;
     }
 
 }
