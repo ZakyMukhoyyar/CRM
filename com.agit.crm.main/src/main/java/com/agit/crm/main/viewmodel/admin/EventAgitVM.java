@@ -69,10 +69,7 @@ public class EventAgitVM {
     /* attribut for CRM */
     private PageNavigation previous;
     private boolean checked;
-    private int pageSize = 10;
-    private int activePage = 0;
-    private int selectedIndex;
-    private int totalSize = 0;
+    private int pageSize = 9;
 
     @Init
     public void init(
@@ -368,29 +365,5 @@ public class EventAgitVM {
     public void setPageSize(int pageSize) {
         this.pageSize = pageSize;
     }
-
-    public int getActivePage() {
-        return activePage;
-    }
-
-    public void setActivePage(int activePage) {
-        this.activePage = activePage;
-    }
-
-    public int getSelectedIndex() {
-        return selectedIndex;
-    }
-
-    public void setSelectedIndex(int selectedIndex) {
-        this.selectedIndex = selectedIndex;
-    }
-
-    public int getTotalSize() {
-        return totalSize;
-    }
-
-    public void setTotalSize(int totalSize) {
-        this.totalSize = totalSize;
-    }
-
+    
 }

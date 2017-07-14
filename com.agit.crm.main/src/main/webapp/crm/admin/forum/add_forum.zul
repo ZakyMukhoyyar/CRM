@@ -63,7 +63,7 @@
                             <row>
                                 <label value="*)" style="color:red"/>
                                 <label value="File Attachment" style="font-weight: bold"/>
-                                <textbox width="100%" readonly="true" value=""/>
+                                <textbox width="100%" readonly="true" value="@command('buttonUploadFileForum')"/>
                                 <button sclass="btn btn-success" label="Upload" upload="true" onUpload="" width="40%"/>
                             </row>  
                         </rows>

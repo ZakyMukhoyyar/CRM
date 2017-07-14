@@ -5,42 +5,52 @@
 <zk xmlns="http://www.zkoss.org/2005/zul">
     <window border="none" apply="org.zkoss.bind.BindComposer"
             viewModel="@id('vm') @init('com.agit.crm.user.management.interfaces.web.ui.viewmodel.GroupVM')">
-        <grid>
-            <columns>
-                <column width="20%"/>
-                <column width="80%"/>
-            </columns>
-            <rows>
-                <row>
-                    <label value="${labels.group.label.name}"/>
-                    <textbox value="@bind(vm.searchRoleName)"/>
-                </row>
-            </rows>
-        </grid>
-        <include src="~./ui/common/button.common.search.page.zul" />
-        <grid mold="paging" pageSize="@load(vm.pageSize)">
-            <columns sizable="true">
-                <column label="${labels.group.label.no}" width="35px"/>
-                <column label="${labels.group.label.name}"/>
-                <column label="${labels.group.label.description}"/>
-                <column label="${labels.common.label.action}" if="${sec:isAllGranted('GROUP_UPDATE,GROUP_DELETE')}"/>
-            </columns>
-            <rows children="@load(vm.roleDTOs)">
-                <template name="children" status="s">
-                    <row>
-                        <label value="@load(s.index+1)" />
-                        <div>
-                            <label value="@load(each.roleName)" if="${not sec:isAllGranted('GROUP_VIEW')}"/>
-                            <a label="@load(each.roleName)" onClick="@command('buttonView', object=each)" if="${sec:isAllGranted('GROUP_VIEW')}"/>
-                        </div>
-                        <label value="@load(each.roleDescription)" />
-                        <div>
-                            <button label="${labels.common.button.edit}" onClick="@command('buttonUpdate', object=each)" if="${sec:isAllGranted('GROUP_UPDATE')}"/>
-                            <button label="${labels.common.button.delete}" onClick="@command('buttonDelete', object=each)" if="${sec:isAllGranted('GROUP_DELETE')}"/>
-                        </div>
-                    </row>
-                </template>
-            </rows>
-        </grid>
+        <groupbox id="gb" closable="false" mold="3d" sclass="col-md-12 nopadding "  style="background:#f5f5f5;" width="100%" height="600px">
+            <caption sclass="labelstyle"   label="Dashboard Event" />   
+            <div sclass="col-md-3 nopadding">
+                <div class="form-group" style="font-style:bold;">
+                    <label sclass="labelstyle" value="Group Maintenance :" />
+                    <separator bar="true"/>
+                </div>
+                <div class="form-group">
+                    <label sclass="labelstyle" value="${labels.group.label.name}" />
+                    <textbox class="form-control" width="100%" value="@bind(vm.searchRoleName)"/>  
+                </div>
+                
+                <div>
+                    <button type="button" sclass="btn btn-success" width="100%" label="${labels.common.button.search}" onClick="@command('buttonSearch')"/>
+                </div>
+            </div>
+            <div sclass="col-md-9 nopadding" >
+            <groupbox closable="false" sclass="col-md-12" >
+                <grid mold="paging" pageSize="@load(vm.pageSize)">
+                    <columns sizable="true">
+                        <column label="${labels.group.label.no}" width="35px"/>
+                        <column label="${labels.group.label.name}"/>
+                        <column label="${labels.group.label.description}"/>
+                        <column label="${labels.common.label.action}" if="${sec:isAllGranted('GROUP_UPDATE,GROUP_DELETE')}"/>
+                    </columns>
+                    <rows children="@load(vm.roleDTOs)">
+                        <template name="children" status="s">
+                            <row>
+                                <label value="@load(s.index+1)" />
+                                <div>
+                                    <label value="@load(each.roleName)" if="${not sec:isAllGranted('GROUP_VIEW')}"/>
+                                    <a label="@load(each.roleName)" onClick="@command('buttonView', object=each)" if="${sec:isAllGranted('GROUP_VIEW')}"/>
+                                </div>
+                                <label value="@load(each.roleDescription)" />
+                                <div>
+                                    <button label="${labels.common.button.edit}" onClick="@command('buttonUpdate', object=each)" if="${sec:isAllGranted('GROUP_UPDATE')}"/>
+                                    <button label="${labels.common.button.delete}" onClick="@command('buttonDelete', object=each)" if="${sec:isAllGranted('GROUP_DELETE')}"/>
+                                </div>
+                            </row>
+                        </template>
+                    </rows>
+                </grid>
+            </groupbox>
+        </div>
+            
+        </groupbox>
+        
     </window>
 </zk>

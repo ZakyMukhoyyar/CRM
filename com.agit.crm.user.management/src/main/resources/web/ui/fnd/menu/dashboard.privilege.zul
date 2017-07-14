@@ -2,72 +2,69 @@
     <window apply="org.zkoss.bind.BindComposer"
             viewModel="@id('vm') @init('com.agit.crm.user.management.interfaces.web.ui.viewmodel.MenuVM')"
             form="@id('fx') @load(vm.privilegeDTO) @save(vm.privilegeDTO, before='buttonSavePrivilege')">
-        <groupbox closable="false" mold="3d">
-            <caption label="Form Dashboard Menu" />
-            <groupbox closable="false">
-                <caption label="Parameter Pencarian" />
-                <grid>
-                    <columns>
-                        <column width="15%" />
-                        <column width="30%" />
-                    </columns>
-                    <rows>
-                        <row>
-                            <label value="ID Privilege" />
-                            <textbox width="100%" value="@bind(vm.privilegeID)"/>
-                        </row>
-                        <row>
-                            <label value="Nama Privilege" />
-                            <textbox width="100%" value="@bind(vm.privilegeName)"/>
-                        </row>
-                        <row>
-                            <cell></cell>
-                            <cell align="left">
-                                <button width="40%" label="Pencarian" image="/images/crm_search.png" mold="trendy" onClick="@command('buttonSearch')"/>
-                                <space width="10px"></space>
-                                <button width="53%" label="Membuat Menu" image="/images/crm_add.png" mold="trendy" onClick="@command('buttonNewPrivilege')"/>
-                            </cell>
-                            <cell colspan="2"></cell> 
-                        </row>
-                    </rows>
-                </grid>
-                <separator></separator>
-            </groupbox>
-            <groupbox closable="false">
-                <paging forward="onPaging" />
-                <listbox rows="5" emptyMessage="${labels.common.noDataFound}" model="@bind(vm.privilegeDTOs)">
-                    <listhead>
-                        <listheader label="ID Privilege" width="15%" align="center"/>
-                        <listheader label="ID Parent" width="15%" align="center"/>
-                        <listheader label="Nama Privilege" width="25%" align="center"/>
-                        <listheader label="Nama Menu" width="25%" align="center"/>
-                        <listheader label="Status" width="10%" align="center"/>
-                        <listheader label="Aksi" width="10%" align="center"/>
-                    </listhead>
-                    <template name="model">
-                        <listitem value="${each}">
-                            <listcell >
-                                <label width="100%" value="@bind(each.privilegeID)"/>
-                            </listcell>
-                            <listcell >
-                                <label width="100%" value="@bind(each.parentID)"/>
-                            </listcell>
-                            <listcell >
-                                <label width="100%" value="@bind(each.privilegeName)"/>
-                            </listcell>
-                            <listcell >
-                                <label width="100%" value="@bind(each.menuName)"/>
-                            </listcell>
-                            <listcell >
-                                <label width="100%" value="@bind(each.privilegeStatus)"/>
-                            </listcell>
-                            <listcell>
-                                <a label="Detail" style="text-decoration:underline ;color:blue" onClick="@command('detailPrivilege', object=each)"></a>
-                            </listcell>
-                        </listitem>
-                    </template>
-                </listbox>
-            </groupbox>
+        <groupbox id="gb" closable="false" mold="3d" sclass="col-md-12 nopadding "  style="background:#f5f5f5;" width="100%" height="100%">
+            <caption sclass="labelstyle"   label="Dashboard Menu" />   
+            <div sclass="col-md-3 nopadding">
+                <groupbox closable="false">                    
+                    <div class="form-group" style="font-style:bold;">
+                        <label sclass="labelstyle" value="Parameter Pencarian :" />
+                        <separator bar="true"/>
+                    </div>
+                    <div>
+                        <label sclass="labelstyle" value="ID Privilege" />
+                        <textbox class="form-control" width="100%" value="@bind(vm.privilegeID)"/>
+                        <separator/>
+                    </div>
+                    <div>
+                        <label sclass="labelstyle" value="Nama Privilege" />
+                        <textbox class="form-control" width="100%" value="@bind(vm.privilegeName)"/>
+                    </div>
+                    <separator/>
+                    <separator/>
+                    <separator/>
+                    <div>
+                        <a sclass="btn btn-info" width="100%" label="Pencarian" onClick="@command('buttonSearch')"/>
+                        <separator/>
+                        <a sclass="btn btn-info" width="100%" label="Membuat Menu" onClick="@command('buttonNewPrivilege')"/>
+                    </div>
+                </groupbox>
+            </div> 
+            <div sclass="col-md-9 nopadding" >
+                <groupbox closable="false" sclass="col-md-12" >
+                    <listbox rows="15"  mold="paging" pageSize="15" emptyMessage="${labels.common.noDataFound}" model="@bind(vm.privilegeDTOs)">
+                        <listhead>
+                            <listheader sclass="labelstyle bold" label="ID Privilege" width="15%" align="center"/>
+                            <listheader sclass="labelstyle bold" label="ID Parent" width="15%" align="center"/>
+                            <listheader sclass="labelstyle bold" label="Nama Privilege" width="25%" align="center"/>
+                            <listheader sclass="labelstyle bold" label="Nama Menu" width="25%" align="center"/>
+                            <listheader sclass="labelstyle bold" label="Status" width="10%" align="center"/>
+                            <listheader sclass="labelstyle bold" label="Aksi" width="10%" align="center"/>
+                        </listhead>
+                        <template name="model">
+                            <listitem value="${each}">
+                                <listcell >
+                                    <label width="100%" value="@bind(each.privilegeID)"/>
+                                </listcell>
+                                <listcell >
+                                    <label width="100%" value="@bind(each.parentID)"/>
+                                </listcell>
+                                <listcell >
+                                    <label width="100%" value="@bind(each.privilegeName)"/>
+                                </listcell>
+                                <listcell >
+                                    <label width="100%" value="@bind(each.menuName)"/>
+                                </listcell>
+                                <listcell >
+                                    <label width="100%" value="@bind(each.privilegeStatus)"/>
+                                </listcell>
+                                <listcell>
+                                    <a label="Detail" style="text-decoration:underline ;color:blue" onClick="@command('detailPrivilege', object=each)"></a>
+                                </listcell>
+                            </listitem>
+                        </template>
+                    </listbox>
+                </groupbox>
+            </div>            
         </groupbox>
     </window>
 </zk>

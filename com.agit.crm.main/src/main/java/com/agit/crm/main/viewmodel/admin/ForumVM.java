@@ -187,9 +187,9 @@ public class ForumVM {
     }
     
     /* Function upload File Forum */
-    @Command("uploadFileForum")
+    @Command("buttonUploadFileForum")
     @NotifyChange({"mediaNameUploadFileForum", "pathLocationUploadFileForum"})
-    public void uploadFileForum(@ContextParam(ContextType.BIND_CONTEXT) BindContext ctx) throws IOException {
+    public void buttonUploadFileForum(@ContextParam(ContextType.BIND_CONTEXT) BindContext ctx) throws IOException {
         UploadEvent upEvent = null;
         Object objUploadEvent = ctx.getTriggerEvent();
 

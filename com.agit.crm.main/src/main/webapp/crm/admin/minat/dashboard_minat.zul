@@ -6,31 +6,31 @@
             <caption label="Dashboard Minat" sclass="labelstyle" />
             <div sclass="col-md-3 nopadding">
                 
-                    <div class="form-group" style="font-style:bold;">
-                        <label sclass="labelstyle" value="Filter Pencarian :" />
-                        <separator bar="true"/>
-                    </div>
-                    <div class="form-group">
-                        <label sclass="labelstyle" value="ID Minat" />
-                        <textbox class="form-control" width="100%" value="@bind(vm.idMinat)" />
-                    </div>                    
-                    <div class="form-group">
-                        <label sclass="labelstyle" value="Nama Minat" />
-                        <textbox class="form-control" width="100%" value="@bind(vm.namaMinat)"/>
-                    </div>                    
-                    <div class="form-group">
-                        <label sclass="labelstyle" value="Status" />   
-                        <combobox sclass="labelstyle" width="100%" placeholder="- Silahkan Pilih -" readonly="true" model="@load(vm.listStatus)" selectedItem="@bind(vm.status)">
-                            <template name="model" var="items">
-                                <comboitem label="@load(items)" value="@load(items)"/>
-                            </template>
-                        </combobox>
-                    </div>
+                <div class="form-group" style="font-style:bold;">
+                    <label sclass="labelstyle" value="Filter Pencarian :" />
+                    <separator bar="true"/>
+                </div>
+                <div class="form-group">
+                    <label sclass="labelstyle" value="ID Minat" />
+                    <textbox class="form-control" width="100%" value="@bind(vm.idMinat)" />
+                </div>                    
+                <div class="form-group">
+                    <label sclass="labelstyle" value="Nama Minat" />
+                    <textbox class="form-control" width="100%" value="@bind(vm.namaMinat)"/>
+                </div>                    
+                <div class="form-group">
+                    <label sclass="labelstyle" value="Status" />      
+                    <listbox mold="select" sclass="form-control" model="@load(vm.status)" selectedItem="@bind(vm.status)" >
+                        <template name="model" var="items" >
+                            <listitem label="@load(items)"  value="@load(items)" />
+                        </template>
+                    </listbox>
+                </div>
                 
-                    <div>
-                        <button type="button" sclass="btn btn-success" width="100%" label="Pencarian" mold="trendy" onClick="@command('buttonSearchMinat')"/>
-                        <button type="button"  sclass="btn btn-success" width="100%" label="Tambah Minat" onClick="@command('buttonNewMinat')"/>
-                    </div>
+                <div>
+                    <button type="button" sclass="btn btn-success" width="100%" label="Pencarian" mold="trendy" onClick="@command('buttonSearchMinat')"/>
+                    <button type="button"  sclass="btn btn-success" width="100%" label="Tambah Minat" onClick="@command('buttonNewMinat')"/>
+                </div>
                 
             </div>
             
@@ -55,7 +55,7 @@
                                     <label width="100%" value="@bind(each.status)"/>
                                 </listcell>
                                 <listcell>
-                                    <a label="Detail" style="text-decoration:underline ;color:blue" onClick="@command('detailMinat', object=each)"></a>
+                                    <a sclass="btn btn-primary " label="Detail" style="text-decoration:underline ;color:white" onClick="@command('detailMinat', object=each)"></a>
                                     <!--                                <a label=" | " style="font-size:12pt ;color:black"></a>
                                     <a label="Delete" style="text-decoration:underline ;color:blue" onClick="@command('deleteDataBank', object=each)"></a>-->
                                 </listcell>
