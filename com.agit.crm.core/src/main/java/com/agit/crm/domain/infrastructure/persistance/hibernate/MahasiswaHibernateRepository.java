@@ -2,7 +2,6 @@ package com.agit.crm.domain.infrastructure.persistance.hibernate;
 
 import com.agit.crm.domain.crm.Mahasiswa;
 import com.agit.crm.domain.crm.MahasiswaRepository;
-import com.agit.crm.shared.id.IdMahasiswa;
 import com.agit.crm.util.StringUtil;
 import java.util.List;
 import java.util.Map;
@@ -67,6 +66,14 @@ public class MahasiswaHibernateRepository extends HibernateRepository implements
         Query query = getSession().createQuery("delete from com.agit.crm.domain.crm.Mahasiswa where idMahasiswa = :tid");
         query.setParameter("tid", mahasiswa.getIdMahasiswa());
         query.executeUpdate();
+    }
+
+    @Override
+    public Mahasiswa findByNamaLengkap(String namaApplyLowongan) {
+        return (Mahasiswa) getSession()
+                .createQuery("from com.agit.crm.domain.crm.Mahasiswa where namaLengkap = :nl")
+                .setParameter("nl", namaApplyLowongan)
+                .uniqueResult();
     }
 
 }

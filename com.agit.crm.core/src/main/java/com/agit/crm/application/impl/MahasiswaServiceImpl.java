@@ -24,48 +24,48 @@ import org.apache.commons.lang.Validate;
  * @author Bayu Hendra Setiawan
  */
 public class MahasiswaServiceImpl implements MahasiswaService {
-    
+
     private MahasiswaRepository mahasiswaRepository;
     private MahasiswaDTOAssembler mahasiswaDTOAssembler;
     private LowonganRepository lowonganRepository;
     private LowonganDTOAssembler lowonganDTOAssembler;
-    
+
     public void setMahasiswaRepository(MahasiswaRepository mahasiswaRepository) {
         this.mahasiswaRepository = mahasiswaRepository;
     }
-    
+
     public void setMahasiswaDTOAssembler(MahasiswaDTOAssembler mahasiswaDTOAssembler) {
         this.mahasiswaDTOAssembler = mahasiswaDTOAssembler;
     }
-    
+
     public void setLowonganRepository(LowonganRepository lowonganRepository) {
         this.lowonganRepository = lowonganRepository;
     }
-    
+
     public void setLowonganDTOAssembler(LowonganDTOAssembler lowonganDTOAssembler) {
         this.lowonganDTOAssembler = lowonganDTOAssembler;
     }
-    
+
     @Override
     public void SaveOrUpdate(MahasiswaDTO mahasiswa) {
         Mahasiswa t = mahasiswaRepository.findByID(mahasiswa.getIdMahasiswa());
-        
+
         if (t == null) {
             t = mahasiswaDTOAssembler.toDomain(mahasiswa);
         } else {
             Mahasiswa newMahasiswa = mahasiswaDTOAssembler.toDomain(mahasiswa);
             t.assignNewMahasiswa(newMahasiswa);
-            
+
         }
         mahasiswaRepository.saveOrUpdate(t);
     }
-    
+
     @Override
     public void deleteData(MahasiswaDTO mahasiswa) {
         Mahasiswa p = mahasiswaDTOAssembler.toDomain(mahasiswa);
         mahasiswaRepository.deleteData(p);
     }
-    
+
     @Override
     public MahasiswaDTO getDummyData() {
         Lowongan lowongan1 = new LowonganBuilder()
@@ -102,7 +102,7 @@ public class MahasiswaServiceImpl implements MahasiswaService {
         List<Lowongan> lowongans = new ArrayList<>();
         lowongans.add(lowongan1);
         lowongans.add(lowongan2);
-        
+
         Mahasiswa mahasiswa = new MahasiswaBuilder()
                 .setIdMahasiswa("11")
                 .setUsername("username")
@@ -140,7 +140,7 @@ public class MahasiswaServiceImpl implements MahasiswaService {
                 .createMahasiswa();
         return mahasiswaDTOAssembler.toDTO(mahasiswa);
     }
-    
+
     @Override
     public MahasiswaDTO findByID(String idMahasiswa) {
         Validate.notNull(mahasiswaRepository);
@@ -150,7 +150,7 @@ public class MahasiswaServiceImpl implements MahasiswaService {
         }
         return null;
     }
-    
+
     @Override
     public List<MahasiswaDTO> findAll() {
         Validate.notNull(mahasiswaRepository);
@@ -160,7 +160,7 @@ public class MahasiswaServiceImpl implements MahasiswaService {
         }
         return null;
     }
-    
+
     @Override
     public List<MahasiswaDTO> findByParams(Map map) {
         Validate.notNull(mahasiswaRepository);
@@ -170,5 +170,15 @@ public class MahasiswaServiceImpl implements MahasiswaService {
         }
         return null;
     }
-    
+
+    @Override
+    public MahasiswaDTO findByNamaLengkap(String namaLengkap) {
+        Validate.notNull(mahasiswaRepository);
+        Mahasiswa b = mahasiswaRepository.findByNamaLengkap(namaLengkap);
+        if (b != null) {
+            return mahasiswaDTOAssembler.toDTO(b);
+        }
+        return null;
+    }
+
 }

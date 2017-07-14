@@ -22,4 +22,6 @@ public interface MahasiswaService {
 
     List<MahasiswaDTO> findByParams(Map map);
 
+    MahasiswaDTO findByNamaLengkap(String namaLengkap);
+
 }

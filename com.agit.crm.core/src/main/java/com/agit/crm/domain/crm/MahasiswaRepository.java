@@ -18,4 +18,6 @@ public interface MahasiswaRepository {
     void deleteData(Mahasiswa mahasiswa);
 
     List<Mahasiswa> findByParams(Map map);
+
+    Mahasiswa findByNamaLengkap(String namaApplyLowongan);
 }

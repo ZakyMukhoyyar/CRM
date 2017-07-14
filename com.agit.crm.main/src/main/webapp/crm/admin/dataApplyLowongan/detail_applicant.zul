@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul">
+    <window>
+        <groupbox closable="false" mold="3d" >
+            <caption label="Data Applicant" />
+            <grid style="border:0">
+                <columns>
+                    <column width="30%" align="right"/>
+                    <column width="40%"/>
+                    <column ></column>
+                </columns>
+                <rows>
+                    <row>
+                        <label value="ID " style="font-weight: bold"/>
+                        <textbox width="30%" readonly="true" value="@bind(fx.idMahasiswa)"/>
+                    </row>
+                    <row>
+                        <label value="Nama Lengkap" style="font-weight: bold"/>
+                        <textbox width="100%" readonly="true" value="@bind(fx.namaLengkap)"/>
+                    </row>
+                    <row>
+                        <label value="Alamat Email" style="font-weight: bold"/>
+                        <textbox width="100%" readonly="true" value="@bind(fx.email)"/>
+                    </row>
+                    <row>
+                        <label value="Tanggal Lahir" style="font-weight: bold" />
+                        <textbox width="100%" readonly="true" value="@bind(fx.tanggalLahir)"/> 
+                    </row>
+                    <row>
+                        <label value="No KTP" style="font-weight: bold"/>
+                        <textbox width="100%" readonly="true" value="@bind(fx.noKTP)"/>
+                    </row>
+                        
+                    <row>
+                        <label value="Jenis Kelamin" style="font-weight: bold"/>
+                        <textbox width="100%" readonly="true" value="@bind(fx.jenisKelaminType)" />
+                    </row>
+                        
+                    <row>
+                        <label value="Domisili" style="font-weight: bold"/>
+                        <textbox width="100%" readonly="true" value="@bind(fx.domisili)"/>
+                    </row>
+                        
+                    <row>
+                        <label value="No Handphone" style="font-weight: bold"/>
+                        <textbox width="100%" readonly="true" value="@bind(fx.noHP)"/>
+                    </row>
+                    <row>
+                        <label value="Pendidikan Terakhir" style="font-weight: bold"/>
+                        <textbox width="100%" readonly="true" value="@bind(fx.pendidikanType)" />
+                    </row>
+                    <row>
+                        <label value="Nama Civitas" style="font-weight: bold"/>
+                        <textbox width="100%" readonly="true" value="@bind(fx.namaCivitas)" />
+                    </row>
+                    <row>
+                        <label value="IPK" style="font-weight: bold"/>
+                        <textbox width="100%" readonly="true" value="@bind(fx.ipk)"/>
+                    </row>
+                    <row>
+                        <label value="Minat" style="font-weight: bold"/>
+                        <textbox width="100%" readonly="true" value="@bind(fx.minat)" />
+                    </row>
+                    <row>
+                        <label/>
+                        <button label="Kembali" onClick="@command('buttonBackApplicant')"/>
+                    </row>
+                </rows>
+            </grid>
+        </groupbox>
+    </window>
+</zk>
