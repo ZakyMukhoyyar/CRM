@@ -13,12 +13,12 @@
             </columns>
             <rows>
                 <row>
-                    <label value="${labels.user.label.release.type}" />
+                    <label sclass="labelstyle"  value="${labels.user.label.release.type}" />
                     <listbox model="@load(vm.listRelease)"
                              onSelect="@command('selectReleaseType', obj=self.getSelectedItem().getValue())"
                              mold="select" width="25%">
                         <template name="model">
-                            <listitem label="@load(vm.toSentenceCase(each))" value="@load(each)" selected="@load(each eq 'ALL')"/>
+                            <listitem sclass="labelstyle" label="@load(vm.toSentenceCase(each))" value="@load(each)" selected="@load(each eq 'ALL')"/>
                         </template>
                     </listbox>
                 </row>
@@ -26,15 +26,15 @@
                     <label />
                     <div>
                         <textbox value="@bind(vm.release)" width="25%" disabled="@load(empty vm.releaseType or vm.releaseType eq 'ALL')"/>
-                        <label value="@load(vm.message)" style="color:red"/>
+                        <label sclass="labelstyle" value="@load(vm.message)" style="color:red"/>
                     </div>
                 </row>
             </rows>
         </grid>
         <separator/>
         <div align="center">
-            <button label="${labels.user.button.release}" onClick="@command('buttonRelease')"/>
-            <button label="${labels.common.button.close}" onClick="@command('buttonClose')"/>
+            <button type="button" sclass="btn btn-success" width="20%" label="${labels.user.button.release}" onClick="@command('buttonRelease')"/>
+            <button type="button" sclass="btn btn-success" width="20%" label="${labels.common.button.close}" onClick="@command('buttonClose')"/>
         </div>
         <separator/>
     </window>

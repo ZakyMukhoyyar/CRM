@@ -4,82 +4,89 @@
 <?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
 <zk xmlns="http://www.zkoss.org/2005/zul">
     <window border="none" apply="org.zkoss.bind.BindComposer"
-            viewModel="@id('vm') @init('com.agit.crm.user.management.interfaces.web.ui.viewmodel.UserVM')">
-        <grid>
-            <columns>
-                <column width="20%"/>
-                <column width="80%"/>
-            </columns>
-            <rows>
-                <row>
-                    <label value="${labels.user.label.username}" />
-                    <textbox width="25%" value="@bind(vm.searchUserName)"/>
-                </row>
-                <row>
-                    <label value="${labels.user.label.group}" />
-                    <listbox model="@load(vm.roleList)"
-                             mold="select" 
-                             width="25%" onSelect="@command('selectRoleSearch', obj=self.getSelectedItem().getValue())">
-                        <template name="model">
-                            <listitem selected="@load(vm.searchRoleID eq each.roleID)" >
-                                <listcell label="@bind(each.roleName)" />
-                            </listitem>
-                        </template>
-                    </listbox>
-                </row>
-                <row>
-                    <label value="Status User" />
-                    <listbox model="@load(vm.listStatus)"
-                             mold="select" 
-                             width="25%" selectedItem="@bind(vm.searchUserStatus)">
-                        <template name="model" var="items">
-                            <listitem label="@load(items)" value="@load(items)"/>
-                        </template>
-                    </listbox>
-                </row>
-            </rows>
-        </grid>
-        <include src="~./ui/common/button.common.search.page.zul" />
-        <grid mold="paging" pageSize="10">
-            <columns sizable="true">
-                <column label="${labels.common.field.no}" width="35px"/>
-                <column label="${labels.user.label.username}"/>
-                <column label="${labels.user.label.fullname}"/>						
-                <column label="${labels.user.label.group}"/>
-                <column label="${labels.user.label.status}"/>
-                <column label="Lock/Unlock"/>
-                <column label="${labels.common.label.action}" width="350px" if="${(sec:isAllGranted('USER_UPDATE,USER_DELETE,USER_RESET_PASSWORD,USER_LOCK_UNLOCK'))}"/>
-            </columns>
-            <rows children="@load(vm.userDTOs)">
-                <template name="children" status="s">
-                    <row>
-                        <label value="@load(s.index+1)" />
-                        <div>
-                            <label value="@load(each.userName)" if="${not sec:isAllGranted('USER_VIEW')}" />
-                            <a label="@load(each.userName)" onClick="@command('buttonView', object=each)" if="${sec:isAllGranted('USER_VIEW')}"/>
-                        </div>
-                        <label value="@load(each.userSpecificationDTO.fullName)" />
-                        <label value="@load(each.roleDTO.roleName)" />
-                        <label value="@load(vm.toSentenceCase(each.userStatus))" />
-                        <label value="@load(each.userSpecificationDTO.userLoginInfoDTO.loginAttempt)" />
-                        <div>
-                            <button label="${labels.common.button.edit}"
-                                    onClick="@command('buttonUpdate', object=each)" 
-                                    if="${sec:isAllGranted('USER_UPDATE')}"/>
-                            <button label="${labels.common.button.delete}"
-                                    onClick="@command('buttonDelete', object=each)"
-                                    if="${sec:isAllGranted('USER_DELETE')}"/>
-                            <button label="${labels.user.button.resetpassword}"
-                                    onClick="@command('buttonResetPassword', object=each)"
-                                    if="${sec:isAllGranted('USER_RESET_PASSWORD')}"/>
-                            <button label="${labels.user.button.lockunlock}"
-                                    onClick="@command('buttonLockUnlock', object=each)"
-                                    if="${sec:isAllGranted('USER_LOCK_UNLOCK')}"/>
-                        </div>
-                    </row>
-                </template>
-            </rows>
-
-        </grid>
+            viewModel="@id('vm') @init('com.agit.crm.user.management.interfaces.web.ui.viewmodel.UserVM')" 
+            width="100%" height="100%">
+        <groupbox id="gb" closable="false" mold="3d" sclass="col-md-12 nopadding "  style="background:#f5f5f5;" width="100%" height="100%">
+            <div sclass="col-md-3 nopadding">
+                <div>
+                    <div class="form-group"> 
+                        <label sclass="labelstyle" value="${labels.user.label.username}" />
+                        <textbox class="form-control" width="100%" value="@bind(vm.searchUserName)"/>
+                    </div>
+                    <div class="form-group">
+                        <label sclass="labelstyle" value="${labels.user.label.group}" />
+                        <listbox model="@load(vm.roleList)"
+                                 mold="select" 
+                                 class="form-control"
+                                 width="100%" onSelect="@command('selectRoleSearch', obj=self.getSelectedItem().getValue())">
+                            <template name="model">
+                                <listitem selected="@load(vm.searchRoleID eq each.roleID)" >
+                                    <listcell label="@bind(each.roleName)" />
+                                </listitem>
+                            </template>
+                        </listbox>
+                    </div>
+                    <div class="form-group">
+                        <label sclass="labelstyle" value="Status User" />
+                        <listbox model="@load(vm.listStatus)"
+                                 mold="select" 
+                                 class="form-control"
+                                 width="100%" selectedItem="@bind(vm.searchUserStatus)">
+                            <template name="model" var="items">
+                                <listitem label="@load(items)" value="@load(items)"/>
+                            </template>
+                        </listbox>
+                    </div>
+                    <div class="form-group">
+                        <include src="~./ui/common/button.common.search.page.zul" />
+                    </div>
+                </div>
+            </div>
+            <separator></separator>
+            <div sclass="col-md-9 nopadding">
+                <groupbox closable="false" sclass="col-md-12">
+                    <grid mold="paging" pageSize="10">
+                        <columns sizable="true">
+                            <column label="${labels.common.field.no}" width="35px"/>
+                            <column label="${labels.user.label.username}"/>
+                            <column label="${labels.user.label.fullname}"/>						
+                            <column label="${labels.user.label.group}"/>
+                            <column label="${labels.user.label.status}"/>
+                            <column label="Lock/Unlock"/>
+                            <column label="${labels.common.label.action}" width="350px" if="${(sec:isAllGranted('USER_UPDATE,USER_DELETE,USER_RESET_PASSWORD,USER_LOCK_UNLOCK'))}"/>
+                        </columns>
+                        <rows children="@load(vm.userDTOs)">
+                            <template name="children" status="s">
+                                <row>
+                                    <label value="@load(s.index+1)" />
+                                    <div>
+                                        <label value="@load(each.userName)" if="${not sec:isAllGranted('USER_VIEW')}" />
+                                        <a label="@load(each.userName)" onClick="@command('buttonView', object=each)" if="${sec:isAllGranted('USER_VIEW')}"/>
+                                    </div>
+                                    <label value="@load(each.userSpecificationDTO.fullName)" />
+                                    <label value="@load(each.roleDTO.roleName)" />
+                                    <label value="@load(vm.toSentenceCase(each.userStatus))" />
+                                    <label value="@load(each.userSpecificationDTO.userLoginInfoDTO.loginAttempt)" />
+                                    <div>
+                                        <button label="${labels.common.button.edit}"
+                                                onClick="@command('buttonUpdate', object=each)" 
+                                                if="${sec:isAllGranted('USER_UPDATE')}"/>
+                                        <button label="${labels.common.button.delete}"
+                                                onClick="@command('buttonDelete', object=each)"
+                                                if="${sec:isAllGranted('USER_DELETE')}"/>
+                                        <button label="${labels.user.button.resetpassword}"
+                                                onClick="@command('buttonResetPassword', object=each)"
+                                                if="${sec:isAllGranted('USER_RESET_PASSWORD')}"/>
+                                        <button label="${labels.user.button.lockunlock}"
+                                                onClick="@command('buttonLockUnlock', object=each)"
+                                                if="${sec:isAllGranted('USER_LOCK_UNLOCK')}"/>
+                                    </div>
+                                </row>
+                            </template>
+                        </rows>
+                    </grid>
+                </groupbox>
+            </div>
+        </groupbox>
     </window>
 </zk>

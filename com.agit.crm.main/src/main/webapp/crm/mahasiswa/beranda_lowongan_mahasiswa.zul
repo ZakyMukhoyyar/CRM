@@ -52,6 +52,23 @@
                         <button type="button" sclass="btn btn-success" width="100%" label="Pencarian" mold="trendy" onClick="@command('searchDataBank')"/>
                         <button type="button"  sclass="btn btn-success" width="100%" label="History" onClick="@command('buttonRiwayatLowongan')"/>
                     </div>
+                    <separator></separator>
+                    <separator></separator>
+                    <div>
+                        <listbox model="@bind(vm.mahasiswaDTOs)">
+                            <template name="model">
+                                <listitem value="${each}">
+                                    <listcell>
+                                        <a sclass="btn btn-primary" label="Lihat Profile"  onClick="@command('detailProfileMahasiswa', object=each)"></a>
+                                    </listcell>
+                                </listitem>
+                            </template>
+                        </listbox>
+                    </div>
+<!--                    <div>
+                      
+                        <button type="button"  sclass="btn btn-success" width="100%" label="Lihat Profile" onClick="@command('detail')"/>
+                    </div>-->
                 </div>
             </div>
             <div sclass="col-md-9 nopadding">
