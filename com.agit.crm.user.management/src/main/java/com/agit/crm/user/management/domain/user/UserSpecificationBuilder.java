@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.agit.crm.user.management.domain.user;
 
 import com.agit.crm.shared.type.JobDivision;
@@ -11,6 +16,7 @@ public class UserSpecificationBuilder {
     private String mobilePhone;
     private String immediateSupervisorUserName;
     private String primaryBranchID;
+    private String ktp;
     private String escute;
     private JobDivision jobDivision;
     private JobLocation jobLocation;
@@ -45,6 +51,11 @@ public class UserSpecificationBuilder {
         return this;
     }
 
+    public UserSpecificationBuilder setKtp(String ktp) {
+        this.ktp = ktp;
+        return this;
+    }
+
     public UserSpecificationBuilder setEscute(String escute) {
         this.escute = escute;
         return this;
@@ -71,7 +82,7 @@ public class UserSpecificationBuilder {
     }
 
     public UserSpecification createUserSpecification() {
-        return new UserSpecification(fullName, email, mobilePhone, immediateSupervisorUserName, primaryBranchID, escute, jobDivision, jobLocation, accessTime, userLoginInfo);
+        return new UserSpecification(fullName, email, mobilePhone, immediateSupervisorUserName, primaryBranchID, ktp, escute, jobDivision, jobLocation, accessTime, userLoginInfo);
     }
     
 }

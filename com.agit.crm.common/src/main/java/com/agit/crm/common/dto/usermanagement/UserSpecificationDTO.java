@@ -15,6 +15,7 @@ public class UserSpecificationDTO implements Serializable {
     private String mobilePhone;
     private String immediateSupervisorUserName;
     private String primaryBranchID;
+    private String ktp;
     private String escute;
     private JobDivision jobDivision;
     private JobLocation jobLocation;
@@ -24,12 +25,13 @@ public class UserSpecificationDTO implements Serializable {
     public UserSpecificationDTO() {
     }
 
-    public UserSpecificationDTO(String fullName, String email, String mobilePhone, String immediateSupervisorUserName, String primaryBranchID, String escute, JobDivision jobDivision, JobLocation jobLocation, AccessTimeDTO accessTimeDTO, UserLoginInfoDTO userLoginInfoDTO) {
+    public UserSpecificationDTO(String fullName, String email, String mobilePhone, String immediateSupervisorUserName, String primaryBranchID, String ktp, String escute, JobDivision jobDivision, JobLocation jobLocation, AccessTimeDTO accessTimeDTO, UserLoginInfoDTO userLoginInfoDTO) {
         this.fullName = fullName;
         this.email = email;
         this.mobilePhone = mobilePhone;
         this.immediateSupervisorUserName = immediateSupervisorUserName;
         this.primaryBranchID = primaryBranchID;
+        this.ktp = ktp;
         this.escute = escute;
         this.jobDivision = jobDivision;
         this.jobLocation = jobLocation;
@@ -77,6 +79,14 @@ public class UserSpecificationDTO implements Serializable {
         this.primaryBranchID = primaryBranchID;
     }
 
+    public String getKtp() {
+        return ktp;
+    }
+
+    public void setKtp(String ktp) {
+        this.ktp = ktp;
+    }
+
     public String getEscute() {
         return escute;
     }
@@ -119,10 +129,10 @@ public class UserSpecificationDTO implements Serializable {
 
     @Override
     public String toString() {
-        return "UserSpecificationDTO{" + "fullName=" + fullName + ", email=" + email + ", mobilePhone=" + mobilePhone + ", immediateSupervisorUserName=" + immediateSupervisorUserName + ", primaryBranchID=" + primaryBranchID + ", escute=" + escute + ", jobDivision=" + jobDivision + ", jobLocation=" + jobLocation + ", accessTimeDTO=" + accessTimeDTO + ", userLoginInfoDTO=" + userLoginInfoDTO + '}';
+        return "UserSpecificationDTO{" + "fullName=" + fullName + ", email=" + email + ", mobilePhone=" + mobilePhone + ", immediateSupervisorUserName=" + immediateSupervisorUserName + ", primaryBranchID=" + primaryBranchID + ", ktp=" + ktp + ", escute=" + escute + ", jobDivision=" + jobDivision + ", jobLocation=" + jobLocation + ", accessTimeDTO=" + accessTimeDTO + ", userLoginInfoDTO=" + userLoginInfoDTO + '}';
     }
 
-    public static UserSpecificationDTO getInstance(){
+    public static UserSpecificationDTO getInstance() {
         UserSpecificationDTO userSpecification = new UserSpecificationDTOBuilder()
                 .setAccessTimeDTO(AccessTimeDTO.getInstance())
                 .setEmail("email")
@@ -135,7 +145,7 @@ public class UserSpecificationDTO implements Serializable {
                 .setPrimaryBranchID("primaryBranchID")
                 .setUserLoginInfoDTO(UserLoginInfoDTO.getInstance())
                 .createUserSpecificationDTO();
-        
+
         return userSpecification;
 
     }

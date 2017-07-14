@@ -1,8 +1,66 @@
 <window border="none"
-            apply="org.zkoss.bind.BindComposer"
-            viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.DashboardVM')">
+        apply="org.zkoss.bind.BindComposer"
+        viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.DashboardVM')">
+    <groupbox mold="3d" style="background-color:white" contentStyle="border:0" visible="@load(not empty vm.user.getUserSpecificationDTO().getFullName() ? true : false)">
+        <separator spacing="5px"/>
+        <vbox width="100%" height="100%" align="left">
+            <label sclass="isi" style="color:blue;font-size:20px" value="@load(vm.concatUsername('Welcome,  ',vm.user.userSpecificationDTO.fullName))"/>
+        </vbox>
+        <style>
+            .z-separator-hor-bar {
+            background: #eeeeee;	
+            height: 5px;		
+            }
+        </style>
+        <separator spacing="10px" />
+        <vbox width="100%" height="100%" align="left">
+            <cell>
+                <label sclass="isi" style="color:black;font-size:15px" value="@load(vm.concatUsername('You are registered in  ',vm.user.userSpecificationDTO.fullName))"/>
+                <label sclass="isi" style="color:black;font-size:15px" value=" - "/>
+                <label sclass="isi" style="color:black;font-size:15px" value="@load(vm.user.roleDTO.roleName)"/>
+            </cell>
+        </vbox>
+        <separator spacing="5px"/>
+        <vbox width="100%" height="100%" align="left">
+            <label style="color:black;font-size:15px" value="@load(vm.concatUsername('Your last sign in activity was on :  ',vm.user.userSpecificationDTO.userLoginInfoDTO.lastLogin))"/>
+        </vbox>
+        
+    </groupbox>
     <div align="center" style="padding: 50px 5px 0px 0px">
         <image src="@bind(vm.uriPhoto)" />
+    </div>
+    
+    <groupbox mold="3d" contentStyle="border:0">
+        <vbox width="100%" height="100%" align="left">
+            <label style="color:black;font-size:15px; font-weight: bold"/>
+        </vbox>
+    </groupbox>
+
+    <div sclass="col-md-9 nopadding" width="100%" >
+        <groupbox closable="false" sclass="col-md-12" width="100%">
+            <caption label="Jadwal Event" />   
+            <paging forward="onPaging" />
+            <listbox width="100%" rows="@load(vm.pageSize)" mold="paging" pageSize="@load(vm.pageSize)" emptyMessage="${labels.common.noDataFound}"  model="@bind(vm.eventAgitDTOs)">
+                <listhead>
+                    <listheader sclass="labelstyle bold"  label="Nama Event" width="20%" align="center"/>
+                    <listheader sclass="labelstyle bold"  label="Deskripsi" width="20%" align="center"/>
+                    <listheader sclass="labelstyle bold"  label="Aksi" width="20%" align="center"/>
+                </listhead>
+                <template name="model">
+                    <listitem value="${each}">
+                        <listcell>
+                            <label  sclass="labelstylegrid " width="100%" value="@bind(each.namaEvent)"/>
+                        </listcell>
+                        <listcell>
+                            <label  sclass="labelstylegrid " width="100%" value="@bind(each.deskripsiEvent)"/>
+                        </listcell>
+                        <listcell>
+                            <a sclass="btn btn-primary" label="Lihat"  onClick="@command('buttonKlikEvent', object=each)"></a>
+                        </listcell>
+                    </listitem>
+                </template>
+            </listbox>
+        </groupbox>
     </div>
 </window>
 

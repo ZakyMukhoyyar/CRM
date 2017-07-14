@@ -164,4 +164,15 @@ public class UserServiceImpl implements UserService {
         this.userDTOAssembler = userDTOAssembler;
     }
 
+    @Override
+    public UserDTO findByKtp(String ktp) {
+        Validate.notNull(userRepository);
+        User user = (User) userRepository.findByKtp(ktp);
+        if (user != null) {
+            return userDTOAssembler.toDTO(user);
+        }
+
+        return null;
+    }
+
 }

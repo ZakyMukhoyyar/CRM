@@ -41,7 +41,7 @@ public class UserRepositoryHibernate extends HibernateRepository implements User
     public List<User> findByParameter(String fullName, String userName, String roleID, StatusData userStatus) {
         Criteria criteria = getSession().createCriteria(User.class)
                 .add(Restrictions.like("userName", userName).ignoreCase())
-//                .add(Restrictions.or(Restrictions.eq("userStatus", StatusData.ACTIVE), Restrictions.eq("userStatus", StatusData.INACTIVE)));
+                //                .add(Restrictions.or(Restrictions.eq("userStatus", StatusData.ACTIVE), Restrictions.eq("userStatus", StatusData.INACTIVE)));
                 .add(Restrictions.eq("userStatus", userStatus));
 
         if (!fullName.equals("%%")) {
@@ -78,6 +78,13 @@ public class UserRepositoryHibernate extends HibernateRepository implements User
         Criteria criteria = getSession().createCriteria(User.class).add(Restrictions.ne("userStatus", StatusData.DELETED));
         Criteria criteria1 = criteria.createCriteria("role").add(Restrictions.eq("roleID", roleID));
         return (int) criteria1.setProjection(Projections.count("roleID")).uniqueResult();
+    }
+
+    @Override
+    public User findByKtp(String ktp) {
+        Criteria criteria = getSession().createCriteria(User.class)
+                .add(Restrictions.in("ktp", Arrays.asList(ktp.toLowerCase(), ktp.toUpperCase())));
+        return (User) criteria.uniqueResult();
     }
 
 }

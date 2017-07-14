@@ -73,6 +73,14 @@
                                 </div>
                             </row>
                             <row>
+                                <signLabel value="KTP"/>
+                                <div>
+                                    <textbox value="@bind(vm.userDTO.userSpecificationDTO.ktp)" width="40%" />
+                                    <button label="${labels.user.label.verify}" width="75px" onClick="@command('verifyKtp', obj=ktp.getValue())"/>
+                                    <label value="@load(vmsgs['ktp'])" style="color:red"/>
+                                </div>
+                            </row>
+                            <row>
                                 <signLabel value="No HP"/>
                                 <div>
                                     <textbox value="@bind(vm.userDTO.userSpecificationDTO.mobilePhone)" width="40%" />

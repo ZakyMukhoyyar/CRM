@@ -1,7 +1,13 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.agit.crm.common.dto.usermanagement;
 
 import com.agit.crm.shared.type.JobDivision;
 import com.agit.crm.shared.type.JobLocation;
+
 
 public class UserSpecificationDTOBuilder {
 
@@ -10,6 +16,7 @@ public class UserSpecificationDTOBuilder {
     private String mobilePhone;
     private String immediateSupervisorUserName;
     private String primaryBranchID;
+    private String ktp;
     private String escute;
     private JobDivision jobDivision;
     private JobLocation jobLocation;
@@ -44,6 +51,11 @@ public class UserSpecificationDTOBuilder {
         return this;
     }
 
+    public UserSpecificationDTOBuilder setKtp(String ktp) {
+        this.ktp = ktp;
+        return this;
+    }
+
     public UserSpecificationDTOBuilder setEscute(String escute) {
         this.escute = escute;
         return this;
@@ -70,7 +82,7 @@ public class UserSpecificationDTOBuilder {
     }
 
     public UserSpecificationDTO createUserSpecificationDTO() {
-        return new UserSpecificationDTO(fullName, email, mobilePhone, immediateSupervisorUserName, primaryBranchID, escute, jobDivision, jobLocation, accessTimeDTO, userLoginInfoDTO);
+        return new UserSpecificationDTO(fullName, email, mobilePhone, immediateSupervisorUserName, primaryBranchID, ktp, escute, jobDivision, jobLocation, accessTimeDTO, userLoginInfoDTO);
     }
-
+    
 }

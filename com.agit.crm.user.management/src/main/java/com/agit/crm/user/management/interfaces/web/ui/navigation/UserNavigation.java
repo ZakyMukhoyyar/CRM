@@ -18,4 +18,6 @@ public class UserNavigation {
     public final static String USER_SEARCH = "~./ui/fnd/user/search.fnd.user.zul";
     public final static String USER_UPDATE = "~./ui/fnd/user/update.fnd.user.zul";
     public final static String USER_RESUBMIT = "~./ui/fnd/user/resubmit.fnd.user.zul";
+    public final static String DASHBOARD = "http://localhost:9091/crm/login.zul";
+
 }

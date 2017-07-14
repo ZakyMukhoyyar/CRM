@@ -99,11 +99,35 @@
                         </row>
                         <row>
                             <signLabel sclass="labelstyle" value="Nama Civitas" style="font-weight: bold"/>
-                            <combobox sclass="labelstyle" width="100%" placeholder="- Silahkan Pilih -" readonly="true" model="@load(vm.listCivitas)" selectedItem="@bind(fx.namaCivitas)">
+                            <!--                            <combobox sclass="labelstyle" width="100%" placeholder="- Silahkan Pilih -" readonly="true" model="@load(vm.listCivitas)" selectedItem="@bind(fx.namaCivitas)">
                                 <template name="model" var="items">
                                     <comboitem label="@load(items)" value="@load(items)"/>
                                 </template>
-                            </combobox>
+                            </combobox>-->
+                            <toolbar>
+                                <bandbox id="bd" autodrop="true" width="250px"
+                                         onChanging="search.model = strset.getSubModel(event.value, 30);">
+                                    <bandpopup width="320px">
+                                        <panel height="215px">
+                                            <panelchildren>
+                                                <zscript>							
+                                                    String[] data = new String[] {
+                                                    "UDINUS", "ITB", "UNNISULA", "UNDIP", "ITB", "UGM", "AMIKOM" };
+                                                    ListModel strset = new SimpleListModel(data);
+                                                </zscript>
+                                                <listbox class="listbox search" id="search"
+                                                         model="&#36;{strset}" height="100%"
+                                                         style="background:white;" oddRowSclass=""
+                                                         onSelect="bd.value=self.selectedItem.label; bd.close();" />
+                                            </panelchildren>
+                                            <toolbar>
+                                                <paging
+                                                    onCreate='search.setMold("paging");search.paginal=self;search.pageSize = 10;' />
+                                            </toolbar>
+                                        </panel>
+                                    </bandpopup>
+                                </bandbox>
+                            </toolbar>
                         </row>
                         <row>
                             <signLabel sclass="labelstyle" value="IPK" style="font-weight: bold"/>

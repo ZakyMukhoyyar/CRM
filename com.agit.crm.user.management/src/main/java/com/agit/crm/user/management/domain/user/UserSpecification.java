@@ -16,7 +16,8 @@ public class UserSpecification implements ValueObject<UserSpecification> {
     private String mobilePhone;
     private String immediateSupervisorUserName;
     private String primaryBranchID;
-    
+    private String ktp;
+
     private String escute;
     private JobDivision jobDivision;
     private JobLocation jobLocation;
@@ -27,12 +28,13 @@ public class UserSpecification implements ValueObject<UserSpecification> {
     public UserSpecification() {
     }
 
-    public UserSpecification(String fullName, String email, String mobilePhone, String immediateSupervisorUserName, String primaryBranchID, String escute, JobDivision jobDivision, JobLocation jobLocation, AccessTime accessTime, UserLoginInfo userLoginInfo) {
+    public UserSpecification(String fullName, String email, String mobilePhone, String immediateSupervisorUserName, String primaryBranchID, String ktp, String escute, JobDivision jobDivision, JobLocation jobLocation, AccessTime accessTime, UserLoginInfo userLoginInfo) {
         this.fullName = fullName;
         this.email = email;
         this.mobilePhone = mobilePhone;
         this.immediateSupervisorUserName = immediateSupervisorUserName;
         this.primaryBranchID = primaryBranchID;
+        this.ktp = ktp;
         this.escute = escute;
         this.jobDivision = jobDivision;
         this.jobLocation = jobLocation;
@@ -80,19 +82,28 @@ public class UserSpecification implements ValueObject<UserSpecification> {
         return userLoginInfo;
     }
 
+    public String getKtp() {
+        return ktp;
+    }
+
+    public void setKtp(String ktp) {
+        this.ktp = ktp;
+    }
+
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 59 * hash + Objects.hashCode(this.fullName);
-        hash = 59 * hash + Objects.hashCode(this.email);
-        hash = 59 * hash + Objects.hashCode(this.mobilePhone);
-        hash = 59 * hash + Objects.hashCode(this.immediateSupervisorUserName);
-        hash = 59 * hash + Objects.hashCode(this.primaryBranchID);
-        hash = 59 * hash + Objects.hashCode(this.escute);
-        hash = 59 * hash + Objects.hashCode(this.jobDivision);
-        hash = 59 * hash + Objects.hashCode(this.jobLocation);
-        hash = 59 * hash + Objects.hashCode(this.accessTime);
-        hash = 59 * hash + Objects.hashCode(this.userLoginInfo);
+        hash = 89 * hash + Objects.hashCode(this.fullName);
+        hash = 89 * hash + Objects.hashCode(this.email);
+        hash = 89 * hash + Objects.hashCode(this.mobilePhone);
+        hash = 89 * hash + Objects.hashCode(this.immediateSupervisorUserName);
+        hash = 89 * hash + Objects.hashCode(this.primaryBranchID);
+        hash = 89 * hash + Objects.hashCode(this.ktp);
+        hash = 89 * hash + Objects.hashCode(this.escute);
+        hash = 89 * hash + Objects.hashCode(this.jobDivision);
+        hash = 89 * hash + Objects.hashCode(this.jobLocation);
+        hash = 89 * hash + Objects.hashCode(this.accessTime);
+        hash = 89 * hash + Objects.hashCode(this.userLoginInfo);
         return hash;
     }
 
@@ -123,6 +134,9 @@ public class UserSpecification implements ValueObject<UserSpecification> {
         if (!Objects.equals(this.primaryBranchID, other.primaryBranchID)) {
             return false;
         }
+        if (!Objects.equals(this.ktp, other.ktp)) {
+            return false;
+        }
         if (!Objects.equals(this.escute, other.escute)) {
             return false;
         }
@@ -140,7 +154,6 @@ public class UserSpecification implements ValueObject<UserSpecification> {
         }
         return true;
     }
-
 
     @Override
     public boolean sameValueAs(UserSpecification other) {

@@ -19,7 +19,7 @@
                     <template name="model">
                         <listitem value="${each}">
                             <listcell >
-                                <label width="100%" value="@bind(each.idRiwayatApplyMahasiswa)"/>
+                                <label width="100%" value="@bind(each.idRiwayatLowongan)"/>
                             </listcell>
                             <listcell >
                                 <label width="100%" value="@bind(each.namaLowonganApply)"/>
@@ -41,7 +41,7 @@
                     </columns>
                     <rows>
                         <row>
-                            <button sclass="btn btn-success" label="Kembali" mold="trendy" width="120px" onClick="@command('buttonCancelRiwayatLowongan')"/>
+                            <a sclass="btn btn-success" label="Kembali" width="120px" onClick="@command('buttonCancelRiwayatLowongan')"/>
                         </row>
                     </rows>
                 </grid>

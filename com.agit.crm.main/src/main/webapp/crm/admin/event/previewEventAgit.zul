@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<window apply="org.zkoss.bind.BindComposer"
+            viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.admin.EventAgitVM')"
+            form="@id('fx') @load(vm.eventAgitDTO) @save(vm.eventAgitDTO, before='buttonSaveEventAgit')">
+    <groupbox width="800px">
+        <grid style="border:0">           
+            <columns>
+                <column width="70%"></column>
+                <!--                <column ></column>-->
+            </columns>
+            <rows>
+                <row>
+                    <div>
+                        <iframe id="iframe" src="@bind(vm.eventAgitDTO.attachment)"
+                                width="100%" height="700px" style="border: 1px solid gray" />
+                    </div>
+                </row>
+            </rows>
+        </grid>
+    </groupbox>
+    <groupbox width="800px">
+        <grid style="border:0">           
+            <columns>
+                <column width="85%"></column>
+                <column></column>
+            </columns>
+            <rows>
+                <row>
+                    <space width="5%"/>
+                    <button label="Close" mold="trendy" width="100px" onClick="@command('buttonClosePreview')"/>
+                </row>
+            </rows>
+        </grid>
+    </groupbox>
+</window>

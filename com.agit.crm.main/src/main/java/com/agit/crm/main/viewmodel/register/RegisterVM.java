@@ -181,6 +181,19 @@ public class RegisterVM {
         }
     }
 
+    @Command("verifyKtp")
+    @NotifyChange("verifyKtp")
+    public void verifyKtp(@BindingParam("obj") String ktp) {
+        if (ktp != null && !ktp.trim().equals("")) {
+            UserDTO user = userService.findByKtp(ktp);
+            if (user == null) {
+                CommonViewModel.showInformationMessagebox("KTP is not exist");
+            } else {
+                CommonViewModel.showInformationMessagebox(Labels.getLabel("error.message.conflict.repository", new String[]{"ktp", ktp}));
+            }
+        }
+    }   
+
     @Command("onCheckPasswordExpired")
     @NotifyChange("checked")
     public void onCheckPasswordExpired(@BindingParam("obj") Boolean checked) {
@@ -222,7 +235,7 @@ public class RegisterVM {
                 userDTO.setUserName(userDTO.getUserName().toUpperCase());
                 try {
                     userService.saveOrUpdate(userDTO);
-                    CommonViewModel.showInformationMessagebox("User Name " + userDTO.getUserName() + " has successfully created", UserNavigation.REGISTER, null, window);
+                    CommonViewModel.showInformationMessagebox("User Name " + userDTO.getUserName() + " has successfully created", UserNavigation.DASHBOARD, null, window);
                 } catch (Exception e) {
                     CommonViewModel.showErrorMessagebox(Labels.getLabel("error.message.conflict.repository", new String[]{"User Name", userDTO.getUserName()}));
                 }

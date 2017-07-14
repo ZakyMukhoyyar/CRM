@@ -11,7 +11,7 @@ import com.agit.crm.user.management.interfaces.web.facade.dto.assembler.IObjectA
  * @author bayutridewanto
  */
 public class UserSpecificationDTOAssembler implements IObjectAssembler<UserSpecification, UserSpecificationDTO> {
-
+    
     @Override
     public UserSpecificationDTO toDTO(UserSpecification domainObject) {
         return new UserSpecificationDTOBuilder()
@@ -25,9 +25,10 @@ public class UserSpecificationDTOAssembler implements IObjectAssembler<UserSpeci
                 .setImmediateSupervisorUserName(domainObject.getImmediateSupervisorUserName())
                 .setMobilePhone(domainObject.getMobilePhone())
                 .setPrimaryBranchID(domainObject.getPrimaryBranchID())
+                .setKtp(domainObject.getKtp())
                 .createUserSpecificationDTO();
     }
-
+    
     @Override
     public UserSpecification toDomain(UserSpecificationDTO dtoObject) {
         return new UserSpecificationBuilder()
@@ -41,7 +42,8 @@ public class UserSpecificationDTOAssembler implements IObjectAssembler<UserSpeci
                 .setImmediateSupervisorUserName(dtoObject.getImmediateSupervisorUserName())
                 .setMobilePhone(dtoObject.getMobilePhone())
                 .setPrimaryBranchID(dtoObject.getPrimaryBranchID())
+                .setKtp(dtoObject.getKtp())
                 .createUserSpecification();
     }
-
+    
 }

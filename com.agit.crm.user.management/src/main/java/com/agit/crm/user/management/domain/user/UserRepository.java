@@ -13,12 +13,14 @@ public interface UserRepository {
 
     User findByID(String userName);
 
+    User findByKtp(String ktp);
+
     User findByRemote(String remote);
 
     List<User> findAllUser();
 
     List<User> findByParameter(String fullName, String userName, String roleID, StatusData userStatus);
-    
+
     List<User> findByRoleID(String roleID);
 
     int releaseAll();

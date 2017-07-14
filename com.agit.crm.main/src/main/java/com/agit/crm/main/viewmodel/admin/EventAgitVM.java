@@ -254,6 +254,20 @@ public class EventAgitVM {
         CommonViewModel.navigateToWithoutDetach("/crm/admin/event/add_event.zul", window, params);
     }
 
+    @Command("buttonKlikEvent")
+    @NotifyChange({"src", "eventAgitDTOs", "eventAgitDTO"})
+    public void buttonKlikPreview(@BindingParam("object") EventAgitDTO obj, @ContextParam(ContextType.VIEW) Window window) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("eventAgitDTO", obj);
+        CommonViewModel.navigateToWithoutDetach("/crm/admin/event/previewEventAgit.zul", window, params);
+    }
+
+    @Command("buttonClosePreview")
+    @NotifyChange("eventAgitDTO")
+    public void buttonClosePreview(@BindingParam("object") EventAgitDTO obj, @ContextParam(ContextType.VIEW) Window window) {
+        window.detach();
+    }
+
     public EventAgitDTO getEventAgitDTO() {
         return eventAgitDTO;
     }
@@ -365,5 +379,5 @@ public class EventAgitVM {
     public void setPageSize(int pageSize) {
         this.pageSize = pageSize;
     }
-    
+
 }
