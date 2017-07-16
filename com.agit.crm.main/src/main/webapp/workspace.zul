@@ -51,9 +51,9 @@
                             </template>
                         </tree>
                     </west>-->
-                    <west sclass="isi" splittable="true" width="23%" collapsible="true" border="none"
-                                       title="${labels.workspace.label.menu}" flex="true" autoscroll="true">
-                        <tree model="@load(vm.model)" >
+                    <west style="font-size:9pt; font-weight: bold" sclass="isi" splittable="true" width="23%" collapsible="true" border="none"
+                          title="${labels.workspace.label.menu}" flex="true" autoscroll="true">
+                        <tree style="font-size:9pt; font-weight: bold" sclass="isi" model="@load(vm.model)" >
                             <template name="model" >
                                 <treeitem label="@load(each.menuName)" image="@load(each.icon)" open="@load(true)" onClick="@command('menuClick', obj=each)" visible="${sec:isAllGranted(each.privilegeID)}" />
                             </template>
@@ -78,16 +78,16 @@
                     <!-- Footer -->
                     <south border="none" size="25px" >
                         <borderlayout  style="background:#7C1442;">
-                            <west border="none" style="width:50% ;color:#fff; padding: 5px 10px 0px 10px; background:#7C1442;">
+                            <west border="none" style="width:50% ;color:#fff; padding: 5px 10px 0px 10px; background:#7C1442;" sclass="isi">
                                 Copyright 2017 &#169; AGIT - App Candidate Recruitment Management
                             </west>
                             <east border="none" style="color:#fff; padding: 5px 5px 0px 0px; background:#7C1442;">
                                 <div align="left">
-                                    <label value="@load(vm.concatDate('Date: ',vm.user.userSpecificationDTO.userLoginInfoDTO.loginDate))" />
+                                    <label sclass="isi" value="@load(vm.concatDate('Date: ',vm.user.userSpecificationDTO.userLoginInfoDTO.loginDate))" />
                                     <space/>
-                                    <label value="@load(vm.concatDate('Last Login : ',vm.user.userSpecificationDTO.userLoginInfoDTO.lastLogin))" />
+                                    <label sclass="isi" value="@load(vm.concatDate('Last Login : ',vm.user.userSpecificationDTO.userLoginInfoDTO.lastLogin))" />
                                     <space/>
-                                    <label value="@load(vm.concatDate('Last Login Failed: ', vm.user.userSpecificationDTO.userLoginInfoDTO.lastLoginFailed))" />
+                                    <label sclass="isi" value="@load(vm.concatDate('Last Login Failed: ', vm.user.userSpecificationDTO.userLoginInfoDTO.lastLoginFailed))" />
                                 </div>
                             </east>
                         </borderlayout>
@@ -127,6 +127,13 @@
                     letter-spacing: 1px;
                     line-height: 1.3;
                     font-family: 'Lato', sans-serif;
+                    }
+                    
+                    .judulLowongan{
+                    letter-spacing: 1px;
+                    line-height: 1.3;
+                    font-family: 'Lato', sans-serif;
+                    font-size:16px;
                     }
                     .nopadding {
                     padding: 0 !important;

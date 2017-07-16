@@ -38,24 +38,24 @@
 
     <div sclass="col-md-9 nopadding" width="100%" >
         <groupbox closable="false" sclass="col-md-12" width="100%">
-            <caption label="Jadwal Event" />   
+            <caption label="Jadwal Event" style="font-size:12pt; font-weight: bold"/>   
             <paging forward="onPaging" />
             <listbox width="100%" rows="@load(vm.pageSize)" mold="paging" pageSize="@load(vm.pageSize)" emptyMessage="${labels.common.noDataFound}"  model="@bind(vm.eventAgitDTOs)">
                 <listhead>
-                    <listheader sclass="labelstyle bold"  label="Nama Event" width="20%" align="center"/>
-                    <listheader sclass="labelstyle bold"  label="Deskripsi" width="20%" align="center"/>
-                    <listheader sclass="labelstyle bold"  label="Aksi" width="20%" align="center"/>
+                    <listheader style="font-size:9pt; font-weight: bold" sclass="isi" label="Nama Event" width="20%" align="center"/>
+                    <listheader style="font-size:9pt; font-weight: bold" sclass="isi" label="Deskripsi" width="20%" align="center"/>
+                    <listheader style="font-size:9pt; font-weight: bold" sclass="isi" label="Aksi" width="20%" align="center"/>
                 </listhead>
                 <template name="model">
                     <listitem value="${each}">
                         <listcell>
-                            <label  sclass="labelstylegrid " width="100%" value="@bind(each.namaEvent)"/>
+                            <label sclass="isi " width="100%" value="@bind(each.namaEvent)"/>
                         </listcell>
                         <listcell>
-                            <label  sclass="labelstylegrid " width="100%" value="@bind(each.deskripsiEvent)"/>
+                            <label sclass="isi " width="100%" value="@bind(each.deskripsiEvent)"/>
                         </listcell>
                         <listcell>
-                            <a sclass="btn btn-primary" label="Lihat"  onClick="@command('buttonKlikEvent', object=each)"></a>
+                            <a sclass="isi btn btn-primary" label="Lihat"  onClick="@command('buttonKlikEvent', object=each)"></a>
                         </listcell>
                     </listitem>
                 </template>
