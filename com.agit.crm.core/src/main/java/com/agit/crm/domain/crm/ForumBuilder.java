@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.agit.crm.domain.crm;
 
 import com.agit.crm.shared.status.Status;
@@ -8,6 +13,7 @@ public class ForumBuilder {
     private String idForum;
     private String namaForum;
     private String deskripsiForum;
+    private Date tanggalMulai;
     private Date tanggalBerakhir;
     private String createdBy;
     private Date createdDate;
@@ -30,6 +36,11 @@ public class ForumBuilder {
 
     public ForumBuilder setDeskripsiForum(String deskripsiForum) {
         this.deskripsiForum = deskripsiForum;
+        return this;
+    }
+
+    public ForumBuilder setTanggalMulai(Date tanggalMulai) {
+        this.tanggalMulai = tanggalMulai;
         return this;
     }
 
@@ -64,7 +75,7 @@ public class ForumBuilder {
     }
 
     public Forum createForum() {
-        return new Forum(idForum, namaForum, deskripsiForum, tanggalBerakhir, createdBy, createdDate, modifiedBy, modifiedDate, status);
+        return new Forum(idForum, namaForum, deskripsiForum, tanggalMulai, tanggalBerakhir, createdBy, createdDate, modifiedBy, modifiedDate, status);
     }
     
 }

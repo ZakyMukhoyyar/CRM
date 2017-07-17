@@ -15,6 +15,7 @@ public class Forum implements EntityObject<Forum> {
     private String idForum;
     private String namaForum;
     private String deskripsiForum;
+    private Date tanggalMulai;
     private Date tanggalBerakhir;
     private String createdBy;
     private Date createdDate;
@@ -25,10 +26,11 @@ public class Forum implements EntityObject<Forum> {
     public Forum() {
     }
 
-    public Forum(String idForum, String namaForum, String deskripsiForum, Date tanggalBerakhir, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate, Status status) {
+    public Forum(String idForum, String namaForum, String deskripsiForum, Date tanggalMulai, Date tanggalBerakhir, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate, Status status) {
         this.idForum = idForum;
         this.namaForum = namaForum;
         this.deskripsiForum = deskripsiForum;
+        this.tanggalMulai = tanggalMulai;
         this.tanggalBerakhir = tanggalBerakhir;
         this.createdBy = createdBy;
         this.createdDate = createdDate;
@@ -101,6 +103,14 @@ public class Forum implements EntityObject<Forum> {
         this.status = status;
     }
 
+    public Date getTanggalMulai() {
+        return tanggalMulai;
+    }
+
+    public void setTanggalMulai(Date tanggalMulai) {
+        this.tanggalMulai = tanggalMulai;
+    }
+
     public Date getTanggalBerakhir() {
         return tanggalBerakhir;
     }
@@ -112,15 +122,16 @@ public class Forum implements EntityObject<Forum> {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 11 * hash + Objects.hashCode(this.idForum);
-        hash = 11 * hash + Objects.hashCode(this.namaForum);
-        hash = 11 * hash + Objects.hashCode(this.deskripsiForum);
-        hash = 11 * hash + Objects.hashCode(this.tanggalBerakhir);
-        hash = 11 * hash + Objects.hashCode(this.createdBy);
-        hash = 11 * hash + Objects.hashCode(this.createdDate);
-        hash = 11 * hash + Objects.hashCode(this.modifiedBy);
-        hash = 11 * hash + Objects.hashCode(this.modifiedDate);
-        hash = 11 * hash + Objects.hashCode(this.status);
+        hash = 53 * hash + Objects.hashCode(this.idForum);
+        hash = 53 * hash + Objects.hashCode(this.namaForum);
+        hash = 53 * hash + Objects.hashCode(this.deskripsiForum);
+        hash = 53 * hash + Objects.hashCode(this.tanggalMulai);
+        hash = 53 * hash + Objects.hashCode(this.tanggalBerakhir);
+        hash = 53 * hash + Objects.hashCode(this.createdBy);
+        hash = 53 * hash + Objects.hashCode(this.createdDate);
+        hash = 53 * hash + Objects.hashCode(this.modifiedBy);
+        hash = 53 * hash + Objects.hashCode(this.modifiedDate);
+        hash = 53 * hash + Objects.hashCode(this.status);
         return hash;
     }
 
@@ -143,6 +154,7 @@ public class Forum implements EntityObject<Forum> {
         this.idForum = forum.idForum;
         this.namaForum = forum.namaForum;
         this.deskripsiForum = forum.deskripsiForum;
+        this.tanggalMulai = forum.tanggalMulai;
         this.tanggalBerakhir = tanggalBerakhir;
         this.createdBy = forum.createdBy;
         this.createdDate = forum.createdDate;

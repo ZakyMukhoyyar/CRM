@@ -1,3 +1,4 @@
+<?component name="signLabel" class="com.agit.crm.shared.zul.SignLabel" ?>
 <zk xmlns="http://www.zkoss.org/2005/zul">
     <window apply="org.zkoss.bind.BindComposer"
         viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.admin.KetrampilanVM')"
@@ -8,26 +9,22 @@
             <groupbox>
                 <grid style="border:0">
                     <columns>
-                        <column width="3%"></column>
                         <column width="30%"></column>
                         <column width="60%"></column>
                         <column></column>
                     </columns>
                     <rows>
-                        <row>
-                            <label value="*) " style="color:red"/>
-                            <label value="ID Ketrampilan" style="font-weight: bold"/>
-                            <textbox width="20%" disabled="true" value="@bind(fx.idKetrampilan)" />
+                        <row>                            
+                            <signLabel sclass="isi" value="ID Ketrampilan"/>
+                            <textbox width="20%" disabled="true" value="@bind(fx.idKetrampilan)"/>
                         </row>
-                        <row>
-                            <label value="*) " style="color:red"/>
-                            <label value="Nama Ketrampilan " style="font-weight: bold"/>
+                        <row>                            
+                            <signLabel sclass="isi" value="Nama Ketrampilan "/>
                             <textbox rows="2" value="@bind(fx.namaKetrampilan)" width="100%" disabled="false" constraint="no empty : Nama Ketrampilan Tidak Boleh Kosong"/>
                         </row>
                         <row>
-                            <label value="*)" style="color:red"/>
-                            <label value="Status" style="font-weight: bold"/>
-                            <combobox autodrop="true" model="@load(vm.listStatus)" selectedItem="@bind(fx.status)" readonly="true" width="60%" placeholder="- Pilihan Status -">
+                            <signLabel sclass="isi" value="Status"/>
+                            <combobox autodrop="true" readonly="true" width="60%" placeholder="- Pilihan Status -" model="@load(vm.statuses)" selectedItem="@bind(fx.status)">
                                 <template name="model" var="items">
                                     <comboitem label="@load(items)" value="@load(items)"/>
                                 </template>

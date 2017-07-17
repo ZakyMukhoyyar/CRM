@@ -2,8 +2,8 @@
     <window apply="org.zkoss.bind.BindComposer"
             viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.admin.ForumVM')"
             form="@id('fx') @load(vm.forumDTO) @save(vm.forumDTO, before='buttonSaveForum')">
-        <groupbox closable="false" mold="3d" style="background:#f5f5f5" sclass="col-md-12 nopadding" >
-            <caption label="Dashboard Jurusan" />
+        <groupbox height="610px" closable="false" mold="3d" style="background:#f5f5f5" sclass="col-md-12 nopadding" >
+            <caption sclass="isi" label="Dashboard Forum" />
             <div sclass="col-md-3 nopadding">
                 <div class="form-group" style="font-style:bold;">
                     <label sclass="labelstyle" value="Filter Pencarian :" />
@@ -17,24 +17,24 @@
                     <label sclass="labelstyle" value="Nama Forum" />
                     <textbox class="form-control" width="100%" value="@bind(vm.namaForum)" />
                 </div>
-                <div class="form-group">
+                <!--                <div class="form-group">
                     <label sclass="labelstyle" value="Tanggal Berakhir" />
                     <datebox width="100%" value="@bind(vm.tanggalBerakhir)" />
-                </div>
+                </div>-->
                 <div class="form-group">
                     <label sclass="labelstyle" value="Status" />
                     <listbox mold="select" sclass="form-control" model="@load(vm.statuses)" selectedItem="@bind(vm.status)" >
-                            <template name="model" var="items" >
-                                <listitem label="@load(items)"  value="@load(items)" />
-                            </template>
-                        </listbox>
+                        <template name="model" var="items" >
+                            <listitem label="@load(items)"  value="@load(items)" />
+                        </template>
+                    </listbox>
                 </div>
                 <div>
                     <a sclass="btn btn-info" width="100%" label="Pencarian" onClick="@command('buttonSearchForum')"/>
+                    <separator/>
                     <a sclass="btn btn-info" width="100%" label="Tambah Forum" onClick="@command('buttonNewForum')"/>
                 </div>
-            </div>
-            
+            </div>            
             
             <div sclass="col-md-9 nopadding">
                 <groupbox closable="false" sclass="col-md-12">
@@ -42,8 +42,8 @@
                         <listhead>
                             <listheader label="ID Forum" width="10%" align="center" sortDirection="ascending" sort="auto(idForum)"/>
                             <listheader label="Nama Forum" width="30%" align="center"/>
-                            <listheader label="Tanggal Mulai" width="15%" align="center"/>
-                            <listheader label="Tanggal Berakhir" width="15%" align="center"/>
+                            <!--                            <listheader label="Tanggal Mulai" width="15%" align="center"/>
+                            <listheader label="Tanggal Berakhir" width="15%" align="center"/>-->
                             <listheader label="Status" width="10%" align="center"/>
                             <listheader label="Aksi" width="10%" align="center"/>
                         </listhead>
@@ -55,12 +55,12 @@
                                 <listcell>
                                     <label width="100%" value="@bind(each.namaForum)" />
                                 </listcell>
-                                <listcell>
-                                    <label width="100%" value="@bind(each.createdDate)" />
+                                <!--<listcell>
+                                    <label width="100%" value="@bind(each.tanggalMulai)" />
                                 </listcell>
                                 <listcell>
                                     <label width="100%" value="@bind(each.tanggalBerakhir)" />
-                                </listcell>
+                                </listcell>-->
                                 <listcell>
                                     <label width="100%" value="@bind(each.status)" />
                                 </listcell>

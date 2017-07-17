@@ -8,11 +8,12 @@ import java.util.Date;
  *
  * @author Zaky
  */
-public class ForumDTO implements Serializable{
-    
+public class ForumDTO implements Serializable {
+
     private String idForum;
     private String namaForum;
     private String deskripsiForum;
+    private Date tanggalMulai;
     private Date tanggalBerakhir;
     private String createdBy;
     private Date createdDate;
@@ -23,10 +24,11 @@ public class ForumDTO implements Serializable{
     public ForumDTO() {
     }
 
-    public ForumDTO(String idForum, String namaForum, String deskripsiForum, Date tanggalBerakhir, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate, Status status) {
+    public ForumDTO(String idForum, String namaForum, String deskripsiForum, Date tanggalMulai, Date tanggalBerakhir, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate, Status status) {
         this.idForum = idForum;
         this.namaForum = namaForum;
         this.deskripsiForum = deskripsiForum;
+        this.tanggalMulai = tanggalMulai;
         this.tanggalBerakhir = tanggalBerakhir;
         this.createdBy = createdBy;
         this.createdDate = createdDate;
@@ -34,7 +36,7 @@ public class ForumDTO implements Serializable{
         this.modifiedDate = modifiedDate;
         this.status = status;
     }
-    
+
     public String getIdForum() {
         return idForum;
     }
@@ -99,6 +101,14 @@ public class ForumDTO implements Serializable{
         this.status = status;
     }
 
+    public Date getTanggalMulai() {
+        return tanggalMulai;
+    }
+
+    public void setTanggalMulai(Date tanggalMulai) {
+        this.tanggalMulai = tanggalMulai;
+    }
+
     public Date getTanggalBerakhir() {
         return tanggalBerakhir;
     }
@@ -109,7 +119,7 @@ public class ForumDTO implements Serializable{
 
     @Override
     public String toString() {
-        return "ForumDTO{" + "idForum=" + idForum + ", namaForum=" + namaForum + ", deskripsiForum=" + deskripsiForum + ", tanggalBerakhir=" + tanggalBerakhir + ", createdBy=" + createdBy + ", createdDate=" + createdDate + ", modifiedBy=" + modifiedBy + ", modifiedDate=" + modifiedDate + ", status=" + status + '}';
+        return "ForumDTO{" + "idForum=" + idForum + ", namaForum=" + namaForum + ", deskripsiForum=" + deskripsiForum + ", tanggalMulai=" + tanggalMulai + ", tanggalBerakhir=" + tanggalBerakhir + ", createdBy=" + createdBy + ", createdDate=" + createdDate + ", modifiedBy=" + modifiedBy + ", modifiedDate=" + modifiedDate + ", status=" + status + '}';
     }
-    
+
 }

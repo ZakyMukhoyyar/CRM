@@ -53,23 +53,23 @@ public class EventAgitVM {
     private EventAgitDTO eventAgitDTO = new EventAgitDTO();
     private List<EventAgitDTO> eventAgitDTOs = new ArrayList<>();
 
-    private Status status;
     private String idEvent;
     private String namaEvent;
     private Date endDate;
-
+    private Status status;
+    
     private ListModelList<Status> statuses;
+    
+    /* attribut for CRM */
+    private PageNavigation previous;
+    private boolean checked;
+    private int pageSize = 8;
 
     /* attribut for upload file Event */
     Media mediaUploadEventAgit;
     String mediaNameUploadEventAgit;
     private String filepathUploadEventAgit;
     private String pathLocationUploadEventAgit;
-
-    /* attribut for CRM */
-    private PageNavigation previous;
-    private boolean checked;
-    private int pageSize = 9;
 
     @Init
     public void init(
@@ -160,9 +160,9 @@ public class EventAgitVM {
         return s + String.format("%0" + count + "d", max + 1);
     }
 
-    @Command("uploadEventAgit")
+    @Command("buttonUploadEventAgit")
     @NotifyChange({"mediaNameUploadEventAgit", "pathLocationUploadEventAgit"})
-    public void uploadEventAgit(@ContextParam(ContextType.BIND_CONTEXT) BindContext ctx) throws IOException {
+    public void buttonUploadEventAgit(@ContextParam(ContextType.BIND_CONTEXT) BindContext ctx) throws IOException {
         UploadEvent upEvent = null;
         Object objUploadEvent = ctx.getTriggerEvent();
 

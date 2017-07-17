@@ -52,9 +52,10 @@ public class ForumServiceImpl implements ForumService{
     @Override
     public ForumDTO getDummyData() {
         Forum forum = new ForumBuilder()
-                .setIdForum("11")
-                .setNamaForum("namaForum")
-                .setDeskripsiForum("deskripsiForum")
+                .setIdForum("01")
+                .setNamaForum("Nama")
+                .setDeskripsiForum("Deskripsi")
+                .setTanggalMulai(new Date())
                 .setTanggalBerakhir(new Date())
                 .setCreatedBy("created by")
                 .setCreatedDate(new Date())

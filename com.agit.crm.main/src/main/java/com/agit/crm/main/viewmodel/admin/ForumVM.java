@@ -53,13 +53,15 @@ public class ForumVM {
     /* Parameter Filter */
     private String idForum;
     private String namaForum;
+    private String deskripsiForum;
+    private Date tanggalMulai;
     private Date tanggalBerakhir;
     private Status status;
 
     private PageNavigation previous;
-    private int pageSize = 15;
+    private int pageSize = 11;
     private ListModelList<Status> statuses;
-    
+
     /* attribut for upload file forum*/
     Media mediaUploadFileForum;
     String mediaNameUploadFileForum;
@@ -69,21 +71,21 @@ public class ForumVM {
     @Init
     public void init(
             @ExecutionArgParam("forumDTO") ForumDTO forum,
-            @ExecutionArgParam("previous") PageNavigation previous){
+            @ExecutionArgParam("previous") PageNavigation previous) {
         /* Load Data */
         initData();
-        
+
         /* Check Validity */
         checkValidity(forum, previous);
     }
-    
-    private void initData(){
+
+    private void initData() {
         forumDTOs = forumService.findAll();
-        if(forumDTOs.isEmpty()){
+        if (forumDTOs.isEmpty()) {
             forumDTOs = Collections.emptyList();
         }
     }
-    
+
     private void checkValidity(ForumDTO forum, PageNavigation previous) {
         if (forum == null) {
             ListModelList<ForumDTO> parameterList = new ListModelList<>(forumService.findAll());
@@ -104,7 +106,7 @@ public class ForumVM {
             this.previous = previous;
         }
     }
-    
+
     protected String getLatestObjectID(ListModelList list, String attribute) {
         int count = 0;
         int pointer = 0;
@@ -148,30 +150,32 @@ public class ForumVM {
         }
         return s + String.format("%0" + count + "d", max + 1);
     }
-    
+
     @GlobalCommand
     @NotifyChange("forumDTOs")
-    public void refreshForum(){
+    public void refreshForum() {
         forumDTOs = forumService.findAll();
     }
-    
+
     @Command("buttonNewForum")
     @NotifyChange("forumDTO")
-    public void buttonNewForum(@BindingParam("object") ForumDTO obj, @ContextParam(ContextType.VIEW) Window window){
+    public void buttonNewForum(@BindingParam("object") ForumDTO obj, @ContextParam(ContextType.VIEW) Window window) {
         Map<String, Object> params = new HashMap<>();
         params.put("forumDTO", obj);
         CommonViewModel.navigateToWithoutDetach("/crm/admin/forum/add_forum.zul", window, params);
     }
-    
+
     @Command("buttonSearchForum")
     @NotifyChange("forumDTOs")
-    public void buttonSearchForum(@ContextParam(ContextType.VIEW) Window window){
+    public void buttonSearchForum(@ContextParam(ContextType.VIEW) Window window) {
         Map params = new HashMap();
         params.put("idForum", idForum);
         params.put("namaForum", namaForum);
         params.put("status", status);
+
+        forumDTOs = forumService.findByParams(params);
     }
-    
+
     @Command("detailForum")
     @NotifyChange("forumDTO")
     public void detailForum(@BindingParam("object") ForumDTO obj, @ContextParam(ContextType.VIEW) Window window) {
@@ -179,53 +183,51 @@ public class ForumVM {
         params.put("forumDTO", obj);
         CommonViewModel.navigateToWithoutDetach("/crm/admin/forum/add_forum.zul", window, params);
     }
-    
+
     @Command("buttonKembaliForum")
     @NotifyChange("forumDTO")
     public void buttonKembaliForum(@BindingParam("object") ForumDTO obj, @ContextParam(ContextType.VIEW) Window window) {
         window.detach();
     }
-    
+
     /* Function upload File Forum */
-    @Command("buttonUploadFileForum")
-    @NotifyChange({"mediaNameUploadFileForum", "pathLocationUploadFileForum"})
-    public void buttonUploadFileForum(@ContextParam(ContextType.BIND_CONTEXT) BindContext ctx) throws IOException {
-        UploadEvent upEvent = null;
-        Object objUploadEvent = ctx.getTriggerEvent();
-
-        if (objUploadEvent != null && (objUploadEvent instanceof UploadEvent)) {
-            upEvent = (UploadEvent) objUploadEvent;
-        }
-
-        if (upEvent != null) {
-            mediaUploadFileForum = upEvent.getMedia();
-            Calendar now = Calendar.getInstance();
-            int year = now.get(Calendar.YEAR);
-            int month = now.get(Calendar.MONTH);
-            int day = now.get(Calendar.DAY_OF_MONTH);
-            filePathUploadFileForum = Executions.getCurrent().getDesktop().getWebApp().getRealPath("/");
-            filePathUploadFileForum = filePathUploadFileForum + "\\" + "files" + "\\" + "crm-cv" + "\\" + year + "\\" + month + "\\" + day + "\\";
-
-            File baseDir = new File(filePathUploadFileForum);
-            if (!baseDir.exists()) {
-                baseDir.mkdirs();
-            }
-
-            Files.copy(new File(filePathUploadFileForum + mediaUploadFileForum.getName()), mediaUploadFileForum.getStreamData());
-            setMediaNameUploadFileForum(filePathUploadFileForum + mediaUploadFileForum.getName());
-            pathLocationUploadFileForum = "/" + "files" + "/" + "crm-cv" + "/" + year + "/" + month + "/" + day + "/" + mediaUploadFileForum.getName();
-        } else {
-            Calendar now = Calendar.getInstance();
-            int year = now.get(Calendar.YEAR);
-            int month = now.get(Calendar.MONTH);
-            int day = now.get(Calendar.DAY_OF_MONTH);
-            mediaNameUploadFileForum = "";
-            pathLocationUploadFileForum = "/" + "files" + "/" + "crm-cv" + "/" + year + "/" + month + "/" + day + "/" + mediaUploadFileForum.getName();
-            Messagebox.show("File : " + mediaUploadFileForum + " Bukan File PDF", "Error", Messagebox.OK, Messagebox.ERROR);
-        }
-
-    }
-    
+//    @Command("buttonUploadFileForum")
+//    @NotifyChange({"mediaNameUploadFileForum", "pathLocationUploadFileForum"})
+//    public void buttonUploadFileForum(@ContextParam(ContextType.BIND_CONTEXT) BindContext ctx) throws IOException {
+//        UploadEvent upEvent = null;
+//        Object objUploadEvent = ctx.getTriggerEvent();
+//
+//        if (objUploadEvent != null && (objUploadEvent instanceof UploadEvent)) {
+//            upEvent = (UploadEvent) objUploadEvent;
+//        }
+//
+//        if (upEvent != null) {
+//            mediaUploadFileForum = upEvent.getMedia();
+//            Calendar now = Calendar.getInstance();
+//            int year = now.get(Calendar.YEAR);
+//            int month = now.get(Calendar.MONTH);
+//            int day = now.get(Calendar.DAY_OF_MONTH);
+//            filePathUploadFileForum = Executions.getCurrent().getDesktop().getWebApp().getRealPath("/");
+//            filePathUploadFileForum = filePathUploadFileForum + "\\" + "files" + "\\" + "crm-cv" + "\\" + year + "\\" + month + "\\" + day + "\\";
+//
+//            File baseDir = new File(filePathUploadFileForum);
+//            if (!baseDir.exists()) {
+//                baseDir.mkdirs();
+//            }
+//
+//            Files.copy(new File(filePathUploadFileForum + mediaUploadFileForum.getName()), mediaUploadFileForum.getStreamData());
+//            setMediaNameUploadFileForum(filePathUploadFileForum + mediaUploadFileForum.getName());
+//            pathLocationUploadFileForum = "/" + "files" + "/" + "crm-cv" + "/" + year + "/" + month + "/" + day + "/" + mediaUploadFileForum.getName();
+//        } else {
+//            Calendar now = Calendar.getInstance();
+//            int year = now.get(Calendar.YEAR);
+//            int month = now.get(Calendar.MONTH);
+//            int day = now.get(Calendar.DAY_OF_MONTH);
+//            mediaNameUploadFileForum = "";
+//            pathLocationUploadFileForum = "/" + "files" + "/" + "crm-cv" + "/" + year + "/" + month + "/" + day + "/" + mediaUploadFileForum.getName();
+//            Messagebox.show("File : " + mediaUploadFileForum + " Bukan File PDF", "Error", Messagebox.OK, Messagebox.ERROR);
+//        }
+//    }
     @Command("buttonSaveForum")
     @NotifyChange({"forumDTO", "forumDTOs"})
     public void buttonSaveForum(@BindingParam("object") ForumDTO obj, @ContextParam(ContextType.VIEW) Window window) {
@@ -234,8 +236,7 @@ public class ForumVM {
         BindUtils.postGlobalCommand(null, null, "refreshForum", null);
         window.detach();
     }
-    
-    
+
     /* getter setter */
     public ForumDTO getForumDTO() {
         return forumDTO;
@@ -267,6 +268,14 @@ public class ForumVM {
 
     public void setNamaForum(String namaForum) {
         this.namaForum = namaForum;
+    }
+
+    public Date getTanggalMulai() {
+        return tanggalMulai;
+    }
+
+    public void setTanggalMulai(Date tanggalMulai) {
+        this.tanggalMulai = tanggalMulai;
     }
 
     public Date getTanggalBerakhir() {
@@ -340,6 +349,13 @@ public class ForumVM {
     public void setStatuses(ListModelList<Status> statuses) {
         this.statuses = statuses;
     }
-    
-    
+
+    public String getDeskripsiForum() {
+        return deskripsiForum;
+    }
+
+    public void setDeskripsiForum(String deskripsiForum) {
+        this.deskripsiForum = deskripsiForum;
+    }
+
 }

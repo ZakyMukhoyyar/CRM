@@ -5,7 +5,7 @@
             form="@id('fx') @load(vm.eventAgitDTO) @save(vm.eventAgitDTO, before='buttonSaveEventAgit')">
         <separator spacing="5px"/>
         <groupbox width="500px" closable="true">
-            <caption sclass="labelstyle" label="Form Tambah Event" style="font-size:16pt; font-weight: bold"/>
+            <caption sclass="isi" label="Form Tambah Acara" style="font-size:16pt; font-weight: bold"/>
             <groupbox>
                 <grid style="border:0">
                     <columns>
@@ -15,52 +15,51 @@
                     </columns>
                     <rows>
                         <row>
-                            <signLabel value="ID Event" sclass="labelstyle"  style="font-weight: bold"/>
-                            <textbox width="20%" sclass="labelstyle" disabled="true" value="@bind(fx.idEvent)" />
+                            <signLabel value="ID Acara" sclass="isi" />
+                            <textbox width="20%" sclass="isi" disabled="true" value="@bind(fx.idEvent)" />
                         </row>
                         <row>
-                            <signLabel value="Nama Event " sclass="labelstyle" style="font-weight: bold"/>
-                            <textbox rows="2" sclass="labelstyle" value="@bind(fx.namaEvent)" width="100%" disabled="false" constraint="no empty : Nama Lowongan Tidak Boleh Kosong"/>
+                            <signLabel value="Nama Acara " sclass="isi"/>
+                            <textbox rows="2" sclass="isi" value="@bind(fx.namaEvent)" width="100%" disabled="false" constraint="no empty : Nama Lowongan Tidak Boleh Kosong"/>
                         </row>
                         <row>
-                            <signLabel sclass="labelstyle" value="Deskripsi " style="font-weight: bold"/>
-                            <textbox rows="7" sclass="labelstyle" width="100%" disabled="false" value="@bind(fx.deskripsiEvent)" constraint="no empty : Deskripsi Tidak Boleh Kosong"/>
+                            <signLabel sclass="isi" value="Deskripsi "/>
+                            <textbox rows="7" sclass="isi" width="100%" disabled="false" value="@bind(fx.deskripsiEvent)" constraint="no empty : Deskripsi Tidak Boleh Kosong"/>
                         </row>
                         <row>
-                            <signLabel sclass="labelstyle" value="Tanggal Mulai" style="font-weight: bold"/>
-                            <datebox sclass="labelstyle" format="dd/MM/yyyy" width="60%" readonly="true" value="@bind(fx.startDate)" constraint="no empty : Tanggal Mulai Tidak Boleh Kosong"/>
+                            <signLabel sclass="isi" value="Tanggal Mulai"/>
+                            <datebox sclass="isi" format="dd/MM/yyyy" width="60%" readonly="true" value="@bind(fx.startDate)" constraint="no empty : Tanggal Mulai Tidak Boleh Kosong"/>
                         </row> 
                         <row>
-                            <signLabel sclass="labelstyle" value="Tanggal Berakhir" style="font-weight: bold"/>
-                            <datebox sclass="labelstyle" format="dd/MM/yyyy" width="60%" readonly="true" value="@bind(fx.endDate)" constraint="no empty : Tanggal Berakhir Tidak Boleh Kosong"/>
+                            <signLabel sclass="isi" value="Tanggal Berakhir"/>
+                            <datebox sclass="isi" format="dd/MM/yyyy" width="60%" readonly="true" value="@bind(fx.endDate)" constraint="no empty : Tanggal Berakhir Tidak Boleh Kosong"/>
                         </row> 
                         <row>
-                            <signLabel sclass="labelstyle" value="Status" style="font-weight: bold"/>
+                            <signLabel sclass="isi" value="Status"/>
                             <combobox autodrop="true" readonly="true" width="60%" placeholder="- Pilihan Status -" model="@load(vm.statuses)" selectedItem="@bind(fx.status)">
                                 <template name="model" var="items">
-                                    <comboitem sclass="labelstyle" label="@load(items)" value="@load(items)"/>
+                                    <comboitem sclass="isi" label="@load(items)" value="@load(items)"/>
                                 </template>
                             </combobox>
-                        </row>          
-                             
+                        </row>
                     </rows>
                 </grid>
-                <groupbox>
-                    <grid>
-                        <columns>
-                            <column width="30%"></column>
-                            <column width="30%"></column>
-                            <column></column>
-                        </columns>
-                        <rows>
-                            <row>
-                                <signLabel sclass="labelstyle" value="File Attacthment" style="font-weight: bold"/>
-                                <textbox sclass="labelstyle" width="100%" readonly="true" value="@bind(vm.mediaNameUploadEventAgit)"/>
-                                <button  label="Cari File" upload="true" onUpload="@command('uploadEventAgit')" width="50%"/>
-                            </row>  
-                        </rows>
-                    </grid>
-                </groupbox>
+                
+                <grid style="border:0">
+                    <columns>
+                        <column width="30%"></column>
+                        <column width="30%"></column>
+                        <column></column>
+                    </columns>
+                    <rows>
+                        <row>
+                            <signLabel sclass="isi" value="File Attacthment"/>
+                            <textbox sclass="isi" width="100%" readonly="true" value="@bind(vm.mediaNameUploadEventAgit)"/>
+                            <button  label="Cari File" upload="true" onUpload="@command('buttonUploadEventAgit')" width="50%"/>
+                        </row>
+                    </rows>
+                </grid>
+                
                 <grid style="border:0">
                 
                     <columns>

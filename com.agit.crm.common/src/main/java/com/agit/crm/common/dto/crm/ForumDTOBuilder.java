@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.agit.crm.common.dto.crm;
 
 import com.agit.crm.shared.status.Status;
@@ -8,6 +13,7 @@ public class ForumDTOBuilder {
     private String idForum;
     private String namaForum;
     private String deskripsiForum;
+    private Date tanggalMulai;
     private Date tanggalBerakhir;
     private String createdBy;
     private Date createdDate;
@@ -30,6 +36,11 @@ public class ForumDTOBuilder {
 
     public ForumDTOBuilder setDeskripsiForum(String deskripsiForum) {
         this.deskripsiForum = deskripsiForum;
+        return this;
+    }
+
+    public ForumDTOBuilder setTanggalMulai(Date tanggalMulai) {
+        this.tanggalMulai = tanggalMulai;
         return this;
     }
 
@@ -64,7 +75,7 @@ public class ForumDTOBuilder {
     }
 
     public ForumDTO createForumDTO() {
-        return new ForumDTO(idForum, namaForum, deskripsiForum, tanggalBerakhir, createdBy, createdDate, modifiedBy, modifiedDate, status);
+        return new ForumDTO(idForum, namaForum, deskripsiForum, tanggalMulai, tanggalBerakhir, createdBy, createdDate, modifiedBy, modifiedDate, status);
     }
     
 }

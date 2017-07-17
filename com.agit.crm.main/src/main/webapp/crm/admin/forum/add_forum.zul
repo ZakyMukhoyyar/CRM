@@ -1,4 +1,5 @@
-<zk xmlns="http://www.zkoss.org/2005/zul">    
+<?component name="signLabel" class="com.agit.crm.shared.zul.SignLabel" ?>
+<zk xmlns="http://www.zkoss.org/2005/zul">
     <window apply="org.zkoss.bind.BindComposer"
             viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.admin.ForumVM')"
             form="@id('fx') @load(vm.forumDTO) @save(vm.forumDTO, before='buttonSaveForum')">
@@ -8,40 +9,33 @@
             <groupbox>
                 <grid style="border:0">
                     <columns>
-                        <column width="3%"></column>
                         <column width="30%"></column>
                         <column width="60%"></column>
                         <column></column>
                     </columns>
                     <rows>
                         <row>
-                            <label value="*) " style="color:red"/>
-                            <label value="ID Forum" style="font-weight: bold"/>
-                            <textbox width="20%" disabled="true" value="@bind(fx.idForum)" />
+                            <signLabel value="ID Forum" style="font-weight: bold"/>
+                            <textbox value="@bind(fx.idForum)" width="20%" disabled="true"/>
                         </row>
                         <row>
-                            <label value="*) " style="color:red"/>
-                            <label value="Nama Forum " style="font-weight: bold"/>
-                            <textbox rows="2" width="100%" disabled="false" constraint="no empty : Nama Lowongan Tidak Boleh Kosong"/>
+                            <signLabel value="Nama Forum " style="font-weight: bold"/>
+                            <textbox value="@bind(fx.namaForum)" rows="2" width="100%" disabled="false" constraint="no empty : Nama Lowongan Tidak Boleh Kosong"/>
                         </row>
                         <row>
-                            <label value="*) " style="color:red"/>
-                            <label value="Deskripsi " style="font-weight: bold"/>
-                            <textbox rows="7" width="100%" disabled="false" constraint="no empty : Deskripsi Tidak Boleh Kosong"/>
+                            <signLabel value="Deskripsi " style="font-weight: bold"/>
+                            <textbox value="@bind(fx.deskripsiForum)"  rows="7" width="100%" disabled="false" constraint="no empty : Deskripsi Tidak Boleh Kosong"/>
                         </row>
-                        <row>
-                            <label value="*)" style="color:red"/>
-                            <label value="Tanggal Mulai" style="font-weight: bold"/>
+<!--                        <row>
+                            <SignLabel value="Tanggal Mulai" style="font-weight: bold"/>
                             <datebox format="dd/MM/yyyy" width="60%" readonly="true" constraint="no empty : Tanggal Mulai Tidak Boleh Kosong"/>
                         </row> 
                         <row>
-                            <label value="*)" style="color:red"/>
-                            <label value="Tanggal Berakhir" style="font-weight: bold"/>
+                            <SignLabel value="Tanggal Berakhir" style="font-weight: bold"/>
                             <datebox format="dd/MM/yyyy" width="60%" readonly="true" constraint="no empty : Tanggal Berakhir Tidak Boleh Kosong"/>
-                        </row> 
+                        </row> -->
                         <row>
-                            <label value="*)" style="color:red"/>
-                            <label value="Status" style="font-weight: bold"/>
+                            <signLabel value="Status" style="font-weight: bold"/>
                             <combobox autodrop="true" readonly="true" width="60%" placeholder="- Pilihan Status -" model="@load(vm.statuses)" selectedItem="@bind(fx.status)">
                                 <template name="model" var="items">
                                     <comboitem label="@load(items)" value="@load(items)"/>
@@ -54,19 +48,17 @@
                 <groupbox>
                     <grid>
                         <columns>
-                            <column width="3%"></column>
                             <column width="30%"></column>
                             <column width="30%"></column>
                             <column></column>
                         </columns>
-                        <rows>
+<!--                        <rows>
                             <row>
-                                <label value="*)" style="color:red"/>
-                                <label value="File Attachment" style="font-weight: bold"/>
-                                <textbox width="100%" readonly="true" value="@command('buttonUploadFileForum')"/>
-                                <button sclass="btn btn-success" label="Upload" upload="true" onUpload="" width="40%"/>
+                                <SignLabel value="File Attachment" style="font-weight: bold"/>
+                                <textbox width="100%" readonly="true" value="@bind(vm.mediaNameUploadFileForum)"/>
+                                <button sclass="btn btn-success" label="Upload" upload="true" onUpload="@command('buttonUploadFileForum')" width="40%"/>
                             </row>  
-                        </rows>
+                        </rows>-->
                     </grid>
                 </groupbox>
                 <grid style="border:0">
@@ -78,8 +70,8 @@
                 
                     <rows>
                         <row>
-                            <button sclass="btn btn-success" label="Kembali" width="40%" onClick = "@command('buttonKembaliForum')"/>
-                            <button sclass="btn btn-success" label="Save" width="40%" onClick = "@command('uploadFileForum')"/>
+                            <a sclass="btn btn-info" label="Kembali" width="40%" onClick = "@command('buttonKembaliForum')"/>
+                            <a sclass="btn btn-info" label="Save" width="40%" onClick = "@command('buttonSaveForum')"/>
                         </row>
                     </rows>
                 </grid>

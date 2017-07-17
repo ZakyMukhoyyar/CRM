@@ -3,32 +3,33 @@
             viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.admin.KetrampilanVM')"
             form="@id('fx') @load(vm.ketrampilanDTO) @save(vm.ketrampilanDTO, before='buttonSaveKetrampilan')">
         <groupbox closable="false" mold="3d" style="background:#f5f5f5" sclass="col-md-12 nopadding" >
-            <caption label="Dashboard Ketrampilan" sclass="labelstyle" />
+            <caption label="Dashboard Ketrampilan" sclass="isi" />
             <div sclass="col-md-3 nopadding">
                 
                 <div class="form-group" style="font-style:bold;">
-                    <label sclass="labelstyle" value="Filter Pencarian :" />
+                    <label sclass="isi" value="Filter Pencarian :" />
                     <separator bar="true"/>
                 </div>
                 <div class="form-group">
-                    <label sclass="labelstyle" value="ID Ketrampilan" />
+                    <label sclass="isi" value="ID Ketrampilan" />
                     <textbox class="form-control" width="100%" value="@bind(vm.idKetrampilan)" />
                 </div>                    
                 <div class="form-group">
-                    <label sclass="labelstyle" value="Nama Ketrampilan" />
+                    <label sclass="isi" value="Nama Ketrampilan" />
                     <textbox class="form-control" width="100%" value="@bind(vm.namaKetrampilan)"/>
                 </div> 
                 <div class="form-group">
-                    <label sclass="labelstyle" value="Status" />   
-                    <listbox mold="select" sclass="form-control" model="@load(vm.status)" selectedItem="@bind(vm.status)" >
+                    <label sclass="isi" value="Status" />                        
+                    <listbox mold="select" sclass="form-control" model="@load(vm.statuses)" selectedItem="@bind(vm.status)" >
                         <template name="model" var="items" >
                             <listitem label="@load(items)"  value="@load(items)" />
                         </template>
-                    </listbox>
+                    </listbox>                        
                 </div>
                 <div>
-                    <button type="button" sclass="btn btn-success" width="100%" label="Pencarian" mold="trendy" onClick="@command('buttonSearchKetrampilan')"/>
-                    <button type="button"  sclass="btn btn-success" width="100%" label="Tambah Minat" onClick="@command('buttonNewKetrampilan')"/>
+                    <a sclass="btn btn-info" width="100%" label="Pencarian" onClick="@command('buttonSearchKetrampilan')"/>
+                    <separator/>
+                    <a sclass="btn btn-info" width="100%" label="Tambah Minat" onClick="@command('buttonNewKetrampilan')"/>
                 </div>                
             </div>
         

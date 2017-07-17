@@ -46,22 +46,24 @@ public class KetrampilanVM {
     private String idKetrampilan;
     private String namaKetrampilan;
     private Status status;
-    private ListModelList<Status> listStatus;
+    
+    private ListModelList<Status> statuses;
 
     private PageNavigation previous;
     private boolean checked;
     private int pageSize = 15;
-    private int activePage = 0;
-    private int selectedIndex;
-    private int totalSize = 0;
 
     @Init
     public void init(
             @ExecutionArgParam("ketrampilanDTO") KetrampilanDTO ketrampilan,
             @ExecutionArgParam("previous") PageNavigation previous) {
+        
+        /* Load Data */
         initData();
+        
+        /* Check Validity */
         checkValidity(ketrampilan, previous);
-
+        
     }
 
     private void initData() {
@@ -244,22 +246,6 @@ public class KetrampilanVM {
         this.pageSize = pageSize;
     }
 
-    public int getActivePage() {
-        return activePage;
-    }
-
-    public void setActivePage(int activePage) {
-        this.activePage = activePage;
-    }
-
-    public int getTotalSize() {
-        return totalSize;
-    }
-
-    public void setTotalSize(int totalSize) {
-        this.totalSize = totalSize;
-    }
-
     public KetrampilanDTO getKetrampilanDTO() {
         return ketrampilanDTO;
     }
@@ -268,20 +254,11 @@ public class KetrampilanVM {
         this.ketrampilanDTO = ketrampilanDTO;
     }
 
-    public int getSelectedIndex() {
-        return selectedIndex;
+    public ListModelList<Status> getStatuses() {
+        return statuses;
     }
 
-    public void setSelectedIndex(int selectedIndex) {
-        this.selectedIndex = selectedIndex;
+    public void setStatuses(ListModelList<Status> statuses) {
+        this.statuses = statuses;
     }
-
-    public ListModelList<Status> getListStatus() {
-        return new ListModelList<>(Status.values());
-    }
-
-    public void setListStatus(ListModelList<Status> listStatus) {
-        this.listStatus = listStatus;
-    }
-
 }
