@@ -2,39 +2,39 @@
 -- Records of mst_privilege
 -- ----------------------------
 INSERT INTO "public"."mst_privilege" VALUES ('0', 'ROOT', 'ROOT', 'DELETED', null, 't', 'Dashboard', 'Dashboard', null, null, '2016-01-01 00:00:00', 'SYSTEM');
-INSERT INTO "public"."mst_privilege" VALUES ('1', 'ADMINISTRATOR', 'Administrator', 'ACTIVE', 'ROOT', 't', 'Administrator', null, null, null, '2016-01-01 00:00:00', 'SYSTEM');
-INSERT INTO "public"."mst_privilege" VALUES ('2', 'GROUP', 'Group', 'ACTIVE', 'ADMINISTRATOR', 't', 'Group Management', null, null, null, '2016-01-01 00:00:00', 'SYSTEM');
-INSERT INTO "public"."mst_privilege" VALUES ('3', 'GROUP_SEARCH', 'Group Search', 'ACTIVE', 'GROUP', 't', 'Search', 'Group - Maintenance', null, '~./ui/fnd/group/search.fnd.group.zul', '2016-01-01 00:00:00', 'SYSTEM');
+INSERT INTO "public"."mst_privilege" VALUES ('1', 'ADMINISTRATOR', 'Administrator', 'ACTIVE', 'ROOT', 't', 'Pengurus', null, null, null, '2016-01-01 00:00:00', 'SYSTEM');
+INSERT INTO "public"."mst_privilege" VALUES ('2', 'GROUP', 'Group', 'ACTIVE', 'ADMINISTRATOR', 't', 'Pengelolaan Grup', null, null, null, '2016-01-01 00:00:00', 'SYSTEM');
+INSERT INTO "public"."mst_privilege" VALUES ('3', 'GROUP_SEARCH', 'Group Search', 'ACTIVE', 'GROUP', 't', 'Pemeliharaan Grup', 'Pemeliharaan Grup', null, '~./ui/fnd/group/search.fnd.group.zul', '2016-01-01 00:00:00', 'SYSTEM');
 INSERT INTO "public"."mst_privilege" VALUES ('4', 'GROUP_UPDATE', 'Group Update', 'ACTIVE', 'GROUP_SEARCH', 'f', null, null, null, null, '2016-01-01 00:00:00', 'SYSTEM');
 INSERT INTO "public"."mst_privilege" VALUES ('5', 'GROUP_VIEW', 'Group View', 'ACTIVE', 'GROUP_SEARCH', 'f', null, null, null, null, '2016-01-01 00:00:00', 'SYSTEM');
 INSERT INTO "public"."mst_privilege" VALUES ('6', 'GROUP_DELETE', 'Group Delete', 'ACTIVE', 'GROUP_SEARCH', 'f', null, null, null, null, '2016-01-01 00:00:00', 'SYSTEM');
-INSERT INTO "public"."mst_privilege" VALUES ('7', 'GROUP_CREATE', 'Group Create', 'ACTIVE', 'GROUP', 't', 'Create', 'Group - Create', null, '~./ui/fnd/group/create.fnd.group.zul', '2016-01-01 00:00:00', 'SYSTEM');
-INSERT INTO "public"."mst_privilege" VALUES ('8', 'USER_MANAGEMENT', 'User', 'ACTIVE', 'ADMINISTRATOR', 't', 'User Management', null, null, null, '2016-01-01 00:00:00', 'SYSTEM');
-INSERT INTO "public"."mst_privilege" VALUES ('9', 'USER_SEARCH', 'User Search', 'ACTIVE', 'USER_MANAGEMENT', 't', 'Search', 'User - Maintenance', null, '~./ui/fnd/user/search.fnd.user.zul', '2016-01-01 00:00:00', 'SYSTEM');
+INSERT INTO "public"."mst_privilege" VALUES ('7', 'GROUP_CREATE', 'Group Create', 'ACTIVE', 'GROUP', 't', 'Pembuatan Grup', 'Pembuatan Grup', null, '~./ui/fnd/group/create.fnd.group.zul', '2016-01-01 00:00:00', 'SYSTEM');
+INSERT INTO "public"."mst_privilege" VALUES ('8', 'USER_MANAGEMENT', 'User', 'ACTIVE', 'ADMINISTRATOR', 't', 'Pengelolaan Pengguna', null, null, null, '2016-01-01 00:00:00', 'SYSTEM');
+INSERT INTO "public"."mst_privilege" VALUES ('9', 'USER_SEARCH', 'User Search', 'ACTIVE', 'USER_MANAGEMENT', 't', 'Pemeliharaan Pengguna', 'Pemeliharaan Pengguna', null, '~./ui/fnd/user/search.fnd.user.zul', '2016-01-01 00:00:00', 'SYSTEM');
 INSERT INTO "public"."mst_privilege" VALUES ('10', 'USER_UPDATE', 'User Update', 'ACTIVE', 'USER_SEARCH', 'f', null, null, null, null, '2016-01-01 00:00:00', 'SYSTEM');
 INSERT INTO "public"."mst_privilege" VALUES ('11', 'USER_VIEW', 'User View', 'ACTIVE', 'USER_SEARCH', 'f', null, null, null, null, '2016-01-01 00:00:00', 'SYSTEM');
 INSERT INTO "public"."mst_privilege" VALUES ('12', 'USER_DELETE', 'User Delete', 'ACTIVE', 'USER_SEARCH', 'f', null, null, null, null, '2016-01-01 00:00:00', 'SYSTEM');
 INSERT INTO "public"."mst_privilege" VALUES ('13', 'USER_RESET_PASSWORD', 'User Reset Password', 'ACTIVE', 'USER_SEARCH', 'f', null, null, null, null, '2016-01-01 00:00:00', 'SYSTEM');
 INSERT INTO "public"."mst_privilege" VALUES ('14', 'USER_LOCK_UNLOCK', 'User Lock Unlock', 'ACTIVE', 'USER_SEARCH', 'f', null, null, null, null, '2016-01-01 00:00:00', 'SYSTEM');
-INSERT INTO "public"."mst_privilege" VALUES ('15', 'USER_CREATE', 'User Create', 'ACTIVE', 'USER_MANAGEMENT', 't', 'Create', 'User - Create', null, '~./ui/fnd/user/create.fnd.user.zul', '2016-01-01 00:00:00', 'SYSTEM');
-INSERT INTO "public"."mst_privilege" VALUES ('16', 'USER_RELEASE', 'User Release', 'ACTIVE', 'USER_MANAGEMENT', 't', 'Release', 'User - Release', null, '~./ui/fnd/user/release.fnd.user.zul', '2016-01-01 00:00:00', 'SYSTEM');
-INSERT INTO "public"."mst_privilege" VALUES ('17', 'MENU', 'Menu Dashboard', 'ACTIVE', 'ADMINISTRATOR', 't', 'Menu Management', null, null, null, '2016-01-01 00:00:00', 'SYSTEM');
-INSERT INTO "public"."mst_privilege" VALUES ('18', 'MENU_MANAGEMENT', 'Menu Dashboard', 'ACTIVE', 'MENU', 't', 'Menu - Dashboard', 'Menu - Dashboard', null, '~./ui/fnd/menu/dashboard.privilege.zul', '2016-01-01 00:00:00', 'SYSTEM');
+INSERT INTO "public"."mst_privilege" VALUES ('15', 'USER_CREATE', 'User Create', 'ACTIVE', 'USER_MANAGEMENT', 't', 'Pembuatan Pengguna', 'Pembuatan Pengguna', null, '~./ui/fnd/user/create.fnd.user.zul', '2016-01-01 00:00:00', 'SYSTEM');
+INSERT INTO "public"."mst_privilege" VALUES ('16', 'USER_RELEASE', 'User Release', 'ACTIVE', 'USER_MANAGEMENT', 't', 'Penghapusan Pengguna', 'Penghapusan Pengguna', null, '~./ui/fnd/user/release.fnd.user.zul', '2016-01-01 00:00:00', 'SYSTEM');
+INSERT INTO "public"."mst_privilege" VALUES ('17', 'MENU', 'Menu Dashboard', 'ACTIVE', 'ADMINISTRATOR', 't', 'Pengelolaan Menu', null, null, null, '2016-01-01 00:00:00', 'SYSTEM');
+INSERT INTO "public"."mst_privilege" VALUES ('18', 'MENU_MANAGEMENT', 'Menu Dashboard', 'ACTIVE', 'MENU', 't', 'Beranda - Menu', 'Beranda - Menu', null, '~./ui/fnd/menu/dashboard.privilege.zul', '2016-01-01 00:00:00', 'SYSTEM');
 
-INSERT INTO "public"."mst_privilege" VALUES ('19', 'ADMIN_MANAGEMENT', 'Admin', 'ACTIVE', 'ADMINISTRATOR', 't', 'Admin Management', null, null, null, '2016-01-01 00:00:00', 'SYSTEM');
-INSERT INTO "public"."mst_privilege" VALUES ('20', 'EVENT_MANAGEMENT', 'Event Management', 'ACTIVE', 'ADMIN_MANAGEMENT', 't', 'Event - Dashboard', 'Event - Dashboard', null, '/crm/admin/event/dashboard_event.zul', '2016-01-01 00:00:00', 'SYSTEM');
-INSERT INTO "public"."mst_privilege" VALUES ('21', 'FORUM_MANAGEMENT', 'Forum Management', 'ACTIVE', 'ADMIN_MANAGEMENT', 't', 'Forums - Dashboard', 'Forums - Dashboard', null, '/crm/admin/forum/dashboard_forum.zul', '2016-01-01 00:00:00', 'SYSTEM');
-INSERT INTO "public"."mst_privilege" VALUES ('23', 'KETRAMPILAN_MANAGEMENT', 'Ketrampilan Management', 'ACTIVE', 'ADMIN_MANAGEMENT', 't', 'Ketrampilan - Dashboard', 'Ketrampilan - Dashboard', null, '/crm/admin/ketrampilan/dashboard_ketrampilan.zul', '2016-01-01 00:00:00', 'SYSTEM');
-INSERT INTO "public"."mst_privilege" VALUES ('24', 'MINAT_MANAGEMENT', 'Minat Management', 'ACTIVE', 'ADMIN_MANAGEMENT', 't', 'Minat - Dashboard', 'Minat - Dashboard', null, '/crm/admin/minat/dashboard_minat.zul', '2016-01-01 00:00:00', 'SYSTEM');
-INSERT INTO "public"."mst_privilege" VALUES ('25', 'LOWONGAN_MANAGEMENT', 'Lowongan Management', 'ACTIVE', 'ADMIN_MANAGEMENT', 't', 'Lowongan - Dashboard', 'Lowongan - Dashboard', null, '/crm/admin/lowongan/dashboard_lowongan.zul', '2016-01-01 00:00:00', 'SYSTEM');
-INSERT INTO "public"."mst_privilege" VALUES ('26', 'JURUSAN_MANAGEMENT', 'Jurusan Management', 'ACTIVE', 'ADMIN_MANAGEMENT', 't', 'Jurusan - Dashboard', 'Jurusan - Dashboard', null, '/crm/admin/jurusan/dashboard_jurusan.zul', '2016-01-01 00:00:00', 'SYSTEM');
-INSERT INTO "public"."mst_privilege" VALUES ('27', 'DATA_MAHASISWA', 'Dashboard Data Mahasiswa', 'ACTIVE', 'ADMIN_MANAGEMENT', 't', 'Data Mahasiswa - Dashboard', 'Data Mahasiswa - Dashboard', null, '/crm/admin/dataRegister/dashboard_data_register_mahasiswa.zul', '2016-01-01 00:00:00', 'SYSTEM');
-INSERT INTO "public"."mst_privilege" VALUES ('28', 'DATA_APPLY', 'Dashboard Data Apply Lowongan', 'ACTIVE', 'ADMIN_MANAGEMENT', 't', 'Data Apply Lowongan - Dashboard', 'Data Apply Lowongan - Dashboard', null, '/crm/admin/dataApplyLowongan/dashboard_data_apply.zul', '2016-01-01 00:00:00', 'SYSTEM');
-INSERT INTO "public"."mst_privilege" VALUES ('32', 'DATA_CIVITAS', 'Dashboard Data Civitas', 'ACTIVE', 'ADMIN_MANAGEMENT', 't', 'Data History Civitas - Dashboard', 'Data History Civitas - Dashboard', null, '/crm/admin/civitas/dashboard_civitas.zul', '2016-01-01 00:00:00', 'SYSTEM');
+INSERT INTO "public"."mst_privilege" VALUES ('19', 'ADMIN_MANAGEMENT', 'Admin', 'ACTIVE', 'ADMINISTRATOR', 't', 'Pengelolaan Admin', null, null, null, '2016-01-01 00:00:00', 'SYSTEM');
+INSERT INTO "public"."mst_privilege" VALUES ('20', 'EVENT_MANAGEMENT', 'Event Management', 'ACTIVE', 'ADMIN_MANAGEMENT', 't', 'Beranda - Acara', 'Beranda - Acara', null, '/crm/admin/event/dashboard_event.zul', '2016-01-01 00:00:00', 'SYSTEM');
+INSERT INTO "public"."mst_privilege" VALUES ('21', 'FORUM_MANAGEMENT', 'Forum Management', 'ACTIVE', 'ADMIN_MANAGEMENT', 't', 'Beranda - Forum', 'Beranda - Forum', null, '/crm/admin/forum/dashboard_forum.zul', '2016-01-01 00:00:00', 'SYSTEM');
+INSERT INTO "public"."mst_privilege" VALUES ('23', 'KETRAMPILAN_MANAGEMENT', 'Ketrampilan Management', 'ACTIVE', 'ADMIN_MANAGEMENT', 't', 'Beranda - Ketrampilan', 'Beranda - Ketrampilan', null, '/crm/admin/ketrampilan/dashboard_ketrampilan.zul', '2016-01-01 00:00:00', 'SYSTEM');
+INSERT INTO "public"."mst_privilege" VALUES ('24', 'MINAT_MANAGEMENT', 'Minat Management', 'ACTIVE', 'ADMIN_MANAGEMENT', 't', 'Beranda - Minat', 'Beranda - Minat', null, '/crm/admin/minat/dashboard_minat.zul', '2016-01-01 00:00:00', 'SYSTEM');
+INSERT INTO "public"."mst_privilege" VALUES ('25', 'LOWONGAN_MANAGEMENT', 'Lowongan Management', 'ACTIVE', 'ADMIN_MANAGEMENT', 't', 'Beranda - Lowongan', 'Beranda - Lowongan', null, '/crm/admin/lowongan/dashboard_lowongan.zul', '2016-01-01 00:00:00', 'SYSTEM');
+INSERT INTO "public"."mst_privilege" VALUES ('26', 'JURUSAN_MANAGEMENT', 'Jurusan Management', 'ACTIVE', 'ADMIN_MANAGEMENT', 't', 'Beranda - Jurusan', 'Beranda - Jurusan', null, '/crm/admin/jurusan/dashboard_jurusan.zul', '2016-01-01 00:00:00', 'SYSTEM');
+INSERT INTO "public"."mst_privilege" VALUES ('27', 'DATA_MAHASISWA', 'Dashboard Data Mahasiswa', 'ACTIVE', 'ADMIN_MANAGEMENT', 't', 'Beranda - Data Mahasiswa', 'Beranda - Data Mahasiswa', null, '/crm/admin/dataRegister/dashboard_data_register_mahasiswa.zul', '2016-01-01 00:00:00', 'SYSTEM');
+INSERT INTO "public"."mst_privilege" VALUES ('28', 'DATA_APPLY', 'Dashboard Data Apply Lowongan', 'ACTIVE', 'ADMIN_MANAGEMENT', 't', 'Beranda - Data Apply Lowongan', 'Beranda - Data Apply Lowongan', null, '/crm/admin/dataApplyLowongan/dashboard_data_apply.zul', '2016-01-01 00:00:00', 'SYSTEM');
+INSERT INTO "public"."mst_privilege" VALUES ('32', 'DATA_CIVITAS', 'Dashboard Data Civitas', 'ACTIVE', 'ADMIN_MANAGEMENT', 't', 'Beranda - Data History Civitas', 'Beranda - Data History Civitas', null, '/crm/admin/civitas/dashboard_civitas.zul', '2016-01-01 00:00:00', 'SYSTEM');
 
-INSERT INTO "public"."mst_privilege" VALUES ('29', 'MAHASISWA_MANAGEMENT', 'Admin', 'ACTIVE', 'ADMINISTRATOR', 't', 'Mahasiswa Management', null, null, null, '2016-01-01 00:00:00', 'SYSTEM');
-INSERT INTO "public"."mst_privilege" VALUES ('30', 'REGISTER', 'Register', 'ACTIVE', 'MAHASISWA_MANAGEMENT', 't', 'Register', 'Register', null, '/crm/mahasiswa/registrasi_mahasiswa.zul', '2016-01-01 00:00:00', 'SYSTEM');
-INSERT INTO "public"."mst_privilege" VALUES ('31', 'LOWONGAN', 'Beranda Lowongan', 'ACTIVE', 'MAHASISWA_MANAGEMENT', 't', 'Beranda Lowongan', 'Beranda Lowongan', null, '/crm/mahasiswa/beranda_lowongan_mahasiswa.zul', '2016-01-01 00:00:00', 'SYSTEM');
+INSERT INTO "public"."mst_privilege" VALUES ('29', 'MAHASISWA_MANAGEMENT', 'Admin', 'ACTIVE', 'ADMINISTRATOR', 't', 'Pengelolaan Data Mahasiswa', null, null, null, '2016-01-01 00:00:00', 'SYSTEM');
+INSERT INTO "public"."mst_privilege" VALUES ('30', 'REGISTER', 'Register', 'ACTIVE', 'MAHASISWA_MANAGEMENT', 't', 'Pendaftaran', 'Pendaftaran', null, '/crm/mahasiswa/registrasi_mahasiswa.zul', '2016-01-01 00:00:00', 'SYSTEM');
+INSERT INTO "public"."mst_privilege" VALUES ('31', 'LOWONGAN', 'Beranda Lowongan', 'ACTIVE', 'MAHASISWA_MANAGEMENT', 't', 'Informasi - Lowongan', 'Informasi - Lowongan', null, '/crm/mahasiswa/beranda_lowongan_mahasiswa.zul', '2016-01-01 00:00:00', 'SYSTEM');
 
 
 
