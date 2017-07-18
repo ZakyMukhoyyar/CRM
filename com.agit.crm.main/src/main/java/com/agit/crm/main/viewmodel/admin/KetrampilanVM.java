@@ -255,7 +255,7 @@ public class KetrampilanVM {
     }
 
     public ListModelList<Status> getStatuses() {
-        return statuses;
+        return new ListModelList<>(Status.values());
     }
 
     public void setStatuses(ListModelList<Status> statuses) {
