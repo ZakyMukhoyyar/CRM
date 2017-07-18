@@ -44,6 +44,8 @@
                 <listhead>
                     <listheader style="font-size:9pt; font-weight: bold" sclass="isi" label="Nama Event" width="20%" align="center"/>
                     <listheader style="font-size:9pt; font-weight: bold" sclass="isi" label="Deskripsi" width="20%" align="center"/>
+                    <listheader style="font-size:9pt; font-weight: bold" sclass="isi" label="Tanggal Mulai" width="20%" align="center"/>
+                    <listheader style="font-size:9pt; font-weight: bold" sclass="isi" label="Tanggal Berakhir" width="20%" align="center"/>
                     <listheader style="font-size:9pt; font-weight: bold" sclass="isi" label="Aksi" width="20%" align="center"/>
                 </listhead>
                 <template name="model">
@@ -53,6 +55,12 @@
                         </listcell>
                         <listcell>
                             <label sclass="isi " width="100%" value="@bind(each.deskripsiEvent)"/>
+                        </listcell>
+                        <listcell>
+                            <label sclass="isi " width="100%" value="@bind(each.startDate)"/>
+                        </listcell>
+                        <listcell>
+                            <label sclass="isi " width="100%" value="@bind(each.endDate)"/>
                         </listcell>
                         <listcell>
                             <a sclass="isi btn btn-primary" label="Lihat"  onClick="@command('buttonKlikEvent', object=each)"></a>

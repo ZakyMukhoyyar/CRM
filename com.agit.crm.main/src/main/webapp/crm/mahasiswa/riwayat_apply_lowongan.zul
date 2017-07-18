@@ -6,29 +6,29 @@
             viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.admin.LowonganVM')"
             form="@id('fx') @load(vm.riwayatApplyMahasiswaDTO) @save(vm.riwayatApplyMahasiswaDTO, before='buttonKonfirmasiApplyLowongan')">
         <groupbox closable="false" mold="3d" width="700px">
-            <caption label="History Lowongan" />
+            <caption sclass="isi" label="History Lowongan" />
             <groupbox closable="false">
                 <paging forward="onPaging" />
                 <listbox rows="5" emptyMessage="${labels.common.noDataFound}" model="@bind(vm.riwayatApplyMahasiswaDTOs)">
                     <listhead sizable="true">
-                        <listheader label="ID Lowongan" width="7%" align="center"/>
-                        <listheader label="Nama Lowongan" width="20%" align="center"/>
-                        <listheader label="Status" width="10%" align="center"/>
-                        <listheader label="Waktu Apply" width="15%" align="center"/>
+                        <listheader sclass="isi" label="ID Lowongan" width="7%" align="center"/>
+                        <listheader sclass="isi" label="Nama Lowongan" width="20%" align="center"/>
+                        <listheader sclass="isi" label="Status" width="10%" align="center"/>
+                        <listheader sclass="isi" label="Waktu Apply" width="15%" align="center"/>
                     </listhead>
                     <template name="model">
                         <listitem value="${each}">
                             <listcell >
-                                <label width="100%" value="@bind(each.idRiwayatLowongan)"/>
+                                <label sclass="isi" width="100%" value="@bind(each.idRiwayatLowongan)"/>
                             </listcell>
                             <listcell >
-                                <label width="100%" value="@bind(each.namaLowonganApply)"/>
+                                <label sclass="isi" width="100%" value="@bind(each.namaLowonganApply)"/>
                             </listcell>
                             <listcell >
-                                <label width="100%" value="@bind(each.lowonganState)"/>
+                                <label sclass="isi" width="100%" value="@bind(each.lowonganState)"/>
                             </listcell>
                             <listcell >
-                                <label width="100%" value="@bind(each.createdDate)"/>
+                                <label sclass="isi" width="100%" value="@bind(each.createdDate)"/>
                             </listcell>
                         </listitem>
                     </template>

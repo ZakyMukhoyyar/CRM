@@ -99,12 +99,12 @@
                         </row>
                         <row>
                             <signLabel sclass="isi" value="Nama Civitas" style="font-weight: bold"/>
-                            <!--                            <combobox sclass="isi" width="100%" placeholder="- Silahkan Pilih -" readonly="true" model="@load(vm.listCivitas)" selectedItem="@bind(fx.namaCivitas)">
+                            <combobox sclass="isi" width="100%" placeholder="- Silahkan Pilih -" readonly="true" model="@load(vm.listCivitas)" selectedItem="@bind(fx.namaCivitas)">
                                 <template name="model" var="items">
                                     <comboitem label="@load(items)" value="@load(items)"/>
                                 </template>
-                            </combobox>-->
-                            <toolbar>
+                            </combobox>
+                            <!--                            <toolbar>
                                 <bandbox id="bd" autodrop="true" width="250px"
                                          onChanging="search.model = strset.getSubModel(event.value, 30);">
                                     <bandpopup width="320px">
@@ -127,7 +127,7 @@
                                         </panel>
                                     </bandpopup>
                                 </bandbox>
-                            </toolbar>
+                            </toolbar>-->
                         </row>
                         <row>
                             <signLabel sclass="isi" value="IPK" style="font-weight: bold"/>
@@ -248,12 +248,13 @@
                                 <textbox class="form-control" width="100%" readonly="true" value="@bind(vm.mediaNameUploadCV)"/>
                                 <button sclass="btn btn-success" label="Upload" upload="true" onUpload="@command('uploadFileCV')" width="80%">
                                 </button>
+                                <a sclass="isi btn btn-success" label="Lihat CV"  onClick="@command('buttonKlikEvent', object=each)"></a>
                             </row>
                         </rows>
                     </grid>
                 </groupbox>
                 <groupbox>
-                    <label sclass="isi" value="*) Username dan Password akan di gunakan saat login" style="color:red"/>
+                    <label sclass="isi" value="*) Username dan Password akan digunakan saat login" style="color:red"/>
                     <separator></separator>
                     <label sclass="isi" value="*) Password minimal 8 karakter, kombinasi huruf besar, kecil dan angka" style="color:red"/>
                 
@@ -266,8 +267,8 @@
                 
                     <rows>
                         <row>
-                            <button sclass="btn btn-success" label="Kembali" onClick="@command('buttonKembaliMahasiswa')" visible="@bind(vm.disableButtonBack)" />
-                            <button sclass="btn btn-success" label="Simpan" onClick="@command('buttonSaveMahasiswa')" />
+                            <a sclass="btn btn-success" label="Kembali" onClick="@command('buttonKembaliMahasiswa')" visible="@bind(vm.disableButtonBack)" />
+                            <a sclass="btn btn-success" label="Simpan" onClick="@command('buttonSaveMahasiswa')" />
                         </row>
                     </rows>
                 </grid>            

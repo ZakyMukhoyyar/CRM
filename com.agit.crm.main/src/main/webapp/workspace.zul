@@ -23,7 +23,7 @@
                 </menupopup>
                 <!-- Header -->
                 <borderlayout >
-                    <north sclass="isi" height="60px" border="none">
+                    <north sclass="isi" height="80px" border="none">
                         <borderlayout  style="background:#7C1442;">
                             <west border="none" size="20%" style="background:#7C1442;">
                                 <image style="margin-left:10px; margin-top:2px;" src="@bind(vm.uriPhoto)" />
@@ -63,7 +63,7 @@
 
                     <!-- Main -->
                     <center border="none" autoscroll="true">
-                        <tabbox id="tabbox" height="100%">
+                        <tabbox sclass="isi" id="tabbox" height="100%">
                             <tabs id="tabs">
                                 <tab label="Dashboard" iconSclass="icon icon-home" />
                             </tabs>

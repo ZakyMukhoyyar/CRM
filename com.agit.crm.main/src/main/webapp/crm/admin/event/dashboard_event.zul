@@ -52,7 +52,7 @@
                             <listheader sclass="isi bold"  label="Tanggal Berakhir" width="15%" align="center"/>
                             <!--                        <listheader label="Deskripsi" width="14%" align="center"/>-->
                             <listheader sclass="isi bold"  label="Status" width="10%" align="center"/>
-                            <listheader sclass="isi bold"  label="Aksi" width="20%" align="center"/>
+                            <listheader sclass="isi bold"  label="Aksi" width="25%" align="center"/>
                         </listhead>
                         <template name="model">
                             <listitem value="${each}">
@@ -73,7 +73,7 @@
                                 </listcell>
                                 <listcell>
                                     <a sclass="btn btn-primary" label="Detail" onClick="@command('detailEventAgit', object=each)"></a>
-                                    <a sclass="btn btn-primary" label="Lihat"  onClick="@command('buttonKlikEvent', object=each)"></a>
+                                    <a sclass="btn btn-primary" label="Lihat "  onClick="@command('buttonKlikEvent', object=each)"></a>
                                     <!--                                <a label=" | " style="font-size:12pt ;color:black"></a>
                                     <a label="Delete" style="text-decoration:underline ;color:blue" onClick="@command('deleteDataBank', object=each)"></a>-->
                                 </listcell>
