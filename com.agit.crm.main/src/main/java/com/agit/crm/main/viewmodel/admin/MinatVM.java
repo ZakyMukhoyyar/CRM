@@ -45,10 +45,10 @@ public class MinatVM {
     private String namaMinat;
     private Status status;
 
-    private ListModelList<Status> listStatus;
+    private ListModelList<Status> statuses;
 
     private PageNavigation previous;
-    private int pageSize = 15;
+    private int pageSize = 10;
 
     @Init
     public void init(
@@ -227,14 +227,14 @@ public class MinatVM {
         this.status = status;
     }
 
-    public ListModelList<Status> getListStatus() {
+    public ListModelList<Status> getStatuses() {
         return new ListModelList<>(Status.values());
     }
 
-    public void setListStatus(ListModelList<Status> listStatus) {
-        this.listStatus = listStatus;
+    public void setStatuses(ListModelList<Status> statuses) {
+        this.statuses = statuses;
     }
-
+    
     public PageNavigation getPrevious() {
         return previous;
     }

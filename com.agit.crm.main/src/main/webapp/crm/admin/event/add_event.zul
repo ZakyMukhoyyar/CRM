@@ -69,8 +69,8 @@
                 
                     <rows>
                         <row>
-                            <a label="Kembali" sclass="btn btn-info" width="40%" onClick = "@command('buttonKembaliEvent')"/>
-                            <a label="Simpan" sclass="btn btn-info" width="40%" onClick = "@command('buttonSaveEventAgit')"/>
+                            <a label="Kembali" sclass="btn btn-info" width="50%" onClick = "@command('buttonKembaliEvent')"/>
+                            <a label="Simpan" sclass="btn btn-info" width="50%" onClick = "@command('buttonSaveEventAgit')"/>
                         </row>
                     </rows>
                 </grid>

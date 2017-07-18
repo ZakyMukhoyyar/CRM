@@ -5,7 +5,7 @@
         form="@id('fx') @load(vm.jurusanDTO) @save(vm.jurusanDTO, before='buttonSaveJurusan')">
         <separator spacing="5px"/>
         <groupbox width="500px" closable="true">
-            <caption label="Form Tambah Jurusan" style="font-size:16pt; font-weight: bold"/>
+            <caption sclass="isi" label="Form Tambah Jurusan" style="font-size:16pt; font-weight: bold"/>
             <groupbox>
                 <grid style="border:0">
                     <columns>
@@ -16,11 +16,11 @@
                     <rows>
                         <row>                            
                             <signLabel value="ID Jurusan" style="font-weight: bold"/>
-                            <textbox width="20%" disabled="true" value="@bind(fx.idJurusan)" />
+                            <textbox sclass="isi" width="20%" disabled="true" value="@bind(fx.idJurusan)" />
                         </row>
                         <row>                            
                             <signLabel value="Nama Jurusan " style="font-weight: bold"/>
-                            <textbox rows="2" value="@bind(fx.namaJurusan)" width="100%" disabled="false" constraint="no empty : Nama Jurusan Tidak Boleh Kosong"/>
+                            <textbox sclass="isi" rows="2" value="@bind(fx.namaJurusan)" width="100%" disabled="false" constraint="no empty : Nama Jurusan Tidak Boleh Kosong"/>
                         </row>
                     </rows>
                 </grid>
@@ -32,8 +32,8 @@
                     </columns>                
                     <rows>
                         <row>
-                            <button sclass="btn btn-success" label="Kembali" width="40%" onClick = "@command('buttonKembaliJurusan')"/>
-                            <button sclass="btn btn-success" label="Save" width="40%" onClick = "@command('buttonSaveJurusan')"/>
+                            <a sclass="btn btn-info" label="Kembali" width="40%" onClick = "@command('buttonKembaliJurusan')"/>
+                            <a sclass="btn btn-info" label="Simpan" width="40%" onClick = "@command('buttonSaveJurusan')"/>
                         </row>
                     </rows>
                 </grid>

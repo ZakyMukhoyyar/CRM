@@ -5,41 +5,38 @@
         <groupbox height="610px" closable="false" mold="3d" sclass="col-md-12 nopadding "  style="background:#f5f5f5;">
             <caption sclass="isi" label="Dashboard Acara" />   
             <div sclass="col-md-3 nopadding">
-                
-                <div>
-                    <div class="form-group" style="font-style:bold;">
-                        <label sclass="isi" value="Filter Pencarian :" />
-                        <separator bar="true"/>
-                    </div>
-                    <div class="form-group">
-                        <label sclass="isi" value="ID Acara" />
-                        <textbox class="form-control" width="100%" value="@bind(vm.idEvent)"/>  
-                    </div>
+                <div class="form-group" style="font-style:bold;">
+                    <label sclass="isi" value="Filter Pencarian :" />
+                    <separator bar="true"/>
+                </div>
+                <div class="form-group">
+                    <label sclass="isi" value="ID Acara" />
+                    <textbox class="form-control" width="100%" value="@bind(vm.idEvent)"/>  
+                </div>
                     
-                    <div class="form-group">
-                        <label sclass="isi" value="Status" />                        
-                        <listbox mold="select" sclass="form-control" model="@load(vm.statuses)" selectedItem="@bind(vm.status)" >
-                            <template name="model" var="items" >
-                                <listitem label="@load(items)"  value="@load(items)" />
-                            </template>
-                        </listbox>                        
-                    </div>
+                <div class="form-group">
+                    <label sclass="isi" value="Status" />                        
+                    <listbox mold="select" sclass="form-control" model="@load(vm.statuses)" selectedItem="@bind(vm.status)" >
+                        <template name="model" var="items" >
+                            <listitem label="@load(items)"  value="@load(items)" />
+                        </template>
+                    </listbox>                        
+                </div>
                     
-                    <div class="form-group">
-                        <label sclass="isi" value="Nama Acara" />
-                        <textbox class="form-control" width="100%" value="@bind(vm.namaEvent)"/>
-                    </div>
+                <div class="form-group">
+                    <label sclass="isi" value="Nama Acara" />
+                    <textbox class="form-control" width="100%" value="@bind(vm.namaEvent)"/>
+                </div>
                         
-                    <div class="form-group">
-                        <label sclass="isi" value="Tanggal Berakhir" />
-                        <datebox width="100%"  readonly="false" placeholder="- Silahkan Pilih -" value="@bind(vm.endDate)"></datebox>
-                    </div>
+                <div class="form-group">
+                    <label sclass="isi" value="Tanggal Berakhir" />
+                    <datebox width="100%"  readonly="false" placeholder="- Silahkan Pilih -" value="@bind(vm.endDate)"></datebox>
+                </div>
                     
-                    <div>
-                        <a sclass="btn btn-info" width="100%" label="Pencarian" onClick="@command('buttonSearchEvent')"/>
-                        <separator/>
-                        <a sclass="btn btn-info" width="100%" label="Tambah Acara" onClick="@command('buttonNewEvent')"/>
-                    </div>
+                <div>
+                    <a sclass="btn btn-info" width="100%" label="Pencarian" onClick="@command('buttonSearchEvent')"/>
+                    <separator/>
+                    <a sclass="btn btn-info" width="100%" label="Tambah Acara" onClick="@command('buttonNewEvent')"/>
                 </div>
             </div>
             <div sclass="col-md-9 nopadding">
@@ -57,19 +54,19 @@
                         <template name="model">
                             <listitem value="${each}">
                                 <listcell>
-                                    <label sclass="labelstylegrid " width="100%" value="@bind(each.idEvent)" />
+                                    <label sclass="labelstylegrid" width="100%" value="@bind(each.idEvent)" />
                                 </listcell>
                                 <listcell>
-                                    <label  sclass="labelstylegrid " width="100%" value="@bind(each.namaEvent)"/>
+                                    <label  sclass="labelstylegrid" width="100%" value="@bind(each.namaEvent)"/>
                                 </listcell>
                                 <listcell>
-                                    <label sclass="labelstylegrid " width="100%" value="@bind(each.startDate)"/>
+                                    <label sclass="labelstylegrid" width="100%" value="@bind(each.startDate)"/>
                                 </listcell>
                                 <listcell>
-                                    <label sclass="labelstylegrid "  width="100%" value="@bind(each.endDate)"/>
+                                    <label sclass="labelstylegrid"  width="100%" value="@bind(each.endDate)"/>
                                 </listcell>
                                 <listcell>
-                                    <label sclass="labelstylegrid "  width="100%" value="@bind(each.status)"/>
+                                    <label sclass="labelstylegrid"  width="100%" value="@bind(each.status)"/>
                                 </listcell>
                                 <listcell>
                                     <a sclass="btn btn-primary" label="Detail" onClick="@command('detailEventAgit', object=each)"></a>

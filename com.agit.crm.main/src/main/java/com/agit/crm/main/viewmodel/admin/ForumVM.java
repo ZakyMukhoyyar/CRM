@@ -59,7 +59,7 @@ public class ForumVM {
     private Status status;
 
     private PageNavigation previous;
-    private int pageSize = 11;
+    private int pageSize = 10;
     private ListModelList<Status> statuses;
 
     /* attribut for upload file forum*/

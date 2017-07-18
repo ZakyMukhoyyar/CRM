@@ -27,7 +27,7 @@
                         <row>
                             <label value="*)" style="color:red"/>
                             <label value="Status" style="font-weight: bold"/>
-                            <combobox autodrop="true" readonly="true" width="60%" placeholder="- Pilihan Status -" model="@load(vm.listStatus)" selectedItem="@bind(fx.status)">
+                            <combobox autodrop="true" readonly="true" width="60%" placeholder="- Pilihan Status -" model="@load(vm.statuses)" selectedItem="@bind(fx.status)">
                                 <template name="model" var="items">
                                     <comboitem label="@load(items)" value="@load(items)"/>
                                 </template>
@@ -44,8 +44,8 @@
                 
                     <rows>
                         <row>
-                            <button sclass="btn btn-success" label="Kembali" width="40%" onClick = "@command('buttonKembaliMinat')"/>
-                            <button sclass="btn btn-success" label="Save" width="40%" onClick = "@command('buttonSaveMinat')"/>
+                            <a sclass="btn btn-info" label="Kembali" width="40%" onClick = "@command('buttonKembaliMinat')"/>
+                            <a sclass="btn btn-info" label="Simpan" width="40%" onClick = "@command('buttonSaveMinat')"/>
                         </row>
                     </rows>
                 </grid>

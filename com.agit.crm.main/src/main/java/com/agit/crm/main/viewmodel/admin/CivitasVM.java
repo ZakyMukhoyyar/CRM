@@ -61,7 +61,7 @@ public class CivitasVM {
 
     private PageNavigation previous;
     private boolean checked;
-    private int pageSize = 10;
+    private int pageSize = 15;
     private int activePage = 0;
     private int selectedIndex;
     private int totalSize = 0;
@@ -71,9 +71,9 @@ public class CivitasVM {
     private String filepathCivitas;
     private String pathLocationCivitas;
 
+    private String civitasID;
     private String namaCivitas;
     private String status;
-    private String civitasID;
 
     @Init
     public void init(

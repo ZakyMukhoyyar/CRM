@@ -2,7 +2,7 @@
     <window apply="org.zkoss.bind.BindComposer"
             viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.admin.JurusanVM')"
             form="@id('fx') @load(vm.jurusanDTO) @save(vm.jurusanDTO, before='buttonSaveDataJurusan')">
-        <groupbox closable="false" mold="3d" style="background:#f5f5f5" sclass="col-md-12 nopadding" >
+        <groupbox height="610px" closable="false" mold="3d" style="background:#f5f5f5" sclass="col-md-12 nopadding" >
             <caption label="Dashboard Jurusan" />
             <div sclass="col-md-3 nopadding">
                 
@@ -15,8 +15,9 @@
                     <textbox class="form-control" width="100%" value="@bind(vm.namaJurusan)" />
                 </div>                
                 <div>
-                    <button type="button" sclass="btn btn-success" width="100%" label="Pencarian" onClick="@command('buttonSearchJurusan')"/>
-                    <button type="button"  sclass="btn btn-success" width="100%" label="Tambah Minat" onClick="@command('buttonNewJurusan')"/>
+                    <a sclass="btn btn-info" width="100%" label="Pencarian" onClick="@command('buttonSearchJurusan')"/>
+                    <separator/>
+                    <a sclass="btn btn-info" width="100%" label="Tambah Minat" onClick="@command('buttonNewJurusan')"/>
                 </div>
                 <separator/>
                 <separator/>
@@ -27,11 +28,12 @@
                 </div>
                 <div class="form-group">
                     <label sclass="labelstyle" value="File Upload" />
-                    <textbox class="form-control" width="100%" value="@bind(vm.mediaNameJurusan)" />
+                    <textbox class="form-control" disabled="true" width="100%" value="@bind(vm.mediaNameJurusan)" />
                 </div>                
                 <div>
-                    <button type="button" sclass="btn btn-success" width="100%" label="Browse" upload="true" onUpload="@command('buttonUploadFile')"/>
-                    <button type="button" sclass="btn btn-success" width="100%" label="Upload"  onClick="@command('buttonSaveDataJurusan')"/>
+                    <button type="button" sclass="btn btn-info" width="100%" label="Browse" upload="true" onUpload="@command('buttonUploadFile')"/>
+                    <separator/>
+                    <a sclass="btn btn-info"  label="Upload" width="100%" onClick="@command('buttonSaveDataJurusan')"/>
                 </div>                
             </div>
             

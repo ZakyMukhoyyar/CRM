@@ -62,7 +62,6 @@ public class EventAgitVM {
     
     /* attribut for CRM */
     private PageNavigation previous;
-    private boolean checked;
     private int pageSize = 8;
 
     /* attribut for upload file Event */
@@ -362,14 +361,6 @@ public class EventAgitVM {
 
     public void setPrevious(PageNavigation previous) {
         this.previous = previous;
-    }
-
-    public boolean isChecked() {
-        return checked;
-    }
-
-    public void setChecked(boolean checked) {
-        this.checked = checked;
     }
 
     public int getPageSize() {
