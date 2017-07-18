@@ -13,7 +13,7 @@
             validationMessages="@id('vmsgs')">
         <tabbox width="700px">
             <tabs>
-                <tab label="Register"/>
+                <tab label="Daftar Akun"/>
             </tabs>
             <tabpanels width="700px">
                 <tabpanel>
@@ -55,7 +55,7 @@
                                 <signLabel value="Username "/>
                                 <div>
                                     <textbox id="userName" value="@bind(vm.userDTO.userName)" width="40%"/>
-                                    <button label="${labels.user.label.verify}" width="75px" onClick="@command('verifyUserName', obj=userName.getValue())"/>
+                                    <button label="Verifikasi" width="75px" onClick="@command('verifyUserName', obj=userName.getValue())"/>
                                     <label value="@load(vmsgs['userName'])" style="color:red"/>
                                 </div>
                             </row>
@@ -76,7 +76,7 @@
                                 <signLabel value="KTP"/>
                                 <div>
                                     <textbox value="@bind(vm.userDTO.userSpecificationDTO.ktp)" width="40%" />
-                                    <button label="${labels.user.label.verify}" width="75px" onClick="@command('verifyKtp', obj=ktp.getValue())"/>
+                                    <button label="Verifikasi" width="75px" onClick="@command('verifyKtp', obj=ktp.getValue())"/>
                                     <label value="@load(vmsgs['ktp'])" style="color:red"/>
                                 </div>
                             </row>
@@ -94,12 +94,13 @@
             </tabpanels>
         </tabbox>
         <groupbox width="700px">
-            <label value="*) Username dan Password akan di gunakan saat login" style="color:red"/>
+            <label value="*) Username dan Password akan digunakan saat login" style="color:red"/>
             <separator></separator>
             <label value="*) Password minimal 8 karakter, kombinasi huruf besar, kecil dan angka" style="color:red"/>
             <div align="center">
-                <separator />        
-                <button label="Register" width="10%" onClick="@command('buttonSubmit')"/>
+                <separator /> 
+                <button label="Kembali" width="10%" onClick="@command('buttonKembali')"/>
+                <button label="Daftar" width="10%" onClick="@command('buttonSubmit')"/>
                 <separator />     
             </div>
         </groupbox>

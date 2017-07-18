@@ -248,7 +248,6 @@
                                 <textbox class="form-control" width="100%" readonly="true" value="@bind(vm.mediaNameUploadCV)"/>
                                 <button sclass="btn btn-success" label="Upload" upload="true" onUpload="@command('uploadFileCV')" width="80%">
                                 </button>
-                                <a sclass="isi btn btn-success" label="Lihat CV"  onClick="@command('buttonKlikEvent', object=each)"></a>
                             </row>
                         </rows>
                     </grid>

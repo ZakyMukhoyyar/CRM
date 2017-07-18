@@ -7,6 +7,7 @@ import com.agit.crm.common.application.LowonganService;
 import com.agit.crm.common.application.MahasiswaService;
 import com.agit.crm.common.application.MinatService;
 import com.agit.crm.common.dto.crm.CivitasDTO;
+import com.agit.crm.common.dto.crm.EventAgitDTO;
 import com.agit.crm.common.dto.crm.JurusanDTO;
 import com.agit.crm.common.dto.crm.KetrampilanDTO;
 import com.agit.crm.common.dto.crm.LowonganDTO;
@@ -313,9 +314,23 @@ public class MahasiswaVM extends SelectorComposer<Window> {
         window.detach();
     }
 
+    @Command("buttonKlikPreviewCV")
+    @NotifyChange({"src", "mahasiswaDTOs", "mahasiswa"})
+    public void buttonKlikPreviewCV(@BindingParam("object") MahasiswaDTO obj, @ContextParam(ContextType.VIEW) Window window) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("mahasiswaDTO", obj);
+        CommonViewModel.navigateToWithoutDetach("/crm/admin/dataRegister/previewCV.zul", window, params);
+    }
+
+    @Command("buttonClosePreview")
+    @NotifyChange("mahasiswaDTO")
+    public void buttonClosePreview(@BindingParam("object") MahasiswaDTO obj, @ContextParam(ContextType.VIEW) Window window) {
+        window.detach();
+    }
+
     /* Function button save register mahasiswa */
     @Command("buttonSaveMahasiswa")
-    @NotifyChange({"mahasiswaDTO","pathLocationUploadCV"})
+    @NotifyChange({"mahasiswaDTO", "pathLocationUploadCV"})
     public void buttonSaveMahasiswa(@BindingParam("object") MahasiswaDTO obj, @ContextParam(ContextType.VIEW) Window window) {
         if (pathLocationUploadCV == null) {
             pathLocationUploadCV = mahasiswaDTO.getUploadCV();

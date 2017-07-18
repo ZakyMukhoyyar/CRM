@@ -25,6 +25,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
@@ -87,6 +88,7 @@ public class LowonganVM {
     private String namaLowonganApply;
     private String namaLengkap;
     private String namaApplyLowongan;
+    private String idRiwayatApplyMahasiswa;
 
     private PageNavigation previous;
     private boolean checked;
@@ -326,11 +328,13 @@ public class LowonganVM {
     @Command("buttonKonfirmasiApplyLowongan")
     @NotifyChange({"lowonganDTO", "lowonganDTOs"})
     public void buttonKonfirmasiApplyLowongan(@BindingParam("object") LowonganDTO obj, @ContextParam(ContextType.VIEW) Window window) {
-        if (namaLowonganApply != null) {
-            namaLowonganApply = lowonganDTO.getNamaLowongan();
-        }
+        Map<String, Object> params = new HashMap<>();
+        String message = "";
+
+        riwayatApplyMahasiswaDTOs = lowonganDTO.getListRiwayatApplyMahasiswaDTO();
         RiwayatApplyMahasiswaDTO r = new RiwayatApplyMahasiswaDTOBuilder()
-                .setIdRiwayatApplyMahasiswa(idLowongan)
+                .setIdRiwayatApplyMahasiswa(UUID.randomUUID().toString())
+                .setIdRiwayatLowongan(idLowongan)
                 .setNamaLowonganApply(lowonganDTO.getNamaLowongan())
                 .setNamaApplyLowongan(user.getUserSpecificationDTO().getFullName())
                 .setLowonganState(LowonganState.APPLY)
@@ -339,24 +343,13 @@ public class LowonganVM {
                 .createRiwayatApplyMahasiswaDTO();
         riwayatApplyMahasiswaDTOs.add(r);
 
-        Map<String, Object> params = new HashMap<>();
+        ListModelList<LowonganDTO> lowonganList = new ListModelList<>(lowonganService.findAll());
+        lowonganDTO.setLowonganState(LowonganState.APPLY);
+        lowonganDTO.setIdUser(user.getUserName());
+        lowonganDTO.setListRiwayatApplyMahasiswaDTO(riwayatApplyMahasiswaDTOs);
+        lowonganService.SaveOrUpdate(lowonganDTO);
+        message = "Konfirmasi Lowongan Berhasil Di Apply";
 
-        String message = "";
-        if (lowonganDTO.getIdLowongan() == null) {
-
-            ListModelList<LowonganDTO> lowonganList = new ListModelList<>(lowonganService.findAll());
-            lowonganDTO.setLowonganState(LowonganState.APPLY);
-            lowonganDTO.setIdUser(user.getUserName());
-            lowonganDTO.setListRiwayatApplyMahasiswaDTO(riwayatApplyMahasiswaDTOs);
-            lowonganService.SaveOrUpdate(lowonganDTO);
-            message = "Konfirmasi Lowongan Berhasil Di Apply";
-        } else {
-            lowonganDTO.setLowonganState(LowonganState.APPLY);
-            lowonganDTO.setIdUser(user.getUserName());
-            lowonganDTO.setListRiwayatApplyMahasiswaDTO(riwayatApplyMahasiswaDTOs);
-            lowonganService.SaveOrUpdate(lowonganDTO);
-            message = "Konfirmasi Lowongan Berhasil Di Apply";
-        }
         showInformationMessagebox(message);
         BindUtils.postGlobalCommand(null, null, "refreshLowongan", null);
         window.detach();
