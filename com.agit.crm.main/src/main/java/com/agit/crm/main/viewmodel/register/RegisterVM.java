@@ -1,5 +1,15 @@
 package com.agit.crm.main.viewmodel.register;
 
+import com.agit.crm.common.application.CivitasService;
+import com.agit.crm.common.application.DomisiliService;
+import com.agit.crm.common.application.JurusanService;
+import com.agit.crm.common.application.KetrampilanService;
+import com.agit.crm.common.application.MinatService;
+import com.agit.crm.common.dto.crm.CivitasDTO;
+import com.agit.crm.common.dto.crm.DomisiliDTO;
+import com.agit.crm.common.dto.crm.JurusanDTO;
+import com.agit.crm.common.dto.crm.KetrampilanDTO;
+import com.agit.crm.common.dto.crm.MinatDTO;
 import com.agit.crm.common.dto.usermanagement.AccessTimeDTO;
 import com.agit.crm.common.dto.usermanagement.AccessTimeDTOBuilder;
 import com.agit.crm.common.dto.usermanagement.RoleDTO;
@@ -11,10 +21,13 @@ import com.agit.crm.common.dto.usermanagement.UserSpecificationDTO;
 import com.agit.crm.common.dto.usermanagement.UserSpecificationDTOBuilder;
 import com.agit.crm.common.security.SecurityUtil;
 import com.agit.crm.shared.status.StatusCode;
+import com.agit.crm.shared.type.JenisKelaminType;
 import com.agit.crm.shared.type.JobDivision;
 import com.agit.crm.shared.type.JobLocation;
+import com.agit.crm.shared.type.PendidikanType;
 import com.agit.crm.shared.type.ReleaseType;
 import com.agit.crm.shared.type.StatusData;
+import com.agit.crm.shared.type.TingkatanType;
 import com.agit.crm.shared.zul.CommonViewModel;
 import com.agit.crm.shared.zul.PageNavigation;
 import com.agit.crm.user.management.application.RoleService;
@@ -25,12 +38,16 @@ import com.agit.crm.util.DateUtil;
 import com.agit.crm.util.SqlFilterUtil;
 import com.agit.crm.util.StringUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.zkoss.bind.BindContext;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.ContextParam;
@@ -39,7 +56,11 @@ import org.zkoss.bind.annotation.ExecutionArgParam;
 import org.zkoss.bind.annotation.GlobalCommand;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
+import org.zkoss.io.Files;
+import org.zkoss.util.media.Media;
 import org.zkoss.util.resource.Labels;
+import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.event.UploadEvent;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Messagebox;
@@ -57,12 +78,35 @@ public class RegisterVM {
     @WireVariable
     RoleService roleService;
 
+    @WireVariable
+    MinatService minatService;
+
+    @WireVariable
+    KetrampilanService ketrampilanService;
+
+    @WireVariable
+    JurusanService jurusanService;
+
+    @WireVariable
+    CivitasService civitasService;
+
+    @WireVariable
+    DomisiliService domisiliService;
+
+
     /* search option*/
     private String searchUserName;
     private String searchFullName;
     private String searchRoleID;
     private String roleName;
     private StatusData searchUserStatus;
+
+    /* Select ComboBox */
+    private String domisiliSelect;
+    private String minatSelect;
+    private String jurusanSelect;
+    private String ketrampilanSelect;
+    private String civitasSelect;
 
     private List<UserDTO> userDTOs;
     private UserDTO userDTO;
@@ -84,6 +128,33 @@ public class RegisterVM {
     private ListModelList<StatusData> listStatus = new ListModelList<>();
     private List<RoleDTO> roleDTOs = new ArrayList<RoleDTO>();
 
+    /* Object List */
+    private List<MinatDTO> minats = new ArrayList<MinatDTO>();
+    private List<KetrampilanDTO> ketrampilans = new ArrayList<KetrampilanDTO>();
+    private List<JurusanDTO> jurusans = new ArrayList<JurusanDTO>();
+    private List<CivitasDTO> civitass = new ArrayList<CivitasDTO>();
+    private List<DomisiliDTO> domisilis = new ArrayList<DomisiliDTO>();
+    private ListModelList<PendidikanType> pendidikanTypes;
+    private ListModelList<JenisKelaminType> jenisKelaminTypes;
+    private ListModelList<TingkatanType> tingkatanTypes1;
+    private ListModelList<TingkatanType> tingkatanTypes2;
+    private ListModelList<TingkatanType> tingkatanTypes3;
+    private ListModelList<TingkatanType> tingkatanTypes4;
+    private ListModelList<TingkatanType> tingkatanTypes5;
+
+    /* Bind List Value ComboBox */
+    private List<String> listMinat = new ArrayList<>();
+    private List<String> listKetrampilan = new ArrayList<>();
+    private List<String> listDomisili = new ArrayList<>();
+    private List<String> listCivitas = new ArrayList<>();
+    private List<String> listJurusan = new ArrayList<>();
+
+    /* attribut for upload file CV */
+    Media mediaUploadCV;
+    String mediaNameUploadCV;
+    private String filepathUploadCV;
+    private String pathLocationUploadCV;
+
     @Init
     public void init(@ContextParam(ContextType.COMPONENT) Window window,
             @ExecutionArgParam("user") UserDTO user,
@@ -94,6 +165,9 @@ public class RegisterVM {
         searchUserStatus = StatusData.ACTIVE;
 
         roleDTOs = roleService.findByParameter("Mahasiswa");
+
+        initData();
+        checkValidity(user, previous);
 
         if (window.getId().isEmpty()) {
             if (user == null) {
@@ -152,6 +226,40 @@ public class RegisterVM {
         }
     }
 
+    private void initData() {
+
+
+        /* Load Data */
+        minats = minatService.findAll();
+        for (MinatDTO m : minats) {
+            listMinat.add(m.getNamaMinat());
+        }
+        ketrampilans = ketrampilanService.findAll();
+        for (KetrampilanDTO k : ketrampilans) {
+            listKetrampilan.add(k.getNamaKetrampilan());
+        }
+        civitass = civitasService.findAll();
+        for (CivitasDTO c : civitass) {
+            listCivitas.add(c.getNamaCivitas());
+        }
+        jurusans = jurusanService.findAll();
+        for (JurusanDTO j : jurusans) {
+            listJurusan.add(j.getNamaJurusan());
+        }
+        domisilis = domisiliService.findAll();
+        for (DomisiliDTO d : domisilis) {
+            listDomisili.add(d.getNamaKabupaten());
+        }
+    }
+
+    private void checkValidity(UserDTO user, PageNavigation previous) {
+        if (user != null) {
+            this.userDTO = user;
+            mediaNameUploadCV = user.getUserSpecificationDTO().getUploadCV();
+            this.previous = previous;
+        }
+    }
+
     public AccessTimeDTO initAccessTime() {
         Date startTime = DateUtil.stringToDate("00:00", "HH:mm");
         Date endTime = DateUtil.stringToDate("23:59", "HH:mm");
@@ -192,7 +300,7 @@ public class RegisterVM {
                 CommonViewModel.showInformationMessagebox(Labels.getLabel("error.message.conflict.repository", new String[]{"ktp", ktp}));
             }
         }
-    }   
+    }
 
     @Command("onCheckPasswordExpired")
     @NotifyChange("checked")
@@ -333,6 +441,10 @@ public class RegisterVM {
         Map<String, Object> params = new HashMap<>();
         params.put("user", userDTO);
         params.put("propertyParam", propertyParam());
+        if (pathLocationUploadCV == null) {
+            pathLocationUploadCV = userDTO.getUserSpecificationDTO().getUploadCV();
+        }
+        userDTO.getUserSpecificationDTO().setUploadCV(pathLocationUploadCV);
         if (previous == null) {
             params.put("previous", PageNavigation.CREATE);
         } else if (previous.equals(PageNavigation.SEARCH) || previous.equals(PageNavigation.CONFIRM)) {
@@ -444,6 +556,46 @@ public class RegisterVM {
         } catch (Exception ex) {
             CommonViewModel.showErrorMessagebox(ex.getMessage());
         }
+    }
+    /* Function upload CV */
+
+    @Command("uploadFileCV")
+    @NotifyChange({"mediaNameUploadCV", "pathLocationUploadCV"})
+    public void uploadFileCV(@ContextParam(ContextType.BIND_CONTEXT) BindContext ctx) throws IOException {
+        UploadEvent upEvent = null;
+        Object objUploadEvent = ctx.getTriggerEvent();
+
+        if (objUploadEvent != null && (objUploadEvent instanceof UploadEvent)) {
+            upEvent = (UploadEvent) objUploadEvent;
+        }
+
+        if (upEvent != null) {
+            mediaUploadCV = upEvent.getMedia();
+            Calendar now = Calendar.getInstance();
+            int year = now.get(Calendar.YEAR);
+            int month = now.get(Calendar.MONTH);
+            int day = now.get(Calendar.DAY_OF_MONTH);
+            filepathUploadCV = Executions.getCurrent().getDesktop().getWebApp().getRealPath("/");
+            filepathUploadCV = filepathUploadCV + "\\" + "files" + "\\" + "crm-cv" + "\\" + year + "\\" + month + "\\" + day + "\\";
+
+            File baseDir = new File(filepathUploadCV);
+            if (!baseDir.exists()) {
+                baseDir.mkdirs();
+            }
+
+            Files.copy(new File(filepathUploadCV + mediaUploadCV.getName()), mediaUploadCV.getStreamData());
+            setMediaNameUploadCV(filepathUploadCV + mediaUploadCV.getName());
+            pathLocationUploadCV = "/" + "files" + "/" + "crm-cv" + "/" + year + "/" + month + "/" + day + "/" + mediaUploadCV.getName();
+        } else {
+            Calendar now = Calendar.getInstance();
+            int year = now.get(Calendar.YEAR);
+            int month = now.get(Calendar.MONTH);
+            int day = now.get(Calendar.DAY_OF_MONTH);
+            mediaNameUploadCV = "";
+            pathLocationUploadCV = "/" + "files" + "/" + "crm-cv" + "/" + year + "/" + month + "/" + day + "/" + mediaUploadCV.getName();
+            Messagebox.show("File : " + mediaUploadCV + " Bukan File PDF", "Error", Messagebox.OK, Messagebox.ERROR);
+        }
+
     }
 
     /*Listbox*/
@@ -691,6 +843,222 @@ public class RegisterVM {
 
     public void setRoleDTOs(List<RoleDTO> roleDTOs) {
         this.roleDTOs = roleDTOs;
+    }
+
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
+
+    public String getDomisiliSelect() {
+        return domisiliSelect;
+    }
+
+    public void setDomisiliSelect(String domisiliSelect) {
+        this.domisiliSelect = domisiliSelect;
+    }
+
+    public String getMinatSelect() {
+        return minatSelect;
+    }
+
+    public void setMinatSelect(String minatSelect) {
+        this.minatSelect = minatSelect;
+    }
+
+    public String getJurusanSelect() {
+        return jurusanSelect;
+    }
+
+    public void setJurusanSelect(String jurusanSelect) {
+        this.jurusanSelect = jurusanSelect;
+    }
+
+    public String getKetrampilanSelect() {
+        return ketrampilanSelect;
+    }
+
+    public void setKetrampilanSelect(String ketrampilanSelect) {
+        this.ketrampilanSelect = ketrampilanSelect;
+    }
+
+    public String getCivitasSelect() {
+        return civitasSelect;
+    }
+
+    public void setCivitasSelect(String civitasSelect) {
+        this.civitasSelect = civitasSelect;
+    }
+
+    public List<MinatDTO> getMinats() {
+        return minats;
+    }
+
+    public void setMinats(List<MinatDTO> minats) {
+        this.minats = minats;
+    }
+
+    public List<KetrampilanDTO> getKetrampilans() {
+        return ketrampilans;
+    }
+
+    public void setKetrampilans(List<KetrampilanDTO> ketrampilans) {
+        this.ketrampilans = ketrampilans;
+    }
+
+    public List<JurusanDTO> getJurusans() {
+        return jurusans;
+    }
+
+    public void setJurusans(List<JurusanDTO> jurusans) {
+        this.jurusans = jurusans;
+    }
+
+    public List<CivitasDTO> getCivitass() {
+        return civitass;
+    }
+
+    public void setCivitass(List<CivitasDTO> civitass) {
+        this.civitass = civitass;
+    }
+
+    public List<String> getListMinat() {
+        return listMinat;
+    }
+
+    public void setListMinat(List<String> listMinat) {
+        this.listMinat = listMinat;
+    }
+
+    public List<String> getListKetrampilan() {
+        return listKetrampilan;
+    }
+
+    public void setListKetrampilan(List<String> listKetrampilan) {
+        this.listKetrampilan = listKetrampilan;
+    }
+
+    public List<String> getListDomisili() {
+        return listDomisili;
+    }
+
+    public void setListDomisili(List<String> listDomisili) {
+        this.listDomisili = listDomisili;
+    }
+
+    public List<String> getListCivitas() {
+        return listCivitas;
+    }
+
+    public void setListCivitas(List<String> listCivitas) {
+        this.listCivitas = listCivitas;
+    }
+
+    public List<String> getListJurusan() {
+        return listJurusan;
+    }
+
+    public void setListJurusan(List<String> listJurusan) {
+        this.listJurusan = listJurusan;
+    }
+
+    public ListModelList<PendidikanType> getPendidikanTypes() {
+        return new ListModelList<>(PendidikanType.values());
+    }
+
+    public void setPendidikanTypes(ListModelList<PendidikanType> pendidikanTypes) {
+        this.pendidikanTypes = pendidikanTypes;
+    }
+
+    public ListModelList<JenisKelaminType> getJenisKelaminTypes() {
+        return new ListModelList<>(JenisKelaminType.values());
+    }
+
+    public void setJenisKelaminTypes(ListModelList<JenisKelaminType> jenisKelaminTypes) {
+        this.jenisKelaminTypes = jenisKelaminTypes;
+    }
+
+    public ListModelList<TingkatanType> getTingkatanTypes1() {
+        return new ListModelList<>(TingkatanType.values());
+    }
+
+    public void setTingkatanTypes1(ListModelList<TingkatanType> tingkatanTypes1) {
+        this.tingkatanTypes1 = tingkatanTypes1;
+    }
+
+    public ListModelList<TingkatanType> getTingkatanTypes2() {
+        return new ListModelList<>(TingkatanType.values());
+    }
+
+    public void setTingkatanTypes2(ListModelList<TingkatanType> tingkatanTypes2) {
+        this.tingkatanTypes2 = tingkatanTypes2;
+    }
+
+    public ListModelList<TingkatanType> getTingkatanTypes3() {
+        return new ListModelList<>(TingkatanType.values());
+    }
+
+    public void setTingkatanTypes3(ListModelList<TingkatanType> tingkatanTypes3) {
+        this.tingkatanTypes3 = tingkatanTypes3;
+    }
+
+    public ListModelList<TingkatanType> getTingkatanTypes4() {
+        return new ListModelList<>(TingkatanType.values());
+    }
+
+    public void setTingkatanTypes4(ListModelList<TingkatanType> tingkatanTypes4) {
+        this.tingkatanTypes4 = tingkatanTypes4;
+    }
+
+    public ListModelList<TingkatanType> getTingkatanTypes5() {
+        return new ListModelList<>(TingkatanType.values());
+    }
+
+    public void setTingkatanTypes5(ListModelList<TingkatanType> tingkatanTypes5) {
+        this.tingkatanTypes5 = tingkatanTypes5;
+    }
+
+    public String getFilepathUploadCV() {
+        return filepathUploadCV;
+    }
+
+    public void setFilepathUploadCV(String filepathUploadCV) {
+        this.filepathUploadCV = filepathUploadCV;
+    }
+
+    public String getPathLocationUploadCV() {
+        return pathLocationUploadCV;
+    }
+
+    public void setPathLocationUploadCV(String pathLocationUploadCV) {
+        this.pathLocationUploadCV = pathLocationUploadCV;
+    }
+
+    public Media getMediaUploadCV() {
+        return mediaUploadCV;
+    }
+
+    public void setMediaUploadCV(Media mediaUploadCV) {
+        this.mediaUploadCV = mediaUploadCV;
+    }
+
+    public String getMediaNameUploadCV() {
+        return mediaNameUploadCV;
+    }
+
+    public void setMediaNameUploadCV(String mediaNameUploadCV) {
+        this.mediaNameUploadCV = mediaNameUploadCV;
+    }
+
+    public List<DomisiliDTO> getDomisilis() {
+        return domisilis;
+    }
+
+    public void setDomisilis(List<DomisiliDTO> domisilis) {
+        this.domisilis = domisilis;
     }
 
 }

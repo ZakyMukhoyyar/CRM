@@ -65,7 +65,70 @@
                 <property column="remoteHost" name="remoteHost"/>
                 <property column="sessionID" name="sessionID"/>
             </component>
+            <property column="tanggalLahir" name="tanggalLahir" not-null="false"/>
+            <property column="domisili" name="domisili" not-null="false"/>
+            <property column="noHP" name="noHP"/>
+            <property column="noKTP" name="noKTP"/>
+            <property column="ipk" name="ipk"/>
+            <property column="jenisKelaminType" name="jenisKelaminType" not-null="false">
+                <type name="org.hibernate.type.EnumType">
+                    <param name="enumClass">com.agit.crm.shared.type.JenisKelaminType</param>
+                    <param name="type">12</param>
+                </type>
+            </property>        
+            <property column="pendidikanType" name="pendidikanType" not-null="false">
+                <type name="org.hibernate.type.EnumType">
+                    <param name="enumClass">com.agit.crm.shared.type.PendidikanType</param>
+                    <param name="type">12</param>
+                </type>
+            </property>
+            <property column="namaCivitas" name="namaCivitas" not-null="false"/>
+            <property column="minat" name="minat" not-null="false"/>
+            <property column="ketrampilan1" name="ketrampilan1"/>
+            <property column="ketrampilan2" name="ketrampilan2"/>        
+            <property column="ketrampilan3" name="ketrampilan3"/>
+            <property column="ketrampilan4" name="ketrampilan4"/>
+            <property column="ketrampilan5" name="ketrampilan5"/>
+            <property column="tingkatanType1" name="tingkatanType1" not-null="false">
+                <type name="org.hibernate.type.EnumType">
+                    <param name="enumClass">com.agit.crm.shared.type.TingkatanType</param>
+                    <param name="type">12</param>
+                </type>
+            </property>
+            <property column="tingkatanType2" name="tingkatanType2" not-null="false">
+                <type name="org.hibernate.type.EnumType">
+                    <param name="enumClass">com.agit.crm.shared.type.TingkatanType</param>
+                    <param name="type">12</param>
+                </type>
+            </property>
+            <property column="tingkatanType3" name="tingkatanType3" not-null="false">
+                <type name="org.hibernate.type.EnumType">
+                    <param name="enumClass">com.agit.crm.shared.type.TingkatanType</param>
+                    <param name="type">12</param>
+                </type>
+            </property>
+            <property column="tingkatanType4" name="tingkatanType4" not-null="false">
+                <type name="org.hibernate.type.EnumType">
+                    <param name="enumClass">com.agit.crm.shared.type.TingkatanType</param>
+                    <param name="type">12</param>
+                </type>
+            </property>
+            <property column="tingkatanType5" name="tingkatanType5" not-null="false">
+                <type name="org.hibernate.type.EnumType">
+                    <param name="enumClass">com.agit.crm.shared.type.TingkatanType</param>
+                    <param name="type">12</param>
+                </type>
+            </property>
+            <property column="uploadCV" name="uploadCV"/>
+            <!--        <list cascade="all" lazy="false" name="lowongans">
+                <key column="idMahasiswa" foreign-key="idMahasiswa"/>
+                <index column="lowongan_index"/>
+                <one-to-many class="com.agit.crm.domain.crm.Lowongan"/>
+            </list>-->
+            <property column="statusApprove" name="statusApprove" not-null="false"/>
+            <property column="jurusan" name="jurusan" not-null="false"/>
         </component>
+        
         <property column="creationalDate" name="creationalDate" not-null="true" update="true"/>
         <property column="creationalBy" name="creationalBy" unique="false" update="true"/>
     </class>
