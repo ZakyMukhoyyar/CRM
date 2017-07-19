@@ -70,4 +70,10 @@
         <property name="riwayatApplyMahasiswaRepository" ref="riwayatApplyMahasiswaRepository"/>
         <property name="riwayatApplyMahasiswaDTOAssembler" ref="riwayatApplyMahasiswaDTOAssembler"/>
     </bean>
+    
+    <bean id="domisiliDTOAssembler" class="com.agit.crm.interfaces.web.facade.dto.assembler.crm.DomisiliDTOAssembler"></bean>
+    <bean id="domisiliService" class="com.agit.crm.application.impl.DomisiliServiceImpl">
+        <property name="domisiliRepository" ref="domisiliRepository"/>
+        <property name="domisiliDTOAssembler" ref="domisiliDTOAssembler"/>
+    </bean>
 </beans>

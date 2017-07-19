@@ -1,0 +1,74 @@
+    <zk xmlns="http://www.zkoss.org/2005/zul">
+    <window apply="org.zkoss.bind.BindComposer"
+            viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.admin.DomisiliVM')"
+            form="@id('fx') @load(vm.domisiliDTO) @save(vm.domisiliDTO, before='buttonSaveDataDomisili')">
+        <groupbox height="610px" closable="false" mold="3d" style="background:#f5f5f5" sclass="col-md-12 nopadding" >
+            <caption label="Dashboard Domisili" />
+            <div sclass="col-md-3 nopadding">
+                
+                <div class="form-group" style="font-style:bold;">
+                    <label sclass="labelstyle" value="Filter Pencarian :" />
+                    <separator bar="true"/>
+                </div>
+                <div class="form-group">
+                    <label sclass="labelstyle" value="ID Domisili" />
+                    <textbox class="form-control" width="100%" value="@bind(vm.idDomisili)"/>
+                </div>  
+                <div class="form-group">
+                    <label sclass="labelstyle" value="Nama Kabupaten" />
+                    <textbox class="form-control" width="100%" value="@bind(vm.namaKabupaten)"/>
+                </div>               
+                <div>
+                    <a sclass="btn btn-success" width="100%" label="Pencarian" onClick="@command('buttonSearchDomisili')"/>
+                    <separator/>
+                    <a sclass="btn btn-success" width="100%" label="Tambah Domisili" onClick="@command('buttonTambahDomisili')"/>
+                </div>
+                <separator/>
+                <separator/>
+                <separator/>
+                <div class="form-group" style="font-style:bold;">
+                    <separator bar="true"/>
+                </div>
+                <div class="form-group">
+                    <label sclass="labelstyle" value="File Upload" />
+                    <textbox class="form-control" disabled="true" width="100%" value="@bind(vm.mediaNameUploadDomisili)"/>
+                </div>                
+                <div>
+                    <button type="button" sclass="btn btn-success" width="100%" label="Browse" upload="true" onUpload="@command('buttonUploadFile')"/>
+                    <separator/>
+                    <a sclass="btn btn-success"  label="Upload" width="100%" onClick="@command('buttonSaveDataDomisili')"/>
+                </div>                
+            </div>
+            
+            
+            <div sclass="col-md-9 nopadding">
+                <groupbox closable="false" sclass="col-md-12">
+                    <listbox rows="@load(vm.pageSize)" pageSize="@load(vm.pageSize)" model="@bind(vm.domisiliDTOs)" mold="paging" emptyMessage="${labels.common.noDataFound}">
+                        <listhead>
+                            <listheader label="ID Domisili" width="7%" align="center"/>
+                            <listheader label="Provinsi" width="15%" align="center"/>
+                            <listheader label="Kabupaten" width="15%" align="center"/>
+                            <listheader label="Kota" width="15%" align="center"/>            
+                        </listhead>
+                        <template name="model">
+                            <listitem value="${each}">
+                                <listcell >
+                                    <label width="100%" value="@bind(each.idDomisili)"/>
+                                </listcell>
+                                <listcell >
+                                    <label width="100%" value="@bind(each.namaProvinsi)"/>
+                                </listcell>
+                                <listcell >
+                                    <label width="100%" value="@bind(each.namaKabupaten)"/>
+                                </listcell>
+                                <listcell >
+                                    <label width="100%" value="@bind(each.namaKota)"/>
+                                </listcell>
+                            </listitem>
+                        </template>
+                    </listbox>
+                </groupbox>
+            </div>
+        </groupbox>
+    </window>
+</zk>

@@ -33,7 +33,7 @@
                                     <!--                            <label value="Logged" style="font-weight:bold"/>-->
                                     <label value="@load(vm.concat(vm.user.userSpecificationDTO.fullName, vm.concat(' - ',vm.user.roleDTO.roleName)))" style="font-weight:bold" />
                                     <label value="|"/>
-                                    <a href="/processLogout" style="color:red" onClick="@command('buttonLogout')" >
+                                    <a href="/processLogout" style="color:white" onClick="@command('buttonLogout')" >
                                         <label sclass="fa fa-power-off" value="Logout" style="font-weight:bold"/>
                                     </a>
                                     <!--<label value="Version : ${labels.buildNumber}"/>-->

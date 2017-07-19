@@ -1,0 +1,52 @@
+<?component name="signLabel" class="com.agit.crm.shared.zul.SignLabel" ?>
+<zk xmlns="http://www.zkoss.org/2005/zul">
+    <window apply="org.zkoss.bind.BindComposer"
+            viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.admin.DomisiliVM')"
+            form="@id('fx') @load(vm.domisiliDTO) @save(vm.domisiliDTO, before='buttonSaveDataDomisili')">
+        <separator spacing="5px"/>
+        <groupbox width="500px" closable="true">
+            <caption sclass="isi" label="Form Tambah Domisili" style="font-size:16pt; font-weight: bold"/>
+            <groupbox>
+                <grid style="border:0">
+                    <columns>
+                        <column width="30%"></column>
+                        <column width="60%"></column>
+                        <column></column>
+                    </columns>
+                    <rows>
+                        <row>                            
+                            <signLabel value="ID Domisili" style="font-weight: bold"/>
+                            <textbox sclass="isi" width="20%" disabled="true" value="@bind(fx.idDomisili)" />
+                        </row>
+                        
+                        <row>                            
+                            <signLabel value="Provinsi" style="font-weight: bold"/>
+                            <textbox sclass="isi" width="100%" rows="2" value="@bind(fx.namaProvinsi)" />
+                        </row>
+                        <row>                            
+                            <signLabel value="Kabupaten" style="font-weight: bold"/>
+                            <textbox sclass="isi" width="100%" rows="2" value="@bind(fx.namaKabupaten)" />
+                        </row>
+                        <row>                            
+                            <signLabel value="Kota" style="font-weight: bold"/>
+                            <textbox sclass="isi" rows="2" value="@bind(fx.namaKota)" width="100%" disabled="false" constraint="no empty : Nama Domisili Tidak Boleh Kosong"/>
+                        </row>
+                    </rows>
+                </grid>
+                <separator/>
+                <grid style="border:0">                
+                    <columns>
+                        <column align="right" width="50%"/>
+                        <column align="left" width="50%"/>
+                    </columns>                
+                    <rows>
+                        <row>
+                            <a sclass="btn btn-info" label="Kembali" width="40%" onClick = "@command('buttonKembaliDomisili')"/>
+                            <a sclass="btn btn-info" label="Simpan" width="40%" onClick = "@command('buttonSaveDomisili')"/>
+                        </row>
+                    </rows>
+                </grid>
+            </groupbox>
+        </groupbox>
+    </window>
+</zk>
