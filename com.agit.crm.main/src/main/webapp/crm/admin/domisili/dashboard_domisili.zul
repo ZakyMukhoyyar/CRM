@@ -1,7 +1,7 @@
     <zk xmlns="http://www.zkoss.org/2005/zul">
     <window apply="org.zkoss.bind.BindComposer"
             viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.admin.DomisiliVM')"
-            form="@id('fx') @load(vm.domisiliDTO) @save(vm.domisiliDTO, before='buttonSaveDataDomisili')">
+            form="@id('fx') @load(vm.domisiliDTO) @save(vm.domisiliDTO, before='buttonSaveDomisili')">
         <groupbox height="610px" closable="false" mold="3d" style="background:#f5f5f5" sclass="col-md-12 nopadding" >
             <caption label="Dashboard Domisili" />
             <div sclass="col-md-3 nopadding">

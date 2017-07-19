@@ -64,7 +64,7 @@ public class DomisiliVM {
 
     /* attribut for CRM */
     private PageNavigation previous;
-    private int pageSize = 10;
+    private int pageSize = 11;
 
     /* attribut for upload file Event */
     Media mediaUploadDomisili;
@@ -171,7 +171,7 @@ public class DomisiliVM {
 
     @Command("buttonSaveDataDomisili")
     @NotifyChange({"domisiliDTOs", "domisiliDTO"})
-    public void buttonSaveDomisili(@BindingParam("object") DomisiliDTO obj, @ContextParam(ContextType.VIEW) Window window) throws IOException, FileNotFoundException, IllegalAccessException, InstantiationException, IllegalArgumentException,
+    public void buttonSaveDataDomisili(@BindingParam("object") DomisiliDTO obj, @ContextParam(ContextType.VIEW) Window window) throws IOException, FileNotFoundException, IllegalAccessException, InstantiationException, IllegalArgumentException,
             InvocationTargetException, IntrospectionException {
         if (mediaNameUploadDomisili == null) {
             Messagebox.show("Silakan Pilih File yang akan diupload!", "Peringatan", Messagebox.OK, Messagebox.EXCLAMATION);
@@ -200,6 +200,15 @@ public class DomisiliVM {
         }
         showInformationMessagebox("Data Domisili Berhasil Disimpan");
         BindUtils.postGlobalCommand(null, null, "refreshDomisili", null);
+    }
+
+    @Command("buttonSaveDomisili")
+    @NotifyChange("domisiliDTO")
+    public void buttonSaveDomisili(@BindingParam("object") DomisiliDTO obj, @ContextParam(ContextType.VIEW) Window window) {
+        domisiliService.SaveOrUpdate(domisiliDTO);
+        showInformationMessagebox("Data Domisili Berhasil Disimpan");
+        BindUtils.postGlobalCommand(null, null, "refreshDomisili", null);
+        window.detach();
     }
 
     @GlobalCommand
