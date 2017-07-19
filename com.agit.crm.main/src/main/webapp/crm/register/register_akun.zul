@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?taglib uri="/WEB-INF/security.tld" prefix="sec"?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<?component name="signLabel" class="com.agit.crm.shared.zul.SignLabel" ?>
+<?link rel="icon" type="image/png" href="/images/logoagit-new.png"?>
+<zk xmlns="http://www.zkoss.org/2005/zul">
+    <window border="0"
+            apply="org.zkoss.bind.BindComposer"
+            viewModel="@id('fx') @init('com.agit.crm.main.viewmodel.register.RegisterVM')"
+            form="@id('vm') @load(fx) @save(fx, before='buttonSubmit')
+            roleID=fx.userDTO.roleDTO.roleID, accessTime=fx.userDTO.userSpecificationDTO.accessTimeDTO)"
+            validationMessages="@id('vmsgs')">
+        <tabbox width="700px">
+            <tabs>
+                <tab label="Daftar Akun"/>
+            </tabs>
+            <tabpanels width="700px">
+                <tabpanel>
+                    <grid>
+                        <columns>
+                            <column width="20%" />
+                            <column width="60%" />
+                        </columns>
+                        <rows>
+                            <row>
+                                <signLabel value="Nama Lengkap "/>
+                                <div>
+                                    <textbox value="@bind(vm.userDTO.userSpecificationDTO.fullName)" width="40%"/>
+                                    <label value="@load(vmsgs['fullName'])" style="color:red"/>
+                                </div>
+                            </row>
+                            <row>
+                                <signLabel value="Assign Role "/>
+                                <!--                                <div>
+                                    <combobox autodrop="true" readonly="true" width="25%" model="@load(vm.roleDTOs)" selectedItem="@bind(fx.userDTO.roleDTO.roleName)" placeholder="- Silahkan Pilih -">
+                                        <template name="model" var="items">
+                                            <comboitem label="@load(items.getRoleName())" value="@load(items.getRoleName())"/>
+                                        </template>
+                                    </combobox>
+                                </div>-->
+                                <div>
+                                    <listbox model="@load(vm.roleDTOs)"
+                                             mold="select"
+                                             width="40%"
+                                             onSelect="@command('selectRole', obj=self.getSelectedItem().getValue())">
+                                        <template name="model">
+                                            <listitem selected="@load(fx.userDTO.roleDTO.roleID eq each.roleID)" label="@load(each.roleName)" disabled="@load(empty each.roleID)"/>
+                                        </template>
+                                    </listbox>
+                                    <label value="@load(vmsgs['roleDTO'])" style="color:red"/>
+                                </div>
+                            </row>
+                            <row>
+                                <signLabel value="Username "/>
+                                <div>
+                                    <textbox id="userName" value="@bind(vm.userDTO.userName)" width="40%"/>
+                                    <button label="Verifikasi" width="75px" onClick="@command('verifyUserName', obj=userName.getValue())"/>
+                                    <label value="@load(vmsgs['userName'])" style="color:red"/>
+                                </div>
+                            </row>
+                            
+                            <row>
+                                <signLabel value="Password" width="40%" />
+                                <textbox type="password" value="xxxxxxxxxxx" width="40%" disabled="true"/>
+                            </row>
+                            
+                            <row>
+                                <signLabel value="Email"/>
+                                <div>
+                                    <textbox value="@bind(vm.userDTO.userSpecificationDTO.email)" width="40%" />
+                                    <label value="@load(vmsgs['email'])" style="color:red"/>
+                                </div>
+                            </row>
+                            <row>
+                                <signLabel value="KTP"/>
+                                <div>
+                                    <textbox value="@bind(vm.userDTO.userSpecificationDTO.ktp)" width="40%" />
+                                    <button label="Verifikasi" width="75px" onClick="@command('verifyKtp', obj=ktp.getValue())"/>
+                                    <label value="@load(vmsgs['ktp'])" style="color:red"/>
+                                </div>
+                            </row>
+                            <row>
+                                <signLabel value="No HP"/>
+                                <div>
+                                    <textbox value="@bind(vm.userDTO.userSpecificationDTO.mobilePhone)" width="40%" />
+                                    <label value="@load(vmsgs['mobilePhone'])" style="color:red"/>
+                                </div>
+                            </row>
+                        </rows>
+                    </grid>
+                </tabpanel>
+
+            </tabpanels>
+        </tabbox>
+        <groupbox width="700px">
+            <label value="*) Username dan Password akan digunakan saat login" style="color:red"/>
+            <separator></separator>
+            <label value="*) Password minimal 8 karakter, kombinasi huruf besar, kecil dan angka" style="color:red"/>
+            <div align="center">
+                <separator /> 
+                <button label="Kembali" width="10%" onClick="@command('buttonKembali')"/>
+                <button label="Daftar" width="10%" onClick="@command('buttonSubmit')"/>
+                <separator />     
+            </div>
+        </groupbox>
+    </window>
+</zk>
