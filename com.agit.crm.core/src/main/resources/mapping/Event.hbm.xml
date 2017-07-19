@@ -8,7 +8,7 @@
         </id>
         <property column="idEvent" name="idEvent" not-null="false"/>
         <property column="namaEvent" name="namaEvent" not-null="false"/>
-        <property column="deskripsiEvent" name="deskripsiEvent" not-null="false"/>
+        <property column="deskripsiEvent" name="deskripsiEvent" not-null="false" length = "3000"/>
         <property column="startDate" name="startDate" not-null="false"/>
         <property column="endDate" name="endDate" not-null="false"/>
         <property column="attachment" name="attachment" not-null="false"/>
