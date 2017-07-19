@@ -2,7 +2,7 @@
 <zk xmlns="http://www.zkoss.org/2005/zul">
     <window apply="org.zkoss.bind.BindComposer"
             viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.admin.DomisiliVM')"
-            form="@id('fx') @load(vm.domisiliDTO) @save(vm.domisiliDTO, before='buttonSaveDataDomisili')">
+            form="@id('fx') @load(vm.domisiliDTO) @save(vm.domisiliDTO, before='buttonSaveDomisili')">
         <separator spacing="5px"/>
         <groupbox width="500px" closable="true">
             <caption sclass="isi" label="Form Tambah Domisili" style="font-size:16pt; font-weight: bold"/>
