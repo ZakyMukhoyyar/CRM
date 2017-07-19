@@ -76,4 +76,11 @@
         <property name="domisiliRepository" ref="domisiliRepository"/>
         <property name="domisiliDTOAssembler" ref="domisiliDTOAssembler"/>
     </bean>
+    
+    <bean id="dataToHrdDTOAssembler" class="com.agit.crm.interfaces.web.facade.dto.assembler.crm.DataToHrdDTOAssembler"></bean>
+    <bean id="dataToHrdService" class="com.agit.crm.application.impl.DataToHrdServiceImpl">
+        <property name="dataToHrdRepository" ref="dataToHrdRepository"/>
+        <property name="dataToHrdDTOAssembler" ref="dataToHrdDTOAssembler"/>
+    </bean>
+    
 </beans>

@@ -49,5 +49,10 @@
     
     <bean id="domisiliRepository" class="com.agit.crm.domain.infrastructure.persistance.hibernate.DomisiliHibernateRepository">
         <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>    
+    
+    <bean id="dataToHrdRepository" class="com.agit.crm.domain.infrastructure.persistance.hibernate.DataToHrdHibernateRepository">
+        <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
+
 </beans>
