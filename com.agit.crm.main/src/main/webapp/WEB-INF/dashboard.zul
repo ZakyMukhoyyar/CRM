@@ -39,11 +39,10 @@
     <div sclass="col-md-9 nopadding" width="100%" >
         <groupbox closable="false" sclass="col-md-12" width="100%">
             <caption label="Jadwal Event" style="font-size:12pt; font-weight: bold"/>   
-            <paging forward="onPaging" />
             <listbox width="100%" rows="1" mold="paging" pageSize="@load(vm.pageSize)" emptyMessage="${labels.common.noDataFound}"  model="@bind(vm.eventAgitDTOs)">
                 <listhead>
-                    <listheader style="font-size:9pt; font-weight: bold" sclass="isi" label="Nama Event" width="90%" align="center"/>
-                    <listheader style="font-size:9pt; font-weight: bold" sclass="isi" label="Aksi" width="10%" align="center"/>
+                    <listheader style="font-size:9pt; font-weight: bold" sclass="isi" label="Nama Event" width="80%" align="center"/>
+                    <listheader style="font-size:9pt; font-weight: bold" sclass="isi" label="Aksi" width="20%" align="center"/>
                 </listhead>
                 <template name="model">
                     <listitem value="${each}">
@@ -60,6 +59,7 @@
                         </listcell>
                         <listcell>
                             <a sclass="isi btn btn-primary" label="Lihat"  onClick="@command('buttonKlikEvent', object=each)"></a>
+                            <a sclass="isi btn btn-primary" label="Daftar"></a>
                         </listcell>
                     </listitem>
                 </template>

@@ -19,9 +19,9 @@
                     <textbox class="form-control" width="100%" value="@bind(vm.namaKabupaten)"/>
                 </div>               
                 <div>
-                    <a sclass="btn btn-success" width="100%" label="Pencarian" onClick="@command('buttonSearchDomisili')"/>
+                    <a sclass="btn btn-info" width="100%" label="Pencarian" onClick="@command('buttonSearchDomisili')"/>
                     <separator/>
-                    <a sclass="btn btn-success" width="100%" label="Tambah Domisili" onClick="@command('buttonTambahDomisili')"/>
+                    <a sclass="btn btn-info" width="100%" label="Tambah Domisili" onClick="@command('buttonTambahDomisili')"/>
                 </div>
                 <separator/>
                 <separator/>
@@ -34,9 +34,9 @@
                     <textbox class="form-control" disabled="true" width="100%" value="@bind(vm.mediaNameUploadDomisili)"/>
                 </div>                
                 <div>
-                    <button type="button" sclass="btn btn-success" width="100%" label="Browse" upload="true" onUpload="@command('buttonUploadFile')"/>
+                    <button type="button" sclass="btn btn-info" width="100%" label="Browse" upload="true" onUpload="@command('buttonUploadFile')"/>
                     <separator/>
-                    <a sclass="btn btn-success"  label="Upload" width="100%" onClick="@command('buttonSaveDataDomisili')"/>
+                    <a sclass="btn btn-info"  label="Upload" width="100%" onClick="@command('buttonSaveDataDomisili')"/>
                 </div>                
             </div>
             

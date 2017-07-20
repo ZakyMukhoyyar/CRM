@@ -23,9 +23,9 @@
         <separator/>
         <groupbox contentStyle="border:0; padding-left:20%; ">
             <hbox align="center">
-                <a sclass="btn btn-success" label="Kembali" width="100px" onClick="@command('buttonKembaliLowongan')"/>
+                <a sclass="btn btn-info" label="Kembali" width="100px" onClick="@command('buttonKembaliLowongan')"/>
                 <space width="1%"/>
-                <a sclass="btn btn-success" label="Simpan" width="100px" onClick="@command('buttonKonfirmasiApplyLowongan', object=vm.lowonganDTO)"/>
+                <a sclass="btn btn-info" label="Simpan" width="100px" onClick="@command('buttonKonfirmasiApplyLowongan', object=vm.lowonganDTO)"/>
             </hbox>
         </groupbox>
     </groupbox>

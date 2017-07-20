@@ -28,7 +28,7 @@
             <rows>
                 <row>
                     <space width="5%"/>
-                    <a sclass="btn isi btn-success" label="Close" width="100px" onClick="@command('buttonClosePreview')"/>
+                    <a sclass="btn isi btn-info" label="Close" width="100px" onClick="@command('buttonClosePreview')"/>
                 </row>
             </rows>
         </grid>

@@ -3,86 +3,72 @@
     <window apply="org.zkoss.bind.BindComposer"
             viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.mahasiswa.MahasiswaVM')"
             form="@id('fx') @load(vm.mahasiswaDTO) @save(vm.mahasiswaDTO, before='buttonSaveMahasiswa')">
-        <groupbox closable="false" mold="3d">
+        <groupbox height="460px" closable="false" mold="3d" style="background:#f5f5f5" sclass="col-md-12 nopadding" >
             <caption label="Dashboard Data Register Mahasiswa" />
-            <groupbox closable="false">
-                <caption label="Parameter Pencarian" />
-                <grid style="border:0">
-                    <columns>
-                        <column width="20%" />
-                        <column width="30%" />
-                        <column width="20%" />
-                        <column width="30%" />
-                    </columns>
-                    <rows>
-                        <row>
-                            <label value="Nama Lengkap" />
-                            <textbox width="60%" value="@bind(vm.namaLengkap)"/>
-                            <label value="KTP" />
-                            <textbox width="60%" value="@bind(vm.noKTP)"/>                        
-                        </row>
-                        <row>
-                            <label value="Domisili" />
-                            <textbox width="60%"  value="@bind(vm.domisili)"/>
-                            <label value="Minat Pekerjaan" />
-                            <combobox width="60%" placeholder="- Silahkan Pilih -" model="@load(vm.listNamaMinat)" selectedItem="@bind(vm.minatSelect)">
-                                <template name="model" var="items">
-                                    <comboitem label="@load(items)" value="@load(items)"/>
-                                </template>
-                            </combobox>
-                        </row>
-                        <row>
-                            <cell></cell>
-                            <cell></cell>
-                            <cell>
-                                <button width="80%"  label="Pencarian" mold="trendy" onClick="@command('searchRegMahasiswa')"/>
-                            </cell>
-                            <cell colspan="2"></cell> 
-                        </row>
-                    </rows>
-                </grid>
-                <separator></separator>
-            </groupbox>
-            <groupbox closable="false">
-                <paging forward="onPaging" />
-                <listbox mold="paging" emptyMessage="${labels.common.noDataFound}"  model="@bind(vm.mahasiswaDTOs)">
-                    <listhead>
-                        <listheader label="ID" width="5%" align="center" sortDirection="ascending" sort="auto(idMahasiswa)"/>
-                        <listheader label="Nama Lengkap" width="20%" align="center"/>
-                        <listheader label="Domisili" width="14%" align="center"/>
-                        <listheader label="No KTP" width="14%" align="center"/>
-                        <listheader label="IPK" width="5%" align="center"/>
-                        <listheader label="Minat" width="14%" align="center"/>
-                        <listheader label="Aksi" width="19%" align="center"/>
-                    </listhead>
-                    <template name="model">
-                        <listitem value="${each}">
-                            <listcell>
-                                <label width="100%" value="@bind(each.idMahasiswa)"/>
-                            </listcell>
-                            <listcell>
-                                <label width="100%" value="@bind(each.namaLengkap)"/>
-                            </listcell>
-                            <listcell>
-                                <label width="100%" value="@bind(each.domisili)"/>
-                            </listcell>
-                            <listcell>
-                                <label width="100%" value="@bind(each.noKTP)"/>
-                            </listcell>
-                            <listcell>
-                                <label width="100%" value="@bind(each.ipk)"/>
-                            </listcell>
-                            <listcell>
-                                <label width="100%" value="@bind(each.minat)"/>
-                            </listcell>
-                            <listcell>
-                                <a sclass="isi btn btn-success" label="Detail" onClick="@command('detailRegMahasiswa', object=each)"></a>
-                                <a sclass="isi btn btn-success" label="Lihat CV"  onClick="@command('buttonKlikPreviewCV', object=each)"></a>
-                            </listcell>
-                        </listitem>
-                    </template>
-                </listbox>
-            </groupbox>
+            
+            <div sclass="col-md-3 nopadding">
+                <div class="form-group" style="font-style:bold;">
+                    <label sclass="isi" value="Nama Lengkap" />
+                    <textbox class="form-control" width="100%" value="@bind(vm.namaLengkap)"/>
+                </div>
+                <div class="form-group" style="font-style:bold;">
+                    <label sclass="isi" value="KTP" />
+                    <textbox class="form-control" width="100%" value="@bind(vm.noKTP)"/>
+                </div>
+                <div class="form-group" style="font-style:bold;">
+                    <label sclass="isi" value="Domisili" />
+                    <textbox class="form-control" width="100%" value="@bind(vm.domisili)"/>
+                </div>
+                <div class="form-group" style="font-style:bold;">
+                    <label sclass="isi" value="Minat Pekerjaan" />
+                    <combobox width="100%" placeholder="- Silahkan Pilih -" model="@load(vm.listNamaMinat)" selectedItem="@bind(vm.minatSelect)">
+                        <template name="model" var="items">
+                            <comboitem label="@load(items)" value="@load(items)"/>
+                        </template>
+                    </combobox>
+                </div>
+                <div>
+                    <a sclass="btn btn-info" width="100%"  label="Pencarian" onClick="@command('searchRegMahasiswa')"/>
+                </div>   
+            </div>
+            <div sclass="col-md-9 nopadding">
+                <groupbox closable="false">
+                    <paging forward="onPaging" />
+                    <listbox rows="6" mold="paging" emptyMessage="${labels.common.noDataFound}"  model="@bind(vm.mahasiswaDTOs)">
+                        <listhead>
+                            <listheader label="ID" width="7%" align="center" sortDirection="ascending" sort="auto(idMahasiswa)"/>
+                            <listheader label="Nama Lengkap" width="20%" align="center"/>
+                            <listheader label="Domisili" width="14%" align="center"/>
+                            <listheader label="IPK" width="5%" align="center"/>
+                            <listheader label="Minat" width="14%" align="center"/>
+                            <listheader label="Aksi" width="22%" align="center"/>
+                        </listhead>
+                        <template name="model">
+                            <listitem value="${each}">
+                                <listcell>
+                                    <label width="100%" value="@bind(each.idMahasiswa)"/>
+                                </listcell>
+                                <listcell>
+                                    <label width="100%" value="@bind(each.namaLengkap)"/>
+                                </listcell>
+                                <listcell>
+                                    <label width="100%" value="@bind(each.domisili)"/>
+                                </listcell>
+                                <listcell>
+                                    <label width="100%" value="@bind(each.ipk)"/>
+                                </listcell>
+                                <listcell>
+                                    <label width="100%" value="@bind(each.minat)"/>
+                                </listcell>
+                                <listcell>
+                                    <a sclass="isi btn btn-primary" label="Detail" onClick="@command('detailRegMahasiswa', object=each)"></a>
+                                    <a sclass="isi btn btn-primary" label="Lihat CV"  onClick="@command('buttonKlikPreviewCV', object=each)"></a>
+                                </listcell>
+                            </listitem>
+                        </template>
+                    </listbox>
+                </groupbox>
+            </div>
         </groupbox>
     </window>
 </zk>

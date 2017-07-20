@@ -4,7 +4,7 @@
             viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.admin.EventAgitVM')"
             form="@id('fx') @load(vm.eventAgitDTO) @save(vm.eventAgitDTO, before='buttonSaveEventAgit')">
         <separator spacing="5px"/>
-        <groupbox width="500px" closable="true">
+        <groupbox width="700px" closable="true">
             <caption sclass="isi" label="Form Tambah Acara" style="font-size:16pt; font-weight: bold"/>
             <groupbox>
                 <grid style="border:0">
@@ -28,11 +28,11 @@
                         </row>
                         <row>
                             <signLabel sclass="isi" value="Tanggal Mulai"/>
-                            <datebox sclass="isi" format="dd/MM/yyyy" width="60%" readonly="true" value="@bind(fx.startDate)" constraint="no empty : Tanggal Mulai Tidak Boleh Kosong"/>
+                            <datebox sclass="isi" format="hh:mm:ss a dd/MM/yyyy" width="60%" readonly="true" value="@bind(fx.startDate)" constraint="no empty : Tanggal Mulai Tidak Boleh Kosong"/>
                         </row> 
                         <row>
                             <signLabel sclass="isi" value="Tanggal Berakhir"/>
-                            <datebox sclass="isi" format="dd/MM/yyyy" width="60%" readonly="true" value="@bind(fx.endDate)" constraint="no empty : Tanggal Berakhir Tidak Boleh Kosong"/>
+                            <datebox sclass="isi" format="hh:mm:ss a dd/MM/yyyy" width="60%" readonly="true" value="@bind(fx.endDate)" constraint="no empty : Tanggal Berakhir Tidak Boleh Kosong"/>
                         </row> 
                         <row>
                             <signLabel sclass="isi" value="Status"/>

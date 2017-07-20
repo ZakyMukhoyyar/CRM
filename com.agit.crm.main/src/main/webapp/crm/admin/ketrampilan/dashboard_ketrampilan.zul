@@ -2,7 +2,7 @@
     <window apply="org.zkoss.bind.BindComposer"
             viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.admin.KetrampilanVM')"
             form="@id('fx') @load(vm.ketrampilanDTO) @save(vm.ketrampilanDTO, before='buttonSaveKetrampilan')">
-        <groupbox height="610px" closable="false" mold="3d" style="background:#f5f5f5" sclass="col-md-12 nopadding" >
+        <groupbox height="500px" closable="false" mold="3d" style="background:#f5f5f5" sclass="col-md-12 nopadding" >
             <caption label="Dashboard Ketrampilan" sclass="isi" />
             <div sclass="col-md-3 nopadding">
                 

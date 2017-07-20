@@ -49,8 +49,8 @@
                     </div>
                     
                     <div>
-                        <a sclass="isi btn btn-success" width="100%" label="Pencarian" onClick="@command('searchDataBank')"/>
-                        <a sclass="isi btn btn-success" width="100%" label="History" onClick="@command('buttonRiwayatLowongan')"/>
+                        <a sclass="isi btn btn-info" width="100%" label="Pencarian" onClick="@command('searchDataBank')"/>
+                        <a sclass="isi btn btn-info" width="100%" label="History" onClick="@command('buttonRiwayatLowongan')"/>
                     </div>
                 </div>
             </div>

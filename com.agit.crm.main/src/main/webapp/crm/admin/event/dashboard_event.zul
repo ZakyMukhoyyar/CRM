@@ -2,7 +2,7 @@
     <window apply="org.zkoss.bind.BindComposer"
             viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.admin.EventAgitVM')"
             form="@id('fx') @load(vm.eventAgitDTO) @save(vm.eventAgitDTO, before='buttonSaveEventAgit')">
-        <groupbox height="610px" closable="false" mold="3d" sclass="col-md-12 nopadding "  style="background:#f5f5f5;">
+        <groupbox height="500px" closable="false" mold="3d" sclass="col-md-12 nopadding "  style="background:#f5f5f5;">
             <caption sclass="isi" label="Dashboard Acara" />   
             <div sclass="col-md-3 nopadding">
                 <div class="form-group" style="font-style:bold;">
@@ -45,9 +45,8 @@
                         <listhead>
                             <listheader sclass="isi bold" label="ID Acara" width="10%" align="center" sortDirection="ascending" sort="auto(idEvent)"/>
                             <listheader sclass="isi bold"  label="Nama Acara" width="30%" align="center"/>
-                            <listheader sclass="isi bold"  label="Tanggal Mulai" width="15%" align="center"/>
-                            <listheader sclass="isi bold"  label="Tanggal Berakhir" width="15%" align="center"/>
-                            <!--                        <listheader label="Deskripsi" width="14%" align="center"/>-->
+                            <listheader sclass="isi bold"  label="Mulai" width="15%" align="center"/>
+                            <listheader sclass="isi bold"  label="Berakhir" width="15%" align="center"/>
                             <listheader sclass="isi bold"  label="Status" width="10%" align="center"/>
                             <listheader sclass="isi bold"  label="Aksi" width="25%" align="center"/>
                         </listhead>
