@@ -23,7 +23,7 @@ public class Lowongan implements EntityObject<Lowongan> {
     private String persyaratan;
     private String lokasiKerja;
     private String gaji;
-    private LowonganState lowonganState;
+    private List<LowonganStatus> listLowonganStatuses;
     private List<RiwayatApplyMahasiswa> listRiwayatApplyMahasiswa;
     private String createdBy;
     private Date createdDate;
@@ -33,7 +33,7 @@ public class Lowongan implements EntityObject<Lowongan> {
     public Lowongan() {
     }
 
-    public Lowongan(String idLowongan, String idUser, String namaLowongan, String deskripsiLowongan, Date tanggalMulai, Date tanggalBerakhir, String minatPekerjaan, String persyaratan, String lokasiKerja, String gaji, LowonganState lowonganState, List<RiwayatApplyMahasiswa> listRiwayatApplyMahasiswa, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate) {
+    public Lowongan(String idLowongan, String idUser, String namaLowongan, String deskripsiLowongan, Date tanggalMulai, Date tanggalBerakhir, String minatPekerjaan, String persyaratan, String lokasiKerja, String gaji, List<LowonganStatus> listLowonganStatuses, List<RiwayatApplyMahasiswa> listRiwayatApplyMahasiswa, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate) {
         this.idLowongan = idLowongan;
         this.idUser = idUser;
         this.namaLowongan = namaLowongan;
@@ -44,7 +44,7 @@ public class Lowongan implements EntityObject<Lowongan> {
         this.persyaratan = persyaratan;
         this.lokasiKerja = lokasiKerja;
         this.gaji = gaji;
-        this.lowonganState = lowonganState;
+        this.listLowonganStatuses = listLowonganStatuses;
         this.listRiwayatApplyMahasiswa = listRiwayatApplyMahasiswa;
         this.createdBy = createdBy;
         this.createdDate = createdDate;
@@ -132,12 +132,12 @@ public class Lowongan implements EntityObject<Lowongan> {
         this.gaji = gaji;
     }
 
-    public LowonganState getLowonganState() {
-        return lowonganState;
+    public List<LowonganStatus> getListLowonganStatuses() {
+        return listLowonganStatuses;
     }
 
-    public void setLowonganState(LowonganState lowonganState) {
-        this.lowonganState = lowonganState;
+    public void setListLowonganStatuses(List<LowonganStatus> listLowonganStatuses) {
+        this.listLowonganStatuses = listLowonganStatuses;
     }
 
     public List<RiwayatApplyMahasiswa> getListRiwayatApplyMahasiswa() {
@@ -183,30 +183,27 @@ public class Lowongan implements EntityObject<Lowongan> {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 37 * hash + Objects.hashCode(this.idLowongan);
-        hash = 37 * hash + Objects.hashCode(this.idUser);
-        hash = 37 * hash + Objects.hashCode(this.namaLowongan);
-        hash = 37 * hash + Objects.hashCode(this.deskripsiLowongan);
-        hash = 37 * hash + Objects.hashCode(this.tanggalMulai);
-        hash = 37 * hash + Objects.hashCode(this.tanggalBerakhir);
-        hash = 37 * hash + Objects.hashCode(this.minatPekerjaan);
-        hash = 37 * hash + Objects.hashCode(this.persyaratan);
-        hash = 37 * hash + Objects.hashCode(this.lokasiKerja);
-        hash = 37 * hash + Objects.hashCode(this.gaji);
-        hash = 37 * hash + Objects.hashCode(this.lowonganState);
-        hash = 37 * hash + Objects.hashCode(this.listRiwayatApplyMahasiswa);
-        hash = 37 * hash + Objects.hashCode(this.createdBy);
-        hash = 37 * hash + Objects.hashCode(this.createdDate);
-        hash = 37 * hash + Objects.hashCode(this.modifiedBy);
-        hash = 37 * hash + Objects.hashCode(this.modifiedDate);
+        hash = 67 * hash + Objects.hashCode(this.idLowongan);
+        hash = 67 * hash + Objects.hashCode(this.idUser);
+        hash = 67 * hash + Objects.hashCode(this.namaLowongan);
+        hash = 67 * hash + Objects.hashCode(this.deskripsiLowongan);
+        hash = 67 * hash + Objects.hashCode(this.tanggalMulai);
+        hash = 67 * hash + Objects.hashCode(this.tanggalBerakhir);
+        hash = 67 * hash + Objects.hashCode(this.minatPekerjaan);
+        hash = 67 * hash + Objects.hashCode(this.persyaratan);
+        hash = 67 * hash + Objects.hashCode(this.lokasiKerja);
+        hash = 67 * hash + Objects.hashCode(this.gaji);
+        hash = 67 * hash + Objects.hashCode(this.listLowonganStatuses);
+        hash = 67 * hash + Objects.hashCode(this.listRiwayatApplyMahasiswa);
+        hash = 67 * hash + Objects.hashCode(this.createdBy);
+        hash = 67 * hash + Objects.hashCode(this.createdDate);
+        hash = 67 * hash + Objects.hashCode(this.modifiedBy);
+        hash = 67 * hash + Objects.hashCode(this.modifiedDate);
         return hash;
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
         if (obj == null) {
             return false;
         }
@@ -232,13 +229,12 @@ public class Lowongan implements EntityObject<Lowongan> {
         this.gaji = lowongan.gaji;
         this.idUser = lowongan.idUser;
         this.listRiwayatApplyMahasiswa =lowongan.listRiwayatApplyMahasiswa;
-        this.lowonganState = lowongan.lowonganState;
+        this.listLowonganStatuses = lowongan.listLowonganStatuses;
         this.modifiedBy = lowongan.modifiedBy;
         this.modifiedDate = lowongan.modifiedDate;
     }
 
     @Override
-
     public boolean sameIdentityAs(Lowongan other) {
         return this.equals(other);
     }

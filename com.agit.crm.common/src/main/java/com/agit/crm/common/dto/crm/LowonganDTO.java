@@ -20,7 +20,7 @@ public class LowonganDTO {
     private String persyaratan;
     private String lokasiKerja;
     private String gaji;
-    private LowonganState lowonganState;
+    private List<LowonganStatusDTO> listLowonganStatusDTO;
     private List<RiwayatApplyMahasiswaDTO> listRiwayatApplyMahasiswaDTO;
     private String createdBy;
     private Date createdDate;
@@ -30,7 +30,7 @@ public class LowonganDTO {
     public LowonganDTO() {
     }
 
-    public LowonganDTO(String idLowongan, String idUser, String namaLowongan, String deskripsiLowongan, Date tanggalMulai, Date tanggalBerakhir, String minatPekerjaan, String persyaratan, String lokasiKerja, String gaji, LowonganState lowonganState, List<RiwayatApplyMahasiswaDTO> listRiwayatApplyMahasiswaDTO, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate) {
+    public LowonganDTO(String idLowongan, String idUser, String namaLowongan, String deskripsiLowongan, Date tanggalMulai, Date tanggalBerakhir, String minatPekerjaan, String persyaratan, String lokasiKerja, String gaji, List<LowonganStatusDTO> listLowonganStatusDTO, List<RiwayatApplyMahasiswaDTO> listRiwayatApplyMahasiswaDTO, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate) {
         this.idLowongan = idLowongan;
         this.idUser = idUser;
         this.namaLowongan = namaLowongan;
@@ -41,7 +41,7 @@ public class LowonganDTO {
         this.persyaratan = persyaratan;
         this.lokasiKerja = lokasiKerja;
         this.gaji = gaji;
-        this.lowonganState = lowonganState;
+        this.listLowonganStatusDTO = listLowonganStatusDTO;
         this.listRiwayatApplyMahasiswaDTO = listRiwayatApplyMahasiswaDTO;
         this.createdBy = createdBy;
         this.createdDate = createdDate;
@@ -129,12 +129,12 @@ public class LowonganDTO {
         this.gaji = gaji;
     }
 
-    public LowonganState getLowonganState() {
-        return lowonganState;
+    public List<LowonganStatusDTO> getListLowonganStatusDTO() {
+        return listLowonganStatusDTO;
     }
 
-    public void setLowonganState(LowonganState lowonganState) {
-        this.lowonganState = lowonganState;
+    public void setListLowonganStatusDTO(List<LowonganStatusDTO> listLowonganStatusDTO) {
+        this.listLowonganStatusDTO = listLowonganStatusDTO;
     }
 
     public List<RiwayatApplyMahasiswaDTO> getListRiwayatApplyMahasiswaDTO() {
@@ -179,7 +179,7 @@ public class LowonganDTO {
 
     @Override
     public String toString() {
-        return "LowonganDTO{" + "idLowongan=" + idLowongan + ", idUser=" + idUser + ", namaLowongan=" + namaLowongan + ", deskripsiLowongan=" + deskripsiLowongan + ", tanggalMulai=" + tanggalMulai + ", tanggalBerakhir=" + tanggalBerakhir + ", minatPekerjaan=" + minatPekerjaan + ", persyaratan=" + persyaratan + ", lokasiKerja=" + lokasiKerja + ", gaji=" + gaji + ", lowonganState=" + lowonganState + ", listRiwayatApplyMahasiswaDTO=" + listRiwayatApplyMahasiswaDTO + ", createdBy=" + createdBy + ", createdDate=" + createdDate + ", modifiedBy=" + modifiedBy + ", modifiedDate=" + modifiedDate + '}';
+        return "LowonganDTO{" + "idLowongan=" + idLowongan + ", idUser=" + idUser + ", namaLowongan=" + namaLowongan + ", deskripsiLowongan=" + deskripsiLowongan + ", tanggalMulai=" + tanggalMulai + ", tanggalBerakhir=" + tanggalBerakhir + ", minatPekerjaan=" + minatPekerjaan + ", persyaratan=" + persyaratan + ", lokasiKerja=" + lokasiKerja + ", gaji=" + gaji + ", listLowonganStatusDTO=" + listLowonganStatusDTO + ", listRiwayatApplyMahasiswaDTO=" + listRiwayatApplyMahasiswaDTO + ", createdBy=" + createdBy + ", createdDate=" + createdDate + ", modifiedBy=" + modifiedBy + ", modifiedDate=" + modifiedDate + '}';
     }
 
 }

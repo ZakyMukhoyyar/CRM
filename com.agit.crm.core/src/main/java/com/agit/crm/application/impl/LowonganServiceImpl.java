@@ -5,10 +5,14 @@ import com.agit.crm.common.dto.crm.LowonganDTO;
 import com.agit.crm.domain.crm.Lowongan;
 import com.agit.crm.domain.crm.LowonganBuilder;
 import com.agit.crm.domain.crm.LowonganRepository;
+import com.agit.crm.domain.crm.LowonganStatus;
+import com.agit.crm.domain.crm.LowonganStatusBuilder;
+import com.agit.crm.domain.crm.LowonganStatusRepository;
 import com.agit.crm.domain.crm.RiwayatApplyMahasiswa;
 import com.agit.crm.domain.crm.RiwayatApplyMahasiswaBuilder;
 import com.agit.crm.domain.crm.RiwayatApplyMahasiswaRepository;
 import com.agit.crm.interfaces.web.facade.dto.assembler.crm.LowonganDTOAssembler;
+import com.agit.crm.interfaces.web.facade.dto.assembler.crm.LowonganStatusDTOAssembler;
 import com.agit.crm.interfaces.web.facade.dto.assembler.crm.RiwayatApplyMahasiswaDTOAssembler;
 import com.agit.crm.shared.state.LowonganState;
 import java.util.ArrayList;
@@ -27,6 +31,8 @@ public class LowonganServiceImpl implements LowonganService {
     private LowonganDTOAssembler lowonganDTOAssembler;
     private RiwayatApplyMahasiswaRepository riwayatApplyMahasiswaRepository;
     private RiwayatApplyMahasiswaDTOAssembler riwayatApplyMahasiswaDTOAssembler;
+    private LowonganStatusRepository lowonganStatusRepository;
+    private LowonganStatusDTOAssembler lowonganStatusDTOAssembler;
 
     public void setRiwayatApplyMahasiswaRepository(RiwayatApplyMahasiswaRepository riwayatApplyMahasiswaRepository) {
         this.riwayatApplyMahasiswaRepository = riwayatApplyMahasiswaRepository;
@@ -43,6 +49,15 @@ public class LowonganServiceImpl implements LowonganService {
     public void setLowonganDTOAssembler(LowonganDTOAssembler lowonganDTOAssembler) {
         this.lowonganDTOAssembler = lowonganDTOAssembler;
     }
+
+    public void setLowonganStatusRepository(LowonganStatusRepository lowonganStatusRepository) {
+        this.lowonganStatusRepository = lowonganStatusRepository;
+    }
+
+    public void setLowonganStatusDTOAssembler(LowonganStatusDTOAssembler lowonganStatusDTOAssembler) {
+        this.lowonganStatusDTOAssembler = lowonganStatusDTOAssembler;
+    }
+    
 
     @Override
     public void SaveOrUpdate(LowonganDTO lowongan) {
@@ -67,36 +82,92 @@ public class LowonganServiceImpl implements LowonganService {
     @Override
     public LowonganDTO getDummyData() {
 
+        /* Riwayat Apply Mahasiswa Dummy */
+        /*dummy1*/
         RiwayatApplyMahasiswa riwayatApplyMahasiswa1 = new RiwayatApplyMahasiswaBuilder()
-                .setIdRiwayatApplyMahasiswa("11")
+                .setIdRiwayatApplyMahasiswa("RAM001")
+                .setLowonganState(LowonganState.APPLY)
                 .setCreatedBy("created by")
                 .setCreatedDate(new Date())
                 .setModifiedBy("modified by")
                 .setModifiedDate(new Date())
-                .setLowonganState(LowonganState.CLOSE)
+                .createRiwayatApplyMahasiswa();
+        /*dummy2*/
+        RiwayatApplyMahasiswa riwayatApplyMahasiswa2 = new RiwayatApplyMahasiswaBuilder()
+                .setIdRiwayatApplyMahasiswa("RAM002")
+                .setLowonganState(LowonganState.APPLY)
+                .setCreatedBy("created by")
+                .setCreatedDate(new Date())
+                .setModifiedBy("modified by")
+                .setModifiedDate(new Date())
                 .createRiwayatApplyMahasiswa();
         List<RiwayatApplyMahasiswa> riwayatApplyMahasiswas = new ArrayList<>();
         riwayatApplyMahasiswas.add(riwayatApplyMahasiswa1);
-
-        Lowongan lowongan = new LowonganBuilder()
-                .setIdLowongan("11")
-                .setNamaLowongan("namaLowongan")
-                .setDeskripsiLowongan("deskripsiLowongan")
+        riwayatApplyMahasiswas.add(riwayatApplyMahasiswa2);
+        
+        /* Lowongan Status Dummy */
+        /*dummy1*/
+        LowonganStatus lowonganStatus1 = new LowonganStatusBuilder()
+                .setIdLowonganStatus("LS001")
+                .setLowonganState(LowonganState.APPLY)
+                .setCreatedBy("admin")
+                .setCreatedDate(new Date())
+                .setModifiedBy("user")
+                .setModifiedDate(new Date())
+                .createLowonganStatus();
+        /*dummy2*/
+        LowonganStatus lowonganStatus2 = new LowonganStatusBuilder()
+                .setIdLowonganStatus("LS002")
+                .setLowonganState(LowonganState.APPLY)
+                .setCreatedBy("admin")
+                .setCreatedDate(new Date())
+                .setModifiedBy("user")
+                .setModifiedDate(new Date())
+                .createLowonganStatus();        
+        List<LowonganStatus> lowonganStatuses = new ArrayList<>();
+        lowonganStatuses.add(lowonganStatus1);
+        lowonganStatuses.add(lowonganStatus2);
+        
+        /* Lowongan Dummy1 */
+        Lowongan lowongan1 = new LowonganBuilder()
+                .setIdLowongan("L001")
+                .setNamaLowongan("namaLow1")
+                .setDeskripsiLowongan("descLow1")
                 .setTanggalMulai(new Date())
                 .setTanggalBerakhir(new Date())
-                .setMinatPekerjaan("minatPekerjaan")
-                .setPersyaratan("persyaratan")
-                .setLokasiKerja("lokasiKerja")
+                .setMinatPekerjaan("minat1")
+                .setPersyaratan("persyaratan1")
+                .setLokasiKerja("lokasi1")
                 .setGaji("Rp 2.000.000 - Rp 3.000.000")
-                .setCreatedBy("created by")
-                .setLowonganState(LowonganState.APPLY)
-                .setIdUser("idUser")
+                .setCreatedBy("admin")
+                .setIdUser("User1")
+                .setListLowonganStatuses(lowonganStatuses)
                 .setListRiwayatApplyMahasiswa(riwayatApplyMahasiswas)
                 .setCreatedDate(new Date())
                 .setModifiedBy("modified by")
                 .setModifiedDate(new Date())
                 .createLowongan();
-        return lowonganDTOAssembler.toDTO(lowongan);
+        return lowonganDTOAssembler.toDTO(lowongan1);
+        
+//        Lowongan lowongan2 = new LowonganBuilder()
+//                .setIdLowongan("L002")
+//                .setNamaLowongan("namaLow2")
+//                .setDeskripsiLowongan("descLow2")
+//                .setTanggalMulai(new Date())
+//                .setTanggalBerakhir(new Date())
+//                .setMinatPekerjaan("minat2")
+//                .setPersyaratan("persyaratan2")
+//                .setLokasiKerja("lokasi2")
+//                .setGaji("Rp 2.000.000 - Rp 3.000.000")
+//                .setIdUser("User2")
+//                .setListLowonganStatuses(lowonganStatuses)
+//                .setListRiwayatApplyMahasiswa(riwayatApplyMahasiswas)
+//                .setCreatedBy("admin")
+//                .setCreatedDate(new Date())
+//                .setModifiedBy("user")
+//                .setModifiedDate(new Date())
+//                .createLowongan();
+//        return lowonganDTOAssembler.toDTO(lowongan2);
     }
 
     @Override

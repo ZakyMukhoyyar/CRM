@@ -82,9 +82,6 @@ public class MahasiswaServiceImpl implements MahasiswaService {
                 .setModifiedBy("modified by")
                 .setModifiedDate(new Date())
                 .createLowongan();
-//        List<Lowongan> lowongan1 = new ArrayList<>();
-//        lowongans.add(lowongan1);
-
         Lowongan lowongan2 = new LowonganBuilder()
                 .setIdLowongan("11")
                 .setNamaLowongan("namaLowongan")
@@ -98,10 +95,14 @@ public class MahasiswaServiceImpl implements MahasiswaService {
                 .setCreatedDate(new Date())
                 .setModifiedBy("modified by")
                 .setModifiedDate(new Date())
-                .createLowongan();
+                .createLowongan();        
         List<Lowongan> lowongans = new ArrayList<>();
         lowongans.add(lowongan1);
         lowongans.add(lowongan2);
+        
+        
+        
+        
 
         Mahasiswa mahasiswa = new MahasiswaBuilder()
                 .setIdMahasiswa("11")

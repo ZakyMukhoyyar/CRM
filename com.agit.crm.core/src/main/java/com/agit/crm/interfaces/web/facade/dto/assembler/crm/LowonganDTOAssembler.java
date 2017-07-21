@@ -2,9 +2,12 @@ package com.agit.crm.interfaces.web.facade.dto.assembler.crm;
 
 import com.agit.crm.common.dto.crm.LowonganDTO;
 import com.agit.crm.common.dto.crm.LowonganDTOBuilder;
+import com.agit.crm.common.dto.crm.LowonganStatusDTO;
 import com.agit.crm.common.dto.crm.RiwayatApplyMahasiswaDTO;
 import com.agit.crm.domain.crm.Lowongan;
 import com.agit.crm.domain.crm.LowonganBuilder;
+import com.agit.crm.domain.crm.LowonganStatus;
+import com.agit.crm.domain.crm.LowonganStatusRepository;
 import com.agit.crm.domain.crm.RiwayatApplyMahasiswa;
 import com.agit.crm.domain.crm.RiwayatApplyMahasiswaRepository;
 import com.agit.crm.shared.object.IObjectAssembler;
@@ -20,6 +23,8 @@ public class LowonganDTOAssembler implements IObjectAssembler<Lowongan, Lowongan
 
     private RiwayatApplyMahasiswaRepository riwayatApplyMahasiswaRepository;
     private RiwayatApplyMahasiswaDTOAssembler riwayatApplyMahasiswaDTOAssembler;
+    private LowonganStatusRepository lowonganStatusRepository;
+    private LowonganStatusDTOAssembler lowonganStatusDTOAssembler;
 
     public void setRiwayatApplyMahasiswaRepository(RiwayatApplyMahasiswaRepository riwayatApplyMahasiswaRepository) {
         this.riwayatApplyMahasiswaRepository = riwayatApplyMahasiswaRepository;
@@ -29,6 +34,14 @@ public class LowonganDTOAssembler implements IObjectAssembler<Lowongan, Lowongan
         this.riwayatApplyMahasiswaDTOAssembler = riwayatApplyMahasiswaDTOAssembler;
     }
 
+    public void setLowonganStatusRepository(LowonganStatusRepository lowonganStatusRepository) {
+        this.lowonganStatusRepository = lowonganStatusRepository;
+    }
+
+    public void setLowonganStatusDTOAssembler(LowonganStatusDTOAssembler lowonganStatusDTOAssembler) {
+        this.lowonganStatusDTOAssembler = lowonganStatusDTOAssembler;
+    }
+    
     @Override
     public LowonganDTO toDTO(Lowongan domainObject) {
         return new LowonganDTOBuilder()
@@ -41,8 +54,8 @@ public class LowonganDTOAssembler implements IObjectAssembler<Lowongan, Lowongan
                 .setPersyaratan(domainObject.getPersyaratan())
                 .setLokasiKerja(domainObject.getLokasiKerja())
                 .setGaji(domainObject.getGaji())
-                .setLowonganState(domainObject.getLowonganState())
                 .setIdUser(domainObject.getIdUser())
+                .setListLowonganStatusDTO(domainObject.getListLowonganStatuses() == null ? Collections.EMPTY_LIST : lowonganStatusDTOAssembler.toDTOs(domainObject.getListLowonganStatuses()))
                 .setListRiwayatApplyMahasiswaDTO(domainObject.getListRiwayatApplyMahasiswa() == null ? Collections.EMPTY_LIST : riwayatApplyMahasiswaDTOAssembler.toDTOs(domainObject.getListRiwayatApplyMahasiswa()))
                 .setCreatedBy(domainObject.getCreatedBy())
                 .setCreatedDate(domainObject.getCreatedDate())
@@ -64,7 +77,7 @@ public class LowonganDTOAssembler implements IObjectAssembler<Lowongan, Lowongan
                 .setLokasiKerja(dtoObject.getLokasiKerja())
                 .setGaji(dtoObject.getGaji())
                 .setIdUser(dtoObject.getIdUser())
-                .setLowonganState(dtoObject.getLowonganState())
+                .setListLowonganStatuses(dtoObject.getListLowonganStatusDTO() == null ? Collections.EMPTY_LIST : lowonganStatusDTOAssembler.toDomains(dtoObject.getListLowonganStatusDTO()))
                 .setListRiwayatApplyMahasiswa(dtoObject.getListRiwayatApplyMahasiswaDTO() == null ? Collections.EMPTY_LIST : riwayatApplyMahasiswaDTOAssembler.toDomains(dtoObject.getListRiwayatApplyMahasiswaDTO()))
                 .setCreatedBy(dtoObject.getCreatedBy())
                 .setCreatedDate(dtoObject.getCreatedDate())
@@ -111,11 +124,10 @@ public class LowonganDTOAssembler implements IObjectAssembler<Lowongan, Lowongan
                 }
                 res.add(riwayatApplyMahasiswa);
             }
-
         }
         return res;
     }
-
+    
     public List<RiwayatApplyMahasiswaDTO> RAMDomain2RAMDTO(List<RiwayatApplyMahasiswa> arg0) {
         List<RiwayatApplyMahasiswaDTO> res = new ArrayList<>();
         if (arg0 != null) {
@@ -126,4 +138,31 @@ public class LowonganDTOAssembler implements IObjectAssembler<Lowongan, Lowongan
         }
         return res;
     }
+    
+    public List<LowonganStatus> LSDTO2LSDomain(List<LowonganStatusDTO> arg0){
+        List<LowonganStatus> res = new ArrayList<>();
+        if(arg0 != null){
+            for( LowonganStatusDTO o : arg0 ){
+                LowonganStatus lowonganStatus = lowonganStatusRepository.findByID(o.getIdLowonganStatus());
+                if(lowonganStatus == null){
+                    lowonganStatus = lowonganStatusDTOAssembler.toDomain(o);
+                } else {
+                    lowonganStatus.assignNewLowonganStatus(lowonganStatusDTOAssembler.toDomain(o));
+                }
+                res.add(lowonganStatus);
+            }
+        }
+        return res;
+    }
+    
+    public List<LowonganStatusDTO> LSDomain2LSDTO (List<LowonganStatus> arg0){
+        List<LowonganStatusDTO> res = new ArrayList<>();
+        if(arg0 != null){
+            for (LowonganStatus o : arg0){
+                res.add(new LowonganStatusDTOAssembler().toDTO(o));
+            }
+        }
+        return res;
+    }
+    
 }

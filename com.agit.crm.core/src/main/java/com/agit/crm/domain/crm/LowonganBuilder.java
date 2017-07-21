@@ -1,17 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.agit.crm.domain.crm;
 
-import com.agit.crm.shared.state.LowonganState;
 import java.util.Date;
 import java.util.List;
 
 
 public class LowonganBuilder {
-
     private String idLowongan;
     private String idUser;
     private String namaLowongan;
@@ -22,7 +15,7 @@ public class LowonganBuilder {
     private String persyaratan;
     private String lokasiKerja;
     private String gaji;
-    private LowonganState lowonganState;
+    private List<LowonganStatus> listLowonganStatuses;
     private List<RiwayatApplyMahasiswa> listRiwayatApplyMahasiswa;
     private String createdBy;
     private Date createdDate;
@@ -82,8 +75,8 @@ public class LowonganBuilder {
         return this;
     }
 
-    public LowonganBuilder setLowonganState(LowonganState lowonganState) {
-        this.lowonganState = lowonganState;
+    public LowonganBuilder setListLowonganStatuses(List<LowonganStatus> listLowonganStatuses) {
+        this.listLowonganStatuses = listLowonganStatuses;
         return this;
     }
 
@@ -113,7 +106,7 @@ public class LowonganBuilder {
     }
 
     public Lowongan createLowongan() {
-        return new Lowongan(idLowongan, idUser, namaLowongan, deskripsiLowongan, tanggalMulai, tanggalBerakhir, minatPekerjaan, persyaratan, lokasiKerja, gaji, lowonganState, listRiwayatApplyMahasiswa, createdBy, createdDate, modifiedBy, modifiedDate);
+        return new Lowongan(idLowongan, idUser, namaLowongan, deskripsiLowongan, tanggalMulai, tanggalBerakhir, minatPekerjaan, persyaratan, lokasiKerja, gaji, listLowonganStatuses, listRiwayatApplyMahasiswa, createdBy, createdDate, modifiedBy, modifiedDate);
     }
     
 }

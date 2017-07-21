@@ -16,12 +16,11 @@
         <property column="persyaratan" name="persyaratan" not-null="false" length = "3200"/>
         <property column="lokasiKerja" name="lokasiKerja"/>
         <property column="gaji" name="gaji"/>
-        <property column="lowonganState" name="lowonganState" not-null="false">
-            <type name="org.hibernate.type.EnumType">
-                <param name="enumClass">com.agit.crm.shared.state.LowonganState</param>
-                <param name="type">12</param>
-            </type>
-        </property>
+        <list cascade="all" lazy="false" name="listLowonganStatuses">
+            <key column="idLowongan" foreign-key="idLowongan"/>
+            <index column="lowonganStatus_index"/>
+            <one-to-many class="com.agit.crm.domain.crm.LowonganStatus"/>
+        </list>
         <list cascade="all" lazy="false" name="listRiwayatApplyMahasiswa">
             <key column="idLowongan" foreign-key="idLowongan"/>
             <index column="riwayatApplyMahasiswa_index"/>

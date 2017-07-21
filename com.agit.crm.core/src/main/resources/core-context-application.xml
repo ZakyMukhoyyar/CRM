@@ -18,69 +18,75 @@
     <bean id="lowonganDTOAssembler" class="com.agit.crm.interfaces.web.facade.dto.assembler.crm.LowonganDTOAssembler">
         <property name="riwayatApplyMahasiswaRepository" ref="riwayatApplyMahasiswaRepository"/>
         <property name="riwayatApplyMahasiswaDTOAssembler" ref="riwayatApplyMahasiswaDTOAssembler"/>
+        <property name="lowonganStatusRepository" ref="lowonganStatusRepository"/>
+        <property name="lowonganStatusDTOAssembler" ref="lowonganStatusDTOAssembler"/>
     </bean>
     <bean id="lowonganService" class="com.agit.crm.application.impl.LowonganServiceImpl">
         <property name="lowonganRepository" ref="lowonganRepository"/>
         <property name="lowonganDTOAssembler" ref="lowonganDTOAssembler"/>
         <property name="riwayatApplyMahasiswaRepository" ref="riwayatApplyMahasiswaRepository"/>
         <property name="riwayatApplyMahasiswaDTOAssembler" ref="riwayatApplyMahasiswaDTOAssembler"/>
-    </bean>
-	
+        <property name="lowonganStatusRepository" ref="lowonganStatusRepository"/>
+        <property name="lowonganStatusDTOAssembler" ref="lowonganStatusDTOAssembler"/>
+    </bean>	
     
-    <bean id="forumDTOAssembler" class="com.agit.crm.interfaces.web.facade.dto.assembler.crm.ForumDTOAssembler">
-    </bean>
+    <bean id="forumDTOAssembler" class="com.agit.crm.interfaces.web.facade.dto.assembler.crm.ForumDTOAssembler"/>
     <bean id="forumService" class="com.agit.crm.application.impl.ForumServiceImpl">
         <property name="forumRepository" ref="forumRepository"/>
         <property name="forumDTOAssembler" ref="forumDTOAssembler"/>
     </bean>
     
-    <bean id="eventAgitDTOAssembler" class="com.agit.crm.interfaces.web.facade.dto.assembler.crm.EventAgitDTOAssembler">
-    </bean>
+    <bean id="eventAgitDTOAssembler" class="com.agit.crm.interfaces.web.facade.dto.assembler.crm.EventAgitDTOAssembler"/>
     <bean id="eventAgitService" class="com.agit.crm.application.impl.EventAgitServiceImpl">
         <property name="eventAgitRepository" ref="eventAgitRepository"/>
         <property name="eventAgitDTOAssembler" ref="eventAgitDTOAssembler"/>
     </bean>
     
-    <bean id="minatDTOAssembler" class="com.agit.crm.interfaces.web.facade.dto.assembler.crm.MinatDTOAssembler"></bean>
+    <bean id="minatDTOAssembler" class="com.agit.crm.interfaces.web.facade.dto.assembler.crm.MinatDTOAssembler"/>
     <bean id="minatService" class="com.agit.crm.application.impl.MinatServiceImpl">
         <property name="minatRepository" ref="minatRepository"/>
         <property name="minatDTOAssembler" ref="minatDTOAssembler"/>
     </bean>
     
-    <bean id="ketrampilanDTOAssembler" class="com.agit.crm.interfaces.web.facade.dto.assembler.crm.KetrampilanDTOAssembler"></bean>
+    <bean id="ketrampilanDTOAssembler" class="com.agit.crm.interfaces.web.facade.dto.assembler.crm.KetrampilanDTOAssembler"/>
     <bean id="ketrampilanService" class="com.agit.crm.application.impl.KetrampilanServiceImpl">
         <property name="ketrampilanRepository" ref="ketrampilanRepository"/>
         <property name="ketrampilanDTOAssembler" ref="ketrampilanDTOAssembler"/>
     </bean>
     
-    <bean id="jurusanDTOAssembler" class="com.agit.crm.interfaces.web.facade.dto.assembler.crm.JurusanDTOAssembler"></bean>
+    <bean id="jurusanDTOAssembler" class="com.agit.crm.interfaces.web.facade.dto.assembler.crm.JurusanDTOAssembler"/>
     <bean id="jurusanService" class="com.agit.crm.application.impl.JurusanServiceImpl">
         <property name="jurusanRepository" ref="jurusanRepository"/>
         <property name="jurusanDTOAssembler" ref="jurusanDTOAssembler"/>
     </bean>
     
-    <bean id="civitasDTOAssembler" class="com.agit.crm.interfaces.web.facade.dto.assembler.crm.CivitasDTOAssembler"></bean>
+    <bean id="civitasDTOAssembler" class="com.agit.crm.interfaces.web.facade.dto.assembler.crm.CivitasDTOAssembler"/>
     <bean id="civitasService" class="com.agit.crm.application.impl.CivitasServiceImpl">
         <property name="civitasRepository" ref="civitasRepository"/>
         <property name="civitasDTOAssembler" ref="civitasDTOAssembler"/>
     </bean>
     
-    <bean id="riwayatApplyMahasiswaDTOAssembler" class="com.agit.crm.interfaces.web.facade.dto.assembler.crm.RiwayatApplyMahasiswaDTOAssembler"></bean>
+    <bean id="riwayatApplyMahasiswaDTOAssembler" class="com.agit.crm.interfaces.web.facade.dto.assembler.crm.RiwayatApplyMahasiswaDTOAssembler"/>
     <bean id="riwayatApplyMahasiswaService" class="com.agit.crm.application.impl.RiwayatApplyMahasiswaServiceImpl">
         <property name="riwayatApplyMahasiswaRepository" ref="riwayatApplyMahasiswaRepository"/>
         <property name="riwayatApplyMahasiswaDTOAssembler" ref="riwayatApplyMahasiswaDTOAssembler"/>
     </bean>
     
-    <bean id="domisiliDTOAssembler" class="com.agit.crm.interfaces.web.facade.dto.assembler.crm.DomisiliDTOAssembler"></bean>
+    <bean id="domisiliDTOAssembler" class="com.agit.crm.interfaces.web.facade.dto.assembler.crm.DomisiliDTOAssembler"/>
     <bean id="domisiliService" class="com.agit.crm.application.impl.DomisiliServiceImpl">
         <property name="domisiliRepository" ref="domisiliRepository"/>
         <property name="domisiliDTOAssembler" ref="domisiliDTOAssembler"/>
     </bean>
     
-    <bean id="dataToHrdDTOAssembler" class="com.agit.crm.interfaces.web.facade.dto.assembler.crm.DataToHrdDTOAssembler"></bean>
+    <bean id="dataToHrdDTOAssembler" class="com.agit.crm.interfaces.web.facade.dto.assembler.crm.DataToHrdDTOAssembler"/>
     <bean id="dataToHrdService" class="com.agit.crm.application.impl.DataToHrdServiceImpl">
         <property name="dataToHrdRepository" ref="dataToHrdRepository"/>
         <property name="dataToHrdDTOAssembler" ref="dataToHrdDTOAssembler"/>
     </bean>
     
+    <bean id="lowonganStatusDTOAssembler" class="com.agit.crm.interfaces.web.facade.dto.assembler.crm.LowonganStatusDTOAssembler"/>
+    <bean id="lowonganStatusService" class="com.agit.crm.application.impl.LowonganStatusServiceImpl">
+        <property name="lowonganStatusRepository" ref="lowonganStatusRepository"/>
+        <property name="lowonganStatusDTOAssembler" ref="lowonganStatusDTOAssembler"/>
+    </bean>
 </beans>
