@@ -26,9 +26,9 @@
                     </listbox>
                 </div>
                 <div>
-                    <a sclass="btn btn-info" width="100%" label="Create" onClick="@command('buttonKlikCreateLowongan')"/>
-                    <separator/>
                     <a sclass="btn btn-info" width="100%" label="Pencarian" onClick="@command('searchLowongan')"/>
+                    <separator/>
+                    <a sclass="btn btn-info" width="100%" label="Tambah Lowongan" onClick="@command('buttonKlikCreateLowongan')"/>
                 </div>   
             </div>
             <div sclass="col-md-9 nopadding">
@@ -62,7 +62,7 @@
                                 </listcell>
                                 <listcell>
                                     <a sclass="btn btn-primary " label="Detail" onClick="@command('buttonDetailLowongan', object=each)"></a>
-                                    <a sclass="btn btn-primary " label="Delete" onClick="@command('deleteLowongan', object=each)"></a>
+                                    <a sclass="btn btn-primary " label="Hapus" onClick="@command('deleteLowongan', object=each)"></a>
                                 </listcell>
                             </listitem>
                         </template>

@@ -71,7 +71,7 @@
                     <rows>
                         <row>
                             <a sclass="btn btn-info" label="Kembali" width="40%" onClick = "@command('buttonKembaliForum')"/>
-                            <a sclass="btn btn-info" label="Save" width="40%" onClick = "@command('buttonSaveForum')"/>
+                            <a sclass="btn btn-info" label="Simpan" width="40%" onClick = "@command('buttonSaveForum')"/>
                         </row>
                     </rows>
                 </grid>

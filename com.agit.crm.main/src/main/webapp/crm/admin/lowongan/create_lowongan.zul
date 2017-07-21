@@ -70,7 +70,7 @@
                     <rows>
                         <row>
                             <a sclass="btn btn-info" label="Kembali" width="40%" onClick="@command('buttonKembaliLowongan')"/>
-                            <a sclass="btn btn-info" label="Save" width="40%" onClick="@command('buttonSaveLowongan')" disabled="@bind(vm.disableButtonSave)"/>
+                            <a sclass="btn btn-info" label="Simpan" width="40%" onClick="@command('buttonSaveLowongan')" disabled="@bind(vm.disableButtonSave)"/>
                         </row>
                     </rows>
                 </grid>
