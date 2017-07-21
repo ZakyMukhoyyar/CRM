@@ -5,11 +5,16 @@ import com.agit.crm.common.dto.crm.MahasiswaDTO;
 import com.agit.crm.domain.crm.Lowongan;
 import com.agit.crm.domain.crm.LowonganBuilder;
 import com.agit.crm.domain.crm.LowonganRepository;
+import com.agit.crm.domain.crm.LowonganStatus;
+import com.agit.crm.domain.crm.LowonganStatusBuilder;
 import com.agit.crm.domain.crm.Mahasiswa;
 import com.agit.crm.domain.crm.MahasiswaBuilder;
 import com.agit.crm.domain.crm.MahasiswaRepository;
+import com.agit.crm.domain.crm.RiwayatApplyMahasiswa;
+import com.agit.crm.domain.crm.RiwayatApplyMahasiswaBuilder;
 import com.agit.crm.interfaces.web.facade.dto.assembler.crm.LowonganDTOAssembler;
 import com.agit.crm.interfaces.web.facade.dto.assembler.crm.MahasiswaDTOAssembler;
+import com.agit.crm.shared.state.LowonganState;
 import com.agit.crm.shared.type.JenisKelaminType;
 import com.agit.crm.shared.type.PendidikanType;
 import com.agit.crm.shared.type.TingkatanType;
@@ -68,8 +73,55 @@ public class MahasiswaServiceImpl implements MahasiswaService {
 
     @Override
     public MahasiswaDTO getDummyData() {
+        
+        /* Riwayat Apply Mahasiswa Dummy */
+        /*dummy1*/
+        RiwayatApplyMahasiswa riwayatApplyMahasiswa1 = new RiwayatApplyMahasiswaBuilder()
+                .setIdRiwayatApplyMahasiswa("RAM001")
+                .setLowonganState(LowonganState.APPLY)
+                .setCreatedBy("created by")
+                .setCreatedDate(new Date())
+                .setModifiedBy("modified by")
+                .setModifiedDate(new Date())
+                .createRiwayatApplyMahasiswa();
+        /*dummy2*/
+        RiwayatApplyMahasiswa riwayatApplyMahasiswa2 = new RiwayatApplyMahasiswaBuilder()
+                .setIdRiwayatApplyMahasiswa("RAM002")
+                .setLowonganState(LowonganState.APPLY)
+                .setCreatedBy("created by")
+                .setCreatedDate(new Date())
+                .setModifiedBy("modified by")
+                .setModifiedDate(new Date())
+                .createRiwayatApplyMahasiswa();
+        List<RiwayatApplyMahasiswa> riwayatApplyMahasiswas = new ArrayList<>();
+        riwayatApplyMahasiswas.add(riwayatApplyMahasiswa1);
+        riwayatApplyMahasiswas.add(riwayatApplyMahasiswa2);
+        
+        /* Lowongan Status Dummy */
+        /*dummy1*/
+        LowonganStatus lowonganStatus1 = new LowonganStatusBuilder()
+                .setIdLowonganStatus("LS001")
+                .setLowonganState(LowonganState.APPLY)
+                .setCreatedBy("admin")
+                .setCreatedDate(new Date())
+                .setModifiedBy("user")
+                .setModifiedDate(new Date())
+                .createLowonganStatus();
+        /*dummy2*/
+        LowonganStatus lowonganStatus2 = new LowonganStatusBuilder()
+                .setIdLowonganStatus("LS002")
+                .setLowonganState(LowonganState.APPLY)
+                .setCreatedBy("admin")
+                .setCreatedDate(new Date())
+                .setModifiedBy("user")
+                .setModifiedDate(new Date())
+                .createLowonganStatus();        
+        List<LowonganStatus> lowonganStatuses = new ArrayList<>();
+        lowonganStatuses.add(lowonganStatus1);
+        lowonganStatuses.add(lowonganStatus2);
+        
         Lowongan lowongan1 = new LowonganBuilder()
-                .setIdLowongan("11")
+                .setIdLowongan("L001")
                 .setNamaLowongan("namaLowongan")
                 .setDeskripsiLowongan("deskripsiLowongan")
                 .setTanggalMulai(new Date())
@@ -81,9 +133,11 @@ public class MahasiswaServiceImpl implements MahasiswaService {
                 .setCreatedDate(new Date())
                 .setModifiedBy("modified by")
                 .setModifiedDate(new Date())
+                .setListRiwayatApplyMahasiswa(riwayatApplyMahasiswas)
+                .setListLowonganStatuses(lowonganStatuses)                
                 .createLowongan();
         Lowongan lowongan2 = new LowonganBuilder()
-                .setIdLowongan("11")
+                .setIdLowongan("L002")
                 .setNamaLowongan("namaLowongan")
                 .setDeskripsiLowongan("deskripsiLowongan")
                 .setTanggalMulai(new Date())
@@ -95,17 +149,15 @@ public class MahasiswaServiceImpl implements MahasiswaService {
                 .setCreatedDate(new Date())
                 .setModifiedBy("modified by")
                 .setModifiedDate(new Date())
+                .setListRiwayatApplyMahasiswa(riwayatApplyMahasiswas)
+                .setListLowonganStatuses(lowonganStatuses)
                 .createLowongan();        
         List<Lowongan> lowongans = new ArrayList<>();
         lowongans.add(lowongan1);
         lowongans.add(lowongan2);
-        
-        
-        
-        
 
         Mahasiswa mahasiswa = new MahasiswaBuilder()
-                .setIdMahasiswa("11")
+                .setIdMahasiswa("M001")
                 .setUsername("username")
                 .setPassword("password")
                 .setRetypedPassword("retypedPassword")
@@ -131,13 +183,13 @@ public class MahasiswaServiceImpl implements MahasiswaService {
                 .setTingkatanType4(TingkatanType.PEMULA)
                 .setTingkatanType5(TingkatanType.PEMULA)
                 .setUploadCV("uploadCV")
-                .setLowongans(lowongans)
                 .setCreatedBy("createdBy")
                 .setCreatedDate(new Date())
                 .setModifiedBy("modifiedBy")
                 .setModifiedDate(new Date())
                 .setStatusApprove(Boolean.TRUE)
                 .setJurusan("IPS")
+                .setLowongans(lowongans)
                 .createMahasiswa();
         return mahasiswaDTOAssembler.toDTO(mahasiswa);
     }
