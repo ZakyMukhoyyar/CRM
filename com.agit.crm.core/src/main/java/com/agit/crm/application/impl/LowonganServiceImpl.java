@@ -139,7 +139,7 @@ public class LowonganServiceImpl implements LowonganService {
                 .setLokasiKerja("lokasi1")
                 .setGaji("Rp 2.000.000 - Rp 3.000.000")
                 .setCreatedBy("admin")
-                .setUserID("User1")
+                .setUserID(Long.MIN_VALUE)
                 .setCreatedDate(new Date())
                 .setModifiedBy("modified by")
                 .setModifiedDate(new Date())

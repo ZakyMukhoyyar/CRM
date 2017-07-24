@@ -10,7 +10,7 @@ import java.util.Date;
 public class LowonganBuilder {
 
     private String idLowongan;
-    private String userID;
+    private Long userID;
     private String namaLowongan;
     private String deskripsiLowongan;
     private Date tanggalMulai;
@@ -32,7 +32,7 @@ public class LowonganBuilder {
         return this;
     }
 
-    public LowonganBuilder setUserID(String userID) {
+    public LowonganBuilder setUserID(Long userID) {
         this.userID = userID;
         return this;
     }

@@ -11,7 +11,7 @@ import java.util.List;
 public class LowonganDTO {
 
     private String idLowongan;
-    private String userID;
+    private Long userID;
     private String namaLowongan;
     private String deskripsiLowongan;
     private Date tanggalMulai;
@@ -28,7 +28,7 @@ public class LowonganDTO {
     public LowonganDTO() {
     }
 
-    public LowonganDTO(String idLowongan, String userID, String namaLowongan, String deskripsiLowongan, Date tanggalMulai, Date tanggalBerakhir, String minatPekerjaan, String persyaratan, String lokasiKerja, String gaji, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate) {
+    public LowonganDTO(String idLowongan, Long userID, String namaLowongan, String deskripsiLowongan, Date tanggalMulai, Date tanggalBerakhir, String minatPekerjaan, String persyaratan, String lokasiKerja, String gaji, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate) {
         this.idLowongan = idLowongan;
         this.userID = userID;
         this.namaLowongan = namaLowongan;
@@ -53,11 +53,11 @@ public class LowonganDTO {
         this.idLowongan = idLowongan;
     }
 
-    public String getUserID() {
+    public Long getUserID() {
         return userID;
     }
 
-    public void setUserID(String userID) {
+    public void setUserID(Long userID) {
         this.userID = userID;
     }
 

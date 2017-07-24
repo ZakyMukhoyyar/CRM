@@ -10,7 +10,7 @@ import java.util.Date;
 public class LowonganDTOBuilder {
 
     private String idLowongan;
-    private String userID;
+    private Long userID;
     private String namaLowongan;
     private String deskripsiLowongan;
     private Date tanggalMulai;
@@ -32,7 +32,7 @@ public class LowonganDTOBuilder {
         return this;
     }
 
-    public LowonganDTOBuilder setUserID(String userID) {
+    public LowonganDTOBuilder setUserID(Long userID) {
         this.userID = userID;
         return this;
     }
