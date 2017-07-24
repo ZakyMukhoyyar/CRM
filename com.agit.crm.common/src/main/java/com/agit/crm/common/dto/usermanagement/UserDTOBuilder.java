@@ -1,8 +1,14 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.agit.crm.common.dto.usermanagement;
 
+import com.agit.crm.common.dto.crm.LowonganDTO;
 import com.agit.crm.shared.type.StatusData;
 import java.util.Date;
-
+import java.util.List;
 
 public class UserDTOBuilder {
 
@@ -15,6 +21,7 @@ public class UserDTOBuilder {
     private UserSpecificationDTO userSpecificationDTO;
     private Date creationalDate;
     private String creationalBy;
+    private List<LowonganDTO> lowongansDTO;
 
     public UserDTOBuilder() {
     }
@@ -64,8 +71,13 @@ public class UserDTOBuilder {
         return this;
     }
 
-    public UserDTO createUserDTO() {
-        return new UserDTO(userID, nip, userName, password, roleDTO, userStatus, userSpecificationDTO, creationalDate, creationalBy);
+    public UserDTOBuilder setLowongansDTO(List<LowonganDTO> lowongansDTO) {
+        this.lowongansDTO = lowongansDTO;
+        return this;
     }
-    
+
+    public UserDTO createUserDTO() {
+        return new UserDTO(userID, nip, userName, password, roleDTO, userStatus, userSpecificationDTO, creationalDate, creationalBy, lowongansDTO);
+    }
+
 }

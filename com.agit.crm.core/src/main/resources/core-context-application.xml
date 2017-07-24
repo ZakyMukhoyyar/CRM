@@ -15,12 +15,7 @@
         <property name="lowonganDTOAssembler" ref="lowonganDTOAssembler"/>
     </bean>
     
-    <bean id="lowonganDTOAssembler" class="com.agit.crm.interfaces.web.facade.dto.assembler.crm.LowonganDTOAssembler">
-        <property name="riwayatApplyMahasiswaRepository" ref="riwayatApplyMahasiswaRepository"/>
-        <property name="riwayatApplyMahasiswaDTOAssembler" ref="riwayatApplyMahasiswaDTOAssembler"/>
-        <property name="lowonganStatusRepository" ref="lowonganStatusRepository"/>
-        <property name="lowonganStatusDTOAssembler" ref="lowonganStatusDTOAssembler"/>
-    </bean>
+    <bean id="lowonganDTOAssembler" class="com.agit.crm.interfaces.web.facade.dto.assembler.crm.LowonganDTOAssembler"></bean>
     <bean id="lowonganService" class="com.agit.crm.application.impl.LowonganServiceImpl">
         <property name="lowonganRepository" ref="lowonganRepository"/>
         <property name="lowonganDTOAssembler" ref="lowonganDTOAssembler"/>

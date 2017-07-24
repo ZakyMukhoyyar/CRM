@@ -120,14 +120,15 @@
                 </type>
             </property>
             <property column="uploadCV" name="uploadCV"/>
-            <!--        <list cascade="all" lazy="false" name="lowongans">
-                <key column="idMahasiswa" foreign-key="idMahasiswa"/>
-                <index column="lowongan_index"/>
-                <one-to-many class="com.agit.crm.domain.crm.Lowongan"/>
-            </list>-->
+            
             <property column="statusApprove" name="statusApprove" not-null="false"/>
             <property column="jurusan" name="jurusan" not-null="false"/>
         </component>
+        <list cascade="all" lazy="false" name="lowongans">
+            <key column="userID" foreign-key="userID"/>
+            <index column="lowongan_index"/>
+            <one-to-many class="com.agit.crm.domain.crm.Lowongan"/>
+        </list>
         
         <property column="creationalDate" name="creationalDate" not-null="true" update="true"/>
         <property column="creationalBy" name="creationalBy" unique="false" update="true"/>

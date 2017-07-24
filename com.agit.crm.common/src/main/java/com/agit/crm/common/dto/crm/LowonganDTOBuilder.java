@@ -1,12 +1,16 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.agit.crm.common.dto.crm;
 
 import java.util.Date;
-import java.util.List;
-
 
 public class LowonganDTOBuilder {
+
     private String idLowongan;
-    private String idUser;
+    private String userID;
     private String namaLowongan;
     private String deskripsiLowongan;
     private Date tanggalMulai;
@@ -15,8 +19,6 @@ public class LowonganDTOBuilder {
     private String persyaratan;
     private String lokasiKerja;
     private String gaji;
-    private List<LowonganStatusDTO> listLowonganStatusDTO;
-    private List<RiwayatApplyMahasiswaDTO> listRiwayatApplyMahasiswaDTO;
     private String createdBy;
     private Date createdDate;
     private String modifiedBy;
@@ -30,8 +32,8 @@ public class LowonganDTOBuilder {
         return this;
     }
 
-    public LowonganDTOBuilder setIdUser(String idUser) {
-        this.idUser = idUser;
+    public LowonganDTOBuilder setUserID(String userID) {
+        this.userID = userID;
         return this;
     }
 
@@ -75,16 +77,6 @@ public class LowonganDTOBuilder {
         return this;
     }
 
-    public LowonganDTOBuilder setListLowonganStatusDTO(List<LowonganStatusDTO> listLowonganStatusDTO) {
-        this.listLowonganStatusDTO = listLowonganStatusDTO;
-        return this;
-    }
-
-    public LowonganDTOBuilder setListRiwayatApplyMahasiswaDTO(List<RiwayatApplyMahasiswaDTO> listRiwayatApplyMahasiswaDTO) {
-        this.listRiwayatApplyMahasiswaDTO = listRiwayatApplyMahasiswaDTO;
-        return this;
-    }
-
     public LowonganDTOBuilder setCreatedBy(String createdBy) {
         this.createdBy = createdBy;
         return this;
@@ -106,7 +98,7 @@ public class LowonganDTOBuilder {
     }
 
     public LowonganDTO createLowonganDTO() {
-        return new LowonganDTO(idLowongan, idUser, namaLowongan, deskripsiLowongan, tanggalMulai, tanggalBerakhir, minatPekerjaan, persyaratan, lokasiKerja, gaji, listLowonganStatusDTO, listRiwayatApplyMahasiswaDTO, createdBy, createdDate, modifiedBy, modifiedDate);
+        return new LowonganDTO(idLowongan, userID, namaLowongan, deskripsiLowongan, tanggalMulai, tanggalBerakhir, minatPekerjaan, persyaratan, lokasiKerja, gaji, createdBy, createdDate, modifiedBy, modifiedDate);
     }
-    
+
 }

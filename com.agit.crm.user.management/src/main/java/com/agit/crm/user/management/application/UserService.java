@@ -41,4 +41,6 @@ public interface UserService {
     Boolean isNotExistUserName(String userName);
 
     Boolean isNotExistIPAddress(String ipAddress);
+
+    UserDTO getDummy();
 }

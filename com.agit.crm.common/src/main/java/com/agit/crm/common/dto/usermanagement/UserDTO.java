@@ -1,8 +1,10 @@
 package com.agit.crm.common.dto.usermanagement;
 
+import com.agit.crm.common.dto.crm.LowonganDTO;
 import com.agit.crm.shared.type.StatusData;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -19,11 +21,12 @@ public class UserDTO implements Serializable {
     private UserSpecificationDTO userSpecificationDTO;
     private Date creationalDate;
     private String creationalBy;
+    private List<LowonganDTO> lowongansDTO;
 
     public UserDTO() {
     }
 
-    public UserDTO(String userID, String nip, String userName, String password, RoleDTO roleDTO, StatusData userStatus, UserSpecificationDTO userSpecificationDTO, Date creationalDate, String creationalBy) {
+    public UserDTO(String userID, String nip, String userName, String password, RoleDTO roleDTO, StatusData userStatus, UserSpecificationDTO userSpecificationDTO, Date creationalDate, String creationalBy, List<LowonganDTO> lowongansDTO) {
         this.userID = userID;
         this.nip = nip;
         this.userName = userName;
@@ -33,6 +36,7 @@ public class UserDTO implements Serializable {
         this.userSpecificationDTO = userSpecificationDTO;
         this.creationalDate = creationalDate;
         this.creationalBy = creationalBy;
+        this.lowongansDTO = lowongansDTO;
     }
 
     public String getUserID() {
@@ -107,9 +111,17 @@ public class UserDTO implements Serializable {
         this.creationalBy = creationalBy;
     }
 
+    public List<LowonganDTO> getLowongansDTO() {
+        return lowongansDTO;
+    }
+
+    public void setLowongansDTO(List<LowonganDTO> lowongansDTO) {
+        this.lowongansDTO = lowongansDTO;
+    }
+
     @Override
     public String toString() {
-        return "UserDTO{" + "userID=" + userID + ", nip=" + nip + ", userName=" + userName + ", password=" + password + ", roleDTO=" + roleDTO + ", userStatus=" + userStatus + ", userSpecificationDTO=" + userSpecificationDTO + ", creationalDate=" + creationalDate + ", creationalBy=" + creationalBy + '}';
+        return "UserDTO{" + "userID=" + userID + ", nip=" + nip + ", userName=" + userName + ", password=" + password + ", roleDTO=" + roleDTO + ", userStatus=" + userStatus + ", userSpecificationDTO=" + userSpecificationDTO + ", creationalDate=" + creationalDate + ", creationalBy=" + creationalBy + ", lowongansDTO=" + lowongansDTO + '}';
     }
 
     public static UserDTO getInstance() {
@@ -128,5 +140,5 @@ public class UserDTO implements Serializable {
         return user;
 
     }
-    
+
 }

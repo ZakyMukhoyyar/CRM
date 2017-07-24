@@ -2,14 +2,42 @@ package com.agit.crm.user.management.application.impl;
 
 import com.agit.crm.common.dto.usermanagement.UserDTO;
 import com.agit.crm.common.dto.usermanagement.UserLoginInfoDTO;
+import com.agit.crm.domain.crm.Lowongan;
+import com.agit.crm.domain.crm.LowonganBuilder;
+import com.agit.crm.domain.crm.LowonganStatus;
+import com.agit.crm.domain.crm.LowonganStatusBuilder;
+import com.agit.crm.domain.crm.RiwayatApplyMahasiswa;
+import com.agit.crm.domain.crm.RiwayatApplyMahasiswaBuilder;
+import com.agit.crm.shared.state.LowonganState;
 import com.agit.crm.shared.status.StatusCode;
+import com.agit.crm.shared.type.AccessType;
+import com.agit.crm.shared.type.JenisKelaminType;
+import com.agit.crm.shared.type.JobDivision;
+import com.agit.crm.shared.type.JobLocation;
+import com.agit.crm.shared.type.PendidikanType;
 import com.agit.crm.shared.type.ReleaseType;
 import com.agit.crm.shared.type.StatusData;
+import com.agit.crm.shared.type.TingkatanType;
 import com.agit.crm.user.management.application.UserService;
+import com.agit.crm.user.management.domain.privilege.Privilege;
+import com.agit.crm.user.management.domain.privilege.PrivilegeBuilder;
+import com.agit.crm.user.management.domain.role.Role;
+import com.agit.crm.user.management.domain.role.RoleBuilder;
+import com.agit.crm.user.management.domain.role.RolePrivilege;
+import com.agit.crm.user.management.domain.role.RolePrivilegeBuilder;
+import com.agit.crm.user.management.domain.user.AccessTime;
+import com.agit.crm.user.management.domain.user.AccessTimeBuilder;
 import com.agit.crm.user.management.domain.user.User;
+import com.agit.crm.user.management.domain.user.UserBuilder;
+import com.agit.crm.user.management.domain.user.UserLoginInfo;
+import com.agit.crm.user.management.domain.user.UserLoginInfoBuilder;
 import com.agit.crm.user.management.domain.user.UserRepository;
+import com.agit.crm.user.management.domain.user.UserSpecification;
+import com.agit.crm.user.management.domain.user.UserSpecificationBuilder;
 import com.agit.crm.user.management.interfaces.web.facade.dto.assembler.user.UserDTOAssembler;
 import com.agit.crm.user.management.interfaces.web.facade.dto.assembler.user.UserLoginInfoDTOAssembler;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import org.apache.commons.lang.Validate;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -173,6 +201,153 @@ public class UserServiceImpl implements UserService {
         }
 
         return null;
+    }
+
+    @Override
+    public UserDTO getDummy() {
+
+        Lowongan lowongan1 = new LowonganBuilder()
+                .setIdLowongan("L001")
+                .setNamaLowongan("namaLowongan")
+                .setDeskripsiLowongan("deskripsiLowongan")
+                .setTanggalMulai(new Date())
+                .setTanggalBerakhir(new Date())
+                .setMinatPekerjaan("minatPekerjaan")
+                .setPersyaratan("persyaratan")
+                .setLokasiKerja("lokasiKerja")
+                .setCreatedBy("created by")
+                .setCreatedDate(new Date())
+                .setModifiedBy("modified by")
+                .setModifiedDate(new Date())
+                .createLowongan();
+
+        Lowongan lowongan2 = new LowonganBuilder()
+                .setIdLowongan("L002")
+                .setNamaLowongan("namaLowongan")
+                .setDeskripsiLowongan("deskripsiLowongan")
+                .setTanggalMulai(new Date())
+                .setTanggalBerakhir(new Date())
+                .setMinatPekerjaan("minatPekerjaan")
+                .setPersyaratan("persyaratan")
+                .setLokasiKerja("lokasiKerja")
+                .setCreatedBy("created by")
+                .setCreatedDate(new Date())
+                .setModifiedBy("modified by")
+                .setModifiedDate(new Date())
+                .createLowongan();
+        List<Lowongan> lowongans = new ArrayList<>();
+        lowongans.add(lowongan1);
+        lowongans.add(lowongan2);
+
+        AccessTime accessTime = new AccessTimeBuilder()
+                .setFridayEnd(new Date())
+                .setFridayStart(new Date())
+                .setMondayEnd(new Date())
+                .setMondayStart(new Date())
+                .setSaturdayEnd(new Date())
+                .setSaturdayStart(new Date())
+                .setSundayEnd(new Date())
+                .setSundayStart(new Date())
+                .setThursdayEnd(new Date())
+                .setThursdayStart(new Date())
+                .setTuesdayEnd(new Date())
+                .setTuesdayStart(new Date())
+                .setWednesdayEnd(new Date())
+                .setWednesdayStart(new Date())
+                .createAccessTime();
+
+        UserLoginInfo userLoginInfo = new UserLoginInfoBuilder()
+                .setCredentialsExpiredDate(new Date())
+                .setLastLogin(new Date())
+                .setLastLoginFailed(new Date())
+                .setLoginAttempt(1)
+                .setLoginDate(new Date())
+                .setLogoutDate(new Date())
+                .setRemoteAddress("remoteAddress")
+                .setRemoteHost("remoteHost")
+                .setSessionID("sessionID")
+                .createUserLoginInfo();
+
+        UserSpecification specification = new UserSpecificationBuilder()
+                .setAccessTime(accessTime)
+                .setDomisili("blora")
+                .setEmail("a@a.com")
+                .setEscute(null)
+                .setFullName("Atmaji")
+                .setImmediateSupervisorUserName(null)
+                .setIpk("3")
+                .setJenisKelaminType(JenisKelaminType.WANITA)
+                .setJobDivision(JobDivision.TI)
+                .setJobLocation(JobLocation.JAKARTA)
+                .setJurusan("TI")
+                .setKetrampilan1("A")
+                .setKetrampilan2("b")
+                .setKetrampilan3(null)
+                .setKetrampilan4(null)
+                .setKetrampilan5(null)
+                .setKtp("121")
+                .setMinat("c")
+                .setMobilePhone("1232")
+                .setNamaCivitas("qweq")
+                .setNoHP(null)
+                .setNoKTP(null)
+                .setPendidikanType(PendidikanType.STRATA_I)
+                .setPrimaryBranchID(null)
+                .setStatusApprove(Boolean.FALSE)
+                .setTanggalLahir(null)
+                .setTingkatanType1(TingkatanType.KOMPETEN)
+                .setTingkatanType2(TingkatanType.KOMPETEN)
+                .setTingkatanType3(TingkatanType.KOMPETEN)
+                .setTingkatanType4(TingkatanType.KOMPETEN)
+                .setTingkatanType5(TingkatanType.KOMPETEN)
+                .setUploadCV(null)
+                .setUserLoginInfo(userLoginInfo)
+                .createUserSpecification();
+
+        Privilege privilege = new PrivilegeBuilder()
+                .setCreationalBy("a")
+                .setCreationalDate(new Date())
+                .setIcon("Icon")
+                .setMenu(true)
+                .setMenuName("MenuName")
+                .setParentID("11")
+                .setPrivilegeID("11")
+                .setPrivilegeName("PrivilegeName")
+                .setPrivilegeStatus(StatusData.ACTIVE)
+                .setTabName("TabName")
+                .setUrl("X")
+                .createPrivilege();
+
+        RolePrivilege rolePrivilege = new RolePrivilegeBuilder()
+                .setAccessType(AccessType.ALLOW)
+                .setPrivilege(privilege)
+                .createRolePrivilege();
+        List<RolePrivilege> listRolePrevilage = new ArrayList<>();
+        listRolePrevilage.add(rolePrivilege);
+
+        Role role = new RoleBuilder()
+                .setRoleID("11")
+                .setRoleName("NEw")
+                .setRolePrivileges(listRolePrevilage)
+                .setRoleStatus(StatusData.DELETED)
+                .setCreationalBy("creationalBy")
+                .setCreationalDate(new Date())
+                .setRoleDescription("roleDescription")
+                .createRole();
+
+        User user = new UserBuilder()
+                .setCreationalBy("A")
+                .setCreationalDate(new Date())
+                .setNip("11")
+                .setPassword("Password123")
+                //                .setRole(role)
+                .setUserID("11")
+                .setUserName("KK")
+                .setLowongans(lowongans)
+                .setUserSpecification(specification)
+                .setUserStatus(StatusData.ACTIVE)
+                .createUser();
+        return userDTOAssembler.toDTO(user);
     }
 
 }

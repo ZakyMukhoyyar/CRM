@@ -7,7 +7,7 @@
             <generator class="org.hibernate.id.IdentityGenerator"/>
         </id>
         <property column="idLowongan" name="idLowongan" not-null="false"/>
-        <property column="idUser" name="idUser" not-null="false"/>
+        <property column="userID" name="userID" not-null="false"/>
         <property column="namaLowongan" name="namaLowongan" not-null="false"/>
         <property column="deskripsiLowongan" name="deskripsiLowongan" not-null="false" length = "3200" />
         <property column="tanggalMulai" name="tanggalMulai" not-null="false"/>
@@ -16,16 +16,6 @@
         <property column="persyaratan" name="persyaratan" not-null="false" length = "3200"/>
         <property column="lokasiKerja" name="lokasiKerja"/>
         <property column="gaji" name="gaji"/>
-        <list cascade="all" lazy="false" name="listLowonganStatuses">
-            <key column="idLowongan" foreign-key="idLowongan"/>
-            <index column="lowonganStatus_index"/>
-            <one-to-many class="com.agit.crm.domain.crm.LowonganStatus"/>
-        </list>
-        <list cascade="all" lazy="false" name="listRiwayatApplyMahasiswa">
-            <key column="idLowongan" foreign-key="idLowongan"/>
-            <index column="riwayatApplyMahasiswa_index"/>
-            <one-to-many class="com.agit.crm.domain.crm.RiwayatApplyMahasiswa"/>
-        </list>
         <property column="createdDate" name="createdDate" not-null="false"/>
         <property column="createdBy" name="createdBy"/>
         <property column="modifiedDate" name="modifiedDate" not-null="false"/>

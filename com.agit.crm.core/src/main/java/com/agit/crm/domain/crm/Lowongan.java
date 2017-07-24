@@ -1,9 +1,7 @@
 package com.agit.crm.domain.crm;
 
 import com.agit.crm.shared.object.EntityObject;
-import com.agit.crm.shared.state.LowonganState;
 import java.util.Date;
-import java.util.List;
 import java.util.Objects;
 
 /**
@@ -14,7 +12,7 @@ public class Lowongan implements EntityObject<Lowongan> {
 
     long id;
     private String idLowongan;
-    private String idUser;
+    private String userID;
     private String namaLowongan;
     private String deskripsiLowongan;
     private Date tanggalMulai;
@@ -23,8 +21,6 @@ public class Lowongan implements EntityObject<Lowongan> {
     private String persyaratan;
     private String lokasiKerja;
     private String gaji;
-    private List<LowonganStatus> listLowonganStatuses;
-    private List<RiwayatApplyMahasiswa> listRiwayatApplyMahasiswa;
     private String createdBy;
     private Date createdDate;
     private String modifiedBy;
@@ -33,9 +29,9 @@ public class Lowongan implements EntityObject<Lowongan> {
     public Lowongan() {
     }
 
-    public Lowongan(String idLowongan, String idUser, String namaLowongan, String deskripsiLowongan, Date tanggalMulai, Date tanggalBerakhir, String minatPekerjaan, String persyaratan, String lokasiKerja, String gaji, List<LowonganStatus> listLowonganStatuses, List<RiwayatApplyMahasiswa> listRiwayatApplyMahasiswa, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate) {
+    public Lowongan(String idLowongan, String userID, String namaLowongan, String deskripsiLowongan, Date tanggalMulai, Date tanggalBerakhir, String minatPekerjaan, String persyaratan, String lokasiKerja, String gaji, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate) {
         this.idLowongan = idLowongan;
-        this.idUser = idUser;
+        this.userID = userID;
         this.namaLowongan = namaLowongan;
         this.deskripsiLowongan = deskripsiLowongan;
         this.tanggalMulai = tanggalMulai;
@@ -44,8 +40,6 @@ public class Lowongan implements EntityObject<Lowongan> {
         this.persyaratan = persyaratan;
         this.lokasiKerja = lokasiKerja;
         this.gaji = gaji;
-        this.listLowonganStatuses = listLowonganStatuses;
-        this.listRiwayatApplyMahasiswa = listRiwayatApplyMahasiswa;
         this.createdBy = createdBy;
         this.createdDate = createdDate;
         this.modifiedBy = modifiedBy;
@@ -60,12 +54,20 @@ public class Lowongan implements EntityObject<Lowongan> {
         this.idLowongan = idLowongan;
     }
 
-    public String getIdUser() {
-        return idUser;
+    public long getId() {
+        return id;
     }
 
-    public void setIdUser(String idUser) {
-        this.idUser = idUser;
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getUserID() {
+        return userID;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
     }
 
     public String getNamaLowongan() {
@@ -132,22 +134,6 @@ public class Lowongan implements EntityObject<Lowongan> {
         this.gaji = gaji;
     }
 
-    public List<LowonganStatus> getListLowonganStatuses() {
-        return listLowonganStatuses;
-    }
-
-    public void setListLowonganStatuses(List<LowonganStatus> listLowonganStatuses) {
-        this.listLowonganStatuses = listLowonganStatuses;
-    }
-
-    public List<RiwayatApplyMahasiswa> getListRiwayatApplyMahasiswa() {
-        return listRiwayatApplyMahasiswa;
-    }
-
-    public void setListRiwayatApplyMahasiswa(List<RiwayatApplyMahasiswa> listRiwayatApplyMahasiswa) {
-        this.listRiwayatApplyMahasiswa = listRiwayatApplyMahasiswa;
-    }
-
     public String getCreatedBy() {
         return createdBy;
     }
@@ -184,7 +170,7 @@ public class Lowongan implements EntityObject<Lowongan> {
     public int hashCode() {
         int hash = 7;
         hash = 67 * hash + Objects.hashCode(this.idLowongan);
-        hash = 67 * hash + Objects.hashCode(this.idUser);
+        hash = 67 * hash + Objects.hashCode(this.userID);
         hash = 67 * hash + Objects.hashCode(this.namaLowongan);
         hash = 67 * hash + Objects.hashCode(this.deskripsiLowongan);
         hash = 67 * hash + Objects.hashCode(this.tanggalMulai);
@@ -193,8 +179,6 @@ public class Lowongan implements EntityObject<Lowongan> {
         hash = 67 * hash + Objects.hashCode(this.persyaratan);
         hash = 67 * hash + Objects.hashCode(this.lokasiKerja);
         hash = 67 * hash + Objects.hashCode(this.gaji);
-        hash = 67 * hash + Objects.hashCode(this.listLowonganStatuses);
-        hash = 67 * hash + Objects.hashCode(this.listRiwayatApplyMahasiswa);
         hash = 67 * hash + Objects.hashCode(this.createdBy);
         hash = 67 * hash + Objects.hashCode(this.createdDate);
         hash = 67 * hash + Objects.hashCode(this.modifiedBy);
@@ -227,9 +211,7 @@ public class Lowongan implements EntityObject<Lowongan> {
         this.persyaratan = lowongan.persyaratan;
         this.lokasiKerja = lowongan.lokasiKerja;
         this.gaji = lowongan.gaji;
-        this.idUser = lowongan.idUser;
-        this.listRiwayatApplyMahasiswa =lowongan.listRiwayatApplyMahasiswa;
-        this.listLowonganStatuses = lowongan.listLowonganStatuses;
+        this.userID = lowongan.userID;
         this.modifiedBy = lowongan.modifiedBy;
         this.modifiedDate = lowongan.modifiedDate;
     }

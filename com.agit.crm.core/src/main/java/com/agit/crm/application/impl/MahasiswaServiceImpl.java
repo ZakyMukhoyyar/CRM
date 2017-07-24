@@ -73,7 +73,7 @@ public class MahasiswaServiceImpl implements MahasiswaService {
 
     @Override
     public MahasiswaDTO getDummyData() {
-        
+
         /* Riwayat Apply Mahasiswa Dummy */
         /*dummy1*/
         RiwayatApplyMahasiswa riwayatApplyMahasiswa1 = new RiwayatApplyMahasiswaBuilder()
@@ -96,7 +96,7 @@ public class MahasiswaServiceImpl implements MahasiswaService {
         List<RiwayatApplyMahasiswa> riwayatApplyMahasiswas = new ArrayList<>();
         riwayatApplyMahasiswas.add(riwayatApplyMahasiswa1);
         riwayatApplyMahasiswas.add(riwayatApplyMahasiswa2);
-        
+
         /* Lowongan Status Dummy */
         /*dummy1*/
         LowonganStatus lowonganStatus1 = new LowonganStatusBuilder()
@@ -115,11 +115,11 @@ public class MahasiswaServiceImpl implements MahasiswaService {
                 .setCreatedDate(new Date())
                 .setModifiedBy("user")
                 .setModifiedDate(new Date())
-                .createLowonganStatus();        
+                .createLowonganStatus();
         List<LowonganStatus> lowonganStatuses = new ArrayList<>();
         lowonganStatuses.add(lowonganStatus1);
         lowonganStatuses.add(lowonganStatus2);
-        
+
         Lowongan lowongan1 = new LowonganBuilder()
                 .setIdLowongan("L001")
                 .setNamaLowongan("namaLowongan")
@@ -133,8 +133,8 @@ public class MahasiswaServiceImpl implements MahasiswaService {
                 .setCreatedDate(new Date())
                 .setModifiedBy("modified by")
                 .setModifiedDate(new Date())
-                .setListRiwayatApplyMahasiswa(riwayatApplyMahasiswas)
-                .setListLowonganStatuses(lowonganStatuses)                
+                //                .setListRiwayatApplyMahasiswa(riwayatApplyMahasiswas)
+                //                .setListLowonganStatuses(lowonganStatuses)                
                 .createLowongan();
         Lowongan lowongan2 = new LowonganBuilder()
                 .setIdLowongan("L002")
@@ -149,9 +149,9 @@ public class MahasiswaServiceImpl implements MahasiswaService {
                 .setCreatedDate(new Date())
                 .setModifiedBy("modified by")
                 .setModifiedDate(new Date())
-                .setListRiwayatApplyMahasiswa(riwayatApplyMahasiswas)
-                .setListLowonganStatuses(lowonganStatuses)
-                .createLowongan();        
+                //                .setListRiwayatApplyMahasiswa(riwayatApplyMahasiswas)
+                //                .setListLowonganStatuses(lowonganStatuses)
+                .createLowongan();
         List<Lowongan> lowongans = new ArrayList<>();
         lowongans.add(lowongan1);
         lowongans.add(lowongan2);

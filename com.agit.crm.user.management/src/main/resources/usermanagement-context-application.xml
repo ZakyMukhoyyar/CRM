@@ -19,7 +19,7 @@
         <property name="userRepository" ref="userRepository"/>
         <property name="userDTOAssembler" ref="userDTOAssembler"/>
     </bean>
-<!--    <bean id="companyProfileService" class="com.agit.crm.user.management.application.impl.CompanyProfileImpl">
+    <!--    <bean id="companyProfileService" class="com.agit.crm.user.management.application.impl.CompanyProfileImpl">
         <property name="companyProfileRepository" ref="companyProfileRepository"/>
         <property name="companyProfileDTOAssembler" ref="companyProfileDTOAssembler"/>
     </bean> -->
@@ -47,10 +47,11 @@
     <bean id="userDTOAssembler" class="com.agit.crm.user.management.interfaces.web.facade.dto.assembler.user.UserDTOAssembler">
         <property name="roleDTOAssembler" ref="roleDTOAssembler"/>
         <property name="roleRepository" ref="roleRepository"/>
+        <property name="lowonganDTOAssembler" ref="lowonganDTOAssembler"/>
     </bean>
     
     <!--Company Profile-->
-<!--    <bean id="companyProfileDTOAssembler" class="com.agit.crm.user.management.interfaces.web.facade.dto.assembler.companyprofile.CompanyProfileDTOAssembler">
+    <!--    <bean id="companyProfileDTOAssembler" class="com.agit.crm.user.management.interfaces.web.facade.dto.assembler.companyprofile.CompanyProfileDTOAssembler">
     </bean> -->
     
     

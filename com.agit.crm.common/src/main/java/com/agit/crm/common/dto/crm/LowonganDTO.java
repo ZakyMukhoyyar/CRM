@@ -11,7 +11,7 @@ import java.util.List;
 public class LowonganDTO {
 
     private String idLowongan;
-    private String idUser;
+    private String userID;
     private String namaLowongan;
     private String deskripsiLowongan;
     private Date tanggalMulai;
@@ -20,8 +20,6 @@ public class LowonganDTO {
     private String persyaratan;
     private String lokasiKerja;
     private String gaji;
-    private List<LowonganStatusDTO> listLowonganStatusDTO;
-    private List<RiwayatApplyMahasiswaDTO> listRiwayatApplyMahasiswaDTO;
     private String createdBy;
     private Date createdDate;
     private String modifiedBy;
@@ -30,9 +28,9 @@ public class LowonganDTO {
     public LowonganDTO() {
     }
 
-    public LowonganDTO(String idLowongan, String idUser, String namaLowongan, String deskripsiLowongan, Date tanggalMulai, Date tanggalBerakhir, String minatPekerjaan, String persyaratan, String lokasiKerja, String gaji, List<LowonganStatusDTO> listLowonganStatusDTO, List<RiwayatApplyMahasiswaDTO> listRiwayatApplyMahasiswaDTO, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate) {
+    public LowonganDTO(String idLowongan, String userID, String namaLowongan, String deskripsiLowongan, Date tanggalMulai, Date tanggalBerakhir, String minatPekerjaan, String persyaratan, String lokasiKerja, String gaji, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate) {
         this.idLowongan = idLowongan;
-        this.idUser = idUser;
+        this.userID = userID;
         this.namaLowongan = namaLowongan;
         this.deskripsiLowongan = deskripsiLowongan;
         this.tanggalMulai = tanggalMulai;
@@ -41,8 +39,6 @@ public class LowonganDTO {
         this.persyaratan = persyaratan;
         this.lokasiKerja = lokasiKerja;
         this.gaji = gaji;
-        this.listLowonganStatusDTO = listLowonganStatusDTO;
-        this.listRiwayatApplyMahasiswaDTO = listRiwayatApplyMahasiswaDTO;
         this.createdBy = createdBy;
         this.createdDate = createdDate;
         this.modifiedBy = modifiedBy;
@@ -57,12 +53,12 @@ public class LowonganDTO {
         this.idLowongan = idLowongan;
     }
 
-    public String getIdUser() {
-        return idUser;
+    public String getUserID() {
+        return userID;
     }
 
-    public void setIdUser(String idUser) {
-        this.idUser = idUser;
+    public void setUserID(String userID) {
+        this.userID = userID;
     }
 
     public String getNamaLowongan() {
@@ -129,22 +125,6 @@ public class LowonganDTO {
         this.gaji = gaji;
     }
 
-    public List<LowonganStatusDTO> getListLowonganStatusDTO() {
-        return listLowonganStatusDTO;
-    }
-
-    public void setListLowonganStatusDTO(List<LowonganStatusDTO> listLowonganStatusDTO) {
-        this.listLowonganStatusDTO = listLowonganStatusDTO;
-    }
-
-    public List<RiwayatApplyMahasiswaDTO> getListRiwayatApplyMahasiswaDTO() {
-        return listRiwayatApplyMahasiswaDTO;
-    }
-
-    public void setListRiwayatApplyMahasiswaDTO(List<RiwayatApplyMahasiswaDTO> listRiwayatApplyMahasiswaDTO) {
-        this.listRiwayatApplyMahasiswaDTO = listRiwayatApplyMahasiswaDTO;
-    }
-
     public String getCreatedBy() {
         return createdBy;
     }
@@ -179,7 +159,7 @@ public class LowonganDTO {
 
     @Override
     public String toString() {
-        return "LowonganDTO{" + "idLowongan=" + idLowongan + ", idUser=" + idUser + ", namaLowongan=" + namaLowongan + ", deskripsiLowongan=" + deskripsiLowongan + ", tanggalMulai=" + tanggalMulai + ", tanggalBerakhir=" + tanggalBerakhir + ", minatPekerjaan=" + minatPekerjaan + ", persyaratan=" + persyaratan + ", lokasiKerja=" + lokasiKerja + ", gaji=" + gaji + ", listLowonganStatusDTO=" + listLowonganStatusDTO + ", listRiwayatApplyMahasiswaDTO=" + listRiwayatApplyMahasiswaDTO + ", createdBy=" + createdBy + ", createdDate=" + createdDate + ", modifiedBy=" + modifiedBy + ", modifiedDate=" + modifiedDate + '}';
+        return "LowonganDTO{" + "idLowongan=" + idLowongan + ", userID=" + userID + ", namaLowongan=" + namaLowongan + ", deskripsiLowongan=" + deskripsiLowongan + ", tanggalMulai=" + tanggalMulai + ", tanggalBerakhir=" + tanggalBerakhir + ", minatPekerjaan=" + minatPekerjaan + ", persyaratan=" + persyaratan + ", lokasiKerja=" + lokasiKerja + ", gaji=" + gaji + ", createdBy=" + createdBy + ", createdDate=" + createdDate + ", modifiedBy=" + modifiedBy + ", modifiedDate=" + modifiedDate + '}';
     }
 
 }

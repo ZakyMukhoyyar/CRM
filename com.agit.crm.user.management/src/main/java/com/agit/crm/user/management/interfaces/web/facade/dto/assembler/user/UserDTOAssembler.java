@@ -2,12 +2,15 @@ package com.agit.crm.user.management.interfaces.web.facade.dto.assembler.user;
 
 import com.agit.crm.common.dto.usermanagement.UserDTO;
 import com.agit.crm.common.dto.usermanagement.UserDTOBuilder;
+import com.agit.crm.interfaces.web.facade.dto.assembler.crm.LowonganDTOAssembler;
+import com.agit.crm.interfaces.web.facade.dto.assembler.crm.RiwayatApplyMahasiswaDTOAssembler;
 import com.agit.crm.user.management.domain.role.RoleRepository;
 import com.agit.crm.user.management.domain.user.User;
 import com.agit.crm.user.management.domain.user.UserBuilder;
 import com.agit.crm.user.management.interfaces.web.facade.dto.assembler.IObjectAssembler;
 import com.agit.crm.user.management.interfaces.web.facade.dto.assembler.role.RoleDTOAssembler;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -18,7 +21,12 @@ public class UserDTOAssembler implements IObjectAssembler<User, UserDTO> {
 
     private RoleDTOAssembler roleDTOAssembler;
     private RoleRepository roleRepository;
-        
+
+    private LowonganDTOAssembler lowonganDTOAssembler;
+
+    public void setLowonganDTOAssembler(LowonganDTOAssembler lowonganDTOAssembler) {
+        this.lowonganDTOAssembler = lowonganDTOAssembler;
+    }
 
     public void setRoleDTOAssembler(RoleDTOAssembler roleDTOAssembler) {
         this.roleDTOAssembler = roleDTOAssembler;
@@ -32,6 +40,7 @@ public class UserDTOAssembler implements IObjectAssembler<User, UserDTO> {
     public UserDTO toDTO(User domainObject) {
         return new UserDTOBuilder()
                 .setUserID(domainObject.getUserID())
+                .setLowongansDTO(domainObject.getLowongans() == null ? Collections.EMPTY_LIST : lowonganDTOAssembler.toDTOs(domainObject.getLowongans()))
                 .setNip(domainObject.getNip())
                 .setCreationalDate(domainObject.getCreationalDate())
                 .setCreationalBy(domainObject.getCreationalBy())
@@ -47,6 +56,7 @@ public class UserDTOAssembler implements IObjectAssembler<User, UserDTO> {
     public User toDomain(UserDTO dtoObject) {
         return new UserBuilder()
                 .setUserID(dtoObject.getUserID())
+                .setLowongans(dtoObject.getLowongansDTO() == null ? Collections.EMPTY_LIST : lowonganDTOAssembler.toDomains(dtoObject.getLowongansDTO()))
                 .setNip(dtoObject.getNip())
                 .setCreationalDate(dtoObject.getCreationalDate())
                 .setCreationalBy(dtoObject.getCreationalBy())
@@ -61,6 +71,7 @@ public class UserDTOAssembler implements IObjectAssembler<User, UserDTO> {
     public UserDTO toDTOWithPrivilege(User domainObject) {
         return new UserDTOBuilder()
                 .setNip(domainObject.getNip())
+                .setLowongansDTO(domainObject.getLowongans() == null ? Collections.EMPTY_LIST : lowonganDTOAssembler.toDTOs(domainObject.getLowongans()))
                 .setUserID(domainObject.getUserID())
                 .setCreationalDate(domainObject.getCreationalDate())
                 .setCreationalBy(domainObject.getCreationalBy())

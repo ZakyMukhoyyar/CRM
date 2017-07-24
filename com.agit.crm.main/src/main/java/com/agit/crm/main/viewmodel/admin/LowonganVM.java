@@ -191,8 +191,8 @@ public class LowonganVM {
             }
             lowonganDTO = new LowonganDTOBuilder()
                     .setIdLowongan(idLowongan)
-                    .setListLowonganStatusDTO(lowonganStatusDTOs)
-                    .setListRiwayatApplyMahasiswaDTO(riwayatApplyMahasiswaDTOs)
+//                    .setListLowonganStatusDTO(lowonganStatusDTOs)
+                    //                    .setListRiwayatApplyMahasiswaDTO(riwayatApplyMahasiswaDTOs)
                     .setCreatedBy(SecurityUtil.getUserName())
                     .setCreatedDate(new Date())
                     .createLowonganDTO();
@@ -221,12 +221,12 @@ public class LowonganVM {
             idMahasiswa = mahasiswaDTO.getIdMahasiswa();
             this.previous = previous;
         }
-        if (riwayatApplyMahasiswaDTOs != null) {
-            riwayatApplyMahasiswaDTOs = lowonganDTO.getListRiwayatApplyMahasiswaDTO();
-        }
-        if (lowonganStatusDTOs != null){
-            lowonganStatusDTOs = lowonganDTO.getListLowonganStatusDTO();
-        }
+//        if (riwayatApplyMahasiswaDTOs != null) {
+//            riwayatApplyMahasiswaDTOs = lowonganDTO.getListRiwayatApplyMahasiswaDTO();
+//        }
+//        if (lowonganStatusDTOs != null){
+//            lowonganStatusDTOs = lowonganDTO.getListLowonganStatusDTO();
+//        }
 
     }
 
@@ -350,7 +350,7 @@ public class LowonganVM {
         Map<String, Object> params = new HashMap<>();
         String message = "";
 
-        riwayatApplyMahasiswaDTOs = lowonganDTO.getListRiwayatApplyMahasiswaDTO();
+//        riwayatApplyMahasiswaDTOs = lowonganDTO.getListRiwayatApplyMahasiswaDTO();
         RiwayatApplyMahasiswaDTO r = new RiwayatApplyMahasiswaDTOBuilder()
                 .setIdRiwayatApplyMahasiswa(UUID.randomUUID().toString())
                 .setIdRiwayatLowongan(idLowongan)
@@ -363,9 +363,9 @@ public class LowonganVM {
         riwayatApplyMahasiswaDTOs.add(r);
 
         ListModelList<LowonganDTO> lowonganList = new ListModelList<>(lowonganService.findAll());
-        lowonganDTO.setIdUser(user.getUserName());
-        lowonganDTO.setListRiwayatApplyMahasiswaDTO(riwayatApplyMahasiswaDTOs);
-        lowonganDTO.setListLowonganStatusDTO(lowonganStatusDTOs);
+//        lowonganDTO.setIdUser(user.getUserName());
+//        lowonganDTO.setListRiwayatApplyMahasiswaDTO(riwayatApplyMahasiswaDTOs);
+//        lowonganDTO.setListLowonganStatusDTO(lowonganStatusDTOs);
         lowonganService.SaveOrUpdate(lowonganDTO);
         message = "Konfirmasi Lowongan Berhasil Di Apply";
 

@@ -1,9 +1,15 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.agit.crm.user.management.domain.user;
 
+import com.agit.crm.domain.crm.Lowongan;
 import com.agit.crm.shared.type.StatusData;
 import com.agit.crm.user.management.domain.role.Role;
 import java.util.Date;
-
+import java.util.List;
 
 public class UserBuilder {
 
@@ -14,6 +20,7 @@ public class UserBuilder {
     private Role role;
     private StatusData userStatus;
     private UserSpecification userSpecification;
+    private List<Lowongan> lowongans;
     private Date creationalDate;
     private String creationalBy;
 
@@ -55,6 +62,11 @@ public class UserBuilder {
         return this;
     }
 
+    public UserBuilder setLowongans(List<Lowongan> lowongans) {
+        this.lowongans = lowongans;
+        return this;
+    }
+
     public UserBuilder setCreationalDate(Date creationalDate) {
         this.creationalDate = creationalDate;
         return this;
@@ -66,7 +78,7 @@ public class UserBuilder {
     }
 
     public User createUser() {
-        return new User(userID, nip, userName, password, role, userStatus, userSpecification, creationalDate, creationalBy);
+        return new User(userID, nip, userName, password, role, userStatus, userSpecification, lowongans, creationalDate, creationalBy);
     }
-    
+
 }

@@ -57,7 +57,6 @@ public class LowonganServiceImpl implements LowonganService {
     public void setLowonganStatusDTOAssembler(LowonganStatusDTOAssembler lowonganStatusDTOAssembler) {
         this.lowonganStatusDTOAssembler = lowonganStatusDTOAssembler;
     }
-    
 
     @Override
     public void SaveOrUpdate(LowonganDTO lowongan) {
@@ -104,7 +103,7 @@ public class LowonganServiceImpl implements LowonganService {
         List<RiwayatApplyMahasiswa> riwayatApplyMahasiswas = new ArrayList<>();
         riwayatApplyMahasiswas.add(riwayatApplyMahasiswa1);
         riwayatApplyMahasiswas.add(riwayatApplyMahasiswa2);
-        
+
         /* Lowongan Status Dummy */
         /*dummy1*/
         LowonganStatus lowonganStatus1 = new LowonganStatusBuilder()
@@ -123,11 +122,11 @@ public class LowonganServiceImpl implements LowonganService {
                 .setCreatedDate(new Date())
                 .setModifiedBy("user")
                 .setModifiedDate(new Date())
-                .createLowonganStatus();        
+                .createLowonganStatus();
         List<LowonganStatus> lowonganStatuses = new ArrayList<>();
         lowonganStatuses.add(lowonganStatus1);
         lowonganStatuses.add(lowonganStatus2);
-        
+
         /* Lowongan Dummy1 */
         Lowongan lowongan1 = new LowonganBuilder()
                 .setIdLowongan("L001")
@@ -140,15 +139,13 @@ public class LowonganServiceImpl implements LowonganService {
                 .setLokasiKerja("lokasi1")
                 .setGaji("Rp 2.000.000 - Rp 3.000.000")
                 .setCreatedBy("admin")
-                .setIdUser("User1")
-                .setListLowonganStatuses(lowonganStatuses)
-                .setListRiwayatApplyMahasiswa(riwayatApplyMahasiswas)
+                .setUserID("User1")
                 .setCreatedDate(new Date())
                 .setModifiedBy("modified by")
                 .setModifiedDate(new Date())
                 .createLowongan();
         return lowonganDTOAssembler.toDTO(lowongan1);
-        
+
 //        Lowongan lowongan2 = new LowonganBuilder()
 //                .setIdLowongan("L002")
 //                .setNamaLowongan("namaLow2")

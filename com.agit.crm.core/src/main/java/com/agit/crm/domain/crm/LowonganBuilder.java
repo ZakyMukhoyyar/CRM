@@ -1,12 +1,16 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.agit.crm.domain.crm;
 
 import java.util.Date;
-import java.util.List;
-
 
 public class LowonganBuilder {
+
     private String idLowongan;
-    private String idUser;
+    private String userID;
     private String namaLowongan;
     private String deskripsiLowongan;
     private Date tanggalMulai;
@@ -15,8 +19,6 @@ public class LowonganBuilder {
     private String persyaratan;
     private String lokasiKerja;
     private String gaji;
-    private List<LowonganStatus> listLowonganStatuses;
-    private List<RiwayatApplyMahasiswa> listRiwayatApplyMahasiswa;
     private String createdBy;
     private Date createdDate;
     private String modifiedBy;
@@ -30,8 +32,8 @@ public class LowonganBuilder {
         return this;
     }
 
-    public LowonganBuilder setIdUser(String idUser) {
-        this.idUser = idUser;
+    public LowonganBuilder setUserID(String userID) {
+        this.userID = userID;
         return this;
     }
 
@@ -75,16 +77,6 @@ public class LowonganBuilder {
         return this;
     }
 
-    public LowonganBuilder setListLowonganStatuses(List<LowonganStatus> listLowonganStatuses) {
-        this.listLowonganStatuses = listLowonganStatuses;
-        return this;
-    }
-
-    public LowonganBuilder setListRiwayatApplyMahasiswa(List<RiwayatApplyMahasiswa> listRiwayatApplyMahasiswa) {
-        this.listRiwayatApplyMahasiswa = listRiwayatApplyMahasiswa;
-        return this;
-    }
-
     public LowonganBuilder setCreatedBy(String createdBy) {
         this.createdBy = createdBy;
         return this;
@@ -106,7 +98,7 @@ public class LowonganBuilder {
     }
 
     public Lowongan createLowongan() {
-        return new Lowongan(idLowongan, idUser, namaLowongan, deskripsiLowongan, tanggalMulai, tanggalBerakhir, minatPekerjaan, persyaratan, lokasiKerja, gaji, listLowonganStatuses, listRiwayatApplyMahasiswa, createdBy, createdDate, modifiedBy, modifiedDate);
+        return new Lowongan(idLowongan, userID, namaLowongan, deskripsiLowongan, tanggalMulai, tanggalBerakhir, minatPekerjaan, persyaratan, lokasiKerja, gaji, createdBy, createdDate, modifiedBy, modifiedDate);
     }
-    
+
 }

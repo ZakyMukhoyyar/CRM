@@ -1,9 +1,11 @@
 package com.agit.crm.user.management.domain.user;
 
+import com.agit.crm.domain.crm.Lowongan;
 import com.agit.crm.shared.object.EntityObject;
 import com.agit.crm.shared.type.StatusData;
 import com.agit.crm.user.management.domain.role.Role;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -14,16 +16,18 @@ public class User implements EntityObject<User> {
 
     /* id for attriute*/
     long id;
-    
+
     private String userID;
     private String nip;
-    
+
     private String userName;
     private String password;
     private Role role;
-    
+
     private StatusData userStatus;
     private UserSpecification userSpecification;
+
+    private List<Lowongan> lowongans;
 
     /* Creational */
     private Date creationalDate;
@@ -32,7 +36,7 @@ public class User implements EntityObject<User> {
     public User() {
     }
 
-    public User(String userID, String nip, String userName, String password, Role role, StatusData userStatus, UserSpecification userSpecification, Date creationalDate, String creationalBy) {
+    public User(String userID, String nip, String userName, String password, Role role, StatusData userStatus, UserSpecification userSpecification, List<Lowongan> lowongans, Date creationalDate, String creationalBy) {
         this.userID = userID;
         this.nip = nip;
         this.userName = userName;
@@ -40,6 +44,7 @@ public class User implements EntityObject<User> {
         this.role = role;
         this.userStatus = userStatus;
         this.userSpecification = userSpecification;
+        this.lowongans = lowongans;
         this.creationalDate = creationalDate;
         this.creationalBy = creationalBy;
     }
@@ -80,26 +85,32 @@ public class User implements EntityObject<User> {
         return creationalBy;
     }
 
+    public List<Lowongan> getLowongans() {
+        return lowongans;
+    }
+
+    public void setLowongans(List<Lowongan> lowongans) {
+        this.lowongans = lowongans;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 41 * hash + Objects.hashCode(this.userID);
-        hash = 41 * hash + Objects.hashCode(this.nip);
-        hash = 41 * hash + Objects.hashCode(this.userName);
-        hash = 41 * hash + Objects.hashCode(this.password);
-        hash = 41 * hash + Objects.hashCode(this.role);
-        hash = 41 * hash + Objects.hashCode(this.userStatus);
-        hash = 41 * hash + Objects.hashCode(this.userSpecification);
-        hash = 41 * hash + Objects.hashCode(this.creationalDate);
-        hash = 41 * hash + Objects.hashCode(this.creationalBy);
+        int hash = 7;
+        hash = 71 * hash + Objects.hashCode(this.userID);
+        hash = 71 * hash + Objects.hashCode(this.nip);
+        hash = 71 * hash + Objects.hashCode(this.userName);
+        hash = 71 * hash + Objects.hashCode(this.password);
+        hash = 71 * hash + Objects.hashCode(this.role);
+        hash = 71 * hash + Objects.hashCode(this.userStatus);
+        hash = 71 * hash + Objects.hashCode(this.userSpecification);
+        hash = 71 * hash + Objects.hashCode(this.lowongans);
+        hash = 71 * hash + Objects.hashCode(this.creationalDate);
+        hash = 71 * hash + Objects.hashCode(this.creationalBy);
         return hash;
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
         if (obj == null) {
             return false;
         }
@@ -113,7 +124,6 @@ public class User implements EntityObject<User> {
         return true;
     }
 
-    
     @Override
     public boolean sameIdentityAs(User other) {
         return this.equals(other);
@@ -124,8 +134,9 @@ public class User implements EntityObject<User> {
         this.role = user.getRole();
         this.userStatus = user.getUserStatus();
         this.userSpecification = user.getUserSpecification();
+        this.lowongans = user.getLowongans();
     }
-    
+
     public void assignNewStatus(StatusData status) {
         this.userStatus = status;
     }
@@ -138,5 +149,5 @@ public class User implements EntityObject<User> {
     public void assignNewPassword(String password) {
         this.password = password;
     }
-    
+
 }

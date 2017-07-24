@@ -2,7 +2,6 @@ package com.agit.crm.domain.crm;
 
 import com.agit.crm.shared.object.EntityObject;
 import com.agit.crm.shared.state.LowonganState;
-import com.agit.crm.shared.status.Status;
 import java.util.Date;
 import java.util.Objects;
 
