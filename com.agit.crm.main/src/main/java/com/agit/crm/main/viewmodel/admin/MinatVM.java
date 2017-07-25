@@ -9,6 +9,7 @@ import com.agit.crm.shared.zul.CommonViewModel;
 import static com.agit.crm.shared.zul.CommonViewModel.showInformationMessagebox;
 import com.agit.crm.shared.zul.PageNavigation;
 import com.agit.crm.util.CommonUtil;
+import com.agit.crm.util.StringUtil;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -26,6 +27,7 @@ import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 import org.zkoss.zul.ListModelList;
+import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Window;
 
 /**
@@ -144,14 +146,30 @@ public class MinatVM {
         CommonViewModel.navigateToWithoutDetach("/crm/admin/minat/add_minat.zul", window, params);
     }
 
+    public int checkCountParameter(int count, Object obj) {
+        if (StringUtil.hasValue(obj)) {
+            count += 1;
+        }
+        return count;
+    }
+
     @Command("buttonSearchMinat")
     @NotifyChange("minatDTOs")
     public void buttonSearchMinat(@ContextParam(ContextType.VIEW) Window window) {
+        int count = 0;
+
         Map params = new HashMap();
         params.put("idMinat", idMinat);
+        count = checkCountParameter(count, idMinat);
         params.put("namaMinat", namaMinat);
+        count = checkCountParameter(count, namaMinat);
         params.put("status", status);
+        count = checkCountParameter(count, status);
 
+        if (count < 1) {
+            Messagebox.show("Minimal harus memasukkan 1 parameter pencarian", "Peringatan", Messagebox.OK, Messagebox.EXCLAMATION);
+            return;
+        }
         minatDTOs = minatService.findByParams(params);
     }
 
@@ -234,7 +252,7 @@ public class MinatVM {
     public void setStatuses(ListModelList<Status> statuses) {
         this.statuses = statuses;
     }
-    
+
     public PageNavigation getPrevious() {
         return previous;
     }

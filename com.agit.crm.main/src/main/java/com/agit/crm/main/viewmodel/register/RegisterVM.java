@@ -275,6 +275,12 @@ public class RegisterVM {
                 .createAccessTimeDTO();
     }
 
+    @Command("buttonKembali")
+    @NotifyChange("userDTO")
+    public void buttonKembali(@BindingParam("object") UserDTO obj, @ContextParam(ContextType.VIEW) Window window) {
+        window.detach();
+    }
+
     /* Command */
     @Command("verifyUserName")
     @NotifyChange("verifyUserName")
@@ -452,7 +458,7 @@ public class RegisterVM {
         } else if (previous.equals(PageNavigation.CREATE)) {
             params.put("previous", PageNavigation.CREATE);
         }
-        CommonViewModel.navigateTo(UserNavigation.APPROVE, window, params);
+        CommonViewModel.navigateToWithoutDetach(UserNavigation.APPROVE, window, params);
     }
 
     @Command("buttonUpdate")
@@ -557,6 +563,7 @@ public class RegisterVM {
             CommonViewModel.showErrorMessagebox(ex.getMessage());
         }
     }
+
     /* Function upload CV */
 
     @Command("uploadFileCV")

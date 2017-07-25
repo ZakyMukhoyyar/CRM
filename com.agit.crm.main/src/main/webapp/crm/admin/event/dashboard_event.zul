@@ -28,10 +28,10 @@
                     <textbox class="form-control" width="100%" value="@bind(vm.namaEvent)"/>
                 </div>
                         
-                <div class="form-group">
+<!--                <div class="form-group">
                     <label sclass="isi" value="Tanggal Berakhir" />
                     <datebox width="100%"  readonly="false" placeholder="- Silahkan Pilih -" value="@bind(vm.endDate)"></datebox>
-                </div>
+                </div>-->
                     
                 <div>
                     <a sclass="btn btn-info" width="100%" label="Pencarian" onClick="@command('buttonSearchEvent')"/>

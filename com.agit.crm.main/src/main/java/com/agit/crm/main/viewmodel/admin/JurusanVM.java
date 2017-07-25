@@ -10,6 +10,7 @@ import com.agit.crm.shared.zul.CommonViewModel;
 import static com.agit.crm.shared.zul.CommonViewModel.showInformationMessagebox;
 import com.agit.crm.shared.zul.PageNavigation;
 import com.agit.crm.util.CommonUtil;
+import com.agit.crm.util.StringUtil;
 import java.beans.IntrospectionException;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -34,7 +35,6 @@ import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.io.Files;
 import org.zkoss.util.media.Media;
-import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.UploadEvent;
 import org.zkoss.zk.ui.select.annotation.VariableResolver;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
@@ -52,7 +52,7 @@ public class JurusanVM {
     @WireVariable
     JurusanService jurusanService;
 
-    private static final String FILE_LOC = "D:\\Work\\AgitCRM\\CRM\\template-mapping\\insert-template-jurusan.xlsx";
+    private static final String FILE_LOC = "D:\\Training-Material\\Project\\Project CRM\\Code\\CRM\\template-mapping\\insert-template-jurusan.xlsx";
 
     /* Object Binding UI*/
     private JurusanDTO jurusanDTO = new JurusanDTO();
@@ -167,12 +167,27 @@ public class JurusanVM {
         jurusanDTOs = jurusanService.findAll();
     }
 
+    public int checkCountParameter(int count, Object obj) {
+        if (StringUtil.hasValue(obj)) {
+            count += 1;
+        }
+        return count;
+    }
+
     @Command("buttonSearchJurusan")
     @NotifyChange("jurusanDTOs")
     public void buttonSearchJurusan(@ContextParam(ContextType.VIEW) Window window) {
+        int count = 0;
+
         Map params = new HashMap();
         params.put("idJurusan", idJurusan);
+        count = checkCountParameter(count, idJurusan);
         params.put("namaJurusan", namaJurusan);
+        count = checkCountParameter(count, namaJurusan);
+        if (count < 1) {
+            Messagebox.show("Minimal harus memasukkan 1 parameter pencarian", "Peringatan", Messagebox.OK, Messagebox.EXCLAMATION);
+            return;
+        }
 
         jurusanDTOs = jurusanService.findByParams(params);
     }
@@ -351,5 +366,5 @@ public class JurusanVM {
     public void setPageSize(int pageSize) {
         this.pageSize = pageSize;
     }
-    
+
 }

@@ -14,6 +14,14 @@
                     <label sclass="isi" value="Civitas" style="font-weight:bold"/>
                     <textbox sclass="form-control" value="@bind(vm.namaCivitas)" width="100%"/>
                 </div>
+                <div class="form-group">
+                    <label sclass="labelstyle" value="Status" />
+                    <listbox mold="select" sclass="form-control" model="@load(vm.statuses)" selectedItem="@bind(vm.status)" >
+                        <template name="model" var="items" >
+                            <listitem label="@load(items)"  value="@load(items)" />
+                        </template>
+                    </listbox>
+                </div>
                 <div>
                     <a sclass="btn btn-info" width="100%" label="Pencarian" onClick="@command('buttonSearchCivitas')"/>
                     <separator/>

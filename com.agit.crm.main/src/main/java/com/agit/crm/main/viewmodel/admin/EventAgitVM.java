@@ -10,6 +10,7 @@ import com.agit.crm.shared.zul.CommonViewModel;
 import static com.agit.crm.shared.zul.CommonViewModel.showInformationMessagebox;
 import com.agit.crm.shared.zul.PageNavigation;
 import com.agit.crm.util.CommonUtil;
+import com.agit.crm.util.StringUtil;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -57,9 +58,9 @@ public class EventAgitVM {
     private String namaEvent;
     private Date endDate;
     private Status status;
-    
+
     private ListModelList<Status> statuses;
-    
+
     /* attribut for CRM */
     private PageNavigation previous;
     private int pageSize = 8;
@@ -233,14 +234,31 @@ public class EventAgitVM {
         CommonViewModel.navigateToWithoutDetach("/crm/admin/event/add_event.zul", window, params);
     }
 
+    public int checkCountParameter(int count, Object obj) {
+        if (StringUtil.hasValue(obj)) {
+            count += 1;
+        }
+        return count;
+    }
+
     @Command("buttonSearchEvent")
     @NotifyChange("eventAgitDTOs")
     public void buttonSearchEvent(@ContextParam(ContextType.VIEW) Window window) {
+        int count = 0;
         Map params = new HashMap();
         params.put("idEvent", idEvent);
+        count = checkCountParameter(count, idEvent);
         params.put("namaEvent", namaEvent);
+        count = checkCountParameter(count, namaEvent);
         params.put("status", status);
+        count = checkCountParameter(count, status);
         params.put("endDate", endDate);
+        count = checkCountParameter(count, endDate);
+
+        if (count < 1) {
+            Messagebox.show("Minimal harus memasukkan 1 parameter pencarian", "Peringatan", Messagebox.OK, Messagebox.EXCLAMATION);
+            return;
+        }
 
         eventAgitDTOs = eventAgitService.findByParams(params);
     }

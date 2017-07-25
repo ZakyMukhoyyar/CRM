@@ -10,6 +10,7 @@ import com.agit.crm.shared.zul.CommonViewModel;
 import static com.agit.crm.shared.zul.CommonViewModel.showInformationMessagebox;
 import com.agit.crm.shared.zul.PageNavigation;
 import com.agit.crm.util.CommonUtil;
+import com.agit.crm.util.StringUtil;
 import java.beans.IntrospectionException;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -217,13 +218,27 @@ public class DomisiliVM {
         domisiliDTOs = domisiliService.findAll();
     }
 
+    public int checkCountParameter(int count, Object obj) {
+        if (StringUtil.hasValue(obj)) {
+            count += 1;
+        }
+        return count;
+    }
+
     @Command("buttonSearchDomisili")
     @NotifyChange("domisiliDTOs")
     public void buttonSearchJurusan(@ContextParam(ContextType.VIEW) Window window) {
+        int count = 0;
+
         Map params = new HashMap();
         params.put("idDomisili", idDomisili);
+        count = checkCountParameter(count, idDomisili);
         params.put("namaKabupaten", namaKabupaten);
-
+        count = checkCountParameter(count, namaKabupaten);
+        if (count < 1) {
+            Messagebox.show("Minimal harus memasukkan 1 parameter pencarian", "Peringatan", Messagebox.OK, Messagebox.EXCLAMATION);
+            return;
+        }
         domisiliDTOs = domisiliService.findByParams(params);
     }
 

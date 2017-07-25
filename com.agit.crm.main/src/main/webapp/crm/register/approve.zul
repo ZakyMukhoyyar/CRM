@@ -6,7 +6,7 @@
 <zk xmlns="http://www.zkoss.org/2005/zul">
     <window border="none" apply="org.zkoss.bind.BindComposer"
             viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.register.RegisterVM')">
-        <tabbox>
+        <tabbox width="700px">
             <tabs>
                 <tab label="Register"/>
             </tabs>

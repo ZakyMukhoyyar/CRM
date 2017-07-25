@@ -11,6 +11,7 @@ import com.agit.crm.shared.zul.CommonViewModel;
 import static com.agit.crm.shared.zul.CommonViewModel.showInformationMessagebox;
 import com.agit.crm.shared.zul.PageNavigation;
 import com.agit.crm.util.CommonUtil;
+import com.agit.crm.util.StringUtil;
 import java.beans.IntrospectionException;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -52,7 +53,7 @@ public class CivitasVM {
     @WireVariable
     CivitasService civitasService;
 
-    private static final String FILE_LOC = "D:\\Work\\AgitCRM\\CRM\\template-mapping\\insert-template-civitas.xlsx";
+    private static final String FILE_LOC = "D:\\Training-Material\\Project\\Project CRM\\Code\\CRM\\template-mapping\\insert-template-civitas.xlsx";
 
     private CivitasDTO civitasDTO = new CivitasDTO();
     private List<CivitasDTO> civitasDTOs = new ArrayList<>();
@@ -149,12 +150,29 @@ public class CivitasVM {
         }
     }
 
+    public int checkCountParameter(int count, Object obj) {
+        if (StringUtil.hasValue(obj)) {
+            count += 1;
+        }
+        return count;
+    }
+
     @Command("buttonSearchCivitas")
     @NotifyChange("civitasDTOs")
     public void buttonSearchCivitas(@ContextParam(ContextType.VIEW) Window window) {
+        int count = 0;
+
         Map params = new HashMap();
         params.put("namaCivitas", namaCivitas);
+        count = checkCountParameter(count, namaCivitas);
         params.put("status", status);
+        count = checkCountParameter(count, status);
+
+        if (count < 1) {
+            Messagebox.show("Minimal harus memasukkan 1 parameter pencarian", "Peringatan", Messagebox.OK, Messagebox.EXCLAMATION);
+            return;
+        }
+
         civitasDTOs = civitasService.findByParams(params);
     }
 

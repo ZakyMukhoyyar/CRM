@@ -11,6 +11,10 @@
                     <separator bar="true"/>
                 </div>
                 <div class="form-group">
+                    <label sclass="labelstyle" value="ID Jurusan" />
+                    <textbox class="form-control" width="100%" value="@bind(vm.idJurusan)" />
+                </div>  
+                <div class="form-group">
                     <label sclass="labelstyle" value="Nama Jurusan" />
                     <textbox class="form-control" width="100%" value="@bind(vm.namaJurusan)" />
                 </div>                
@@ -40,26 +44,26 @@
             
             <div sclass="col-md-9 nopadding">
                 <groupbox closable="false" sclass="col-md-12">
-                <!--<paging forward="onPaging" />-->
-                <listbox rows="@load(vm.pageSize)" mold="paging" pageSize="@load(vm.pageSize)" emptyMessage="${labels.common.noDataFound}" 
-                         model="@bind(vm.jurusanDTOs)">
-                    <listhead>
-                        <listheader label="ID Jurusan" width="10%" align="center"/>
-                        <listheader label="Nama Jurusan" width="15%" align="center"/>
+                    <!--<paging forward="onPaging" />-->
+                    <listbox rows="@load(vm.pageSize)" mold="paging" pageSize="@load(vm.pageSize)" emptyMessage="${labels.common.noDataFound}" 
+                             model="@bind(vm.jurusanDTOs)">
+                        <listhead>
+                            <listheader label="ID Jurusan" width="10%" align="center"/>
+                            <listheader label="Nama Jurusan" width="15%" align="center"/>
                                            
-                    </listhead>
-                    <template name="model">
-                        <listitem value="${each}">
-                            <listcell >
-                                <label width="100%" value="@bind(each.idJurusan)"/>
-                            </listcell>
-                            <listcell >
-                                <label width="100%" value="@bind(each.namaJurusan)"/>
-                            </listcell>
-                        </listitem>
-                    </template>
-                </listbox>
-            </groupbox>
+                        </listhead>
+                        <template name="model">
+                            <listitem value="${each}">
+                                <listcell >
+                                    <label width="100%" value="@bind(each.idJurusan)"/>
+                                </listcell>
+                                <listcell >
+                                    <label width="100%" value="@bind(each.namaJurusan)"/>
+                                </listcell>
+                            </listitem>
+                        </template>
+                    </listbox>
+                </groupbox>
             </div>
             
             <separator height="30px"/>

@@ -55,7 +55,7 @@
                         <grid style="border:none;">
                             <rows>
                                 <row spans="2">
-                                    <a href="http://localhost:9091/crm/crm/register/register.zul" sclass="isi" label="Belum Punya Account User?" style="font-weight:bold;color:#65001e"/>
+                                    <a width="100%" label="Belum Punya Account User?" style="font-weight:bold;color:#65001e" onClick="@command('buttonKembali')"/>
                                     <div align="center">
                                         <h:input type="submit" value="${labels.user.label.login}" style="width: 120px; height : 30px" />
                                     </div>

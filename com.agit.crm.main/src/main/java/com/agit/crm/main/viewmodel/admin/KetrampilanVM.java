@@ -9,6 +9,7 @@ import com.agit.crm.shared.zul.CommonViewModel;
 import static com.agit.crm.shared.zul.CommonViewModel.showInformationMessagebox;
 import com.agit.crm.shared.zul.PageNavigation;
 import com.agit.crm.util.CommonUtil;
+import com.agit.crm.util.StringUtil;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -27,6 +28,7 @@ import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zk.ui.select.annotation.VariableResolver;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 import org.zkoss.zul.ListModelList;
+import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Window;
 
 /**
@@ -46,7 +48,7 @@ public class KetrampilanVM {
     private String idKetrampilan;
     private String namaKetrampilan;
     private Status status;
-    
+
     private ListModelList<Status> statuses;
 
     private PageNavigation previous;
@@ -57,13 +59,13 @@ public class KetrampilanVM {
     public void init(
             @ExecutionArgParam("ketrampilanDTO") KetrampilanDTO ketrampilan,
             @ExecutionArgParam("previous") PageNavigation previous) {
-        
+
         /* Load Data */
         initData();
-        
+
         /* Check Validity */
         checkValidity(ketrampilan, previous);
-        
+
     }
 
     private void initData() {
@@ -150,14 +152,29 @@ public class KetrampilanVM {
         CommonViewModel.navigateToWithoutDetach("/crm/admin/ketrampilan/add_ketrampilan.zul", window, params);
     }
 
+    public int checkCountParameter(int count, Object obj) {
+        if (StringUtil.hasValue(obj)) {
+            count += 1;
+        }
+        return count;
+    }
+
     @Command("buttonSearchKetrampilan")
     @NotifyChange("ketrampilanDTOs")
     public void buttonSearchKetrampilan(@ContextParam(ContextType.VIEW) Window window) {
+        int count = 0;
         Map params = new HashMap();
         params.put("idKetrampilan", idKetrampilan);
+        count = checkCountParameter(count, idKetrampilan);
         params.put("namaKetrampilan", namaKetrampilan);
+        count = checkCountParameter(count, namaKetrampilan);
         params.put("status", status);
+        count = checkCountParameter(count, status);
 
+        if (count < 1) {
+            Messagebox.show("Minimal harus memasukkan 1 parameter pencarian", "Peringatan", Messagebox.OK, Messagebox.EXCLAMATION);
+            return;
+        }
         ketrampilanDTOs = ketrampilanService.findByParams(params);
     }
 

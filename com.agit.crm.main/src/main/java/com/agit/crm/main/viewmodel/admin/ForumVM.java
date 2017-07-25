@@ -1,7 +1,6 @@
 package com.agit.crm.main.viewmodel.admin;
 
 import com.agit.crm.common.application.ForumService;
-import com.agit.crm.common.dto.crm.ForumDTO;
 import com.agit.crm.common.dto.crm.ForumDTOBuilder;
 import com.agit.crm.common.dto.crm.ForumDTO;
 import com.agit.crm.common.security.SecurityUtil;
@@ -10,16 +9,13 @@ import com.agit.crm.shared.zul.CommonViewModel;
 import static com.agit.crm.shared.zul.CommonViewModel.showInformationMessagebox;
 import com.agit.crm.shared.zul.PageNavigation;
 import com.agit.crm.util.CommonUtil;
-import java.io.File;
-import java.io.IOException;
+import com.agit.crm.util.StringUtil;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.zkoss.bind.BindContext;
 import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
@@ -29,10 +25,7 @@ import org.zkoss.bind.annotation.ExecutionArgParam;
 import org.zkoss.bind.annotation.GlobalCommand;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
-import org.zkoss.io.Files;
 import org.zkoss.util.media.Media;
-import org.zkoss.zk.ui.Executions;
-import org.zkoss.zk.ui.event.UploadEvent;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Messagebox;
@@ -165,13 +158,30 @@ public class ForumVM {
         CommonViewModel.navigateToWithoutDetach("/crm/admin/forum/add_forum.zul", window, params);
     }
 
+    public int checkCountParameter(int count, Object obj) {
+        if (StringUtil.hasValue(obj)) {
+            count += 1;
+        }
+        return count;
+    }
+
     @Command("buttonSearchForum")
     @NotifyChange("forumDTOs")
     public void buttonSearchForum(@ContextParam(ContextType.VIEW) Window window) {
+        int count = 0;
+
         Map params = new HashMap();
         params.put("idForum", idForum);
+        count = checkCountParameter(count, idForum);
         params.put("namaForum", namaForum);
+        count = checkCountParameter(count, namaForum);
         params.put("status", status);
+        count = checkCountParameter(count, status);
+
+        if (count < 1) {
+            Messagebox.show("Minimal harus memasukkan 1 parameter pencarian", "Peringatan", Messagebox.OK, Messagebox.EXCLAMATION);
+            return;
+        }
 
         forumDTOs = forumService.findByParams(params);
     }

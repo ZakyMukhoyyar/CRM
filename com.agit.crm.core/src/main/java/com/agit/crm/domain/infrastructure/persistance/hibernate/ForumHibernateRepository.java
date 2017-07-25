@@ -55,6 +55,9 @@ public class ForumHibernateRepository extends HibernateRepository implements For
         if (StringUtil.hasValue(map.get("namaForum"))) {
             criteria.add(Restrictions.like("namaForum", "%" + map.get("namaForum") + "%").ignoreCase());
         }
+        if (StringUtil.hasValue(map.get("status"))) {
+            criteria.add(Restrictions.eq("status", map.get("status")));
+        }
 
         return criteria.list();
     }
