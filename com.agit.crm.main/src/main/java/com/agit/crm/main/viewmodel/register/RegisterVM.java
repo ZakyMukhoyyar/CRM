@@ -34,6 +34,7 @@ import com.agit.crm.user.management.application.RoleService;
 import com.agit.crm.user.management.application.UserService;
 import com.agit.crm.user.management.application.security.SecurityCacheHelper;
 import com.agit.crm.user.management.interfaces.web.ui.navigation.UserNavigation;
+import com.agit.crm.util.CommonUtil;
 import com.agit.crm.util.DateUtil;
 import com.agit.crm.util.SqlFilterUtil;
 import com.agit.crm.util.StringUtil;
@@ -123,6 +124,7 @@ public class RegisterVM {
     private int pageSize;
     private int activePage;
     private String lockUnlock;
+    private String userID;
     private ListModelList<JobDivision> listJobDivision = new ListModelList<>();
     private ListModelList<JobLocation> listJobLocation = new ListModelList<>();
     private ListModelList<StatusData> listStatus = new ListModelList<>();
@@ -348,8 +350,19 @@ public class RegisterVM {
                 userDTO.setCreationalDate(new Date());
                 userDTO.setUserName(userDTO.getUserName().toUpperCase());
                 try {
-                    userService.saveOrUpdate(userDTO);
-                    CommonViewModel.showInformationMessagebox("User Name " + userDTO.getUserName() + " has successfully created", UserNavigation.DASHBOARD, null, window);
+                    if (userDTO.getUserID() == null) {
+                        ListModelList<UserDTO> userList = new ListModelList<>(userService.findAllUser());
+                        String userID = "";
+                        if (userList.isEmpty()) {
+                            userID = "USER004";
+                        } else {
+                            userID = getLatestObjectID(userList, "userID");
+                        }
+
+                        userDTO.setUserID(userID);
+                        userService.saveOrUpdate(userDTO);
+                        CommonViewModel.showInformationMessagebox("User Name " + userDTO.getUserName() + " has successfully created", UserNavigation.DASHBOARD, null, window);
+                    }
                 } catch (Exception e) {
                     CommonViewModel.showErrorMessagebox(Labels.getLabel("error.message.conflict.repository", new String[]{"User Name", userDTO.getUserName()}));
                 }
@@ -363,6 +376,54 @@ public class RegisterVM {
             userService.delete(userDTO.getUserName());
             CommonViewModel.showInformationMessagebox("User Name " + userDTO.getUserName() + " has successfully deleted", UserNavigation.USER_SEARCH, null, window);
         }
+    }
+
+    protected String getLatestObjectID(ListModelList list, String attribute) {
+        int count = 0;
+        int pointer = 0;
+        int max = 0;
+        String s = "";
+        for (Object obj : list) {
+            Map<String, Object> map = CommonUtil.convertObject2Map(obj);
+            String att = attribute;
+            String[] arr = new String[attribute.length()];
+            String key = "";
+
+            if (att.contains(".")) {
+                arr = att.split("\\.");
+                int f = 1;
+                for (Object x : arr) {
+                    if (f != arr.length) {
+                        map = CommonUtil.convertObject2Map(map.get(x.toString()));
+                    } else {
+                        key = x.toString();
+                    }
+                    f += 1;
+                }
+            } else {
+                key = att;
+            }
+
+            att = map.get(key).toString();
+
+            String temp = "";
+            int countTemp = 0;
+            for (int i = att.length(); i > 0; i--) {
+                if (Character.isLetter(att.charAt(i - 1))) {
+                    pointer = i;
+                    s = att.substring(0, pointer);
+                    break;
+                }
+                countTemp += 1;
+                temp = att.charAt(i - 1) + temp;
+            }
+            if (Integer.parseInt(temp) > max) {
+                max = Integer.parseInt(temp);
+            }
+            count = countTemp;
+        }
+
+        return s + String.format("%0" + count + "d", max + 1);
     }
 
     @Command({"buttonOk", "buttonClose"})
@@ -565,7 +626,6 @@ public class RegisterVM {
     }
 
     /* Function upload CV */
-
     @Command("uploadFileCV")
     @NotifyChange({"mediaNameUploadCV", "pathLocationUploadCV"})
     public void uploadFileCV(@ContextParam(ContextType.BIND_CONTEXT) BindContext ctx) throws IOException {
