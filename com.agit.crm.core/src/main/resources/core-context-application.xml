@@ -4,16 +4,6 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
     
-    <bean id="mahasiswaDTOAssembler" class="com.agit.crm.interfaces.web.facade.dto.assembler.crm.MahasiswaDTOAssembler">
-        <property name="lowonganRepository" ref="lowonganRepository"/>
-        <property name="lowonganDTOAssembler" ref="lowonganDTOAssembler"/>
-    </bean>
-    <bean id="mahasiswaService" class="com.agit.crm.application.impl.MahasiswaServiceImpl">
-        <property name="mahasiswaRepository" ref="mahasiswaRepository"/>
-        <property name="mahasiswaDTOAssembler" ref="mahasiswaDTOAssembler"/>
-        <property name="lowonganRepository" ref="lowonganRepository"/>
-        <property name="lowonganDTOAssembler" ref="lowonganDTOAssembler"/>
-    </bean>
     
     <bean id="lowonganDTOAssembler" class="com.agit.crm.interfaces.web.facade.dto.assembler.crm.LowonganDTOAssembler"></bean>
     <bean id="lowonganService" class="com.agit.crm.application.impl.LowonganServiceImpl">

@@ -5,6 +5,7 @@ import com.agit.crm.common.dto.usermanagement.UserLoginInfoDTO;
 import com.agit.crm.shared.status.StatusCode;
 import com.agit.crm.shared.type.StatusData;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -42,5 +43,11 @@ public interface UserService {
 
     Boolean isNotExistIPAddress(String ipAddress);
 
+    UserDTO findByFullName(String fullName);
+
     UserDTO getDummy();
+
+    List<UserDTO> findAll();
+
+    List<UserDTO> findByParamsMap(Map map);
 }

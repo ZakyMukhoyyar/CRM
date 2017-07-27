@@ -15,10 +15,6 @@
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
     
-    <bean id="mahasiswaRepository" class="com.agit.crm.domain.infrastructure.persistance.hibernate.MahasiswaHibernateRepository">
-        <property name="sessionFactory" ref="sessionFactory"/>
-    </bean>
-    
     <bean id="forumRepository" class="com.agit.crm.domain.infrastructure.persistance.hibernate.ForumHibernateRepository">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>

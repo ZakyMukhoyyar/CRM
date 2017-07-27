@@ -39,6 +39,7 @@ import com.agit.crm.user.management.interfaces.web.facade.dto.assembler.user.Use
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import org.apache.commons.lang.Validate;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -348,6 +349,33 @@ public class UserServiceImpl implements UserService {
                 .setUserStatus(StatusData.ACTIVE)
                 .createUser();
         return userDTOAssembler.toDTO(user);
+    }
+
+    @Override
+    public UserDTO findByFullName(String fullName) {
+        Validate.notNull(userRepository);
+        User user = (User) userRepository.findByNamaLengkap(fullName);
+        if (user != null) {
+            return userDTOAssembler.toDTO(user);
+        }
+
+        return null;
+    }
+
+    @Override
+    public List<UserDTO> findAll() {
+        Validate.notNull(userRepository);
+        return userDTOAssembler.toDTOs(userRepository.findAll());
+    }
+
+    @Override
+    public List<UserDTO> findByParamsMap(Map map) {
+        Validate.notNull(userRepository);
+        List<User> listMahasiswa = userRepository.findByParamsMap(map);
+        if (listMahasiswa != null) {
+            return (List<UserDTO>) userDTOAssembler.toDTOs(listMahasiswa);
+        }
+        return null;
     }
 
 }

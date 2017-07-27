@@ -2,6 +2,7 @@ package com.agit.crm.user.management.domain.user;
 
 import com.agit.crm.shared.type.StatusData;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -26,4 +27,10 @@ public interface UserRepository {
     int releaseAll();
 
     int count(String roleID);
+
+    User findByNamaLengkap(String fullName);
+
+    List<User> findAll();
+
+    List<User> findByParamsMap(Map map);
 }
