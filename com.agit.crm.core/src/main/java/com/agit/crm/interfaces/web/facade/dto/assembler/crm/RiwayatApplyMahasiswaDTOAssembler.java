@@ -13,14 +13,14 @@ import java.util.List;
  * @author Zaky
  */
 public class RiwayatApplyMahasiswaDTOAssembler implements IObjectAssembler<RiwayatApplyMahasiswa, RiwayatApplyMahasiswaDTO> {
-
-
+    
     @Override
     public RiwayatApplyMahasiswaDTO toDTO(RiwayatApplyMahasiswa domainObject) {
         return new RiwayatApplyMahasiswaDTOBuilder()
                 .setIdRiwayatApplyMahasiswa(domainObject.getIdRiwayatApplyMahasiswa())
                 .setIdRiwayatLowongan(domainObject.getIdRiwayatLowongan())
                 .setCreatedBy(domainObject.getCreatedBy())
+                .setIdUserRiwayat(domainObject.getIdUserRiwayat())
                 .setNamaLowonganApply(domainObject.getNamaLowonganApply())
                 .setNamaApplyLowongan(domainObject.getNamaApplyLowongan())
                 .setCreatedDate(domainObject.getCreatedDate())
@@ -29,13 +29,14 @@ public class RiwayatApplyMahasiswaDTOAssembler implements IObjectAssembler<Riway
                 .setLowonganState(domainObject.getLowonganState())
                 .createRiwayatApplyMahasiswaDTO();
     }
-
+    
     @Override
     public RiwayatApplyMahasiswa toDomain(RiwayatApplyMahasiswaDTO dtoObject) {
         return new RiwayatApplyMahasiswaBuilder()
                 .setIdRiwayatApplyMahasiswa(dtoObject.getIdRiwayatApplyMahasiswa())
                 .setIdRiwayatLowongan(dtoObject.getIdRiwayatLowongan())
                 .setCreatedBy(dtoObject.getCreatedBy())
+                .setIdUserRiwayat(dtoObject.getIdUserRiwayat())
                 .setNamaLowonganApply(dtoObject.getNamaLowonganApply())
                 .setNamaApplyLowongan(dtoObject.getNamaApplyLowongan())
                 .setCreatedDate(dtoObject.getCreatedDate())
@@ -44,7 +45,7 @@ public class RiwayatApplyMahasiswaDTOAssembler implements IObjectAssembler<Riway
                 .setLowonganState(dtoObject.getLowonganState())
                 .createRiwayatApplyMahasiswa();
     }
-
+    
     public List<RiwayatApplyMahasiswa> toDomains(List<RiwayatApplyMahasiswaDTO> arg0) {
         List<RiwayatApplyMahasiswa> res = new ArrayList<>();
         for (RiwayatApplyMahasiswaDTO t : arg0) {
@@ -52,7 +53,7 @@ public class RiwayatApplyMahasiswaDTOAssembler implements IObjectAssembler<Riway
         }
         return res;
     }
-
+    
     public List<RiwayatApplyMahasiswaDTO> toDTOs(List<RiwayatApplyMahasiswa> arg0) {
         List<RiwayatApplyMahasiswaDTO> res = new ArrayList<>();
         for (RiwayatApplyMahasiswa t : arg0) {
@@ -60,5 +61,5 @@ public class RiwayatApplyMahasiswaDTOAssembler implements IObjectAssembler<Riway
         }
         return res;
     }
-
+    
 }

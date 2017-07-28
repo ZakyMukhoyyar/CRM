@@ -10,6 +10,7 @@
         <property column="idRiwayatLowongan" name="idRiwayatLowongan" not-null="false"/>
         <property column="namaLowonganApply" name="namaLowonganApply" not-null="false"/>
         <property column="namaApplyLowongan" name="namaApplyLowongan" not-null="false"/>
+        <property column="idUserRiwayat" name="idUserRiwayat" not-null="false"/>
         <property column="createdBy" name="createdBy" not-null="false"/>
         <property column="createdDate" name="createdDate" not-null="false"/>
         <property column="modifiedDate" name="modifiedDate" not-null="false"/>

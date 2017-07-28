@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.agit.crm.domain.crm;
 
 import com.agit.crm.shared.state.LowonganState;
@@ -8,6 +13,7 @@ public class RiwayatApplyMahasiswaBuilder {
 
     private String idRiwayatApplyMahasiswa;
     private String idRiwayatLowongan;
+    private String idUserRiwayat;
     private String namaLowonganApply;
     private String namaApplyLowongan;
     private LowonganState lowonganState;
@@ -26,6 +32,11 @@ public class RiwayatApplyMahasiswaBuilder {
 
     public RiwayatApplyMahasiswaBuilder setIdRiwayatLowongan(String idRiwayatLowongan) {
         this.idRiwayatLowongan = idRiwayatLowongan;
+        return this;
+    }
+
+    public RiwayatApplyMahasiswaBuilder setIdUserRiwayat(String idUserRiwayat) {
+        this.idUserRiwayat = idUserRiwayat;
         return this;
     }
 
@@ -65,7 +76,7 @@ public class RiwayatApplyMahasiswaBuilder {
     }
 
     public RiwayatApplyMahasiswa createRiwayatApplyMahasiswa() {
-        return new RiwayatApplyMahasiswa(idRiwayatApplyMahasiswa, idRiwayatLowongan, namaLowonganApply, namaApplyLowongan, lowonganState, createdBy, createdDate, modifiedBy, modifiedDate);
+        return new RiwayatApplyMahasiswa(idRiwayatApplyMahasiswa, idRiwayatLowongan, idUserRiwayat, namaLowonganApply, namaApplyLowongan, lowonganState, createdBy, createdDate, modifiedBy, modifiedDate);
     }
     
 }

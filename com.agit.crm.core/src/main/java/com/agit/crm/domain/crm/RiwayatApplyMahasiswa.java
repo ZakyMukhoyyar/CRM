@@ -15,6 +15,7 @@ public class RiwayatApplyMahasiswa implements EntityObject<RiwayatApplyMahasiswa
 
     private String idRiwayatApplyMahasiswa;
     private String idRiwayatLowongan;
+    private String idUserRiwayat;
     private String namaLowonganApply;
     private String namaApplyLowongan;
     private LowonganState lowonganState;
@@ -26,9 +27,10 @@ public class RiwayatApplyMahasiswa implements EntityObject<RiwayatApplyMahasiswa
     public RiwayatApplyMahasiswa() {
     }
 
-    public RiwayatApplyMahasiswa(String idRiwayatApplyMahasiswa, String idRiwayatLowongan, String namaLowonganApply, String namaApplyLowongan, LowonganState lowonganState, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate) {
+    public RiwayatApplyMahasiswa(String idRiwayatApplyMahasiswa, String idRiwayatLowongan, String idUserRiwayat, String namaLowonganApply, String namaApplyLowongan, LowonganState lowonganState, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate) {
         this.idRiwayatApplyMahasiswa = idRiwayatApplyMahasiswa;
         this.idRiwayatLowongan = idRiwayatLowongan;
+        this.idUserRiwayat = idUserRiwayat;
         this.namaLowonganApply = namaLowonganApply;
         this.namaApplyLowongan = namaApplyLowongan;
         this.lowonganState = lowonganState;
@@ -52,6 +54,14 @@ public class RiwayatApplyMahasiswa implements EntityObject<RiwayatApplyMahasiswa
 
     public void setIdRiwayatLowongan(String idRiwayatLowongan) {
         this.idRiwayatLowongan = idRiwayatLowongan;
+    }
+
+    public String getIdUserRiwayat() {
+        return idUserRiwayat;
+    }
+
+    public void setIdUserRiwayat(String idUserRiwayat) {
+        this.idUserRiwayat = idUserRiwayat;
     }
 
     public String getNamaLowonganApply() {
@@ -112,16 +122,17 @@ public class RiwayatApplyMahasiswa implements EntityObject<RiwayatApplyMahasiswa
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 59 * hash + Objects.hashCode(this.idRiwayatApplyMahasiswa);
-        hash = 59 * hash + Objects.hashCode(this.idRiwayatLowongan);
-        hash = 59 * hash + Objects.hashCode(this.namaLowonganApply);
-        hash = 59 * hash + Objects.hashCode(this.namaApplyLowongan);
-        hash = 59 * hash + Objects.hashCode(this.lowonganState);
-        hash = 59 * hash + Objects.hashCode(this.createdBy);
-        hash = 59 * hash + Objects.hashCode(this.createdDate);
-        hash = 59 * hash + Objects.hashCode(this.modifiedBy);
-        hash = 59 * hash + Objects.hashCode(this.modifiedDate);
+        int hash = 7;
+        hash = 41 * hash + Objects.hashCode(this.idRiwayatApplyMahasiswa);
+        hash = 41 * hash + Objects.hashCode(this.idRiwayatLowongan);
+        hash = 41 * hash + Objects.hashCode(this.idUserRiwayat);
+        hash = 41 * hash + Objects.hashCode(this.namaLowonganApply);
+        hash = 41 * hash + Objects.hashCode(this.namaApplyLowongan);
+        hash = 41 * hash + Objects.hashCode(this.lowonganState);
+        hash = 41 * hash + Objects.hashCode(this.createdBy);
+        hash = 41 * hash + Objects.hashCode(this.createdDate);
+        hash = 41 * hash + Objects.hashCode(this.modifiedBy);
+        hash = 41 * hash + Objects.hashCode(this.modifiedDate);
         return hash;
     }
 
@@ -147,6 +158,7 @@ public class RiwayatApplyMahasiswa implements EntityObject<RiwayatApplyMahasiswa
         this.idRiwayatApplyMahasiswa = riwayatApplyMahasiswa.idRiwayatApplyMahasiswa;
         this.namaLowonganApply = riwayatApplyMahasiswa.namaLowonganApply;
         this.idRiwayatLowongan = riwayatApplyMahasiswa.idRiwayatLowongan;
+        this.idUserRiwayat = riwayatApplyMahasiswa.idUserRiwayat;
         this.namaApplyLowongan = riwayatApplyMahasiswa.namaApplyLowongan;
         this.lowonganState = riwayatApplyMahasiswa.lowonganState;
         this.modifiedBy = riwayatApplyMahasiswa.modifiedBy;

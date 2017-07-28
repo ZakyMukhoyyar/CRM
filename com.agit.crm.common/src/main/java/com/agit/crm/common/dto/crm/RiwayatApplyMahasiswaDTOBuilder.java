@@ -14,6 +14,7 @@ public class RiwayatApplyMahasiswaDTOBuilder {
     private String idRiwayatApplyMahasiswa;
     private String idRiwayatLowongan;
     private LowonganState lowonganState;
+    private String idUserRiwayat;
     private String namaLowonganApply;
     private String namaApplyLowongan;
     private String createdBy;
@@ -36,6 +37,11 @@ public class RiwayatApplyMahasiswaDTOBuilder {
 
     public RiwayatApplyMahasiswaDTOBuilder setLowonganState(LowonganState lowonganState) {
         this.lowonganState = lowonganState;
+        return this;
+    }
+
+    public RiwayatApplyMahasiswaDTOBuilder setIdUserRiwayat(String idUserRiwayat) {
+        this.idUserRiwayat = idUserRiwayat;
         return this;
     }
 
@@ -70,7 +76,7 @@ public class RiwayatApplyMahasiswaDTOBuilder {
     }
 
     public RiwayatApplyMahasiswaDTO createRiwayatApplyMahasiswaDTO() {
-        return new RiwayatApplyMahasiswaDTO(idRiwayatApplyMahasiswa, idRiwayatLowongan, lowonganState, namaLowonganApply, namaApplyLowongan, createdBy, createdDate, modifiedBy, modifiedDate);
+        return new RiwayatApplyMahasiswaDTO(idRiwayatApplyMahasiswa, idRiwayatLowongan, lowonganState, idUserRiwayat, namaLowonganApply, namaApplyLowongan, createdBy, createdDate, modifiedBy, modifiedDate);
     }
     
 }
