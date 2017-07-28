@@ -34,7 +34,7 @@ INSERT INTO "public"."mst_privilege" VALUES ('32', 'DATA_CIVITAS', 'Dashboard Da
 INSERT INTO "public"."mst_privilege" VALUES ('33', 'DATA_DOMISILI', 'Dashboard Data Domisili', 'ACTIVE', 'ADMIN_MANAGEMENT', 't', 'Beranda - Data History Domisili', 'Beranda - Data History Domisili', null, '/crm/admin/domisili/dashboard_domisili.zul', '2016-01-01 00:00:00', 'SYSTEM');
 
 INSERT INTO "public"."mst_privilege" VALUES ('29', 'MAHASISWA_MANAGEMENT', 'Admin', 'ACTIVE', 'ADMINISTRATOR', 't', 'Pengelolaan Data Mahasiswa', null, null, null, '2016-01-01 00:00:00', 'SYSTEM');
-INSERT INTO "public"."mst_privilege" VALUES ('30', 'REGISTER', 'Register', 'ACTIVE', 'MAHASISWA_MANAGEMENT', 't', 'Pendaftaran', 'Pendaftaran', null, '/crm/mahasiswa/registrasi_mahasiswa.zul', '2016-01-01 00:00:00', 'SYSTEM');
+-- INSERT INTO "public"."mst_privilege" VALUES ('30', 'REGISTER', 'Register', 'ACTIVE', 'MAHASISWA_MANAGEMENT', 't', 'Pendaftaran', 'Pendaftaran', null, '/crm/mahasiswa/registrasi_mahasiswa.zul', '2016-01-01 00:00:00', 'SYSTEM');
 INSERT INTO "public"."mst_privilege" VALUES ('31', 'LOWONGAN', 'Beranda Lowongan', 'ACTIVE', 'MAHASISWA_MANAGEMENT', 't', 'Informasi - Lowongan', 'Informasi - Lowongan', null, '/crm/mahasiswa/beranda_lowongan_mahasiswa.zul', '2016-01-01 00:00:00', 'SYSTEM');
 
 

@@ -1,6 +1,5 @@
 package com.agit.crm.domain.infrastructure.persistance.hibernate;
 
-import com.agit.crm.domain.crm.Minat;
 import com.agit.crm.domain.crm.RiwayatApplyMahasiswa;
 import com.agit.crm.domain.crm.RiwayatApplyMahasiswaRepository;
 import com.agit.crm.util.StringUtil;
@@ -49,12 +48,15 @@ public class RiwayatApplyMahasiswaHibernateRepository extends HibernateRepositor
 
     @Override
     public List<RiwayatApplyMahasiswa> findByParams(Map map) {
-        Criteria criteria = getSession().createCriteria(Minat.class);
+        Criteria criteria = getSession().createCriteria(RiwayatApplyMahasiswa.class);
         if (StringUtil.hasValue(map.get("idRiwayatApplyMahasiswa"))) {
             criteria.add(Restrictions.eq("idRiwayatApplyMahasiswa", map.get("idRiwayatApplyMahasiswa")));
         }
         if (StringUtil.hasValue(map.get("lowonganState"))) {
             criteria.add(Restrictions.like("lowonganState", "%" + map.get("lowonganState") + "%").ignoreCase());
+        }
+        if (StringUtil.hasValue(map.get("namaApplyLowongan"))) {
+            criteria.add(Restrictions.eq("namaApplyLowongan",map.get("namaApplyLowongan")));
         }
         return criteria.list();
     }
