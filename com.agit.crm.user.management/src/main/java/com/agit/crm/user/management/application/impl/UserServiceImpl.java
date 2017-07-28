@@ -363,17 +363,28 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserDTO> findAll() {
-        Validate.notNull(userRepository);
-        return userDTOAssembler.toDTOs(userRepository.findAll());
-    }
-
-    @Override
     public List<UserDTO> findByParamsMap(Map map) {
         Validate.notNull(userRepository);
         List<User> listMahasiswa = userRepository.findByParamsMap(map);
         if (listMahasiswa != null) {
             return (List<UserDTO>) userDTOAssembler.toDTOs(listMahasiswa);
+        }
+        return null;
+    }
+
+    @Override
+    public List<UserDTO> findByRoleID(String roleID) {
+        Validate.notNull(userRepository);
+        List<User> users = (List<User>) userRepository.findByRoleID(roleID);
+        return userDTOAssembler.toDTOs(users);
+    }
+
+    @Override
+    public List<UserDTO> findAllMahasiswa(long roleid) {
+        Validate.notNull(userRepository);
+        List<User> users = (List<User>) userRepository.findAllByMahasiswa(roleid);
+        if (users != null) {
+            return userDTOAssembler.toDTOs(users);
         }
         return null;
     }

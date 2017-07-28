@@ -1,7 +1,7 @@
 <zk xmlns="http://www.zkoss.org/2005/zul">
     <window border="30" apply="org.zkoss.bind.BindComposer"
             viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.admin.LowonganVM')"
-            form="@id('fx') @load(vm.mahasiswaDTO) @save(vm.mahasiswaDTO, before='buttonBackApplicant')">
+            form="@id('fx') @load(vm.userDTO) @save(vm.userDTO, before='buttonBackApplicant')">
         <groupbox closable="false" mold="3d">
             <caption label="Daftar Pelamar" />
             <paging forward="onPaging"/>

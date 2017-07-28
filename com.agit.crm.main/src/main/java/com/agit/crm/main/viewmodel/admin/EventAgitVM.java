@@ -3,7 +3,6 @@ package com.agit.crm.main.viewmodel.admin;
 import com.agit.crm.common.application.EventAgitService;
 import com.agit.crm.common.dto.crm.EventAgitDTO;
 import com.agit.crm.common.dto.crm.EventAgitDTOBuilder;
-import com.agit.crm.common.dto.crm.MahasiswaDTO;
 import com.agit.crm.common.security.SecurityUtil;
 import com.agit.crm.shared.status.Status;
 import com.agit.crm.shared.zul.CommonViewModel;

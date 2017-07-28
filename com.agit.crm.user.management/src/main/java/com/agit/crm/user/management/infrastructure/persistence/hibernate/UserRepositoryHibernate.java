@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
@@ -97,12 +98,6 @@ public class UserRepositoryHibernate extends HibernateRepository implements User
     }
 
     @Override
-    public List<User> findAll() {
-        Criteria criteria = getSession().createCriteria(User.class);
-        return (List<User>) criteria.list();
-    }
-
-    @Override
     public List<User> findByParamsMap(Map map) {
         Criteria criteria = getSession().createCriteria(User.class);
         if (StringUtil.hasValue(map.get("userID"))) {
@@ -122,4 +117,12 @@ public class UserRepositoryHibernate extends HibernateRepository implements User
         }
         return (List<User>) criteria.list();
     }
+
+    @Override
+    public List<User> findAllByMahasiswa(long roleid) {
+        Query query = getSession().createQuery("FROM com.agit.crm.user.management.domain.user.User WHERE roleid = :rid");
+        query.setParameter("rid", roleid);
+        return (List<User>) query.list();
+    }
+
 }

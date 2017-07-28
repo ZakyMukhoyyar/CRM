@@ -3,7 +3,6 @@ package com.agit.crm.user.management.interfaces.web.facade.dto.assembler.user;
 import com.agit.crm.common.dto.usermanagement.UserDTO;
 import com.agit.crm.common.dto.usermanagement.UserDTOBuilder;
 import com.agit.crm.interfaces.web.facade.dto.assembler.crm.LowonganDTOAssembler;
-import com.agit.crm.interfaces.web.facade.dto.assembler.crm.RiwayatApplyMahasiswaDTOAssembler;
 import com.agit.crm.user.management.domain.role.RoleRepository;
 import com.agit.crm.user.management.domain.user.User;
 import com.agit.crm.user.management.domain.user.UserBuilder;

@@ -1,31 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zk xmlns="http://www.zkoss.org/2005/zul">
     <window apply="org.zkoss.bind.BindComposer"
-            viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.mahasiswa.MahasiswaVM')"
-            form="@id('fx') @load(vm.mahasiswaDTO) @save(vm.mahasiswaDTO, before='buttonSaveMahasiswa')">
+            viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.admin.DataMahasiswaVM')"
+            form="@id('fx') @load(vm.userDTO) @save(vm.userDTO, before='buttonSaveMahasiswa')">
         <groupbox height="460px" closable="false" mold="3d" style="background:#f5f5f5" sclass="col-md-12 nopadding" >
             <caption label="Dashboard Data Register Mahasiswa" />
             
             <div sclass="col-md-3 nopadding">
                 <div class="form-group" style="font-style:bold;">
                     <label sclass="isi" value="Nama Lengkap" />
-                    <textbox class="form-control" width="100%" value="@bind(vm.namaLengkap)"/>
+                    <textbox class="form-control" width="100%" value="@bind(vm.fullName)"/>
                 </div>
                 <div class="form-group" style="font-style:bold;">
                     <label sclass="isi" value="KTP" />
-                    <textbox class="form-control" width="100%" value="@bind(vm.noKTP)"/>
+                    <textbox class="form-control" width="100%" value="@bind(vm.ktp)"/>
                 </div>
                 <div class="form-group" style="font-style:bold;">
                     <label sclass="isi" value="Domisili" />
-                    <textbox class="form-control" width="100%" value="@bind(vm.domisili)"/>
+                    <listbox 
+                        class="form-control"
+                        width="100%"
+                        mold="select"
+                        model="@load(vm.listDomisili)" 
+                        selectedItem="@bind(vm.domisiliSelect)" >
+                        <template name="model" var="items" >
+                            <listitem label="@load(items)"  value="@load(items)" />
+                        </template>
+                    </listbox> 
                 </div>
                 <div class="form-group" style="font-style:bold;">
                     <label sclass="isi" value="Minat Pekerjaan" />
-                    <combobox width="100%" placeholder="- Silahkan Pilih -" model="@load(vm.listNamaMinat)" selectedItem="@bind(vm.minatSelect)">
-                        <template name="model" var="items">
-                            <comboitem label="@load(items)" value="@load(items)"/>
+                    <listbox 
+                        class="form-control"
+                        width="100%"
+                        mold="select"
+                        model="@load(vm.listMinat)" 
+                        selectedItem="@bind(vm.minatSelect)" >
+                        <template name="model" var="items" >
+                            <listitem label="@load(items)"  value="@load(items)" />
                         </template>
-                    </combobox>
+                    </listbox>
                 </div>
                 <div>
                     <a sclass="btn btn-info" width="100%"  label="Pencarian" onClick="@command('searchRegMahasiswa')"/>
@@ -34,9 +48,9 @@
             <div sclass="col-md-9 nopadding">
                 <groupbox closable="false">
                     <paging forward="onPaging" />
-                    <listbox rows="6" mold="paging" emptyMessage="${labels.common.noDataFound}"  model="@bind(vm.mahasiswaDTOs)">
+                    <listbox rows="6" mold="paging" emptyMessage="${labels.common.noDataFound}"  model="@bind(vm.userDTOs)">
                         <listhead>
-                            <listheader label="ID" width="7%" align="center" sortDirection="ascending" sort="auto(idMahasiswa)"/>
+                            <listheader label="ID" width="7%" align="center" sortDirection="ascending" sort="auto(userID)"/>
                             <listheader label="Nama Lengkap" width="20%" align="center"/>
                             <listheader label="Domisili" width="14%" align="center"/>
                             <listheader label="IPK" width="5%" align="center"/>
@@ -46,19 +60,19 @@
                         <template name="model">
                             <listitem value="${each}">
                                 <listcell>
-                                    <label width="100%" value="@bind(each.idMahasiswa)"/>
+                                    <label width="100%" value="@bind(each.userID)"/>
                                 </listcell>
                                 <listcell>
-                                    <label width="100%" value="@bind(each.namaLengkap)"/>
+                                    <label width="100%" value="@bind(each.userSpecificationDTO.fullName)"/>
                                 </listcell>
                                 <listcell>
-                                    <label width="100%" value="@bind(each.domisili)"/>
+                                    <label width="100%" value="@bind(each.userSpecificationDTO.domisili)"/>
                                 </listcell>
                                 <listcell>
-                                    <label width="100%" value="@bind(each.ipk)"/>
+                                    <label width="100%" value="@bind(each.userSpecificationDTO.ipk)"/>
                                 </listcell>
                                 <listcell>
-                                    <label width="100%" value="@bind(each.minat)"/>
+                                    <label width="100%" value="@bind(each.userSpecificationDTO.minat)"/>
                                 </listcell>
                                 <listcell>
                                     <a sclass="isi btn btn-primary" label="Detail" onClick="@command('detailRegMahasiswa', object=each)"></a>

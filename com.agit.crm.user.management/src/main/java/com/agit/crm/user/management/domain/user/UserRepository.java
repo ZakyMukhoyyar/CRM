@@ -30,7 +30,7 @@ public interface UserRepository {
 
     User findByNamaLengkap(String fullName);
 
-    List<User> findAll();
+    List<User> findAllByMahasiswa(long roleid);
 
     List<User> findByParamsMap(Map map);
 }

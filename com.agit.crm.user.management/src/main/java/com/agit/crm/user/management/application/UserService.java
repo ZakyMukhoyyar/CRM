@@ -47,7 +47,9 @@ public interface UserService {
 
     UserDTO getDummy();
 
-    List<UserDTO> findAll();
+    List<UserDTO> findAllMahasiswa(long roleid);
+
+    List<UserDTO> findByRoleID(String roleID);
 
     List<UserDTO> findByParamsMap(Map map);
 }

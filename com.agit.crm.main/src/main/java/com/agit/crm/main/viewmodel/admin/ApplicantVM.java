@@ -1,9 +1,7 @@
 package com.agit.crm.main.viewmodel.admin;
 
 import com.agit.crm.common.application.LowonganService;
-import com.agit.crm.common.application.MahasiswaService;
 import com.agit.crm.common.dto.crm.LowonganDTO;
-import com.agit.crm.common.dto.crm.MahasiswaDTO;
 import com.agit.crm.shared.zul.CommonViewModel;
 import com.agit.crm.shared.zul.PageNavigation;
 import java.util.ArrayList;
@@ -30,17 +28,16 @@ import org.zkoss.zul.Window;
 public class ApplicantVM {
 
     /* Import Service */
-    @WireVariable
-    MahasiswaService mahasiswaService;
-
+//    @WireVariable
+//    MahasiswaService mahasiswaService;
     @WireVariable
     LowonganService lowonganService;
 
     /* Object Binding */
     private LowonganDTO lowonganDTO = new LowonganDTO();
     private List<LowonganDTO> lowonganDTOs = new ArrayList();
-    private MahasiswaDTO mahasiswaDTO = new MahasiswaDTO();
-    private List<MahasiswaDTO> mahasiswaDTOs = new ArrayList();
+//    private MahasiswaDTO mahasiswaDTO = new MahasiswaDTO();
+//    private List<MahasiswaDTO> mahasiswaDTOs = new ArrayList();
 
     private PageNavigation previous;
     private boolean checked;
@@ -53,7 +50,7 @@ public class ApplicantVM {
     @Init
     public void init(
             @ExecutionArgParam("LowonganDTO") LowonganDTO lowongan,
-            @ExecutionArgParam("MahasiswaDTO") MahasiswaDTO mahasiswa,
+            //            @ExecutionArgParam("MahasiswaDTO") MahasiswaDTO mahasiswa,
             @ExecutionArgParam("previous") PageNavigation previous
     ) {
         /* Load Data */
@@ -66,34 +63,33 @@ public class ApplicantVM {
         if (lowonganDTOs.isEmpty()) {
             lowonganDTOs = Collections.emptyList();
         }
-        mahasiswaDTOs = mahasiswaService.findAll();
-        if (mahasiswaDTOs.isEmpty()) {
-            mahasiswaDTOs = Collections.emptyList();
-        }
+//        mahasiswaDTOs = mahasiswaService.findAll();
+//        if (mahasiswaDTOs.isEmpty()) {
+//            mahasiswaDTOs = Collections.emptyList();
+//        }
     }
-    
+
     @Command("detailLowongan")
     @NotifyChange({"lowongan", "mahasiswa"})
-    public void detailLowongan(@BindingParam("object") LowonganDTO obj, @ContextParam(ContextType.VIEW) Window window){
+    public void detailLowongan(@BindingParam("object") LowonganDTO obj, @ContextParam(ContextType.VIEW) Window window) {
         Map<String, Object> params = new HashMap<>();
         params.put("lowonganDTO", obj);
         CommonViewModel.navigateToWithoutDetach("/crm/admin/applicant/applicant_contain.zul", window, params);
     }
-    
-    @Command("detailApplicant")
-    @NotifyChange({"lowongan", "mahasiswa"})
-    public void detailApplicant(@BindingParam("object") MahasiswaDTO obj, @ContextParam(ContextType.VIEW) Window window){
-        Map<String, Object> params = new HashMap<>();
-        params.put("mahasiswaDTO", obj);
-        CommonViewModel.navigateToWithoutDetach("/crm/mahasiswa/registrasi_mahasiswa.zul", window, params);
-    }
-    
+
+//    @Command("detailApplicant")
+//    @NotifyChange({"lowongan", "mahasiswa"})
+//    public void detailApplicant(@BindingParam("object") MahasiswaDTO obj, @ContextParam(ContextType.VIEW) Window window) {
+//        Map<String, Object> params = new HashMap<>();
+//        params.put("mahasiswaDTO", obj);
+//        CommonViewModel.navigateToWithoutDetach("/crm/mahasiswa/registrasi_mahasiswa.zul", window, params);
+//    }
     @Command("buttonKembaliApplicantContain")
     @NotifyChange({"lowongan", "mahasiswa"})
-    public void buttonKembaliApplicantContain (@BindingParam("object") LowonganDTO obj, @ContextParam(ContextType.VIEW) Window window){
+    public void buttonKembaliApplicantContain(@BindingParam("object") LowonganDTO obj, @ContextParam(ContextType.VIEW) Window window) {
         window.detach();
     }
-    
+
 
     /* getter setter */
     public LowonganDTO getLowonganDTO() {
@@ -110,22 +106,6 @@ public class ApplicantVM {
 
     public void setLowonganDTOs(List<LowonganDTO> lowonganDTOs) {
         this.lowonganDTOs = lowonganDTOs;
-    }
-
-    public MahasiswaDTO getMahasiswaDTO() {
-        return mahasiswaDTO;
-    }
-
-    public void setMahasiswaDTO(MahasiswaDTO mahasiswaDTO) {
-        this.mahasiswaDTO = mahasiswaDTO;
-    }
-
-    public List<MahasiswaDTO> getMahasiswaDTOs() {
-        return mahasiswaDTOs;
-    }
-
-    public void setMahasiswaDTOs(List<MahasiswaDTO> mahasiswaDTOs) {
-        this.mahasiswaDTOs = mahasiswaDTOs;
     }
 
     public PageNavigation getPrevious() {
