@@ -352,9 +352,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDTO findByFullName(String fullName) {
+    public UserDTO findByUserID(String userID) {
         Validate.notNull(userRepository);
-        User user = (User) userRepository.findByNamaLengkap(fullName);
+        User user = (User) userRepository.findByUserID(userID);
         if (user != null) {
             return userDTOAssembler.toDTO(user);
         }

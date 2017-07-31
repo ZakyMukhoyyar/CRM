@@ -91,9 +91,9 @@ public class UserRepositoryHibernate extends HibernateRepository implements User
     }
 
     @Override
-    public User findByNamaLengkap(String fullName) {
+    public User findByUserID(String userID) {
         Criteria criteria = getSession().createCriteria(User.class)
-                .add(Restrictions.eq("userSpecification.fullName", fullName));
+                .add(Restrictions.eq("userID", userID));
         return (User) criteria.uniqueResult();
     }
 

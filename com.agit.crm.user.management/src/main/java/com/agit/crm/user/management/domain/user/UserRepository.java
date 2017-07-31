@@ -28,7 +28,7 @@ public interface UserRepository {
 
     int count(String roleID);
 
-    User findByNamaLengkap(String fullName);
+    User findByUserID(String userID);
 
     List<User> findAllByMahasiswa(long roleid);
 

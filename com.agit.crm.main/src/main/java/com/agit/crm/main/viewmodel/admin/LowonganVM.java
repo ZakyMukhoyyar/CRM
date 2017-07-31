@@ -80,7 +80,9 @@ public class LowonganVM {
     private List<LowonganDTO> lowonganDTOs = new ArrayList();
     private List<MinatDTO> minats = new ArrayList<MinatDTO>();
     private List<RiwayatApplyMahasiswaDTO> riwayatApplyMahasiswaDTOs = new ArrayList<>();
+    private List<RiwayatApplyMahasiswaDTO> listRiwayatApplyMahasiswaDTOs = new ArrayList<>();
     private List<LowonganStatusDTO> lowonganStatusDTOs = new ArrayList<>();
+    private List<String> listLowonganID = new ArrayList<String>();
 
     /* Function For Combobox  */
     private ListModelList<String> gaji = new ListModelList<>();
@@ -96,10 +98,11 @@ public class LowonganVM {
     private String namaApplyLowongan;
     private String idRiwayatApplyMahasiswa;
     private String idLowonganStatus;
+    private String idRiwayatLowongan;
 
     private PageNavigation previous;
     private boolean checked;
-    private int pageSize = 2;
+    private int pageSize = 5;
     private int pageSizeCreateLowongan = 7;
     private int activePage = 0;
     private int selectedIndex;
@@ -132,6 +135,9 @@ public class LowonganVM {
         if (lowonganDTOs.isEmpty()) {
             lowonganDTOs = Collections.emptyList();
         }
+        for (LowonganDTO m : lowonganDTOs) {
+            listLowonganID.add(m.getIdLowongan());
+        }
 
         userDTO = userService.findByID(SecurityUtil.getUserName());
         Map<String, Object> map = new HashMap();
@@ -141,6 +147,10 @@ public class LowonganVM {
             riwayatApplyMahasiswaDTOs = Collections.emptyList();
         }
 
+//        listRiwayatApplyMahasiswaDTOs = riwayatApplyMahasiswaService.findAll();
+//        if (listRiwayatApplyMahasiswaDTOs.isEmpty()) {
+//            listRiwayatApplyMahasiswaDTOs = Collections.emptyList();
+//        }
         lowonganStatusDTOs = lowonganStatusService.findAll();
         if (lowonganStatusDTOs.isEmpty()) {
             lowonganStatusDTOs = Collections.emptyList();
@@ -286,14 +296,6 @@ public class LowonganVM {
         CommonViewModel.navigateToWithoutDetach("/crm/mahasiswa/riwayat_apply_lowongan.zul", window, params1);
     }
 
-    @Command("buttonViewDataPribadi")
-    @NotifyChange("mahasiswaDTO")
-    public void buttonViewDataPribadi(@BindingParam("object") LowonganDTO obj, @ContextParam(ContextType.VIEW) Window window) {
-        Map<String, Object> params = new HashMap<>();
-        params.put("lowonganDTO", obj);
-        CommonViewModel.navigateToWithoutDetach("/crm/mahasiswa/riwayat_apply_lowongan.zul", window, params);
-    }
-
     @Command("buttonCancelRiwayatLowongan")
     @NotifyChange("lowonganDTO")
     public void buttonCancelRiwayatLowongan(@BindingParam("object") LowonganDTO obj, @ContextParam(ContextType.VIEW) Window window) {
@@ -383,53 +385,41 @@ public class LowonganVM {
         lowonganDTO = (LowonganDTO) obj;
         Messagebox.show("Apakah anda yakin ingin menghapus Lowongan?", "Konfirmasi", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION,
                 new org.zkoss.zk.ui.event.EventListener() {
-            @Override
-            public void onEvent(Event evt) throws InterruptedException {
-                if (evt.getName().equals("onOK")) {
-                    lowonganService.deleteData(lowonganDTO);
-                    showInformationMessagebox("Lowongan Berhasil Dihapus");
-                    BindUtils.postGlobalCommand(null, null, "refreshLowongan", null);
-                } else {
-                    System.out.println("Operation Canceled !");
+                    @Override
+                    public void onEvent(Event evt) throws InterruptedException {
+                        if (evt.getName().equals("onOK")) {
+                            lowonganService.deleteData(lowonganDTO);
+                            showInformationMessagebox("Lowongan Berhasil Dihapus");
+                            BindUtils.postGlobalCommand(null, null, "refreshLowongan", null);
+                        } else {
+                            System.out.println("Operation Canceled !");
+                        }
+                    }
                 }
-            }
-        }
         );
     }
 
     /* --------------------------------------------- for data apply functionality ---------------------------------------------------*/
-    @Command("detailMahasiswa")
-    @NotifyChange("userDTOs")
-    public void detailMahasiswa(@BindingParam("object") UserDTO obj, @ContextParam(ContextType.VIEW) Window window) {
-        Map<String, Object> params = new HashMap<>();
-        params.put("userDTO", obj);
-        CommonViewModel.navigateToWithoutDetach("/crm/admin/dataApplyLowongan/dashboard_applicant.zul", window, params);
-    }
+    @Command("searchPelamar")
+    @NotifyChange("listRiwayatApplyMahasiswaDTOs")
+    public void searchPelamar(@ContextParam(ContextType.VIEW) Window window) {
+        Map params = new HashMap();
+        params.put("idRiwayatLowongan", idRiwayatLowongan);
+        params.put("namaLowonganApply", namaLowonganApply);
+        params.put("namaApplyLowongan", namaApplyLowongan);
 
-    @Command("KlikDataPelamar")
-    @NotifyChange({"userDTO", "userDTOs", "lowonganDTO", "lowonganDTOs", "riwayatApplyMahasiswaDTOs", "riwayatApplyMahasiswaDTO"})
-    public void KlikDataPelamar(@BindingParam("object") LowonganDTO obj, @ContextParam(ContextType.VIEW) Window window) {
-        Map<String, Object> params = new HashMap<>();
-        params.put("lowonganDTO", obj);
-        CommonViewModel.navigateToWithoutDetach("/crm/admin/dataApplyLowongan/dashboard_pelamar.zul", window, params);
+        listRiwayatApplyMahasiswaDTOs = riwayatApplyMahasiswaService.findByParams(params);
     }
 
     @Command("KlikDetailDataPelamar")
     @NotifyChange({"userDTO", "userDTOs", "lowonganDTO", "lowonganDTOs", "riwayatApplyMahasiswaDTOs", "riwayatApplyMahasiswaDTO"})
     public void KlikDetailDataPelamar(@BindingParam("object") RiwayatApplyMahasiswaDTO obj, @ContextParam(ContextType.VIEW) Window window) {
-        if (obj.getNamaApplyLowongan() != null) {
-            userDTO = userService.findByFullName(obj.getNamaApplyLowongan());
+        if (obj.getIdUserRiwayat() != null) {
+            userDTO = userService.findByUserID(obj.getIdUserRiwayat());
         }
 
     }
 
-//    @Command("AddDetailApplicant")
-//    @NotifyChange({"userDTO", "userDTOs", "lowonganDTO", "lowonganDTOs"})
-//    public void AddDetailApplicant(@BindingParam("object") UserDTO obj, @ContextParam(ContextType.VIEW) Window window) {
-//        Map<String, Object> params = new HashMap<>();
-//        params.put("userDTO", obj);
-////        CommonViewModel.navigateToWithoutDetach("/crm/admin/applicant/dummy.zul", window, params);
-//    }
     @Command("buttonBackApplicant")
     @NotifyChange({"lowonganDTO", "userDTOs"})
     public void buttonBackApplicant(@BindingParam("object") LowonganDTO obj, UserDTO obj2, @ContextParam(ContextType.VIEW) Window window) {
@@ -719,6 +709,30 @@ public class LowonganVM {
 
     public void setUserID(String userID) {
         this.userID = userID;
+    }
+
+    public List<RiwayatApplyMahasiswaDTO> getListRiwayatApplyMahasiswaDTOs() {
+        return listRiwayatApplyMahasiswaDTOs;
+    }
+
+    public void setListRiwayatApplyMahasiswaDTOs(List<RiwayatApplyMahasiswaDTO> listRiwayatApplyMahasiswaDTOs) {
+        this.listRiwayatApplyMahasiswaDTOs = listRiwayatApplyMahasiswaDTOs;
+    }
+
+    public String getIdRiwayatLowongan() {
+        return idRiwayatLowongan;
+    }
+
+    public void setIdRiwayatLowongan(String idRiwayatLowongan) {
+        this.idRiwayatLowongan = idRiwayatLowongan;
+    }
+
+    public List<String> getListLowonganID() {
+        return listLowonganID;
+    }
+
+    public void setListLowonganID(List<String> listLowonganID) {
+        this.listLowonganID = listLowonganID;
     }
 
 }

@@ -43,7 +43,7 @@ public interface UserService {
 
     Boolean isNotExistIPAddress(String ipAddress);
 
-    UserDTO findByFullName(String fullName);
+    UserDTO findByUserID(String userID);
 
     UserDTO getDummy();
 

@@ -13,59 +13,59 @@
                 <rows>
                     <row>
                         <label value="ID " style="font-weight: bold"/>
-                        <textbox width="30%" readonly="true" value="@bind(fx.idMahasiswa)"/>
+                        <textbox width="30%" readonly="true" value="@bind(fx.userID)"/>
                     </row>
                     <row>
                         <label value="Nama Lengkap" style="font-weight: bold"/>
-                        <textbox width="100%" readonly="true" value="@bind(fx.namaLengkap)"/>
+                        <textbox width="100%" readonly="true" value="@bind(fx.userSpecificationDTO.fullName)"/>
                     </row>
                     <row>
                         <label value="Alamat Email" style="font-weight: bold"/>
-                        <textbox width="100%" readonly="true" value="@bind(fx.email)"/>
+                        <textbox width="100%" readonly="true" value="@bind(fx.userSpecificationDTO.email)"/>
                     </row>
                     <row>
                         <label value="Tanggal Lahir" style="font-weight: bold" />
-                        <textbox width="100%" readonly="true" value="@bind(fx.tanggalLahir)"/> 
+                        <textbox width="100%" readonly="true" value="@bind(fx.userSpecificationDTO.tanggalLahir)"/> 
                     </row>
                     <row>
                         <label value="No KTP" style="font-weight: bold"/>
-                        <textbox width="100%" readonly="true" value="@bind(fx.noKTP)"/>
+                        <textbox width="100%" readonly="true" value="@bind(fx.userSpecificationDTO.ktp)"/>
                     </row>
                         
                     <row>
                         <label value="Jenis Kelamin" style="font-weight: bold"/>
-                        <textbox width="100%" readonly="true" value="@bind(fx.jenisKelaminType)" />
+                        <textbox width="100%" readonly="true" value="@bind(fx.userSpecificationDTO.jenisKelaminType)" />
                     </row>
                         
                     <row>
                         <label value="Domisili" style="font-weight: bold"/>
-                        <textbox width="100%" readonly="true" value="@bind(fx.domisili)"/>
+                        <textbox width="100%" readonly="true" value="@bind(fx.userSpecificationDTO.domisili)"/>
                     </row>
                         
                     <row>
                         <label value="No Handphone" style="font-weight: bold"/>
-                        <textbox width="100%" readonly="true" value="@bind(fx.noHP)"/>
+                        <textbox width="100%" readonly="true" value="@bind(fx.userSpecificationDTO.mobilePhone)"/>
                     </row>
                     <row>
                         <label value="Pendidikan Terakhir" style="font-weight: bold"/>
-                        <textbox width="100%" readonly="true" value="@bind(fx.pendidikanType)" />
+                        <textbox width="100%" readonly="true" value="@bind(fx.userSpecificationDTO.pendidikanType)" />
                     </row>
                     <row>
                         <label value="Nama Civitas" style="font-weight: bold"/>
-                        <textbox width="100%" readonly="true" value="@bind(fx.namaCivitas)" />
+                        <textbox width="100%" readonly="true" value="@bind(fx.userSpecificationDTO.namaCivitas)" />
                     </row>
                     <row>
                         <label value="IPK" style="font-weight: bold"/>
-                        <textbox width="100%" readonly="true" value="@bind(fx.ipk)"/>
+                        <textbox width="100%" readonly="true" value="@bind(fx.userSpecificationDTO.ipk)"/>
                     </row>
                     <row>
                         <label value="Minat" style="font-weight: bold"/>
-                        <textbox width="100%" readonly="true" value="@bind(fx.minat)" />
+                        <textbox width="100%" readonly="true" value="@bind(fx.userSpecificationDTO.minat)" />
                     </row>
-                    <row>
+                    <!--                    <row>
                         <label/>
                         <button label="Kembali" onClick="@command('buttonBackApplicant')"/>
-                    </row>
+                    </row>-->
                 </rows>
             </grid>
         </groupbox>

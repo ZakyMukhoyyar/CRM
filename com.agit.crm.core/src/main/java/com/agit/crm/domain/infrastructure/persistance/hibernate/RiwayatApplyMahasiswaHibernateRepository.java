@@ -52,17 +52,30 @@ public class RiwayatApplyMahasiswaHibernateRepository extends HibernateRepositor
         if (StringUtil.hasValue(map.get("idRiwayatApplyMahasiswa"))) {
             criteria.add(Restrictions.eq("idRiwayatApplyMahasiswa", map.get("idRiwayatApplyMahasiswa")));
         }
+        if (StringUtil.hasValue(map.get("idRiwayatLowongan"))) {
+            criteria.add(Restrictions.eq("idRiwayatLowongan", map.get("idRiwayatLowongan")));
+        }
         if (StringUtil.hasValue(map.get("lowonganState"))) {
-            criteria.add(Restrictions.like("lowonganState", "%" + map.get("lowonganState") + "%").ignoreCase());
+            criteria.add(Restrictions.eq("lowonganState", "%" + map.get("lowonganState") + "%").ignoreCase());
         }
         if (StringUtil.hasValue(map.get("namaApplyLowongan"))) {
-            criteria.add(Restrictions.eq("namaApplyLowongan", map.get("namaApplyLowongan")));
+            criteria.add(Restrictions.like("namaApplyLowongan", "%" + map.get("namaApplyLowongan") + "%").ignoreCase());
         }
-
+        if (StringUtil.hasValue(map.get("namaLowonganApply"))) {
+            criteria.add(Restrictions.like("namaLowonganApply", "%" + map.get("namaLowonganApply") + "%").ignoreCase());
+        }
         if (StringUtil.hasValue(map.get("idUserRiwayat"))) {
-            criteria.add(Restrictions.like("idUserRiwayat", "%" + map.get("idUserRiwayat") + "%").ignoreCase());
+            criteria.add(Restrictions.eq("idUserRiwayat", "%" + map.get("idUserRiwayat") + "%").ignoreCase());
         }
         return criteria.list();
+    }
+
+    @Override
+    public List<RiwayatApplyMahasiswa> findAllRiwayataLowongan(String idRiwayatLowongan) {
+        return (List<RiwayatApplyMahasiswa>) getSession()
+                .createQuery("from com.agit.crm.domain.crm.RiwayatApplyMahasiswa where idRiwayatLowongan = :lid")
+                .setParameter("lid", idRiwayatLowongan)
+                .list();
     }
 
 }

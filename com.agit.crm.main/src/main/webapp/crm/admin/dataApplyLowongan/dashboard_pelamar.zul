@@ -4,58 +4,84 @@
             form="@id('fx') @load(vm.userDTO) @save(vm.userDTO, before='buttonBackApplicant')">
         <groupbox closable="false" mold="3d">
             <caption label="Daftar Pelamar" />
-            <paging forward="onPaging"/>
-            <listbox rows="5" emptyMessage="${labels.common.noDataFound}" model="@bind(vm.riwayatApplyMahasiswaDTOs)">
-                <listhead sizable="true">
-                    <listheader label="ID Lowongan" width="7%" align="center"/>
-                    <listheader label="Nama Lowongan" width="20%" align="center"/>
-                    <listheader label="Status" width="10%" align="center"/>
-                    <listheader label="Nama Apply" width="10%" align="center"/>
-                    <listheader label="Waktu Apply" width="15%" align="center"/>
-                    <listheader label="Aksi" width="8%" align="center"/>
-                </listhead>
-                <template name="model">
-                    <listitem value="${each}">
-                        <listcell >
-                            <label width="100%" value="@bind(each.idRiwayatLowongan)"/>
-                        </listcell>
-                        <listcell >
-                            <label width="100%" value="@bind(each.namaLowonganApply)"/>
-                        </listcell>
-                        <listcell >
-                            <label width="100%" value="@bind(each.lowonganState)"/>
-                        </listcell>
-                        <listcell >
-                            <label width="100%" value="@bind(each.namaApplyLowongan)"/>
-                        </listcell>
-                        <listcell >
-                            <label width="100%" value="@bind(each.createdDate)"/>
-                        </listcell>
-                        <listcell>
-                            <a label="Detail" style="text-decoration:underline ;color:blue" onClick="@command('KlikDetailDataPelamar', object=each)"></a>
-                            <a label=" | " style="font-size:12pt ;color:black"></a>
-                            <checkbox label="Approve" style="text-decoration:underline ;color:blue"/>
-                        </listcell>
-                    </listitem>
-                </template>
-            </listbox>
-            <groupbox>
-                <grid style="border:0">
+            <div sclass="col-md-3 nopadding">
+                <div class="form-group" style="font-style:bold;">
+                    <label sclass="labelstyle" value="Filter Pencarian :" />
+                    <separator width="90%" bar="true"/>
+                </div>
+                <div class="form-group">
+                    <label sclass="labelstyle" value="ID Lowongan" />      
+                    <listbox mold="select" sclass="form-control" model="@load(vm.listLowonganID)" selectedItem="@bind(vm.idRiwayatLowongan)" width="90%">
+                        <template name="model" var="items" >
+                            <listitem label="@load(items)"  value="@load(items)" />
+                        </template>
+                    </listbox>
+                </div>
+                <div class="form-group">
+                    <label sclass="labelstyle" value="Nama Lowongan" />
+                    <textbox class="form-control" width="90%" value="@bind(vm.namaLowonganApply)" />    
+                </div> 
+                <div class="form-group">
+                    <label sclass="labelstyle" value="Nama Apply" />
+                    <textbox class="form-control" width="90%" value="@bind(vm.namaApplyLowongan)" />
+                </div> 
+                <div>
+                    <separator/>
+                    <a sclass="btn btn-info" width="90%" label="Pencarian" onClick="@command('searchPelamar')"/>
+                </div>
+            </div>
+            <div sclass="col-md-9 nopadding">
+                <groupbox closable="false" sclass="col-md-12">
+                    <listbox rows="5" mold="paging" pageSize="5" emptyMessage="${labels.common.noDataFound}" model="@bind(vm.listRiwayatApplyMahasiswaDTOs)">
+                        <listhead sizable="true">
+                            <listheader label="ID Lowongan" width="7%" align="center"/>
+                            <listheader label="Nama Lowongan" width="20%" align="center"/>
+                            <listheader label="Nama Apply" width="15%" align="center"/>
+                            <listheader label="Waktu Apply" width="15%" align="center"/>
+                            <listheader label="Aksi" width="15%" align="center"/>
+                        </listhead>
+                        <template name="model">
+                            <listitem value="${each}">
+                                <listcell >
+                                    <label width="100%" value="@bind(each.idRiwayatLowongan)"/>
+                                </listcell>
+                                <listcell >
+                                    <label width="100%" value="@bind(each.namaLowonganApply)"/>
+                                </listcell>
+                                <listcell >
+                                    <label width="100%" value="@bind(each.namaApplyLowongan)"/>
+                                </listcell>
+                                <listcell >
+                                    <label width="100%" value="@bind(each.createdDate)"/>
+                                </listcell>
+                                <listcell>
+                                    <a label="Detail" style="text-decoration:underline ;color:blue" onClick="@command('KlikDetailDataPelamar', object=each)"></a>
+                                    <a label=" | " style="font-size:12pt ;color:black"></a>
+                                    <checkbox label="Approve" style="text-decoration:underline ;color:blue"/>
+                                </listcell>
+                            </listitem>
+                        </template>
+                    </listbox>
+                    <groupbox>
+                        <grid style="border:0">
                 
-                    <columns>
-                        <column align="right" width="98%"/>
-                        <column align="right" width="1%"/>
-                        <column align="left" width="1%"/>
-                    </columns>
+                            <columns>
+                                <column align="right" width="98%"/>
+                                <column align="right" width="1%"/>
+                                <column align="left" width="1%"/>
+                            </columns>
                 
-                    <rows>
-                        <row>
-                            <button label="Save" width="8%"/>
-                        </row>
-                    </rows>
-                </grid>
-            </groupbox>
+                            <rows>
+                                <row>
+                                    <button label="Save" width="8%"/>
+                                </row>
+                            </rows>
+                        </grid>
+                    </groupbox>
+                </groupbox>
+            </div>
         </groupbox>
+                
         <separator></separator>
         <div>
             <include src="/crm/admin/dataApplyLowongan/detail_applicant.zul">
@@ -64,70 +90,3 @@
         </div>
     </window>
 </zk>
-<!--        <groupbox closable="false" mold="3d" >
-            <caption label="Data Applicant" />
-            <grid style="border:0">
-                <columns>
-                    <column width="30%" align="right"/>
-                    <column width="40%"/>
-                    <column ></column>
-                </columns>
-                <rows>
-                    <row>
-                        <label value="ID " style="font-weight: bold"/>
-                        <textbox width="30%" readonly="true" value="@bind(fx.idMahasiswa)"/>
-                    </row>
-                    <row>
-                        <label value="Nama Lengkap" style="font-weight: bold"/>
-                        <textbox width="100%" readonly="true" value="@bind(fx.namaLengkap)"/>
-                    </row>
-                    <row>
-                        <label value="Alamat Email" style="font-weight: bold"/>
-                        <textbox width="100%" readonly="true" value="@bind(fx.email)"/>
-                    </row>
-                    <row>
-                        <label value="Tanggal Lahir" style="font-weight: bold" />
-                        <textbox width="100%" readonly="true" value="@bind(fx.tanggalLahir)"/> 
-                    </row>
-                    <row>
-                        <label value="No KTP" style="font-weight: bold"/>
-                        <textbox width="100%" readonly="true" value="@bind(fx.noKTP)"/>
-                    </row>
-                        
-                    <row>
-                        <label value="Jenis Kelamin" style="font-weight: bold"/>
-                        <textbox width="100%" readonly="true" value="@bind(fx.jenisKelaminType)" />
-                    </row>
-                        
-                    <row>
-                        <label value="Domisili" style="font-weight: bold"/>
-                        <textbox width="100%" readonly="true" value="@bind(fx.domisili)"/>
-                    </row>
-                        
-            <row>
-                <label value="No Handphone" style="font-weight: bold"/>
-                <textbox width="100%" readonly="true" value="@bind(fx.noHP)"/>
-            </row>
-            <row>
-                <label value="Pendidikan Terakhir" style="font-weight: bold"/>
-                <textbox width="100%" readonly="true" value="@bind(fx.pendidikanType)" />
-            </row>
-            <row>
-                <label value="Nama Civitas" style="font-weight: bold"/>
-                <textbox width="100%" readonly="true" value="@bind(fx.namaCivitas)" />
-            </row>
-            <row>
-                <label value="IPK" style="font-weight: bold"/>
-                <textbox width="100%" readonly="true" value="@bind(fx.ipk)"/>
-            </row>
-            <row>
-                <label value="Minat" style="font-weight: bold"/>
-                <textbox width="100%" readonly="true" value="@bind(fx.minat)" />
-            </row>
-            <row>
-                <label/>
-                <button label="Kembali" onClick="@command('buttonBackApplicant')"/>
-            </row>
-        </rows>
-    </grid>
-</groupbox>-->

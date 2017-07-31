@@ -1,4 +1,4 @@
-<zk xmlns="http://www.zkoss.org/2005/zul">
+<!--<zk xmlns="http://www.zkoss.org/2005/zul">
     <window border="30" apply="org.zkoss.bind.BindComposer"
             viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.admin.LowonganVM')"
             form="@id('fx') @load(vm.lowonganDTO) @save(vm.lowonganDTO, before='buttonSaveLowongan')">
@@ -30,7 +30,6 @@
                     </combobox>
                 </div> 
                 <div>
-                    <a sclass="btn btn-info" width="100%" label="Create" onClick="@command('buttonKlikCreateLowongan')"/>
                     <separator/>
                     <a sclass="btn btn-info" width="100%" label="Pencarian" onClick="@command('searchLowongan')"/>
                 </div>
@@ -67,4 +66,4 @@
             </div>
         </groupbox>
     </window>
-</zk>
+</zk>-->

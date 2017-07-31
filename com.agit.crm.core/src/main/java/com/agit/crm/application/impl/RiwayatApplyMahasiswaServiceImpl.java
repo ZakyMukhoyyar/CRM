@@ -90,4 +90,10 @@ public class RiwayatApplyMahasiswaServiceImpl implements RiwayatApplyMahasiswaSe
         riwayatApplyMahasiswaRepository.saveOrUpdate(t);
     }
 
+    @Override
+    public List<RiwayatApplyMahasiswaDTO> findAllRiwayataLowongan(String idRiwayatLowongan) {
+        Validate.notNull(riwayatApplyMahasiswaRepository);
+        return riwayatApplyMahasiswaDTOAssembler.toDTOs(riwayatApplyMahasiswaRepository.findAllRiwayataLowongan(idRiwayatLowongan));
+    }
+
 }
