@@ -7,6 +7,7 @@ import com.agit.crm.common.application.RiwayatApplyMahasiswaService;
 import com.agit.crm.common.dto.crm.LowonganDTO;
 import com.agit.crm.common.dto.crm.LowonganDTOBuilder;
 import com.agit.crm.common.dto.crm.LowonganStatusDTO;
+import com.agit.crm.common.dto.crm.LowonganStatusDTOBuilder;
 import com.agit.crm.common.dto.crm.MinatDTO;
 import com.agit.crm.common.dto.crm.RiwayatApplyMahasiswaDTO;
 import com.agit.crm.common.dto.crm.RiwayatApplyMahasiswaDTOBuilder;
@@ -120,13 +121,14 @@ public class LowonganVM {
             @ExecutionArgParam("lowonganDTO") LowonganDTO lowongan,
             @ExecutionArgParam("userDTO") UserDTO user,
             @ExecutionArgParam("riwayatApplyMahasiswaDTO") RiwayatApplyMahasiswaDTO riwayatApplyMahasiswa,
+            @ExecutionArgParam("lowonganStatusDTO") LowonganStatusDTO LowonganStatus,
             @ExecutionArgParam("previous") PageNavigation previous) {
 
         /* Load Data */
         initData();
 
         /* Check Validity */
-        checkValidity(lowongan, user, riwayatApplyMahasiswa, previous);
+        checkValidity(lowongan, user, riwayatApplyMahasiswa, LowonganStatus, previous);
     }
 
     private void initData() {
@@ -147,6 +149,15 @@ public class LowonganVM {
             riwayatApplyMahasiswaDTOs = Collections.emptyList();
         }
 
+//        lowonganStatusDTO = lowonganStatusService.findByIDUser(userDTO.getUserID());
+//        if (lowonganStatusDTO != null) {
+//            if (lowonganStatusDTO.getIdUser().equals(userDTO.getUserID())) {
+//                disableButtonApply = true;
+//            } else {
+//                disableButtonApply = false;
+//            }
+//        }
+
 //        listRiwayatApplyMahasiswaDTOs = riwayatApplyMahasiswaService.findAll();
 //        if (listRiwayatApplyMahasiswaDTOs.isEmpty()) {
 //            listRiwayatApplyMahasiswaDTOs = Collections.emptyList();
@@ -156,16 +167,15 @@ public class LowonganVM {
             lowonganStatusDTOs = Collections.emptyList();
         }
 
-        gaji.add(" < Rp 1.000.000");
-        gaji.add("Rp 1.000.000 - Rp 3.000.000");
-        gaji.add("Rp 3.000.000 - Rp 5.000.000");
-        gaji.add("Rp 5.000.000 - Rp 7.000.000");
-        gaji.add("Rp 7.000.000 - Rp 9.000.000");
-        gaji.add("Rp 9.000.000 - Rp 11.000.000");
-        gaji.add("Rp 11.000.000 - Rp 13.000.000");
-        gaji.add("Rp 13.000.000 - Rp 15.000.000");
-        gaji.add(" > Rp 15.000.000");
-
+//        gaji.add(" < Rp 1.000.000");
+//        gaji.add("Rp 1.000.000 - Rp 3.000.000");
+//        gaji.add("Rp 3.000.000 - Rp 5.000.000");
+//        gaji.add("Rp 5.000.000 - Rp 7.000.000");
+//        gaji.add("Rp 7.000.000 - Rp 9.000.000");
+//        gaji.add("Rp 9.000.000 - Rp 11.000.000");
+//        gaji.add("Rp 11.000.000 - Rp 13.000.000");
+//        gaji.add("Rp 13.000.000 - Rp 15.000.000");
+//        gaji.add(" > Rp 15.000.000");
         minats = minatService.findAll();
         for (MinatDTO m : minats) {
             listNamaMinat.add(m.getNamaMinat());
@@ -182,7 +192,7 @@ public class LowonganVM {
 
     }
 
-    private void checkValidity(LowonganDTO lowongan, UserDTO user, RiwayatApplyMahasiswaDTO riwayatApplyMahasiswa, PageNavigation previous) {
+    private void checkValidity(LowonganDTO lowongan, UserDTO user, RiwayatApplyMahasiswaDTO riwayatApplyMahasiswa, LowonganStatusDTO lowonganStatus, PageNavigation previous) {
         if (lowongan == null) {
             ListModelList<LowonganDTO> parameterList = new ListModelList<>(lowonganService.findAll());
             String idLowongan = "";
@@ -236,7 +246,25 @@ public class LowonganVM {
             idRiwayatApplyMahasiswa = riwayatApplyMahasiswaDTO.getIdRiwayatApplyMahasiswa();
             this.previous = previous;
         }
-
+        /* Validity Lowongan Status */
+        if (lowonganStatus == null) {
+            ListModelList<LowonganStatusDTO> parameterLS = new ListModelList<>(lowonganStatusService.findAll());
+            String idLowonganStatus = "";
+            if (parameterLS.isEmpty()) {
+                idLowonganStatus = "LS001";
+            } else {
+                idLowonganStatus = getLatestObjectID(parameterLS, "idLowonganStatus");
+            }
+            lowonganStatusDTO = new LowonganStatusDTOBuilder()
+                    .setIdLowonganStatus(idLowonganStatus)
+                    .setCreatedBy(SecurityUtil.getUserName())
+                    .setCreatedDate(new Date())
+                    .createLowonganStatusDTO();
+        } else {
+            this.lowonganStatusDTO = lowonganStatus;
+            idLowonganStatus = lowonganStatusDTO.getIdLowonganStatus();
+            this.previous = previous;
+        }
     }
 
     protected String getLatestObjectID(ListModelList list, String attribute) {
@@ -357,6 +385,12 @@ public class LowonganVM {
         riwayatApplyMahasiswaDTO.setIdUserRiwayat(user.getUserID());
         riwayatApplyMahasiswaDTO.setLowonganState(LowonganState.APPLY);
         riwayatApplyMahasiswaService.SaveOrUpdate(riwayatApplyMahasiswaDTO);
+
+        lowonganStatusDTO.setIdLowongan(idLowongan);
+        lowonganStatusDTO.setIdUser(user.getUserID());
+        lowonganStatusDTO.setLowonganState(LowonganState.APPLY);
+        lowonganStatusService.saveOrUpdate(lowonganStatusDTO);
+
         message = "Konfirmasi Lowongan Berhasil Di Apply";
 
         showInformationMessagebox(message);
