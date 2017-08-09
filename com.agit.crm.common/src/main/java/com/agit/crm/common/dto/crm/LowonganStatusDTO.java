@@ -9,7 +9,8 @@ import java.util.Date;
  * @author Zaky
  */
 public class LowonganStatusDTO implements Serializable{
-    
+    private String idUser;
+    private String idLowongan;
     private String idLowonganStatus;
     private LowonganState lowonganState;
     private String createdBy;
@@ -20,13 +21,31 @@ public class LowonganStatusDTO implements Serializable{
     public LowonganStatusDTO() {
     }
 
-    public LowonganStatusDTO(String idLowonganStatus, LowonganState lowonganState, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate) {
+    public LowonganStatusDTO(String idUser, String idLowongan, String idLowonganStatus, LowonganState lowonganState, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate) {
+        this.idUser = idUser;
+        this.idLowongan = idLowongan;
         this.idLowonganStatus = idLowonganStatus;
         this.lowonganState = lowonganState;
         this.createdBy = createdBy;
         this.createdDate = createdDate;
         this.modifiedBy = modifiedBy;
         this.modifiedDate = modifiedDate;
+    }
+
+    public String getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(String idUser) {
+        this.idUser = idUser;
+    }
+
+    public String getIdLowongan() {
+        return idLowongan;
+    }
+
+    public void setIdLowongan(String idLowongan) {
+        this.idLowongan = idLowongan;
     }
 
     public String getIdLowonganStatus() {
@@ -79,7 +98,7 @@ public class LowonganStatusDTO implements Serializable{
 
     @Override
     public String toString() {
-        return "LowonganStatusDTO{" + "idLowonganStatus=" + idLowonganStatus + ", lowonganState=" + lowonganState + ", createdBy=" + createdBy + ", createdDate=" + createdDate + ", modifiedBy=" + modifiedBy + ", modifiedDate=" + modifiedDate + '}';
+        return "LowonganStatusDTO{" + "idUser=" + idUser + ", idLowongan=" + idLowongan + ", idLowonganStatus=" + idLowonganStatus + ", lowonganState=" + lowonganState + ", createdBy=" + createdBy + ", createdDate=" + createdDate + ", modifiedBy=" + modifiedBy + ", modifiedDate=" + modifiedDate + '}';
     }
     
 }

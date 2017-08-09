@@ -61,7 +61,7 @@ public class DomisiliVM {
     private String namaKabupaten;
     private String namaKota;
 
-    private static final String FILE_LOC = "D:\\Training-Material\\Project\\Project CRM\\Code\\CRM\\template-mapping\\insert-template-domisili.xlsx";
+    private static final String FILE_LOC = "D:\\Work\\AgitCRM\\CRM\\template-mapping\\insert-template-domisili.xlsx";
 
     /* attribut for CRM */
     private PageNavigation previous;

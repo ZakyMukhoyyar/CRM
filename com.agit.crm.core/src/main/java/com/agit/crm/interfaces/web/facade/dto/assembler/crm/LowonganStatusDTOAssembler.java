@@ -29,6 +29,8 @@ public class LowonganStatusDTOAssembler implements IObjectAssembler<LowonganStat
     @Override
     public LowonganStatusDTO toDTO(LowonganStatus domainObject) {
         return new LowonganStatusDTOBuilder()
+                .setIdUser(domainObject.getIdUser())
+                .setIdLowongan(domainObject.getIdLowongan())
                 .setIdLowonganStatus(domainObject.getIdLowonganStatus())
                 .setLowonganState(domainObject.getLowonganState())
                 .setCreatedBy(domainObject.getCreatedBy())
@@ -41,6 +43,8 @@ public class LowonganStatusDTOAssembler implements IObjectAssembler<LowonganStat
     @Override
     public LowonganStatus toDomain(LowonganStatusDTO dtoObject) {
         return new LowonganStatusBuilder()
+                .setIdUser(dtoObject.getIdUser())
+                .setIdLowongan(dtoObject.getIdLowongan())
                 .setIdLowonganStatus(dtoObject.getIdLowonganStatus())
                 .setLowonganState(dtoObject.getLowonganState())
                 .setCreatedBy(dtoObject.getCreatedBy())

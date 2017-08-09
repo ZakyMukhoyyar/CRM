@@ -5,6 +5,8 @@ import java.util.Date;
 
 
 public class LowonganStatusBuilder {
+    private String idUser;
+    private String idLowongan;
     private String idLowonganStatus;
     private LowonganState lowonganState;
     private String createdBy;
@@ -13,6 +15,16 @@ public class LowonganStatusBuilder {
     private Date modifiedDate;
 
     public LowonganStatusBuilder() {
+    }
+
+    public LowonganStatusBuilder setIdUser(String idUser) {
+        this.idUser = idUser;
+        return this;
+    }
+
+    public LowonganStatusBuilder setIdLowongan(String idLowongan) {
+        this.idLowongan = idLowongan;
+        return this;
     }
 
     public LowonganStatusBuilder setIdLowonganStatus(String idLowonganStatus) {
@@ -46,7 +58,7 @@ public class LowonganStatusBuilder {
     }
 
     public LowonganStatus createLowonganStatus() {
-        return new LowonganStatus(idLowonganStatus, lowonganState, createdBy, createdDate, modifiedBy, modifiedDate);
+        return new LowonganStatus(idUser, idLowongan, idLowonganStatus, lowonganState, createdBy, createdDate, modifiedBy, modifiedDate);
     }
     
 }

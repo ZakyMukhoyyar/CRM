@@ -7,6 +7,8 @@
             <generator class="org.hibernate.id.IdentityGenerator"/>
         </id>
         <property column="idLowonganStatus" name="idLowonganStatus" not-null="false"/>
+        <property column="idUser" name="idUser" not-null="false"/>
+        <property column="idLowongan" name="idLowongan" not-null="false"/>
         <property column="lowonganState" name="lowonganState" not-null="false">            
             <type name="org.hibernate.type.EnumType">
                 <param name="enumClass">com.agit.crm.shared.state.LowonganState</param>

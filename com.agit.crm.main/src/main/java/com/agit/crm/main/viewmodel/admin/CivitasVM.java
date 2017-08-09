@@ -53,7 +53,7 @@ public class CivitasVM {
     @WireVariable
     CivitasService civitasService;
 
-    private static final String FILE_LOC = "D:\\Training-Material\\Project\\Project CRM\\Code\\CRM\\template-mapping\\insert-template-civitas.xlsx";
+    private static final String FILE_LOC = "D:\\Work\\AgitCRM\\CRM\\template-mapping\\insert-template-civitas.xlsx";
 
     private CivitasDTO civitasDTO = new CivitasDTO();
     private List<CivitasDTO> civitasDTOs = new ArrayList<>();

@@ -75,6 +75,8 @@ public class LowonganStatusServiceImpl implements LowonganStatusService{
     @Override
     public LowonganStatusDTO getDummy() {
         LowonganStatus lowonganStatus = new LowonganStatusBuilder()
+                .setIdUser("USER001")
+                .setIdLowongan("LOW001")
                 .setIdLowonganStatus("LS001")
                 .setLowonganState(LowonganState.APPLY)
                 .setCreatedBy("SYSTEM")

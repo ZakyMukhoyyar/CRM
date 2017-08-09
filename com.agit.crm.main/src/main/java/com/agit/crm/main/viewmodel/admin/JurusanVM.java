@@ -52,7 +52,7 @@ public class JurusanVM {
     @WireVariable
     JurusanService jurusanService;
 
-    private static final String FILE_LOC = "D:\\Training-Material\\Project\\Project CRM\\Code\\CRM\\template-mapping\\insert-template-jurusan.xlsx";
+    private static final String FILE_LOC = "D:\\Work\\AgitCRM\\CRM\\template-mapping\\insert-template-jurusan.xlsx";
 
     /* Object Binding UI*/
     private JurusanDTO jurusanDTO = new JurusanDTO();

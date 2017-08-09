@@ -12,6 +12,8 @@ import java.util.Objects;
 public class LowonganStatus implements EntityObject<LowonganStatus>{
     
     long id;
+    private String idUser;
+    private String idLowongan;
     private String idLowonganStatus;
     private LowonganState lowonganState;
     private String createdBy;
@@ -22,13 +24,31 @@ public class LowonganStatus implements EntityObject<LowonganStatus>{
     public LowonganStatus() {
     }
 
-    public LowonganStatus(String idLowonganStatus, LowonganState lowonganState, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate) {
+    public LowonganStatus(String idUser, String idLowongan, String idLowonganStatus, LowonganState lowonganState, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate) {
+        this.idUser = idUser;
+        this.idLowongan = idLowongan;
         this.idLowonganStatus = idLowonganStatus;
         this.lowonganState = lowonganState;
         this.createdBy = createdBy;
         this.createdDate = createdDate;
         this.modifiedBy = modifiedBy;
         this.modifiedDate = modifiedDate;
+    }
+
+    public String getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(String idUser) {
+        this.idUser = idUser;
+    }
+
+    public String getIdLowongan() {
+        return idLowongan;
+    }
+
+    public void setIdLowongan(String idLowongan) {
+        this.idLowongan = idLowongan;
     }
 
     public String getIdLowonganStatus() {
@@ -81,13 +101,15 @@ public class LowonganStatus implements EntityObject<LowonganStatus>{
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 61 * hash + Objects.hashCode(this.idLowonganStatus);
-        hash = 61 * hash + Objects.hashCode(this.lowonganState);
-        hash = 61 * hash + Objects.hashCode(this.createdBy);
-        hash = 61 * hash + Objects.hashCode(this.createdDate);
-        hash = 61 * hash + Objects.hashCode(this.modifiedBy);
-        hash = 61 * hash + Objects.hashCode(this.modifiedDate);
+        int hash = 3;
+        hash = 47 * hash + Objects.hashCode(this.idUser);
+        hash = 47 * hash + Objects.hashCode(this.idLowongan);
+        hash = 47 * hash + Objects.hashCode(this.idLowonganStatus);
+        hash = 47 * hash + Objects.hashCode(this.lowonganState);
+        hash = 47 * hash + Objects.hashCode(this.createdBy);
+        hash = 47 * hash + Objects.hashCode(this.createdDate);
+        hash = 47 * hash + Objects.hashCode(this.modifiedBy);
+        hash = 47 * hash + Objects.hashCode(this.modifiedDate);
         return hash;
     }
 
@@ -108,6 +130,8 @@ public class LowonganStatus implements EntityObject<LowonganStatus>{
     
     public void assignNewLowonganStatus (LowonganStatus lowonganStatus){
         this.idLowonganStatus = lowonganStatus.idLowonganStatus;
+        this.idUser = lowonganStatus.idUser;
+        this.idLowongan = lowonganStatus.idLowongan;
         this.lowonganState = lowonganStatus.lowonganState;
         this.createdBy = lowonganStatus.createdBy;
         this.createdDate = lowonganStatus.createdDate;

@@ -5,6 +5,8 @@ import java.util.Date;
 
 
 public class LowonganStatusDTOBuilder {
+    private String idUser;
+    private String idLowongan;
     private String idLowonganStatus;
     private LowonganState lowonganState;
     private String createdBy;
@@ -13,6 +15,16 @@ public class LowonganStatusDTOBuilder {
     private Date modifiedDate;
 
     public LowonganStatusDTOBuilder() {
+    }
+
+    public LowonganStatusDTOBuilder setIdUser(String idUser) {
+        this.idUser = idUser;
+        return this;
+    }
+
+    public LowonganStatusDTOBuilder setIdLowongan(String idLowongan) {
+        this.idLowongan = idLowongan;
+        return this;
     }
 
     public LowonganStatusDTOBuilder setIdLowonganStatus(String idLowonganStatus) {
@@ -46,7 +58,7 @@ public class LowonganStatusDTOBuilder {
     }
 
     public LowonganStatusDTO createLowonganStatusDTO() {
-        return new LowonganStatusDTO(idLowonganStatus, lowonganState, createdBy, createdDate, modifiedBy, modifiedDate);
+        return new LowonganStatusDTO(idUser, idLowongan, idLowonganStatus, lowonganState, createdBy, createdDate, modifiedBy, modifiedDate);
     }
     
 }

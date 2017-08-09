@@ -39,18 +39,19 @@
                         </combobox>
                     </div>
                 
-                    <div class="form-group">
+<!--                    <div class="form-group">
                         <label sclass="isi" value="Gaji" />
                         <combobox sclass="isi" width="100%" model="@load(vm.gaji)" selectedItem="@bind(fx.gaji)" readonly="true" placeholder="- Silahkan Pilih -">
                             <template name="model" var="items">
                                 <comboitem label="@load(items)" value="@load(items)"/>
                             </template>
                         </combobox>
-                    </div>
+                    </div>-->
                     
                     <div>
                         <a sclass="isi btn btn-info" width="100%" label="Pencarian" onClick="@command('searchDataBank')"/>
-                        <a sclass="isi btn btn-info" width="100%" label="History" onClick="@command('buttonRiwayatLowongan')"/>
+                        <separator />
+                        <a sclass="isi btn btn-info" width="100%" label="Riwayat" onClick="@command('buttonRiwayatLowongan')"/>
                     </div>
                 </div>
             </div>
