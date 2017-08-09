@@ -66,4 +66,12 @@ public class LowonganHibernateRepository extends HibernateRepository implements 
         query.executeUpdate();
     }
 
+    @Override
+    public Lowongan findByIDUser(String userID) {
+        return (Lowongan) getSession()
+                .createQuery("from com.agit.crm.domain.crm.Lowongan where userID = :tid")
+                .setParameter("tid", userID)
+                .uniqueResult();
+    }
+
 }

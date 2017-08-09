@@ -23,4 +23,6 @@ public interface RiwayatApplyMahasiswaService {
     List<RiwayatApplyMahasiswaDTO> findAllRiwayataLowongan(String idRiwayatLowongan);
 
     List<RiwayatApplyMahasiswaDTO> findByParams(Map map);
+
+    RiwayatApplyMahasiswaDTO findByIDUser(String idUserRiwayat);
 }

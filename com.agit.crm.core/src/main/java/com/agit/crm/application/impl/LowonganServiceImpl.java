@@ -193,4 +193,14 @@ public class LowonganServiceImpl implements LowonganService {
         return lowonganDTOAssembler.toDTOs(lowonganRepository.findAll());
     }
 
+    @Override
+    public LowonganDTO findByIDUser(String userID) {
+        Validate.notNull(lowonganRepository);
+        Lowongan b = (Lowongan) lowonganRepository.findByIDUser(userID);
+        if (b != null) {
+            return lowonganDTOAssembler.toDTO(b);
+        }
+        return null;
+    }
+
 }

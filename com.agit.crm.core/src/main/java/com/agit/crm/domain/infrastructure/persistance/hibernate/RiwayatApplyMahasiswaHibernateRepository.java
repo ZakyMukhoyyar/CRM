@@ -78,4 +78,12 @@ public class RiwayatApplyMahasiswaHibernateRepository extends HibernateRepositor
                 .list();
     }
 
+    @Override
+    public RiwayatApplyMahasiswa findByIDUser(String idUserRiwayat) {
+        return (RiwayatApplyMahasiswa) getSession()
+                .createQuery("from com.agit.crm.domain.crm.RiwayatApplyMahasiswa where idUserRiwayat = :tid")
+                .setParameter("tid", idUserRiwayat)
+                .uniqueResult();
+    }
+
 }

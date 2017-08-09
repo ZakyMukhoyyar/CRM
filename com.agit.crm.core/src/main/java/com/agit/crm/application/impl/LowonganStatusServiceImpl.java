@@ -17,7 +17,8 @@ import org.apache.commons.lang.Validate;
  *
  * @author Zaky
  */
-public class LowonganStatusServiceImpl implements LowonganStatusService{
+public class LowonganStatusServiceImpl implements LowonganStatusService {
+
     private LowonganStatusRepository lowonganStatusRepository;
     private LowonganStatusDTOAssembler lowonganStatusDTOAssembler;
 
@@ -32,12 +33,13 @@ public class LowonganStatusServiceImpl implements LowonganStatusService{
     @Override
     public void saveOrUpdate(LowonganStatusDTO lowonganStatusDTO) {
         LowonganStatus ls = lowonganStatusRepository.findByID(lowonganStatusDTO.getIdLowonganStatus());
-        if(ls == null){
+        if (ls == null) {
             ls = lowonganStatusDTOAssembler.toDomain(lowonganStatusDTO);
-        }else{
+        } else {
             LowonganStatus newLowonganStatus = lowonganStatusDTOAssembler.toDomain(lowonganStatusDTO);
             ls.assignNewLowonganStatus(newLowonganStatus);
-        }lowonganStatusRepository.saveOrUpdate(ls);
+        }
+        lowonganStatusRepository.saveOrUpdate(ls);
     }
 
     @Override
@@ -86,6 +88,15 @@ public class LowonganStatusServiceImpl implements LowonganStatusService{
                 .createLowonganStatus();
         return lowonganStatusDTOAssembler.toDTO(lowonganStatus);
     }
-    
-    
+
+    @Override
+    public LowonganStatusDTO findByIDUser(String idUser) {
+        Validate.notNull(lowonganStatusRepository);
+        LowonganStatus b = lowonganStatusRepository.findByIDUser(idUser);
+        if (b != null) {
+            return lowonganStatusDTOAssembler.toDTO(b);
+        }
+        return null;
+    }
+
 }

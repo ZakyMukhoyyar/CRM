@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 @Repository
-public class LowonganStatusHibernateRepository extends HibernateRepository implements LowonganStatusRepository{
+public class LowonganStatusHibernateRepository extends HibernateRepository implements LowonganStatusRepository {
 
     @Override
     public void saveOrUpdate(LowonganStatus lowonganStatus) {
@@ -49,13 +49,20 @@ public class LowonganStatusHibernateRepository extends HibernateRepository imple
     @Override
     public List<LowonganStatus> findByParams(Map map) {
         Criteria criteria = getSession().createCriteria(LowonganStatus.class);
-        if(StringUtil.hasValue(map.get("idLowonganStatus"))){
+        if (StringUtil.hasValue(map.get("idLowonganStatus"))) {
             criteria.add(Restrictions.eq("idLowonganStatus", map.get("idLowonganStatus")));
         }
-        if(StringUtil.hasValue(map.get("lowonganState"))){
+        if (StringUtil.hasValue(map.get("lowonganState"))) {
             criteria.add(Restrictions.eq("lowonganState", map.get("lowonganState")));
         }
         return criteria.list();
     }
-    
+
+    @Override
+    public LowonganStatus findByIDUser(String idUser) {
+        Query query = getSession().createQuery("from com.agit.crm.domain.crm.LowonganStatus where idUser = :uid");
+        query.setParameter("uid", idUser);
+        return (LowonganStatus) query.uniqueResult();
+    }
+
 }

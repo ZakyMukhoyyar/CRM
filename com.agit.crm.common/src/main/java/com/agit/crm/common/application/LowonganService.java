@@ -22,4 +22,6 @@ public interface LowonganService {
 
     List<LowonganDTO> findByParams(Map map);
 
+    LowonganDTO findByIDUser(String userID);
+
 }

@@ -21,4 +21,6 @@ public interface RiwayatApplyMahasiswaRepository {
 
     List<RiwayatApplyMahasiswa> findByParams(Map map);
 
+    RiwayatApplyMahasiswa findByIDUser(String idUserRiwayat);
+
 }

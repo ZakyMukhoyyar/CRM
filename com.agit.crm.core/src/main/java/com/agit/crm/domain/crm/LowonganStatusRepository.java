@@ -10,13 +10,15 @@ import java.util.Map;
 public interface LowonganStatusRepository {
 
     void saveOrUpdate(LowonganStatus lowonganStatus);
-    
+
     void deleteData(LowonganStatus lowonganStatus);
-    
+
     LowonganStatus findByID(String idLowonganStatus);
-    
+
     List<LowonganStatus> findAll();
-    
+
     List<LowonganStatus> findByParams(Map map);
-    
+
+    LowonganStatus findByIDUser(String idUser);
+
 }

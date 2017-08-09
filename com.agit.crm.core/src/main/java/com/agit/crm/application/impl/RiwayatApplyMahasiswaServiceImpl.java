@@ -96,4 +96,14 @@ public class RiwayatApplyMahasiswaServiceImpl implements RiwayatApplyMahasiswaSe
         return riwayatApplyMahasiswaDTOAssembler.toDTOs(riwayatApplyMahasiswaRepository.findAllRiwayataLowongan(idRiwayatLowongan));
     }
 
+    @Override
+    public RiwayatApplyMahasiswaDTO findByIDUser(String idUserRiwayat) {
+        Validate.notNull(riwayatApplyMahasiswaRepository);
+        RiwayatApplyMahasiswa b = (RiwayatApplyMahasiswa) riwayatApplyMahasiswaRepository.findByIDUser(idUserRiwayat);
+        if (b != null) {
+            return riwayatApplyMahasiswaDTOAssembler.toDTO(b);
+        }
+        return null;
+    }
+
 }

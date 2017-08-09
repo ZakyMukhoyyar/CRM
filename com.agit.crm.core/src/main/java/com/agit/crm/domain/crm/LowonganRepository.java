@@ -18,4 +18,6 @@ public interface LowonganRepository {
     List<Lowongan> findAll();
 
     List<Lowongan> findByParams(Map map);
+
+    Lowongan findByIDUser(String userID);
 }
