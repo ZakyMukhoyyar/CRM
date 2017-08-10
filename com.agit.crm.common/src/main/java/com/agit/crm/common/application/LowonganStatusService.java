@@ -22,5 +22,5 @@ public interface LowonganStatusService {
 
     LowonganStatusDTO getDummy();
 
-    LowonganStatusDTO findByIDUser(String idUser);
+    List<LowonganStatusDTO> findByParams2(Map map2);
 }

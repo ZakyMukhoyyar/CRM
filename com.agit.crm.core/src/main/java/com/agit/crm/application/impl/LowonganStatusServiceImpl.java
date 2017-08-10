@@ -1,6 +1,5 @@
 package com.agit.crm.application.impl;
 
-import com.agit.crm.common.application.LowonganService;
 import com.agit.crm.common.application.LowonganStatusService;
 import com.agit.crm.common.dto.crm.LowonganStatusDTO;
 import com.agit.crm.domain.crm.LowonganStatus;
@@ -90,11 +89,11 @@ public class LowonganStatusServiceImpl implements LowonganStatusService {
     }
 
     @Override
-    public LowonganStatusDTO findByIDUser(String idUser) {
+    public List<LowonganStatusDTO> findByParams2(Map map2) {
         Validate.notNull(lowonganStatusRepository);
-        LowonganStatus b = lowonganStatusRepository.findByIDUser(idUser);
-        if (b != null) {
-            return lowonganStatusDTOAssembler.toDTO(b);
+        List<LowonganStatus> listLowonganStatus = lowonganStatusRepository.findByParams2(map2);
+        if (listLowonganStatus != null) {
+            return (List<LowonganStatusDTO>) lowonganStatusDTOAssembler.toDTOs(listLowonganStatus);
         }
         return null;
     }

@@ -19,6 +19,6 @@ public interface LowonganStatusRepository {
 
     List<LowonganStatus> findByParams(Map map);
 
-    LowonganStatus findByIDUser(String idUser);
+    List<LowonganStatus> findByParams2(Map map2);
 
 }

@@ -52,6 +52,12 @@ public class LowonganStatusHibernateRepository extends HibernateRepository imple
         if (StringUtil.hasValue(map.get("idLowonganStatus"))) {
             criteria.add(Restrictions.eq("idLowonganStatus", map.get("idLowonganStatus")));
         }
+        if (StringUtil.hasValue(map.get("idUser"))) {
+            criteria.add(Restrictions.eq("idUser", map.get("idUser")));
+        }
+        if (StringUtil.hasValue(map.get("idLowongan"))) {
+            criteria.add(Restrictions.eq("idLowongan", map.get("idLowongan")));
+        }
         if (StringUtil.hasValue(map.get("lowonganState"))) {
             criteria.add(Restrictions.eq("lowonganState", map.get("lowonganState")));
         }
@@ -59,10 +65,11 @@ public class LowonganStatusHibernateRepository extends HibernateRepository imple
     }
 
     @Override
-    public LowonganStatus findByIDUser(String idUser) {
-        Query query = getSession().createQuery("from com.agit.crm.domain.crm.LowonganStatus where idUser = :uid");
-        query.setParameter("uid", idUser);
-        return (LowonganStatus) query.uniqueResult();
+    public List<LowonganStatus> findByParams2(Map map2) {
+        Criteria criteria = getSession().createCriteria(LowonganStatus.class);
+        criteria.add(Restrictions.eq("idUser", map2.get("idUser")));
+        criteria.add(Restrictions.eq("idLowongan", map2.get("idLowongan")));
+        return (List< LowonganStatus>) criteria.list();
     }
 
 }

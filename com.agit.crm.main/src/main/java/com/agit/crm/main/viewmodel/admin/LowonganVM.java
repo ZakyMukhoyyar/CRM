@@ -85,9 +85,6 @@ public class LowonganVM {
     private List<LowonganStatusDTO> lowonganStatusDTOs = new ArrayList<>();
     private List<String> listLowonganID = new ArrayList<String>();
 
-    /* Function For Combobox  */
-    private ListModelList<String> gaji = new ListModelList<>();
-
     /* Function For Seacrh  */
     private String userID;
     private Date tanggalBerakhir;
@@ -149,33 +146,10 @@ public class LowonganVM {
             riwayatApplyMahasiswaDTOs = Collections.emptyList();
         }
 
-//        lowonganStatusDTO = lowonganStatusService.findByIDUser(userDTO.getUserID());
-//        if (lowonganStatusDTO != null) {
-//            if (lowonganStatusDTO.getIdUser().equals(userDTO.getUserID())) {
-//                disableButtonApply = true;
-//            } else {
-//                disableButtonApply = false;
-//            }
-//        }
-
-//        listRiwayatApplyMahasiswaDTOs = riwayatApplyMahasiswaService.findAll();
-//        if (listRiwayatApplyMahasiswaDTOs.isEmpty()) {
-//            listRiwayatApplyMahasiswaDTOs = Collections.emptyList();
-//        }
         lowonganStatusDTOs = lowonganStatusService.findAll();
         if (lowonganStatusDTOs.isEmpty()) {
             lowonganStatusDTOs = Collections.emptyList();
         }
-
-//        gaji.add(" < Rp 1.000.000");
-//        gaji.add("Rp 1.000.000 - Rp 3.000.000");
-//        gaji.add("Rp 3.000.000 - Rp 5.000.000");
-//        gaji.add("Rp 5.000.000 - Rp 7.000.000");
-//        gaji.add("Rp 7.000.000 - Rp 9.000.000");
-//        gaji.add("Rp 9.000.000 - Rp 11.000.000");
-//        gaji.add("Rp 11.000.000 - Rp 13.000.000");
-//        gaji.add("Rp 13.000.000 - Rp 15.000.000");
-//        gaji.add(" > Rp 15.000.000");
         minats = minatService.findAll();
         for (MinatDTO m : minats) {
             listNamaMinat.add(m.getNamaMinat());
@@ -391,9 +365,6 @@ public class LowonganVM {
         lowonganStatusDTO.setLowonganState(LowonganState.APPLY);
         lowonganStatusService.saveOrUpdate(lowonganStatusDTO);
 
-        message = "Konfirmasi Lowongan Berhasil Di Apply";
-
-        showInformationMessagebox(message);
         BindUtils.postGlobalCommand(null, null, "refreshLowongan", null);
         window.detach();
     }
@@ -401,14 +372,24 @@ public class LowonganVM {
     @Command("buttonApplyLowongan")
     @NotifyChange({"lowonganDTO", "lowonganDTOs"})
     public void buttonApplyLowongan(@BindingParam("object") LowonganDTO obj, @ContextParam(ContextType.VIEW) Window window) {
-        BindUtils.postGlobalCommand(null, null, "refreshLowongan", null);
-        Map<String, Object> params = new HashMap<>();
-        params.put("lowonganDTO", obj);
-        CommonViewModel.navigateToWithoutDetach("/crm/mahasiswa/popup_apply_lowongan.zul", window, params);
+        userDTO = userService.findByID(SecurityUtil.getUserName());
+        Map map = new HashMap();
+        map.put("idUser", userDTO.getUserID());
+        map.put("idLowongan", obj.getIdLowongan());
+        lowonganStatusDTOs = lowonganStatusService.findByParams2(map);
+        if (lowonganStatusDTOs.size() == 0) {
+            BindUtils.postGlobalCommand(null, null, "refreshLowongan", null);
+            Map<String, Object> params = new HashMap<>();
+            params.put("lowonganDTO", obj);
+            CommonViewModel.navigateToWithoutDetach("/crm/mahasiswa/popup_apply_lowongan.zul", window, params);
+
+        } else {
+            showInformationMessagebox("Anda Sudah Pernah Apply Lowongan Ini");
+        }
     }
 
     @GlobalCommand
-    @NotifyChange("lowonganDTOs")
+    @NotifyChange({"lowonganDTOs", ""})
     public void refreshLowongan() {
         lowonganDTOs = lowonganService.findAll();
     }
@@ -479,6 +460,9 @@ public class LowonganVM {
         CommonViewModel.navigateToWithoutDetach("/crm/mahasiswa/grid_profile.zul", window, params);
     }
 
+    public String concatStateLowongan(String s1, String s2) {
+        return s1.concat(s2);
+    }
 
     /* getter setter */
     public UserDTO getUser() {
@@ -551,14 +535,6 @@ public class LowonganVM {
 
     public void setLowonganStatusDTOs(List<LowonganStatusDTO> lowonganStatusDTOs) {
         this.lowonganStatusDTOs = lowonganStatusDTOs;
-    }
-
-    public ListModelList<String> getGaji() {
-        return gaji;
-    }
-
-    public void setGaji(ListModelList<String> gaji) {
-        this.gaji = gaji;
     }
 
     public Date getTanggalBerakhir() {
