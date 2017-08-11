@@ -19,11 +19,12 @@ public class RiwayatApplyMahasiswaDTO {
     private Date createdDate;
     private String modifiedBy;
     private Date modifiedDate;
+    private String statusApprove;
 
     public RiwayatApplyMahasiswaDTO() {
     }
 
-    public RiwayatApplyMahasiswaDTO(String idRiwayatApplyMahasiswa, String idRiwayatLowongan, LowonganState lowonganState, String idUserRiwayat, String namaLowonganApply, String namaApplyLowongan, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate) {
+    public RiwayatApplyMahasiswaDTO(String idRiwayatApplyMahasiswa, String idRiwayatLowongan, LowonganState lowonganState, String idUserRiwayat, String namaLowonganApply, String namaApplyLowongan, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate, String statusApprove) {
         this.idRiwayatApplyMahasiswa = idRiwayatApplyMahasiswa;
         this.idRiwayatLowongan = idRiwayatLowongan;
         this.lowonganState = lowonganState;
@@ -34,6 +35,7 @@ public class RiwayatApplyMahasiswaDTO {
         this.createdDate = createdDate;
         this.modifiedBy = modifiedBy;
         this.modifiedDate = modifiedDate;
+        this.statusApprove = statusApprove;
     }
 
     public String getIdRiwayatApplyMahasiswa() {
@@ -116,9 +118,17 @@ public class RiwayatApplyMahasiswaDTO {
         this.modifiedDate = modifiedDate;
     }
 
+    public String getStatusApprove() {
+        return statusApprove;
+    }
+
+    public void setStatusApprove(String statusApprove) {
+        this.statusApprove = statusApprove;
+    }
+
     @Override
     public String toString() {
-        return "RiwayatApplyMahasiswaDTO{" + "idRiwayatApplyMahasiswa=" + idRiwayatApplyMahasiswa + ", idRiwayatLowongan=" + idRiwayatLowongan + ", lowonganState=" + lowonganState + ", idUserRiwayat=" + idUserRiwayat + ", namaLowonganApply=" + namaLowonganApply + ", namaApplyLowongan=" + namaApplyLowongan + ", createdBy=" + createdBy + ", createdDate=" + createdDate + ", modifiedBy=" + modifiedBy + ", modifiedDate=" + modifiedDate + '}';
+        return "RiwayatApplyMahasiswaDTO{" + "idRiwayatApplyMahasiswa=" + idRiwayatApplyMahasiswa + ", idRiwayatLowongan=" + idRiwayatLowongan + ", lowonganState=" + lowonganState + ", idUserRiwayat=" + idUserRiwayat + ", namaLowonganApply=" + namaLowonganApply + ", namaApplyLowongan=" + namaApplyLowongan + ", createdBy=" + createdBy + ", createdDate=" + createdDate + ", modifiedBy=" + modifiedBy + ", modifiedDate=" + modifiedDate + ", statusApprove=" + statusApprove + '}';
     }
 
 }

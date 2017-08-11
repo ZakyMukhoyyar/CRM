@@ -21,6 +21,7 @@ public class RiwayatApplyMahasiswaDTOBuilder {
     private Date createdDate;
     private String modifiedBy;
     private Date modifiedDate;
+    private String statusApprove;
 
     public RiwayatApplyMahasiswaDTOBuilder() {
     }
@@ -75,8 +76,13 @@ public class RiwayatApplyMahasiswaDTOBuilder {
         return this;
     }
 
+    public RiwayatApplyMahasiswaDTOBuilder setStatusApprove(String statusApprove) {
+        this.statusApprove = statusApprove;
+        return this;
+    }
+
     public RiwayatApplyMahasiswaDTO createRiwayatApplyMahasiswaDTO() {
-        return new RiwayatApplyMahasiswaDTO(idRiwayatApplyMahasiswa, idRiwayatLowongan, lowonganState, idUserRiwayat, namaLowonganApply, namaApplyLowongan, createdBy, createdDate, modifiedBy, modifiedDate);
+        return new RiwayatApplyMahasiswaDTO(idRiwayatApplyMahasiswa, idRiwayatLowongan, lowonganState, idUserRiwayat, namaLowonganApply, namaApplyLowongan, createdBy, createdDate, modifiedBy, modifiedDate, statusApprove);
     }
     
 }

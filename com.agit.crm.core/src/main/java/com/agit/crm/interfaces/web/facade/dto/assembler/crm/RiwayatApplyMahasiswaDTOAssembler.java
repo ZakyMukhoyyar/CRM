@@ -27,6 +27,7 @@ public class RiwayatApplyMahasiswaDTOAssembler implements IObjectAssembler<Riway
                 .setModifiedBy(domainObject.getModifiedBy())
                 .setModifiedDate(domainObject.getModifiedDate())
                 .setLowonganState(domainObject.getLowonganState())
+                .setStatusApprove(domainObject.getStatusApprove())
                 .createRiwayatApplyMahasiswaDTO();
     }
     
@@ -43,6 +44,7 @@ public class RiwayatApplyMahasiswaDTOAssembler implements IObjectAssembler<Riway
                 .setModifiedBy(dtoObject.getModifiedBy())
                 .setModifiedDate(dtoObject.getModifiedDate())
                 .setLowonganState(dtoObject.getLowonganState())
+                .setStatusApprove(dtoObject.getStatusApprove())
                 .createRiwayatApplyMahasiswa();
     }
     

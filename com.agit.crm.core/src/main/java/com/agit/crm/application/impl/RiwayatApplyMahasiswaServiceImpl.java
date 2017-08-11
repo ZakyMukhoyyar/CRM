@@ -46,6 +46,7 @@ public class RiwayatApplyMahasiswaServiceImpl implements RiwayatApplyMahasiswaSe
                 .setModifiedBy("modified by")
                 .setModifiedDate(new Date())
                 .setLowonganState(LowonganState.CLOSE)
+                .setStatusApprove("Approved")
                 .createRiwayatApplyMahasiswa();
         return riwayatApplyMahasiswaDTOAssembler.toDTO(riwayatApplyMahasiswa);
     }
