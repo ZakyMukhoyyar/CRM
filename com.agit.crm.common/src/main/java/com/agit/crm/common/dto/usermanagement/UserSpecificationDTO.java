@@ -48,11 +48,12 @@ public class UserSpecificationDTO implements Serializable {
 //    private List<Lowongan> lowongans;
     private Boolean statusApprove;
     private String jurusan;
+    private Boolean disableButton;
 
     public UserSpecificationDTO() {
     }
 
-    public UserSpecificationDTO(String fullName, String email, String mobilePhone, String immediateSupervisorUserName, String primaryBranchID, String ktp, String escute, JobDivision jobDivision, JobLocation jobLocation, AccessTimeDTO accessTimeDTO, UserLoginInfoDTO userLoginInfoDTO, Date tanggalLahir, String domisili, String noHP, String noKTP, String ipk, JenisKelaminType jenisKelaminType, PendidikanType pendidikanType, String namaCivitas, String minat, String ketrampilan1, String ketrampilan2, String ketrampilan3, String ketrampilan4, String ketrampilan5, TingkatanType tingkatanType1, TingkatanType tingkatanType2, TingkatanType tingkatanType3, TingkatanType tingkatanType4, TingkatanType tingkatanType5, String uploadCV, Boolean statusApprove, String jurusan) {
+    public UserSpecificationDTO(String fullName, String email, String mobilePhone, String immediateSupervisorUserName, String primaryBranchID, String ktp, String escute, JobDivision jobDivision, JobLocation jobLocation, AccessTimeDTO accessTimeDTO, UserLoginInfoDTO userLoginInfoDTO, Date tanggalLahir, String domisili, String noHP, String noKTP, String ipk, JenisKelaminType jenisKelaminType, PendidikanType pendidikanType, String namaCivitas, String minat, String ketrampilan1, String ketrampilan2, String ketrampilan3, String ketrampilan4, String ketrampilan5, TingkatanType tingkatanType1, TingkatanType tingkatanType2, TingkatanType tingkatanType3, TingkatanType tingkatanType4, TingkatanType tingkatanType5, String uploadCV, Boolean statusApprove, String jurusan, Boolean disableButton) {
         this.fullName = fullName;
         this.email = email;
         this.mobilePhone = mobilePhone;
@@ -86,6 +87,7 @@ public class UserSpecificationDTO implements Serializable {
         this.uploadCV = uploadCV;
         this.statusApprove = statusApprove;
         this.jurusan = jurusan;
+        this.disableButton = disableButton;
     }
 
     public String getFullName() {
@@ -351,11 +353,20 @@ public class UserSpecificationDTO implements Serializable {
     public void setJurusan(String jurusan) {
         this.jurusan = jurusan;
     }
+    
+    public Boolean getDisableButton() {
+        return disableButton;
+    }
+
+    public void setDisableButton(Boolean disableButton) {
+        this.disableButton = disableButton;
+    }
 
     @Override
     public String toString() {
-        return "UserSpecificationDTO{" + "fullName=" + fullName + ", email=" + email + ", mobilePhone=" + mobilePhone + ", immediateSupervisorUserName=" + immediateSupervisorUserName + ", primaryBranchID=" + primaryBranchID + ", ktp=" + ktp + ", escute=" + escute + ", jobDivision=" + jobDivision + ", jobLocation=" + jobLocation + ", accessTimeDTO=" + accessTimeDTO + ", userLoginInfoDTO=" + userLoginInfoDTO + ", tanggalLahir=" + tanggalLahir + ", domisili=" + domisili + ", noHP=" + noHP + ", noKTP=" + noKTP + ", ipk=" + ipk + ", jenisKelaminType=" + jenisKelaminType + ", pendidikanType=" + pendidikanType + ", namaCivitas=" + namaCivitas + ", minat=" + minat + ", ketrampilan1=" + ketrampilan1 + ", ketrampilan2=" + ketrampilan2 + ", ketrampilan3=" + ketrampilan3 + ", ketrampilan4=" + ketrampilan4 + ", ketrampilan5=" + ketrampilan5 + ", tingkatanType1=" + tingkatanType1 + ", tingkatanType2=" + tingkatanType2 + ", tingkatanType3=" + tingkatanType3 + ", tingkatanType4=" + tingkatanType4 + ", tingkatanType5=" + tingkatanType5 + ", uploadCV=" + uploadCV + ", statusApprove=" + statusApprove + ", jurusan=" + jurusan + '}';
+        return "UserSpecificationDTO{" + "fullName=" + fullName + ", email=" + email + ", mobilePhone=" + mobilePhone + ", immediateSupervisorUserName=" + immediateSupervisorUserName + ", primaryBranchID=" + primaryBranchID + ", ktp=" + ktp + ", escute=" + escute + ", jobDivision=" + jobDivision + ", jobLocation=" + jobLocation + ", accessTimeDTO=" + accessTimeDTO + ", userLoginInfoDTO=" + userLoginInfoDTO + ", tanggalLahir=" + tanggalLahir + ", domisili=" + domisili + ", noHP=" + noHP + ", noKTP=" + noKTP + ", ipk=" + ipk + ", jenisKelaminType=" + jenisKelaminType + ", pendidikanType=" + pendidikanType + ", namaCivitas=" + namaCivitas + ", minat=" + minat + ", ketrampilan1=" + ketrampilan1 + ", ketrampilan2=" + ketrampilan2 + ", ketrampilan3=" + ketrampilan3 + ", ketrampilan4=" + ketrampilan4 + ", ketrampilan5=" + ketrampilan5 + ", tingkatanType1=" + tingkatanType1 + ", tingkatanType2=" + tingkatanType2 + ", tingkatanType3=" + tingkatanType3 + ", tingkatanType4=" + tingkatanType4 + ", tingkatanType5=" + tingkatanType5 + ", uploadCV=" + uploadCV + ", statusApprove=" + statusApprove + ", jurusan=" + jurusan + ", disableButton=" + disableButton + '}';
     }
+    
 
     public static UserSpecificationDTO getInstance() {
         UserSpecificationDTO userSpecification = new UserSpecificationDTOBuilder()
@@ -370,7 +381,6 @@ public class UserSpecificationDTO implements Serializable {
                 .setPrimaryBranchID("primaryBranchID")
                 .setUserLoginInfoDTO(UserLoginInfoDTO.getInstance())
                 .createUserSpecificationDTO();
-
         return userSpecification;
 
     }

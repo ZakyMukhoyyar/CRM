@@ -48,6 +48,7 @@ public class UserSpecificationDTOAssembler implements IObjectAssembler<UserSpeci
                 .setUploadCV(domainObject.getUploadCV())
                 .setStatusApprove(domainObject.getStatusApprove())
                 .setJurusan(domainObject.getJurusan())
+                .setDisableButton(domainObject.getDisableButton())
                 .createUserSpecificationDTO();
     }
 
@@ -87,6 +88,7 @@ public class UserSpecificationDTOAssembler implements IObjectAssembler<UserSpeci
                 .setUploadCV(dtoObject.getUploadCV())
                 .setStatusApprove(dtoObject.getStatusApprove())
                 .setJurusan(dtoObject.getJurusan())
+                .setDisableButton(dtoObject.getDisableButton())
                 .createUserSpecification();
     }
 

@@ -47,6 +47,7 @@ public class UserSpecificationDTOBuilder {
     private String uploadCV;
     private Boolean statusApprove;
     private String jurusan;
+    private Boolean disableButton;
 
     public UserSpecificationDTOBuilder() {
     }
@@ -215,9 +216,14 @@ public class UserSpecificationDTOBuilder {
         this.jurusan = jurusan;
         return this;
     }
+    
+    public UserSpecificationDTOBuilder setDisableButton(Boolean disableButton) {
+        this.disableButton = disableButton;
+        return this;
+    }
 
     public UserSpecificationDTO createUserSpecificationDTO() {
-        return new UserSpecificationDTO(fullName, email, mobilePhone, immediateSupervisorUserName, primaryBranchID, ktp, escute, jobDivision, jobLocation, accessTimeDTO, userLoginInfoDTO, tanggalLahir, domisili, noHP, noKTP, ipk, jenisKelaminType, pendidikanType, namaCivitas, minat, ketrampilan1, ketrampilan2, ketrampilan3, ketrampilan4, ketrampilan5, tingkatanType1, tingkatanType2, tingkatanType3, tingkatanType4, tingkatanType5, uploadCV, statusApprove, jurusan);
+        return new UserSpecificationDTO(fullName, email, mobilePhone, immediateSupervisorUserName, primaryBranchID, ktp, escute, jobDivision, jobLocation, accessTimeDTO, userLoginInfoDTO, tanggalLahir, domisili, noHP, noKTP, ipk, jenisKelaminType, pendidikanType, namaCivitas, minat, ketrampilan1, ketrampilan2, ketrampilan3, ketrampilan4, ketrampilan5, tingkatanType1, tingkatanType2, tingkatanType3, tingkatanType4, tingkatanType5, uploadCV, statusApprove, jurusan, disableButton);
     }
 
 }
