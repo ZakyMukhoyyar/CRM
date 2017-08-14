@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zk xmlns="http://www.zkoss.org/2005/zul">
+    <window border="0" apply="org.zkoss.bind.BindComposer"
+            viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.admin.DataMahasiswaVM')"
+            form="@id('fx') @load(vm.userDTO) @save(vm.userDTO, before='buttonConfirm')">
+        <listbox  emptyMessage="${labels.common.noDataFound}" model="@bind(vm.userDTO2s)" width="99%">
+            <listhead >
+                <listheader sclass="isi" width="90%" align="center "/>
+                <listheader sclass="isi" width="10%" align="center"/>
+            </listhead>
+            <template name="model">
+                <listitem value="${each}" style="margin-bottom:20px;">
+                    <listcell style="border:1px solid #dcdcdc;">
+                        <label sclass="judulLowongan" width="100%" value="@bind(each.userSpecificationDTO.fullName)" style="text-align: left; align: left;"/>
+                        <separator bar="true"></separator>
+                        <label sclass="isi" width="100%" value="@bind(each.userSpecificationDTO.email)" style="text-align: justify; display: block; padding:10px;"/>
+                        <separator></separator>
+                        <label sclass="isi" value="Penempatan : " />
+                        <label sclass="isi" width="100%" value="@bind(each.userSpecificationDTO.domisili)" style="text-align: left; padding:10px;"/>
+                        <label sclass="isi" width="100%" value="@bind(each.userSpecificationDTO.mobilePhone)" style="text-align: justify; display: block; padding:10px;" />
+                        <label sclass="isi" width="100%" value="@bind(each.userSpecificationDTO.ktp)" style="text-align: justify; display: block; padding:10px;" />
+                        <label sclass="isi" width="100%" value="@bind(each.userSpecificationDTO.tanggalLahir)" style="text-align: justify; display: block; padding:10px;" />
+                        <label sclass="isi" width="100%" value="@bind(each.userSpecificationDTO.domisili)" style="text-align: justify; display: block; padding:10px;" />
+                        <label sclass="isi" width="100%" value="@bind(each.userSpecificationDTO.ipk)" style="text-align: justify; display: block; padding:10px;" />
+                        <label sclass="isi" width="100%" value="@bind(each.userSpecificationDTO.jenisKelaminType)" style="text-align: justify; display: block; padding:10px;" />
+                        <label sclass="isi" width="100%" value="@bind(each.userSpecificationDTO.pendidikanType)" style="text-align: justify; display: block; padding:10px;" />
+                        <label sclass="isi" width="100%" value="@bind(each.userSpecificationDTO.namaCivitas)" style="text-align: justify; display: block; padding:10px;" />
+                        <separator bar="true"/> 
+                    </listcell>
+                    <listcell>
+                        <a sclass="isi btn btn-primary" label="Update"  onClick="@command('buttonDetailProfil', object=each)"></a>
+                    </listcell>
+                </listitem>
+            </template>
+        </listbox>
+    </window>
+</zk>

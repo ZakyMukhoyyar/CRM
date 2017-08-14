@@ -123,7 +123,6 @@
             
             <property column="statusApprove" name="statusApprove" not-null="false"/>
             <property column="jurusan" name="jurusan" not-null="false"/>
-            <property column="disableButton" name="disableButton"/>
         </component>
         <list cascade="all" lazy="false" name="lowongans">
             <key column="userID" foreign-key="userID"/>

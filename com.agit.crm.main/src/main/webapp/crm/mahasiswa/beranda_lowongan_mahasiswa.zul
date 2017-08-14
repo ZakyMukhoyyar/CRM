@@ -39,7 +39,7 @@
                         </combobox>
                     </div>
                 
-<!--                    <div class="form-group">
+                    <!--                    <div class="form-group">
                         <label sclass="isi" value="Gaji" />
                         <combobox sclass="isi" width="100%" model="@load(vm.gaji)" selectedItem="@bind(fx.gaji)" readonly="true" placeholder="- Silahkan Pilih -">
                             <template name="model" var="items">
@@ -52,6 +52,7 @@
                         <a sclass="isi btn btn-info" width="100%" label="Pencarian" onClick="@command('searchDataBank')"/>
                         <separator />
                         <a sclass="isi btn btn-info" width="100%" label="Riwayat" onClick="@command('buttonRiwayatLowongan')"/>
+                        <separator />
                     </div>
                 </div>
             </div>
@@ -77,7 +78,7 @@
                                     <label sclass="isi label label-success" width="100%" value="@bind(each.gaji)" style="text-align: left;"/>
                                     <separator></separator>-->
                                     <label sclass="isi bold" value="Status : "/> 
-                                    <!--<label sclass="isi label label-danger" width="100%" value="@bind(each.lowonganState)" style="text-align: left;"/>-->
+                                    <!--<label sclass="isi label label-danger" width="100%" value="@load(vm.concatStateLowongan('Welcome,  ',vm.lowonganStatusDTO.lowonganState))" style="text-align: left;"/>-->
                                 </listcell>
                                 <listcell>
                                     <a sclass="isi btn btn-primary" label="Detail"  onClick="@command('buttonDetailLowongan', object=each)"></a>

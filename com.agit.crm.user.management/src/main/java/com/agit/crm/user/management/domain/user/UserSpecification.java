@@ -51,13 +51,11 @@ public class UserSpecification implements ValueObject<UserSpecification> {
 
     private AccessTime accessTime;
     private UserLoginInfo userLoginInfo;
-    
-    private Boolean disableButton;
 
     public UserSpecification() {
     }
 
-    public UserSpecification(String fullName, String email, String mobilePhone, String immediateSupervisorUserName, String primaryBranchID, String ktp, Date tanggalLahir, String domisili, String noHP, String noKTP, String ipk, JenisKelaminType jenisKelaminType, PendidikanType pendidikanType, String namaCivitas, String minat, String ketrampilan1, String ketrampilan2, String ketrampilan3, String ketrampilan4, String ketrampilan5, TingkatanType tingkatanType1, TingkatanType tingkatanType2, TingkatanType tingkatanType3, TingkatanType tingkatanType4, TingkatanType tingkatanType5, String uploadCV, Boolean statusApprove, String jurusan, String escute, JobDivision jobDivision, JobLocation jobLocation, AccessTime accessTime, UserLoginInfo userLoginInfo, Boolean disableButton) {
+    public UserSpecification(String fullName, String email, String mobilePhone, String immediateSupervisorUserName, String primaryBranchID, String ktp, Date tanggalLahir, String domisili, String noHP, String noKTP, String ipk, JenisKelaminType jenisKelaminType, PendidikanType pendidikanType, String namaCivitas, String minat, String ketrampilan1, String ketrampilan2, String ketrampilan3, String ketrampilan4, String ketrampilan5, TingkatanType tingkatanType1, TingkatanType tingkatanType2, TingkatanType tingkatanType3, TingkatanType tingkatanType4, TingkatanType tingkatanType5, String uploadCV, Boolean statusApprove, String jurusan, String escute, JobDivision jobDivision, JobLocation jobLocation, AccessTime accessTime, UserLoginInfo userLoginInfo) {
         this.fullName = fullName;
         this.email = email;
         this.mobilePhone = mobilePhone;
@@ -91,8 +89,6 @@ public class UserSpecification implements ValueObject<UserSpecification> {
         this.jobLocation = jobLocation;
         this.accessTime = accessTime;
         this.userLoginInfo = userLoginInfo;
-        this.userLoginInfo = userLoginInfo;
-        this.disableButton = disableButton;
     }
 
     public String getFullName() {
@@ -359,14 +355,6 @@ public class UserSpecification implements ValueObject<UserSpecification> {
         this.userLoginInfo = userLoginInfo;
     }
 
-    public Boolean getDisableButton() {
-        return disableButton;
-    }
-
-    public void setDisableButton(Boolean disableButton) {
-        this.disableButton = disableButton;
-    }
-
     @Override
     public int hashCode() {
         int hash = 3;
@@ -403,7 +391,6 @@ public class UserSpecification implements ValueObject<UserSpecification> {
         hash = 83 * hash + Objects.hashCode(this.jobLocation);
         hash = 83 * hash + Objects.hashCode(this.accessTime);
         hash = 83 * hash + Objects.hashCode(this.userLoginInfo);
-        hash = 83 * hash + Objects.hashCode(this.disableButton);
         return hash;
     }
 
@@ -513,9 +500,6 @@ public class UserSpecification implements ValueObject<UserSpecification> {
             return false;
         }
         if (!Objects.equals(this.userLoginInfo, other.userLoginInfo)) {
-            return false;
-        }
-        if (!Objects.equals(this.disableButton, other.disableButton)) {
             return false;
         }
         return true;

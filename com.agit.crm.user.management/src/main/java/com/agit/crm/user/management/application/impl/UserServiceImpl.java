@@ -389,4 +389,11 @@ public class UserServiceImpl implements UserService {
         return null;
     }
 
+    @Override
+    public List<UserDTO> findByUsername(String userName) {
+        Validate.notNull(userRepository);
+        List<User> users = (List<User>) userRepository.findByUsername(userName);
+        return userDTOAssembler.toDTOs(users);
+    }
+
 }

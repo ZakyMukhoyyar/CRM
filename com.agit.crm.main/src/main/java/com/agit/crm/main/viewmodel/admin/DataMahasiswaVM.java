@@ -17,6 +17,7 @@ import com.agit.crm.shared.type.JenisKelaminType;
 import com.agit.crm.shared.type.PendidikanType;
 import com.agit.crm.shared.type.TingkatanType;
 import com.agit.crm.shared.zul.CommonViewModel;
+import static com.agit.crm.shared.zul.CommonViewModel.showInformationMessagebox;
 import com.agit.crm.shared.zul.PageNavigation;
 import com.agit.crm.user.management.application.UserService;
 import com.agit.crm.util.StringUtil;
@@ -25,6 +26,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.ContextParam;
@@ -70,6 +72,7 @@ public class DataMahasiswaVM {
     /*------------------------------------- object binding -----------------------------------*/
     private UserDTO userDTO = new UserDTO();
     private List<UserDTO> userDTOs = new ArrayList<>();
+    private List<UserDTO> userDTO2s = new ArrayList<>();
     private List<DomisiliDTO> domisilis = new ArrayList<DomisiliDTO>();
     private List<MinatDTO> minats = new ArrayList<MinatDTO>();
     private List<String> listMinat = new ArrayList<>();
@@ -129,6 +132,8 @@ public class DataMahasiswaVM {
 
     private void initData() {
         userDTOs = userService.findAllMahasiswa(3);
+
+        userDTO2s = userService.findByUsername(SecurityUtil.getUserName());
 
         minats = minatService.findAll();
         for (MinatDTO m : minats) {
@@ -230,8 +235,32 @@ public class DataMahasiswaVM {
         }
         return count;
     }
-    /*------------------------------------- Getter&Set---------------------------------------*/
 
+    /*--------------------------------------------------------- Aksi Update Profile ---------------------------------------------------------*/
+    @Command("buttonDetailProfil")
+    @NotifyChange("userDTO")
+    public void buttonDetailProfil(@BindingParam("object") UserDTO obj, @ContextParam(ContextType.VIEW) Window window) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("userDTO", obj);
+        CommonViewModel.navigateToWithoutDetach("/crm/register/update_profile.zul", window, params);
+    }
+
+    @Command("buttonUpdateProfile")
+    @NotifyChange({"userDTO", "userDTO2s"})
+    public void buttonUpdateProfile(@BindingParam("object") UserDTO obj, @ContextParam(ContextType.VIEW) Window window) {
+        userService.saveOrUpdate(userDTO);
+        showInformationMessagebox("Update Profile Berhasil Disimpan");
+        BindUtils.postGlobalCommand(null, null, "refreshUsers", null);
+        window.detach();
+    }
+
+    @GlobalCommand
+    @NotifyChange("userDTO2s")
+    public void refreshUsers() {
+        userDTO2s = userService.findByUsername(SecurityUtil.getUserName());
+    }
+
+    /*------------------------------------- Getter&Set---------------------------------------*/
     public UserDTO getUserDTO() {
         return userDTO;
     }
@@ -534,6 +563,14 @@ public class DataMahasiswaVM {
 
     public void setCivitasSelect(String civitasSelect) {
         this.civitasSelect = civitasSelect;
+    }
+
+    public List<UserDTO> getUserDTO2s() {
+        return userDTO2s;
+    }
+
+    public void setUserDTO2s(List<UserDTO> userDTO2s) {
+        this.userDTO2s = userDTO2s;
     }
 
 }

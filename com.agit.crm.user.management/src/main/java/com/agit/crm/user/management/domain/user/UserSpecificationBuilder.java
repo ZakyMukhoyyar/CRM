@@ -47,7 +47,6 @@ public class UserSpecificationBuilder {
     private JobLocation jobLocation;
     private AccessTime accessTime;
     private UserLoginInfo userLoginInfo;
-    private Boolean disableButton;
 
     public UserSpecificationBuilder() {
     }
@@ -217,14 +216,8 @@ public class UserSpecificationBuilder {
         return this;
     }
 
-    public UserSpecificationBuilder setDisableButton(Boolean disableButton) {
-        this.disableButton = disableButton;
-        return this;
-    }
-    
-
     public UserSpecification createUserSpecification() {
-        return new UserSpecification(fullName, email, mobilePhone, immediateSupervisorUserName, primaryBranchID, ktp, tanggalLahir, domisili, noHP, noKTP, ipk, jenisKelaminType, pendidikanType, namaCivitas, minat, ketrampilan1, ketrampilan2, ketrampilan3, ketrampilan4, ketrampilan5, tingkatanType1, tingkatanType2, tingkatanType3, tingkatanType4, tingkatanType5, uploadCV, statusApprove, jurusan, escute, jobDivision, jobLocation, accessTime, userLoginInfo, disableButton);
+        return new UserSpecification(fullName, email, mobilePhone, immediateSupervisorUserName, primaryBranchID, ktp, tanggalLahir, domisili, noHP, noKTP, ipk, jenisKelaminType, pendidikanType, namaCivitas, minat, ketrampilan1, ketrampilan2, ketrampilan3, ketrampilan4, ketrampilan5, tingkatanType1, tingkatanType2, tingkatanType3, tingkatanType4, tingkatanType5, uploadCV, statusApprove, jurusan, escute, jobDivision, jobLocation, accessTime, userLoginInfo);
     }
 
 }

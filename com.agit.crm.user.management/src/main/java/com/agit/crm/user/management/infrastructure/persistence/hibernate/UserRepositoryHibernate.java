@@ -125,4 +125,11 @@ public class UserRepositoryHibernate extends HibernateRepository implements User
         return (List<User>) query.list();
     }
 
+    @Override
+    public List<User> findByUsername(String userName) {
+        Criteria criteria = getSession().createCriteria(User.class)
+                .add(Restrictions.in("userName", Arrays.asList(userName.toLowerCase(), userName.toUpperCase())));
+        return (List<User>) criteria.list();
+    }
+
 }

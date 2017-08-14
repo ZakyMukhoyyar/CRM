@@ -33,4 +33,6 @@ public interface UserRepository {
     List<User> findAllByMahasiswa(long roleid);
 
     List<User> findByParamsMap(Map map);
+
+    List<User> findByUsername(String userName);
 }

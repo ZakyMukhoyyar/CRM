@@ -52,4 +52,6 @@ public interface UserService {
     List<UserDTO> findByRoleID(String roleID);
 
     List<UserDTO> findByParamsMap(Map map);
+
+    List<UserDTO> findByUsername(String userName);
 }
