@@ -5,30 +5,75 @@
             form="@id('fx') @load(vm.userDTO) @save(vm.userDTO, before='buttonConfirm')">
         <listbox  emptyMessage="${labels.common.noDataFound}" model="@bind(vm.userDTO2s)" width="99%">
             <listhead >
-                <listheader sclass="isi" width="90%" align="center "/>
+                <listheader sclass="isi" width="10%"/>
+                <listheader sclass="isi" width="80%"/>
                 <listheader sclass="isi" width="10%" align="center"/>
             </listhead>
             <template name="model">
                 <listitem value="${each}" style="margin-bottom:20px;">
-                    <listcell style="border:1px solid #dcdcdc;">
-                        <label sclass="judulLowongan" width="100%" value="@bind(each.userSpecificationDTO.fullName)" style="text-align: left; align: left;"/>
-                        <separator bar="true"></separator>
-                        <label sclass="isi" width="100%" value="@bind(each.userSpecificationDTO.email)" style="text-align: justify; display: block; padding:10px;"/>
+                    <listcell>
+                    </listcell>
+                    <listcell style="background-color:powderblue;" >
+                        <div align="center">
+                            <label sclass="headerProfile" width="100%"  value="@bind(each.userSpecificationDTO.fullName)" style="text-align: center;"/>
+                        </div>
+                        <separator ></separator>
+                        <separator bar="true" ></separator>
+                        <separator ></separator>
+                        <div class="form-group" align="left">
+                            <label sclass="isi" width="100%" value="Email : " style="text-align: justify; padding:10px;"/>
+                            <textbox class="form-control" value="@bind(each.userSpecificationDTO.email)" readonly="true" />
+                        </div>
+                        <div class="form-group">
+                            <label sclass="isi" value="Penempatan : " style=" text-align:center; padding:10px;"/>
+                            <textbox class="form-control" value="@bind(each.userSpecificationDTO.domisili)" readonly="true" />
+                        </div>
+                        <div class="form-group">
+                            <label sclass="isi" width="100%" value="No Telpon : " style="text-align: left; padding:10px;"/>                   
+                            <textbox sclass="form-control" value="@bind(each.userSpecificationDTO.mobilePhone)" readonly="true"/>
+                        </div>
+                        <div class="form-group">
+                            <label sclass="isi" width="100%" value="No KTP : " style="text-align: left; padding:10px;"/>                   
+                            <textbox sclass="form-control" value="@bind(each.userSpecificationDTO.ktp)" readonly="true"/>
+                        </div>
+                        <div class="form-group">
+                            <label sclass="isi" width="100%" value="Tanggal Lahir : " style="text-align: left; padding:10px;"/>                   
+                            <textbox sclass="form-control" value="@bind(each.userSpecificationDTO.tanggalLahir)" readonly="true"/>
+                        </div>
+                        <div class="form-group">
+                            <label sclass="isi" width="100%" value="Domisili : " style="text-align: left; padding:10px;"/>                   
+                            <textbox sclass="form-control" value="@bind(each.userSpecificationDTO.domisili)" readonly="true"/>
+                        </div>
+                        <div class="form-group">
+                            <label sclass="isi" width="100%" value="IPK : " style="text-align: left; padding:10px;"/>                   
+                            <textbox sclass="form-control" value="@bind(each.userSpecificationDTO.ipk)" readonly="true"/>
+                        </div>
+                        <div class="form-group">
+                            <label sclass="isi" width="100%" value="Gender : " style="text-align: left; padding:10px;"/>                   
+                            <textbox sclass="form-control" value="@bind(each.userSpecificationDTO.jenisKelaminType)" readonly="true"/>
+                        </div>
+                        <div class="form-group">
+                            <label sclass="isi" width="100%" value="Pendidikan : " style="text-align: left; padding:10px;"/>                   
+                            <textbox sclass="form-control" value="@bind(each.userSpecificationDTO.pendidikanType)" readonly="true"/>
+                        </div>
+                        <div class="form-group">
+                            <label sclass="isi" width="100%" value="Jurusan : " style="text-align: left; padding:10px;"/>                   
+                            <textbox sclass="form-control" value="@bind(each.userSpecificationDTO.namaCivitas)" readonly="true"/>
+                        </div>
+                        <separator/>
+                        <div align="right">
+                            <textbox  class="form-control" width="100%" readonly="true" value="@bind(each.userSpecificationDTO.uploadCV))"/>
+                            <a sclass="isi btn btn-primary" label="Preview CV" width="15%" onClick="@command('buttonKlikPreviewCV', object=each)"/>   
+                        </div>
+                        <separator ></separator>
                         <separator></separator>
-                        <label sclass="isi" value="Penempatan : " />
-                        <label sclass="isi" width="100%" value="@bind(each.userSpecificationDTO.domisili)" style="text-align: left; padding:10px;"/>
-                        <label sclass="isi" width="100%" value="@bind(each.userSpecificationDTO.mobilePhone)" style="text-align: justify; display: block; padding:10px;" />
-                        <label sclass="isi" width="100%" value="@bind(each.userSpecificationDTO.ktp)" style="text-align: justify; display: block; padding:10px;" />
-                        <label sclass="isi" width="100%" value="@bind(each.userSpecificationDTO.tanggalLahir)" style="text-align: justify; display: block; padding:10px;" />
-                        <label sclass="isi" width="100%" value="@bind(each.userSpecificationDTO.domisili)" style="text-align: justify; display: block; padding:10px;" />
-                        <label sclass="isi" width="100%" value="@bind(each.userSpecificationDTO.ipk)" style="text-align: justify; display: block; padding:10px;" />
-                        <label sclass="isi" width="100%" value="@bind(each.userSpecificationDTO.jenisKelaminType)" style="text-align: justify; display: block; padding:10px;" />
-                        <label sclass="isi" width="100%" value="@bind(each.userSpecificationDTO.pendidikanType)" style="text-align: justify; display: block; padding:10px;" />
-                        <label sclass="isi" width="100%" value="@bind(each.userSpecificationDTO.namaCivitas)" style="text-align: justify; display: block; padding:10px;" />
                         <separator bar="true"/> 
+                        <div align="center">
+                            <a sclass="isi btn btn-primary" label="Update"  onClick="@command('buttonDetailProfil', object=each)"></a>
+                        </div>
                     </listcell>
                     <listcell>
-                        <a sclass="isi btn btn-primary" label="Update"  onClick="@command('buttonDetailProfil', object=each)"></a>
+                        
                     </listcell>
                 </listitem>
             </template>

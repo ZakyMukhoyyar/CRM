@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?taglib uri="/WEB-INF/security.tld" prefix="sec"?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<?component name="signLabel" class="com.agit.crm.shared.zul.SignLabel" ?>
+<?link rel="icon" type="image/png" href="/images/logoagit-new.png"?>
+
+<?page id="index" title="Candidate Recruitment Management - Project"?>
+<?link rel="icon" type="image/png" href="/images/logoagit-new.png"?>
+<?taglib uri="/WEB-INF/security.tld" prefix="sec"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?link rel="stylesheet" type="text/css"	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" ?>
+<?link rel="stylesheet" type="text/css"	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" ?>
+<!--<?link rel="stylesheet" type="text/css"	href="/styles/css/bootstrap.css" ?>-->
+<!--<?link rel="stylesheet" type="text/css"	href="/styles/css/default.css" ?>-->
+<?script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" if="${zk.ie < 9}" ?>
+    <?script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" if="${zk.ie < 9}"?>
+
+        <zk xmlns="http://www.zkoss.org/2005/zul">
+            <window apply="org.zkoss.bind.BindComposer"
+                    viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.admin.DataMahasiswaVM')"
+                    form="@id('fx') @load(vm) @save(vm, before='buttonUpdateProfile')">
+                <tabbox width="700px">
+                    <tabs>
+                        <tab sclass="isi" label="Detail Akun"/>
+                    </tabs>
+                    <tabpanels width="700px">
+                        <tabpanel>
+                            <grid>
+                                <columns>
+                                    <column width="20%" />
+                                    <column width="60%" />
+                                </columns>
+                                <rows>
+                                    <row>
+                                        <signLabel sclass="isi" value="Nama Lengkap "/>
+                                        <div>
+                                            <textbox value="@bind(fx.userDTO.userSpecificationDTO.fullName)" width="40%"/>
+                                        </div>
+                                    </row>
+                                    <row>
+                                        <signLabel sclass="isi" value="Username "/>
+                                        <div>
+                                            <textbox id="userName" value="@bind(fx.userDTO.userName)" width="40%"/>
+                                        </div>
+                                    </row>
+                            
+                                    <row>
+                                        <signLabel sclass="isi" value="Password" width="40%" />
+                                        <textbox type="password" value="xxxxxxxxxxx" width="40%" disabled="true"/>
+                                    </row>
+                            
+                                    <row>
+                                        <signLabel sclass="isi" value="Email"/>
+                                        <div>
+                                            <textbox value="@bind(fx.userDTO.userSpecificationDTO.email)" width="40%" />
+                                        </div>
+                                    </row>
+                                    <row>
+                                        <signLabel sclass="isi" value="KTP"/>
+                                        <div>
+                                            <textbox value="@bind(fx.userDTO.userSpecificationDTO.ktp)" width="40%" />
+                                        </div>
+                                    </row>
+                                    <row>
+                                        <signLabel sclass="isi" value="No HP"/>
+                                        <div>
+                                            <textbox value="@bind(fx.userDTO.userSpecificationDTO.mobilePhone)" width="40%" />
+                                        </div>
+                                    </row>
+                                    <row>
+                                        <signLabel value="Tanggal Lahir"/>
+                                        <div>
+                                            <datebox value="@bind(fx.userDTO.userSpecificationDTO.tanggalLahir)" width="40%" />
+                                        </div>
+                                    </row>
+                                    <row>
+                                        <signLabel sclass="isi" value="Domisili"/>
+                                        <div>
+                                            <listbox 
+                                                width="40%"
+                                                mold="select"
+                                                model="@load(vm.listDomisili)" 
+                                                selectedItem="@bind(fx.userDTO.userSpecificationDTO.domisili)" >
+                                                <template name="model" var="items" >
+                                                    <listitem label="@load(items)"  value="@load(items)" />
+                                                </template>
+                                            </listbox> 
+                                        </div>
+                                    </row>
+                                    <row>
+                                        <signLabel sclass="isi" value="IPK"/>
+                                        <div>
+                                            <textbox value="@bind(fx.userDTO.userSpecificationDTO.ipk)" width="40%" />
+                                        </div>
+                                    </row>
+                                    <row>
+                                        <signLabel sclass="isi" value="Jenis Kelamin"/>
+                                        <div>
+                                            <listbox 
+                                                width="40%"
+                                                mold="select"
+                                                model="@load(vm.jenisKelaminTypes)" 
+                                                selectedItem="@bind(fx.userDTO.userSpecificationDTO.jenisKelaminType)" >
+                                                <template name="model" var="items" >
+                                                    <listitem label="@load(items)"  value="@load(items)" />
+                                                </template>
+                                            </listbox> 
+                                        </div>
+                                    </row>
+                                    <row>
+                                        <signLabel sclass="isi" value="Pendidikan Type"/>
+                                        <div>
+                                            <listbox 
+                                                width="40%"
+                                                mold="select"
+                                                model="@load(vm.pendidikanTypes)" 
+                                                selectedItem="@bind(fx.userDTO.userSpecificationDTO.pendidikanType)" >
+                                                <template name="model" var="items" >
+                                                    <listitem label="@load(items)"  value="@load(items)" />
+                                                </template>
+                                            </listbox> 
+                                        </div>
+                                    </row>
+                                    <row>
+                                        <signLabel sclass="isi" value="Civitas"/>
+                                        <div>
+                                            <listbox 
+                                                width="40%"
+                                                mold="select"
+                                                model="@load(vm.listCivitas)" 
+                                                selectedItem="@bind(fx.userDTO.userSpecificationDTO.namaCivitas)" >
+                                                <template name="model" var="items" >
+                                                    <listitem label="@load(items)"  value="@load(items)" />
+                                                </template>
+                                            </listbox> 
+                                        </div>
+                                    </row>
+
+                                    <row>
+                                        <signLabel sclass="isi" value="Jurusan"/>
+                                        <div>
+                                            <listbox 
+                                                width="40%"
+                                                mold="select"
+                                                model="@load(vm.listJurusan)" 
+                                                selectedItem="@bind(fx.userDTO.userSpecificationDTO.jurusan)" >
+                                                <template name="model" var="items" >
+                                                    <listitem label="@load(items)"  value="@load(items)" />
+                                                </template>
+                                            </listbox> 
+                                        </div>
+                                    </row>
+                            
+                                    <row>
+                                        <signLabel sclass="isi" value="Minat"/>
+                                        <div>
+                                            <listbox 
+                                                width="40%"
+                                                mold="select"
+                                                model="@load(vm.listMinat)" 
+                                                selectedItem="@bind(fx.userDTO.userSpecificationDTO.minat)" >
+                                                <template name="model" var="items" >
+                                                    <listitem label="@load(items)"  value="@load(items)" />
+                                                </template>
+                                            </listbox> 
+                                        </div>
+                                    </row>
+                            
+                                </rows>
+                            </grid>
+                            <groupbox >
+                                <caption sclass="isi" label="Skills" style="font-size:12pt; font-weight: bold"/>
+                                <grid style="border:0">
+                                    <columns>
+                                        <column width="40%"></column>
+                                        <column width="40%"></column>
+                                        <column></column>
+                                    </columns>
+                                    <rows>
+                                        <row>
+                                            <signLabel sclass="isi" value="Ketrampilan" style="font-weight: bold; alignment: center"/>
+                                            <signLabel sclass="isi" value="Tingkat" style="font-weight: bold"/>
+                                        </row>
+                                        <row>
+                                            <div>
+                                                <listbox 
+                                                    width="100%"
+                                                    mold="select"
+                                                    model="@load(vm.listKetrampilan)" 
+                                                    selectedItem="@bind(fx.userDTO.userSpecificationDTO.ketrampilan1)" >
+                                                    <template name="model" var="items" >
+                                                        <listitem label="@load(items)"  value="@load(items)" />
+                                                    </template>
+                                                </listbox> 
+                                            </div>
+                                            <div>
+                                                <listbox 
+                                                    width="100%"
+                                                    mold="select"
+                                                    model="@load(vm.tingkatanTypes1)" 
+                                                    selectedItem="@bind(fx.userDTO.userSpecificationDTO.tingkatanType1)" >
+                                                    <template name="model" var="items" >
+                                                        <listitem label="@load(items)"  value="@load(items)" />
+                                                    </template>
+                                                </listbox> 
+                                            </div>
+                                        </row>
+                                        <row>
+                                            <div>
+                                                <listbox 
+                                                    width="100%"
+                                                    mold="select"
+                                                    model="@load(vm.listKetrampilan)" 
+                                                    selectedItem="@bind(fx.userDTO.userSpecificationDTO.ketrampilan2)" >
+                                                    <template name="model" var="items" >
+                                                        <listitem label="@load(items)"  value="@load(items)" />
+                                                    </template>
+                                                </listbox> 
+                                            </div>
+                                            <div>
+                                                <listbox 
+                                                    width="100%"
+                                                    mold="select"
+                                                    model="@load(vm.tingkatanTypes2)" 
+                                                    selectedItem="@bind(fx.userDTO.userSpecificationDTO.tingkatanType2)" >
+                                                    <template name="model" var="items" >
+                                                        <listitem label="@load(items)"  value="@load(items)" />
+                                                    </template>
+                                                </listbox> 
+                                            </div>
+                                        </row>
+                                        <row>
+                                            <div>
+                                                <listbox 
+                                                    width="100%"
+                                                    mold="select"
+                                                    model="@load(vm.listKetrampilan)" 
+                                                    selectedItem="@bind(fx.userDTO.userSpecificationDTO.ketrampilan3)" >
+                                                    <template name="model" var="items" >
+                                                        <listitem label="@load(items)"  value="@load(items)" />
+                                                    </template>
+                                                </listbox> 
+                                            </div>
+                                            <div>
+                                                <listbox 
+                                                    width="100%"
+                                                    mold="select"
+                                                    model="@load(vm.tingkatanTypes3)" 
+                                                    selectedItem="@bind(fx.userDTO.userSpecificationDTO.tingkatanType3)" >
+                                                    <template name="model" var="items" >
+                                                        <listitem label="@load(items)"  value="@load(items)" />
+                                                    </template>
+                                                </listbox> 
+                                            </div>
+                                        </row>
+                                        <row>
+                                            <div>
+                                                <listbox 
+                                                    width="100%"
+                                                    mold="select"
+                                                    model="@load(vm.listKetrampilan)" 
+                                                    selectedItem="@bind(fx.userDTO.userSpecificationDTO.ketrampilan4)" >
+                                                    <template name="model" var="items" >
+                                                        <listitem label="@load(items)"  value="@load(items)" />
+                                                    </template>
+                                                </listbox> 
+                                            </div>
+                                            <div>
+                                                <listbox 
+                                                    width="100%"
+                                                    mold="select"
+                                                    model="@load(vm.tingkatanTypes4)" 
+                                                    selectedItem="@bind(fx.userDTO.userSpecificationDTO.tingkatanType4)" >
+                                                    <template name="model" var="items" >
+                                                        <listitem label="@load(items)"  value="@load(items)" />
+                                                    </template>
+                                                </listbox> 
+                                            </div>
+                                        </row>
+                                        <row>
+                                            <div>
+                                                <listbox 
+                                                    width="100%"
+                                                    mold="select"
+                                                    model="@load(vm.listKetrampilan)" 
+                                                    selectedItem="@bind(fx.userDTO.userSpecificationDTO.ketrampilan5)" >
+                                                    <template name="model" var="items" >
+                                                        <listitem label="@load(items)"  value="@load(items)" />
+                                                    </template>
+                                                </listbox> 
+                                            </div>
+                                            <div>
+                                                <listbox 
+                                                    width="100%"
+                                                    mold="select"
+                                                    model="@load(vm.tingkatanTypes5)" 
+                                                    selectedItem="@bind(fx.userDTO.userSpecificationDTO.tingkatanType5)" >
+                                                    <template name="model" var="items" >
+                                                        <listitem label="@load(items)"  value="@load(items)" />
+                                                    </template>
+                                                </listbox> 
+                                            </div>
+                                        </row>
+                                    </rows>
+                                </grid>
+                            </groupbox>
+                            <groupbox>
+                                <caption sclass="isi" label="Upload CV" style="font-size:12pt; font-weight: bold"/>
+                                <grid style="border:0">
+                                    <columns>
+                                        <column width="3%"></column>
+                                        <column width="40%"></column>
+                                        <column width="20%"></column>
+                                        <column></column>
+                                    </columns> 
+                                    <rows>
+                                        <row>
+                                            <label value="" />
+                                            <textbox  class="form-control" width="100%" readonly="true" value="@bind(vm.mediaNameUploadCV)"/>
+                                            <button sclass="btn btn-info" label="Upload" upload="true" onUpload="@command('uploadFileCV')" width="80%">
+                                            </button>
+                                        </row>
+                                    </rows>
+                                </grid>
+                            </groupbox>
+                        </tabpanel>
+
+                    </tabpanels>
+                </tabbox>
+                <groupbox width="700px">
+                    <label sclass="isi" value="*) Username dan Password akan digunakan saat login" style="color:red"/>
+                    <separator></separator>
+                    <label sclass="isi" value="*) Password minimal 8 karakter, kombinasi huruf besar, kecil dan angka" style="color:red"/>
+                    <div align="center">
+                        <separator /> 
+                        <a sclass="btn btn-info" label="Kembali" width="30%" onClick="@command('buttonKembali')"/>
+                        <separator />
+                        <a sclass="btn btn-info" label="Save" width="30%" onClick="@command('buttonUpdateProfile')"/>     
+                    </div>
+                </groupbox>
+                <style>
+                    @import url('https://fonts.googleapis.com/css?family=Noto+Sans')
+                    @import url('https://fonts.googleapis.com/css?family=Lato');
+                    
+                    .judul{
+                    font-family: 'Noto Sans', sans-serif;
+                    text-transform: uppercase;
+                    font-size:18px;
+                    margin-top:10px;
+                    }
+                    .bold{
+                    font-weight:500;
+                    }
+                    .labelstyle {
+                    font-family: 'Open Sans', sans-serif;
+                    color: black
+                    background:#000;
+                    padding-top:10px;
+                    letter-spacing: 1px;
+                    margin-bottom:2px;
+                    }
+                    .labelstylegrid {
+                    font-family: 'Open Sans', sans-serif;
+                    color: black
+                    background:#000;
+                    padding-top:9px;
+                    letter-spacing: 1px;
+                    margin-bottom:1px;
+                    }
+                    .isi{
+                    letter-spacing: 1px;
+                    line-height: 1.3;
+                    font-family: 'Lato', sans-serif;
+                    }
+                    
+                    .judulLowongan{
+                    letter-spacing: 1px;
+                    line-height: 1.3;
+                    font-family: 'Lato', sans-serif;
+                    font-size:16px;
+                    }
+                    .nopadding {
+                    padding: 0 !important;
+                    margin: 0 !important;
+                    }
+                    .btn{
+                    border-radius:0px !important;
+                    }
+                    .z-treecell-content{
+                    background:#4f4f4;
+                    border:1px solid #f4f4f4;
+                    height:30px;
+                    }
+                    .z-treecell-content:hover{
+                    background:#D9E0DF;
+                    }
+                    .z-treecell-content:active{
+                    background:#D9E0DF;
+                    color:#fff;
+                    }
+                    .listx:hover {
+                    border-color: #e5f4fb;
+                    background: #333;
+                    position: relative;
+                    }
+                    .z-tabs-content {
+                    display: table;
+                    width: 100%;
+                    border-collapse: separate;
+                    border-spacing: 0;
+                    /* border-bottom: 1px solid #cfcfcf; */
+                    margin: 0;
+                    padding-left: 0;
+                    padding-top: 0;
+                    list-style-image: none;
+                    list-style-position: outside;
+                    list-style-type: none;
+                    zoom: 1;
+                    clear: both;
+                    background: #D9E0DF;
+                    }
+                    .z-north-header, .z-south-header, .z-west-header, .z-center-header, .z-east-header {
+                    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+                    font-size: 12px;
+                    font-weight: bold;
+                    font-style: normal;
+                    color: #555;
+                    height: 32px;
+                    border-bottom: 1px solid #cfcfcf;
+                    padding: 4px 4px 3px;
+                    line-height: 24px;; */
+                    overflow: hidden;
+                    cursor: default;
+                    white-space: nowrap;
+                    background:#D9E0DF;
+                    }
+                    
+                    .z-tab {
+                    background:#f5f5f5;
+                    color:#fff;
+                    border-radius:0px;
+                    position:relative;
+                    text-align:center;
+                    }
+                </style>
+            </window>
+        </zk>

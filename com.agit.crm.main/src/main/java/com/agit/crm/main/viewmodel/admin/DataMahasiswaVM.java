@@ -21,11 +21,15 @@ import static com.agit.crm.shared.zul.CommonViewModel.showInformationMessagebox;
 import com.agit.crm.shared.zul.PageNavigation;
 import com.agit.crm.user.management.application.UserService;
 import com.agit.crm.util.StringUtil;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.zkoss.bind.BindContext;
 import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
@@ -35,7 +39,10 @@ import org.zkoss.bind.annotation.ExecutionArgParam;
 import org.zkoss.bind.annotation.GlobalCommand;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
+import org.zkoss.io.Files;
 import org.zkoss.util.media.Media;
+import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.event.UploadEvent;
 import org.zkoss.zk.ui.select.annotation.VariableResolver;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 import org.zkoss.zul.ListModelList;
@@ -115,6 +122,7 @@ public class DataMahasiswaVM {
     String mediaNameUploadCV;
     private String filepathUploadCV;
     private String pathLocationUploadCV;
+
 
     /*------------------------------------- Init--------------------------------------------*/
     @Init
@@ -248,10 +256,53 @@ public class DataMahasiswaVM {
     @Command("buttonUpdateProfile")
     @NotifyChange({"userDTO", "userDTO2s"})
     public void buttonUpdateProfile(@BindingParam("object") UserDTO obj, @ContextParam(ContextType.VIEW) Window window) {
+        if (pathLocationUploadCV == null) {
+            pathLocationUploadCV = userDTO.getUserSpecificationDTO().getUploadCV();
+        }
+        userDTO.getUserSpecificationDTO().setUploadCV(pathLocationUploadCV);
         userService.saveOrUpdate(userDTO);
         showInformationMessagebox("Update Profile Berhasil Disimpan");
         BindUtils.postGlobalCommand(null, null, "refreshUsers", null);
         window.detach();
+    }
+
+    @Command("uploadFileCV")
+    @NotifyChange({"mediaNameUploadCV", "pathLocationUploadCV"})
+    public void uploadFileCV(@ContextParam(ContextType.BIND_CONTEXT) BindContext ctx) throws IOException {
+        UploadEvent upEvent = null;
+        Object objUploadEvent = ctx.getTriggerEvent();
+
+        if (objUploadEvent != null && (objUploadEvent instanceof UploadEvent)) {
+            upEvent = (UploadEvent) objUploadEvent;
+        }
+
+        if (upEvent != null) {
+            mediaUploadCV = upEvent.getMedia();
+            Calendar now = Calendar.getInstance();
+            int year = now.get(Calendar.YEAR);
+            int month = now.get(Calendar.MONTH);
+            int day = now.get(Calendar.DAY_OF_MONTH);
+            filepathUploadCV = Executions.getCurrent().getDesktop().getWebApp().getRealPath("/");
+            filepathUploadCV = filepathUploadCV + "\\" + "files" + "\\" + "crm-cv" + "\\" + year + "\\" + month + "\\" + day + "\\";
+
+            File baseDir = new File(filepathUploadCV);
+            if (!baseDir.exists()) {
+                baseDir.mkdirs();
+            }
+
+            Files.copy(new File(filepathUploadCV + mediaUploadCV.getName()), mediaUploadCV.getStreamData());
+            setMediaNameUploadCV(filepathUploadCV + mediaUploadCV.getName());
+            pathLocationUploadCV = "/" + "files" + "/" + "crm-cv" + "/" + year + "/" + month + "/" + day + "/" + mediaUploadCV.getName();
+        } else {
+            Calendar now = Calendar.getInstance();
+            int year = now.get(Calendar.YEAR);
+            int month = now.get(Calendar.MONTH);
+            int day = now.get(Calendar.DAY_OF_MONTH);
+            mediaNameUploadCV = "";
+            pathLocationUploadCV = "/" + "files" + "/" + "crm-cv" + "/" + year + "/" + month + "/" + day + "/" + mediaUploadCV.getName();
+            Messagebox.show("File : " + mediaUploadCV + " Bukan File PDF", "Error", Messagebox.OK, Messagebox.ERROR);
+        }
+
     }
 
     @GlobalCommand
