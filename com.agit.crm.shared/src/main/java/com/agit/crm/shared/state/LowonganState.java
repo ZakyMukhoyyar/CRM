@@ -6,6 +6,7 @@ package com.agit.crm.shared.state;
  */
 public enum LowonganState {
     APPLY,
-    CLOSE,
     WAITING,
+    REJECT,
+//    ACCEPTED
 }

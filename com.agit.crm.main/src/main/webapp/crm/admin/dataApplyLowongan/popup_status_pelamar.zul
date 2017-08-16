@@ -1,0 +1,42 @@
+    <window border="30" apply="org.zkoss.bind.BindComposer" width="400px"
+            viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.admin.LowonganVM')"
+            form="@id('fx') @load(vm) @save(vm, before='buttonBackStatusPelamar')">
+        <!--riwayatApplyMahasiswaDTO-->
+    <groupbox closable="false" mold="3d">
+        <caption label="Persetujuan"/>
+        <groupbox closable="false">
+            <grid style="border:0;">
+                <columns>
+                    <column align="center" />
+                </columns>
+                <rows>
+                    <row>
+                        <label value="Pilih Status Pelamar" />
+                    </row>
+                    <row>
+                        <div>
+                            <listbox 
+                                width="40%"
+                                mold="select"
+                                model="@load(vm.lowonganStates)" 
+                                selectedItem="@bind(vm.lowonganState)">
+                                <template name="model" var="items" >
+                                    <listitem label="@load(items)"  value="@load(items)" />
+                                </template>
+                            </listbox>
+                        </div>
+                    </row>
+                </rows>
+            </grid>
+            <separator height="10px"/>
+        </groupbox>
+        <separator/>
+        <groupbox contentStyle="border:0; padding-left:20%; ">
+            <hbox align="center">
+                <a sclass="btn btn-info" label="Kembali" width="100px" onClick="@command('buttonKembaliStatusPelamar')"/>
+                <space width="1%"/>
+                <a sclass="btn btn-info" label="Simpan" width="100px" onClick="@command('buttonSimpanStatusPelamar', object=vm.riwayatApplyMahasiswaDTO)"/>
+            </hbox>
+        </groupbox>
+    </groupbox>
+</window>

@@ -85,7 +85,7 @@ public class LowonganServiceImpl implements LowonganService {
         /*dummy1*/
         RiwayatApplyMahasiswa riwayatApplyMahasiswa1 = new RiwayatApplyMahasiswaBuilder()
                 .setIdRiwayatApplyMahasiswa("RAM001")
-                .setLowonganState(LowonganState.APPLY)
+//                .setLowonganState(LowonganState.APPLY)
                 .setCreatedBy("created by")
                 .setCreatedDate(new Date())
                 .setModifiedBy("modified by")
@@ -94,7 +94,7 @@ public class LowonganServiceImpl implements LowonganService {
         /*dummy2*/
         RiwayatApplyMahasiswa riwayatApplyMahasiswa2 = new RiwayatApplyMahasiswaBuilder()
                 .setIdRiwayatApplyMahasiswa("RAM002")
-                .setLowonganState(LowonganState.APPLY)
+//                .setLowonganState(LowonganState.APPLY)
                 .setCreatedBy("created by")
                 .setCreatedDate(new Date())
                 .setModifiedBy("modified by")

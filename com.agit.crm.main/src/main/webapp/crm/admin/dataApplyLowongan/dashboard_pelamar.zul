@@ -31,54 +31,48 @@
                 </div>
             </div>
             <div sclass="col-md-9 nopadding">
-                <groupbox closable="false" sclass="col-md-12">
+                <!--<groupbox closable="false" sclass="col-md-12">-->
                     <listbox rows="5" mold="paging" pageSize="5" emptyMessage="${labels.common.noDataFound}" model="@bind(vm.listRiwayatApplyMahasiswaDTOs)">
                         <listhead sizable="true">
-                            <listheader label="ID Lowongan" width="7%" align="center"/>
-                            <listheader label="Nama Lowongan" width="20%" align="center"/>
-                            <listheader label="Nama Apply" width="15%" align="center"/>
+                            <listheader label="ID Lowongan" width="12.5%" align="center"/>
+                            <listheader label="Nama Lowongan" width="27.5%" align="center"/>
+                            <listheader label="Nama Apply" width="20%" align="center"/>
+                            <listheader label="Status" width="10%" align="center"/>
                             <listheader label="Waktu Apply" width="15%" align="center"/>
                             <listheader label="Aksi" width="15%" align="center"/>
                         </listhead>
                         <template name="model">
                             <listitem value="${each}">
-                                <listcell >
+                                <listcell>
                                     <label width="100%" value="@bind(each.idRiwayatLowongan)"/>
                                 </listcell>
-                                <listcell >
+                                <listcell>
                                     <label width="100%" value="@bind(each.namaLowonganApply)"/>
-                                </listcell>
-                                <listcell >
+                                    </listcell>
+                                <listcell>
                                     <label width="100%" value="@bind(each.namaApplyLowongan)"/>
+                                    <!--<a label="@bind(each.namaApplyLowongan)" onClick="@command('KlikDetailDataPelamar', object=each)" style="font-size:12pt ;color:blue;text-decoration:underline"/>-->
+                                    <!--<separator/>-->
+                                    <!--<separator/>-->
+                                    <!--<button label="Detail" onClick="@command('KlikDetailDataPelamar', object=each)"/>-->
                                 </listcell>
-                                <listcell >
+                                <listcell>
+                                    <label value="@bind(each.lowonganState)"/>
+                                </listcell>
+                                <listcell>
                                     <label width="100%" value="@bind(each.createdDate)"/>
                                 </listcell>
                                 <listcell>
-                                    <a label="Detail" style="text-decoration:underline ;color:blue" onClick="@command('KlikDetailDataPelamar', object=each)"></a>
+                                    <a label="Detail" onClick="@command('KlikDetailDataPelamar', object=each)" />
+                                    <!--<a label="Approve" onClick="@command('KlikApprovePelamar', object=each)" />-->
                                     <a label=" | " style="font-size:12pt ;color:black"></a>
-                                    <checkbox label="Approve" style="text-decoration:underline ;color:blue"/>
+                                    <!--<separator/>-->
+                                    <a label="Status" onClick="@command('KlikStatusPelamar', object=each)"  />
+                                    <!--<a label="Reject" onClick="@command('KlikRejectPelamar', object=each)"  />-->
                                 </listcell>
                             </listitem>
                         </template>
                     </listbox>
-                    <groupbox>
-                        <grid style="border:0">
-                
-                            <columns>
-                                <column align="right" width="98%"/>
-                                <column align="right" width="1%"/>
-                                <column align="left" width="1%"/>
-                            </columns>
-                
-                            <rows>
-                                <row>
-                                    <button label="Save" width="8%"/>
-                                </row>
-                            </rows>
-                        </grid>
-                    </groupbox>
-                </groupbox>
             </div>
         </groupbox>
                 
