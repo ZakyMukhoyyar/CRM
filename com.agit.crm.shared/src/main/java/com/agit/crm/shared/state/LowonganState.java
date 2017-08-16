@@ -8,5 +8,5 @@ public enum LowonganState {
     APPLY,
     WAITING,
     REJECT,
-//    ACCEPTED
+    ACCEPTED
 }
