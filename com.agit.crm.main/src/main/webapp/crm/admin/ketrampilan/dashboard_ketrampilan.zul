@@ -29,7 +29,7 @@
                 <div>
                     <a sclass="btn btn-info" width="100%" label="Pencarian" onClick="@command('buttonSearchKetrampilan')"/>
                     <separator/>
-                    <a sclass="btn btn-info" width="100%" label="Tambah Minat" onClick="@command('buttonNewKetrampilan')"/>
+                    <a sclass="btn btn-info" width="100%" label="Tambah Ketrampilan" onClick="@command('buttonNewKetrampilan')"/>
                 </div>                
             </div>
         

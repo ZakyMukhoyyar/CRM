@@ -44,15 +44,19 @@
                                     </row>
                                     <row>
                                         <signLabel sclass="isi" value="Assign Role "/>
-                                        <!--                                <div>
-                                            <combobox autodrop="true" readonly="true" width="25%" model="@load(vm.roleDTOs)" selectedItem="@bind(fx.userDTO.roleDTO.roleName)" placeholder="- Silahkan Pilih -">
+<!--                                         <div>
+                                            <combobox autodrop="true" 
+                                                      width="40%"                                                       
+                                                      model="@load(vm.roleDTOs)" 
+                                                      selectedItem="@bind(fx.userDTO.roleDTO.roleName)" 
+                                                      placeholder=" Silahkan Pilih ">
                                                 <template name="model" var="items">
                                                     <comboitem label="@load(items.getRoleName())" value="@load(items.getRoleName())"/>
                                                 </template>
                                             </combobox>
                                         </div>-->
-                                        <div>
-                                            <listbox model="@load(vm.roleDTOs)"
+                                       <div>
+                                            <listbox model="@load(vm.roleDTOs)" 
                                                      mold="select"
                                                      width="40%"
                                                      onSelect="@command('selectRole', obj=self.getSelectedItem().getValue())">
@@ -80,7 +84,9 @@
                                     <row>
                                         <signLabel sclass="isi" value="Email"/>
                                         <div>
-                                            <textbox value="@bind(vm.userDTO.userSpecificationDTO.email)" width="40%" />
+                                            <textbox 
+                                                value="@bind(vm.userDTO.userSpecificationDTO.email)" width="40%"
+                                                constraint="/.+@.+\.[a-z]+/: Please enter an e-mail address"/>
                                             <a sclass="btn btn-primary" label="Verifikasi" width="20%" onClick="@command('verify', obj=user.userSpecification.ktp.getValue())"/>
                                             <label value="@load(vmsgs['email'])" style="color:red"/>
                                         </div>
@@ -88,7 +94,11 @@
                                     <row>
                                         <signLabel sclass="isi" value="KTP"/>
                                         <div>
-                                            <textbox value="@bind(vm.userDTO.userSpecificationDTO.ktp)" width="40%" />
+                                            <textbox  
+                                                     width="40%" 
+                                                     disabled="false" 
+                                                     constraint="/.[0-9]+/: No KTP Tidak Boleh Kosong" 
+                                                     value="@bind(vm.userDTO.userSpecificationDTO.ktp)"/>
                                             <a sclass="btn btn-primary" label="Verifikasi" width="20%" onClick="@command('verifyKtp', obj=ktp.getValue())"/>
                                             <label value="@load(vmsgs['ktp'])" style="color:red"/>
                                         </div>
@@ -96,7 +106,10 @@
                                     <row>
                                         <signLabel sclass="isi" value="No HP"/>
                                         <div>
-                                            <textbox value="@bind(vm.userDTO.userSpecificationDTO.mobilePhone)" width="40%" />
+                                            <textbox 
+                                                    width="40%"
+                                                    constraint="/.[0-9]+/: No Handphone Tidak Boleh Kosong"    
+                                                    value="@bind(vm.userDTO.userSpecificationDTO.mobilePhone)" />
                                             <label value="@load(vmsgs['mobilePhone'])" style="color:red"/>
                                         </div>
                                     </row>
@@ -110,16 +123,15 @@
                                     <row>
                                         <signLabel sclass="isi" value="Domisili"/>
                                         <div>
-                                            <listbox 
-                                                width="40%"
-                                                mold="select"
+<!--                                            <combobox autodrop="true"
+                                                width="40%"                                                
                                                 model="@load(vm.listDomisili)" 
                                                 selectedItem="@bind(fx.userDTO.userSpecificationDTO.domisili)" >
                                                 <template name="model" var="items" >
-                                                    <listitem label="@load(items)"  value="@load(items)" />
+                                                    <comboitem label="@load(items)"  value="@load(items)" />
                                                 </template>
-                                            </listbox> 
-                                            <label value="@load(vmsgs['domisili'])" style="color:red"/>
+                                            </combobox> 
+                                            <label value="@load(vmsgs['domisili'])" style="color:red"/>-->
                                         </div>
                                     </row>
                                     <row>
@@ -132,61 +144,60 @@
                                     <row>
                                         <signLabel sclass="isi" value="Jenis Kelamin"/>
                                         <div>
-                                            <listbox 
-                                                width="40%"
-                                                mold="select"
+                                            <combobox autodrop="true"
+                                                width="40%"                                              
                                                 model="@load(vm.jenisKelaminTypes)" 
-                                                selectedItem="@bind(fx.userDTO.userSpecificationDTO.jenisKelaminType)" >
+                                                selectedItem="@bind(fx.userDTO.userSpecificationDTO.jenisKelaminType)" 
+                                                placeholder=" Silahkan Pilih ">
                                                 <template name="model" var="items" >
-                                                    <listitem label="@load(items)"  value="@load(items)" />
+                                                    <comboitem label="@load(items)"  value="@load(items)" />
                                                 </template>
-                                            </listbox> 
+                                            </combobox> 
                                             <label value="@load(vmsgs['jenisKelaminType'])" style="color:red"/>
                                         </div>
                                     </row>
                                     <row>
                                         <signLabel sclass="isi" value="Pendidikan Type"/>
                                         <div>
-                                            <listbox 
-                                                width="40%"
-                                                mold="select"
+                                            <combobox autodrop="true"
+                                                width="40%"                                                
                                                 model="@load(vm.pendidikanTypes)" 
-                                                selectedItem="@bind(fx.userDTO.userSpecificationDTO.pendidikanType)" >
+                                                selectedItem="@bind(fx.userDTO.userSpecificationDTO.pendidikanType)"
+                                                placeholder=" Silahkan Pilih ">
                                                 <template name="model" var="items" >
-                                                    <listitem label="@load(items)"  value="@load(items)" />
+                                                    <comboitem label="@load(items)"  value="@load(items)" />
                                                 </template>
-                                            </listbox> 
+                                            </combobox> 
                                             <label value="@load(vmsgs['pendidikanType'])" style="color:red"/>
                                         </div>
                                     </row>
                                     <row>
                                         <signLabel sclass="isi" value="Civitas"/>
                                         <div>
-                                            <listbox 
-                                                width="40%"
-                                                mold="select"
+<!--                                            <combobox autodrop="true"
+                                                width="40%"                                               
                                                 model="@load(vm.listCivitas)" 
                                                 selectedItem="@bind(fx.userDTO.userSpecificationDTO.namaCivitas)" >
                                                 <template name="model" var="items" >
-                                                    <listitem label="@load(items)"  value="@load(items)" />
+                                                    <comboitem label="@load(items)"  value="@load(items)" />
                                                 </template>
-                                            </listbox> 
-                                            <label value="@load(vmsgs['namaCivitas'])" style="color:red"/>
+                                            </combobox> 
+                                            <label value="@load(vmsgs['namaCivitas'])" style="color:red"/>-->
                                         </div>
                                     </row>
 
                                     <row>
                                         <signLabel sclass="isi" value="Jurusan"/>
                                         <div>
-                                            <listbox 
-                                                width="40%"
-                                                mold="select"
+                                            <combobox autodrop="true"
+                                                width="40%"                                               
                                                 model="@load(vm.listJurusan)" 
-                                                selectedItem="@bind(fx.userDTO.userSpecificationDTO.jurusan)" >
+                                                selectedItem="@bind(fx.userDTO.userSpecificationDTO.jurusan)"
+                                                placeholder=" Silahkan Pilih "   >
                                                 <template name="model" var="items" >
-                                                    <listitem label="@load(items)"  value="@load(items)" />
+                                                    <comboitem label="@load(items)"  value="@load(items)" />
                                                 </template>
-                                            </listbox> 
+                                            </combobox> 
                                             <label value="@load(vmsgs['jurusan'])" style="color:red"/>
                                         </div>
                                     </row>
@@ -194,15 +205,15 @@
                                     <row>
                                         <signLabel sclass="isi" value="Minat"/>
                                         <div>
-                                            <listbox 
-                                                width="40%"
-                                                mold="select"
+                                            <combobox autodrop="true" 
+                                                width="40%"                                               
                                                 model="@load(vm.listMinat)" 
-                                                selectedItem="@bind(fx.userDTO.userSpecificationDTO.minat)" >
+                                                selectedItem="@bind(fx.userDTO.userSpecificationDTO.minat)"
+                                                placeholder=" Silahkan Pilih ">
                                                 <template name="model" var="items" >
-                                                    <listitem label="@load(items)"  value="@load(items)" />
+                                                    <comboitem label="@load(items)"  value="@load(items)" />
                                                 </template>
-                                            </listbox> 
+                                            </combobox> 
                                             <label value="@load(vmsgs['minat'])" style="color:red"/>
                                         </div>
                                     </row>
@@ -224,131 +235,126 @@
                                         </row>
                                         <row>
                                             <div>
-                                                <listbox 
-                                                    width="100%"
-                                                    mold="select"
+                                                <combobox autodrop="true"
+                                                    width="100%"                                                    
                                                     model="@load(vm.listKetrampilan)" 
                                                     selectedItem="@bind(fx.userDTO.userSpecificationDTO.ketrampilan1)" >
                                                     <template name="model" var="items" >
-                                                        <listitem label="@load(items)"  value="@load(items)" />
+                                                        <comboitem label="@load(items)"  value="@load(items)" />
                                                     </template>
-                                                </listbox> 
+                                                </combobox> 
                                                 <label value="@load(vmsgs['ketrampilan1'])" style="color:red"/>
                                             </div>
                                             <div>
-                                                <listbox 
-                                                    width="100%"
-                                                    mold="select"
+                                                <combobox autodrop="true"
+                                                    readonly="true"
+                                                    width="100%"                                                    
                                                     model="@load(vm.tingkatanTypes1)" 
                                                     selectedItem="@bind(fx.userDTO.userSpecificationDTO.tingkatanType1)" >
                                                     <template name="model" var="items" >
-                                                        <listitem label="@load(items)"  value="@load(items)" />
+                                                        <comboitem label="@load(items)"  value="@load(items)" />
                                                     </template>
-                                                </listbox> 
+                                                </combobox> 
                                                 <label value="@load(vmsgs['tingkatanType1'])" style="color:red"/>
                                             </div>
                                         </row>
                                         <row>
                                             <div>
-                                                <listbox 
-                                                    width="100%"
-                                                    mold="select"
+                                                <combobox autodrop="true"
+                                                    width="100%"                                                    
                                                     model="@load(vm.listKetrampilan)" 
                                                     selectedItem="@bind(fx.userDTO.userSpecificationDTO.ketrampilan2)" >
                                                     <template name="model" var="items" >
-                                                        <listitem label="@load(items)"  value="@load(items)" />
+                                                        <comboitem label="@load(items)"  value="@load(items)" />
                                                     </template>
-                                                </listbox> 
+                                                </combobox> 
                                                 <label value="@load(vmsgs['ketrampilan2'])" style="color:red"/>
                                             </div>
                                             <div>
-                                                <listbox 
-                                                    width="100%"
-                                                    mold="select"
+                                                <combobox autodrop="true"
+                                                    readonly="true"
+                                                    width="100%"                                                    
                                                     model="@load(vm.tingkatanTypes2)" 
                                                     selectedItem="@bind(fx.userDTO.userSpecificationDTO.tingkatanType2)" >
                                                     <template name="model" var="items" >
-                                                        <listitem label="@load(items)"  value="@load(items)" />
+                                                        <comboitem label="@load(items)"  value="@load(items)" />
                                                     </template>
-                                                </listbox> 
+                                                </combobox> 
                                                 <label value="@load(vmsgs['tingkatanType2'])" style="color:red"/>
                                             </div>
                                         </row>
                                         <row>
                                             <div>
-                                                <listbox 
-                                                    width="100%"
-                                                    mold="select"
+                                                <combobox autodrop="true"
+                                                    width="100%"                                                   
                                                     model="@load(vm.listKetrampilan)" 
                                                     selectedItem="@bind(fx.userDTO.userSpecificationDTO.ketrampilan3)" >
                                                     <template name="model" var="items" >
-                                                        <listitem label="@load(items)"  value="@load(items)" />
+                                                        <comboitem label="@load(items)"  value="@load(items)" />
                                                     </template>
-                                                </listbox> 
+                                                </combobox> 
                                                 <label value="@load(vmsgs['ketrampilan3'])" style="color:red"/>
                                             </div>
                                             <div>
-                                                <listbox 
-                                                    width="100%"
-                                                    mold="select"
+                                                <combobox autodrop="true"
+                                                    readonly="true"
+                                                    width="100%"                                                    
                                                     model="@load(vm.tingkatanTypes3)" 
                                                     selectedItem="@bind(fx.userDTO.userSpecificationDTO.tingkatanType3)" >
                                                     <template name="model" var="items" >
-                                                        <listitem label="@load(items)"  value="@load(items)" />
+                                                        <comboitem label="@load(items)"  value="@load(items)" />
                                                     </template>
-                                                </listbox> 
+                                                </combobox> 
                                                 <label value="@load(vmsgs['tingkatanType3'])" style="color:red"/>
                                             </div>
                                         </row>
                                         <row>
                                             <div>
-                                                <listbox 
-                                                    width="100%"
-                                                    mold="select"
+                                                <combobox autodrop="true"
+                                                    width="100%"                                                    
                                                     model="@load(vm.listKetrampilan)" 
                                                     selectedItem="@bind(fx.userDTO.userSpecificationDTO.ketrampilan4)" >
                                                     <template name="model" var="items" >
-                                                        <listitem label="@load(items)"  value="@load(items)" />
+                                                        <comboitem label="@load(items)"  value="@load(items)" />
                                                     </template>
-                                                </listbox> 
+                                                </combobox> 
                                                 <label value="@load(vmsgs['ketrampilan4'])" style="color:red"/>
                                             </div>
                                             <div>
-                                                <listbox 
-                                                    width="100%"
-                                                    mold="select"
+                                                <combobox autodrop="true"
+                                                    readonly="true"
+                                                    width="100%"                                                   
                                                     model="@load(vm.tingkatanTypes4)" 
                                                     selectedItem="@bind(fx.userDTO.userSpecificationDTO.tingkatanType4)" >
                                                     <template name="model" var="items" >
-                                                        <listitem label="@load(items)"  value="@load(items)" />
+                                                        <comboitem label="@load(items)"  value="@load(items)" />
                                                     </template>
-                                                </listbox> 
+                                                </combobox> 
                                                 <label value="@load(vmsgs['tingkatanType4'])" style="color:red"/>
                                             </div>
                                         </row>
                                         <row>
                                             <div>
-                                                <listbox 
-                                                    width="100%"
-                                                    mold="select"
+                                                <combobox autodrop="true"
+                                                    width="100%"                                                   
                                                     model="@load(vm.listKetrampilan)" 
                                                     selectedItem="@bind(fx.userDTO.userSpecificationDTO.ketrampilan5)" >
                                                     <template name="model" var="items" >
-                                                        <listitem label="@load(items)"  value="@load(items)" />
+                                                        <comboitem label="@load(items)"  value="@load(items)" />
                                                     </template>
-                                                </listbox> 
+                                                </combobox> 
                                                 <label value="@load(vmsgs['ketrampilan5'])" style="color:red"/>
                                             </div>
                                             <div>
-                                                <listbox 
-                                                    width="100%"
-                                                    mold="select"
+                                                <combobox autodrop="true"
+                                                    readonly="true"
+                                                    width="100%"                                                    
                                                     model="@load(vm.tingkatanTypes5)" 
                                                     selectedItem="@bind(fx.userDTO.userSpecificationDTO.tingkatanType5)" >
                                                     <template name="model" var="items" >
-                                                        <listitem label="@load(items)"  value="@load(items)" />
+                                                        <comboitem label="@load(items)"  value="@load(items)" />
                                                     </template>
-                                                </listbox> 
+                                                </combobox> 
                                                 <label value="@load(vmsgs['tingkatanType5'])" style="color:red"/>
                                             </div>
                                         </row>
