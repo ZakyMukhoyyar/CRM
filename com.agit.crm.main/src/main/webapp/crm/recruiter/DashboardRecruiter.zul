@@ -29,11 +29,7 @@
                 <div class="form-group">
                     <label sclass="labelstyle" value="Nama Applicant" />
                     <textbox class="form-control" width="90%" value="@bind(vm.namaApplyLowongan)" />
-                </div> 
-<!--                <div class="form-group">
-                    <label sclass="labelstyle" value="Nama Lowongan" />
-                    <textbox class="form-control" width="90%" value="@bind(vm.namaLowonganApply)" />    
-                </div> -->
+                </div>
                 <div>
                     <separator/>
                     <a sclass="btn btn-info" width="90%" label="Pencarian" onClick="@command('searchPelamar')"/>

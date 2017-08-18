@@ -30,7 +30,7 @@
                             <rows>
                                 <row>
                                     <label sclass="isi" style="font-weight:bold;color:#65001e;font-size:14px" value="${labels.user.label.username}" />
-                                    <textbox class="form-control"  name="username" width="150px" placeholder="username" />
+                                    <textbox class="form-control"  name="username" width="150px" placeholder="username" constraint="no empty : Username Tidak Boleh Kosong"/>
                                 </row>
                             </rows>
                     
@@ -39,7 +39,7 @@
                             <rows>
                                 <row>
                                     <label sclass="isi" style="font-weight:bold;color:#65001e;font-size:14px" value="${labels.user.label.password}" />
-                                    <textbox class="form-control" type="password" name="password" width="150px" placeholder="Password"/>
+                                    <textbox class="form-control" type="password" name="password" width="150px" placeholder="Password" constraint="no empty : Password Tidak Boleh Kosong"/>
                                 </row>
                                 <row visible="false">
                                     <label sclass="isi" value="${labels.user.label.domain}" style="font-weight:bold;color:#65001e" />

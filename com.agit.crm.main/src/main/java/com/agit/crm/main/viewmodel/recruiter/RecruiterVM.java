@@ -263,7 +263,6 @@ public class RecruiterVM {
         int count1 = 0;
         int count2 = 0;
         Map params = new HashMap();
-//        params.put("idRiwayatLowongan", idRiwayatLowongan);
         params.put("namaApplyLowongan", namaApplyLowongan);
         params.put("namaLowonganApply", namaLowonganApply);
         count1 = checkCount(count1, namaLowonganApply);
