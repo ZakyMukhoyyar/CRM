@@ -1,84 +1,74 @@
 <zk xmlns="http://www.zkoss.org/2005/zul">
-    <window>
+    <window apply="org.zkoss.bind.BindComposer"
+            viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.recruiter.RecruiterVM')"
+            form="@id('fx') @load(vm.userDTO) @save(vm.userDTO, before='KlikDetailDataPelamar')"
+    >
         <groupbox closable="false" mold="3d">
-            <caption label="Dashboard Recruiter" />
-            <groupbox closable="false">
-                <caption label="Parameter Pencarian" />
-                <grid style="border:0">
-                    <columns>
-                        <column width="20%" />
-                        <column width="30%" />
-                        <column width="20%" />
-                        <column width="30%" />
-                    </columns>
-                    <rows>
-                        <row>
-                            <label value="Nama Lowongan" />
-                            <textbox width="100%" value="@bind(vm.idDataBank)"/>
-                            <label value="Tanggal Berakhir" />
-                            <datebox width="100%" value="@bind(vm.noRekening)"/>                            
-                        </row>
-                        <row>
-                            <label value="Lokasi Kerja" />
-                            <textbox width="100%" value="@bind(vm.idDataBank)"/>
-                            <label value="Fungsi Pekerjaan" />
-                            <combobox width="100%" placeholder="- Silahkan Pilih -" model="@load(vm.bankTypes)" selectedItem="@bind(vm.namaBank)">
-                                <template name="model" var="items">
-                                    <comboitem label="@load(items)" value="@load(items)"/>
-                                </template>
-                            </combobox>
-                        </row>
-                        <row>
-                            <cell></cell>
-                            <cell></cell>
-                            <cell align="left">
-                                <button width="60%" label="Pencarian" mold="trendy" onClick="@command('searchDataBank')"/>
-                                
-                            </cell>
-                            <cell colspan="2"></cell> 
-                        </row>
-                    </rows>
-                </grid>
-                <separator></separator>
-            </groupbox>
-            <groupbox closable="false">
-                <paging forward="onPaging" />
-                <listbox rows="@load(vm.pageSize)" mold="paging" pageSize="@load(vm.pageSize)" emptyMessage="${labels.common.noDataFound}">
-                    <listhead>
-                        <listheader label="ID" width="5%" align="center" sortDirection="ascending" sort="auto(idDataBank)"/>
-                        <listheader label="Nama Lowongan" width="20%" align="center"/>
-                        <listheader label="Tanggal Mulai" width="14%" align="center"/>
-                        <listheader label="Tanggal Berakhir" width="14%" align="center"/>
-                        <listheader label="Fungsi Pekerjaan" width="14%" align="center"/>
-                        <listheader label="Lokasi" width="14%" align="center"/>
-                        <listheader label="Aksi" width="10%" align="center"/>
-                    </listhead>
-                    <template name="model">
-                        <listitem value="${each}">
-                            <listcell>
-                                <label width="100%"/>
-                            </listcell>
-                            <listcell>
-                                <label width="100%"/>
-                            </listcell>
-                            <listcell>
-                                <label width="100%"/>
-                            </listcell>
-                            <listcell>
-                                <label width="100%"/>
-                            </listcell>
-                            <listcell>
-                                <label width="100%"/>
-                            </listcell>
-                            <listcell>
-                                <a label="Detail" style="text-decoration:underline ;color:blue" onClick="@command('detailDataBank', object=each)"></a>
-                                <!--                                <a label=" | " style="font-size:12pt ;color:black"></a>
-                                <a label="Delete" style="text-decoration:underline ;color:blue" onClick="@command('deleteDataBank', object=each)"></a>-->
-                            </listcell>
-                        </listitem>
-                    </template>
-                </listbox>
-            </groupbox>
+            <caption label="Daftar Pelamar" />
+            <div sclass="col-md-3 nopadding">
+                <div class="form-group" style="font-style:bold;">
+                    <label sclass="labelstyle" value="Filter Pencarian :" />
+                    <separator width="90%" bar="true"/>
+                </div>
+                <div class="form-group">
+                    <label sclass="labelstyle" value="Nama Lowongan" />
+                    <listbox mold="select" sclass="form-control" model="@load(vm.listLowonganID)" selectedItem="@bind(vm.namaLowonganApply)" width="90%">
+                        <template name="model" var="items" >
+                            <listitem label="@load(items)"  value="@load(items)" />
+                        </template>
+                    </listbox>
+                </div>
+                <div class="form-group">
+                    <label sclass="labelstyle" value="Status" />
+                    <listbox model="@load(vm.lowonganStates)" selectedItem="@bind(vm.lowonganState)" mold="select" sclass="form-control" width="90%">
+                        <template name="model" var="items" >
+                            <listitem label="@load(items)"  value="@load(items)" />
+                        </template>
+                    </listbox>
+                </div>
+                <div class="form-group">
+                    <label sclass="labelstyle" value="Nama Applicant" />
+                    <textbox class="form-control" width="90%" value="@bind(vm.namaApplyLowongan)" />
+                </div>
+                <div>
+                    <separator/>
+                    <a sclass="btn btn-info" width="90%" label="Pencarian" onClick="@command('searchPelamar')"/>
+                </div>
+            </div>
+            <div sclass="col-md-9 nopadding">
+                <!--<groupbox closable="false" sclass="col-md-12">-->
+                    <listbox rows="5" mold="paging" pageSize="5" emptyMessage="${labels.common.noDataFound}" model="@bind(vm.listRiwayatApplyMahasiswaDTOs)">
+                        <listhead sizable="true">
+                            <listheader label="Nama Lowongan" width="27.5%" align="center"/>
+                            <listheader label="Nama Apply" width="20%" align="center"/>
+                            <listheader label="Aksi" width="15%" align="center"/>
+                        </listhead>
+                        <template name="model">
+                            <listitem value="${each}">
+                                <listcell>
+                                    <label width="100%" value="@bind(each.namaLowonganApply)"/>
+                                    </listcell>
+                                <listcell>
+                                    <label width="100%" value="@bind(each.namaApplyLowongan)"/>
+                                    <separator/>
+                                    <label width="100%" value="@bind(each.lowonganState)"/>
+                                </listcell>
+                                <listcell>
+                                    <a label="Detail" onClick="@command('KlikDetailDataPelamar', object=each)" />
+                                    <a label=" | " style="font-size:12pt ;color:black"></a>
+                                    <a label="Lihat CV" onClick="@command('buttonKlikPreviewCV', object=each)"  />
+                                </listcell>
+                            </listitem>
+                        </template>
+                    </listbox>
+            </div>
         </groupbox>
+                
+        <separator></separator>
+        <div>
+            <include src="/crm/admin/dataApplyLowongan/detail_applicant.zul">
+                
+            </include>
+        </div>
     </window>
 </zk>

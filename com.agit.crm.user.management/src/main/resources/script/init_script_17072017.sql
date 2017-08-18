@@ -34,10 +34,11 @@ INSERT INTO "public"."mst_privilege" VALUES ('32', 'DATA_CIVITAS', 'Dashboard Da
 INSERT INTO "public"."mst_privilege" VALUES ('33', 'DATA_DOMISILI', 'Dashboard Data Domisili', 'ACTIVE', 'ADMIN_MANAGEMENT', 't', 'Beranda - Data History Domisili', 'Beranda - Data History Domisili', null, '/crm/admin/domisili/dashboard_domisili.zul', '2016-01-01 00:00:00', 'SYSTEM');
 
 INSERT INTO "public"."mst_privilege" VALUES ('29', 'MAHASISWA_MANAGEMENT', 'Admin', 'ACTIVE', 'ADMINISTRATOR', 't', 'Pengelolaan Data Mahasiswa', null, null, null, '2016-01-01 00:00:00', 'SYSTEM');
--- INSERT INTO "public"."mst_privilege" VALUES ('30', 'REGISTER', 'Register', 'ACTIVE', 'MAHASISWA_MANAGEMENT', 't', 'Pendaftaran', 'Pendaftaran', null, '/crm/mahasiswa/registrasi_mahasiswa.zul', '2016-01-01 00:00:00', 'SYSTEM');
 INSERT INTO "public"."mst_privilege" VALUES ('31', 'LOWONGAN', 'Beranda Lowongan', 'ACTIVE', 'MAHASISWA_MANAGEMENT', 't', 'Informasi - Lowongan', 'Informasi - Lowongan', null, '/crm/mahasiswa/beranda_lowongan_mahasiswa.zul', '2016-01-01 00:00:00', 'SYSTEM');
 INSERT INTO "public"."mst_privilege" VALUES ('34', 'PROFILE', 'Update Profile', 'ACTIVE', 'MAHASISWA_MANAGEMENT', 't', 'Profil - Profilku', 'Profil - Profilku', null, '/crm/mahasiswa/beranda_profile_mahasiswa.zul', '2016-01-01 00:00:00', 'SYSTEM');
 
+INSERT INTO "public"."mst_privilege" VALUES ('35', 'RECRUITER_MANAGEMENT', 'Admin', 'ACTIVE', 'ADMINISTRATOR', 't', 'Pengelolaan Data Pelamar', null, null, null, '2016-01-01 00:00:00', 'SYSTEM');
+INSERT INTO "public"."mst_privilege" VALUES ('36', 'DATA_PELAMAR', 'Data Pelamar', 'ACTIVE', 'RECRUITER_MANAGEMENT', 't', 'Data - Pelamar', 'Data - Pelamar', null, '/crm/recruiter/DashboardRecruiter.zul', '2016-01-01 00:00:00', 'SYSTEM');
 
 -- ----------------------------
 -- Records of mst_role
@@ -45,6 +46,7 @@ INSERT INTO "public"."mst_privilege" VALUES ('34', 'PROFILE', 'Update Profile', 
 INSERT INTO "public"."mst_role" VALUES ('1', 'SUPERADMIN', 'SUPERADMIN', 'SUPERADMIN', 'ACTIVE', '2016-01-01 00:00:00', 'SUPERADMIN');
 INSERT INTO "public"."mst_role" VALUES ('2', 'ADMIN', 'ADMIN', 'ADMIN', 'ACTIVE', '2016-01-01 00:00:00', 'SUPERADMIN');
 INSERT INTO "public"."mst_role" VALUES ('3', 'MAHASISWA', 'MAHASISWA', 'MAHASISWA', 'ACTIVE', '2016-01-01 00:00:00', 'SUPERADMIN');
+INSERT INTO "public"."mst_role" VALUES ('4', 'RECUITER', 'RECUITER', 'RECUITER', 'ACTIVE', '2016-01-01 00:00:00', 'SUPERADMIN');
 
 -- ----------------------------
 -- Records of mst_role_privilege
@@ -53,6 +55,7 @@ INSERT INTO "public"."mst_role_privilege" VALUES ('1', '1', 'ALLOW', '0');
 INSERT INTO "public"."mst_role_privilege" VALUES ('2', '19', 'ALLOW', '0');
 INSERT INTO "public"."mst_role_privilege" VALUES ('2', '29', 'ALLOW', '1');
 INSERT INTO "public"."mst_role_privilege" VALUES ('3', '29', 'ALLOW', '0');
+INSERT INTO "public"."mst_role_privilege" VALUES ('4', '35', 'ALLOW', '0');
 
 -- ----------------------------
 -- Records of mst_user
@@ -60,3 +63,4 @@ INSERT INTO "public"."mst_role_privilege" VALUES ('3', '29', 'ALLOW', '0');
 INSERT INTO "public"."mst_user" VALUES ('1', 'SUPERADMIN', '$2a$10$vW7zns/PRqfHgaxN3DpJuuH2n1mI152gMxO6Lnm4X6zrAEXDPBAUC', 'USER001', '1200101', 'ACTIVE', '1', 'Super Admin', 'superadmin@agit.com', '0811111111', 'SYSTEM', '001','321354616', null, 'TI', 'JAKARTA', '1970-01-01 00:00:00', '1970-01-01 23:59:00', '1970-01-01 00:00:00', '1970-01-01 23:59:00', '1970-01-01 00:00:00', '1970-01-01 23:59:00', '1970-01-01 00:00:00', '1970-01-01 23:59:00', '1970-01-01 00:00:00', '1970-01-01 23:59:00', '1970-01-01 00:00:00', '1970-01-01 23:59:00', '1970-01-01 00:00:00', '1970-01-01 23:59:00', null, null, '0', '2016-09-21 15:37:06.305', null, null, '0:0:0:0:0:0:0:1', '0:0:0:0:0:0:0:1', '1e2fuhqu103ts1uv76m4k3czc', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,'2016-01-01 00:00:00', 'SYSTEM');
 INSERT INTO "public"."mst_user" VALUES ('2', 'ADMIN', '$2a$10$57J57UK4Wxa6GUWig2QyA.KYv5GgiHeXUIUppRtmczWSlTJd35iba', 'USER002', '1200102', 'ACTIVE', '2', 'Admin', 'admin@agit.com', '0811111111', 'SUPERADMIN', '001', '321354617', null, 'TI', 'BANDUNG', '1970-01-01 00:00:00', '1970-01-01 23:59:00', '1970-01-01 00:00:00', '1970-01-01 23:59:00', '1970-01-01 00:00:00', '1970-01-01 23:59:00', '1970-01-01 00:00:00', '1970-01-01 23:59:00', '1970-01-01 00:00:00', '1970-01-01 23:59:00', '1970-01-01 00:00:00', '1970-01-01 23:59:00', '1970-01-01 00:00:00', '1970-01-01 23:59:00', null, null, '0', null, null, null, '0:0:0:0:0:0:0:1', '0:0:0:0:0:0:0:1', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,'2016-01-01 00:00:00', 'SUPERADMIN');
 INSERT INTO "public"."mst_user" VALUES ('3', 'MAHASISWA', '$2a$10$57J57UK4Wxa6GUWig2QyA.KYv5GgiHeXUIUppRtmczWSlTJd35iba', 'USER003', '1200102', 'ACTIVE', '3', 'Admin', 'admin@agit.com', '0811111111', 'SUPERADMIN', '001','321354618', null, 'TI', 'BANDUNG', '1970-01-01 00:00:00', '1970-01-01 23:59:00', '1970-01-01 00:00:00', '1970-01-01 23:59:00', '1970-01-01 00:00:00', '1970-01-01 23:59:00', '1970-01-01 00:00:00', '1970-01-01 23:59:00', '1970-01-01 00:00:00', '1970-01-01 23:59:00', '1970-01-01 00:00:00', '1970-01-01 23:59:00', '1970-01-01 00:00:00', '1970-01-01 23:59:00', null, null, '0', null, null, null, '0:0:0:0:0:0:0:1', '0:0:0:0:0:0:0:1', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,'2016-01-01 00:00:00', 'SUPERADMIN');
+INSERT INTO "public"."mst_user" VALUES ('4', 'RECRUITER', '$2a$10$57J57UK4Wxa6GUWig2QyA.KYv5GgiHeXUIUppRtmczWSlTJd35iba', 'USER004', '1200102', 'ACTIVE', '4', 'Admin', 'admin@agit.com', '0811111111', 'SUPERADMIN', '001','321354618', null, 'TI', 'BANDUNG', '1970-01-01 00:00:00', '1970-01-01 23:59:00', '1970-01-01 00:00:00', '1970-01-01 23:59:00', '1970-01-01 00:00:00', '1970-01-01 23:59:00', '1970-01-01 00:00:00', '1970-01-01 23:59:00', '1970-01-01 00:00:00', '1970-01-01 23:59:00', '1970-01-01 00:00:00', '1970-01-01 23:59:00', '1970-01-01 00:00:00', '1970-01-01 23:59:00', null, null, '0', null, null, null, '0:0:0:0:0:0:0:1', '0:0:0:0:0:0:0:1', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,'2016-01-01 00:00:00', 'SUPERADMIN');
