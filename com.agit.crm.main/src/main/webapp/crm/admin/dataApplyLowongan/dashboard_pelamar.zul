@@ -69,6 +69,9 @@
                                     <!--<separator/>-->
                                     <a label="Status" onClick="@command('KlikStatusPelamar', object=each)"  />
                                     <!--<a label="Reject" onClick="@command('KlikRejectPelamar', object=each)"  />-->
+                                 
+                                    <!--<separator/>-->
+                                    <a label="Lihat CV" onClick="@command('buttonPreviewCV', object=each)" />
                                 </listcell>
                             </listitem>
                         </template>

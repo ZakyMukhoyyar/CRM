@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?component name="signLabel" class="com.agit.crm.shared.zul.SignLabel" ?>
 
 <zk xmlns="http://www.zkoss.org/2005/zul">
     <window>
@@ -11,10 +12,10 @@
                     <column ></column>
                 </columns>
                 <rows>
-                    <row>
+               <!-- <row>
                         <label value="ID " style="font-weight: bold"/>
                         <textbox width="30%" readonly="true" value="@bind(fx.userID)"/>
-                    </row>
+                    </row>-->
                     <row>
                         <label value="Nama Lengkap" style="font-weight: bold"/>
                         <textbox width="100%" readonly="true" value="@bind(fx.userSpecificationDTO.fullName)"/>
@@ -27,10 +28,10 @@
                         <label value="Tanggal Lahir" style="font-weight: bold" />
                         <textbox width="100%" readonly="true" value="@bind(fx.userSpecificationDTO.tanggalLahir)"/> 
                     </row>
-                    <row>
+<!--                <row>
                         <label value="No KTP" style="font-weight: bold"/>
                         <textbox width="100%" readonly="true" value="@bind(fx.userSpecificationDTO.ktp)"/>
-                    </row>
+                    </row>-->
                         
                     <row>
                         <label value="Jenis Kelamin" style="font-weight: bold"/>
@@ -54,6 +55,10 @@
                         <label value="Nama Civitas" style="font-weight: bold"/>
                         <textbox width="100%" readonly="true" value="@bind(fx.userSpecificationDTO.namaCivitas)" />
                     </row>
+                     <row>
+                        <label value="Jurusan" style="font-weight: bold"/>
+                        <textbox width="100%" readonly="true" value="@bind(fx.userSpecificationDTO.jurusan)" />
+                    </row>
                     <row>
                         <label value="IPK" style="font-weight: bold"/>
                         <textbox width="100%" readonly="true" value="@bind(fx.userSpecificationDTO.ipk)"/>
@@ -61,13 +66,76 @@
                     <row>
                         <label value="Minat" style="font-weight: bold"/>
                         <textbox width="100%" readonly="true" value="@bind(fx.userSpecificationDTO.minat)" />
-                    </row>
-                    <!--                    <row>
-                        <label/>
-                        <button label="Kembali" onClick="@command('buttonBackApplicant')"/>
-                    </row>-->
+                    </row>                                                    
                 </rows>
             </grid>
         </groupbox>
+        <groupbox>
+            <caption sclass="isi" label="Skills" style="font-size:12pt; font-weight: bold"/>
+            <grid style="border:0">
+                <columns>
+                    <column ></column>
+                    <column width="25%"></column>
+                    <column width="25%"></column>                   
+                    <column ></column>
+                </columns>
+            <rows>
+                <row>
+                    <label/>
+                    <label sclass="isi" value="Ketrampilan" style="font-weight: bold; alignment: center"/>
+                    <label sclass="isi" value="Tingkat" style="font-weight: bold"/>
+                </row>
+                <row>
+                    <div></div>
+                    <div>
+                        <textbox width="100%" readonly="true" value="@bind(fx.userSpecificationDTO.ketrampilan1)"></textbox>
+                    </div>
+                    <div>
+                        <textbox width="100%" readonly="true" value="@bind(fx.userSpecificationDTO.tingkatanType1)"></textbox>
+                    </div>                      
+                </row>
+                <row>
+                    <div></div>
+                    <div>
+                        <textbox width="100%" readonly="true" value="@bind(fx.userSpecificationDTO.ketrampilan2)"></textbox>
+                    </div>
+                    <div>
+                        <textbox width="100%" readonly="true" value="@bind(fx.userSpecificationDTO.tingkatanType2)"></textbox>
+                    </div>   
+                </row>
+                <row>
+                    <div></div>
+                    <div>
+                        <textbox width="100%" readonly="true" value="@bind(fx.userSpecificationDTO.ketrampilan3)"></textbox>
+                    </div>
+                    <div>
+                        <textbox width="100%" readonly="true" value="@bind(fx.userSpecificationDTO.tingkatanType3)"></textbox>
+                    </div>   
+                </row>
+                <row>
+                    <div></div>
+                    <div>
+                        <textbox width="100%" readonly="true" value="@bind(fx.userSpecificationDTO.ketrampilan4)"></textbox>
+                    </div>
+                    <div>
+                        <textbox width="100%" readonly="true" value="@bind(fx.userSpecificationDTO.tingkatanType4)"></textbox>
+                    </div>   
+                </row>
+                <row>
+                    <div></div>
+                    <div>
+                        <textbox width="100%" readonly="true" value="@bind(fx.userSpecificationDTO.ketrampilan5)"></textbox>
+                    </div>
+                    <div>
+                        <textbox width="100%" readonly="true" value="@bind(fx.userSpecificationDTO.tingkatanType5)"></textbox>
+                    </div>   
+                </row>
+<!--            <row>
+                <label/>
+                <a sclass="isi btn btn-primary" label="Lihat CV"  onClick="@command('buttonPreviewCV', object=each)"></a>
+            </row>-->
+            </rows>
+            </grid>
+        </groupbox>    
     </window>
 </zk>

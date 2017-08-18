@@ -391,17 +391,17 @@ public class LowonganVM {
         lowonganDTO = (LowonganDTO) obj;
         Messagebox.show("Apakah anda yakin ingin menghapus Lowongan?", "Konfirmasi", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION,
                 new org.zkoss.zk.ui.event.EventListener() {
-                    @Override
-                    public void onEvent(Event evt) throws InterruptedException {
-                        if (evt.getName().equals("onOK")) {
-                            lowonganService.deleteData(lowonganDTO);
-                            showInformationMessagebox("Lowongan Berhasil Dihapus");
-                            BindUtils.postGlobalCommand(null, null, "refreshLowongan", null);
-                        } else {
-                            System.out.println("Operation Canceled !");
-                        }
-                    }
+            @Override
+            public void onEvent(Event evt) throws InterruptedException {
+                if (evt.getName().equals("onOK")) {
+                    lowonganService.deleteData(lowonganDTO);
+                    showInformationMessagebox("Lowongan Berhasil Dihapus");
+                    BindUtils.postGlobalCommand(null, null, "refreshLowongan", null);
+                } else {
+                    System.out.println("Operation Canceled !");
                 }
+            }
+        }
         );
     }
 
@@ -424,25 +424,25 @@ public class LowonganVM {
             userDTO = userService.findByUserID(obj.getIdUserRiwayat());
         }
     }
-    
+
     @Command("KlikStatusPelamar")
     @NotifyChange({"userDTO", "userDTOs", "lowonganDTO", "lowonganDTOs", "riwayatApplyMahasiswaDTOs", "riwayatApplyMahasiswaDTO"})
-    public void KlikStatusPelamar(@BindingParam("object") RiwayatApplyMahasiswaDTO obj, @ContextParam(ContextType.VIEW) Window window){
-        Map <String,Object> map = new HashMap<>();
+    public void KlikStatusPelamar(@BindingParam("object") RiwayatApplyMahasiswaDTO obj, @ContextParam(ContextType.VIEW) Window window) {
+        Map<String, Object> map = new HashMap<>();
         map.put("riwayatApplyMahasiswaDTO", obj);
         riwayatApplyMahasiswaDTOs = riwayatApplyMahasiswaService.findByParams(map);
         CommonViewModel.navigateToWithoutDetach("/crm/admin/dataApplyLowongan/popup_status_pelamar.zul", window, map);
     }
-    
+
     @Command("buttonKembaliStatusPelamar")
     @NotifyChange("RiwayatApplyMahasiswaDTO")
     public void buttonKembaliStatusPelamar(@BindingParam("object") RiwayatApplyMahasiswaDTO obj, @ContextParam(ContextType.VIEW) Window window) {
         window.detach();
     }
-    
+
 //    @NotifyChange({"riwayatApplyMahasiswaDTO","riwayatApplyMahasiswaDTOs"})
     @Command("buttonSimpanStatusPelamar")
-    @NotifyChange({"listRiwayatApplyMahasiswaDTOs","riwayatApplyMahasiswaDTO","riwayatApplyMahasiswaDTOs"})
+    @NotifyChange({"listRiwayatApplyMahasiswaDTOs", "riwayatApplyMahasiswaDTO", "riwayatApplyMahasiswaDTOs"})
     public void buttonSimpanStatusPelamar(@BindingParam("object") RiwayatApplyMahasiswaDTO obj, @ContextParam(ContextType.VIEW) Window window) {
         riwayatApplyMahasiswaDTO.setLowonganState(lowonganState);
         riwayatApplyMahasiswaService.SaveOrUpdate(riwayatApplyMahasiswaDTO);
@@ -460,6 +460,17 @@ public class LowonganVM {
         CommonViewModel.navigateToWithoutDetach("/crm/mahasiswa/registrasi_mahasiswa.zul", window, params);
     }
 
+    @Command("buttonPreviewCV")
+    @NotifyChange({"userDTO", "userDTOs", "lowonganDTO", "lowonganDTOs", "riwayatApplyMahasiswaDTOs", "riwayatApplyMahasiswaDTO"})
+    public void buttonPreviewCV(@BindingParam("object") RiwayatApplyMahasiswaDTO obj, @ContextParam(ContextType.VIEW) Window window) {
+        Map<String, Object> params = new HashMap<>();
+        if (obj.getIdUserRiwayat() != null) {
+            userDTO = userService.findByUserID(obj.getIdUserRiwayat());
+        }
+        params.put("userDTO", userDTO);
+        CommonViewModel.navigateToWithoutDetach("/crm/admin/dataRegister/previewCV.zul", window, params);
+    }
+
     @Command("detail")
     @NotifyChange("user")
     public void detail(@BindingParam("object") UserDTO obj, @ContextParam(ContextType.VIEW) Window window) {
@@ -471,16 +482,16 @@ public class LowonganVM {
     public String concatStateLowongan(String s1, String s2) {
         return s1.concat(s2);
     }
-    
+
     @GlobalCommand
     @NotifyChange("lowonganDTOs")
     public void refreshLowongan() {
-        lowonganDTOs = lowonganService.findAll();        
+        lowonganDTOs = lowonganService.findAll();
     }
-    
+
     @GlobalCommand
-    @NotifyChange({"riwayatApplyMahasiswaDTOs", "listRiwayatApplyMahasiswaDTOs" })
-    public void refreshRAM(){
+    @NotifyChange({"riwayatApplyMahasiswaDTOs", "listRiwayatApplyMahasiswaDTOs"})
+    public void refreshRAM() {
         riwayatApplyMahasiswaDTOs = riwayatApplyMahasiswaService.findAll();
     }
 
@@ -780,5 +791,5 @@ public class LowonganVM {
     public void setLowonganState(LowonganState lowonganState) {
         this.lowonganState = lowonganState;
     }
-    
+
 }
