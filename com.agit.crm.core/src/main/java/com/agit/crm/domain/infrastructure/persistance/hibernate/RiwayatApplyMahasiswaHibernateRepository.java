@@ -56,7 +56,7 @@ public class RiwayatApplyMahasiswaHibernateRepository extends HibernateRepositor
             criteria.add(Restrictions.eq("idRiwayatLowongan", map.get("idRiwayatLowongan")));
         }
         if (StringUtil.hasValue(map.get("lowonganState"))) {
-            criteria.add(Restrictions.eq("lowonganState", "%" + map.get("lowonganState") + "%").ignoreCase());
+            criteria.add(Restrictions.eq("lowonganState", map.get("lowonganState")));
         }
         if (StringUtil.hasValue(map.get("namaApplyLowongan"))) {
             criteria.add(Restrictions.like("namaApplyLowongan", "%" + map.get("namaApplyLowongan") + "%").ignoreCase());

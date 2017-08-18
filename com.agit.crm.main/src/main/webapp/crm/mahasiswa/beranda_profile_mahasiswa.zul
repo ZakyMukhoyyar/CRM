@@ -25,10 +25,6 @@
                             <textbox class="form-control" value="@bind(each.userSpecificationDTO.email)" readonly="true" />
                         </div>
                         <div class="form-group">
-                            <label sclass="isi" value="Penempatan : " style=" text-align:center; padding:10px;"/>
-                            <textbox class="form-control" value="@bind(each.userSpecificationDTO.domisili)" readonly="true" />
-                        </div>
-                        <div class="form-group">
                             <label sclass="isi" width="100%" value="No Telpon : " style="text-align: left; padding:10px;"/>                   
                             <textbox sclass="form-control" value="@bind(each.userSpecificationDTO.mobilePhone)" readonly="true"/>
                         </div>
