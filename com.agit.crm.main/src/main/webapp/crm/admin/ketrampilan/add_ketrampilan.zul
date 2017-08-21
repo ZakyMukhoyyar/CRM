@@ -20,11 +20,11 @@
                         </row>
                         <row>                            
                             <signLabel sclass="isi" value="Nama Ketrampilan "/>
-                            <textbox rows="2" value="@bind(fx.namaKetrampilan)" width="100%" disabled="false" constraint="no empty : Nama Ketrampilan Tidak Boleh Kosong"/>
+                            <textbox rows="2" value="@bind(fx.namaKetrampilan)" width="100%" disabled="false" constraint="/.[a-zA-Z0-9\s]+/, no empty: Format isian salah"/>
                         </row>
                         <row>
                             <signLabel sclass="isi" value="Status"/>
-                            <combobox autodrop="true" readonly="true" width="60%" placeholder="- Pilihan Status -" model="@load(vm.statuses)" selectedItem="@bind(fx.status)">
+                            <combobox autodrop="true" readonly="true" width="60%" placeholder="- Pilihan Status -" model="@load(vm.statuses)" selectedItem="@bind(fx.status)" constraint=" no empty : Format isian salah">
                                 <template name="model" var="items">
                                     <comboitem label="@load(items)" value="@load(items)"/>
                                 </template>

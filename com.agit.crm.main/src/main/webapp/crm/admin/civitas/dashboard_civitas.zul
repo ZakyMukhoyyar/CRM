@@ -39,9 +39,10 @@
                     <textbox class="form-control" width="100%" readonly="true" value="@bind(vm.mediaNameCivitas)" />
                 </div>                
                 <div>
-                    <button type="button" sclass="btn btn-info" width="100%" label="Browse" upload="true" onUpload="@command('buttonUploadFile')"/>
+                    <button type="button" sclass="btn btn-info" width="100%" label="Browse"  upload="true,maxsize=-1,accept=.xlsx|.xlsm" onUpload="@command('buttonUploadFile')"/>
                     <separator/>
                     <a sclass="btn btn-info" width="100%" label="Upload"  onClick="@command('buttonSaveDataCivitas')"/>
+                   
                 </div>
             </div>
             
