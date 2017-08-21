@@ -24,6 +24,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.apache.commons.fileupload.FileItem;
 import org.zkoss.bind.BindContext;
 import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.BindingParam;
@@ -36,6 +37,7 @@ import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.io.Files;
 import org.zkoss.util.media.Media;
+import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.UploadEvent;
 import org.zkoss.zk.ui.select.annotation.VariableResolver;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
@@ -53,7 +55,8 @@ public class CivitasVM {
     @WireVariable
     CivitasService civitasService;
 
-    private static final String FILE_LOC = "D:\\Work\\AgitCRM\\CRM\\template-mapping\\insert-template-civitas.xlsx";
+//    private static final String FILE_LOC = "E:\\PEKERJAAN\\Agit\\Project\\Project2\\CRM\\template-mapping\\insert-template-civitas.xlsx";
+    private FileItem file;
 
     private CivitasDTO civitasDTO = new CivitasDTO();
     private List<CivitasDTO> civitasDTOs = new ArrayList<>();
@@ -136,17 +139,24 @@ public class CivitasVM {
             int year = now.get(Calendar.YEAR);
             int month = now.get(Calendar.MONTH);
             int day = now.get(Calendar.DAY_OF_MONTH);
-//            filepathCivitas = Executions.getCurrent().getDesktop().getWebApp().getRealPath("/");
-//            filepath = filepath + "\\" + "files" + "\\" + "rkap" + "\\" + year + "\\" + month + "\\" + day + "\\" + media.getName();
-            filepathCivitas = FILE_LOC;
+            filepathCivitas = Executions.getCurrent().getDesktop().getWebApp().getRealPath("/");
+            filepathCivitas = filepathCivitas + "\\" + "files" + "\\" + "crm-xls" + "\\" + year + "\\" + month + "\\" + day + "\\" + mediaCivitas.getName();
+
+//            filepathCivitas = FILE_LOC;
             File baseDir = new File(filepathCivitas);
             if (!baseDir.exists()) {
                 baseDir.mkdirs();
+            } else if (mediaCivitas.getFormat().matches("xlsx")) {
+                Files.copy(new File(filepathCivitas + mediaCivitas.getName()), mediaCivitas.getStreamData());
+                setMediaNameCivitas(mediaCivitas.getName());
+                pathLocationCivitas = "/" + "files" + "/" + "rkap" + "/" + year + "/" + month + "/" + day + "/" + mediaCivitas.getName();
+            } else if (mediaCivitas.getFormat().matches("xls")) {
+                Files.copy(new File(filepathCivitas + mediaCivitas.getName()), mediaCivitas.getStreamData());
+                setMediaNameCivitas(mediaCivitas.getName());
+                pathLocationCivitas = "/" + "files" + "/" + "rkap" + "/" + year + "/" + month + "/" + day + "/" + mediaCivitas.getName();
+            } else {
+                Messagebox.show("Format Harus Excel", "Peringatan", Messagebox.OK, Messagebox.EXCLAMATION);
             }
-
-            Files.copy(new File(filepathCivitas + mediaCivitas.getName()), mediaCivitas.getStreamData());
-            setMediaNameCivitas(mediaCivitas.getName());
-            pathLocationCivitas = "/" + "files" + "/" + "rkap" + "/" + year + "/" + month + "/" + day + "/" + mediaCivitas.getName();
         }
     }
 
@@ -258,7 +268,7 @@ public class CivitasVM {
         }
 
         XlsReader<CivitasSecondary> jxr = new XlsReader<>(CivitasSecondary.class);
-        List<CivitasSecondary> ls = jxr.getJavaObjectFromThisFile(filepathCivitas);
+        List<CivitasSecondary> ls = jxr.getJavaObjectFromThisFile(filepathCivitas + mediaNameCivitas);
         for (CivitasSecondary s : ls) {
             Status status = null;
 
