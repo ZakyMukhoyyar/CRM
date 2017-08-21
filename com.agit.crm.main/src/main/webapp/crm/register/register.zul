@@ -123,7 +123,7 @@
                                     <row>
                                         <signLabel sclass="isi" value="Domisili"/>
                                         <div>
-<!--                                            <combobox autodrop="true"
+                                           <combobox autodrop="true"
                                                 width="40%"                                                
                                                 model="@load(vm.listDomisili)" 
                                                 selectedItem="@bind(fx.userDTO.userSpecificationDTO.domisili)" >
@@ -131,7 +131,7 @@
                                                     <comboitem label="@load(items)"  value="@load(items)" />
                                                 </template>
                                             </combobox> 
-                                            <label value="@load(vmsgs['domisili'])" style="color:red"/>-->
+                                            <label value="@load(vmsgs['domisili'])" style="color:red"/>
                                         </div>
                                     </row>
                                     <row>
@@ -174,7 +174,7 @@
                                     <row>
                                         <signLabel sclass="isi" value="Civitas"/>
                                         <div>
-<!--                                            <combobox autodrop="true"
+                                           <combobox autodrop="true"
                                                 width="40%"                                               
                                                 model="@load(vm.listCivitas)" 
                                                 selectedItem="@bind(fx.userDTO.userSpecificationDTO.namaCivitas)" >
@@ -182,7 +182,7 @@
                                                     <comboitem label="@load(items)"  value="@load(items)" />
                                                 </template>
                                             </combobox> 
-                                            <label value="@load(vmsgs['namaCivitas'])" style="color:red"/>-->
+                                            <label value="@load(vmsgs['namaCivitas'])" style="color:red"/>
                                         </div>
                                     </row>
 
