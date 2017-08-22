@@ -36,12 +36,12 @@
                     <paging forward="onPaging" />
                     <listbox rows="7" pageSize="@load(vm.pageSizeCreateLowongan)" mold="paging" emptyMessage="${labels.common.noDataFound}" model="@bind(vm.lowonganDTOs)">
                         <listhead>
-                            <listheader label="ID" width="5%" align="center" sortDirection="ascending" sort="auto(idLowongan)"/>
+                            <listheader label="ID" width="10%" align="center" sortDirection="ascending" sort="auto(idLowongan)"/>
                             <listheader label="Nama Lowongan" width="20%" align="center"/>
-                            <listheader label="Mulai" width="12%" align="center"/>
-                            <listheader label="Berakhir" width="12%" align="center"/>
-                            <listheader label="Kategori Kerja" width="14%" align="center"/>
-                            <listheader label="Aksi" width="21%" align="center"/>
+                            <listheader label="Mulai" width="15%" align="center"/>
+                            <listheader label="Berakhir" width="15%" align="center"/>
+                            <listheader label="Kategori Kerja" width="20%" align="center"/>
+                            <listheader label="Aksi" width="20%" align="center"/>
                         </listhead>
                         <template name="model">
                             <listitem value="${each}">

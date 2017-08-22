@@ -40,12 +40,12 @@
                 <groupbox closable="false" sclass="col-md-12">
                     <listbox rows="12" mold="paging" pageSize="@load(vm.pageSize)" emptyMessage="${labels.common.noDataFound}" model="@bind(vm.forumDTOs)">
                         <listhead>
-                            <listheader label="ID Forum" width="10%" align="center" sortDirection="ascending" sort="auto(idForum)"/>
-                            <listheader label="Nama Forum" width="30%" align="center"/>
+                            <listheader label="ID Forum" width="15%" align="center" sortDirection="ascending" sort="auto(idForum)"/>
+                            <listheader label="Nama Forum" width="45%" align="center"/>
                             <!--                            <listheader label="Tanggal Mulai" width="15%" align="center"/>
                             <listheader label="Tanggal Berakhir" width="15%" align="center"/>-->
-                            <listheader label="Status" width="10%" align="center"/>
-                            <listheader label="Aksi" width="10%" align="center"/>
+                            <listheader label="Status" width="20%" align="center"/>
+                            <listheader label="Aksi" width="20%" align="center"/>
                         </listhead>
                         <template name="model">
                             <listitem value="${each}">

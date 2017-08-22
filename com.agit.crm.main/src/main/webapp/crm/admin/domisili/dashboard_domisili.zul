@@ -45,10 +45,10 @@
                 <groupbox closable="false" sclass="col-md-12">
                     <listbox rows="@load(vm.pageSize)" pageSize="@load(vm.pageSize)" model="@bind(vm.domisiliDTOs)" mold="paging" emptyMessage="${labels.common.noDataFound}">
                         <listhead>
-                            <listheader label="ID Domisili" width="7%" align="center"/>
-                            <listheader label="Provinsi" width="15%" align="center"/>
-                            <listheader label="Kabupaten" width="15%" align="center"/>
-                            <listheader label="Kota" width="15%" align="center"/>            
+                            <listheader label="ID Domisili" width="15%" align="center"/>
+                            <listheader label="Provinsi" width="45%" align="center"/>
+                            <listheader label="Kabupaten" width="20%" align="center"/>
+                            <listheader label="Kota" width="20" align="center"/>            
                         </listhead>
                         <template name="model">
                             <listitem value="${each}">
