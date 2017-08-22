@@ -27,6 +27,7 @@ public class DomisiliDTOAssembler implements IObjectAssembler<Domisili, Domisili
                 .setCreatedDate(domainObject.getCreatedDate())
                 .setModifiedBy(domainObject.getModifiedBy())
                 .setModifiedDate(domainObject.getModifiedDate())
+                .setStatus(domainObject.getStatus())
                 .createDomisiliDTO();
     }
 
@@ -41,6 +42,7 @@ public class DomisiliDTOAssembler implements IObjectAssembler<Domisili, Domisili
                 .setCreatedDate(dtoObject.getCreatedDate())
                 .setModifiedBy(dtoObject.getModifiedBy())
                 .setModifiedDate(dtoObject.getModifiedDate())
+                .setStatus(dtoObject.getStatus())
                 .createDomisili();
     }
 

@@ -5,7 +5,9 @@
  */
 package com.agit.crm.common.dto.crm;
 
+import com.agit.crm.shared.status.Status;
 import java.util.Date;
+
 
 public class LowonganDTOBuilder {
 
@@ -23,6 +25,7 @@ public class LowonganDTOBuilder {
     private Date createdDate;
     private String modifiedBy;
     private Date modifiedDate;
+    private Status status;
 
     public LowonganDTOBuilder() {
     }
@@ -97,8 +100,13 @@ public class LowonganDTOBuilder {
         return this;
     }
 
-    public LowonganDTO createLowonganDTO() {
-        return new LowonganDTO(idLowongan, userID, namaLowongan, deskripsiLowongan, tanggalMulai, tanggalBerakhir, minatPekerjaan, persyaratan, lokasiKerja, gaji, createdBy, createdDate, modifiedBy, modifiedDate);
+    public LowonganDTOBuilder setStatus(Status status) {
+        this.status = status;
+        return this;
     }
 
+    public LowonganDTO createLowonganDTO() {
+        return new LowonganDTO(idLowongan, userID, namaLowongan, deskripsiLowongan, tanggalMulai, tanggalBerakhir, minatPekerjaan, persyaratan, lokasiKerja, gaji, createdBy, createdDate, modifiedBy, modifiedDate, status);
+    }
+    
 }

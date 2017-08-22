@@ -1,6 +1,7 @@
 package com.agit.crm.domain.crm;
 
 import com.agit.crm.shared.object.EntityObject;
+import com.agit.crm.shared.status.Status;
 import java.util.Date;
 import java.util.Objects;
 
@@ -25,11 +26,12 @@ public class Lowongan implements EntityObject<Lowongan> {
     private Date createdDate;
     private String modifiedBy;
     private Date modifiedDate;
+    private Status status;
 
     public Lowongan() {
     }
 
-    public Lowongan(String idLowongan, Long userID, String namaLowongan, String deskripsiLowongan, Date tanggalMulai, Date tanggalBerakhir, String minatPekerjaan, String persyaratan, String lokasiKerja, String gaji, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate) {
+    public Lowongan(String idLowongan, Long userID, String namaLowongan, String deskripsiLowongan, Date tanggalMulai, Date tanggalBerakhir, String minatPekerjaan, String persyaratan, String lokasiKerja, String gaji, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate, Status status) {
         this.idLowongan = idLowongan;
         this.userID = userID;
         this.namaLowongan = namaLowongan;
@@ -44,6 +46,15 @@ public class Lowongan implements EntityObject<Lowongan> {
         this.createdDate = createdDate;
         this.modifiedBy = modifiedBy;
         this.modifiedDate = modifiedDate;
+        this.status = status;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     public String getIdLowongan() {
@@ -169,25 +180,29 @@ public class Lowongan implements EntityObject<Lowongan> {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 67 * hash + Objects.hashCode(this.idLowongan);
-        hash = 67 * hash + Objects.hashCode(this.userID);
-        hash = 67 * hash + Objects.hashCode(this.namaLowongan);
-        hash = 67 * hash + Objects.hashCode(this.deskripsiLowongan);
-        hash = 67 * hash + Objects.hashCode(this.tanggalMulai);
-        hash = 67 * hash + Objects.hashCode(this.tanggalBerakhir);
-        hash = 67 * hash + Objects.hashCode(this.minatPekerjaan);
-        hash = 67 * hash + Objects.hashCode(this.persyaratan);
-        hash = 67 * hash + Objects.hashCode(this.lokasiKerja);
-        hash = 67 * hash + Objects.hashCode(this.gaji);
-        hash = 67 * hash + Objects.hashCode(this.createdBy);
-        hash = 67 * hash + Objects.hashCode(this.createdDate);
-        hash = 67 * hash + Objects.hashCode(this.modifiedBy);
-        hash = 67 * hash + Objects.hashCode(this.modifiedDate);
+        hash = 37 * hash + Objects.hashCode(this.idLowongan);
+        hash = 37 * hash + Objects.hashCode(this.userID);
+        hash = 37 * hash + Objects.hashCode(this.namaLowongan);
+        hash = 37 * hash + Objects.hashCode(this.deskripsiLowongan);
+        hash = 37 * hash + Objects.hashCode(this.tanggalMulai);
+        hash = 37 * hash + Objects.hashCode(this.tanggalBerakhir);
+        hash = 37 * hash + Objects.hashCode(this.minatPekerjaan);
+        hash = 37 * hash + Objects.hashCode(this.persyaratan);
+        hash = 37 * hash + Objects.hashCode(this.lokasiKerja);
+        hash = 37 * hash + Objects.hashCode(this.gaji);
+        hash = 37 * hash + Objects.hashCode(this.createdBy);
+        hash = 37 * hash + Objects.hashCode(this.createdDate);
+        hash = 37 * hash + Objects.hashCode(this.modifiedBy);
+        hash = 37 * hash + Objects.hashCode(this.modifiedDate);
+        hash = 37 * hash + Objects.hashCode(this.status);
         return hash;
     }
 
     @Override
     public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
         if (obj == null) {
             return false;
         }
@@ -200,6 +215,8 @@ public class Lowongan implements EntityObject<Lowongan> {
         }
         return true;
     }
+
+   
 
     public void assignNewLowongan(Lowongan lowongan) {
         this.idLowongan = lowongan.idLowongan;
@@ -214,6 +231,7 @@ public class Lowongan implements EntityObject<Lowongan> {
         this.userID = lowongan.userID;
         this.modifiedBy = lowongan.modifiedBy;
         this.modifiedDate = lowongan.modifiedDate;
+        this.status = lowongan.status;
     }
 
     @Override

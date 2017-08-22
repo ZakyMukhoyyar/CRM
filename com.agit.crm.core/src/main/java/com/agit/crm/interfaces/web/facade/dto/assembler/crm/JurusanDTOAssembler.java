@@ -35,6 +35,7 @@ public class JurusanDTOAssembler implements IObjectAssembler<Jurusan, JurusanDTO
                 .setCreatedDate(domainObject.getCreatedDate())
                 .setModifiedBy(domainObject.getModifiedBy())
                 .setModifiedDate(domainObject.getModifiedDate())
+                .setStatus(domainObject.getStatus())
                 .createJurusanDTO();
     }
 
@@ -47,6 +48,7 @@ public class JurusanDTOAssembler implements IObjectAssembler<Jurusan, JurusanDTO
                 .setCreatedDate(dtoObject.getCreatedDate())
                 .setModifiedBy(dtoObject.getModifiedBy())
                 .setModifiedDate(dtoObject.getModifiedDate())
+                .setStatus(dtoObject.getStatus())
                 .createJurusan();
     }
 

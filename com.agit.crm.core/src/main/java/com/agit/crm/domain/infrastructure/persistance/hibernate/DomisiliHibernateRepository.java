@@ -61,6 +61,9 @@ public class DomisiliHibernateRepository extends HibernateRepository implements 
         if (StringUtil.hasValue(map.get("namaKota"))) {
             criteria.add(Restrictions.like("namaKota", "%" + map.get("namaKota") + "%").ignoreCase());
         }
+        if (StringUtil.hasValue(map.get("status"))) {
+            criteria.add(Restrictions.eq("status", map.get("status")));
+        }
         return criteria.list();
     }
 

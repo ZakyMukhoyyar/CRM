@@ -1,6 +1,7 @@
 package com.agit.crm.domain.crm;
 
 import com.agit.crm.shared.object.EntityObject;
+import com.agit.crm.shared.status.Status;
 import java.util.Date;
 import java.util.Objects;
 
@@ -17,17 +18,27 @@ public class Jurusan implements EntityObject<Jurusan>{
     private Date createdDate;
     private String modifiedBy;
     private Date modifiedDate;
+    private Status status;
 
     public Jurusan() {
     }
 
-    public Jurusan(String idJurusan, String namaJurusan, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate) {
+    public Jurusan(String idJurusan, String namaJurusan, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate, Status status ) {
         this.idJurusan = idJurusan;
         this.namaJurusan = namaJurusan;
         this.createdBy = createdBy;
         this.createdDate = createdDate;
         this.modifiedBy = modifiedBy;
         this.modifiedDate = modifiedDate;
+        this.status = status;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     public String getIdJurusan() {
@@ -81,17 +92,21 @@ public class Jurusan implements EntityObject<Jurusan>{
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 43 * hash + Objects.hashCode(this.idJurusan);
-        hash = 43 * hash + Objects.hashCode(this.namaJurusan);
-        hash = 43 * hash + Objects.hashCode(this.createdBy);
-        hash = 43 * hash + Objects.hashCode(this.createdDate);
-        hash = 43 * hash + Objects.hashCode(this.modifiedBy);
-        hash = 43 * hash + Objects.hashCode(this.modifiedDate);
+        hash = 79 * hash + Objects.hashCode(this.idJurusan);
+        hash = 79 * hash + Objects.hashCode(this.namaJurusan);
+        hash = 79 * hash + Objects.hashCode(this.createdBy);
+        hash = 79 * hash + Objects.hashCode(this.createdDate);
+        hash = 79 * hash + Objects.hashCode(this.modifiedBy);
+        hash = 79 * hash + Objects.hashCode(this.modifiedDate);
+        hash = 79 * hash + Objects.hashCode(this.status);
         return hash;
     }
 
     @Override
     public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
         if (obj == null) {
             return false;
         }
@@ -104,6 +119,8 @@ public class Jurusan implements EntityObject<Jurusan>{
         }
         return true;
     }
+
+    
     
     public void assignNewJurusan(Jurusan jurusan){
         this.idJurusan = jurusan.idJurusan;
@@ -112,6 +129,7 @@ public class Jurusan implements EntityObject<Jurusan>{
         this.createdDate = jurusan.createdDate;
         this.modifiedBy = jurusan.modifiedBy;
         this.modifiedDate = jurusan.modifiedDate;
+        this.status = jurusan.status;
     }
     
 

@@ -55,6 +55,9 @@ public class JurusanHibernateRepository extends HibernateRepository implements J
         if (StringUtil.hasValue(map.get("namaJurusan"))) {
             criteria.add(Restrictions.like("namaJurusan", "%" + map.get("namaJurusan") + "%").ignoreCase());
         }
+        if (StringUtil.hasValue(map.get("status"))) {
+            criteria.add(Restrictions.eq("status", map.get("status")));
+        }
         return criteria.list();
     }
 

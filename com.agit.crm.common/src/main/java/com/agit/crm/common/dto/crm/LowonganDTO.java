@@ -1,6 +1,7 @@
 package com.agit.crm.common.dto.crm;
 
 import com.agit.crm.shared.state.LowonganState;
+import com.agit.crm.shared.status.Status;
 import java.util.Date;
 import java.util.List;
 
@@ -24,11 +25,12 @@ public class LowonganDTO {
     private Date createdDate;
     private String modifiedBy;
     private Date modifiedDate;
+    private Status status;
 
     public LowonganDTO() {
     }
 
-    public LowonganDTO(String idLowongan, Long userID, String namaLowongan, String deskripsiLowongan, Date tanggalMulai, Date tanggalBerakhir, String minatPekerjaan, String persyaratan, String lokasiKerja, String gaji, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate) {
+    public LowonganDTO(String idLowongan, Long userID, String namaLowongan, String deskripsiLowongan, Date tanggalMulai, Date tanggalBerakhir, String minatPekerjaan, String persyaratan, String lokasiKerja, String gaji, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate, Status status) {
         this.idLowongan = idLowongan;
         this.userID = userID;
         this.namaLowongan = namaLowongan;
@@ -43,6 +45,15 @@ public class LowonganDTO {
         this.createdDate = createdDate;
         this.modifiedBy = modifiedBy;
         this.modifiedDate = modifiedDate;
+        this.status = status;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     public String getIdLowongan() {
@@ -159,7 +170,9 @@ public class LowonganDTO {
 
     @Override
     public String toString() {
-        return "LowonganDTO{" + "idLowongan=" + idLowongan + ", userID=" + userID + ", namaLowongan=" + namaLowongan + ", deskripsiLowongan=" + deskripsiLowongan + ", tanggalMulai=" + tanggalMulai + ", tanggalBerakhir=" + tanggalBerakhir + ", minatPekerjaan=" + minatPekerjaan + ", persyaratan=" + persyaratan + ", lokasiKerja=" + lokasiKerja + ", gaji=" + gaji + ", createdBy=" + createdBy + ", createdDate=" + createdDate + ", modifiedBy=" + modifiedBy + ", modifiedDate=" + modifiedDate + '}';
+        return "LowonganDTO{" + "idLowongan=" + idLowongan + ", userID=" + userID + ", namaLowongan=" + namaLowongan + ", deskripsiLowongan=" + deskripsiLowongan + ", tanggalMulai=" + tanggalMulai + ", tanggalBerakhir=" + tanggalBerakhir + ", minatPekerjaan=" + minatPekerjaan + ", persyaratan=" + persyaratan + ", lokasiKerja=" + lokasiKerja + ", gaji=" + gaji + ", createdBy=" + createdBy + ", createdDate=" + createdDate + ", modifiedBy=" + modifiedBy + ", modifiedDate=" + modifiedDate + ", status=" + status + '}';
     }
+
+    
 
 }

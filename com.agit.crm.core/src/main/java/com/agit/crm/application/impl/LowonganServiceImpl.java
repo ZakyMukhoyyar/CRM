@@ -15,6 +15,7 @@ import com.agit.crm.interfaces.web.facade.dto.assembler.crm.LowonganDTOAssembler
 import com.agit.crm.interfaces.web.facade.dto.assembler.crm.LowonganStatusDTOAssembler;
 import com.agit.crm.interfaces.web.facade.dto.assembler.crm.RiwayatApplyMahasiswaDTOAssembler;
 import com.agit.crm.shared.state.LowonganState;
+import com.agit.crm.shared.status.Status;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -143,6 +144,7 @@ public class LowonganServiceImpl implements LowonganService {
                 .setCreatedDate(new Date())
                 .setModifiedBy("modified by")
                 .setModifiedDate(new Date())
+                .setStatus(Status.ACTIVE)
                 .createLowongan();
         return lowonganDTOAssembler.toDTO(lowongan1);
 

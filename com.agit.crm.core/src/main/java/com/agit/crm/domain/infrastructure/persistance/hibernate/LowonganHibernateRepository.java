@@ -56,6 +56,9 @@ public class LowonganHibernateRepository extends HibernateRepository implements 
         if (StringUtil.hasValue(map.get("minatPekerjaan"))) {
             criteria.add(Restrictions.eq("minatPekerjaan", map.get("minatPekerjaan")));
         }
+        if (StringUtil.hasValue(map.get("status"))) {
+            criteria.add(Restrictions.eq("status", map.get("status")));
+        }
         return criteria.list();
     }
 

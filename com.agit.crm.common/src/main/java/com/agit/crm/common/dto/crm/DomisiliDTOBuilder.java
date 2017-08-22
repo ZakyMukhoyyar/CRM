@@ -1,5 +1,11 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.agit.crm.common.dto.crm;
 
+import com.agit.crm.shared.status.Status;
 import java.util.Date;
 
 
@@ -13,6 +19,7 @@ public class DomisiliDTOBuilder {
     private Date createdDate;
     private String modifiedBy;
     private Date modifiedDate;
+    private Status status;
 
     public DomisiliDTOBuilder() {
     }
@@ -57,8 +64,13 @@ public class DomisiliDTOBuilder {
         return this;
     }
 
+    public DomisiliDTOBuilder setStatus(Status status) {
+        this.status = status;
+        return this;
+    }
+
     public DomisiliDTO createDomisiliDTO() {
-        return new DomisiliDTO(idDomisili, namaProvinsi, namaKabupaten, namaKota, createdBy, createdDate, modifiedBy, modifiedDate);
+        return new DomisiliDTO(idDomisili, namaProvinsi, namaKabupaten, namaKota, createdBy, createdDate, modifiedBy, modifiedDate, status);
     }
     
 }

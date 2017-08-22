@@ -6,6 +6,7 @@ import com.agit.crm.domain.crm.Domisili;
 import com.agit.crm.domain.crm.DomisiliBuilder;
 import com.agit.crm.domain.crm.DomisiliRepository;
 import com.agit.crm.interfaces.web.facade.dto.assembler.crm.DomisiliDTOAssembler;
+import com.agit.crm.shared.status.Status;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -59,6 +60,7 @@ public class DomisiliServiceImpl implements DomisiliService {
                 .setCreatedDate(new Date())
                 .setModifiedBy("modifiedBy")
                 .setModifiedDate(new Date())
+                .setStatus(Status.ACTIVE)
                 .createDomisili();
         return domisiliDTOAssembler.toDTO(domisili);
     }

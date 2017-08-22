@@ -1,6 +1,7 @@
 package com.agit.crm.domain.crm;
 
 import com.agit.crm.shared.object.EntityObject;
+import com.agit.crm.shared.status.Status;
 import java.util.Date;
 import java.util.Objects;
 
@@ -19,11 +20,13 @@ public class Domisili implements EntityObject<Domisili> {
     private Date createdDate;
     private String modifiedBy;
     private Date modifiedDate;
+    private Status status;
+    
 
     public Domisili() {
     }
 
-    public Domisili(String idDomisili, String namaProvinsi, String namaKabupaten, String namaKota, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate) {
+    public Domisili(String idDomisili, String namaProvinsi, String namaKabupaten, String namaKota, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate, Status status) {
         this.idDomisili = idDomisili;
         this.namaProvinsi = namaProvinsi;
         this.namaKabupaten = namaKabupaten;
@@ -32,6 +35,7 @@ public class Domisili implements EntityObject<Domisili> {
         this.createdDate = createdDate;
         this.modifiedBy = modifiedBy;
         this.modifiedDate = modifiedDate;
+        this.status = status;
     }
 
     public String getIdDomisili() {
@@ -98,17 +102,26 @@ public class Domisili implements EntityObject<Domisili> {
         this.modifiedDate = modifiedDate;
     }
 
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 97 * hash + Objects.hashCode(this.idDomisili);
-        hash = 97 * hash + Objects.hashCode(this.namaProvinsi);
-        hash = 97 * hash + Objects.hashCode(this.namaKabupaten);
-        hash = 97 * hash + Objects.hashCode(this.namaKota);
-        hash = 97 * hash + Objects.hashCode(this.createdBy);
-        hash = 97 * hash + Objects.hashCode(this.createdDate);
-        hash = 97 * hash + Objects.hashCode(this.modifiedBy);
-        hash = 97 * hash + Objects.hashCode(this.modifiedDate);
+        hash = 17 * hash + Objects.hashCode(this.idDomisili);
+        hash = 17 * hash + Objects.hashCode(this.namaProvinsi);
+        hash = 17 * hash + Objects.hashCode(this.namaKabupaten);
+        hash = 17 * hash + Objects.hashCode(this.namaKota);
+        hash = 17 * hash + Objects.hashCode(this.createdBy);
+        hash = 17 * hash + Objects.hashCode(this.createdDate);
+        hash = 17 * hash + Objects.hashCode(this.modifiedBy);
+        hash = 17 * hash + Objects.hashCode(this.modifiedDate);
+        hash = 17 * hash + Objects.hashCode(this.status);
         return hash;
     }
 
@@ -136,6 +149,7 @@ public class Domisili implements EntityObject<Domisili> {
         this.namaKota = domisili.namaKota;
         this.modifiedBy = domisili.modifiedBy;
         this.modifiedDate = domisili.modifiedDate;
+        this.status = domisili.status;
     }
 
     @Override

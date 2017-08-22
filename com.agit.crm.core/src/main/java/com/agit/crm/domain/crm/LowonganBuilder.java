@@ -5,7 +5,9 @@
  */
 package com.agit.crm.domain.crm;
 
+import com.agit.crm.shared.status.Status;
 import java.util.Date;
+
 
 public class LowonganBuilder {
 
@@ -23,6 +25,7 @@ public class LowonganBuilder {
     private Date createdDate;
     private String modifiedBy;
     private Date modifiedDate;
+    private Status status;
 
     public LowonganBuilder() {
     }
@@ -97,8 +100,13 @@ public class LowonganBuilder {
         return this;
     }
 
-    public Lowongan createLowongan() {
-        return new Lowongan(idLowongan, userID, namaLowongan, deskripsiLowongan, tanggalMulai, tanggalBerakhir, minatPekerjaan, persyaratan, lokasiKerja, gaji, createdBy, createdDate, modifiedBy, modifiedDate);
+    public LowonganBuilder setStatus(Status status) {
+        this.status = status;
+        return this;
     }
 
+    public Lowongan createLowongan() {
+        return new Lowongan(idLowongan, userID, namaLowongan, deskripsiLowongan, tanggalMulai, tanggalBerakhir, minatPekerjaan, persyaratan, lokasiKerja, gaji, createdBy, createdDate, modifiedBy, modifiedDate, status);
+    }
+    
 }

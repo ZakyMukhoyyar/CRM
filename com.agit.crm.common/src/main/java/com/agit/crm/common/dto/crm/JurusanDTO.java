@@ -1,5 +1,6 @@
 package com.agit.crm.common.dto.crm;
 
+import com.agit.crm.shared.status.Status;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -15,17 +16,27 @@ public class JurusanDTO implements Serializable{
     private Date createdDate;
     private String modifiedBy;
     private Date modifiedDate;
+    private Status status;
 
     public JurusanDTO() {
     }
 
-    public JurusanDTO(String idJurusan, String namaJurusan, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate) {
+    public JurusanDTO(String idJurusan, String namaJurusan, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate, Status status) {
         this.idJurusan = idJurusan;
         this.namaJurusan = namaJurusan;
         this.createdBy = createdBy;
         this.createdDate = createdDate;
         this.modifiedBy = modifiedBy;
         this.modifiedDate = modifiedDate;
+        this.modifiedDate = modifiedDate;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     public String getIdJurusan() {
@@ -78,9 +89,10 @@ public class JurusanDTO implements Serializable{
 
     @Override
     public String toString() {
-        return "JurusanDTO{" + "idJurusan=" + idJurusan + ", namaJurusan=" + namaJurusan + ", createdBy=" + createdBy + ", createdDate=" + createdDate + ", modifiedBy=" + modifiedBy + ", modifiedDate=" + modifiedDate + '}';
+        return "JurusanDTO{" + "idJurusan=" + idJurusan + ", namaJurusan=" + namaJurusan + ", createdBy=" + createdBy + ", createdDate=" + createdDate + ", modifiedBy=" + modifiedBy + ", modifiedDate=" + modifiedDate + ", status=" + status + '}';
     }
-    
+
+   
     
     
 }

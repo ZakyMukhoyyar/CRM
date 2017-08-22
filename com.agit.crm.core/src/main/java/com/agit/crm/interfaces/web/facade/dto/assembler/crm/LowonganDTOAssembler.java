@@ -31,6 +31,7 @@ public class LowonganDTOAssembler implements IObjectAssembler<Lowongan, Lowongan
                 .setCreatedDate(domainObject.getCreatedDate())
                 .setModifiedBy(domainObject.getModifiedBy())
                 .setModifiedDate(domainObject.getModifiedDate())
+                .setStatus(domainObject.getStatus())
                 .createLowonganDTO();
     }
 
@@ -51,6 +52,7 @@ public class LowonganDTOAssembler implements IObjectAssembler<Lowongan, Lowongan
                 .setCreatedDate(dtoObject.getCreatedDate())
                 .setModifiedBy(dtoObject.getModifiedBy())
                 .setModifiedDate(dtoObject.getModifiedDate())
+                .setStatus(dtoObject.getStatus())
                 .createLowongan();
     }
 

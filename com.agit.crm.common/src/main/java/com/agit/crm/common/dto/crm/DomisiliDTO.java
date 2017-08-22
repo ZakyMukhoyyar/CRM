@@ -1,5 +1,6 @@
 package com.agit.crm.common.dto.crm;
 
+import com.agit.crm.shared.status.Status;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -17,11 +18,12 @@ public class DomisiliDTO implements Serializable {
     private Date createdDate;
     private String modifiedBy;
     private Date modifiedDate;
+    private Status status;
 
     public DomisiliDTO() {
     }
 
-    public DomisiliDTO(String idDomisili, String namaProvinsi, String namaKabupaten, String namaKota, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate) {
+    public DomisiliDTO(String idDomisili, String namaProvinsi, String namaKabupaten, String namaKota, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate, Status status) {
         this.idDomisili = idDomisili;
         this.namaProvinsi = namaProvinsi;
         this.namaKabupaten = namaKabupaten;
@@ -30,6 +32,15 @@ public class DomisiliDTO implements Serializable {
         this.createdDate = createdDate;
         this.modifiedBy = modifiedBy;
         this.modifiedDate = modifiedDate;
+        this.status = status;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     public String getIdDomisili() {
@@ -98,7 +109,8 @@ public class DomisiliDTO implements Serializable {
 
     @Override
     public String toString() {
-        return "DomisiliDTO{" + "idDomisili=" + idDomisili + ", namaProvinsi=" + namaProvinsi + ", namaKabupaten=" + namaKabupaten + ", namaKota=" + namaKota + ", createdBy=" + createdBy + ", createdDate=" + createdDate + ", modifiedBy=" + modifiedBy + ", modifiedDate=" + modifiedDate + '}';
+        return "DomisiliDTO{" + "idDomisili=" + idDomisili + ", namaProvinsi=" + namaProvinsi + ", namaKabupaten=" + namaKabupaten + ", namaKota=" + namaKota + ", createdBy=" + createdBy + ", createdDate=" + createdDate + ", modifiedBy=" + modifiedBy + ", modifiedDate=" + modifiedDate + ", status=" + status + '}';
     }
 
+  
 }

@@ -5,6 +5,7 @@
  */
 package com.agit.crm.domain.crm;
 
+import com.agit.crm.shared.status.Status;
 import java.util.Date;
 
 
@@ -18,6 +19,7 @@ public class DomisiliBuilder {
     private Date createdDate;
     private String modifiedBy;
     private Date modifiedDate;
+    private Status status;
 
     public DomisiliBuilder() {
     }
@@ -62,8 +64,13 @@ public class DomisiliBuilder {
         return this;
     }
 
+    public DomisiliBuilder setStatus(Status status) {
+        this.status = status;
+        return this;
+    }
+
     public Domisili createDomisili() {
-        return new Domisili(idDomisili, namaProvinsi, namaKabupaten, namaKota, createdBy, createdDate, modifiedBy, modifiedDate);
+        return new Domisili(idDomisili, namaProvinsi, namaKabupaten, namaKota, createdBy, createdDate, modifiedBy, modifiedDate, status);
     }
     
 }

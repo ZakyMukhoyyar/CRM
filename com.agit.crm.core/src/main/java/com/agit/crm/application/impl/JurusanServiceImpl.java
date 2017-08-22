@@ -6,6 +6,7 @@ import com.agit.crm.domain.crm.Jurusan;
 import com.agit.crm.domain.crm.JurusanBuilder;
 import com.agit.crm.domain.crm.JurusanRepository;
 import com.agit.crm.interfaces.web.facade.dto.assembler.crm.JurusanDTOAssembler;
+import com.agit.crm.shared.status.Status;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -57,6 +58,7 @@ public class JurusanServiceImpl implements JurusanService {
                 .setCreatedDate(new Date())
                 .setModifiedBy("modified by")
                 .setModifiedDate(new Date())
+                .setStatus(Status.ACTIVE)
                 .createJurusan();
         return jurusanDTOAssembler.toDTO(jurusan);
     }

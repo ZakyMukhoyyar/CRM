@@ -1,15 +1,23 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.agit.crm.domain.crm;
 
+import com.agit.crm.shared.status.Status;
 import java.util.Date;
 
 
 public class JurusanBuilder {
+
     private String idJurusan;
     private String namaJurusan;
     private String createdBy;
     private Date createdDate;
     private String modifiedBy;
     private Date modifiedDate;
+    private Status status;
 
     public JurusanBuilder() {
     }
@@ -44,12 +52,13 @@ public class JurusanBuilder {
         return this;
     }
 
-    public Jurusan createJurusan() {
-        return new Jurusan(idJurusan, namaJurusan, createdBy, createdDate, modifiedBy, modifiedDate);
+    public JurusanBuilder setStatus(Status status) {
+        this.status = status;
+        return this;
     }
 
-    public Object setDeskripsiJurusan(String deskripsiJurusan) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Jurusan createJurusan() {
+        return new Jurusan(idJurusan, namaJurusan, createdBy, createdDate, modifiedBy, modifiedDate, status);
     }
     
 }

@@ -1,15 +1,23 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.agit.crm.common.dto.crm;
 
+import com.agit.crm.shared.status.Status;
 import java.util.Date;
 
 
 public class JurusanDTOBuilder {
+
     private String idJurusan;
     private String namaJurusan;
     private String createdBy;
     private Date createdDate;
     private String modifiedBy;
     private Date modifiedDate;
+    private Status status;
 
     public JurusanDTOBuilder() {
     }
@@ -44,8 +52,13 @@ public class JurusanDTOBuilder {
         return this;
     }
 
+    public JurusanDTOBuilder setStatus(Status status) {
+        this.status = status;
+        return this;
+    }
+
     public JurusanDTO createJurusanDTO() {
-        return new JurusanDTO(idJurusan, namaJurusan, createdBy, createdDate, modifiedBy, modifiedDate);
+        return new JurusanDTO(idJurusan, namaJurusan, createdBy, createdDate, modifiedBy, modifiedDate, status);
     }
     
 }

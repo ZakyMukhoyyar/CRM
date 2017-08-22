@@ -20,5 +20,11 @@
         <property column="createdBy" name="createdBy"/>
         <property column="modifiedDate" name="modifiedDate" not-null="false"/>
         <property column="modifiedBy" name="modifiedBy" not-null="false"/>
+        <property column="status" name="status" not-null="false">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">com.agit.crm.shared.status.Status</param>
+                <param name="type">12</param>
+            </type>
+        </property>
     </class>
 </hibernate-mapping>
