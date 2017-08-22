@@ -140,13 +140,14 @@ public class CivitasVM {
             int month = now.get(Calendar.MONTH);
             int day = now.get(Calendar.DAY_OF_MONTH);
             filepathCivitas = Executions.getCurrent().getDesktop().getWebApp().getRealPath("/");
-            filepathCivitas = filepathCivitas + "\\" + "files" + "\\" + "crm-xls" + "\\" + year + "\\" + month + "\\" + day + "\\" + mediaCivitas.getName();
+            filepathCivitas = filepathCivitas + "\\" + "files" + "\\" + "crm-xls" + "\\" + year + "\\" + month + "\\" + day + "\\";
 
 //            filepathCivitas = FILE_LOC;
             File baseDir = new File(filepathCivitas);
             if (!baseDir.exists()) {
                 baseDir.mkdirs();
-            } else if (mediaCivitas.getFormat().matches("xlsx")) {
+            }
+            if (mediaCivitas.getFormat().matches("xlsx")) {
                 Files.copy(new File(filepathCivitas + mediaCivitas.getName()), mediaCivitas.getStreamData());
                 setMediaNameCivitas(mediaCivitas.getName());
                 pathLocationCivitas = "/" + "files" + "/" + "rkap" + "/" + year + "/" + month + "/" + day + "/" + mediaCivitas.getName();
@@ -155,7 +156,7 @@ public class CivitasVM {
                 setMediaNameCivitas(mediaCivitas.getName());
                 pathLocationCivitas = "/" + "files" + "/" + "rkap" + "/" + year + "/" + month + "/" + day + "/" + mediaCivitas.getName();
             } else {
-                Messagebox.show("Format Harus Excel", "Peringatan", Messagebox.OK, Messagebox.EXCLAMATION);
+                Messagebox.show("Format Harus Sesuai Template", "Peringatan", Messagebox.OK, Messagebox.EXCLAMATION);
             }
         }
     }
