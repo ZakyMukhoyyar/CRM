@@ -9,17 +9,17 @@
             <div sclass="col-md-3 nopadding">
                 <div class="form-group" style="font-style:bold;">
                     <label sclass="isi" value="Nama Lengkap" />
-                    <textbox class="form-control" width="100%" value="@bind(vm.fullName)"/>
+                    <textbox class="form-control" width="90%" value="@bind(vm.fullName)"/>
                 </div>
                 <div class="form-group" style="font-style:bold;">
                     <label sclass="isi" value="KTP" />
-                    <textbox class="form-control" width="100%" value="@bind(vm.ktp)"/>
+                    <textbox class="form-control" width="90%" value="@bind(vm.ktp)"/>
                 </div>
                 <div class="form-group" style="font-style:bold;">
                     <label sclass="isi" value="Domisili" />
                     <listbox 
                         class="form-control"
-                        width="100%"
+                        width="90%"
                         mold="select"
                         model="@load(vm.listDomisili)" 
                         selectedItem="@bind(vm.domisiliSelect)" >
@@ -32,7 +32,7 @@
                     <label sclass="isi" value="Minat Pekerjaan" />
                     <listbox 
                         class="form-control"
-                        width="100%"
+                        width="90%"
                         mold="select"
                         model="@load(vm.listMinat)" 
                         selectedItem="@bind(vm.minatSelect)" >
@@ -42,20 +42,20 @@
                     </listbox>
                 </div>
                 <div>
-                    <a sclass="btn btn-info" width="100%"  label="Pencarian" onClick="@command('searchRegMahasiswa')"/>
+                    <a sclass="btn btn-info" width="90%"  label="Pencarian" onClick="@command('searchRegMahasiswa')"/>
                 </div>   
             </div>
             <div sclass="col-md-9 nopadding">
                 <groupbox closable="false">
                     <paging forward="onPaging" />
-                    <listbox rows="6" mold="paging" emptyMessage="${labels.common.noDataFound}"  model="@bind(vm.userDTOs)">
+                    <listbox rows="@load(pageSize)" pageSize="@load(vm.pageSizeCreateLowongan)" mold="paging" emptyMessage="${labels.common.noDataFound}"  model="@bind(vm.userDTOs)">
                         <listhead>
-                            <listheader label="ID" width="7%" align="center" sortDirection="ascending" sort="auto(userID)"/>
-                            <listheader label="Nama Lengkap" width="20%" align="center"/>
-                            <listheader label="Domisili" width="14%" align="center"/>
-                            <listheader label="IPK" width="5%" align="center"/>
-                            <listheader label="Minat" width="14%" align="center"/>
-                            <listheader label="Aksi" width="22%" align="center"/>
+                            <listheader label="ID" width="10%" align="center" sortDirection="ascending" sort="auto(userID)"/>
+                            <listheader label="Nama Lengkap" width="32%" align="center"/>
+                            <listheader label="Domisili" width="20%" align="center"/>
+                            <listheader label="IPK" width="8%" align="center"/>
+                            <listheader label="Minat" width="20%" align="center"/>
+                            <listheader label="Aksi" width="15%" align="center"/>
                         </listhead>
                         <template name="model">
                             <listitem value="${each}">
@@ -75,8 +75,11 @@
                                     <label width="100%" value="@bind(each.userSpecificationDTO.minat)"/>
                                 </listcell>
                                 <listcell>
-                                    <a sclass="isi btn btn-primary" label="Detail" onClick="@command('detailRegMahasiswa', object=each)"></a>
-                                    <a sclass="isi btn btn-primary" label="Lihat CV"  onClick="@command('buttonKlikPreviewCV', object=each)"></a>
+                                    <a onClick="@command('detailRegMahasiswa', object=each)" 
+                                       image="/images/skk_edit.png" sclass="btn btn-default" />
+                                    <!--<space/>-->
+                                    <a onClick="@command('buttonKlikPreviewCV', object=each)" 
+                                       image="/images/mWindow.png" sclass="btn btn-default" />
                                 </listcell>
                             </listitem>
                         </template>

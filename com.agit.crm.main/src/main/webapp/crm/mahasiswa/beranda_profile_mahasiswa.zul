@@ -54,7 +54,7 @@
                         </div>
                         <div class="form-group">
                             <label sclass="isi" width="100%" value="Jurusan : " style="text-align: left; padding:10px;"/>                   
-                            <textbox sclass="form-control" value="@bind(each.userSpecificationDTO.namaCivitas)" readonly="true"/>
+                            <textbox sclass="form-control" value="@bind(each.userSpecificationDTO.jurusan)" readonly="true"/>
                         </div>
                         <separator/>
                         <div align="right">

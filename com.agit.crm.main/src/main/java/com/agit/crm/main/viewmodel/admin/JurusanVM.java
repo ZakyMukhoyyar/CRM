@@ -38,6 +38,7 @@ import org.zkoss.util.media.Media;
 import org.zkoss.zk.ui.event.UploadEvent;
 import org.zkoss.zk.ui.select.annotation.VariableResolver;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
+import org.zkoss.zul.Fileupload;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Window;
@@ -244,6 +245,7 @@ public class JurusanVM {
         }
         showInformationMessagebox("Data History Berhasil Diupload");
         BindUtils.postGlobalCommand(null, null, "refreshJurusan", null);
+
     }
 
     @Command("buttonUploadFile")
@@ -263,8 +265,6 @@ public class JurusanVM {
             int month = now.get(Calendar.MONTH);
             int day = now.get(Calendar.DAY_OF_MONTH);
 
-//            filePathJurusan = Executions.getCurrent().getDesktop().getWebApp().getRealPath("/");
-//            filepath = filepath + "\\" + "files" + "\\" + "rkap" + "\\" + year + "\\" + month + "\\" + day + "\\" + media.getName();
             filePathJurusan = FILE_LOC;
             File baseDir = new File(filePathJurusan);
             if (!baseDir.exists()) {
@@ -273,7 +273,6 @@ public class JurusanVM {
 
             Files.copy(new File(filePathJurusan + mediaJurusan.getName()), mediaJurusan.getStreamData());
             setMediaNameJurusan(mediaJurusan.getName());
-//            pathLocationJurusan = "/" + "files" + "/" + "rkap" + "/" + year + "/" + month + "/" + day + "/" + mediaJurusan.getName();
         }
     }
 

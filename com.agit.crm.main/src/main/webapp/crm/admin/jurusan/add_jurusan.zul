@@ -14,13 +14,15 @@
                         <column></column>
                     </columns>
                     <rows>
-                        <row>                            
+                        <row>
                             <signLabel value="ID Jurusan" style="font-weight: bold"/>
                             <textbox sclass="isi" width="20%" disabled="true" value="@bind(fx.idJurusan)" />
                         </row>
                         <row>                            
                             <signLabel value="Nama Jurusan " style="font-weight: bold"/>
-                            <textbox sclass="isi" rows="2" value="@bind(fx.namaJurusan)" width="100%" disabled="false" constraint="no empty : Nama Jurusan Tidak Boleh Kosong"/>
+                            <textbox sclass="isi" rows="2" width="100%" disabled="false" 
+                                     value="@bind(fx.namaJurusan)" 
+                                     constraint="/.[a-zA-Z\s]+/, no empty : Format isian salah"/>
                         </row>
                     </rows>
                 </grid>

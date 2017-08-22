@@ -1,13 +1,10 @@
 package com.agit.crm.main.viewmodel.recruiter;
 
 import com.agit.crm.common.application.LowonganService;
-import com.agit.crm.common.application.LowonganStatusService;
 import com.agit.crm.common.application.MinatService;
 import com.agit.crm.common.application.RiwayatApplyMahasiswaService;
 import com.agit.crm.common.dto.crm.LowonganDTO;
 import com.agit.crm.common.dto.crm.LowonganDTOBuilder;
-import com.agit.crm.common.dto.crm.LowonganStatusDTO;
-import com.agit.crm.common.dto.crm.LowonganStatusDTOBuilder;
 import com.agit.crm.common.dto.crm.MinatDTO;
 import com.agit.crm.common.dto.crm.RiwayatApplyMahasiswaDTO;
 import com.agit.crm.common.dto.crm.RiwayatApplyMahasiswaDTOBuilder;

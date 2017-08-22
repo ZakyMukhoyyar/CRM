@@ -21,18 +21,11 @@
                             <listitem label="@load(items)"  value="@load(items)" />
                         </template>
                     </listbox>                        
-                </div>
-                    
+                </div>                    
                 <div class="form-group">
                     <label sclass="isi" value="Nama Acara" />
                     <textbox class="form-control" width="100%" value="@bind(vm.namaEvent)"/>
                 </div>
-                        
-<!--                <div class="form-group">
-                    <label sclass="isi" value="Tanggal Berakhir" />
-                    <datebox width="100%"  readonly="false" placeholder="- Silahkan Pilih -" value="@bind(vm.endDate)"></datebox>
-                </div>-->
-                    
                 <div>
                     <a sclass="btn btn-info" width="100%" label="Pencarian" onClick="@command('buttonSearchEvent')"/>
                     <separator/>
@@ -68,10 +61,9 @@
                                     <label sclass="labelstylegrid"  width="100%" value="@bind(each.status)"/>
                                 </listcell>
                                 <listcell>
-                                    <a sclass="btn btn-primary" label="Detail" onClick="@command('detailEventAgit', object=each)"></a>
-                                    <a sclass="btn btn-primary" label="Lihat "  onClick="@command('buttonKlikEvent', object=each)"></a>
-                                    <!--                                <a label=" | " style="font-size:12pt ;color:black"></a>
-                                    <a label="Delete" style="text-decoration:underline ;color:blue" onClick="@command('deleteDataBank', object=each)"></a>-->
+                                    <a onClick="@command('detailEventAgit', object=each)" image="/images/skk_edit.png" sclass="btn btn-default"/>
+                                    <space/>
+                                    <a onClick="@command('buttonKlikEvent', object=each)" image="/images/mWindow.png" sclass="btn btn-default"/>
                                 </listcell>
                             </listitem>
                         </template>

@@ -20,7 +20,9 @@
                         </row>
                         <row>
                             <signLabel value="Nama Acara " sclass="isi"/>
-                            <textbox rows="2" sclass="isi" value="@bind(fx.namaEvent)" width="100%" disabled="false" constraint="/.[a-z]+/, no empty : Format isian salah"/>
+                            <textbox rows="2" sclass="isi" 
+                                     value="@bind(fx.namaEvent)" width="100%" disabled="false" 
+                                     constraint="/.[a-zA-Z0-9\s-]+/, no empty : Format isian salah"/>
                         </row>
                         <row>
                             <signLabel sclass="isi" value="Deskripsi "/>
@@ -28,11 +30,15 @@
                         </row>
                         <row>
                             <signLabel sclass="isi" value="Tanggal Mulai"/>
-                            <datebox sclass="isi" format="hh:mm:ss a dd/MM/yyyy" width="60%" readonly="true" value="@bind(fx.startDate)" constraint="no empty : Tanggal Mulai Tidak Boleh Kosong"/>
+                            <datebox sclass="isi" format="hh:mm:ss a dd/MM/yyyy" width="60%" 
+                                     readonly="true" value="@bind(fx.startDate)"
+                                     constraint="no empty : Tanggal Mulai Tidak Boleh Kosong"/>
                         </row> 
                         <row>
                             <signLabel sclass="isi" value="Tanggal Berakhir"/>
-                            <datebox sclass="isi" format="hh:mm:ss a dd/MM/yyyy" width="60%" readonly="true" value="@bind(fx.endDate)" constraint="no empty : Tanggal Berakhir Tidak Boleh Kosong"/>
+                            <datebox sclass="isi" format="hh:mm:ss a dd/MM/yyyy" width="60%" 
+                                     readonly="true" value="@bind(fx.endDate)" 
+                                     constraint="no empty : Tanggal Berakhir Tidak Boleh Kosong"/>
                         </row> 
                         <row>
                             <signLabel sclass="isi" value="Status"/>

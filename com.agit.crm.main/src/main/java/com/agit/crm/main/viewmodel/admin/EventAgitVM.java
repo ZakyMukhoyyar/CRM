@@ -12,6 +12,7 @@ import com.agit.crm.util.CommonUtil;
 import com.agit.crm.util.StringUtil;
 import java.io.File;
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -205,11 +206,19 @@ public class EventAgitVM {
         if (pathLocationUploadEventAgit == null) {
             pathLocationUploadEventAgit = eventAgitDTO.getAttachment();
         }
-        eventAgitDTO.setAttachment(pathLocationUploadEventAgit);
-        eventAgitService.SaveOrUpdate(eventAgitDTO);
-        showInformationMessagebox("Data EventAgit Berhasil Disimpan");
-        BindUtils.postGlobalCommand(null, null, "refreshEventAgit", null);
-        window.detach();
+        
+        Date tanggalMulai = eventAgitDTO.getStartDate();
+        Date tanggalBerakhir = eventAgitDTO.getEndDate();
+
+        if (tanggalMulai != null && tanggalBerakhir != null && tanggalBerakhir.compareTo(tanggalMulai) < 0) {
+            Messagebox.show("Format tanggal mulai dan tanggal berakhir salah");
+        } else {
+            eventAgitDTO.setAttachment(pathLocationUploadEventAgit);
+            eventAgitService.SaveOrUpdate(eventAgitDTO);
+            showInformationMessagebox("Data EventAgit Berhasil Disimpan");
+            BindUtils.postGlobalCommand(null, null, "refreshEventAgit", null);
+            window.detach();
+        }
     }
 
     /* Function refresh data Event */
@@ -387,5 +396,4 @@ public class EventAgitVM {
     public void setPageSize(int pageSize) {
         this.pageSize = pageSize;
     }
-
 }

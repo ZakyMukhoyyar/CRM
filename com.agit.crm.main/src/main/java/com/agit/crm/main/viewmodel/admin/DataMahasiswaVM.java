@@ -111,8 +111,8 @@ public class DataMahasiswaVM {
     /*------------------------------------- Paging--------------------------------------------*/
     private PageNavigation previous;
     private boolean checked;
-    private int pageSize = 2;
-    private int pageSizeCreateLowongan = 7;
+    private int pageSize = 10;
+    private int pageSizeCreateLowongan = 10;
     private int activePage = 0;
     private int selectedIndex;
     private int totalSize = 0;

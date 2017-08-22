@@ -56,9 +56,7 @@
                                     <label width="100%" value="@bind(each.status)"/>
                                 </listcell>
                                 <listcell>
-                                    <a sclass="btn btn-primary " label="Detail" style="text-decoration:underline ;color:white" onClick="@command('detailMinat', object=each)"></a>
-                                    <!--                                <a label=" | " style="font-size:12pt ;color:black"></a>
-                                    <a label="Delete" style="text-decoration:underline ;color:blue" onClick="@command('deleteDataBank', object=each)"></a>-->
+                                    <a onClick="@command('detailMinat', object=each)" image="/images/skk_edit.png" sclass="btn btn-default" />
                                 </listcell>
                             </listitem>
                         </template>

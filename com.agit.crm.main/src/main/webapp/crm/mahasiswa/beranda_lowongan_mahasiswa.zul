@@ -13,16 +13,7 @@
                     </div>
                     <div class="form-group">
                         <label sclass="isi" value="ID Lowongan" />
-                        <textbox class="form-control" width="100%" />  
-                    </div>
-                    
-                    <div class="form-group">
-                        <label sclass="isi" value="Jenis Pekerjaan" />
-                        <combobox sclass="isi" autodrop="true" readonly="true" width="100%" model="@load(vm.minats)" selectedItem="@bind(fx.minatPekerjaan)" placeholder="- Pilihan Kategori -">
-                            <template name="model" var="items">
-                                <comboitem label="@load(items.getNamaMinat())" value="@load(items.getNamaMinat())"/>
-                            </template>
-                        </combobox> 
+                        <textbox class="form-control" width="100%" value="@bind(vm.idLowongan)"/>  
                     </div>
                     
                     <div class="form-group">
@@ -31,8 +22,19 @@
                     </div>
                     
                     <div class="form-group">
+                        <label sclass="isi" value="Jenis Pekerjaan" />
+                        <combobox sclass="isi" autodrop="true" readonly="true" width="100%" placeholder="- Pilihan Kategori -"
+                                  model="@load(vm.listNamaMinat)" selectedItem="@bind(vm.minatPekerjaan)" >
+                            <template name="model" var="items">
+                                <comboitem label="@load(items)"  value="@load(items)" />
+                            </template>
+                        </combobox> 
+                    </div>
+                    
+                    <div class="form-group">
                         <label sclass="isi" value="Status" />   
-                        <combobox sclass="isi" width="100%" placeholder="- Silahkan Pilih -" readonly="true">
+                        <combobox sclass="isi" autodrop="true" width="100%" placeholder="- Pilih Status -" readonly="true"
+                        model="@load(vm.statuses)" selectedItem="@bind(vm.status)">
                             <template name="model" var="items">
                                 <comboitem label="@load(items)" value="@load(items)"/>
                             </template>
@@ -49,7 +51,7 @@
                     </div>-->
                     
                     <div>
-                        <a sclass="isi btn btn-info" width="100%" label="Pencarian" onClick="@command('searchDataBank')"/>
+                        <a sclass="isi btn btn-info" width="100%" label="Pencarian" onClick="@command('buttonSearchLowonganMahasiswa')"/>
                         <separator />
                         <a sclass="isi btn btn-info" width="100%" label="Riwayat" onClick="@command('buttonRiwayatLowongan')"/>
                         <separator />

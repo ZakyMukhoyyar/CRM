@@ -35,13 +35,15 @@
                                     <row>
                                         <signLabel sclass="isi" value="Nama Lengkap "/>
                                         <div>
-                                            <textbox value="@bind(fx.userDTO.userSpecificationDTO.fullName)" width="40%"/>
+                                            <textbox value="@bind(fx.userDTO.userSpecificationDTO.fullName)" width="40%"
+                                                     constraint="/.[a-zA-Z\s]+/, no empty : Format isian salah"/>
                                         </div>
                                     </row>
                                     <row>
                                         <signLabel sclass="isi" value="Username "/>
                                         <div>
-                                            <textbox id="userName" value="@bind(fx.userDTO.userName)" width="40%"/>
+                                            <textbox id="userName" value="@bind(fx.userDTO.userName)" width="40%"
+                                                     constraint="/.[a-zA-Z0-9]+/, no empty : Format isian salah"/>
                                         </div>
                                     </row>
                             
@@ -53,25 +55,29 @@
                                     <row>
                                         <signLabel sclass="isi" value="Email"/>
                                         <div>
-                                            <textbox value="@bind(fx.userDTO.userSpecificationDTO.email)" width="40%" />
+                                            <textbox value="@bind(fx.userDTO.userSpecificationDTO.email)" width="40%"
+                                                     constraint="/.+@.+\.[a-z]+/, no empty : Format isian salah"/>
                                         </div>
                                     </row>
                                     <row>
                                         <signLabel sclass="isi" value="KTP"/>
                                         <div>
-                                            <textbox value="@bind(fx.userDTO.userSpecificationDTO.ktp)" width="40%" />
+                                            <textbox value="@bind(fx.userDTO.userSpecificationDTO.ktp)" width="40%"
+                                                     maxlength="16" constraint="/.[0-9]+/, no empty : Format isian salah"/>
                                         </div>
                                     </row>
                                     <row>
                                         <signLabel sclass="isi" value="No HP"/>
                                         <div>
-                                            <textbox value="@bind(fx.userDTO.userSpecificationDTO.mobilePhone)" width="40%" />
+                                            <textbox value="@bind(fx.userDTO.userSpecificationDTO.mobilePhone)" width="40%" 
+                                                     maxlength="13" constraint="/.[0-9]+/, no empty : Format isian salah"/>
                                         </div>
                                     </row>
                                     <row>
                                         <signLabel value="Tanggal Lahir"/>
                                         <div>
-                                            <datebox value="@bind(fx.userDTO.userSpecificationDTO.tanggalLahir)" width="40%" />
+                                            <datebox value="@bind(fx.userDTO.userSpecificationDTO.tanggalLahir)" width="40%" 
+                                                     constraint="no empty : Format isian salah"/>
                                         </div>
                                     </row>
                                     <row>
@@ -81,7 +87,7 @@
                                                 width="40%"
                                                 mold="select"
                                                 model="@load(vm.listDomisili)" 
-                                                selectedItem="@bind(fx.userDTO.userSpecificationDTO.domisili)" >
+                                                selectedItem="@bind(fx.userDTO.userSpecificationDTO.domisili)">
                                                 <template name="model" var="items" >
                                                     <listitem label="@load(items)"  value="@load(items)" />
                                                 </template>
@@ -91,7 +97,8 @@
                                     <row>
                                         <signLabel sclass="isi" value="IPK"/>
                                         <div>
-                                            <textbox value="@bind(fx.userDTO.userSpecificationDTO.ipk)" width="40%" />
+                                            <textbox value="@bind(fx.userDTO.userSpecificationDTO.ipk)" width="40%" 
+                                            constraint="/[0-4]+.+[0-9]+/, no empty : Format isian salah"/>
                                         </div>
                                     </row>
                                     <row>

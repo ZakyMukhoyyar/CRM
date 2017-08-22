@@ -17,11 +17,13 @@ import com.agit.crm.common.dto.usermanagement.UserSpecificationDTO;
 import com.agit.crm.common.dto.usermanagement.UserSpecificationDTOBuilder;
 import com.agit.crm.common.security.SecurityUtil;
 import com.agit.crm.shared.state.LowonganState;
+import com.agit.crm.shared.status.Status;
 import com.agit.crm.shared.zul.CommonViewModel;
 import static com.agit.crm.shared.zul.CommonViewModel.showInformationMessagebox;
 import com.agit.crm.shared.zul.PageNavigation;
 import com.agit.crm.user.management.application.UserService;
 import com.agit.crm.util.CommonUtil;
+import com.agit.crm.util.StringUtil;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -85,6 +87,7 @@ public class LowonganVM {
     private List<LowonganStatusDTO> lowonganStatusDTOs = new ArrayList<>();
     private List<String> listLowonganID = new ArrayList<String>();
     private ListModelList<LowonganState> lowonganStates;
+    private ListModelList<Status> statuses;
 
     /* Function For Seacrh  */
     private String userID;
@@ -99,6 +102,7 @@ public class LowonganVM {
     private String idLowonganStatus;
     private String idRiwayatLowongan;
     private LowonganState lowonganState;
+    private Status status;
 
     private PageNavigation previous;
     private boolean checked;
@@ -332,10 +336,28 @@ public class LowonganVM {
     @Command("buttonSaveLowongan")
     @NotifyChange({"lowonganDTO", "lowonganDTOs"})
     public void buttonSaveKetrampilan(@BindingParam("object") LowonganDTO obj, @ContextParam(ContextType.VIEW) Window window) {
-        lowonganService.SaveOrUpdate(lowonganDTO);
-        showInformationMessagebox("Data Lowongan Berhasil Disimpan");
-        BindUtils.postGlobalCommand(null, null, "refreshLowongan", null);
-        window.detach();
+        Date tanggalMulai = lowonganDTO.getTanggalMulai();
+        Date tanggalBerakhir = lowonganDTO.getTanggalBerakhir();
+
+        if (tanggalMulai != null && tanggalBerakhir != null && tanggalBerakhir.compareTo(tanggalMulai) < 0) {
+            Messagebox.show("Format tanggal mulai dan tanggal berakhir salah");
+        } else {
+            lowonganService.SaveOrUpdate(lowonganDTO);
+            showInformationMessagebox("Data Lowongan Berhasil Disimpan");
+            BindUtils.postGlobalCommand(null, null, "refreshLowongan", null);
+            window.detach();
+        }
+    }
+
+    @Command("buttonSearchLowonganMahasiswa")
+    @NotifyChange("lowonganDTOs")
+    public void buttonSearchLowonganMahasiswa(@ContextParam(ContextType.VIEW) Window window) {
+        Map params = new HashMap();
+        params.put("idLowongan", idLowongan);
+        params.put("namaLowongan", namaLowongan);
+        params.put("minatPekerjaan", minatPekerjaan);
+        params.put("status", status);
+        lowonganDTOs = lowonganService.findByParams(params);
     }
 
     @Command("buttonDetailLowongan")
@@ -391,31 +413,43 @@ public class LowonganVM {
         lowonganDTO = (LowonganDTO) obj;
         Messagebox.show("Apakah anda yakin ingin menghapus Lowongan?", "Konfirmasi", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION,
                 new org.zkoss.zk.ui.event.EventListener() {
-            @Override
-            public void onEvent(Event evt) throws InterruptedException {
-                if (evt.getName().equals("onOK")) {
-                    lowonganService.deleteData(lowonganDTO);
-                    showInformationMessagebox("Lowongan Berhasil Dihapus");
-                    BindUtils.postGlobalCommand(null, null, "refreshLowongan", null);
-                } else {
-                    System.out.println("Operation Canceled !");
+                    @Override
+                    public void onEvent(Event evt) throws InterruptedException {
+                        if (evt.getName().equals("onOK")) {
+                            lowonganService.deleteData(lowonganDTO);
+                            showInformationMessagebox("Lowongan Berhasil Dihapus");
+                            BindUtils.postGlobalCommand(null, null, "refreshLowongan", null);
+                        } else {
+                            System.out.println("Operation Canceled !");
+                        }
+                    }
                 }
-            }
-        }
         );
     }
 
+    public int checkCount(int count, Object object) {
+        if (StringUtil.hasValue(object)){
+            count += 1;
+        }return count;
+    }
     /* --------------------------------------------- for data pelamar functionality ---------------------------------------------------*/
     @Command("searchPelamar")
     @NotifyChange("listRiwayatApplyMahasiswaDTOs")
     public void searchPelamar(@ContextParam(ContextType.VIEW) Window window) {
+        int count = 0;
         Map params = new HashMap();
         params.put("idRiwayatLowongan", idRiwayatLowongan);
+        count = checkCount(count, idRiwayatLowongan);
         params.put("namaLowonganApply", namaLowonganApply);
+        count = checkCount(count, namaLowonganApply);
         params.put("namaApplyLowongan", namaApplyLowongan);
-
+        count = checkCount(count, namaApplyLowongan);
+        if (count < 1) {
+            Messagebox.show("Minimal harus memasukkan 1 parameter pencarian", "Peringatan", Messagebox.OK, Messagebox.EXCLAMATION);
+            return;
+        }
         listRiwayatApplyMahasiswaDTOs = riwayatApplyMahasiswaService.findByParams(params);
-    }
+    }    
 
     @Command("KlikDetailDataPelamar")
     @NotifyChange({"userDTO", "userDTOs", "lowonganDTO", "lowonganDTOs", "riwayatApplyMahasiswaDTOs", "riwayatApplyMahasiswaDTO"})
@@ -460,17 +494,6 @@ public class LowonganVM {
         CommonViewModel.navigateToWithoutDetach("/crm/mahasiswa/registrasi_mahasiswa.zul", window, params);
     }
 
-    @Command("buttonPreviewCV")
-    @NotifyChange({"userDTO", "userDTOs", "lowonganDTO", "lowonganDTOs", "riwayatApplyMahasiswaDTOs", "riwayatApplyMahasiswaDTO"})
-    public void buttonPreviewCV(@BindingParam("object") RiwayatApplyMahasiswaDTO obj, @ContextParam(ContextType.VIEW) Window window) {
-        Map<String, Object> params = new HashMap<>();
-        if (obj.getIdUserRiwayat() != null) {
-            userDTO = userService.findByUserID(obj.getIdUserRiwayat());
-        }
-        params.put("userDTO", userDTO);
-        CommonViewModel.navigateToWithoutDetach("/crm/admin/dataRegister/previewCV.zul", window, params);
-    }
-
     @Command("detail")
     @NotifyChange("user")
     public void detail(@BindingParam("object") UserDTO obj, @ContextParam(ContextType.VIEW) Window window) {
@@ -494,6 +517,7 @@ public class LowonganVM {
     public void refreshRAM() {
         riwayatApplyMahasiswaDTOs = riwayatApplyMahasiswaService.findAll();
     }
+    
 
     /*-------------------------------------------------------------------- getter setter --------------------------------------------------------------------*/
     public UserDTO getUser() {
@@ -790,6 +814,22 @@ public class LowonganVM {
 
     public void setLowonganState(LowonganState lowonganState) {
         this.lowonganState = lowonganState;
+    }
+
+    public ListModelList<Status> getStatuses() {
+        return new ListModelList<>(Status.values());
+    }
+
+    public void setStatuses(ListModelList<Status> statuses) {
+        this.statuses = statuses;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
 }

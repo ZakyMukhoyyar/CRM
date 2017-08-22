@@ -20,19 +20,31 @@
                         </row>
                         <row>
                             <signLabel value="Nama Lowongan " style="font-weight: bold"/>
-                            <textbox readonly="@bind(vm.disableButtonSave)" rows="2" width="100%" constraint="no empty : Nama Lowongan Tidak Boleh Kosong" value="@bind(fx.namaLowongan)"/>
+                            <textbox rows="2" width="100%"
+                                     readonly="@bind(vm.disableButtonSave)"
+                                     constraint="/.[a-zA-Z\s.]+/ , no empty : Nama Lowongan Tidak Boleh Kosong" 
+                                     value="@bind(fx.namaLowongan)"/>
                         </row>
                         <row>
                             <signLabel value="Deskripsi " style="font-weight: bold"/>
-                            <textbox readonly="@bind(vm.disableButtonSave)"  rows="10" width="100%" maxlength="2000" disabled="false" constraint="no empty : Deskripsi Tidak Boleh Kosong" value="@bind(fx.deskripsiLowongan)"/>
+                            <textbox rows="10" width="100%" maxlength="2000" disabled="false" 
+                                     readonly="@bind(vm.disableButtonSave)" 
+                                     constraint="no empty : Deskripsi Tidak Boleh Kosong" 
+                                     value="@bind(fx.deskripsiLowongan)"/>
                         </row>
                         <row>
                             <signLabel value="Tanggal Mulai" style="font-weight: bold"/>
-                            <datebox disabled="@bind(vm.disableButtonSave)" format="hh:mm:ss a dd/MM/yyyy" width="50%" readonly="true" constraint="no empty : Tanggal Mulai Tidak Boleh Kosong" value="@bind(fx.tanggalMulai)"/>
+                            <datebox format="hh:mm:ss a dd/MM/yyyy" width="50%" readonly="true" 
+                                     disabled="@bind(vm.disableButtonSave)"
+                                     constraint="no empty : Tanggal Mulai Tidak Boleh Kosong" 
+                                     value="@bind(fx.tanggalMulai)"/>
                         </row> 
                         <row>
                             <signLabel value="Tanggal Berakhir" style="font-weight: bold"/>
-                            <datebox disabled="@bind(vm.disableButtonSave)" format="hh:mm:ss a dd/MM/yyyy" width="50%" readonly="true" constraint="no empty : Tanggal Berakhir Tidak Boleh Kosong" value="@bind(fx.tanggalBerakhir)"/>
+                            <datebox format="hh:mm:ss a dd/MM/yyyy" width="50%" readonly="true" 
+                                     disabled="@bind(vm.disableButtonSave)"
+                                     constraint="no empty : Tanggal Berakhir Tidak Boleh Kosong" 
+                                     value="@bind(fx.tanggalBerakhir)"/>
                         </row>     
                         <row>
                             <signLabel value="Kategori Pekerjaan" style="font-weight: bold"/>
@@ -42,7 +54,7 @@
                                 </template>
                             </listbox>
                         </row>  
-<!--                        <row>
+                        <!--                        <row>
                             <signLabel value="Perkiraan Gaji" style="font-weight: bold"/>
                             <listbox width="50%" disabled="@bind(vm.disableButtonSave)" mold="select" sclass="form-control" model="@load(vm.gaji)" selectedItem="@bind(fx.gaji)" >
                                 <template name="model" var="items" >
@@ -52,11 +64,13 @@
                         </row> -->
                         <row>
                             <signLabel value="Persyaratan " style="font-weight: bold"/>
-                            <textbox readonly="@bind(vm.disableButtonSave)" rows="10" width="100%" constraint="no empty : Persyaratan Tidak Boleh Kosong" value="@bind(fx.persyaratan)"/>
+                            <textbox readonly="@bind(vm.disableButtonSave)" rows="10" width="100%" 
+                                     constraint="no empty : Persyaratan Tidak Boleh Kosong" value="@bind(fx.persyaratan)"/>
                         </row>
                         <row>
                             <signLabel value="Lokasi Kerja" style="font-weight: bold"/>
-                            <textbox readonly="@bind(vm.disableButtonSave)" rows="2" width="100%" constraint="no empty : Lokasi Kerja Tidak Boleh Kosong" value="@bind(fx.lokasiKerja)"/>
+                            <textbox readonly="@bind(vm.disableButtonSave)" rows="2" width="100%" 
+                                     constraint="no empty : Lokasi Kerja Tidak Boleh Kosong" value="@bind(fx.lokasiKerja)"/>
                         </row>                 
                     </rows>
                 </grid>
