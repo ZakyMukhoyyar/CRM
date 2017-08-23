@@ -47,6 +47,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.zkoss.bind.BindContext;
 import org.zkoss.bind.annotation.BindingParam;
@@ -65,7 +66,6 @@ import org.zkoss.zk.ui.event.UploadEvent;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Messagebox;
-import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
 /**
@@ -185,7 +185,7 @@ public class RegisterVM {
                         .createRoleDTO();
                 userDTO = new UserDTOBuilder()
                         .setCreationalBy(SecurityUtil.getUserName())
-                        .setPassword(new BCryptPasswordEncoder().encode("Password123"))
+                        .setUserID(UUID.randomUUID().toString())
                         .setUserSpecificationDTO(userSpecificationDTO)
                         .setRoleDTO(roleDTO)
                         .setUserStatus(StatusData.ACTIVE)
@@ -359,24 +359,14 @@ public class RegisterVM {
     public void buttonConfirm(@ContextParam(ContextType.VIEW) Window window) throws JsonProcessingException {
         if (previous == PageNavigation.CREATE) {
             /* Check exist code */
-            UserDTO user = userService.findByID(userDTO.getUserName() == null ? "" : userDTO.getUserName());
+            UserDTO user = userService.findByID(userDTO.getUserID() == null ? "" : userDTO.getUserID());
             if (user == null) {
                 userDTO.setCreationalDate(new Date());
                 userDTO.setUserName(userDTO.getUserName().toUpperCase());
+                userDTO.setPassword(new BCryptPasswordEncoder().encode(userDTO.getPassword()));
                 try {
-                    if (userDTO.getUserID() == null) {
-                        ListModelList<UserDTO> userList = new ListModelList<>(userService.findAllUser());
-                        String userID = "";
-                        if (userList.isEmpty()) {
-                            userID = "USER004";
-                        } else {
-                            userID = getLatestObjectID(userList, "userID");
-                        }
-
-                        userDTO.setUserID(userID);
-                        userService.saveOrUpdate(userDTO);
-                        CommonViewModel.showInformationMessagebox("User Name " + userDTO.getUserName() + " has successfully created", UserNavigation.DASHBOARD, null, window);
-                    }
+                    userService.saveOrUpdate(userDTO);
+                    CommonViewModel.showInformationMessagebox("User Name " + userDTO.getUserName() + " has successfully created", UserNavigation.DASHBOARD, null, window);
                 } catch (Exception e) {
                     CommonViewModel.showErrorMessagebox(Labels.getLabel("error.message.conflict.repository", new String[]{"User Name", userDTO.getUserName()}));
                 }

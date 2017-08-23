@@ -78,8 +78,8 @@
                                     </row>
                             
                                     <row>
-                                        <signLabel sclass="isi" value="Password" width="40%" />
-                                        <textbox type="password" value="xxxxxxxxxxx" width="40%" disabled="true"/>
+                                        <label value="${labels.user.label.password} " width="25%" />
+                                        <textbox type="password" value="@bind(vm.userDTO.password)" width="25%"/>
                                     </row>
                             
                                     <row>

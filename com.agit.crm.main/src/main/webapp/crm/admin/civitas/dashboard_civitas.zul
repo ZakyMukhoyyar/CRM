@@ -26,6 +26,7 @@
                     <a sclass="btn btn-info" width="100%" label="Pencarian" onClick="@command('buttonSearchCivitas')"/>
                     <separator/>
                     <a sclass="btn btn-info" width="100%" label="Tambah Civitas" onClick="@command('buttonNewCivitas')"/>
+            
                 </div>
                 <separator/>
                 <separator/>
@@ -42,7 +43,11 @@
                     <button type="button" sclass="btn btn-info" width="100%" label="Browse"  upload="true,maxsize=-1,accept=.xlsx|.xlsm" onUpload="@command('buttonUploadFile')"/>
                     <separator/>
                     <a sclass="btn btn-info" width="100%" label="Upload"  onClick="@command('buttonSaveDataCivitas')"/>
-                   
+                    <button width="100%" label="Download Template">
+                        <attribute name="onClick">
+                            Filedownload.save("/files/insert-template-civitas.xlsx", null);
+                        </attribute>
+                    </button>
                 </div>
             </div>
             
