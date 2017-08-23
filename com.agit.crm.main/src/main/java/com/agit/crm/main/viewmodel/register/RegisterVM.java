@@ -299,7 +299,7 @@ public class RegisterVM {
 
     @Command("verifyKtp")
     @NotifyChange("verifyKtp")
-    public void verifyKtp(@BindingParam("obj") String ktp) {
+    public void verifyKtp(@BindingParam("obj1") String ktp) {
         if (ktp != null && !ktp.trim().equals("")) {
             UserDTO user = userService.findByKtp(ktp);
             if (user == null) {
@@ -312,7 +312,7 @@ public class RegisterVM {
 
     @Command("verifyEmail")
     @NotifyChange("verifyEmail")
-    public void verifyEmail(@BindingParam("obj") String email) {
+    public void verifyEmail(@BindingParam("obj2") String email) {
         if (email != null && !email.trim().equals("")) {
             UserDTO user = userService.findByEmail(email);
             if (user == null) {
@@ -358,34 +358,56 @@ public class RegisterVM {
     public void buttonConfirm(@ContextParam(ContextType.VIEW) Window window) throws JsonProcessingException {
         if (previous == PageNavigation.CREATE) {
             /* Check exist code */
-            UserDTO user = userService.findByID(userDTO.getUserName() == null ? "" : userDTO.getUserName());
-            if (user == null) {
-                ListModelList<UserDTO> userList = new ListModelList<>(userService.findAllUser());
-                String userID = "";
-                if (userList.isEmpty()) {
-                    userID = "USER004";
-                } else {
-                    userID = getLatestObjectID(userList, "userID");
-                }
-                userDTO.setUserID(userID);
-                userDTO.setCreationalDate(new Date());
+
+            if ((userDTO.getUserName() != null && !userDTO.getUserName().trim().equals("")) || (userDTO.getUserSpecificationDTO().getKtp() != null && !userDTO.getUserSpecificationDTO().getKtp().trim().equals("")) || (userDTO.getUserSpecificationDTO().getEmail() != null && !userDTO.getUserSpecificationDTO().getEmail().trim().equals(""))) {
                 userDTO.setUserName(userDTO.getUserName().toUpperCase());
-                userDTO.setPassword(new BCryptPasswordEncoder().encode(userDTO.getPassword()));
-                try {
-                    userService.saveOrUpdate(userDTO);
-                    CommonViewModel.showInformationMessagebox("User Name " + userDTO.getUserName() + " has successfully created", UserNavigation.DASHBOARD, null, window);
-                } catch (Exception e) {
-                    CommonViewModel.showErrorMessagebox(Labels.getLabel("error.message.conflict.repository", new String[]{"User Name", userDTO.getUserName()}));
+                UserDTO user = userService.findByID(userDTO.getUserName());
+                if (user != null) {
+                    if (user.getUserName().equals(userDTO.getUserName())) {
+                        CommonViewModel.showInformationMessagebox(Labels.getLabel("error.message.conflict.repository", new String[]{"User Name", userDTO.getUserName()}));
+                    }
+                } else if (user == null) {
+                    user = userService.findByKtp(userDTO.getUserSpecificationDTO().getKtp());
+                    if (user != null) {
+                        if (user.getUserSpecificationDTO().getKtp().equals(userDTO.getUserSpecificationDTO().getKtp())) {
+                            CommonViewModel.showInformationMessagebox(Labels.getLabel("error.message.conflict.repository", new String[]{"ktp", userDTO.getUserSpecificationDTO().getKtp()}));
+                        }
+                    }
+                    if (user == null) {
+                        user = userService.findByEmail(userDTO.getUserSpecificationDTO().getEmail());
+                        if (user != null) {
+                            if (user.getUserSpecificationDTO().getEmail().equals(userDTO.getUserSpecificationDTO().getEmail())) {
+                                CommonViewModel.showInformationMessagebox(Labels.getLabel("error.message.conflict.repository", new String[]{"email", userDTO.getUserSpecificationDTO().getEmail()}));
+                            }
+                        } else {
+                            ListModelList<UserDTO> userList = new ListModelList<>(userService.findAllUser());
+                            String userID = "";
+                            if (userList.isEmpty()) {
+                                userID = "USER004";
+                            } else {
+                                userID = getLatestObjectID(userList, "userID");
+                            }
+                            userDTO.setUserID(userID);
+                            userDTO.setCreationalDate(new Date());
+                            userDTO.setUserName(userDTO.getUserName().toUpperCase());
+                            userDTO.setPassword(new BCryptPasswordEncoder().encode(userDTO.getPassword()));
+                            try {
+                                userService.saveOrUpdate(userDTO);
+                                CommonViewModel.showInformationMessagebox("User Name " + userDTO.getUserName() + " has successfully created", UserNavigation.DASHBOARD, null, window);
+                            } catch (Exception e) {
+                                CommonViewModel.showErrorMessagebox(Labels.getLabel("error.message.conflict.repository", new String[]{"User Name", userDTO.getUserName()}));
+                            }
+                        }
+                    }
                 }
-                try {
-                    userService.saveOrUpdate(userDTO);
-                    CommonViewModel.showInformationMessagebox("Ktp " + userDTO.getUserSpecificationDTO().getKtp() + " has successfully created", UserNavigation.DASHBOARD, null, window);
-                } catch (Exception e) {
-                    CommonViewModel.showErrorMessagebox(Labels.getLabel("error.message.conflict.repository", new String[]{"Ktp", userDTO.getUserSpecificationDTO().getKtp()}));
-                }
-            } else {
-                CommonViewModel.showErrorMessagebox(Labels.getLabel("error.message.conflict.repository", new String[]{"User Name", userDTO.getUserName()}));
             }
+
+//            UserDTO user = userService.findByID(userDTO.getUserName() == null ? "" : userDTO.getUserName());
+//            if (user == null) {
+//
+//            } else if (user.getUserName().equals(userDTO.getUserName())) {
+//                CommonViewModel.showErrorMessagebox(Labels.getLabel("error.message.conflict.repository", new String[]{"User Name", userDTO.getUserName()}));
+//            }
         } else if (previous == PageNavigation.UPDATE) {
             userService.saveOrUpdate(userDTO);
             CommonViewModel.showInformationMessagebox("User Name " + userDTO.getUserName() + " has successfully updated", UserNavigation.USER_SEARCH, null, window);
@@ -521,7 +543,8 @@ public class RegisterVM {
     }
 
     @Command("buttonSubmit")
-    public void buttonSubmit(@ContextParam(ContextType.VIEW) Window window) {
+    @NotifyChange({"verifyEmail", "verifyKtp", "verifyUserName", "buttonSubmit"})
+    public void buttonSubmit(@BindingParam("obj") String userName, @BindingParam("obj1") String ktp, @BindingParam("obj2") String email, @ContextParam(ContextType.VIEW) Window window) {
         Map<String, Object> params = new HashMap<>();
         params.put("user", userDTO);
         params.put("propertyParam", propertyParam());
