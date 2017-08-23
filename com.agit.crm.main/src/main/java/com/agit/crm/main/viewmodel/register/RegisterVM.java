@@ -185,7 +185,6 @@ public class RegisterVM {
                         .createRoleDTO();
                 userDTO = new UserDTOBuilder()
                         .setCreationalBy(SecurityUtil.getUserName())
-                        .setUserID(UUID.randomUUID().toString())
                         .setUserSpecificationDTO(userSpecificationDTO)
                         .setRoleDTO(roleDTO)
                         .setUserStatus(StatusData.ACTIVE)
@@ -359,8 +358,16 @@ public class RegisterVM {
     public void buttonConfirm(@ContextParam(ContextType.VIEW) Window window) throws JsonProcessingException {
         if (previous == PageNavigation.CREATE) {
             /* Check exist code */
-            UserDTO user = userService.findByID(userDTO.getUserID() == null ? "" : userDTO.getUserID());
+            UserDTO user = userService.findByID(userDTO.getUserName() == null ? "" : userDTO.getUserName());
             if (user == null) {
+                ListModelList<UserDTO> userList = new ListModelList<>(userService.findAllUser());
+                String userID = "";
+                if (userList.isEmpty()) {
+                    userID = "USER004";
+                } else {
+                    userID = getLatestObjectID(userList, "userID");
+                }
+                userDTO.setUserID(userID);
                 userDTO.setCreationalDate(new Date());
                 userDTO.setUserName(userDTO.getUserName().toUpperCase());
                 userDTO.setPassword(new BCryptPasswordEncoder().encode(userDTO.getPassword()));
@@ -369,6 +376,12 @@ public class RegisterVM {
                     CommonViewModel.showInformationMessagebox("User Name " + userDTO.getUserName() + " has successfully created", UserNavigation.DASHBOARD, null, window);
                 } catch (Exception e) {
                     CommonViewModel.showErrorMessagebox(Labels.getLabel("error.message.conflict.repository", new String[]{"User Name", userDTO.getUserName()}));
+                }
+                try {
+                    userService.saveOrUpdate(userDTO);
+                    CommonViewModel.showInformationMessagebox("Ktp " + userDTO.getUserSpecificationDTO().getKtp() + " has successfully created", UserNavigation.DASHBOARD, null, window);
+                } catch (Exception e) {
+                    CommonViewModel.showErrorMessagebox(Labels.getLabel("error.message.conflict.repository", new String[]{"Ktp", userDTO.getUserSpecificationDTO().getKtp()}));
                 }
             } else {
                 CommonViewModel.showErrorMessagebox(Labels.getLabel("error.message.conflict.repository", new String[]{"User Name", userDTO.getUserName()}));
