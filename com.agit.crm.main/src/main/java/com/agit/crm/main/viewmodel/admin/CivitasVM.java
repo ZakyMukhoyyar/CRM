@@ -77,7 +77,7 @@ public class CivitasVM {
 
     private String civitasID;
     private String namaCivitas;
-    private String status;
+    private Status status;
 
     @Init
     public void init(
@@ -403,11 +403,11 @@ public class CivitasVM {
         this.namaCivitas = namaCivitas;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 

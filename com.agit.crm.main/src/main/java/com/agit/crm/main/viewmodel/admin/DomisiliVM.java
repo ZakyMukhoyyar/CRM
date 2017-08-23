@@ -35,6 +35,7 @@ import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.io.Files;
 import org.zkoss.util.media.Media;
+import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.UploadEvent;
 import org.zkoss.zk.ui.select.annotation.VariableResolver;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
@@ -60,6 +61,7 @@ public class DomisiliVM {
     private String namaProvinsi;
     private String namaKabupaten;
     private String namaKota;
+    
 
     private static final String FILE_LOC = "D:\\Work\\AgitCRM\\CRM\\template-mapping\\insert-template-domisili.xlsx";
 
@@ -180,7 +182,7 @@ public class DomisiliVM {
         }
 
         XlsReader<DomisiliSecondary> jxr = new XlsReader<>(DomisiliSecondary.class);
-        List<DomisiliSecondary> ls = jxr.getJavaObjectFromThisFile(filepathUploadDomisili);
+        List<DomisiliSecondary> ls = jxr.getJavaObjectFromThisFile(filepathUploadDomisili + mediaNameUploadDomisili);
         for (DomisiliSecondary s : ls) {
             DomisiliDTO m = new DomisiliDTOBuilder()
                     .setIdDomisili(s.getIdDomisili())
@@ -258,16 +260,21 @@ public class DomisiliVM {
             int year = now.get(Calendar.YEAR);
             int month = now.get(Calendar.MONTH);
             int day = now.get(Calendar.DAY_OF_MONTH);
+            filepathUploadDomisili = Executions.getCurrent().getDesktop().getWebApp().getRealPath("/");
+            filepathUploadDomisili = filepathUploadDomisili + "\\" + "files" + "\\" + "crm-xls" + "\\" + year + "\\" + month + "\\" + day + "\\";
 
-            filepathUploadDomisili = FILE_LOC;
             File baseDir = new File(filepathUploadDomisili);
             if (!baseDir.exists()) {
                 baseDir.mkdirs();
             }
 
-            Files.copy(new File(filepathUploadDomisili + mediaUploadDomisili.getName()), mediaUploadDomisili.getStreamData());
-            setMediaNameUploadDomisili(mediaUploadDomisili.getName());
-//            pathLocationDomisili = "/" + "files" + "/" + "rkap" + "/" + year + "/" + month + "/" + day + "/" + mediaDomisili.getName();
+            if (mediaUploadDomisili.getFormat().matches("xlsx") || mediaUploadDomisili.getFormat().matches("xls")) {
+                Files.copy(new File(filepathUploadDomisili + mediaUploadDomisili.getName()), mediaUploadDomisili.getStreamData());
+                setMediaNameUploadDomisili(mediaUploadDomisili.getName());
+                pathLocationUploadDomisili = "/" + "files" + "/" + "rkap" + "/" + year + "/" + month + "/" + day + "/" + mediaUploadDomisili.getName();
+            } else {
+                Messagebox.show("Format Harus Sesuai Template", "Peringatan", Messagebox.OK, Messagebox.EXCLAMATION);
+            }
         }
     }
 

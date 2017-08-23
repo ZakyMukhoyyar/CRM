@@ -35,6 +35,7 @@ import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.io.Files;
 import org.zkoss.util.media.Media;
+import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.UploadEvent;
 import org.zkoss.zk.ui.select.annotation.VariableResolver;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
@@ -52,8 +53,6 @@ public class JurusanVM {
 
     @WireVariable
     JurusanService jurusanService;
-
-    private static final String FILE_LOC = "D:\\Work\\AgitCRM\\CRM\\template-mapping\\insert-template-jurusan.xlsx";
 
     /* Object Binding UI*/
     private JurusanDTO jurusanDTO = new JurusanDTO();
@@ -189,7 +188,6 @@ public class JurusanVM {
             Messagebox.show("Minimal harus memasukkan 1 parameter pencarian", "Peringatan", Messagebox.OK, Messagebox.EXCLAMATION);
             return;
         }
-
         jurusanDTOs = jurusanService.findByParams(params);
     }
 
@@ -226,7 +224,7 @@ public class JurusanVM {
         }
 
         XlsReader<JurusanSecondary> jxr = new XlsReader<>(JurusanSecondary.class);
-        List<JurusanSecondary> ls = jxr.getJavaObjectFromThisFile(filePathJurusan);
+        List<JurusanSecondary> ls = jxr.getJavaObjectFromThisFile(filePathJurusan + mediaNameJurusan);
         for (JurusanSecondary s : ls) {
             JurusanDTO m = new JurusanDTOBuilder()
                     .setIdJurusan(s.getIdJurusan())
@@ -264,15 +262,20 @@ public class JurusanVM {
             int year = now.get(Calendar.YEAR);
             int month = now.get(Calendar.MONTH);
             int day = now.get(Calendar.DAY_OF_MONTH);
+            filePathJurusan = Executions.getCurrent().getDesktop().getWebApp().getRealPath("/");
+            filePathJurusan = filePathJurusan + "\\" + "files" + "\\" + "crm-xls" + "\\" + year + "\\" + month + "\\" + day + "\\";
 
-            filePathJurusan = FILE_LOC;
             File baseDir = new File(filePathJurusan);
             if (!baseDir.exists()) {
                 baseDir.mkdirs();
             }
-
-            Files.copy(new File(filePathJurusan + mediaJurusan.getName()), mediaJurusan.getStreamData());
-            setMediaNameJurusan(mediaJurusan.getName());
+            if (mediaJurusan.getFormat().matches("xlsx") || mediaJurusan.getFormat().matches("xls")) {
+                Files.copy(new File(filePathJurusan + mediaJurusan.getName()), mediaJurusan.getStreamData());
+                setMediaNameJurusan(mediaJurusan.getName());
+                pathLocationJurusan = "/" + "files" + "/" + "rkap" + "/" + year + "/" + month + "/" + day + "/" + mediaJurusan.getName();
+            } else {
+                Messagebox.show("Format Harus Sesuai Template", "Peringatan", Messagebox.OK, Messagebox.EXCLAMATION);
+            }
         }
     }
 

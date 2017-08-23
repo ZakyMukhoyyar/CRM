@@ -12,7 +12,6 @@ import com.agit.crm.util.CommonUtil;
 import com.agit.crm.util.StringUtil;
 import java.io.File;
 import java.io.IOException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -22,6 +21,8 @@ import java.util.List;
 import java.util.Map;
 import org.zkoss.bind.BindContext;
 import org.zkoss.bind.BindUtils;
+import org.zkoss.bind.ValidationContext;
+import org.zkoss.bind.validator.AbstractValidator;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.ContextParam;
@@ -206,7 +207,7 @@ public class EventAgitVM {
         if (pathLocationUploadEventAgit == null) {
             pathLocationUploadEventAgit = eventAgitDTO.getAttachment();
         }
-        
+
         Date tanggalMulai = eventAgitDTO.getStartDate();
         Date tanggalBerakhir = eventAgitDTO.getEndDate();
 
@@ -242,6 +243,15 @@ public class EventAgitVM {
         CommonViewModel.navigateToWithoutDetach("/crm/admin/event/add_event.zul", window, params);
     }
 
+//    public int validasiForm(int jawab, String afterChck) {
+//        for (int i = 0; i < afterChck.length(); i++) {
+//            if (afterChck.charAt(i) != 'a' ) {
+//                jawab += 1;
+//            }            
+//        }
+//        return jawab;
+//    }
+
     public int checkCountParameter(int count, Object obj) {
         if (StringUtil.hasValue(obj)) {
             count += 1;
@@ -252,6 +262,12 @@ public class EventAgitVM {
     @Command("buttonSearchEvent")
     @NotifyChange("eventAgitDTOs")
     public void buttonSearchEvent(@ContextParam(ContextType.VIEW) Window window) {
+
+//        int jawab = 0;
+//        Map param1 = new HashMap();
+//        param1.put("namaEvent", namaEvent);
+//        jawab = validasiForm(jawab, namaEvent);
+
         int count = 0;
         Map params = new HashMap();
         params.put("idEvent", idEvent);

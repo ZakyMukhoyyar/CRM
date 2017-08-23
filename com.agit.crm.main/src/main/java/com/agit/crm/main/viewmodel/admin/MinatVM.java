@@ -197,14 +197,6 @@ public class MinatVM {
     }
 
     /* getter setter */
-    public MinatService getMinatService() {
-        return minatService;
-    }
-
-    public void setMinatService(MinatService minatService) {
-        this.minatService = minatService;
-    }
-
     public MinatDTO getMinatDTO() {
         return minatDTO;
     }
