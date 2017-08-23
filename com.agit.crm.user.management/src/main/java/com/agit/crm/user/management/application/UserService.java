@@ -19,6 +19,8 @@ public interface UserService {
 
     UserDTO findByKtp(String ktp);
 
+    UserDTO findByEmail(String email);
+
     UserDTO findByRemote(String remote);
 
     List<UserDTO> findAllUser();

@@ -396,4 +396,15 @@ public class UserServiceImpl implements UserService {
         return userDTOAssembler.toDTOs(users);
     }
 
+    @Override
+    public UserDTO findByEmail(String email) {
+        Validate.notNull(userRepository);
+        User user = (User) userRepository.findByEmail(email);
+        if (user != null) {
+            return userDTOAssembler.toDTO(user);
+        }
+
+        return null;
+    }
+
 }

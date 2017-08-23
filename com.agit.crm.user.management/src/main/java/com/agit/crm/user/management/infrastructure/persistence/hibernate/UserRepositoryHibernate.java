@@ -86,7 +86,7 @@ public class UserRepositoryHibernate extends HibernateRepository implements User
     @Override
     public User findByKtp(String ktp) {
         Criteria criteria = getSession().createCriteria(User.class)
-                .add(Restrictions.in("ktp", Arrays.asList(ktp.toLowerCase(), ktp.toUpperCase())));
+                .add(Restrictions.in("userSpecification.ktp", Arrays.asList(ktp.toLowerCase(), ktp.toUpperCase())));
         return (User) criteria.uniqueResult();
     }
 
@@ -130,6 +130,13 @@ public class UserRepositoryHibernate extends HibernateRepository implements User
         Criteria criteria = getSession().createCriteria(User.class)
                 .add(Restrictions.in("userName", Arrays.asList(userName.toLowerCase(), userName.toUpperCase())));
         return (List<User>) criteria.list();
+    }
+
+    @Override
+    public User findByEmail(String email) {
+        Criteria criteria = getSession().createCriteria(User.class)
+                .add(Restrictions.in("userSpecification.email", Arrays.asList(email.toLowerCase(), email.toUpperCase())));
+        return (User) criteria.uniqueResult();
     }
 
 }

@@ -65,6 +65,7 @@ import org.zkoss.zk.ui.event.UploadEvent;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Messagebox;
+import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
 /**
@@ -306,6 +307,19 @@ public class RegisterVM {
                 CommonViewModel.showInformationMessagebox("KTP is not exist");
             } else {
                 CommonViewModel.showInformationMessagebox(Labels.getLabel("error.message.conflict.repository", new String[]{"ktp", ktp}));
+            }
+        }
+    }
+
+    @Command("verifyEmail")
+    @NotifyChange("verifyEmail")
+    public void verifyEmail(@BindingParam("obj") String email) {
+        if (email != null && !email.trim().equals("")) {
+            UserDTO user = userService.findByEmail(email);
+            if (user == null) {
+                CommonViewModel.showInformationMessagebox("Email is not exist");
+            } else {
+                CommonViewModel.showInformationMessagebox(Labels.getLabel("error.message.conflict.repository", new String[]{"email", email}));
             }
         }
     }

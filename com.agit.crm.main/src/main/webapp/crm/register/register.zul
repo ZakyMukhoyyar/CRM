@@ -45,7 +45,7 @@
                                     </row>
                                     <row>
                                         <signLabel sclass="isi" value="Assign Role "/>
-<!--                                         <div>
+                                        <!--                                         <div>
                                             <combobox autodrop="true" 
                                                       width="40%"                                                       
                                                       model="@load(vm.roleDTOs)" 
@@ -56,7 +56,7 @@
                                                 </template>
                                             </combobox>
                                         </div>-->
-                                       <div>
+                                        <div>
                                             <listbox model="@load(vm.roleDTOs)" 
                                                      mold="select"
                                                      width="40%"
@@ -85,21 +85,15 @@
                                     <row>
                                         <signLabel sclass="isi" value="Email"/>
                                         <div>
-                                            <textbox 
-                                                value="@bind(vm.userDTO.userSpecificationDTO.email)" width="40%"
-                                                constraint="/.+@.+\.[a-z]+/: Format isian salah"/>
-                                            <a sclass="btn btn-primary" label="Verifikasi" width="20%" onClick="@command('verify', obj=user.userSpecification.ktp.getValue())"/>
+                                            <textbox id="email" value="@bind(vm.userDTO.userSpecificationDTO.email)" width="40%" constraint="/.+@.+\.[a-z]+/: Format isian salah"/>
+                                            <a sclass="btn btn-primary" label="Verifikasi" width="20%" onClick="@command('verifyEmail', obj=email.getValue())"/>
                                             <label value="@load(vmsgs['email'])" style="color:red"/>
                                         </div>
                                     </row>
                                     <row>
                                         <signLabel sclass="isi" value="KTP"/>
                                         <div>
-                                            <textbox   
-                                                     width="40%" 
-                                                     disabled="false" 
-                                                     maxlength="16" constraint="/.[0-9]+/: no empty: Format isian salah" 
-                                                     value="@bind(vm.userDTO.userSpecificationDTO.ktp)"/>
+                                            <textbox id="ktp" value="@bind(vm.userDTO.userSpecificationDTO.ktp)" width="40%" maxlength="16" constraint="/.[0-9]+/: no empty: Format isian salah" />
                                             <a sclass="btn btn-primary" label="Verifikasi" width="20%" onClick="@command('verifyKtp', obj=ktp.getValue())"/>
                                             <label value="@load(vmsgs['ktp'])" style="color:red"/>
                                         </div>
@@ -108,9 +102,9 @@
                                         <signLabel sclass="isi" value="No HP"/>
                                         <div>
                                             <textbox 
-                                                    width="40%"
-                                                    constraint="/.[0-9]+/: Format isian salah"    
-                                                    value="@bind(vm.userDTO.userSpecificationDTO.mobilePhone)" />
+                                                width="40%"
+                                                constraint="/.[0-9]+/: Format isian salah"    
+                                                value="@bind(vm.userDTO.userSpecificationDTO.mobilePhone)" />
                                             <label value="@load(vmsgs['mobilePhone'])" style="color:red"/>
                                         </div>
                                     </row>
@@ -124,11 +118,11 @@
                                     <row>
                                         <signLabel sclass="isi" value="Domisili"/>
                                         <div>
-                                           <combobox autodrop="true"
-                                                width="40%"                                                
-                                                model="@load(vm.listDomisili)" 
-                                                selectedItem="@bind(fx.userDTO.userSpecificationDTO.domisili)"
-                                                constraint=" no empty : Format isian salah">
+                                            <combobox autodrop="true"
+                                                      width="40%"                                                
+                                                      model="@load(vm.listDomisili)" 
+                                                      selectedItem="@bind(fx.userDTO.userSpecificationDTO.domisili)"
+                                                      constraint=" no empty : Format isian salah">
                                                 <template name="model" var="items" >
                                                     <comboitem label="@load(items)"  value="@load(items)" />
                                                 </template>
@@ -147,11 +141,11 @@
                                         <signLabel sclass="isi" value="Jenis Kelamin"/>
                                         <div>
                                             <combobox readonly="true" autodrop="true"
-                                                width="40%"                                              
-                                                model="@load(vm.jenisKelaminTypes)" 
-                                                selectedItem="@bind(fx.userDTO.userSpecificationDTO.jenisKelaminType)" 
-                                                placeholder=" Silahkan Pilih "
-                                                constraint=" no empty : Format isian salah">
+                                                      width="40%"                                              
+                                                      model="@load(vm.jenisKelaminTypes)" 
+                                                      selectedItem="@bind(fx.userDTO.userSpecificationDTO.jenisKelaminType)" 
+                                                      placeholder=" Silahkan Pilih "
+                                                      constraint=" no empty : Format isian salah">
                                                 <template name="model" var="items" >
                                                     <comboitem label="@load(items)"  value="@load(items)" />
                                                 </template>
@@ -163,11 +157,11 @@
                                         <signLabel sclass="isi" value="Pendidikan Type"/>
                                         <div>
                                             <combobox readonly="true" autodrop="true"
-                                                width="40%"                                                
-                                                model="@load(vm.pendidikanTypes)" 
-                                                selectedItem="@bind(fx.userDTO.userSpecificationDTO.pendidikanType)"
-                                                placeholder=" Silahkan Pilih "
-                                                constraint=" no empty : Format isian salah">
+                                                      width="40%"                                                
+                                                      model="@load(vm.pendidikanTypes)" 
+                                                      selectedItem="@bind(fx.userDTO.userSpecificationDTO.pendidikanType)"
+                                                      placeholder=" Silahkan Pilih "
+                                                      constraint=" no empty : Format isian salah">
                                                 <template name="model" var="items" >
                                                     <comboitem label="@load(items)"  value="@load(items)" />
                                                 </template>
@@ -178,12 +172,12 @@
                                     <row>
                                         <signLabel sclass="isi" value="Civitas"/>
                                         <div>
-                                          <combobox autodrop="true"
-                                                width="40%"                                               
-                                                model="@load(vm.listCivitas)" 
-                                                selectedItem="@bind(fx.userDTO.userSpecificationDTO.namaCivitas)"
-                                                placeholder = "Silahkan pilih"
-                                                constraint=" no empty : Format isian salah">
+                                            <combobox autodrop="true"
+                                                      width="40%"                                               
+                                                      model="@load(vm.listCivitas)" 
+                                                      selectedItem="@bind(fx.userDTO.userSpecificationDTO.namaCivitas)"
+                                                      placeholder = "Silahkan pilih"
+                                                      constraint=" no empty : Format isian salah">
                                                 <template name="model" var="items" >
                                                     <comboitem label="@load(items)"  value="@load(items)" />
                                                 </template>
@@ -196,11 +190,11 @@
                                         <signLabel sclass="isi" value="Jurusan"/>
                                         <div>
                                             <combobox autodrop="true"
-                                                width="40%"                                               
-                                                model="@load(vm.listJurusan)" 
-                                                selectedItem="@bind(fx.userDTO.userSpecificationDTO.jurusan)"
-                                                placeholder=" Silahkan pilih "   
-                                                constraint=" no empty : Format isian salah">
+                                                      width="40%"                                               
+                                                      model="@load(vm.listJurusan)" 
+                                                      selectedItem="@bind(fx.userDTO.userSpecificationDTO.jurusan)"
+                                                      placeholder=" Silahkan pilih "   
+                                                      constraint=" no empty : Format isian salah">
                                                 <template name="model" var="items" >
                                                     <comboitem label="@load(items)"  value="@load(items)" />
                                                 </template>
@@ -213,11 +207,11 @@
                                         <signLabel sclass="isi" value="Minat"/>
                                         <div>
                                             <combobox readonly="true" autodrop="true" 
-                                                width="40%"                                               
-                                                model="@load(vm.listMinat)" 
-                                                selectedItem="@bind(fx.userDTO.userSpecificationDTO.minat)"
-                                                placeholder=" Silahkan pilih "
-                                                constraint=" no empty : Format isian salah">
+                                                      width="40%"                                               
+                                                      model="@load(vm.listMinat)" 
+                                                      selectedItem="@bind(fx.userDTO.userSpecificationDTO.minat)"
+                                                      placeholder=" Silahkan pilih "
+                                                      constraint=" no empty : Format isian salah">
                                                 <template name="model" var="items" >
                                                     <comboitem label="@load(items)"  value="@load(items)" />
                                                 </template>
@@ -244,10 +238,10 @@
                                         <row>
                                             <div>
                                                 <combobox autodrop="true"
-                                                    width="100%"                                                    
-                                                    model="@load(vm.listKetrampilan)" 
-                                                    selectedItem="@bind(fx.userDTO.userSpecificationDTO.ketrampilan1)"
-                                                    constraint="no empty: Format isian salah">
+                                                          width="100%"                                                    
+                                                          model="@load(vm.listKetrampilan)" 
+                                                          selectedItem="@bind(fx.userDTO.userSpecificationDTO.ketrampilan1)"
+                                                          constraint="no empty: Format isian salah">
                                                     <template name="model" var="items" >
                                                         <comboitem label="@load(items)"  value="@load(items)" />
                                                     </template>
@@ -256,11 +250,11 @@
                                             </div>
                                             <div>
                                                 <combobox autodrop="true"
-                                                    readonly="true"
-                                                    width="100%"                                                    
-                                                    model="@load(vm.tingkatanTypes1)" 
-                                                    selectedItem="@bind(fx.userDTO.userSpecificationDTO.tingkatanType1)"
-                                                    constraint="no empty: Format isian salah">
+                                                          readonly="true"
+                                                          width="100%"                                                    
+                                                          model="@load(vm.tingkatanTypes1)" 
+                                                          selectedItem="@bind(fx.userDTO.userSpecificationDTO.tingkatanType1)"
+                                                          constraint="no empty: Format isian salah">
                                                     <template name="model" var="items" >
                                                         <comboitem label="@load(items)"  value="@load(items)" />
                                                     </template>
@@ -271,10 +265,10 @@
                                         <row>
                                             <div>
                                                 <combobox autodrop="true"
-                                                    width="100%"                                                    
-                                                    model="@load(vm.listKetrampilan)" 
-                                                    selectedItem="@bind(fx.userDTO.userSpecificationDTO.ketrampilan2)"
-                                                    constraint="no empty: Format isian salah">
+                                                          width="100%"                                                    
+                                                          model="@load(vm.listKetrampilan)" 
+                                                          selectedItem="@bind(fx.userDTO.userSpecificationDTO.ketrampilan2)"
+                                                          constraint="no empty: Format isian salah">
                                                     <template name="model" var="items" >
                                                         <comboitem label="@load(items)"  value="@load(items)" />
                                                     </template>
@@ -283,11 +277,11 @@
                                             </div>
                                             <div>
                                                 <combobox autodrop="true"
-                                                    readonly="true"
-                                                    width="100%"                                                    
-                                                    model="@load(vm.tingkatanTypes2)" 
-                                                    selectedItem="@bind(fx.userDTO.userSpecificationDTO.tingkatanType2)" 
-                                                    constraint="no empty: Format isian salah">
+                                                          readonly="true"
+                                                          width="100%"                                                    
+                                                          model="@load(vm.tingkatanTypes2)" 
+                                                          selectedItem="@bind(fx.userDTO.userSpecificationDTO.tingkatanType2)" 
+                                                          constraint="no empty: Format isian salah">
                                                     <template name="model" var="items" >
                                                         <comboitem label="@load(items)"  value="@load(items)" />
                                                     </template>
@@ -298,10 +292,10 @@
                                         <row>
                                             <div>
                                                 <combobox autodrop="true"
-                                                    width="100%"                                                   
-                                                    model="@load(vm.listKetrampilan)" 
-                                                    selectedItem="@bind(fx.userDTO.userSpecificationDTO.ketrampilan3)" 
-                                                    constraint="no empty: Format isian salah">
+                                                          width="100%"                                                   
+                                                          model="@load(vm.listKetrampilan)" 
+                                                          selectedItem="@bind(fx.userDTO.userSpecificationDTO.ketrampilan3)" 
+                                                          constraint="no empty: Format isian salah">
                                                     <template name="model" var="items" >
                                                         <comboitem label="@load(items)"  value="@load(items)" />
                                                     </template>
@@ -310,11 +304,11 @@
                                             </div>
                                             <div>
                                                 <combobox autodrop="true"
-                                                    readonly="true"
-                                                    width="100%"                                                    
-                                                    model="@load(vm.tingkatanTypes3)" 
-                                                    selectedItem="@bind(fx.userDTO.userSpecificationDTO.tingkatanType3)" 
-                                                    constraint="no empty: Format isian salah">
+                                                          readonly="true"
+                                                          width="100%"                                                    
+                                                          model="@load(vm.tingkatanTypes3)" 
+                                                          selectedItem="@bind(fx.userDTO.userSpecificationDTO.tingkatanType3)" 
+                                                          constraint="no empty: Format isian salah">
                                                     <template name="model" var="items" >
                                                         <comboitem label="@load(items)"  value="@load(items)" />
                                                     </template>
@@ -325,9 +319,9 @@
                                         <row>
                                             <div>
                                                 <combobox autodrop="true"
-                                                    width="100%"                                                    
-                                                    model="@load(vm.listKetrampilan)" 
-                                                    selectedItem="@bind(fx.userDTO.userSpecificationDTO.ketrampilan4)" >
+                                                          width="100%"                                                    
+                                                          model="@load(vm.listKetrampilan)" 
+                                                          selectedItem="@bind(fx.userDTO.userSpecificationDTO.ketrampilan4)" >
                                                     <template name="model" var="items" >
                                                         <comboitem label="@load(items)"  value="@load(items)" />
                                                     </template>
@@ -336,10 +330,10 @@
                                             </div>
                                             <div>
                                                 <combobox autodrop="true"
-                                                    readonly="true"
-                                                    width="100%"                                                   
-                                                    model="@load(vm.tingkatanTypes4)" 
-                                                    selectedItem="@bind(fx.userDTO.userSpecificationDTO.tingkatanType4)" >
+                                                          readonly="true"
+                                                          width="100%"                                                   
+                                                          model="@load(vm.tingkatanTypes4)" 
+                                                          selectedItem="@bind(fx.userDTO.userSpecificationDTO.tingkatanType4)" >
                                                     <template name="model" var="items" >
                                                         <comboitem label="@load(items)"  value="@load(items)" />
                                                     </template>
@@ -350,9 +344,9 @@
                                         <row>
                                             <div>
                                                 <combobox autodrop="true"
-                                                    width="100%"                                                   
-                                                    model="@load(vm.listKetrampilan)" 
-                                                    selectedItem="@bind(fx.userDTO.userSpecificationDTO.ketrampilan5)" >
+                                                          width="100%"                                                   
+                                                          model="@load(vm.listKetrampilan)" 
+                                                          selectedItem="@bind(fx.userDTO.userSpecificationDTO.ketrampilan5)" >
                                                     <template name="model" var="items" >
                                                         <comboitem label="@load(items)"  value="@load(items)" />
                                                     </template>
@@ -361,10 +355,10 @@
                                             </div>
                                             <div>
                                                 <combobox autodrop="true"
-                                                    readonly="true"
-                                                    width="100%"                                                    
-                                                    model="@load(vm.tingkatanTypes5)" 
-                                                    selectedItem="@bind(fx.userDTO.userSpecificationDTO.tingkatanType5)" >
+                                                          readonly="true"
+                                                          width="100%"                                                    
+                                                          model="@load(vm.tingkatanTypes5)" 
+                                                          selectedItem="@bind(fx.userDTO.userSpecificationDTO.tingkatanType5)" >
                                                     <template name="model" var="items" >
                                                         <comboitem label="@load(items)"  value="@load(items)" />
                                                     </template>

@@ -16,6 +16,8 @@ public interface UserRepository {
 
     User findByKtp(String ktp);
 
+    User findByEmail(String email);
+
     User findByRemote(String remote);
 
     List<User> findAllUser();
