@@ -2,7 +2,7 @@
     <window apply="org.zkoss.bind.BindComposer"
             viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.admin.CivitasVM')"
             form="@id('fx') @load(vm.civitasDTO) @save(vm.civitasDTO, before='buttonSaveDataCivitas')">
-        <groupbox height="500px" closable="false" mold="3d" style="background:#f5f5f5" sclass="col-md-12 nopadding" >
+        <groupbox height="530px" closable="false" mold="3d" style="background:#f5f5f5" sclass="col-md-12 nopadding" >
             <caption sclass="isi" label="Dashboard Data Civitas" />
             <div sclass="col-md-3 nopadding">
                 
@@ -43,7 +43,9 @@
                     <button type="button" sclass="btn btn-info" width="100%" label="Browse"  upload="true,maxsize=-1,accept=.xlsx|.xlsm" onUpload="@command('buttonUploadFile')"/>
                     <separator/>
                     <a sclass="btn btn-info" width="100%" label="Upload"  onClick="@command('buttonSaveDataCivitas')"/>
-                    <button width="100%" label="Download Template">
+                    <separator/>
+                    
+                    <button sclass="btn btn-info" width="100%" label="Download Template">
                         <attribute name="onClick">
                             Filedownload.save("/files/insert-template-civitas.xlsx", null);
                         </attribute>
@@ -60,7 +62,8 @@
                         <listhead>
                             <listheader sclass="isi bold" label="ID Civitas" width="11%"/>
                             <listheader sclass="isi bold" label="Nama Civitas" width="70%" align="center"/>
-                            <listheader sclass="isi bold" label="Status" width="20%" align="center"/>                                           
+                            <listheader sclass="isi bold" label="Status" width="20%" align="center"/> 
+                            <listheader sclass="isi bold" label="Aksi" width="20%" align="center"/>                                           
                         </listhead>
                         <template name="model">
                             <listitem value="${each}">
@@ -72,6 +75,9 @@
                                 </listcell>
                                 <listcell >
                                     <label width="100%" value="@bind(each.status)"/>
+                                </listcell>
+                                <listcell >
+                                    <a onClick="@command('detailCivitas', object=each)" image="/images/skk_edit.png" sclass="btn btn-default"/>
                                 </listcell>
                             </listitem>
                         </template>

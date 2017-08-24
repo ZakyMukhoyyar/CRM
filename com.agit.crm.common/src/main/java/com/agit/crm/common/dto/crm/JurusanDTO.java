@@ -8,8 +8,8 @@ import java.util.Date;
  *
  * @author Zaky
  */
-public class JurusanDTO implements Serializable{
-    
+public class JurusanDTO implements Serializable {
+
     private String idJurusan;
     private String namaJurusan;
     private String createdBy;
@@ -28,7 +28,7 @@ public class JurusanDTO implements Serializable{
         this.createdDate = createdDate;
         this.modifiedBy = modifiedBy;
         this.modifiedDate = modifiedDate;
-        this.modifiedDate = modifiedDate;
+        this.status = status;
     }
 
     public Status getStatus() {
@@ -92,7 +92,4 @@ public class JurusanDTO implements Serializable{
         return "JurusanDTO{" + "idJurusan=" + idJurusan + ", namaJurusan=" + namaJurusan + ", createdBy=" + createdBy + ", createdDate=" + createdDate + ", modifiedBy=" + modifiedBy + ", modifiedDate=" + modifiedDate + ", status=" + status + '}';
     }
 
-   
-    
-    
 }

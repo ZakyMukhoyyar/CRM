@@ -6,6 +6,7 @@ import com.agit.crm.common.dto.crm.JurusanDTOBuilder;
 import com.agit.crm.common.dto.crm.JurusanSecondary;
 import com.agit.crm.common.security.SecurityUtil;
 import com.agit.crm.infrastructure.component.xls.XlsReader;
+import com.agit.crm.shared.status.Status;
 import com.agit.crm.shared.zul.CommonViewModel;
 import static com.agit.crm.shared.zul.CommonViewModel.showInformationMessagebox;
 import com.agit.crm.shared.zul.PageNavigation;
@@ -39,7 +40,6 @@ import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.UploadEvent;
 import org.zkoss.zk.ui.select.annotation.VariableResolver;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
-import org.zkoss.zul.Fileupload;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Window;
@@ -57,6 +57,7 @@ public class JurusanVM {
     /* Object Binding UI*/
     private JurusanDTO jurusanDTO = new JurusanDTO();
     private List<JurusanDTO> jurusanDTOs = new ArrayList<>();
+    private ListModelList<Status> statuses = new ListModelList<>();
 
     /* parameter variable */
     private String idJurusan;
@@ -226,9 +227,17 @@ public class JurusanVM {
         XlsReader<JurusanSecondary> jxr = new XlsReader<>(JurusanSecondary.class);
         List<JurusanSecondary> ls = jxr.getJavaObjectFromThisFile(filePathJurusan + mediaNameJurusan);
         for (JurusanSecondary s : ls) {
+            Status status = null;
+
+            if ("ACTIVE".equals(s.getStatus())) {
+                status = Status.ACTIVE;
+            } else {
+                status = Status.INACTIVE;
+            }
             JurusanDTO m = new JurusanDTOBuilder()
                     .setIdJurusan(s.getIdJurusan())
                     .setNamaJurusan(s.getNamaJurusan())
+                    .setStatus(status)
                     .setCreatedBy("SYSTEM")
                     .setCreatedDate(new Date())
                     .setModifiedBy("SYSTEM")
@@ -287,6 +296,15 @@ public class JurusanVM {
         BindUtils.postGlobalCommand(null, null, "refreshJurusan", null);
         window.detach();
     }
+
+    @Command("detailJurusan")
+    @NotifyChange("jurusan")
+    public void detailEventAgit(@BindingParam("object") JurusanDTO obj, @ContextParam(ContextType.VIEW) Window window) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("jurusanDTO", obj);
+        CommonViewModel.navigateToWithoutDetach("/crm/admin/jurusan/add_jurusan.zul", window, params);
+    }
+
 
     /* getter setter */
     public JurusanDTO getJurusanDTO() {
@@ -367,6 +385,14 @@ public class JurusanVM {
 
     public void setPageSize(int pageSize) {
         this.pageSize = pageSize;
+    }
+
+    public ListModelList<Status> getStatuses() {
+        return new ListModelList<>(Status.values());
+    }
+
+    public void setStatuses(ListModelList<Status> statuses) {
+        this.statuses = statuses;
     }
 
 }

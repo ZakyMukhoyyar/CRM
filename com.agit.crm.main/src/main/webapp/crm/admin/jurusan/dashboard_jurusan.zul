@@ -38,6 +38,12 @@
                     <button type="button" sclass="btn btn-info" width="100%" label="Browse" upload="true" onUpload="@command('buttonUploadFile')"/>
                     <separator/>
                     <a sclass="btn btn-info"  label="Upload" width="100%" onClick="@command('buttonSaveDataJurusan')"/>
+                    <separator/>
+                    <button sclass="btn btn-info" width="100%" label="Download Template">
+                        <attribute name="onClick">
+                            Filedownload.save("/files/insert-template-jurusan.xlsx", null);
+                        </attribute>
+                    </button>
                 </div>                
             </div>
             
@@ -48,8 +54,10 @@
                     <listbox rows="@load(vm.pageSize)" mold="paging" pageSize="@load(vm.pageSize)" emptyMessage="${labels.common.noDataFound}" 
                              model="@bind(vm.jurusanDTOs)">
                         <listhead>
-                            <listheader label="ID Jurusan" width="30%" align="center"/>
-                            <listheader label="Nama Jurusan" width="70%" align="center"/>                                                                      
+                            <listheader label="ID Jurusan" width="20%" align="center"/>
+                            <listheader label="Nama Jurusan" width="60%" align="center"/> 
+                            <listheader label="Status" width="20%" align="center"/>   
+                            <listheader sclass="isi bold" label="Aksi" width="20%" align="center"/>                                                                       
                         </listhead>
                         <template name="model">
                             <listitem value="${each}">
@@ -58,6 +66,12 @@
                                 </listcell>
                                 <listcell >
                                     <label width="100%" value="@bind(each.namaJurusan)"/>
+                                </listcell>
+                                <listcell >
+                                    <label width="100%" value="@bind(each.status)"/>
+                                </listcell>
+                                <listcell >
+                                    <a onClick="@command('detailJurusan', object=each)" image="/images/skk_edit.png" sclass="btn btn-default"/>
                                 </listcell>
                             </listitem>
                         </template>

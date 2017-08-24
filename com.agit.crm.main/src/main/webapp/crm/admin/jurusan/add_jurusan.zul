@@ -1,8 +1,8 @@
 <?component name="signLabel" class="com.agit.crm.shared.zul.SignLabel" ?>
 <zk xmlns="http://www.zkoss.org/2005/zul">
     <window apply="org.zkoss.bind.BindComposer"
-        viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.admin.JurusanVM')"
-        form="@id('fx') @load(vm.jurusanDTO) @save(vm.jurusanDTO, before='buttonSaveJurusan')">
+            viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.admin.JurusanVM')"
+            form="@id('fx') @load(vm.jurusanDTO) @save(vm.jurusanDTO, before='buttonSaveJurusan')">
         <separator spacing="5px"/>
         <groupbox width="500px" closable="true">
             <caption sclass="isi" label="Form Tambah Jurusan" style="font-size:16pt; font-weight: bold"/>
@@ -24,6 +24,14 @@
                                      value="@bind(fx.namaJurusan)" 
                                      constraint="/.[a-zA-Z\s]+/, no empty : Format isian salah"/>
                         </row>
+                        <row>
+                            <signLabel value="Status"/>
+                            <combobox autodrop="true" model="@load(vm.statuses)" selectedItem="@bind(fx.status)" readonly="true" width="60%" placeholder="- Pilihan Status -" constraint=" no empty : Format isian salah">
+                                <template name="model" var="items">
+                                    <comboitem label="@load(items)" value="@load(items)"/>
+                                </template>
+                            </combobox>
+                        </row> 
                     </rows>
                 </grid>
                 <separator/>

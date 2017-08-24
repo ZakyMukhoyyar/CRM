@@ -298,6 +298,15 @@ public class CivitasVM {
         BindUtils.postGlobalCommand(null, null, "refreshData", null);
     }
 
+    @Command("detailCivitas")
+    @NotifyChange("civitas")
+    public void detailEventAgit(@BindingParam("object") CivitasDTO obj, @ContextParam(ContextType.VIEW) Window window) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("civitasDTO", obj);
+        CommonViewModel.navigateToWithoutDetach("/crm/admin/civitas/add_civitas.zul", window, params);
+    }
+
+
     /* getter setter */
     public CivitasDTO getCivitasDTO() {
         return civitasDTO;

@@ -8,7 +8,6 @@ package com.agit.crm.common.dto.crm;
 import com.agit.crm.shared.status.Status;
 import java.util.Date;
 
-
 public class JurusanDTOBuilder {
 
     private String idJurusan;
@@ -60,5 +59,5 @@ public class JurusanDTOBuilder {
     public JurusanDTO createJurusanDTO() {
         return new JurusanDTO(idJurusan, namaJurusan, createdBy, createdDate, modifiedBy, modifiedDate, status);
     }
-    
+
 }
