@@ -4,6 +4,7 @@ import com.agit.crm.common.application.EventAgitService;
 import com.agit.crm.common.dto.crm.EventAgitDTO;
 import com.agit.crm.common.dto.usermanagement.UserDTO;
 import com.agit.crm.common.security.SecurityUtil;
+import com.agit.crm.shared.status.Status;
 import com.agit.crm.shared.zul.CommonViewModel;
 import com.agit.crm.shared.zul.PageNavigation;
 import com.agit.crm.util.DateUtil;
@@ -50,10 +51,15 @@ public class DashboardVM {
 
     @Init
     public void init(@ContextParam(ContextType.COMPONENT) Window window) {
-        eventAgitDTOs = eventAgitService.findAll();
-        if (!eventAgitDTOs.isEmpty()) {
-            eventAgitDTO = eventAgitDTOs.get(0);
-        }
+        Map params = new HashMap();
+        Status status = Status.ACTIVE;
+        params.put("status", status);
+        eventAgitDTOs = eventAgitService.findByParams(params);
+        
+//        eventAgitDTOs = eventAgitService.findAll();
+//        if (!eventAgitDTOs.isEmpty()) {
+//            eventAgitDTO = eventAgitDTOs.get(0);
+//        }
         userNPWP = SecurityUtil.getUserName();
         role = SecurityUtil.getUser().getRoleDTO().getRoleID();
         user = SecurityUtil.getUser();

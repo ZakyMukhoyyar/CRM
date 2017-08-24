@@ -13,7 +13,12 @@
                     <label sclass="isi" value="ID Acara" />
                     <textbox class="form-control" width="100%" value="@bind(vm.idEvent)"/>  
                 </div>
-                    
+                       
+<!--                <div class="form-group">
+                    <label sclass="isi" value="Tanggal Berakhir" />
+                    <datebox width="100%"  readonly="true" placeholder="- Silahkan Pilih -" value="@bind(vm.endDate)"></datebox>
+                </div>-->
+                
                 <div class="form-group">
                     <label sclass="isi" value="Status" />                        
                     <listbox mold="select" sclass="form-control" model="@load(vm.statuses)" selectedItem="@bind(vm.status)" >

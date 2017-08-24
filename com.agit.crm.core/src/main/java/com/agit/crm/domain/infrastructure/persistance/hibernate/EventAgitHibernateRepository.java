@@ -3,6 +3,8 @@ package com.agit.crm.domain.infrastructure.persistance.hibernate;
 import com.agit.crm.domain.crm.EventAgitRepository;
 import com.agit.crm.domain.crm.EventAgit;
 import com.agit.crm.util.StringUtil;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import org.hibernate.Criteria;
@@ -55,12 +57,13 @@ public class EventAgitHibernateRepository extends HibernateRepository implements
         if (StringUtil.hasValue(map.get("namaEvent"))) {
             criteria.add(Restrictions.like("namaEvent", "%" + map.get("namaEvent") + "%").ignoreCase());
         }
-        if (StringUtil.hasValue(map.get("endDate"))) {
-            criteria.add(Restrictions.eq("endDate", map.get("endDate")));
-        }
         if (StringUtil.hasValue(map.get("status"))) {
             criteria.add(Restrictions.eq("status", map.get("status")));
         }
+        if (StringUtil.hasValue(map.get("endDate"))) {
+            criteria.add(Restrictions.eq("endDate", map.get("endDate")));
+        }
+
         return criteria.list();
     }
 

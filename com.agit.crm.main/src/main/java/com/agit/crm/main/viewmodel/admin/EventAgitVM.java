@@ -12,13 +12,17 @@ import com.agit.crm.util.CommonUtil;
 import com.agit.crm.util.StringUtil;
 import java.io.File;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.joda.time.LocalDate;
 import org.zkoss.bind.BindContext;
 import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.ValidationContext;
@@ -85,10 +89,47 @@ public class EventAgitVM {
     }
 
     private void initData() {
+
         eventAgitDTOs = eventAgitService.findAll();
         if (eventAgitDTOs.isEmpty()) {
             eventAgitDTOs = Collections.emptyList();
         }
+
+        Date dateNow = new Date();
+        int year = dateNow.getYear();
+        int month = dateNow.getMonth();
+        int date = dateNow.getDate();
+        
+        /* for status changer */
+//        String hariIni = year + "-" + month + "-" + date;
+//        for (EventAgitDTO e : eventAgitDTOs) {
+//            int thn = e.getEndDate().getYear();
+//            int bln = e.getEndDate().getMonth();
+//            int tgl = e.getEndDate().getDate();
+//            String hariIni2 = thn + "-" + bln + "-" + tgl;
+//
+//            if (hariIni2.contains(hariIni)) {
+//                e.setStatus(Status.INACTIVE);
+//                eventAgitService.SaveOrUpdate(e);
+//            }
+//        }
+        
+        /* for status changer ver2 */
+        for (EventAgitDTO evt : eventAgitDTOs) {
+            int getEndDateDTO = evt.getEndDate().getDate() + 1;
+            int getEndMonthDTO = evt.getEndDate().getMonth();
+            int getEndYearDTO = evt.getEndDate().getYear();
+            Date dateDTO = new Date(getEndYearDTO,getEndMonthDTO,getEndDateDTO);
+            int compareDate = dateNow.compareTo(dateDTO);
+            if (compareDate == 1){
+                evt.setStatus(Status.INACTIVE);
+                eventAgitService.SaveOrUpdate(evt);
+            }else {
+                evt.setStatus(Status.ACTIVE);
+                eventAgitService.SaveOrUpdate(evt);
+            }
+        }
+
     }
 
     private void checkValidity(EventAgitDTO eventAgit, PageNavigation previous) {
@@ -214,6 +255,7 @@ public class EventAgitVM {
         if (tanggalMulai != null && tanggalBerakhir != null && tanggalBerakhir.compareTo(tanggalMulai) < 0) {
             Messagebox.show("Format tanggal mulai dan tanggal berakhir salah");
         } else {
+            eventAgitDTO.setStatus(Status.ACTIVE);
             eventAgitDTO.setAttachment(pathLocationUploadEventAgit);
             eventAgitService.SaveOrUpdate(eventAgitDTO);
             showInformationMessagebox("Data EventAgit Berhasil Disimpan");
@@ -251,7 +293,6 @@ public class EventAgitVM {
 //        }
 //        return jawab;
 //    }
-
     public int checkCountParameter(int count, Object obj) {
         if (StringUtil.hasValue(obj)) {
             count += 1;
@@ -267,7 +308,6 @@ public class EventAgitVM {
 //        Map param1 = new HashMap();
 //        param1.put("namaEvent", namaEvent);
 //        jawab = validasiForm(jawab, namaEvent);
-
         int count = 0;
         Map params = new HashMap();
         params.put("idEvent", idEvent);

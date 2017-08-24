@@ -40,14 +40,14 @@
                                      readonly="true" value="@bind(fx.endDate)" 
                                      constraint="no empty : Tanggal Berakhir Tidak Boleh Kosong"/>
                         </row> 
-                        <row>
+<!--                        <row>
                             <signLabel sclass="isi" value="Status"/>
                             <combobox model="@load(vm.statuses)" selectedItem="@bind(fx.status)" constraint="no empty : Harap isi Status" autodrop="true" readonly="true" width="60%" placeholder="- Pilihan Status -">
                                 <template name="model" var="items">
                                     <comboitem sclass="isi" label="@load(items)" value="@load(items)"/>
                                 </template>
                             </combobox>
-                        </row>
+                        </row>-->
                     </rows>
                 </grid>
                 
