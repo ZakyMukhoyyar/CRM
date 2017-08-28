@@ -54,7 +54,7 @@
                     <listbox rows="@load(vm.pageSize)" mold="paging" pageSize="@load(vm.pageSize)" emptyMessage="${labels.common.noDataFound}" 
                              model="@bind(vm.jurusanDTOs)">
                         <listhead>
-                            <listheader label="ID Jurusan" width="20%" align="center"/>
+                            <listheader label="ID Jurusan" width="20%" align="center" sortDirection="ascending" sort="auto(idJurusan)"/>
                             <listheader label="Nama Jurusan" width="60%" align="center"/> 
                             <listheader label="Status" width="20%" align="center"/>   
                             <listheader sclass="isi bold" label="Aksi" width="20%" align="center"/>                                                                       

@@ -38,6 +38,14 @@
                                      value="@bind(fx.namaKota)" 
                                      constraint="/.[a-zA-Z\s]+/, no empty : Format isian salah"/>
                         </row>
+                        <row>
+                            <signLabel value="Status"/>
+                            <combobox autodrop="true" model="@load(vm.statuses)" selectedItem="@bind(fx.status)" readonly="true" width="60%" placeholder="- Pilihan Status -" constraint=" no empty : Format isian salah">
+                                <template name="model" var="items">
+                                    <comboitem label="@load(items)" value="@load(items)"/>
+                                </template>
+                            </combobox>
+                        </row> 
                     </rows>
                 </grid>
                 <separator/>

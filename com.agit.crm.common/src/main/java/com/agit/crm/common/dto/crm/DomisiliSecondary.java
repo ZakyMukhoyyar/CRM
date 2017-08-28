@@ -18,8 +18,18 @@ public class DomisiliSecondary {
     private String namaKabupaten;
     @ReadableColumn(column = "namaKota", index = 4)
     private String namaKota;
+    @ReadableColumn(column = "status", index = 5)
+    private String status;
 
     public DomisiliSecondary() {
+    }
+
+    public DomisiliSecondary(String idDomisili, String namaProvinsi, String namaKabupaten, String namaKota, String status) {
+        this.idDomisili = idDomisili;
+        this.namaProvinsi = namaProvinsi;
+        this.namaKabupaten = namaKabupaten;
+        this.namaKota = namaKota;
+        this.status = status;
     }
 
     @ReadableValue(column = "idDomisili", index = 1)
@@ -42,6 +52,11 @@ public class DomisiliSecondary {
         return namaKota;
     }
 
+    @ReadableValue(column = "status", index = 5)
+    public String getStatus() {
+        return status;
+    }
+
     @WritableValue(column = "idDomisili", index = 1)
     public void setIdDomisili(String idDomisili) {
         this.idDomisili = idDomisili;
@@ -62,9 +77,14 @@ public class DomisiliSecondary {
         this.namaKota = namaKota;
     }
 
+    @WritableValue(column = "status", index = 5)
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
-        return "DomisiliSecondary{" + "idDomisili=" + idDomisili + ", namaProvinsi=" + namaProvinsi + ", namaKabupaten=" + namaKabupaten + ", namaKota=" + namaKota + '}';
+        return "DomisiliSecondary{" + "idDomisili=" + idDomisili + ", namaProvinsi=" + namaProvinsi + ", namaKabupaten=" + namaKabupaten + ", namaKota=" + namaKota + ", status=" + status + '}';
     }
 
 }

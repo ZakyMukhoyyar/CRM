@@ -6,6 +6,7 @@ import com.agit.crm.common.dto.crm.DomisiliDTOBuilder;
 import com.agit.crm.common.dto.crm.DomisiliSecondary;
 import com.agit.crm.common.security.SecurityUtil;
 import com.agit.crm.infrastructure.component.xls.XlsReader;
+import com.agit.crm.shared.status.Status;
 import com.agit.crm.shared.zul.CommonViewModel;
 import static com.agit.crm.shared.zul.CommonViewModel.showInformationMessagebox;
 import com.agit.crm.shared.zul.PageNavigation;
@@ -56,18 +57,18 @@ public class DomisiliVM {
     /* Object Binding UI CRM */
     private DomisiliDTO domisiliDTO = new DomisiliDTO();
     private List<DomisiliDTO> domisiliDTOs = new ArrayList<>();
+    private ListModelList<Status> statuses = new ListModelList<>();
 
     private String idDomisili;
     private String namaProvinsi;
     private String namaKabupaten;
     private String namaKota;
-    
 
-    private static final String FILE_LOC = "D:\\Work\\AgitCRM\\CRM\\template-mapping\\insert-template-domisili.xlsx";
+//    private static final String FILE_LOC = "D:\\Work\\AgitCRM\\CRM\\template-mapping\\insert-template-domisili.xlsx";
 
     /* attribut for CRM */
     private PageNavigation previous;
-    private int pageSize = 11;
+    private int pageSize = 7;
 
     /* attribut for upload file Event */
     Media mediaUploadDomisili;
@@ -184,11 +185,20 @@ public class DomisiliVM {
         XlsReader<DomisiliSecondary> jxr = new XlsReader<>(DomisiliSecondary.class);
         List<DomisiliSecondary> ls = jxr.getJavaObjectFromThisFile(filepathUploadDomisili + mediaNameUploadDomisili);
         for (DomisiliSecondary s : ls) {
+
+            Status status = null;
+
+            if ("ACTIVE".equals(s.getStatus())) {
+                status = Status.ACTIVE;
+            } else {
+                status = Status.INACTIVE;
+            }
             DomisiliDTO m = new DomisiliDTOBuilder()
                     .setIdDomisili(s.getIdDomisili())
                     .setNamaProvinsi(s.getNamaProvinsi())
                     .setNamaKabupaten(s.getNamaKabupaten())
                     .setNamaKota(s.getNamaKota())
+                    .setStatus(status)
                     .setCreatedBy("SYSTEM")
                     .setCreatedDate(new Date())
                     .setModifiedBy("SYSTEM")
@@ -282,6 +292,14 @@ public class DomisiliVM {
     @NotifyChange({"domisiliDTO", "domisiliDTOs"})
     public void buttonKembaliDomisili(@BindingParam("object") DomisiliDTO obj, @ContextParam(ContextType.VIEW) Window window) {
         window.detach();
+    }
+
+    @Command("detailDomisili")
+    @NotifyChange("domisiliDTO")
+    public void detailDomisili(@BindingParam("object") DomisiliDTO obj, @ContextParam(ContextType.VIEW) Window window) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("domisiliDTO", obj);
+        CommonViewModel.navigateToWithoutDetach("/crm/admin/domisili/add_domisili.zul", window, params);
     }
 
     public DomisiliService getDomisiliService() {
@@ -386,6 +404,14 @@ public class DomisiliVM {
 
     public void setNamaKota(String namaKota) {
         this.namaKota = namaKota;
+    }
+
+    public ListModelList<Status> getStatuses() {
+        return new ListModelList<>(Status.values());
+    }
+
+    public void setStatuses(ListModelList<Status> statuses) {
+        this.statuses = statuses;
     }
 
 }

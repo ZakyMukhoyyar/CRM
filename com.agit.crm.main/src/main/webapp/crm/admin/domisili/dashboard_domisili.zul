@@ -2,7 +2,7 @@
     <window apply="org.zkoss.bind.BindComposer"
             viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.admin.DomisiliVM')"
             form="@id('fx') @load(vm.domisiliDTO) @save(vm.domisiliDTO, before='buttonSaveDomisili')">
-        <groupbox height="500px" closable="false" mold="3d" style="background:#f5f5f5" sclass="col-md-12 nopadding" >
+        <groupbox height="540px" closable="false" mold="3d" style="background:#f5f5f5" sclass="col-md-12 nopadding" >
             <caption label="Dashboard Domisili" />
             <div sclass="col-md-3 nopadding">
                 
@@ -37,6 +37,12 @@
                     <button type="button" sclass="btn btn-info" width="100%" label="Browse" upload="true" onUpload="@command('buttonUploadFile')"/>
                     <separator/>
                     <a sclass="btn btn-info"  label="Upload" width="100%" onClick="@command('buttonSaveDataDomisili')"/>
+                    <separator/>
+                    <button sclass="btn btn-info" width="100%" label="Download Template">
+                        <attribute name="onClick">
+                            Filedownload.save("/files/insert-template-domisili.xlsx", null);
+                        </attribute>
+                    </button>
                 </div>                
             </div>
             
@@ -45,10 +51,12 @@
                 <groupbox closable="false" sclass="col-md-12">
                     <listbox rows="@load(vm.pageSize)" pageSize="@load(vm.pageSize)" model="@bind(vm.domisiliDTOs)" mold="paging" emptyMessage="${labels.common.noDataFound}">
                         <listhead>
-                            <listheader label="ID Domisili" width="15%" align="center"/>
-                            <listheader label="Provinsi" width="45%" align="center"/>
+                            <listheader label="ID Domisili" width="10%" align="center" sortDirection="ascending" sort="auto(idDomisili)"/>
+                            <listheader label="Provinsi" width="20%" align="center"/>
                             <listheader label="Kabupaten" width="20%" align="center"/>
-                            <listheader label="Kota" width="20" align="center"/>            
+                            <listheader label="Kota" width="20" align="center"/>
+                            <listheader label="Status" width="15%" align="center"/>   
+                            <listheader sclass="isi bold" label="Aksi" width="15%" align="center"/>             
                         </listhead>
                         <template name="model">
                             <listitem value="${each}">
@@ -63,6 +71,12 @@
                                 </listcell>
                                 <listcell >
                                     <label width="100%" value="@bind(each.namaKota)"/>
+                                </listcell>
+                                <listcell >
+                                    <label width="100%" value="@bind(each.status)"/>
+                                </listcell>
+                                <listcell >
+                                    <a onClick="@command('detailDomisili', object=each)" image="/images/skk_edit.png" sclass="btn btn-default"/>
                                 </listcell>
                             </listitem>
                         </template>

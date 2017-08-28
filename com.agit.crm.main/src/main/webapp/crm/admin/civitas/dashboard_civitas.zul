@@ -60,7 +60,7 @@
                     <listbox rows="11" mold="paging" pageSize="@load(vm.pageSize)" emptyMessage="${labels.common.noDataFound}" 
                              model="@bind(vm.civitasDTOs)">
                         <listhead>
-                            <listheader sclass="isi bold" label="ID Civitas" width="11%"/>
+                            <listheader sclass="isi bold" label="ID Civitas" width="11%" sortDirection="ascending" sort="auto(civitasID)"/>
                             <listheader sclass="isi bold" label="Nama Civitas" width="70%" align="center"/>
                             <listheader sclass="isi bold" label="Status" width="20%" align="center"/> 
                             <listheader sclass="isi bold" label="Aksi" width="20%" align="center"/>                                           
