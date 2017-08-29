@@ -342,6 +342,7 @@ public class LowonganVM {
         if (tanggalMulai != null && tanggalBerakhir != null && tanggalBerakhir.compareTo(tanggalMulai) < 0) {
             Messagebox.show("Format tanggal mulai dan tanggal berakhir salah");
         } else {
+            lowonganDTO.setStatus(Status.ACTIVE);
             lowonganService.SaveOrUpdate(lowonganDTO);
             showInformationMessagebox("Data Lowongan Berhasil Disimpan");
             BindUtils.postGlobalCommand(null, null, "refreshLowongan", null);

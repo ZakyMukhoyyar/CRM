@@ -21,4 +21,7 @@ public interface EventAgitService {
     List<EventAgitDTO> findAll();
 
     List<EventAgitDTO> findByParams(Map map);
+    
+    /* service untuk update status */
+    void eventScheduler();
 }

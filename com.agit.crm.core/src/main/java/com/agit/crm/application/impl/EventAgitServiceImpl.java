@@ -17,7 +17,7 @@ import org.apache.commons.lang.Validate;
  * @author Zaky
  */
 public class EventAgitServiceImpl implements EventAgitService {
-    
+
     private EventAgitRepository eventAgitRepository;
     private EventAgitDTOAssembler eventAgitDTOAssembler;
 
@@ -92,7 +92,28 @@ public class EventAgitServiceImpl implements EventAgitService {
         }
         return null;
     }
-    
-    
-    
+
+    @Override
+    public void eventScheduler() {
+        List<EventAgit> list = eventAgitRepository.findAll();
+        Date dateNow = new Date();
+        int year = dateNow.getYear();
+        int month = dateNow.getMonth();
+        int date = dateNow.getDate();
+
+        for (EventAgit evt : list) {
+            int getEndDateDTO = evt.getEndDate().getDate() + 1;
+            int getEndMonthDTO = evt.getEndDate().getMonth();
+            int getEndYearDTO = evt.getEndDate().getYear();
+            Date dateDTO = new Date(getEndYearDTO, getEndMonthDTO, getEndDateDTO);
+            int compareDate = dateNow.compareTo(dateDTO);
+            if (compareDate == 1) {
+                evt.setStatus(Status.INACTIVE);
+            } else {
+                evt.setStatus(Status.ACTIVE);
+            }
+            eventAgitRepository.saveOrUpdate(evt);
+        }
+    }
+
 }

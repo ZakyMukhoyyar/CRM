@@ -205,4 +205,28 @@ public class LowonganServiceImpl implements LowonganService {
         return null;
     }
 
+    @Override
+    public void eventScheduler() {
+        
+        List<Lowongan> list = lowonganRepository.findAll();
+        Date dateNow = new Date();
+        int year = dateNow.getYear();
+        int month = dateNow.getMonth();
+        int date = dateNow.getDate();
+
+        for (Lowongan evt : list) {
+            int getEndDateDTO = evt.getTanggalBerakhir().getDate() + 1;
+            int getEndMonthDTO = evt.getTanggalBerakhir().getMonth();
+            int getEndYearDTO = evt.getTanggalBerakhir().getYear();
+            Date dateDTO = new Date(getEndYearDTO, getEndMonthDTO, getEndDateDTO);
+            int compareDate = dateNow.compareTo(dateDTO);
+            if (compareDate == 1) {
+                evt.setStatus(Status.INACTIVE);
+            } else {
+                evt.setStatus(Status.ACTIVE);
+            }
+            lowonganRepository.saveOrUpdate(evt);
+        }
+    }
+
 }

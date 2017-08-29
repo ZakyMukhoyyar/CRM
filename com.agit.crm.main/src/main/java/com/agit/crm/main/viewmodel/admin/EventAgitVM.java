@@ -94,42 +94,6 @@ public class EventAgitVM {
         if (eventAgitDTOs.isEmpty()) {
             eventAgitDTOs = Collections.emptyList();
         }
-
-        Date dateNow = new Date();
-        int year = dateNow.getYear();
-        int month = dateNow.getMonth();
-        int date = dateNow.getDate();
-        
-        /* for status changer */
-//        String hariIni = year + "-" + month + "-" + date;
-//        for (EventAgitDTO e : eventAgitDTOs) {
-//            int thn = e.getEndDate().getYear();
-//            int bln = e.getEndDate().getMonth();
-//            int tgl = e.getEndDate().getDate();
-//            String hariIni2 = thn + "-" + bln + "-" + tgl;
-//
-//            if (hariIni2.contains(hariIni)) {
-//                e.setStatus(Status.INACTIVE);
-//                eventAgitService.SaveOrUpdate(e);
-//            }
-//        }
-        
-        /* for status changer ver2 */
-        for (EventAgitDTO evt : eventAgitDTOs) {
-            int getEndDateDTO = evt.getEndDate().getDate() + 1;
-            int getEndMonthDTO = evt.getEndDate().getMonth();
-            int getEndYearDTO = evt.getEndDate().getYear();
-            Date dateDTO = new Date(getEndYearDTO,getEndMonthDTO,getEndDateDTO);
-            int compareDate = dateNow.compareTo(dateDTO);
-            if (compareDate == 1){
-                evt.setStatus(Status.INACTIVE);
-                eventAgitService.SaveOrUpdate(evt);
-            }else {
-                evt.setStatus(Status.ACTIVE);
-                eventAgitService.SaveOrUpdate(evt);
-            }
-        }
-
     }
 
     private void checkValidity(EventAgitDTO eventAgit, PageNavigation previous) {

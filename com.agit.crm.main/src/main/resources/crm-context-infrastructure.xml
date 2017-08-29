@@ -4,5 +4,6 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
     
     <import resource="crm-context-infrastructure-persistence.xml"/>
+    <import resource="crm-context-infrastructure-scheduler.xml"/>
     <import resource="crm-context-infrastructure-workflow.xml"/>
 </beans>

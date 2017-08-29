@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation=
+"http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.2.xsd">
+    
+    <!--Task-->
+    <bean id="updateScheduler" class="com.agit.crm.main.scheduler.UpdateScheduler">
+        <property name="eventAgitService" ref="eventAgitService" />
+        <property name="lowonganService" ref="lowonganService" />
+    </bean>
+    
+    <bean id="schedulerTask"
+          class="org.springframework.scheduling.timer.MethodInvokingTimerTaskFactoryBean">
+        <property name="targetObject" ref="updateScheduler" />
+        <property name="targetMethod" value="execute" />
+    </bean>
+    
+    <bean id="timerTask"
+          class="org.springframework.scheduling.timer.ScheduledTimerTask">
+        <property name="timerTask" ref="schedulerTask" />
+        <property name="delay" value="1000" />
+        <!--<property name="period" value="5000" />-->
+        <property name="period" value="86000000" />
+    </bean>
+    
+    <bean class="org.springframework.scheduling.timer.TimerFactoryBean">
+        <property name="scheduledTimerTasks">
+            <list>
+                <ref local="timerTask" />
+            </list>
+        </property>
+    </bean>
+
+</beans>
