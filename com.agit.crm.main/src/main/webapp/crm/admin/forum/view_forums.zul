@@ -1,0 +1,50 @@
+<zk xmlns="http://www.zkoss.org/2005/zul">
+    <window apply="org.zkoss.bind.BindComposer"
+            viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.admin.ForumVM')"
+            form="@id('fx') @load(vm.forumDTO) @save(vm.forumDTO, before='buttonSaveForum')">
+        <groupbox height="500px" closable="false" style="background:#f5f5f5" sclass="col-md-12 nopadding" >
+            <div >
+                <div class="input-group" width="30%">
+                    <!--                    <label sclass="labelstyle" value="Nama Forum" />-->
+                    <textbox class="form-control" width="100%" value="@bind(vm.namaForum)" placeholder="Nama Forum"/>
+                    <span class="input-group-btn">
+                        <a sclass="btn btn-primary" width="100%" label="Pencarian" onClick="@command('buttonSearchForum')"/>
+                    </span>
+                </div>
+            </div>
+            <separator></separator>            
+            <separator></separator>
+            <div >
+                <panel  sclass="panel-primary">
+                    <panelchildren>
+                        <listbox rows="12" mold="paging" pageSize="@load(vm.pageSize)" emptyMessage="${labels.common.noDataFound}" model="@bind(vm.forumDTOs)">
+                            <listhead>
+                                <listheader width="75%" />
+                            </listhead>
+                            <template name="model">
+                                <listitem value="${each}">
+                                    <listcell>
+                                        <div align="center">
+                                            <label sclass="judulLowongan label label-success" width="100%" value="@bind(each.namaForum)" style="text-align: center;" />
+                                        </div>
+                                        <separator bar="true"></separator>
+                                        <separator ></separator>
+                                        <div>
+                                            <label sclass="isi" width="100%" value="@bind(each.deskripsiForum)" style="text-align: justify; display: block; padding:10px;" />
+                                        </div>
+                                        <separator ></separator>
+                                        <separator ></separator>
+                                        <separator ></separator>
+                                        <a  label="Komentari" style="text-decoration:underline ;color:blue" onClick="@command('komentari', object=each)"></a>
+                                    </listcell>
+                                </listitem>
+                            </template>
+                        </listbox>
+                    </panelchildren>
+                </panel>
+            </div>
+            
+            
+        </groupbox>
+    </window>
+</zk>

@@ -45,22 +45,22 @@
                              
                     </rows>
                 </grid>
-                <groupbox>
+                <!--                <groupbox>
                     <grid>
                         <columns>
                             <column width="30%"></column>
                             <column width="30%"></column>
                             <column></column>
                         </columns>
-<!--                        <rows>
+                        <rows>
                             <row>
                                 <SignLabel value="File Attachment" style="font-weight: bold"/>
                                 <textbox width="100%" readonly="true" value="@bind(vm.mediaNameUploadFileForum)"/>
                                 <button sclass="btn btn-success" label="Upload" upload="true" onUpload="@command('buttonUploadFileForum')" width="40%"/>
                             </row>  
-                        </rows>-->
+                        </rows>
                     </grid>
-                </groupbox>
+                </groupbox>-->
                 <grid style="border:0">
                 
                     <columns>

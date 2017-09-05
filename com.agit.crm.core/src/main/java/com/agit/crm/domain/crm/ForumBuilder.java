@@ -7,14 +7,14 @@ package com.agit.crm.domain.crm;
 
 import com.agit.crm.shared.status.Status;
 import java.util.Date;
-
+import java.util.List;
 
 public class ForumBuilder {
+
     private String idForum;
     private String namaForum;
     private String deskripsiForum;
-    private Date tanggalMulai;
-    private Date tanggalBerakhir;
+    private List<KomentarForum> komentar;
     private String createdBy;
     private Date createdDate;
     private String modifiedBy;
@@ -39,13 +39,8 @@ public class ForumBuilder {
         return this;
     }
 
-    public ForumBuilder setTanggalMulai(Date tanggalMulai) {
-        this.tanggalMulai = tanggalMulai;
-        return this;
-    }
-
-    public ForumBuilder setTanggalBerakhir(Date tanggalBerakhir) {
-        this.tanggalBerakhir = tanggalBerakhir;
+    public ForumBuilder setKomentar(List<KomentarForum> komentar) {
+        this.komentar = komentar;
         return this;
     }
 
@@ -75,7 +70,7 @@ public class ForumBuilder {
     }
 
     public Forum createForum() {
-        return new Forum(idForum, namaForum, deskripsiForum, tanggalMulai, tanggalBerakhir, createdBy, createdDate, modifiedBy, modifiedDate, status);
+        return new Forum(idForum, namaForum, deskripsiForum, komentar, createdBy, createdDate, modifiedBy, modifiedDate, status);
     }
-    
+
 }

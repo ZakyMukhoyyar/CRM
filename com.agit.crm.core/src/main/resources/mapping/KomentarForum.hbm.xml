@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class mutable="true" name="com.agit.crm.domain.crm.KomentarForum" table="AGIT_KOMENTAR">
+        <id column="id" name="id">
+            <generator class="org.hibernate.id.IdentityGenerator"/>
+        </id>
+        <property column="komentarID" name="komentarID" not-null="false"/>
+        <property column="komentar" name="komentar" not-null="false"/>
+        <property column="picture" name="picture" not-null="false"/>
+        <property column="userName" name="userName" not-null="false"/>
+        <property column="tglKomentar" name="tglKomentar" not-null="false" type="date"/>
+        <property column="createdBy" name="createdBy" not-null="false"/>
+        <property column="createdDate" name="createdDate" not-null="false"/>
+        <property column="modifiedBy" name="modifiedBy" not-null="false"/>
+        <property column="modifiedDate" name="modifiedDate" not-null="false"/>
+    </class>
+</hibernate-mapping>

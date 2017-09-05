@@ -5,8 +5,11 @@ import com.agit.crm.common.dto.crm.ForumDTO;
 import com.agit.crm.domain.crm.Forum;
 import com.agit.crm.domain.crm.ForumBuilder;
 import com.agit.crm.domain.crm.ForumRepository;
+import com.agit.crm.domain.crm.KomentarForum;
+import com.agit.crm.domain.crm.KomentarForumBuilder;
 import com.agit.crm.interfaces.web.facade.dto.assembler.crm.ForumDTOAssembler;
 import com.agit.crm.shared.status.Status;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -16,8 +19,8 @@ import org.apache.commons.lang.Validate;
  *
  * @author Zaky
  */
-public class ForumServiceImpl implements ForumService{
-    
+public class ForumServiceImpl implements ForumService {
+
     private ForumRepository forumRepository;
     private ForumDTOAssembler forumDTOAssembler;
 
@@ -51,12 +54,25 @@ public class ForumServiceImpl implements ForumService{
 
     @Override
     public ForumDTO getDummyData() {
+        KomentarForum komentarForum = new KomentarForumBuilder()
+                .setKomentarID("K01")
+                .setKomentar("Test")
+                .setPicture("Pic")
+                .setUserName("AD")
+                .setTglKomentar(new Date())
+                .setCreatedBy("AD")
+                .setCreatedDate(new Date())
+                .setModifiedBy("AD")
+                .setModifiedDate(new Date())
+                .createKomentarForum();
+        List<KomentarForum> komentarForums = new ArrayList<>();
+        komentarForums.add(komentarForum);
+
         Forum forum = new ForumBuilder()
                 .setIdForum("01")
                 .setNamaForum("Nama")
                 .setDeskripsiForum("Deskripsi")
-                .setTanggalMulai(new Date())
-                .setTanggalBerakhir(new Date())
+                .setKomentar(komentarForums)
                 .setCreatedBy("created by")
                 .setCreatedDate(new Date())
                 .setModifiedBy("modified by")
@@ -91,7 +107,5 @@ public class ForumServiceImpl implements ForumService{
         }
         return null;
     }
-    
-    
-    
+
 }

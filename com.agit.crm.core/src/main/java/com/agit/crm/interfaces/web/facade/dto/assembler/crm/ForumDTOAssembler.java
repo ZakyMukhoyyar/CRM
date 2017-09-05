@@ -4,36 +4,30 @@ import com.agit.crm.common.dto.crm.ForumDTO;
 import com.agit.crm.common.dto.crm.ForumDTOBuilder;
 import com.agit.crm.domain.crm.Forum;
 import com.agit.crm.domain.crm.ForumBuilder;
-import com.agit.crm.domain.crm.ForumRepository;
 import com.agit.crm.shared.object.IObjectAssembler;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
  *
  * @author Zaky
  */
-public class ForumDTOAssembler implements IObjectAssembler<Forum, ForumDTO>{
-    
-    private ForumRepository forumRepository;
-    private ForumDTOAssembler forumDTOAssembler;
+public class ForumDTOAssembler implements IObjectAssembler<Forum, ForumDTO> {
 
-    public void setForumRepository(ForumRepository forumRepository) {
-        this.forumRepository = forumRepository;
+    private KomentarForumDTOAssembler komentarForumDTOAssembler;
+
+    public void setKomentarForumDTOAssembler(KomentarForumDTOAssembler komentarForumDTOAssembler) {
+        this.komentarForumDTOAssembler = komentarForumDTOAssembler;
     }
 
-    public void setForumDTOAssembler(ForumDTOAssembler forumDTOAssembler) {
-        this.forumDTOAssembler = forumDTOAssembler;
-    }
-    
     @Override
     public ForumDTO toDTO(Forum domainObject) {
         return new ForumDTOBuilder()
                 .setIdForum(domainObject.getIdForum())
                 .setNamaForum(domainObject.getNamaForum())
                 .setDeskripsiForum(domainObject.getDeskripsiForum())
-                .setTanggalMulai(domainObject.getTanggalMulai())
-                .setTanggalBerakhir(domainObject.getTanggalBerakhir())
+                .setKomentarDTO(domainObject.getKomentar() == null ? Collections.EMPTY_LIST : komentarForumDTOAssembler.toDTOs(domainObject.getKomentar()))
                 .setCreatedBy(domainObject.getCreatedBy())
                 .setCreatedDate(domainObject.getCreatedDate())
                 .setModifiedBy(domainObject.getModifiedBy())
@@ -48,8 +42,7 @@ public class ForumDTOAssembler implements IObjectAssembler<Forum, ForumDTO>{
                 .setIdForum(dtoObject.getIdForum())
                 .setNamaForum(dtoObject.getNamaForum())
                 .setDeskripsiForum(dtoObject.getDeskripsiForum())
-                .setTanggalMulai(dtoObject.getTanggalMulai())
-                .setTanggalBerakhir(dtoObject.getTanggalBerakhir())
+                .setKomentar(dtoObject.getKomentarDTO() == null ? Collections.EMPTY_LIST : komentarForumDTOAssembler.toDomains(dtoObject.getKomentarDTO()))
                 .setCreatedBy(dtoObject.getCreatedBy())
                 .setCreatedDate(dtoObject.getCreatedDate())
                 .setModifiedBy(dtoObject.getModifiedBy())
@@ -57,7 +50,7 @@ public class ForumDTOAssembler implements IObjectAssembler<Forum, ForumDTO>{
                 .setStatus(dtoObject.getStatus())
                 .createForum();
     }
-    
+
     public List<Forum> toDomains(List<ForumDTO> arg0) {
         List<Forum> res = new ArrayList<>();
         for (ForumDTO t : arg0) {
@@ -73,5 +66,5 @@ public class ForumDTOAssembler implements IObjectAssembler<Forum, ForumDTO>{
         }
         return res;
     }
-    
+
 }

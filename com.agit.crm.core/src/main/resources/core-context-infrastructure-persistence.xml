@@ -54,5 +54,7 @@
     <bean id="lowonganStatusRepository" class="com.agit.crm.domain.infrastructure.persistance.hibernate.LowonganStatusHibernateRepository">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
-    
+    <bean id="komentarForumRepository" class="com.agit.crm.domain.infrastructure.persistance.hibernate.KomentarForumHibernateRepository">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
 </beans>

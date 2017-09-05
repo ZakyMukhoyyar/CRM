@@ -15,7 +15,9 @@
         <property name="lowonganStatusDTOAssembler" ref="lowonganStatusDTOAssembler"/>
     </bean>	
     
-    <bean id="forumDTOAssembler" class="com.agit.crm.interfaces.web.facade.dto.assembler.crm.ForumDTOAssembler"/>
+    <bean id="forumDTOAssembler" class="com.agit.crm.interfaces.web.facade.dto.assembler.crm.ForumDTOAssembler">
+        <property name="komentarForumDTOAssembler" ref="komentarForumDTOAssembler"/>
+    </bean>
     <bean id="forumService" class="com.agit.crm.application.impl.ForumServiceImpl">
         <property name="forumRepository" ref="forumRepository"/>
         <property name="forumDTOAssembler" ref="forumDTOAssembler"/>
@@ -73,5 +75,11 @@
     <bean id="lowonganStatusService" class="com.agit.crm.application.impl.LowonganStatusServiceImpl">
         <property name="lowonganStatusRepository" ref="lowonganStatusRepository"/>
         <property name="lowonganStatusDTOAssembler" ref="lowonganStatusDTOAssembler"/>
+    </bean>
+    
+    <bean id="komentarForumDTOAssembler" class="com.agit.crm.interfaces.web.facade.dto.assembler.crm.KomentarForumDTOAssembler"/>
+    <bean id="komentarForumService" class="com.agit.crm.application.impl.KomentarForumServiceImpl">
+        <property name="komentarForumRepository" ref="komentarForumRepository"/>
+        <property name="komentarForumDTOAssembler" ref="komentarForumDTOAssembler"/>
     </bean>
 </beans>

@@ -1,9 +1,13 @@
 package com.agit.crm.main.viewmodel.admin;
 
 import com.agit.crm.common.application.ForumService;
+import com.agit.crm.common.application.KomentarForumService;
 import com.agit.crm.common.dto.crm.ForumDTOBuilder;
 import com.agit.crm.common.dto.crm.ForumDTO;
+import com.agit.crm.common.dto.crm.KomentarForumDTO;
+import com.agit.crm.common.dto.crm.KomentarForumDTOBuilder;
 import com.agit.crm.common.security.SecurityUtil;
+import com.agit.crm.domain.crm.KomentarForumBuilder;
 import com.agit.crm.shared.status.Status;
 import com.agit.crm.shared.zul.CommonViewModel;
 import static com.agit.crm.shared.zul.CommonViewModel.showInformationMessagebox;
@@ -16,6 +20,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
@@ -40,8 +45,14 @@ public class ForumVM {
     @WireVariable
     ForumService forumService;
 
+    @WireVariable
+    KomentarForumService komentarForumService;
+
     private ForumDTO forumDTO = new ForumDTO();
     private List<ForumDTO> forumDTOs = new ArrayList<>();
+
+    private KomentarForumDTO komentarForumDTO = new KomentarForumDTO();
+    private List<KomentarForumDTO> komentarForumDTOs = new ArrayList<>();
 
     /* Parameter Filter */
     private String idForum;
@@ -50,6 +61,8 @@ public class ForumVM {
     private Date tanggalMulai;
     private Date tanggalBerakhir;
     private Status status;
+    private String komentarID;
+    private String komentar;
 
     private PageNavigation previous;
     private int pageSize = 10;
@@ -64,12 +77,13 @@ public class ForumVM {
     @Init
     public void init(
             @ExecutionArgParam("forumDTO") ForumDTO forum,
+            @ExecutionArgParam("komentarForumDTO") KomentarForumDTO komentarForum,
             @ExecutionArgParam("previous") PageNavigation previous) {
         /* Load Data */
         initData();
 
         /* Check Validity */
-        checkValidity(forum, previous);
+        checkValidity(forum, komentarForum, previous);
     }
 
     private void initData() {
@@ -77,9 +91,13 @@ public class ForumVM {
         if (forumDTOs.isEmpty()) {
             forumDTOs = Collections.emptyList();
         }
+        komentarForumDTOs = komentarForumService.findAll();
+        if (komentarForumDTOs.isEmpty()) {
+            komentarForumDTOs = Collections.emptyList();
+        }
     }
 
-    private void checkValidity(ForumDTO forum, PageNavigation previous) {
+    private void checkValidity(ForumDTO forum, KomentarForumDTO komentarForum, PageNavigation previous) {
         if (forum == null) {
             ListModelList<ForumDTO> parameterList = new ListModelList<>(forumService.findAll());
             String idForum = "";
@@ -247,6 +265,34 @@ public class ForumVM {
         window.detach();
     }
 
+    /*------------------------------------------------------------- functonality Comment ----------------------------------------------------*/
+    @Command("komentari")
+    @NotifyChange("forumDTO")
+    public void komentari(@BindingParam("object") ForumDTO obj, @ContextParam(ContextType.VIEW) Window window) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("forumDTO", obj);
+        CommonViewModel.navigateToWithoutDetach("/crm/admin/forum/dashboard_komentar.zul", window, params);
+    }
+
+    @Command("buttonComment")
+    @NotifyChange({"forumDTO", "forumDTOs", "komentarForumDTO", "komentarForumDTOs", "komentar"})
+    public void buttonComment(@BindingParam("object") KomentarForumDTO obj, @ContextParam(ContextType.VIEW) Window window) {
+        komentarForumDTO.setKomentarID(UUID.randomUUID().toString());
+        komentarForumDTO.setUserName(SecurityUtil.getUserName());
+        komentarForumDTO.setTglKomentar(new Date());
+        komentarForumDTO.setKomentar(komentar);
+
+        komentarForumService.saveOrUpdate(komentarForumDTO);
+        komentar = null;
+        BindUtils.postGlobalCommand(null, null, "refreshKomentarForum", null);
+    }
+
+    @GlobalCommand
+    @NotifyChange("komentarForumDTOs")
+    public void refreshKomentarForum() {
+        komentarForumDTOs = komentarForumService.findAll();
+    }
+
     /* getter setter */
     public ForumDTO getForumDTO() {
         return forumDTO;
@@ -366,6 +412,38 @@ public class ForumVM {
 
     public void setDeskripsiForum(String deskripsiForum) {
         this.deskripsiForum = deskripsiForum;
+    }
+
+    public KomentarForumDTO getKomentarForumDTO() {
+        return komentarForumDTO;
+    }
+
+    public void setKomentarForumDTO(KomentarForumDTO komentarForumDTO) {
+        this.komentarForumDTO = komentarForumDTO;
+    }
+
+    public List<KomentarForumDTO> getKomentarForumDTOs() {
+        return komentarForumDTOs;
+    }
+
+    public void setKomentarForumDTOs(List<KomentarForumDTO> komentarForumDTOs) {
+        this.komentarForumDTOs = komentarForumDTOs;
+    }
+
+    public String getKomentarID() {
+        return komentarID;
+    }
+
+    public void setKomentarID(String komentarID) {
+        this.komentarID = komentarID;
+    }
+
+    public String getKomentar() {
+        return komentar;
+    }
+
+    public void setKomentar(String komentar) {
+        this.komentar = komentar;
     }
 
 }

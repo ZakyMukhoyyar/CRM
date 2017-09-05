@@ -17,10 +17,6 @@
                     <label sclass="labelstyle" value="Nama Forum" />
                     <textbox class="form-control" width="100%" value="@bind(vm.namaForum)" />
                 </div>
-                <!--                <div class="form-group">
-                    <label sclass="labelstyle" value="Tanggal Berakhir" />
-                    <datebox width="100%" value="@bind(vm.tanggalBerakhir)" />
-                </div>-->
                 <div class="form-group">
                     <label sclass="labelstyle" value="Status" />
                     <listbox mold="select" sclass="form-control" model="@load(vm.statuses)" selectedItem="@bind(vm.status)" >
@@ -42,8 +38,6 @@
                         <listhead>
                             <listheader label="ID Forum" width="15%" align="center" sortDirection="ascending" sort="auto(idForum)"/>
                             <listheader label="Nama Forum" width="45%" align="center"/>
-                            <!--                            <listheader label="Tanggal Mulai" width="15%" align="center"/>
-                            <listheader label="Tanggal Berakhir" width="15%" align="center"/>-->
                             <listheader label="Status" width="20%" align="center"/>
                             <listheader label="Aksi" width="20%" align="center"/>
                         </listhead>
@@ -55,12 +49,6 @@
                                 <listcell>
                                     <label width="100%" value="@bind(each.namaForum)" />
                                 </listcell>
-                                <!--<listcell>
-                                    <label width="100%" value="@bind(each.tanggalMulai)" />
-                                </listcell>
-                                <listcell>
-                                    <label width="100%" value="@bind(each.tanggalBerakhir)" />
-                                </listcell>-->
                                 <listcell>
                                     <label width="100%" value="@bind(each.status)" />
                                 </listcell>

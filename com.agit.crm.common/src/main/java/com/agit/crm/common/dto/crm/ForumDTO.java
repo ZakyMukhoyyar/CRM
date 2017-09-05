@@ -3,6 +3,7 @@ package com.agit.crm.common.dto.crm;
 import com.agit.crm.shared.status.Status;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -13,8 +14,7 @@ public class ForumDTO implements Serializable {
     private String idForum;
     private String namaForum;
     private String deskripsiForum;
-    private Date tanggalMulai;
-    private Date tanggalBerakhir;
+    private List<KomentarForumDTO> komentarDTO;
     private String createdBy;
     private Date createdDate;
     private String modifiedBy;
@@ -24,12 +24,11 @@ public class ForumDTO implements Serializable {
     public ForumDTO() {
     }
 
-    public ForumDTO(String idForum, String namaForum, String deskripsiForum, Date tanggalMulai, Date tanggalBerakhir, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate, Status status) {
+    public ForumDTO(String idForum, String namaForum, String deskripsiForum, List<KomentarForumDTO> komentarDTO, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate, Status status) {
         this.idForum = idForum;
         this.namaForum = namaForum;
         this.deskripsiForum = deskripsiForum;
-        this.tanggalMulai = tanggalMulai;
-        this.tanggalBerakhir = tanggalBerakhir;
+        this.komentarDTO = komentarDTO;
         this.createdBy = createdBy;
         this.createdDate = createdDate;
         this.modifiedBy = modifiedBy;
@@ -101,25 +100,17 @@ public class ForumDTO implements Serializable {
         this.status = status;
     }
 
-    public Date getTanggalMulai() {
-        return tanggalMulai;
+    public List<KomentarForumDTO> getKomentarDTO() {
+        return komentarDTO;
     }
 
-    public void setTanggalMulai(Date tanggalMulai) {
-        this.tanggalMulai = tanggalMulai;
-    }
-
-    public Date getTanggalBerakhir() {
-        return tanggalBerakhir;
-    }
-
-    public void setTanggalBerakhir(Date tanggalBerakhir) {
-        this.tanggalBerakhir = tanggalBerakhir;
+    public void setKomentarDTO(List<KomentarForumDTO> komentarDTO) {
+        this.komentarDTO = komentarDTO;
     }
 
     @Override
     public String toString() {
-        return "ForumDTO{" + "idForum=" + idForum + ", namaForum=" + namaForum + ", deskripsiForum=" + deskripsiForum + ", tanggalMulai=" + tanggalMulai + ", tanggalBerakhir=" + tanggalBerakhir + ", createdBy=" + createdBy + ", createdDate=" + createdDate + ", modifiedBy=" + modifiedBy + ", modifiedDate=" + modifiedDate + ", status=" + status + '}';
+        return "ForumDTO{" + "idForum=" + idForum + ", namaForum=" + namaForum + ", deskripsiForum=" + deskripsiForum + ", komentarDTO=" + komentarDTO + ", createdBy=" + createdBy + ", createdDate=" + createdDate + ", modifiedBy=" + modifiedBy + ", modifiedDate=" + modifiedDate + ", status=" + status + '}';
     }
 
 }

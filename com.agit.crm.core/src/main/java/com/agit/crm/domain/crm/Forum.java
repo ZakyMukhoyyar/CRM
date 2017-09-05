@@ -3,6 +3,7 @@ package com.agit.crm.domain.crm;
 import com.agit.crm.shared.object.EntityObject;
 import com.agit.crm.shared.status.Status;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -15,8 +16,7 @@ public class Forum implements EntityObject<Forum> {
     private String idForum;
     private String namaForum;
     private String deskripsiForum;
-    private Date tanggalMulai;
-    private Date tanggalBerakhir;
+    private List<KomentarForum> komentar;
     private String createdBy;
     private Date createdDate;
     private String modifiedBy;
@@ -26,12 +26,11 @@ public class Forum implements EntityObject<Forum> {
     public Forum() {
     }
 
-    public Forum(String idForum, String namaForum, String deskripsiForum, Date tanggalMulai, Date tanggalBerakhir, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate, Status status) {
+    public Forum(String idForum, String namaForum, String deskripsiForum, List<KomentarForum> komentar, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate, Status status) {
         this.idForum = idForum;
         this.namaForum = namaForum;
         this.deskripsiForum = deskripsiForum;
-        this.tanggalMulai = tanggalMulai;
-        this.tanggalBerakhir = tanggalBerakhir;
+        this.komentar = komentar;
         this.createdBy = createdBy;
         this.createdDate = createdDate;
         this.modifiedBy = modifiedBy;
@@ -103,35 +102,26 @@ public class Forum implements EntityObject<Forum> {
         this.status = status;
     }
 
-    public Date getTanggalMulai() {
-        return tanggalMulai;
+    public List<KomentarForum> getKomentar() {
+        return komentar;
     }
 
-    public void setTanggalMulai(Date tanggalMulai) {
-        this.tanggalMulai = tanggalMulai;
-    }
-
-    public Date getTanggalBerakhir() {
-        return tanggalBerakhir;
-    }
-
-    public void setTanggalBerakhir(Date tanggalBerakhir) {
-        this.tanggalBerakhir = tanggalBerakhir;
+    public void setKomentar(List<KomentarForum> komentar) {
+        this.komentar = komentar;
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 53 * hash + Objects.hashCode(this.idForum);
-        hash = 53 * hash + Objects.hashCode(this.namaForum);
-        hash = 53 * hash + Objects.hashCode(this.deskripsiForum);
-        hash = 53 * hash + Objects.hashCode(this.tanggalMulai);
-        hash = 53 * hash + Objects.hashCode(this.tanggalBerakhir);
-        hash = 53 * hash + Objects.hashCode(this.createdBy);
-        hash = 53 * hash + Objects.hashCode(this.createdDate);
-        hash = 53 * hash + Objects.hashCode(this.modifiedBy);
-        hash = 53 * hash + Objects.hashCode(this.modifiedDate);
-        hash = 53 * hash + Objects.hashCode(this.status);
+        hash = 43 * hash + Objects.hashCode(this.idForum);
+        hash = 43 * hash + Objects.hashCode(this.namaForum);
+        hash = 43 * hash + Objects.hashCode(this.deskripsiForum);
+        hash = 43 * hash + Objects.hashCode(this.komentar);
+        hash = 43 * hash + Objects.hashCode(this.createdBy);
+        hash = 43 * hash + Objects.hashCode(this.createdDate);
+        hash = 43 * hash + Objects.hashCode(this.modifiedBy);
+        hash = 43 * hash + Objects.hashCode(this.modifiedDate);
+        hash = 43 * hash + Objects.hashCode(this.status);
         return hash;
     }
 
@@ -149,20 +139,19 @@ public class Forum implements EntityObject<Forum> {
         }
         return true;
     }
-    
-    public void assignNewForum(Forum forum){
+
+    public void assignNewForum(Forum forum) {
         this.idForum = forum.idForum;
         this.namaForum = forum.namaForum;
         this.deskripsiForum = forum.deskripsiForum;
-        this.tanggalMulai = forum.tanggalMulai;
-        this.tanggalBerakhir = tanggalBerakhir;
+        this.komentar = forum.komentar;
         this.createdBy = forum.createdBy;
         this.createdDate = forum.createdDate;
         this.modifiedBy = forum.modifiedBy;
         this.modifiedDate = forum.modifiedDate;
         this.status = forum.status;
     }
-    
+
     @Override
     public boolean sameIdentityAs(Forum other) {
         return this.equals(other);

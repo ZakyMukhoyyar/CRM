@@ -7,14 +7,14 @@ package com.agit.crm.common.dto.crm;
 
 import com.agit.crm.shared.status.Status;
 import java.util.Date;
-
+import java.util.List;
 
 public class ForumDTOBuilder {
+
     private String idForum;
     private String namaForum;
     private String deskripsiForum;
-    private Date tanggalMulai;
-    private Date tanggalBerakhir;
+    private List<KomentarForumDTO> komentarDTO;
     private String createdBy;
     private Date createdDate;
     private String modifiedBy;
@@ -39,13 +39,8 @@ public class ForumDTOBuilder {
         return this;
     }
 
-    public ForumDTOBuilder setTanggalMulai(Date tanggalMulai) {
-        this.tanggalMulai = tanggalMulai;
-        return this;
-    }
-
-    public ForumDTOBuilder setTanggalBerakhir(Date tanggalBerakhir) {
-        this.tanggalBerakhir = tanggalBerakhir;
+    public ForumDTOBuilder setKomentarDTO(List<KomentarForumDTO> komentarDTO) {
+        this.komentarDTO = komentarDTO;
         return this;
     }
 
@@ -75,7 +70,7 @@ public class ForumDTOBuilder {
     }
 
     public ForumDTO createForumDTO() {
-        return new ForumDTO(idForum, namaForum, deskripsiForum, tanggalMulai, tanggalBerakhir, createdBy, createdDate, modifiedBy, modifiedDate, status);
+        return new ForumDTO(idForum, namaForum, deskripsiForum, komentarDTO, createdBy, createdDate, modifiedBy, modifiedDate, status);
     }
-    
+
 }
