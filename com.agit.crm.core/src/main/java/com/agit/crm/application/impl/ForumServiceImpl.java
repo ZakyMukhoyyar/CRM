@@ -72,7 +72,7 @@ public class ForumServiceImpl implements ForumService {
                 .setIdForum("01")
                 .setNamaForum("Nama")
                 .setDeskripsiForum("Deskripsi")
-                .setKomentar(komentarForums)
+                //                .setKomentar(komentarForums)
                 .setCreatedBy("created by")
                 .setCreatedDate(new Date())
                 .setModifiedBy("modified by")

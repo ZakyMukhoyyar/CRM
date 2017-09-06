@@ -9,11 +9,11 @@
         <property column="idForum" name="idForum" not-null="false"/>
         <property column="namaForum" name="namaForum" not-null="false"/>
         <property column="deskripsiForum" name="deskripsiForum" not-null="false"/>
-        <list cascade="all" lazy="false" name="komentar">
+        <!--        <list cascade="all" lazy="false" name="komentar">
             <key column="idForum" foreign-key="idForum"/>
             <index column="komentar_index"/>
             <one-to-many class="com.agit.crm.domain.crm.KomentarForum"/>
-        </list>
+        </list>-->
         <property column="createdBy" name="createdBy" not-null="false"/>
         <property column="createdDate" name="createdDate" not-null="false"/>
         <property column="modifiedDate" name="modifiedDate" not-null="false"/>
