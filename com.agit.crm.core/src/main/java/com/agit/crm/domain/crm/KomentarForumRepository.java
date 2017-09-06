@@ -18,4 +18,6 @@ public interface KomentarForumRepository {
     List<KomentarForum> findAll();
 
     List<KomentarForum> findByParams(Map map);
+
+    List<KomentarForum> findAllByID(String idForum);
 }

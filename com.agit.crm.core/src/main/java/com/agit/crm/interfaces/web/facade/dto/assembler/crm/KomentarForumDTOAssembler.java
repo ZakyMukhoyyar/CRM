@@ -18,6 +18,7 @@ public class KomentarForumDTOAssembler implements IObjectAssembler<KomentarForum
     public KomentarForumDTO toDTO(KomentarForum domainObject) {
         return new KomentarForumDTOBuilder()
                 .setKomentarID(domainObject.getKomentarID())
+                .setIdForum(domainObject.getIdForum())
                 .setKomentar(domainObject.getKomentar())
                 .setPicture(domainObject.getPicture())
                 .setUserName(domainObject.getUserName())
@@ -34,6 +35,7 @@ public class KomentarForumDTOAssembler implements IObjectAssembler<KomentarForum
     public KomentarForum toDomain(KomentarForumDTO dtoObject) {
         return new KomentarForumBuilder()
                 .setKomentarID(dtoObject.getKomentarID())
+                .setIdForum(dtoObject.getIdForum())
                 .setKomentar(dtoObject.getKomentar())
                 .setPicture(dtoObject.getPicture())
                 .setUserName(dtoObject.getUserName())

@@ -10,6 +10,7 @@ import java.util.Date;
 public class KomentarForumBuilder {
 
     private String komentarID;
+    private String idForum;
     private String komentar;
     private String picture;
     private String userName;
@@ -24,6 +25,11 @@ public class KomentarForumBuilder {
 
     public KomentarForumBuilder setKomentarID(String komentarID) {
         this.komentarID = komentarID;
+        return this;
+    }
+
+    public KomentarForumBuilder setIdForum(String idForum) {
+        this.idForum = idForum;
         return this;
     }
 
@@ -68,7 +74,7 @@ public class KomentarForumBuilder {
     }
 
     public KomentarForum createKomentarForum() {
-        return new KomentarForum(komentarID, komentar, picture, userName, tglKomentar, createdBy, createdDate, modifiedBy, modifiedDate);
+        return new KomentarForum(komentarID, idForum, komentar, picture, userName, tglKomentar, createdBy, createdDate, modifiedBy, modifiedDate);
     }
 
 }

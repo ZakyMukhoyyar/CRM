@@ -10,6 +10,7 @@ import java.util.Date;
 public class KomentarForumDTOBuilder {
 
     private String komentarID;
+    private String idForum;
     private String komentar;
     private String picture;
     private String userName;
@@ -24,6 +25,11 @@ public class KomentarForumDTOBuilder {
 
     public KomentarForumDTOBuilder setKomentarID(String komentarID) {
         this.komentarID = komentarID;
+        return this;
+    }
+
+    public KomentarForumDTOBuilder setIdForum(String idForum) {
+        this.idForum = idForum;
         return this;
     }
 
@@ -68,7 +74,7 @@ public class KomentarForumDTOBuilder {
     }
 
     public KomentarForumDTO createKomentarForumDTO() {
-        return new KomentarForumDTO(komentarID, komentar, picture, userName, tglKomentar, createdBy, createdDate, modifiedBy, modifiedDate);
+        return new KomentarForumDTO(komentarID, idForum, komentar, picture, userName, tglKomentar, createdBy, createdDate, modifiedBy, modifiedDate);
     }
 
 }

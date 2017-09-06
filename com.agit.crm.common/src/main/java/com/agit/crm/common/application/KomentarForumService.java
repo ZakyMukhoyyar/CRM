@@ -21,4 +21,6 @@ public interface KomentarForumService {
     List<KomentarForumDTO> findByParams(Map map);
 
     KomentarForumDTO getDummy();
+
+    List<KomentarForumDTO> findAllByID(String idForum);
 }

@@ -56,4 +56,11 @@ public class KomentarForumHibernateRepository extends HibernateRepository implem
         return (List<KomentarForum>) criteria.list();
     }
 
+    @Override
+    public List<KomentarForum> findAllByID(String idForum) {
+        Criteria criteria = getSession().createCriteria(KomentarForum.class);
+        criteria.add(Restrictions.eq("idForum", idForum));
+        return (List<KomentarForum>) criteria.list();
+    }
+
 }

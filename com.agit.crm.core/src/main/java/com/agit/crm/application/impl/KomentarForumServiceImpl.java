@@ -78,6 +78,7 @@ public class KomentarForumServiceImpl implements KomentarForumService {
     public KomentarForumDTO getDummy() {
         KomentarForum komentarForum = new KomentarForumBuilder()
                 .setKomentarID("K01")
+                .setIdForum("01")
                 .setKomentar("AAAAA")
                 .setPicture(null)
                 .setUserName("AD")
@@ -88,6 +89,12 @@ public class KomentarForumServiceImpl implements KomentarForumService {
                 .setModifiedDate(new Date())
                 .createKomentarForum();
         return komentarForumDTOAssembler.toDTO(komentarForum);
+    }
+
+    @Override
+    public List<KomentarForumDTO> findAllByID(String idForum) {
+        Validate.notNull(komentarForumRepository);
+        return komentarForumDTOAssembler.toDTOs(komentarForumRepository.findAllByID(idForum));
     }
 
 }

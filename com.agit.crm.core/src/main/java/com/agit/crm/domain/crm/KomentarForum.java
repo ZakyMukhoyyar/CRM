@@ -12,6 +12,7 @@ public class KomentarForum implements EntityObject<KomentarForum> {
 
     long id;
     private String komentarID;
+    private String idForum;
     private String komentar;
     private String picture;
     private String userName;
@@ -24,8 +25,9 @@ public class KomentarForum implements EntityObject<KomentarForum> {
     public KomentarForum() {
     }
 
-    public KomentarForum(String komentarID, String komentar, String picture, String userName, Date tglKomentar, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate) {
+    public KomentarForum(String komentarID, String idForum, String komentar, String picture, String userName, Date tglKomentar, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate) {
         this.komentarID = komentarID;
+        this.idForum = idForum;
         this.komentar = komentar;
         this.picture = picture;
         this.userName = userName;
@@ -38,6 +40,7 @@ public class KomentarForum implements EntityObject<KomentarForum> {
 
     public void assignNewKomentar(KomentarForum komentarForum) {
         this.komentarID = komentarForum.komentarID;
+        this.idForum = komentarForum.idForum;
         this.komentar = komentarForum.komentar;
         this.picture = komentarForum.picture;
         this.userName = komentarForum.userName;
@@ -126,18 +129,27 @@ public class KomentarForum implements EntityObject<KomentarForum> {
         this.tglKomentar = tglKomentar;
     }
 
+    public String getIdForum() {
+        return idForum;
+    }
+
+    public void setIdForum(String idForum) {
+        this.idForum = idForum;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 67 * hash + Objects.hashCode(this.komentarID);
-        hash = 67 * hash + Objects.hashCode(this.komentar);
-        hash = 67 * hash + Objects.hashCode(this.picture);
-        hash = 67 * hash + Objects.hashCode(this.userName);
-        hash = 67 * hash + Objects.hashCode(this.tglKomentar);
-        hash = 67 * hash + Objects.hashCode(this.createdBy);
-        hash = 67 * hash + Objects.hashCode(this.createdDate);
-        hash = 67 * hash + Objects.hashCode(this.modifiedBy);
-        hash = 67 * hash + Objects.hashCode(this.modifiedDate);
+        int hash = 3;
+        hash = 43 * hash + Objects.hashCode(this.komentarID);
+        hash = 43 * hash + Objects.hashCode(this.idForum);
+        hash = 43 * hash + Objects.hashCode(this.komentar);
+        hash = 43 * hash + Objects.hashCode(this.picture);
+        hash = 43 * hash + Objects.hashCode(this.userName);
+        hash = 43 * hash + Objects.hashCode(this.tglKomentar);
+        hash = 43 * hash + Objects.hashCode(this.createdBy);
+        hash = 43 * hash + Objects.hashCode(this.createdDate);
+        hash = 43 * hash + Objects.hashCode(this.modifiedBy);
+        hash = 43 * hash + Objects.hashCode(this.modifiedDate);
         return hash;
     }
 

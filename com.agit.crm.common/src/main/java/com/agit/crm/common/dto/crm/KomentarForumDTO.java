@@ -10,6 +10,7 @@ import java.util.Date;
 public class KomentarForumDTO implements Serializable {
 
     private String komentarID;
+    private String idForum;
     private String komentar;
     private String picture;
     private String userName;
@@ -22,8 +23,9 @@ public class KomentarForumDTO implements Serializable {
     public KomentarForumDTO() {
     }
 
-    public KomentarForumDTO(String komentarID, String komentar, String picture, String userName, Date tglKomentar, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate) {
+    public KomentarForumDTO(String komentarID, String idForum, String komentar, String picture, String userName, Date tglKomentar, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate) {
         this.komentarID = komentarID;
+        this.idForum = idForum;
         this.komentar = komentar;
         this.picture = picture;
         this.userName = userName;
@@ -106,9 +108,17 @@ public class KomentarForumDTO implements Serializable {
         this.tglKomentar = tglKomentar;
     }
 
+    public String getIdForum() {
+        return idForum;
+    }
+
+    public void setIdForum(String idForum) {
+        this.idForum = idForum;
+    }
+
     @Override
     public String toString() {
-        return "KomentarForumDTO{" + "komentarID=" + komentarID + ", komentar=" + komentar + ", picture=" + picture + ", userName=" + userName + ", tglKomentar=" + tglKomentar + ", createdBy=" + createdBy + ", createdDate=" + createdDate + ", modifiedBy=" + modifiedBy + ", modifiedDate=" + modifiedDate + '}';
+        return "KomentarForumDTO{" + "komentarID=" + komentarID + ", idForum=" + idForum + ", komentar=" + komentar + ", picture=" + picture + ", userName=" + userName + ", tglKomentar=" + tglKomentar + ", createdBy=" + createdBy + ", createdDate=" + createdDate + ", modifiedBy=" + modifiedBy + ", modifiedDate=" + modifiedDate + '}';
     }
 
 }

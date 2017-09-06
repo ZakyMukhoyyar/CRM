@@ -6,6 +6,7 @@
             <generator class="org.hibernate.id.IdentityGenerator"/>
         </id>
         <property column="komentarID" name="komentarID" not-null="false"/>
+        <property column="idForum" name="idForum" not-null="false"/>
         <property column="komentar" name="komentar" not-null="false"/>
         <property column="picture" name="picture" not-null="false"/>
         <property column="userName" name="userName" not-null="false"/>

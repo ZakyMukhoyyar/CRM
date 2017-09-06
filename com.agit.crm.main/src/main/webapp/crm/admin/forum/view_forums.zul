@@ -3,7 +3,7 @@
             viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.admin.ForumVM')"
             form="@id('fx') @load(vm.forumDTO) @save(vm.forumDTO, before='buttonSaveForum')">
         <groupbox height="500px" closable="false" style="background:#f5f5f5" sclass="col-md-12 nopadding" >
-            <div >
+            <div align="right">
                 <div class="input-group" width="30%">
                     <!--                    <label sclass="labelstyle" value="Nama Forum" />-->
                     <textbox class="form-control" width="100%" value="@bind(vm.namaForum)" placeholder="Nama Forum"/>
