@@ -91,7 +91,7 @@ public class ForumVM {
         if (forumDTOs.isEmpty()) {
             forumDTOs = Collections.emptyList();
         }
-        komentarForumDTOs = komentarForumService.findAll();
+        komentarForumDTOs = komentarForumService.findAllByID(forumDTO.getIdForum());
         if (komentarForumDTOs.isEmpty()) {
             komentarForumDTOs = Collections.emptyList();
         }
@@ -272,6 +272,7 @@ public class ForumVM {
         Map<String, Object> params = new HashMap<>();
         params.put("forumDTO", obj);
         CommonViewModel.navigateToWithoutDetach("/crm/admin/forum/dashboard_komentar.zul", window, params);
+        BindUtils.postGlobalCommand(null, null, "refreshKomentarForum", null);
     }
 
     @Command("buttonComment")
@@ -281,6 +282,7 @@ public class ForumVM {
         komentarForumDTO.setUserName(SecurityUtil.getUserName());
         komentarForumDTO.setTglKomentar(new Date());
         komentarForumDTO.setKomentar(komentar);
+        komentarForumDTO.setIdForum(forumDTO.getIdForum());
 
         komentarForumService.saveOrUpdate(komentarForumDTO);
         komentar = null;
@@ -290,7 +292,7 @@ public class ForumVM {
     @GlobalCommand
     @NotifyChange("komentarForumDTOs")
     public void refreshKomentarForum() {
-        komentarForumDTOs = komentarForumService.findAll();
+        komentarForumDTOs = komentarForumService.findAllByID(forumDTO.getIdForum());
     }
 
     /* getter setter */
