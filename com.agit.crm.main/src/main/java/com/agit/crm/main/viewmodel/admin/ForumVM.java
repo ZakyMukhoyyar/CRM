@@ -95,6 +95,7 @@ public class ForumVM {
         if (komentarForumDTOs.isEmpty()) {
             komentarForumDTOs = Collections.emptyList();
         }
+
     }
 
     private void checkValidity(ForumDTO forum, KomentarForumDTO komentarForum, PageNavigation previous) {
@@ -166,6 +167,13 @@ public class ForumVM {
     @NotifyChange("forumDTOs")
     public void refreshForum() {
         forumDTOs = forumService.findAll();
+    }
+
+    @Command("refreshDataGrid")
+    @NotifyChange("komentarForumDTOs")
+    public void refreshDataGrid() {
+        komentarForumDTOs = komentarForumService.findAllByID(forumDTO.getIdForum());
+
     }
 
     @Command("buttonNewForum")

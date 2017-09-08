@@ -10,7 +10,7 @@
         <property column="komentar" name="komentar" not-null="false"/>
         <property column="picture" name="picture" not-null="false"/>
         <property column="userName" name="userName" not-null="false"/>
-        <property column="tglKomentar" name="tglKomentar" not-null="false" type="date"/>
+        <property column="tglKomentar" name="tglKomentar" not-null="false" type="timestamp"/>
         <property column="createdBy" name="createdBy" not-null="false"/>
         <property column="createdDate" name="createdDate" not-null="false"/>
         <property column="modifiedBy" name="modifiedBy" not-null="false"/>

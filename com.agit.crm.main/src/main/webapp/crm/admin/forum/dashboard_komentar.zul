@@ -23,7 +23,7 @@
             </div>
             <div >
                 <groupbox closable="false" >
-                    <listbox rows="4" mold="paging" pageSize="@load(vm.pageSize)"  emptyMessage="${labels.common.noDataFound}" model="@bind(vm.komentarForumDTOs)" >
+                    <listbox rows="2" emptyMessage="${labels.common.noDataFound}" model="@bind(vm.komentarForumDTOs)" >
                         <listhead>
                             <listheader label="Komentar" width="45%" align="center"/>
                         </listhead>
@@ -31,12 +31,14 @@
                             <listitem value="${each}">
                                 <listcell>
                                     <div align="left">
-                                        <label width="100%" value="@bind(each.tglKomentar)" />
+                                        <a width="100%" image="/images/userpic.png" />
+                                        <label style="color:blue" width="100%" value="@bind(each.userName)" />
                                         <label width="100%" value="" />
-                                        <label width="100%" value="@bind(each.userName)" />
-                                        <label width="100%" value=":" />
-                                        <label width="100%" value="@bind(each.komentar)" />
                                         
+                                        <separator/>
+                                        <label width="100%" value="@bind(each.komentar)" />
+                                        <separator/>
+                                        <label sclass="post-time" width="100%" value="@bind(each.tglKomentar) @converter('formatedDate', format='hh:mm:ss dd-MMM-yyyy')"  />
                                     </div>
                                 </listcell>
                             </listitem>
@@ -49,6 +51,9 @@
                 <textbox class="form-control" width="100%" placeholder="Tulis Komentar" value="@bind(vm.komentar)"/>
                 <span class="input-group-btn">
                     <a sclass="btn btn-primary" width="100%" label="Komentar" onClick="@command('buttonComment')"/>
+                </span>
+                <span class="input-group-btn">
+                    <a sclass="btn btn-primary" width="100%" label="Refresh" onClick="@command('refreshDataGrid')"/>
                 </span>
             </div>
         </groupbox>
