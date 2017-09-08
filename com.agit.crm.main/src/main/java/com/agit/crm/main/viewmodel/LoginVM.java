@@ -3,6 +3,7 @@ package com.agit.crm.main.viewmodel;
 import com.agit.crm.common.dto.usermanagement.UserDTO;
 import com.agit.crm.common.security.SecurityUtil;
 import com.agit.crm.shared.zul.CommonViewModel;
+import static com.agit.crm.shared.zul.CommonViewModel.showInformationMessagebox;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
@@ -47,6 +48,14 @@ public class LoginVM {
         Map<String, Object> params = new HashMap<>();
         params.put("userDTO", obj);
         CommonViewModel.navigateToWithoutDetach("/crm/register/register.zul", window, params);
+    }
+
+    @Command("buttonLupaPassword")
+    @NotifyChange("userDTO")
+    public void buttonLupaPassword(@BindingParam("object") UserDTO obj, @ContextParam(ContextType.VIEW) Window window) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("userDTO", obj);
+        CommonViewModel.navigateToWithoutDetach("/crm/register/lupa_password.zul", window, params);
     }
 
 }

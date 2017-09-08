@@ -55,6 +55,9 @@
                 <span class="input-group-btn">
                     <a sclass="btn btn-primary" width="100%" label="Refresh" onClick="@command('refreshDataGrid')"/>
                 </span>
+                <span class="input-group-btn">
+                    <a sclass="btn btn-primary" width="100%" label="Chatting" target="blank" href="http://10.21.60.51:8181/bitozen/chat/"/>
+                </span>
             </div>
         </groupbox>
     </window>

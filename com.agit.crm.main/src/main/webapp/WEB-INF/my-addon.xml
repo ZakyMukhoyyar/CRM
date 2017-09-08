@@ -40,6 +40,38 @@
         <extends>textbox</extends>
     </component>
     
+    <!-- The name of this addon. It must be unique -->
+    <addon-name>ckezbind</addon-name>
+    <!-- Specifies what other addon this depends
+    <depends></depends>
+    -->
+    <!-- Which language this addon will be added to -->
+    <language-name>xul/html</language-name>
+    <component>
+        <component-name>ckeditor</component-name>
+        <extends>ckeditor</extends>
+        <annotation>
+            <annotation-name>ZKBIND</annotation-name>
+            <property-name>value</property-name>
+            <attribute>
+                <attribute-name>ACCESS</attribute-name>
+                <attribute-value>both</attribute-value>
+            </attribute>
+            <attribute>
+                <attribute-name>SAVE_EVENT</attribute-name>
+                <attribute-value>onChange</attribute-value>
+            </attribute>
+            <attribute>
+                <attribute-name>LOAD_REPLACEMENT</attribute-name>
+                <attribute-value>value</attribute-value>
+            </attribute>
+            <attribute>
+                <attribute-name>LOAD_TYPE</attribute-name>
+                <attribute-value>java.lang.String</attribute-value>
+            </attribute>
+        </annotation>
+    </component>
+    
     <addon-name>my.extension</addon-name><!-- any name you like -->
     <javascript src="/js/jquery.maskedinput-1.3.js" /> <!-- assume you package it as /myjs/foo.js -->
 

@@ -16,13 +16,33 @@
 <?script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" if="${zk.ie < 9}" ?>
     <?script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" if="${zk.ie < 9}"?>
 
-        <zk xmlns="http://www.zkoss.org/2005/zul">
+        <zk xmlns="http://www.zkoss.org/2005/zul" xmlns:c="client">
             <window border="0"
                     apply="org.zkoss.bind.BindComposer"
                     viewModel="@id('fx') @init('com.agit.crm.main.viewmodel.register.RegisterVM')"
                     form="@id('vm') @load(fx) @save(fx, before='buttonSubmit')
             roleID=fx.userDTO.roleDTO.roleID, accessTime=fx.userDTO.userSpecificationDTO.accessTimeDTO)"
                     validationMessages="@id('vmsgs')">
+                <style>
+                    .meter {
+                    font-size: 1px;
+                    height: 3px;
+                    }
+                    .meter-inner {
+                    width: 0px;
+                    height: 3px;
+                    }
+                    .meter-red .meter-inner{
+                    background: red;
+                    }
+                    .meter-orange .meter-inner{
+                    background: orange;
+                    }
+                    .meter-green .meter-inner{
+                    background: green;
+                    }
+                </style>
+                <script src="/widgets/client_side/password_strength/pwd_str.js" ></script>
                 <tabbox width="700px">
                     <tabs>
                         <tab sclass="isi" label="Daftar Akun"/>
@@ -79,7 +99,16 @@
                             
                                     <row>
                                         <label value="${labels.user.label.password} " width="25%" />
-                                        <textbox type="password" value="@bind(vm.userDTO.password)" width="25%"/>
+                                        <textbox type="password" value="@bind(vm.userDTO.password)" width="40%" c:onChanging="meterUpdate(event)"/>
+                                    </row>
+                                    <row>
+                                        Password Strength
+                                        <vlayout>
+                                            <div id="meter" sclass="meter" width="240px">
+                                                <div sclass="meter-inner"></div>
+                                            </div>
+                                            <label id="msg" />
+                                        </vlayout>
                                     </row>
                             
                                     <row>
@@ -97,7 +126,8 @@
                                             <a sclass="btn btn-primary" label="Verifikasi" width="20%" onClick="@command('verifyKtp', obj=ktp.getValue())"/>
                                             <label value="@load(vmsgs['ktp'])" style="color:red"/>
                                         </div>
-                                    </row>
+                                    </row><!--
+-->                                    
                                     <row>
                                         <signLabel sclass="isi" value="No HP"/>
                                         <div>
@@ -403,6 +433,13 @@
                         <separator />     
                     </div>
                 </groupbox>
+                <script type="text/javascript"><![CDATA[
+		function typePassword(text) {
+			var pwdWidget = zk.Widget.$("$pwd");
+			pwdWidget.setValue(text);
+			pwdWidget.fire('onChanging',{ value : text });			
+		}
+	]]></script>
                 <style>
                     @import url('https://fonts.googleapis.com/css?family=Noto+Sans')
                     @import url('https://fonts.googleapis.com/css?family=Lato');

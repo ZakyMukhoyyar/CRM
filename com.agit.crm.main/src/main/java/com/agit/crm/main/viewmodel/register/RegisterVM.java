@@ -542,6 +542,15 @@ public class RegisterVM {
         }
     }
 
+    @Command("buttonLupaPassword")
+    public void buttonLupaPassword(@BindingParam("object") UserDTO obj, @ContextParam(ContextType.VIEW) Window window) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("user", obj);
+        params.put("previous", PageNavigation.SEARCH);
+        params.put("search", searchParam());
+        CommonViewModel.navigateToWithoutDetach(UserNavigation.GANTI_PASSWORD, window, params);
+    }
+
     @Command("buttonSubmit")
     @NotifyChange({"verifyEmail", "verifyKtp", "verifyUserName", "buttonSubmit"})
     public void buttonSubmit(@BindingParam("obj") String userName, @BindingParam("obj1") String ktp, @BindingParam("obj2") String email, @ContextParam(ContextType.VIEW) Window window) {
