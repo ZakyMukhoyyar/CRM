@@ -57,4 +57,7 @@
     <bean id="komentarForumRepository" class="com.agit.crm.domain.infrastructure.persistance.hibernate.KomentarForumHibernateRepository">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
+    <bean id="riwayatApplyEventRepository" class="com.agit.crm.domain.infrastructure.persistance.hibernate.RiwayatApplyEventHibernateRepository">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
 </beans>
