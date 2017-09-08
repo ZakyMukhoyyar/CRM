@@ -313,6 +313,14 @@ public class EventAgitVM {
         window.detach();
     }
 
+    /*-------------------------------------------------------------------- for data apply use  --------------------------------------------------------------------*/
+    @Command("buttonBackPopupAcara")
+    @NotifyChange("EventAgitDTO")
+    public void buttonBackPopupAcara(@ContextParam(ContextType.VIEW) Window window){
+        window.detach();
+    }
+    
+    /*-------------------------------------------------------------------- getter setter --------------------------------------------------------------------*/
     public EventAgitDTO getEventAgitDTO() {
         return eventAgitDTO;
     }

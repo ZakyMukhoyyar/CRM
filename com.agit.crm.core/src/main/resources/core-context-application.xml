@@ -83,9 +83,10 @@
         <property name="komentarForumDTOAssembler" ref="komentarForumDTOAssembler"/>
     </bean>
     
-    <bean id="riwayatApplyEventDTOAssembler" class="com.agit.crm.interfaces.web.facade.dto.assembler.crm.RiwayatApplyEventDTOAssembler"/>
-    <bean id="riwayatApplyEventService" class="com.agit.crm.application.impl.RiwayatApplyEventServiceImpl">
-        <property name="riwayatApplyEventRepository" ref="riwayatApplyEventRepository"/>
-        <property name="riwayatApplyEventDTOAssembler" ref="riwayatApplyEventDTOAssembler"/>
+    <bean id="eventStatusDTOAssembler" class="com.agit.crm.interfaces.web.facade.dto.assembler.crm.EventStatusDTOAssembler"/>
+    <bean id="eventStatusService" class="com.agit.crm.application.impl.EventStatusServiceImpl">
+        <property name="eventStatusRepository" ref="eventStatusRepository"/>
+        <property name="eventStatusDTOAssembler" ref="eventStatusDTOAssembler"/>
     </bean>
+    
 </beans>

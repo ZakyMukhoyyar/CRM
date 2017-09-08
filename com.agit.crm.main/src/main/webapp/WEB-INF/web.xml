@@ -69,6 +69,7 @@
         <servlet-name>auEngine</servlet-name>
         <url-pattern>/zkau/*</url-pattern>
     </servlet-mapping>
+    
     <servlet>
         <servlet-name>dspLoader</servlet-name>
         <servlet-class>org.zkoss.web.servlet.dsp.InterpreterServlet</servlet-class>
@@ -77,6 +78,10 @@
             <param-value>true</param-value>
         </init-param>
     </servlet>
+    <servlet-mapping>
+        <servlet-name>dspLoader</servlet-name>
+        <url-pattern>*.dsp</url-pattern>
+    </servlet-mapping>
     
     <!-- Spring Rest User Interface  -->
     

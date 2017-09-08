@@ -46,9 +46,9 @@ public class KomentarForumHibernateRepository extends HibernateRepository implem
 
     @Override
     public List<KomentarForum> findByParams(Map map) {
-        Criteria criteria = getSession().createCriteria(KomentarForum.class);
+        Criteria criteria = getSession().createCriteria(KomentarForum.class);            
         if (JDCStringUtil.hasValue(map.get("komentarID"))) {
-            criteria.add(Restrictions.eq("komentarDI", map.get("komentarID")));
+            criteria.add(Restrictions.eq("komentarID", map.get("komentarID")));
         }
         if (JDCStringUtil.hasValue(map.get("komentar"))) {
             criteria.add(Restrictions.eq("komentar", map.get("komentar")));
