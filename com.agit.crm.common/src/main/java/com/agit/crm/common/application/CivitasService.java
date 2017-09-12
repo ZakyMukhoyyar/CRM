@@ -1,6 +1,7 @@
 package com.agit.crm.common.application;
 
 import com.agit.crm.common.dto.crm.CivitasDTO;
+import com.agit.crm.shared.status.Status;
 import java.util.List;
 import java.util.Map;
 
@@ -21,4 +22,6 @@ public interface CivitasService {
     List<CivitasDTO> findAll();
 
     List<CivitasDTO> findByParams(Map map);
+
+    List<CivitasDTO> findAllByStatus(Status status);
 }

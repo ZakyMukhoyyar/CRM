@@ -2,6 +2,7 @@ package com.agit.crm.domain.infrastructure.persistance.hibernate;
 
 import com.agit.crm.domain.crm.Ketrampilan;
 import com.agit.crm.domain.crm.KetrampilanRepository;
+import com.agit.crm.shared.status.Status;
 import com.agit.crm.util.StringUtil;
 import java.util.List;
 import java.util.Map;
@@ -60,6 +61,13 @@ public class KetrampilanHibernateRepository extends HibernateRepository implemen
         }
 
         return criteria.list();
+    }
+
+    @Override
+    public List<Ketrampilan> findAllByStatus(Status status) {
+        Criteria criteria = getSession().createCriteria(Ketrampilan.class);
+        criteria.add(Restrictions.eq("status", status));
+        return (List<Ketrampilan>) criteria.list();
     }
 
 }

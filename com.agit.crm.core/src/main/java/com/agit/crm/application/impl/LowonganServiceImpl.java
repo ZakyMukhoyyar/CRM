@@ -86,7 +86,7 @@ public class LowonganServiceImpl implements LowonganService {
         /*dummy1*/
         RiwayatApplyMahasiswa riwayatApplyMahasiswa1 = new RiwayatApplyMahasiswaBuilder()
                 .setIdRiwayatApplyMahasiswa("RAM001")
-//                .setLowonganState(LowonganState.APPLY)
+                //                .setLowonganState(LowonganState.APPLY)
                 .setCreatedBy("created by")
                 .setCreatedDate(new Date())
                 .setModifiedBy("modified by")
@@ -95,7 +95,7 @@ public class LowonganServiceImpl implements LowonganService {
         /*dummy2*/
         RiwayatApplyMahasiswa riwayatApplyMahasiswa2 = new RiwayatApplyMahasiswaBuilder()
                 .setIdRiwayatApplyMahasiswa("RAM002")
-//                .setLowonganState(LowonganState.APPLY)
+                //                .setLowonganState(LowonganState.APPLY)
                 .setCreatedBy("created by")
                 .setCreatedDate(new Date())
                 .setModifiedBy("modified by")
@@ -207,7 +207,7 @@ public class LowonganServiceImpl implements LowonganService {
 
     @Override
     public void eventScheduler() {
-        
+
         List<Lowongan> list = lowonganRepository.findAll();
         Date dateNow = new Date();
         int year = dateNow.getYear();
@@ -227,6 +227,16 @@ public class LowonganServiceImpl implements LowonganService {
             }
             lowonganRepository.saveOrUpdate(evt);
         }
+    }
+
+    @Override
+    public List<LowonganDTO> findAllByStatus(Status status) {
+        Validate.notNull(lowonganRepository);
+        List<Lowongan> listLowongan = lowonganRepository.findAllByStatus(status);
+        if (listLowongan != null) {
+            return (List<LowonganDTO>) lowonganDTOAssembler.toDTOs(listLowongan);
+        }
+        return null;
     }
 
 }

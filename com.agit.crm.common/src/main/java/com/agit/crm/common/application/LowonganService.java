@@ -1,6 +1,7 @@
 package com.agit.crm.common.application;
 
 import com.agit.crm.common.dto.crm.LowonganDTO;
+import com.agit.crm.shared.status.Status;
 import java.util.List;
 import java.util.Map;
 
@@ -23,7 +24,9 @@ public interface LowonganService {
     List<LowonganDTO> findByParams(Map map);
 
     LowonganDTO findByIDUser(String userID);
-    
+
+    List<LowonganDTO> findAllByStatus(Status status);
+
     /* service untuk update status */
     void eventScheduler();
 

@@ -81,6 +81,7 @@ public class LowonganVM {
     private List<UserDTO> userDTOs = new ArrayList<>();
     private List<String> listNamaMinat = new ArrayList<>();
     private List<LowonganDTO> lowonganDTOs = new ArrayList();
+    private List<LowonganDTO> lowonganDTOs2 = new ArrayList();
     private List<MinatDTO> minats = new ArrayList<MinatDTO>();
     private List<RiwayatApplyMahasiswaDTO> riwayatApplyMahasiswaDTOs = new ArrayList<>();
     private List<RiwayatApplyMahasiswaDTO> listRiwayatApplyMahasiswaDTOs = new ArrayList<>();
@@ -140,6 +141,9 @@ public class LowonganVM {
         if (lowonganDTOs.isEmpty()) {
             lowonganDTOs = Collections.emptyList();
         }
+
+        lowonganDTOs2 = lowonganService.findAllByStatus(status.ACTIVE);
+
         for (LowonganDTO m : lowonganDTOs) {
             listLowonganID.add(m.getIdLowongan());
         }
@@ -330,6 +334,7 @@ public class LowonganVM {
         params.put("namaLowongan", namaLowongan);
         params.put("tanggalBerakhir", tanggalBerakhir);
         params.put("minatPekerjaan", minatPekerjaan);
+        params.put("status", status);
         lowonganDTOs = lowonganService.findByParams(params);
     }
 
@@ -359,6 +364,17 @@ public class LowonganVM {
         params.put("minatPekerjaan", minatPekerjaan);
         params.put("status", status);
         lowonganDTOs = lowonganService.findByParams(params);
+    }
+
+    @Command("buttonSearchLowonganMahasiswa2")
+    @NotifyChange("lowonganDTOs2")
+    public void buttonSearchLowonganMahasiswa2(@ContextParam(ContextType.VIEW) Window window) {
+        Map params = new HashMap();
+        params.put("idLowongan", idLowongan);
+        params.put("namaLowongan", namaLowongan);
+        params.put("minatPekerjaan", minatPekerjaan);
+        params.put("status", status.ACTIVE);
+        lowonganDTOs2 = lowonganService.findByParams(params);
     }
 
     @Command("buttonDetailLowongan")
@@ -429,11 +445,13 @@ public class LowonganVM {
     }
 
     public int checkCount(int count, Object object) {
-        if (StringUtil.hasValue(object)){
+        if (StringUtil.hasValue(object)) {
             count += 1;
-        }return count;
+        }
+        return count;
     }
     /* --------------------------------------------- for data pelamar functionality ---------------------------------------------------*/
+
     @Command("searchPelamar")
     @NotifyChange("listRiwayatApplyMahasiswaDTOs")
     public void searchPelamar(@ContextParam(ContextType.VIEW) Window window) {
@@ -450,7 +468,7 @@ public class LowonganVM {
             return;
         }
         listRiwayatApplyMahasiswaDTOs = riwayatApplyMahasiswaService.findByParams(params);
-    }    
+    }
 
     @Command("KlikDetailDataPelamar")
     @NotifyChange({"userDTO", "userDTOs", "lowonganDTO", "lowonganDTOs", "riwayatApplyMahasiswaDTOs", "riwayatApplyMahasiswaDTO"})
@@ -518,7 +536,7 @@ public class LowonganVM {
     public void refreshRAM() {
         riwayatApplyMahasiswaDTOs = riwayatApplyMahasiswaService.findAll();
     }
-    
+
 
     /*-------------------------------------------------------------------- getter setter --------------------------------------------------------------------*/
     public UserDTO getUser() {
@@ -831,6 +849,14 @@ public class LowonganVM {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public List<LowonganDTO> getLowonganDTOs2() {
+        return lowonganDTOs2;
+    }
+
+    public void setLowonganDTOs2(List<LowonganDTO> lowonganDTOs2) {
+        this.lowonganDTOs2 = lowonganDTOs2;
     }
 
 }

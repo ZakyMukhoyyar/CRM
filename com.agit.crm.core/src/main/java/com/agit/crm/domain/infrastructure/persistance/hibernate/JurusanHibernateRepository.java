@@ -2,6 +2,7 @@ package com.agit.crm.domain.infrastructure.persistance.hibernate;
 
 import com.agit.crm.domain.crm.Jurusan;
 import com.agit.crm.domain.crm.JurusanRepository;
+import com.agit.crm.shared.status.Status;
 import com.agit.crm.util.StringUtil;
 import java.util.List;
 import java.util.Map;
@@ -59,6 +60,13 @@ public class JurusanHibernateRepository extends HibernateRepository implements J
             criteria.add(Restrictions.eq("status", map.get("status")));
         }
         return criteria.list();
+    }
+
+    @Override
+    public List<Jurusan> findAllByStatus(Status status) {
+        Criteria criteria = getSession().createCriteria(Jurusan.class);
+        criteria.add(Restrictions.eq("status", status));
+        return (List<Jurusan>) criteria.list();
     }
 
 }

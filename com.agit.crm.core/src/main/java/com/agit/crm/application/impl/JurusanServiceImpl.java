@@ -17,7 +17,7 @@ import org.apache.commons.lang.Validate;
  * @author Zaky
  */
 public class JurusanServiceImpl implements JurusanService {
-    
+
     private JurusanRepository jurusanRepository;
     private JurusanDTOAssembler jurusanDTOAssembler;
 
@@ -88,7 +88,15 @@ public class JurusanServiceImpl implements JurusanService {
         }
         return null;
     }
-    
-    
-    
+
+    @Override
+    public List<JurusanDTO> findAllByStatus(Status status) {
+        Validate.notNull(jurusanRepository);
+        List<Jurusan> listJurusan = jurusanRepository.findAllByStatus(status);
+        if (listJurusan != null) {
+            return (List<JurusanDTO>) jurusanDTOAssembler.toDTOs(listJurusan);
+        }
+        return null;
+    }
+
 }

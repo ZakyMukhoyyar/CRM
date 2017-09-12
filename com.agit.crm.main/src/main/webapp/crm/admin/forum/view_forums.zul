@@ -7,7 +7,7 @@
                 <div class="input-group" width="30%">
                     <textbox class="form-control" width="100%" value="@bind(vm.namaForum)" placeholder="Nama Forum"/>
                     <span class="input-group-btn">
-                        <a sclass="btn btn-primary" width="100%" label="Pencarian" onClick="@command('buttonSearchForum')"/>
+                        <a sclass="btn btn-primary" width="100%" label="Pencarian" onClick="@command('buttonSearchForum2')"/>
                     </span>
                 </div>
             </div>
@@ -16,7 +16,7 @@
             <div >
                 <panel  sclass="panel-primary">
                     <panelchildren>
-                        <listbox rows="@load(vm.pageSize)" mold="paging" pageSize="@load(vm.pageSize)"  emptyMessage="${labels.common.noDataFound}" model="@bind(vm.forumDTOs)">
+                        <listbox rows="@load(vm.pageSize)" mold="paging" pageSize="@load(vm.pageSize)"  emptyMessage="${labels.common.noDataFound}" model="@bind(vm.forumuserDTOs)">
                             <listhead>
                                 <listheader width="75%" />
                             </listhead>

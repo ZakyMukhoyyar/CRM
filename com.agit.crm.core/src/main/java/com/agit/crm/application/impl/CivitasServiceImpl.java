@@ -89,4 +89,14 @@ public class CivitasServiceImpl implements CivitasService {
         return null;
     }
 
+    @Override
+    public List<CivitasDTO> findAllByStatus(Status status) {
+        Validate.notNull(civitasRepository);
+        List<Civitas> listcivitas = civitasRepository.findAllByStatus(status);
+        if (listcivitas != null) {
+            return (List<CivitasDTO>) civitasDTOAssembler.toDTOs(listcivitas);
+        }
+        return null;
+    }
+
 }

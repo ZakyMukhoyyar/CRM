@@ -16,8 +16,8 @@ import org.apache.commons.lang.Validate;
  *
  * @author Zaky
  */
-public class KetrampilanServiceImpl implements KetrampilanService{
-    
+public class KetrampilanServiceImpl implements KetrampilanService {
+
     private KetrampilanRepository ketrampilanRepository;
     private KetrampilanDTOAssembler ketrampilanDTOAssembler;
 
@@ -88,7 +88,15 @@ public class KetrampilanServiceImpl implements KetrampilanService{
         }
         return null;
     }
-    
-    
-    
+
+    @Override
+    public List<KetrampilanDTO> findAllByStatus(Status status) {
+        Validate.notNull(ketrampilanRepository);
+        List<Ketrampilan> listKetrampilan = ketrampilanRepository.findAllByStatus(status);
+        if (listKetrampilan != null) {
+            return (List<KetrampilanDTO>) ketrampilanDTOAssembler.toDTOs(listKetrampilan);
+        }
+        return null;
+    }
+
 }

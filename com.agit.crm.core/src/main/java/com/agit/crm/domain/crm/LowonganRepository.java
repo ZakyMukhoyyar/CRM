@@ -1,5 +1,6 @@
 package com.agit.crm.domain.crm;
 
+import com.agit.crm.shared.status.Status;
 import java.util.List;
 import java.util.Map;
 
@@ -18,6 +19,8 @@ public interface LowonganRepository {
     List<Lowongan> findAll();
 
     List<Lowongan> findByParams(Map map);
+
+    List<Lowongan> findAllByStatus(Status status);
 
     Lowongan findByIDUser(String userID);
 }

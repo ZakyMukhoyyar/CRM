@@ -108,4 +108,14 @@ public class ForumServiceImpl implements ForumService {
         return null;
     }
 
+    @Override
+    public List<ForumDTO> findAllByStatus(Status status) {
+        Validate.notNull(forumRepository);
+        List<Forum> listForum = forumRepository.findAllByStatus(status);
+        if (listForum != null) {
+            return (List<ForumDTO>) forumDTOAssembler.toDTOs(listForum);
+        }
+        return null;
+    }
+
 }

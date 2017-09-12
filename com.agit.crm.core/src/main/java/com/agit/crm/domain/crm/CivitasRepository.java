@@ -1,5 +1,6 @@
 package com.agit.crm.domain.crm;
 
+import com.agit.crm.shared.status.Status;
 import java.util.List;
 import java.util.Map;
 
@@ -18,4 +19,6 @@ public interface CivitasRepository {
     List<Civitas> findAll();
 
     List<Civitas> findByParams(Map map);
+    
+    List<Civitas> findAllByStatus(Status status);
 }

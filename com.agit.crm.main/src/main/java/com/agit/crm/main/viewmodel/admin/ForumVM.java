@@ -57,6 +57,7 @@ public class ForumVM {
 
     private ForumDTO forumDTO = new ForumDTO();
     private List<ForumDTO> forumDTOs = new ArrayList<>();
+    private List<ForumDTO> forumuserDTOs = new ArrayList<>();
 
     private KomentarForumDTO komentarForumDTO = new KomentarForumDTO();
     private List<KomentarForumDTO> komentarForumDTOs = new ArrayList<>();
@@ -103,6 +104,8 @@ public class ForumVM {
         if (forumDTOs.isEmpty()) {
             forumDTOs = Collections.emptyList();
         }
+        /*to User*/
+        forumuserDTOs = forumService.findAllByStatus(status.ACTIVE);
         komentarForumDTOs = komentarForumService.findAllByID(forumDTO.getIdForum());
         if (komentarForumDTOs.isEmpty()) {
             komentarForumDTOs = Collections.emptyList();
@@ -227,6 +230,27 @@ public class ForumVM {
         }
 
         forumDTOs = forumService.findByParams(params);
+    }
+
+    @Command("buttonSearchForum2")
+    @NotifyChange("forumuserDTOs")
+    public void buttonSearchForum2(@ContextParam(ContextType.VIEW) Window window) {
+        int count = 0;
+
+        Map params = new HashMap();
+        params.put("idForum", idForum);
+        count = checkCountParameter(count, idForum);
+        params.put("namaForum", namaForum);
+        count = checkCountParameter(count, namaForum);
+        params.put("status", status.ACTIVE);
+        count = checkCountParameter(count, status.ACTIVE);
+
+        if (count < 1) {
+            Messagebox.show("Minimal harus memasukkan 1 parameter pencarian", "Peringatan", Messagebox.OK, Messagebox.EXCLAMATION);
+            return;
+        }
+
+        forumuserDTOs = forumService.findByParams(params);
     }
 
     @Command("detailForum")
@@ -532,6 +556,14 @@ public class ForumVM {
 
     public void setSrc(String src) {
         this.src = src;
+    }
+
+    public List<ForumDTO> getForumuserDTOs() {
+        return forumuserDTOs;
+    }
+
+    public void setForumuserDTOs(List<ForumDTO> forumuserDTOs) {
+        this.forumuserDTOs = forumuserDTOs;
     }
 
 }

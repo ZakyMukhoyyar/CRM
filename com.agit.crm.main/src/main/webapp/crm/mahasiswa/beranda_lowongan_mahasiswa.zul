@@ -3,64 +3,29 @@
     <window border="0" apply="org.zkoss.bind.BindComposer"
             viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.admin.LowonganVM')"
             form="@id('fx') @load(vm.lowonganDTO) @save(vm.lowonganDTO, before='buttonSaveLowongan')">
-        <groupbox id="gb" mold="3d" sclass="col-md-12 nopadding "  style="background:#f5f5f5;">
-            <div sclass="col-md-3 nopadding">
-                
-                <div >
-                    <div class="form-group" style="font-style:bold;">
-                        <label sclass="isi" value="Filter Pencarian :" />
-                        <separator bar="true"/>
-                    </div>
-                    <div class="form-group">
-                        <label sclass="isi" value="ID Lowongan" />
-                        <textbox class="form-control" width="100%" value="@bind(vm.idLowongan)"/>  
-                    </div>
-                    
-                    <div class="form-group">
-                        <label sclass="isi" value="Nama Lowongan" />
-                        <textbox class="form-control" width="100%" value="@bind(vm.namaLowongan)"/>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label sclass="isi" value="Jenis Pekerjaan" />
-                        <combobox sclass="isi" autodrop="true" readonly="true" width="100%" placeholder="- Pilihan Kategori -"
-                                  model="@load(vm.listNamaMinat)" selectedItem="@bind(vm.minatPekerjaan)" >
-                            <template name="model" var="items">
-                                <comboitem label="@load(items)"  value="@load(items)" />
-                            </template>
-                        </combobox> 
-                    </div>
-                    
-                    <div class="form-group">
-                        <label sclass="isi" value="Status" />   
-                        <combobox sclass="isi" autodrop="true" width="100%" placeholder="- Pilih Status -" readonly="true"
-                        model="@load(vm.statuses)" selectedItem="@bind(vm.status)">
-                            <template name="model" var="items">
-                                <comboitem label="@load(items)" value="@load(items)"/>
-                            </template>
-                        </combobox>
-                    </div>
-                
-                    <!--                    <div class="form-group">
-                        <label sclass="isi" value="Gaji" />
-                        <combobox sclass="isi" width="100%" model="@load(vm.gaji)" selectedItem="@bind(fx.gaji)" readonly="true" placeholder="- Silahkan Pilih -">
-                            <template name="model" var="items">
-                                <comboitem label="@load(items)" value="@load(items)"/>
-                            </template>
-                        </combobox>
-                    </div>-->
-                    
-                    <div>
-                        <a sclass="isi btn btn-info" width="100%" label="Pencarian" onClick="@command('buttonSearchLowonganMahasiswa')"/>
-                        <separator />
+        <groupbox id="gb" mold="3d" sclass="col-md-12 nopadding" style="background:#f5f5f5;">
+            <div align="right">
+                <div class="input-group" width="70%">
+                    <textbox width="50%" value="@bind(vm.namaLowongan)" placeholder="Nama Lowongan"/>
+                    <combobox width="50%" model="@load(vm.listNamaMinat)"  selectedItem="@bind(vm.minatPekerjaan)" placeholder="Minat">
+                        <template name="model" var="items" >
+                            <comboitem label="@load(items)"  value="@load(items)" />
+                        </template>
+                    </combobox>
+                    <span class="input-group-btn">
+                        <a sclass="isi btn btn-info" label="Pencarian" onClick="@command('buttonSearchLowonganMahasiswa2')"/>
+                    </span>
+                    <separator width="5px"></separator>
+                    <span class="input-group-btn">
                         <a sclass="isi btn btn-info" width="100%" label="Riwayat" onClick="@command('buttonRiwayatLowongan')"/>
-                        <separator />
-                    </div>
+                    </span>
                 </div>
             </div>
-            <div sclass="col-md-9 nopadding">
-                <groupbox sclass="col-md-12">
-                    <listbox  rows="@load(vm.pageSize)" pageSize="@load(vm.pageSize)" mold="paging" emptyMessage="${labels.common.noDataFound}" model="@bind(vm.lowonganDTOs)">
+            <separator></separator>
+            <separator></separator>
+            <div >
+                <groupbox>
+                    <listbox  rows="@load(vm.pageSize)" pageSize="@load(vm.pageSize)" mold="paging" emptyMessage="${labels.common.noDataFound}" model="@bind(vm.lowonganDTOs2)">
                         <listhead >
                             <listheader sclass="isi" label="Nama Lowongan" width="50%" align="center "/>
                             <listheader sclass="isi" label="Aksi" width="7%" align="center"/>

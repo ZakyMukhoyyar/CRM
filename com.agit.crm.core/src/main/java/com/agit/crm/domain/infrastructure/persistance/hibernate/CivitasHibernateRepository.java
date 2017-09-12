@@ -2,6 +2,7 @@ package com.agit.crm.domain.infrastructure.persistance.hibernate;
 
 import com.agit.crm.domain.crm.Civitas;
 import com.agit.crm.domain.crm.CivitasRepository;
+import com.agit.crm.shared.status.Status;
 import com.agit.crm.util.StringUtil;
 import java.util.List;
 import java.util.Map;
@@ -60,6 +61,13 @@ public class CivitasHibernateRepository extends HibernateRepository implements C
         }
 
         return criteria.list();
+    }
+
+    @Override
+    public List<Civitas> findAllByStatus(Status status) {
+        Criteria criteria = getSession().createCriteria(Civitas.class);
+        criteria.add(Restrictions.eq("status", status));
+        return (List<Civitas>) criteria.list();
     }
 
 }

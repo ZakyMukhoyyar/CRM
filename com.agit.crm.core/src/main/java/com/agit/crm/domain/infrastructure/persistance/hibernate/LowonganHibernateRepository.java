@@ -3,6 +3,7 @@ package com.agit.crm.domain.infrastructure.persistance.hibernate;
 import com.agit.crm.domain.crm.Lowongan;
 import com.agit.crm.domain.crm.LowonganRepository;
 import com.agit.crm.shared.id.IdLowongan;
+import com.agit.crm.shared.status.Status;
 import com.agit.crm.util.StringUtil;
 import java.util.List;
 import java.util.Map;
@@ -75,6 +76,13 @@ public class LowonganHibernateRepository extends HibernateRepository implements 
                 .createQuery("from com.agit.crm.domain.crm.Lowongan where userID = :tid")
                 .setParameter("tid", userID)
                 .uniqueResult();
+    }
+
+    @Override
+    public List<Lowongan> findAllByStatus(Status status) {
+        Criteria criteria = getSession().createCriteria(Lowongan.class);
+        criteria.add(Restrictions.eq("status", status));
+        return (List<Lowongan>) criteria.list();
     }
 
 }

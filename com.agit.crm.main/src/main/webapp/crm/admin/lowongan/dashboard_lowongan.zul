@@ -25,6 +25,14 @@
                         </template>
                     </listbox>
                 </div>
+                <div class="form-group" style="font-style:bold;">
+                    <label sclass="isi" value="Status" />
+                    <listbox mold="select" sclass="form-control" model="@load(vm.statuses)" selectedItem="@bind(vm.status)" >
+                        <template name="model" var="items" >
+                            <listitem label="@load(items)"  value="@load(items)" />
+                        </template>
+                    </listbox>
+                </div>
                 <div>
                     <a sclass="btn btn-info" width="100%" label="Pencarian" onClick="@command('searchLowongan')"/>
                     <separator/>
@@ -41,6 +49,7 @@
                             <listheader label="Mulai" width="15%" align="center"/>
                             <listheader label="Berakhir" width="15%" align="center"/>
                             <listheader label="Kategori Kerja" width="20%" align="center"/>
+                            <listheader label="Status" width="20%" align="center"/>
                             <listheader label="Aksi" width="20%" align="center"/>
                         </listhead>
                         <template name="model">
@@ -61,8 +70,10 @@
                                     <label width="100%" value="@bind(each.minatPekerjaan)"/>
                                 </listcell>
                                 <listcell>
+                                    <label width="100%" value="@bind(each.status)"/>
+                                </listcell>
+                                <listcell>
                                     <a onClick="@command('buttonDetailLowongan', object=each)" image="/images/skk_edit.png" sclass="btn btn-default" />
-                                    <space/>
                                     <a onClick="@command('deleteLowongan', object=each)" image="/images/clear_x.png" sclass="btn btn-default"/>
                                 </listcell>
                             </listitem>

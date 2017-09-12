@@ -2,6 +2,7 @@ package com.agit.crm.domain.infrastructure.persistance.hibernate;
 
 import com.agit.crm.domain.crm.Minat;
 import com.agit.crm.domain.crm.MinatRepository;
+import com.agit.crm.shared.status.Status;
 import com.agit.crm.util.StringUtil;
 import java.util.List;
 import java.util.Map;
@@ -58,6 +59,13 @@ public class MinatHibernateRepository extends HibernateRepository implements Min
         if (StringUtil.hasValue(map.get("status"))) {
             criteria.add(Restrictions.eq("status", map.get("status")));
         }
+        return criteria.list();
+    }
+
+    @Override
+    public List<Minat> findAllByStatus(Status status) {
+        Criteria criteria = getSession().createCriteria(Minat.class);
+        criteria.add(Restrictions.eq("status", status));
         return criteria.list();
     }
 

@@ -2,6 +2,7 @@ package com.agit.crm.domain.infrastructure.persistance.hibernate;
 
 import com.agit.crm.domain.crm.Forum;
 import com.agit.crm.domain.crm.ForumRepository;
+import com.agit.crm.shared.status.Status;
 import com.agit.crm.util.StringUtil;
 import java.util.List;
 import java.util.Map;
@@ -60,6 +61,13 @@ public class ForumHibernateRepository extends HibernateRepository implements For
         }
 
         return criteria.list();
+    }
+
+    @Override
+    public List<Forum> findAllByStatus(Status status) {
+        Criteria criteria = getSession().createCriteria(Forum.class);
+        criteria.add(Restrictions.eq("status", status));
+        return (List<Forum>) criteria.list();
     }
 
 }
