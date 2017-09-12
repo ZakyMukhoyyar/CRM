@@ -14,13 +14,17 @@ import static com.agit.crm.shared.zul.CommonViewModel.showInformationMessagebox;
 import com.agit.crm.shared.zul.PageNavigation;
 import com.agit.crm.util.CommonUtil;
 import com.agit.crm.util.StringUtil;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import org.zkoss.bind.BindContext;
 import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
@@ -30,7 +34,10 @@ import org.zkoss.bind.annotation.ExecutionArgParam;
 import org.zkoss.bind.annotation.GlobalCommand;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
+import org.zkoss.io.Files;
 import org.zkoss.util.media.Media;
+import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.event.UploadEvent;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Messagebox;
@@ -65,7 +72,7 @@ public class ForumVM {
     private String komentar;
 
     private PageNavigation previous;
-    private int pageSize = 10;
+    private int pageSize = 5;
     private ListModelList<Status> statuses;
 
     /* attribut for upload file forum*/
@@ -73,6 +80,9 @@ public class ForumVM {
     String mediaNameUploadFileForum;
     private String filePathUploadFileForum;
     private String pathLocationUploadFileForum;
+    private String src;
+
+    private boolean hide;
 
     @Init
     public void init(
@@ -292,9 +302,54 @@ public class ForumVM {
         komentarForumDTO.setKomentar(komentar);
         komentarForumDTO.setIdForum(forumDTO.getIdForum());
 
+        if (pathLocationUploadFileForum != null) {
+            komentarForumDTO.setPicture(pathLocationUploadFileForum);
+        } else {
+            komentarForumDTO.setPicture("No Pict");
+        }
+
         komentarForumService.saveOrUpdate(komentarForumDTO);
         komentar = null;
+        pathLocationUploadFileForum = null;
         BindUtils.postGlobalCommand(null, null, "refreshKomentarForum", null);
+    }
+
+    @Command("buttonUploadFileKomentar")
+    @NotifyChange({"mediaNameUploadFileForum", "pathLocationUploadFileForum"})
+    public void buttonUploadFileForum(@ContextParam(ContextType.BIND_CONTEXT) BindContext ctx) throws IOException {
+        UploadEvent upEvent = null;
+        Object objUploadEvent = ctx.getTriggerEvent();
+
+        if (objUploadEvent != null && (objUploadEvent instanceof UploadEvent)) {
+            upEvent = (UploadEvent) objUploadEvent;
+        }
+
+        if (upEvent != null) {
+            mediaUploadFileForum = upEvent.getMedia();
+            Calendar now = Calendar.getInstance();
+            int year = now.get(Calendar.YEAR);
+            int month = now.get(Calendar.MONTH);
+            int day = now.get(Calendar.DAY_OF_MONTH);
+            filePathUploadFileForum = Executions.getCurrent().getDesktop().getWebApp().getRealPath("/");
+            filePathUploadFileForum = filePathUploadFileForum + "\\" + "files" + "\\" + "filekomentar" + "\\" + year + "\\" + month + "\\" + day + "\\";
+
+            File baseDir = new File(filePathUploadFileForum);
+            if (!baseDir.exists()) {
+                baseDir.mkdirs();
+            }
+
+            Files.copy(new File(filePathUploadFileForum + mediaUploadFileForum.getName()), mediaUploadFileForum.getStreamData());
+            setMediaNameUploadFileForum(filePathUploadFileForum + mediaUploadFileForum.getName());
+            pathLocationUploadFileForum = "/" + "files" + "/" + "filekomentar" + "/" + year + "/" + month + "/" + day + "/" + mediaUploadFileForum.getName();
+        } else {
+            Calendar now = Calendar.getInstance();
+            int year = now.get(Calendar.YEAR);
+            int month = now.get(Calendar.MONTH);
+            int day = now.get(Calendar.DAY_OF_MONTH);
+            mediaNameUploadFileForum = "";
+            pathLocationUploadFileForum = "/" + "files" + "/" + "filekomentar" + "/" + year + "/" + month + "/" + day + "/" + mediaUploadFileForum.getName();
+            Messagebox.show("File : " + mediaUploadFileForum + " Bukan File PDF", "Error", Messagebox.OK, Messagebox.ERROR);
+        }
     }
 
     @GlobalCommand
@@ -454,6 +509,22 @@ public class ForumVM {
 
     public void setKomentar(String komentar) {
         this.komentar = komentar;
+    }
+
+    public boolean isHide() {
+        return hide;
+    }
+
+    public void setHide(boolean hide) {
+        this.hide = hide;
+    }
+
+    public String getSrc() {
+        return src;
+    }
+
+    public void setSrc(String src) {
+        this.src = src;
     }
 
 }

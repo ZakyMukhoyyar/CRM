@@ -7,7 +7,7 @@
         </id>
         <property column="komentarID" name="komentarID" not-null="false"/>
         <property column="idForum" name="idForum" not-null="false"/>
-        <property column="komentar" name="komentar" not-null="false"/>
+        <property column="komentar" name="komentar" not-null="false" length="50000"/>
         <property column="picture" name="picture" not-null="false"/>
         <property column="userName" name="userName" not-null="false"/>
         <property column="tglKomentar" name="tglKomentar" not-null="false" type="timestamp"/>
