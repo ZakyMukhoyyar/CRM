@@ -10,7 +10,9 @@ import com.agit.crm.common.dto.crm.EventStatusDTOBuilder;
 import com.agit.crm.common.dto.crm.RiwayatApplyEventDTO;
 import com.agit.crm.common.dto.crm.RiwayatApplyEventDTOBuilder;
 import com.agit.crm.common.dto.usermanagement.UserDTO;
+import com.agit.crm.common.dto.usermanagement.UserDTOBuilder;
 import com.agit.crm.common.dto.usermanagement.UserSpecificationDTO;
+import com.agit.crm.common.dto.usermanagement.UserSpecificationDTOBuilder;
 import com.agit.crm.common.security.SecurityUtil;
 import com.agit.crm.shared.state.LowonganState;
 import com.agit.crm.shared.status.Status;
@@ -77,7 +79,7 @@ public class EventAgitVM {
     /* Object Binding UI CRM */
     private UserDTO user;
     private UserSpecificationDTO userSpecificationDTO;
-    
+
     private UserDTO userDTO = new UserDTO();
     private EventAgitDTO eventAgitDTO = new EventAgitDTO();
     private EventStatusDTO eventStatusDTO = new EventStatusDTO();
@@ -100,6 +102,8 @@ public class EventAgitVM {
     private String idEvent;
     private String idEventStatus;
     private String idRiwayatApplyEvent;
+    private String namaLengkap;
+    private String userID;
     private LowonganState lowonganState;
     private String namaEvent;
     private Date endDate;
@@ -127,7 +131,7 @@ public class EventAgitVM {
         initData();
 
         /* Check Validity */
-        checkValidity(eventAgit, eventStatus, riwayatApplyEvent, previous);
+        checkValidity(user, eventAgit, eventStatus, riwayatApplyEvent, previous);
     }
 
     private void initData() {
@@ -145,6 +149,9 @@ public class EventAgitVM {
         if (eventStatusDTOs.isEmpty()) {
             eventAgitDTOs = Collections.emptyList();
         }
+        
+        /* for init user */
+        user = userService.findByID(SecurityUtil.getUserName());
 
         /* for init riwayat apply event */
 //        userDTO = userService.findByID(SecurityUtil.getUserName());
@@ -157,11 +164,27 @@ public class EventAgitVM {
     }
 
     private void checkValidity(
+            UserDTO user,
             EventAgitDTO eventAgit,
             EventStatusDTO eventStatus,
             RiwayatApplyEventDTO riwayatApplyEvent,
             PageNavigation previous
     ) {
+        if (user == null) {
+            userSpecificationDTO = new UserSpecificationDTOBuilder()
+                    .setFullName(namaLengkap)
+                    .createUserSpecificationDTO();
+            userDTO = new UserDTOBuilder()
+                    .setUserID(userID)
+                    .setUserSpecificationDTO(userSpecificationDTO)
+                    .setCreationalBy(SecurityUtil.getUserName())
+                    .setCreationalDate(new Date())
+                    .createUserDTO();
+        } else {
+            this.userDTO = user;
+            userID = userDTO.getUserID();
+            this.previous = previous;
+        }
         /* for validity event */
         if (eventAgit == null) {
             ListModelList<EventAgitDTO> parameterList = new ListModelList<>(eventAgitService.findAll());
@@ -223,7 +246,7 @@ public class EventAgitVM {
             this.previous = previous;
         }
     }
-    
+
     /* =========== for data apply use =========== */
     @Command("buttonBackPopupAcara")
     @NotifyChange("riwayatApplyEventDTOs")
@@ -245,16 +268,45 @@ public class EventAgitVM {
         }
         listRiwayatApplyEventDTOs = riwayatApplyEventService.findByParams(params);
     }
-    
+
     @Command("KlikStatusPeserta")
-    @NotifyChange({"userDTO", "userDTOs", "riwayatApplyEventDTO" ,"riwayatApplyEventDTOs", "listRiwayatApplyEventDTOs"})
+    @NotifyChange({"userDTO", "userDTOs", "riwayatApplyEventDTO", "riwayatApplyEventDTOs", "listRiwayatApplyEventDTOs"})
     public void KlikStatusPeserta(@BindingParam("object") RiwayatApplyEventDTO obj, @ContextParam(ContextType.VIEW) Window window) {
         Map<String, Object> map = new HashMap<>();
         map.put("riwayatApplyEventDTO", obj);
         riwayatApplyEventDTOs = riwayatApplyEventService.findByParams(map);
         CommonViewModel.navigateToWithoutDetach("/crm/admin/dataApplyAcara/popup_status_acara.zul", window, map);
     }
-    
+
+    /* =========== for popup apply acara =========== */
+    @Command("buttonKonfirmasiApplyAcara")
+    @NotifyChange({"eventAgitDTO", "eventAgitDTOs",
+        "riwayatApplyEventDTO", "riwayatApplyEventDTOs",
+        "eventStatusDTO", "eventStatusDTOs"
+    })
+    public void buttonKonfirmasiApplyAcara(@BindingParam("object") EventAgitDTO obj, @ContextParam(ContextType.VIEW) Window window) {
+        Map<String, Object> params = new HashMap<>();
+        String message = "";
+        riwayatApplyEventDTO.setIdRiwayatEvent(eventAgitDTO.getIdEvent());
+        riwayatApplyEventDTO.setIdUserRiwayat(user.getUserID());
+        riwayatApplyEventDTO.setNamaEvent(eventAgitDTO.getNamaEvent());
+        riwayatApplyEventDTO.setNamaPelamar(user.getUserSpecificationDTO().getFullName());
+        riwayatApplyEventDTO.setLowonganState(LowonganState.APPLY);
+        riwayatApplyEventDTO.setCreatedBy(user.getUserSpecificationDTO().getFullName());
+        riwayatApplyEventDTO.setCreatedDate(new Date());
+        riwayatApplyEventService.saveOrUpdate(riwayatApplyEventDTO);
+
+        eventStatusDTO.setIdEvent(eventAgitDTO.getIdEvent());
+        eventStatusDTO.setIdUser(userDTO.getUserID());
+        eventStatusDTO.setLowonganState(LowonganState.APPLY);
+        eventStatusDTO.setCreatedBy(userDTO.getUserSpecificationDTO().getFullName());
+        eventStatusDTO.setCreatedDate(new Date());
+        eventStatusService.saveOrUpdate(eventStatusDTO);
+
+        BindUtils.postGlobalCommand(null, null, "refreshEventAgit", null);
+        window.detach();
+    }
+
     /* =========== for data event admin use =========== */
     @Command("buttonUploadEventAgit")
     @NotifyChange({"mediaNameUploadEventAgit", "pathLocationUploadEventAgit"})
@@ -393,7 +445,6 @@ public class EventAgitVM {
 
 
     /* =========== getter setter =========== */
-    
     protected String getLatestObjectID(ListModelList list, String attribute) {
         int count = 0;
         int pointer = 0;
@@ -448,7 +499,7 @@ public class EventAgitVM {
         }
         return count;
     }
-    
+
     public EventAgitDTO getEventAgitDTO() {
         return eventAgitDTO;
     }
@@ -632,5 +683,53 @@ public class EventAgitVM {
     public void setListRiwayatApplyEventDTOs(List<RiwayatApplyEventDTO> listRiwayatApplyEventDTOs) {
         this.listRiwayatApplyEventDTOs = listRiwayatApplyEventDTOs;
     }
-    
+
+    public UserDTO getUser() {
+        return user;
+    }
+
+    public void setUser(UserDTO user) {
+        this.user = user;
+    }
+
+    public UserSpecificationDTO getUserSpecificationDTO() {
+        return userSpecificationDTO;
+    }
+
+    public void setUserSpecificationDTO(UserSpecificationDTO userSpecificationDTO) {
+        this.userSpecificationDTO = userSpecificationDTO;
+    }
+
+    public UserDTO getUserDTO() {
+        return userDTO;
+    }
+
+    public void setUserDTO(UserDTO userDTO) {
+        this.userDTO = userDTO;
+    }
+
+    public List<UserDTO> getUserDTOs() {
+        return userDTOs;
+    }
+
+    public void setUserDTOs(List<UserDTO> userDTOs) {
+        this.userDTOs = userDTOs;
+    }
+
+    public String getNamaLengkap() {
+        return namaLengkap;
+    }
+
+    public void setNamaLengkap(String namaLengkap) {
+        this.namaLengkap = namaLengkap;
+    }
+
+    public String getUserID() {
+        return userID;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
+
 }

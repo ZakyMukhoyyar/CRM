@@ -1,11 +1,16 @@
 package com.agit.crm.main.viewmodel;
 
 import com.agit.crm.common.application.EventAgitService;
+import com.agit.crm.common.application.EventStatusService;
+import com.agit.crm.common.application.RiwayatApplyEventService;
 import com.agit.crm.common.dto.crm.EventAgitDTO;
+import com.agit.crm.common.dto.crm.EventStatusDTO;
+import com.agit.crm.common.dto.crm.RiwayatApplyEventDTO;
 import com.agit.crm.common.dto.usermanagement.UserDTO;
 import com.agit.crm.common.security.SecurityUtil;
 import com.agit.crm.shared.status.Status;
 import com.agit.crm.shared.zul.CommonViewModel;
+import static com.agit.crm.shared.zul.CommonViewModel.showInformationMessagebox;
 import com.agit.crm.shared.zul.PageNavigation;
 import com.agit.crm.util.DateUtil;
 import java.util.ArrayList;
@@ -13,10 +18,12 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.ContextParam;
 import org.zkoss.bind.annotation.ContextType;
+import org.zkoss.bind.annotation.GlobalCommand;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
@@ -30,6 +37,12 @@ public class DashboardVM {
 
     @WireVariable
     EventAgitService eventAgitService;
+    
+    @WireVariable
+    EventStatusService eventStatusService;
+    
+    @WireVariable
+    RiwayatApplyEventService riwayatApplyEventService;
 
     /* data user */
     private UserDTO user;
@@ -39,8 +52,15 @@ public class DashboardVM {
 
     private String src;
 
-    private List<EventAgitDTO> eventAgitDTOs = new ArrayList<>();
+//    private UserDTO userDTO;
     private EventAgitDTO eventAgitDTO;
+    private EventStatusDTO eventStatusDTO;
+    private RiwayatApplyEventDTO riwayatApplyEventDTO;
+    
+//    private List<UserDTO> userDTOs = new ArrayList<>();
+    private List<EventAgitDTO> eventAgitDTOs = new ArrayList<>();
+    private List<EventStatusDTO> eventStatusDTOs = new ArrayList<>();
+    private List<RiwayatApplyEventDTO> riwayatApplyEventDTOs = new ArrayList<>();
 
     private PageNavigation previous;
     private boolean checked;
@@ -56,10 +76,6 @@ public class DashboardVM {
         params.put("status", status);
         eventAgitDTOs = eventAgitService.findByParams(params);
         
-//        eventAgitDTOs = eventAgitService.findAll();
-//        if (!eventAgitDTOs.isEmpty()) {
-//            eventAgitDTO = eventAgitDTOs.get(0);
-//        }
         userNPWP = SecurityUtil.getUserName();
         role = SecurityUtil.getUser().getRoleDTO().getRoleID();
         user = SecurityUtil.getUser();
@@ -81,6 +97,31 @@ public class DashboardVM {
         Map<String, Object> params = new HashMap<>();
         params.put("eventAgitDTO", obj);
         CommonViewModel.navigateToWithoutDetach("/crm/admin/event/previewEventAgit.zul", window, params);
+    }
+    
+    @Command("buttonApplyAcara")
+    @NotifyChange({"eventAgitDTO", "eventAgitDTOs"})
+    public void buttonApplyAcara(@BindingParam("object") EventAgitDTO obj, @ContextParam(ContextType.VIEW) Window window) {
+        
+//        user = userService.findByID(SecurityUtil.getUserName());
+        Map map = new HashMap();    
+        map.put("idUser", user.getUserID());
+        map.put("idEvent", obj.getIdEvent());
+        eventStatusDTOs = eventStatusService.findByParams2(map);
+        if (eventStatusDTOs.isEmpty()) {
+            BindUtils.postGlobalCommand(null, null, "refreshAcara", null);
+            Map<String, Object> params = new HashMap<>();
+            params.put("eventAgitDTO", obj);
+            CommonViewModel.navigateToWithoutDetach("/crm/mahasiswa/popup_apply_acara.zul", window, params);
+        } else {
+            showInformationMessagebox("Anda Sudah Pernah Menghadiri Acara Ini");
+        }
+    }
+    
+    @GlobalCommand
+    @NotifyChange("eventAgitDTOs")
+    public void refreshAcara() {
+        eventAgitDTOs = eventAgitService.findAll();
     }
 
     @Command("buttonClosePreview")
@@ -104,6 +145,23 @@ public class DashboardVM {
     }
 
     /* Getter&Setter */
+
+    public RiwayatApplyEventDTO getRiwayatApplyEventDTO() {
+        return riwayatApplyEventDTO;
+    }
+
+    public void setRiwayatApplyEventDTO(RiwayatApplyEventDTO riwayatApplyEventDTO) {
+        this.riwayatApplyEventDTO = riwayatApplyEventDTO;
+    }
+
+    public List<RiwayatApplyEventDTO> getRiwayatApplyEventDTOs() {
+        return riwayatApplyEventDTOs;
+    }
+
+    public void setRiwayatApplyEventDTOs(List<RiwayatApplyEventDTO> riwayatApplyEventDTOs) {
+        this.riwayatApplyEventDTOs = riwayatApplyEventDTOs;
+    }
+        
     public String getUserNPWP() {
         return userNPWP;
     }
@@ -206,6 +264,22 @@ public class DashboardVM {
 
     public void setTotalSize(int totalSize) {
         this.totalSize = totalSize;
+    }
+
+    public EventStatusDTO getEventStatusDTO() {
+        return eventStatusDTO;
+    }
+
+    public void setEventStatusDTO(EventStatusDTO eventStatusDTO) {
+        this.eventStatusDTO = eventStatusDTO;
+    }
+
+    public List<EventStatusDTO> getEventStatusDTOs() {
+        return eventStatusDTOs;
+    }
+
+    public void setEventStatusDTOs(List<EventStatusDTO> eventStatusDTOs) {
+        this.eventStatusDTOs = eventStatusDTOs;
     }
 
 }
