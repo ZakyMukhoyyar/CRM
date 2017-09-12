@@ -53,7 +53,9 @@ public class RiwayatApplyEventHibernateRepository extends HibernateRepository im
         if (JDCStringUtil.hasValue(map.get("idRiwayatEvent"))) {
             criteria.add(Restrictions.eq("idRiwayatEvent", map.get("idRiwayatEvent")));
         }
-
+        if (JDCStringUtil.hasValue(map.get("namaEvent"))) {
+            criteria.add(Restrictions.like("namaEvent", map.get("namaEvent")));
+        }
         return criteria.list();
     }
 

@@ -78,15 +78,15 @@ public class RiwayatApplyEventServiceImpl implements RiwayatApplyEventService {
     @Override
     public RiwayatApplyEventDTO getDummy() {
         return new RiwayatApplyEventDTOBuilder()
-                .setIdRiwayatApplyEvent("A001")
-                .setIdRiwayatEvent("AA01")
-                .setIdUserRiwayat("U01")
-                .setNamaPelamar("Pelamar")
-                .setNamaEvent("Event")
+                .setIdRiwayatApplyEvent("RAE0001")
+                .setIdRiwayatEvent("EVT01")
+                .setIdUserRiwayat("USER001")
+                .setNamaPelamar("Peserta")
+                .setNamaEvent("Bootcamp Ke-1")
                 .setLowonganState(LowonganState.APPLY)
-                .setCreatedBy(null)
+                .setCreatedBy("SYSTEM")
                 .setCreatedDate(new Date())
-                .setModifiedBy(null)
+                .setModifiedBy("SYSTEM")
                 .setModifiedDate(new Date())
                 .createRiwayatApplyEventDTO();
     }

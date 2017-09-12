@@ -58,8 +58,8 @@
                             <label sclass="isi " width="100%" value="@bind(each.endDate)"/>
                         </listcell>
                         <listcell>
-                            <a sclass="isi btn btn-primary" label="Lihat"  onClick="@command('buttonKlikEvent', object=each)"></a>
-                            <a sclass="isi btn btn-primary" label="Daftar"></a>
+                            <a sclass="isi btn btn-primary" label="Lihat"  onClick="@command('buttonKlikEvent', object=each)"/>
+                            <a sclass="isi btn btn-primary" label="Daftar" onClick="@command('buttonApplyAcara', object=each)"/>
                         </listcell>
                     </listitem>
                 </template>

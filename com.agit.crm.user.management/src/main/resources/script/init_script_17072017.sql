@@ -24,19 +24,20 @@ INSERT INTO "public"."mst_privilege" VALUES ('18', 'MENU_MANAGEMENT', 'Menu Dash
 INSERT INTO "public"."mst_privilege" VALUES ('19', 'ADMIN_MANAGEMENT', 'Admin', 'ACTIVE', 'ADMINISTRATOR', 't', 'Pengelolaan Admin', null, null, null, '2016-01-01 00:00:00', 'SYSTEM');
 INSERT INTO "public"."mst_privilege" VALUES ('20', 'EVENT_MANAGEMENT', 'Event Management', 'ACTIVE', 'ADMIN_MANAGEMENT', 't', 'Beranda - Acara', 'Beranda - Acara', null, '/crm/admin/event/dashboard_event.zul', '2016-01-01 00:00:00', 'SYSTEM');
 INSERT INTO "public"."mst_privilege" VALUES ('21', 'FORUM_MANAGEMENT', 'Forum Management', 'ACTIVE', 'ADMIN_MANAGEMENT', 't', 'Beranda - Forum', 'Beranda - Forum', null, '/crm/admin/forum/dashboard_forum.zul', '2016-01-01 00:00:00', 'SYSTEM');
-INSERT INTO "public"."mst_privilege" VALUES ('23', 'KETRAMPILAN_MANAGEMENT', 'Ketrampilan Management', 'ACTIVE', 'ADMIN_MANAGEMENT', 't', 'Beranda - Data History Ketrampilan', 'Beranda - Data History Ketrampilan', null, '/crm/admin/ketrampilan/dashboard_ketrampilan.zul', '2016-01-01 00:00:00', 'SYSTEM');
-INSERT INTO "public"."mst_privilege" VALUES ('24', 'MINAT_MANAGEMENT', 'Minat Management', 'ACTIVE', 'ADMIN_MANAGEMENT', 't', 'Beranda - Data History Minat', 'Beranda - Data History Minat', null, '/crm/admin/minat/dashboard_minat.zul', '2016-01-01 00:00:00', 'SYSTEM');
-INSERT INTO "public"."mst_privilege" VALUES ('25', 'LOWONGAN_MANAGEMENT', 'Lowongan Management', 'ACTIVE', 'ADMIN_MANAGEMENT', 't', 'Beranda - Lowongan', 'Beranda - Lowongan', null, '/crm/admin/lowongan/dashboard_lowongan.zul', '2016-01-01 00:00:00', 'SYSTEM');
-INSERT INTO "public"."mst_privilege" VALUES ('26', 'JURUSAN_MANAGEMENT', 'Jurusan Management', 'ACTIVE', 'ADMIN_MANAGEMENT', 't', 'Beranda - Data History Jurusan', 'Beranda - Data History Jurusan', null, '/crm/admin/jurusan/dashboard_jurusan.zul', '2016-01-01 00:00:00', 'SYSTEM');
-INSERT INTO "public"."mst_privilege" VALUES ('27', 'DATA_MAHASISWA', 'Dashboard Data Mahasiswa', 'ACTIVE', 'ADMIN_MANAGEMENT', 't', 'Beranda - Mahasiswa', 'Beranda - Mahasiswa', null, '/crm/admin/dataRegister/dashboard_data_register_mahasiswa.zul', '2016-01-01 00:00:00', 'SYSTEM');
-INSERT INTO "public"."mst_privilege" VALUES ('28', 'DATA_APPLY', 'Dashboard Data Apply Lowongan', 'ACTIVE', 'ADMIN_MANAGEMENT', 't', 'Beranda - Data Apply Lowongan', 'Beranda - Data Apply Lowongan', null, '/crm/admin/dataApplyLowongan/dashboard_pelamar.zul', '2016-01-01 00:00:00', 'SYSTEM');
-INSERT INTO "public"."mst_privilege" VALUES ('32', 'DATA_CIVITAS', 'Dashboard Data Civitas', 'ACTIVE', 'ADMIN_MANAGEMENT', 't', 'Beranda - Data History Civitas', 'Beranda - Data History Civitas', null, '/crm/admin/civitas/dashboard_civitas.zul', '2016-01-01 00:00:00', 'SYSTEM');
-INSERT INTO "public"."mst_privilege" VALUES ('33', 'DATA_DOMISILI', 'Dashboard Data Domisili', 'ACTIVE', 'ADMIN_MANAGEMENT', 't', 'Beranda - Data History Domisili', 'Beranda - Data History Domisili', null, '/crm/admin/domisili/dashboard_domisili.zul', '2016-01-01 00:00:00', 'SYSTEM');
+INSERT INTO "public"."mst_privilege" VALUES ('22', 'KETRAMPILAN_MANAGEMENT', 'Ketrampilan Management', 'ACTIVE', 'ADMIN_MANAGEMENT', 't', 'Beranda - Data History Ketrampilan', 'Beranda - Data History Ketrampilan', null, '/crm/admin/ketrampilan/dashboard_ketrampilan.zul', '2016-01-01 00:00:00', 'SYSTEM');
+INSERT INTO "public"."mst_privilege" VALUES ('23', 'MINAT_MANAGEMENT', 'Minat Management', 'ACTIVE', 'ADMIN_MANAGEMENT', 't', 'Beranda - Data History Minat', 'Beranda - Data History Minat', null, '/crm/admin/minat/dashboard_minat.zul', '2016-01-01 00:00:00', 'SYSTEM');
+INSERT INTO "public"."mst_privilege" VALUES ('24', 'LOWONGAN_MANAGEMENT', 'Lowongan Management', 'ACTIVE', 'ADMIN_MANAGEMENT', 't', 'Beranda - Lowongan', 'Beranda - Lowongan', null, '/crm/admin/lowongan/dashboard_lowongan.zul', '2016-01-01 00:00:00', 'SYSTEM');
+INSERT INTO "public"."mst_privilege" VALUES ('25', 'JURUSAN_MANAGEMENT', 'Jurusan Management', 'ACTIVE', 'ADMIN_MANAGEMENT', 't', 'Beranda - Data History Jurusan', 'Beranda - Data History Jurusan', null, '/crm/admin/jurusan/dashboard_jurusan.zul', '2016-01-01 00:00:00', 'SYSTEM');
+INSERT INTO "public"."mst_privilege" VALUES ('26', 'DATA_MAHASISWA', 'Dashboard Data Mahasiswa', 'ACTIVE', 'ADMIN_MANAGEMENT', 't', 'Beranda - Mahasiswa', 'Beranda - Mahasiswa', null, '/crm/admin/dataRegister/dashboard_data_register_mahasiswa.zul', '2016-01-01 00:00:00', 'SYSTEM');
+INSERT INTO "public"."mst_privilege" VALUES ('27', 'DATA_APPLY_LOWONGAN', 'Dashboard Data Apply Lowongan', 'ACTIVE', 'ADMIN_MANAGEMENT', 't', 'Beranda - Data Apply Lowongan', 'Beranda - Data Apply Lowongan', null, '/crm/admin/dataApplyLowongan/dashboard_pelamar.zul', '2016-01-01 00:00:00', 'SYSTEM');
+INSERT INTO "public"."mst_privilege" VALUES ('28', 'DATA_APPLY_EVENT', 'Dashboard Data Apply Acara', 'ACTIVE', 'ADMIN_MANAGEMENT', 't', 'Beranda - Data Apply Acara', 'Beranda - Data Apply Acara', null, '/crm/admin/dataApplyAcara/dashboard_apply_pelamar.zul', '2016-01-01 00:00:00', 'SYSTEM');
+INSERT INTO "public"."mst_privilege" VALUES ('29', 'DATA_CIVITAS', 'Dashboard Data Civitas', 'ACTIVE', 'ADMIN_MANAGEMENT', 't', 'Beranda - Data History Civitas', 'Beranda - Data History Civitas', null, '/crm/admin/civitas/dashboard_civitas.zul', '2016-01-01 00:00:00', 'SYSTEM');
+INSERT INTO "public"."mst_privilege" VALUES ('30', 'DATA_DOMISILI', 'Dashboard Data Domisili', 'ACTIVE', 'ADMIN_MANAGEMENT', 't', 'Beranda - Data History Domisili', 'Beranda - Data History Domisili', null, '/crm/admin/domisili/dashboard_domisili.zul', '2016-01-01 00:00:00', 'SYSTEM');
 
-INSERT INTO "public"."mst_privilege" VALUES ('29', 'MAHASISWA_MANAGEMENT', 'Admin', 'ACTIVE', 'ADMINISTRATOR', 't', 'Pengelolaan Data Mahasiswa', null, null, null, '2016-01-01 00:00:00', 'SYSTEM');
-INSERT INTO "public"."mst_privilege" VALUES ('31', 'LOWONGAN', 'Beranda Lowongan', 'ACTIVE', 'MAHASISWA_MANAGEMENT', 't', 'Informasi - Lowongan', 'Informasi - Lowongan', null, '/crm/mahasiswa/beranda_lowongan_mahasiswa.zul', '2016-01-01 00:00:00', 'SYSTEM');
-INSERT INTO "public"."mst_privilege" VALUES ('34', 'PROFILE', 'Update Profile', 'ACTIVE', 'MAHASISWA_MANAGEMENT', 't', 'Profil - Profilku', 'Profil - Profilku', null, '/crm/mahasiswa/beranda_profile_mahasiswa.zul', '2016-01-01 00:00:00', 'SYSTEM');
-INSERT INTO "public"."mst_privilege" VALUES ('37', 'FORUM', 'Beranda Mahasiswa Forum', 'ACTIVE', 'MAHASISWA_MANAGEMENT', 't', 'Informasi - Forum', 'Informasi - Forum', null, '/crm/admin/forum/view_forums.zul', '2016-01-01 00:00:00', 'SYSTEM');
+INSERT INTO "public"."mst_privilege" VALUES ('31', 'MAHASISWA_MANAGEMENT', 'Admin', 'ACTIVE', 'ADMINISTRATOR', 't', 'Pengelolaan Data Mahasiswa', null, null, null, '2016-01-01 00:00:00', 'SYSTEM');
+INSERT INTO "public"."mst_privilege" VALUES ('32', 'LOWONGAN', 'Beranda Lowongan', 'ACTIVE', 'MAHASISWA_MANAGEMENT', 't', 'Informasi - Lowongan', 'Informasi - Lowongan', null, '/crm/mahasiswa/beranda_lowongan_mahasiswa.zul', '2016-01-01 00:00:00', 'SYSTEM');
+INSERT INTO "public"."mst_privilege" VALUES ('33', 'PROFILE', 'Update Profile', 'ACTIVE', 'MAHASISWA_MANAGEMENT', 't', 'Profil - Profilku', 'Profil - Profilku', null, '/crm/mahasiswa/beranda_profile_mahasiswa.zul', '2016-01-01 00:00:00', 'SYSTEM');
+INSERT INTO "public"."mst_privilege" VALUES ('34', 'FORUM', 'Beranda Mahasiswa Forum', 'ACTIVE', 'MAHASISWA_MANAGEMENT', 't', 'Informasi - Forum', 'Informasi - Forum', null, '/crm/admin/forum/view_forums.zul', '2016-01-01 00:00:00', 'SYSTEM');
 
 INSERT INTO "public"."mst_privilege" VALUES ('35', 'RECRUITER_MANAGEMENT', 'Admin', 'ACTIVE', 'ADMINISTRATOR', 't', 'Pengelolaan Data Pelamar', null, null, null, '2016-01-01 00:00:00', 'SYSTEM');
 INSERT INTO "public"."mst_privilege" VALUES ('36', 'DATA_PELAMAR', 'Data Pelamar', 'ACTIVE', 'RECRUITER_MANAGEMENT', 't', 'Data - Pelamar', 'Data - Pelamar', null, '/crm/recruiter/DashboardRecruiter.zul', '2016-01-01 00:00:00', 'SYSTEM');
@@ -54,8 +55,8 @@ INSERT INTO "public"."mst_role" VALUES ('4', 'RECUITER', 'RECUITER', 'RECUITER',
 -- ----------------------------
 INSERT INTO "public"."mst_role_privilege" VALUES ('1', '1', 'ALLOW', '0');
 INSERT INTO "public"."mst_role_privilege" VALUES ('2', '19', 'ALLOW', '0');
-INSERT INTO "public"."mst_role_privilege" VALUES ('2', '29', 'ALLOW', '1');
-INSERT INTO "public"."mst_role_privilege" VALUES ('3', '29', 'ALLOW', '0');
+INSERT INTO "public"."mst_role_privilege" VALUES ('2', '31', 'ALLOW', '1');
+INSERT INTO "public"."mst_role_privilege" VALUES ('3', '31', 'ALLOW', '0');
 INSERT INTO "public"."mst_role_privilege" VALUES ('4', '35', 'ALLOW', '0');
 
 -- ----------------------------

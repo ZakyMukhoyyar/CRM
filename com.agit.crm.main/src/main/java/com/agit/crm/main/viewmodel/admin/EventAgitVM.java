@@ -1,13 +1,23 @@
 package com.agit.crm.main.viewmodel.admin;
 
 import com.agit.crm.common.application.EventAgitService;
+import com.agit.crm.common.application.EventStatusService;
+import com.agit.crm.common.application.RiwayatApplyEventService;
 import com.agit.crm.common.dto.crm.EventAgitDTO;
 import com.agit.crm.common.dto.crm.EventAgitDTOBuilder;
+import com.agit.crm.common.dto.crm.EventStatusDTO;
+import com.agit.crm.common.dto.crm.EventStatusDTOBuilder;
+import com.agit.crm.common.dto.crm.RiwayatApplyEventDTO;
+import com.agit.crm.common.dto.crm.RiwayatApplyEventDTOBuilder;
+import com.agit.crm.common.dto.usermanagement.UserDTO;
+import com.agit.crm.common.dto.usermanagement.UserSpecificationDTO;
 import com.agit.crm.common.security.SecurityUtil;
+import com.agit.crm.shared.state.LowonganState;
 import com.agit.crm.shared.status.Status;
 import com.agit.crm.shared.zul.CommonViewModel;
 import static com.agit.crm.shared.zul.CommonViewModel.showInformationMessagebox;
 import com.agit.crm.shared.zul.PageNavigation;
+import com.agit.crm.user.management.application.UserService;
 import com.agit.crm.util.CommonUtil;
 import com.agit.crm.util.StringUtil;
 import java.io.File;
@@ -55,16 +65,45 @@ public class EventAgitVM {
     @WireVariable
     EventAgitService eventAgitService;
 
-    /* Object Binding UI CRM */
-    private EventAgitDTO eventAgitDTO = new EventAgitDTO();
-    private List<EventAgitDTO> eventAgitDTOs = new ArrayList<>();
+    @WireVariable
+    EventStatusService eventStatusService;
 
+    @WireVariable
+    RiwayatApplyEventService riwayatApplyEventService;
+
+    @WireVariable
+    UserService userService;
+
+    /* Object Binding UI CRM */
+    private UserDTO user;
+    private UserSpecificationDTO userSpecificationDTO;
+    
+    private UserDTO userDTO = new UserDTO();
+    private EventAgitDTO eventAgitDTO = new EventAgitDTO();
+    private EventStatusDTO eventStatusDTO = new EventStatusDTO();
+    private RiwayatApplyEventDTO riwayatApplyEventDTO = new RiwayatApplyEventDTO();
+
+    private List<UserDTO> userDTOs = new ArrayList<>();
+    private List<EventAgitDTO> eventAgitDTOs = new ArrayList<>();
+    private List<EventStatusDTO> eventStatusDTOs = new ArrayList<>();
+    private List<RiwayatApplyEventDTO> riwayatApplyEventDTOs = new ArrayList<>();
+    private List<RiwayatApplyEventDTO> listRiwayatApplyEventDTOs = new ArrayList<>();
+
+    /* for drop down */
+    private ListModelList<Status> statuses;
+    private ListModelList<LowonganState> lowonganStates;
+
+    /* for string list container */
+    private List<String> listNamaEvent = new ArrayList<>();
+
+    /* for variable container */
     private String idEvent;
+    private String idEventStatus;
+    private String idRiwayatApplyEvent;
+    private LowonganState lowonganState;
     private String namaEvent;
     private Date endDate;
     private Status status;
-
-    private ListModelList<Status> statuses;
 
     /* attribut for CRM */
     private PageNavigation previous;
@@ -78,25 +117,52 @@ public class EventAgitVM {
 
     @Init
     public void init(
+            @ExecutionArgParam("userDTO") UserDTO user,
             @ExecutionArgParam("eventAgitDTO") EventAgitDTO eventAgit,
+            @ExecutionArgParam("eventStatusDTO") EventStatusDTO eventStatus,
+            @ExecutionArgParam("riwayatApplyEventDTO") RiwayatApplyEventDTO riwayatApplyEvent,
             @ExecutionArgParam("previous") PageNavigation previous) {
 
         /* Load Data */
         initData();
 
         /* Check Validity */
-        checkValidity(eventAgit, previous);
+        checkValidity(eventAgit, eventStatus, riwayatApplyEvent, previous);
     }
 
     private void initData() {
-
+        /* for init event */
         eventAgitDTOs = eventAgitService.findAll();
         if (eventAgitDTOs.isEmpty()) {
             eventAgitDTOs = Collections.emptyList();
         }
+        for (EventAgitDTO listEvent : eventAgitDTOs) {
+            listNamaEvent.add(listEvent.getNamaEvent());
+        }
+
+        /* for init event status */
+        eventStatusDTOs = eventStatusService.findAll();
+        if (eventStatusDTOs.isEmpty()) {
+            eventAgitDTOs = Collections.emptyList();
+        }
+
+        /* for init riwayat apply event */
+//        userDTO = userService.findByID(SecurityUtil.getUserName());
+//        Map<String, Object> map = new HashMap();
+//        map.put("idUserRiwayat", userDTO.getUserID());
+//        riwayatApplyEventDTOs = riwayatApplyEventService.findByParams(map);
+//        if (riwayatApplyEventDTOs.isEmpty()) {
+//            riwayatApplyEventDTOs = Collections.emptyList();
+//        }
     }
 
-    private void checkValidity(EventAgitDTO eventAgit, PageNavigation previous) {
+    private void checkValidity(
+            EventAgitDTO eventAgit,
+            EventStatusDTO eventStatus,
+            RiwayatApplyEventDTO riwayatApplyEvent,
+            PageNavigation previous
+    ) {
+        /* for validity event */
         if (eventAgit == null) {
             ListModelList<EventAgitDTO> parameterList = new ListModelList<>(eventAgitService.findAll());
             String idEvent = "";
@@ -116,56 +182,80 @@ public class EventAgitVM {
             mediaNameUploadEventAgit = eventAgitDTO.getAttachment();
             this.previous = previous;
         }
-    }
 
-    protected String getLatestObjectID(ListModelList list, String attribute) {
-        int count = 0;
-        int pointer = 0;
-        int max = 0;
-        String s = "";
-        for (Object obj : list) {
-            Map<String, Object> map = CommonUtil.convertObject2Map(obj);
-            String att = attribute;
-            String[] arr = new String[attribute.length()];
-            String key = "";
-
-            if (att.contains(".")) {
-                arr = att.split("\\.");
-                int f = 1;
-                for (Object x : arr) {
-                    if (f != arr.length) {
-                        map = CommonUtil.convertObject2Map(map.get(x.toString()));
-                    } else {
-                        key = x.toString();
-                    }
-                    f += 1;
-                }
+        /* for validity event status */
+        if (eventStatus == null) {
+            ListModelList<EventStatusDTO> parameterList = new ListModelList<>(eventStatusService.findAll());
+            String idEventStatus = "";
+            if (parameterList.isEmpty()) {
+                idEventStatus = "EVTSTS0001";
             } else {
-                key = att;
+                idEventStatus = getLatestObjectID(parameterList, "idEventStatus");
             }
-
-            att = map.get(key).toString();
-
-            String temp = "";
-            int countTemp = 0;
-            for (int i = att.length(); i > 0; i--) {
-                if (Character.isLetter(att.charAt(i - 1))) {
-                    pointer = i;
-                    s = att.substring(0, pointer);
-                    break;
-                }
-                countTemp += 1;
-                temp = att.charAt(i - 1) + temp;
-            }
-            if (Integer.parseInt(temp) > max) {
-                max = Integer.parseInt(temp);
-            }
-            count = countTemp;
+            eventStatusDTO = new EventStatusDTOBuilder()
+                    .setIdEventStatus(idEventStatus)
+                    .setCreatedBy(SecurityUtil.getUserName())
+                    .setCreatedDate(new Date())
+                    .createEventStatusDTO();
+        } else {
+            this.eventStatusDTO = eventStatus;
+            idEventStatus = eventStatusDTO.getIdEventStatus();
+            this.previous = previous;
         }
 
-        return s + String.format("%0" + count + "d", max + 1);
+        /* for validity riwayat apply event */
+        if (riwayatApplyEvent == null) {
+            ListModelList<RiwayatApplyEventDTO> parameterList = new ListModelList<>(riwayatApplyEventService.findAll());
+            String idRiwayatApplyEvent = "";
+            if (parameterList.isEmpty()) {
+                idRiwayatApplyEvent = "RAE0001";
+            } else {
+                idRiwayatApplyEvent = getLatestObjectID(parameterList, "idRiwayatApplyEvent");
+            }
+            riwayatApplyEventDTO = new RiwayatApplyEventDTOBuilder()
+                    .setIdRiwayatApplyEvent(idRiwayatApplyEvent)
+                    .setCreatedBy(SecurityUtil.getUserName())
+                    .setCreatedDate(new Date())
+                    .createRiwayatApplyEventDTO();
+        } else {
+            this.riwayatApplyEventDTO = riwayatApplyEvent;
+            idRiwayatApplyEvent = riwayatApplyEventDTO.getIdRiwayatApplyEvent();
+            this.previous = previous;
+        }
+    }
+    
+    /* =========== for data apply use =========== */
+    @Command("buttonBackPopupAcara")
+    @NotifyChange("riwayatApplyEventDTOs")
+    public void buttonBackPopupAcara(@ContextParam(ContextType.VIEW) Window window) {
+        window.detach();
     }
 
+    @Command("searchAttendance")
+    @NotifyChange("listRiwayatApplyEventDTOs")
+    public void searchAttendance(@ContextParam(ContextType.VIEW) Window window) {
+
+        int count = 0;
+        Map params = new HashMap();
+        params.put("namaEvent", namaEvent);
+        count = checkCount(count, namaEvent);
+        if (count < 1) {
+            Messagebox.show("Minimal harus memasukkan 1 parameter pencarian", "Peringatan", Messagebox.OK, Messagebox.EXCLAMATION);
+            return;
+        }
+        listRiwayatApplyEventDTOs = riwayatApplyEventService.findByParams(params);
+    }
+    
+    @Command("KlikStatusPeserta")
+    @NotifyChange({"userDTO", "userDTOs", "riwayatApplyEventDTO" ,"riwayatApplyEventDTOs", "listRiwayatApplyEventDTOs"})
+    public void KlikStatusPeserta(@BindingParam("object") RiwayatApplyEventDTO obj, @ContextParam(ContextType.VIEW) Window window) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("riwayatApplyEventDTO", obj);
+        riwayatApplyEventDTOs = riwayatApplyEventService.findByParams(map);
+        CommonViewModel.navigateToWithoutDetach("/crm/admin/dataApplyAcara/popup_status_acara.zul", window, map);
+    }
+    
+    /* =========== for data event admin use =========== */
     @Command("buttonUploadEventAgit")
     @NotifyChange({"mediaNameUploadEventAgit", "pathLocationUploadEventAgit"})
     public void buttonUploadEventAgit(@ContextParam(ContextType.BIND_CONTEXT) BindContext ctx) throws IOException {
@@ -249,14 +339,6 @@ public class EventAgitVM {
         CommonViewModel.navigateToWithoutDetach("/crm/admin/event/add_event.zul", window, params);
     }
 
-//    public int validasiForm(int jawab, String afterChck) {
-//        for (int i = 0; i < afterChck.length(); i++) {
-//            if (afterChck.charAt(i) != 'a' ) {
-//                jawab += 1;
-//            }            
-//        }
-//        return jawab;
-//    }
     public int checkCountParameter(int count, Object obj) {
         if (StringUtil.hasValue(obj)) {
             count += 1;
@@ -268,10 +350,6 @@ public class EventAgitVM {
     @NotifyChange("eventAgitDTOs")
     public void buttonSearchEvent(@ContextParam(ContextType.VIEW) Window window) {
 
-//        int jawab = 0;
-//        Map param1 = new HashMap();
-//        param1.put("namaEvent", namaEvent);
-//        jawab = validasiForm(jawab, namaEvent);
         int count = 0;
         Map params = new HashMap();
         params.put("idEvent", idEvent);
@@ -313,14 +391,64 @@ public class EventAgitVM {
         window.detach();
     }
 
-    /*-------------------------------------------------------------------- for data apply use  --------------------------------------------------------------------*/
-    @Command("buttonBackPopupAcara")
-    @NotifyChange("EventAgitDTO")
-    public void buttonBackPopupAcara(@ContextParam(ContextType.VIEW) Window window){
-        window.detach();
+
+    /* =========== getter setter =========== */
+    
+    protected String getLatestObjectID(ListModelList list, String attribute) {
+        int count = 0;
+        int pointer = 0;
+        int max = 0;
+        String s = "";
+        for (Object obj : list) {
+            Map<String, Object> map = CommonUtil.convertObject2Map(obj);
+            String att = attribute;
+            String[] arr = new String[attribute.length()];
+            String key = "";
+
+            if (att.contains(".")) {
+                arr = att.split("\\.");
+                int f = 1;
+                for (Object x : arr) {
+                    if (f != arr.length) {
+                        map = CommonUtil.convertObject2Map(map.get(x.toString()));
+                    } else {
+                        key = x.toString();
+                    }
+                    f += 1;
+                }
+            } else {
+                key = att;
+            }
+
+            att = map.get(key).toString();
+
+            String temp = "";
+            int countTemp = 0;
+            for (int i = att.length(); i > 0; i--) {
+                if (Character.isLetter(att.charAt(i - 1))) {
+                    pointer = i;
+                    s = att.substring(0, pointer);
+                    break;
+                }
+                countTemp += 1;
+                temp = att.charAt(i - 1) + temp;
+            }
+            if (Integer.parseInt(temp) > max) {
+                max = Integer.parseInt(temp);
+            }
+            count = countTemp;
+        }
+
+        return s + String.format("%0" + count + "d", max + 1);
+    }
+
+    public int checkCount(int count, Object object) {
+        if (StringUtil.hasValue(object)) {
+            count += 1;
+        }
+        return count;
     }
     
-    /*-------------------------------------------------------------------- getter setter --------------------------------------------------------------------*/
     public EventAgitDTO getEventAgitDTO() {
         return eventAgitDTO;
     }
@@ -424,4 +552,85 @@ public class EventAgitVM {
     public void setPageSize(int pageSize) {
         this.pageSize = pageSize;
     }
+
+    public EventStatusDTO getEventStatusDTO() {
+        return eventStatusDTO;
+    }
+
+    public void setEventStatusDTO(EventStatusDTO eventStatusDTO) {
+        this.eventStatusDTO = eventStatusDTO;
+    }
+
+    public RiwayatApplyEventDTO getRiwayatApplyEventDTO() {
+        return riwayatApplyEventDTO;
+    }
+
+    public void setRiwayatApplyEventDTO(RiwayatApplyEventDTO riwayatApplyEventDTO) {
+        this.riwayatApplyEventDTO = riwayatApplyEventDTO;
+    }
+
+    public List<EventStatusDTO> getEventStatusDTOs() {
+        return eventStatusDTOs;
+    }
+
+    public void setEventStatusDTOs(List<EventStatusDTO> eventStatusDTOs) {
+        this.eventStatusDTOs = eventStatusDTOs;
+    }
+
+    public List<RiwayatApplyEventDTO> getRiwayatApplyEventDTOs() {
+        return riwayatApplyEventDTOs;
+    }
+
+    public void setRiwayatApplyEventDTOs(List<RiwayatApplyEventDTO> riwayatApplyEventDTOs) {
+        this.riwayatApplyEventDTOs = riwayatApplyEventDTOs;
+    }
+
+    public ListModelList<LowonganState> getLowonganStates() {
+        return lowonganStates;
+    }
+
+    public void setLowonganStates(ListModelList<LowonganState> lowonganStates) {
+        this.lowonganStates = lowonganStates;
+    }
+
+    public List<String> getListNamaEvent() {
+        return listNamaEvent;
+    }
+
+    public void setListNamaEvent(List<String> listNamaEvent) {
+        this.listNamaEvent = listNamaEvent;
+    }
+
+    public String getIdEventStatus() {
+        return idEventStatus;
+    }
+
+    public void setIdEventStatus(String idEventStatus) {
+        this.idEventStatus = idEventStatus;
+    }
+
+    public String getIdRiwayatApplyEvent() {
+        return idRiwayatApplyEvent;
+    }
+
+    public void setIdRiwayatApplyEvent(String idRiwayatApplyEvent) {
+        this.idRiwayatApplyEvent = idRiwayatApplyEvent;
+    }
+
+    public LowonganState getLowonganState() {
+        return lowonganState;
+    }
+
+    public void setLowonganState(LowonganState lowonganState) {
+        this.lowonganState = lowonganState;
+    }
+
+    public List<RiwayatApplyEventDTO> getListRiwayatApplyEventDTOs() {
+        return listRiwayatApplyEventDTOs;
+    }
+
+    public void setListRiwayatApplyEventDTOs(List<RiwayatApplyEventDTO> listRiwayatApplyEventDTOs) {
+        this.listRiwayatApplyEventDTOs = listRiwayatApplyEventDTOs;
+    }
+    
 }

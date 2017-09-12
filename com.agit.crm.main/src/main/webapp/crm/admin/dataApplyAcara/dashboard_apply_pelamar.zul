@@ -1,0 +1,79 @@
+<zk xmlns="http://www.zkoss.org/2005/zul">
+    <window border="30" apply="org.zkoss.bind.BindComposer"
+            viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.admin.EventAgitVM')"
+            form="@id('fx') @load(vm.riwayatApplyEventDTO) @save(vm.riwayatApplyEventDTO, before='buttonBackPopupAcara')">
+        
+        <groupbox closable="false" mold="3d">
+            <caption label="Daftar Pelamar" />
+            <div sclass="col-md-3 nopadding">
+                <div class="form-group" style="font-style:bold;">
+                    <label sclass="labelstyle" value="Filter Pencarian :" />
+                    <separator width="90%" bar="true"/>
+                </div>
+                <div class="form-group">
+                    <label sclass="labelstyle" value="ID Acara" />      
+                    <listbox mold="select" sclass="form-control" model="@load(vm.listNamaEvent)" selectedItem="@bind(vm.namaEvent)" width="90%">
+                        <template name="model" var="items" >
+                            <listitem label="@load(items)"  value="@load(items)" />
+                        </template>
+                    </listbox>
+                </div>
+                <!--                <div class="form-group">
+                    <label sclass="labelstyle" value="Nama Lowongan" />
+                    <textbox class="form-control" width="90%" value="@bind(vm.namaLowonganApply)" />    
+                </div> 
+                <div class="form-group">
+                    <label sclass="labelstyle" value="Nama Apply" />
+                    <textbox class="form-control" width="90%" value="@bind(vm.namaApplyLowongan)" />
+                </div>-->
+                <div>
+                    <separator/>
+                    <a sclass="btn btn-info" width="90%" label="Pencarian" 
+                       onClick="@command('searchAttendance')"/>
+                </div>
+            </div>
+            
+            <!--============ GRID ============-->
+            <div sclass="col-md-9 nopadding">
+                <listbox rows="5" mold="paging" pageSize="5" 
+                         emptyMessage="${labels.common.noDataFound}" 
+                         model="@bind(vm.listRiwayatApplyEventDTOs)">
+                    <listhead sizable="true">
+                        <listheader label="ID Riwayat Acara" width="12.5%" align="center"/>
+                        <listheader label="Nama Acara" width="27.5%" align="center"/>
+                        <listheader label="Nama Peserta" width="20%" align="center"/>
+                        <listheader label="Status" width="10%" align="center"/>
+                        <listheader label="Waktu Apply" width="15%" align="center"/>
+                        <listheader label="Aksi" width="15%" align="center"/>
+                    </listhead>
+                    <template name="model">
+                        <listitem value="${each}">
+                            <listcell>
+                                <label width="100%" value="@bind(each.idRiwayatApplyEvent)"/>
+                            </listcell>
+                            <listcell>
+                                <label width="100%" value="@bind(each.namaEvent)"/>
+                            </listcell>
+                            <listcell>
+                                <label width="100%" value="@bind(each.namaPelamar)"/>
+                            </listcell>
+                            <listcell>
+                                <label value="@bind(each.lowonganState)"/>
+                            </listcell>
+                            <listcell>
+                                <label width="100%" value="@bind(each.createdDate)"/>
+                            </listcell>
+                            <listcell>
+                                <!--<a label="Detail" onClick="@command('KlikDetailDataPelamar', object=each)" />-->
+                                <!--<a label=" | " style="font-size:12pt ;color:black"></a>-->
+                                <a label="Status" onClick="@command('KlikStatusPeserta', object=each)"  />
+                                <!--<a label="Lihat CV" onClick="@command('buttonPreviewCV', object=each)" />-->
+                            </listcell>
+                        </listitem>
+                    </template>
+                </listbox>
+            </div>
+        </groupbox>                
+        <separator/>
+    </window>
+</zk>
