@@ -5,9 +5,9 @@
     <display-name>Agit-ZK-CRM Application V.1.0.0-SNAPSHOT</display-name>
     
     <!-- Define the welcome page -->
-    <welcome-file-list>
+<!--    <welcome-file-list>
         <welcome-file>index.html</welcome-file>
-    </welcome-file-list>
+    </welcome-file-list>-->
     
     <!-- Define Spring IoC Container -->
     <listener>

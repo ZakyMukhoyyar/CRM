@@ -1,0 +1,27 @@
+<zk xmlns:x="xhtml">
+    <window apply="org.zkoss.bind.BindComposer" closable="true"
+            viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.admin.ForumVM')"
+            form="@id('fx') @load(vm.forumDTO) @save(vm.forumDTO, before='buttonSaveForum')">
+        <tabbox width="100%">
+            <tabs id="tabs">
+                <tab label="Forum Agit" />
+            </tabs>
+            <tabpanels>
+                <tabpanel>
+                    <toolbar hflex="true">
+                        <toolbarbutton label="Group Chat 1" target="blank" href="http://localhost:8181/agit/"/>
+                        <toolbarbutton label="Group Chat 2" target="blank" href="http://localhost:8181/agit/"/>
+                        <toolbarbutton label="Group Chat 3" target="blank" href="http://localhost:8181/agit/"/>
+                        <!--                        <toolbarbutton label="Group Chat 1" target="blank" href="http://localhost:8081/chat/"/>
+                        <toolbarbutton label="Group Chat 2" target="blank" href="http://localhost:8081/chat/"/>
+                        <toolbarbutton label="Group Chat 3" target="blank" href="http://localhost:8081/chat/"/>-->
+                        
+                    </toolbar>
+                </tabpanel>
+            </tabpanels>
+        </tabbox>
+        <hlayout>
+            <include id="incTab1" src="@load(vm.src)" hflex="1" width="100%"/>
+        </hlayout>
+    </window>
+</zk>

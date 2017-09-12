@@ -97,6 +97,8 @@ public class ForumVM {
     }
 
     private void initData() {
+        src = "/crm/admin/forum/view_forums.zul";
+
         forumDTOs = forumService.findAll();
         if (forumDTOs.isEmpty()) {
             forumDTOs = Collections.emptyList();
@@ -177,6 +179,11 @@ public class ForumVM {
     @NotifyChange("forumDTOs")
     public void refreshForum() {
         forumDTOs = forumService.findAll();
+    }
+
+    @NotifyChange("src")
+    public void buttonKlikDashboardForum(@BindingParam("object") ForumDTO obj, @ContextParam(ContextType.VIEW) Window window) {
+        src = "/crm/admin/forum/view_forums.zul";
     }
 
     @Command("refreshDataGrid")

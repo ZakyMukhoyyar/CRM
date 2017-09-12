@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+    <!-- All Application services are declared here !!! -->  
+    
+    <!-- for ticketService -->  
+    <bean id="ticketDTOAssembler" class="com.bitozen.training.interfaces.web.facade.dto.assembler.ticket.TicketDTOAssembler">
+    </bean> 
+    <bean id="ticketService" class="com.bitozen.training.application.impl.TicketServiceImpl">
+        <property name="ticketRepository" ref="ticketRepository"/>
+        <property name="ticketDTOAssembler" ref="ticketDTOAssembler"/>
+    </bean> 
+    
+    <!-- for pelayananService -->  
+    <bean id="pelayananDTOAssembler" class="com.bitozen.training.interfaces.web.facade.dto.assembler.pelayanan.PelayananDTOAssembler">
+    </bean> 
+    <bean id="pelayananService" class="com.bitozen.training.application.impl.PelayananServiceImpl">
+        <property name="pelayananRepository" ref="pelayananRepository"/>
+        <property name="pelayananDTOAssembler" ref="pelayananDTOAssembler"/>
+    </bean> 
+    
+</beans>

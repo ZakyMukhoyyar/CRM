@@ -6,6 +6,18 @@
 <?link rel="stylesheet" type="text/css"	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" ?>
 <!--<?link rel="stylesheet" type="text/css"	href="/styles/css/bootstrap.css" ?>-->
 <!--<?link rel="stylesheet" type="text/css"	href="/styles/css/default.css" ?>-->
+<!-- Load Bootstrap  -->
+<?link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"?>
+
+<!-- Google Open Sans font -->
+<!-- Load fonts from local -->
+<?link href="css/fonts.css" rel="stylesheet" type="text/css"?>
+
+<!-- Unmark if we want to use fonts from google server
+<?link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400' rel='stylesheet' type='text/css'?>
+-->
+
+<?link href="less/index.css.dsp" rel="stylesheet" type="text/css"?>
 <?script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" if="${zk.ie < 9}" ?>
     <?script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" if="${zk.ie < 9}"?>
 
@@ -24,7 +36,7 @@
                 <!-- Header -->
                 <borderlayout >
                     <north sclass="isi" height="80px" border="none">
-                        <borderlayout  style="background:#7C1442;">
+                        <borderlayout style="background:#7C1442;">
                             <west border="none" size="40%" style="background:#7C1442;">
                                 <div style="padding:25px;">
                                     <label sclass="isi" style="color:white;font-size:20px;font-weight:bold" value="Candidate Recruitment Management"/>
@@ -33,11 +45,19 @@
                             <east border="none" style="background:#7C1442; color:#fff;">
                                 <div style="padding:15px;">
                                     <!--                            <label value="Logged" style="font-weight:bold"/>-->
-                                    <label value="@load(vm.concat(vm.user.userSpecificationDTO.fullName, vm.concat(' - ',vm.user.roleDTO.roleName)))" style="font-weight:bold" />
-                                    <label value="|"/>
-                                    <a href="/processLogout" style="color:white" onClick="@command('buttonLogout')" >
-                                        <label sclass="fa fa-power-off" value="Logout" style="font-weight:bold"/>
-                                    </a>
+                                    <!--                                    <label value="@load(vm.concat(vm.user.userSpecificationDTO.fullName, vm.concat(' - ',vm.user.roleDTO.roleName)))" style="font-weight:bold" />
+                                    <label value="|"/>-->
+                                    <menubar>
+                                        <menu sclass="isi" label="@load(vm.concat(vm.user.userSpecificationDTO.fullName, vm.concat(' - ',vm.user.roleDTO.roleName)))" image="images/assets/avatars/user.jpg">
+                                            <menupopup>
+                                                <menuitem sclass="isi" label="Settings" iconSclass="z-icon-cog"/>
+                                                <menuitem sclass="isi" label="Profile" iconSclass="z-icon-user" onClick="@command('buttonKlikProfile', object=each)"/>
+                                                <menuseparator/>
+                                                <menuitem sclass="isi" label="Logout" iconSclass="z-icon-off" href="/processLogout" style="color:white" onClick="@command('buttonLogout')"/>
+                                            </menupopup>
+                                        </menu>
+                                    </menubar>
+                                    
                                     <!--<label value="Version : ${labels.buildNumber}"/>-->
                                 </div>
                             </east>

@@ -1,0 +1,106 @@
+<?page id="index" title="Candidate Recruitment Management - Project"?>
+<?link rel="icon" type="image/png" href="/images/logoagit-new.png"?>
+<?link rel="stylesheet" type="text/css"	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" ?>
+<?link rel="stylesheet" type="text/css"	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" ?>
+<!--<?link rel="stylesheet" type="text/css"	href="/styles/css/bootstrap.css" ?>-->
+<!--<?link rel="stylesheet" type="text/css"	href="/styles/css/default.css" ?>-->
+<!-- Load Bootstrap  -->
+<?link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"?>
+
+<!-- Google Open Sans font -->
+<!-- Load fonts from local -->
+<?link href="css/fonts.css" rel="stylesheet" type="text/css"?>
+
+<!-- Unmark if we want to use fonts from google server
+<?link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400' rel='stylesheet' type='text/css'?>
+-->
+
+<?link href="less/index.css.dsp" rel="stylesheet" type="text/css"?>
+<?script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" if="${zk.ie < 9}" ?>
+    <?script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" if="${zk.ie < 9}"?>
+        <?page title="Agit Forum Chat"?>
+        <window id="win" border="normal" width="400px" position="center" mode="overlapped" style="background-color:#0080ff;"
+                apply="tw.com.cruisy.chat.web.ChatComposer">
+            <image src="/images/bg3.jpg" style='position: fixed; top: 0px; left: 0px; width: 100%; z-index: -1;' />
+            <groupbox>
+                <vbox width="100%" height="100%" align="center">
+                    <image src="/images/logo.png"/>
+                    <label sclass="isi" style="font-weight:bold;color:black;font-size:17px" value="Agit Chat Forum"></label>
+                    <separator spacing="20px"/>
+                </vbox>
+                <style>
+                    .z-separator-hor-bar {
+                    background: #65001e;	
+                    height: 5px;		
+                    }
+                </style>
+                <grid id="chatGrid" visible="false">
+                    <columns>
+                        <column width="100%" />
+                    </columns>
+                    <rows>
+                        <row>
+                            <grid id="msgGrid" height="460px">
+                                <rows id="rows" />
+                            </grid>
+                        </row>
+                        <row>
+                            <hbox id="inputHb">
+                                <textbox id="msgTb" style="width:300px" rows="3" placeholder="Write a chat..." />
+                                <a  sclass="btn btn-success" id="sendBtn" label="Send" />
+                            </hbox>
+                        </row>
+                        <row>
+                            <hbox id="userInfoHb">
+                                <a sclass="btn btn-success" id="exitBtn" label="Exit" />
+                                <space />
+                            </hbox>
+                        </row>
+                        <row>
+                            <hbox id="footerHb">
+                                <image id="newpmImg" src="/images/newpm.png"
+                                       visible="false" />
+                                <div id="infoDiv" visible="false">
+                                    <label id="IMLbl" style="color:green" class="label label-default"/>
+                                    <timer id="timer" running="false"
+                                           repeats="false" delay="3000"
+                                           onTimer='infoDiv.setVisible(false);' />
+                                </div>
+                            </hbox>
+                        </row>
+
+                    </rows>
+                </grid>
+                <grid id="loginGrid">
+                    <columns>
+                        <column width="50%" />
+                    </columns>
+                    <rows>
+                        <row>
+                            <hbox style="padding:10px;">
+                                <textbox id="nameTb" style="width:250px;"
+                                         constraint="no empty" class="form-control" placeholder="Username"/>
+                            </hbox>
+                        </row>
+                        <row>
+                            <hbox style="padding:10px;">
+                                <textbox style="width:250px;"
+                                         constraint="no empty" class="form-control" placeholder="Email"/>
+                                <separator spacing="40px"/>
+                                <a sclass="btn btn-success" id="loginBtn" label="Enter " />
+                            </hbox>
+                        </row>
+                        <row>
+                            <hbox>
+                                <checkbox id="IMCb" checked="true" />
+                                <separator spacing="20px"/>
+                                <label value="Enable instant messaging" />
+                            </hbox>
+                        </row>
+                    </rows>
+                </grid>
+            </groupbox>
+        </window>
+
+
+
