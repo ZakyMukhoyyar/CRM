@@ -297,9 +297,9 @@ public class EventAgitVM {
         riwayatApplyEventService.saveOrUpdate(riwayatApplyEventDTO);
 
         eventStatusDTO.setIdEvent(eventAgitDTO.getIdEvent());
-        eventStatusDTO.setIdUser(userDTO.getUserID());
+        eventStatusDTO.setIdUser(user.getUserID());
         eventStatusDTO.setLowonganState(LowonganState.APPLY);
-        eventStatusDTO.setCreatedBy(userDTO.getUserSpecificationDTO().getFullName());
+        eventStatusDTO.setCreatedBy(user.getUserSpecificationDTO().getFullName());
         eventStatusDTO.setCreatedDate(new Date());
         eventStatusService.saveOrUpdate(eventStatusDTO);
 
