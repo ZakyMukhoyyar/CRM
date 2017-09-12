@@ -19,6 +19,7 @@
         <module>com.agit.crm.bpm.api</module>
         <module>com.agit.crm.acm.api</module>
         <module>com.agit.crm.event</module>
+        <module>com.agit.crm.chat</module>
     </modules>
     <properties>
         <!-- Properties for POM -->
