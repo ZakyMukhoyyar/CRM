@@ -5,9 +5,7 @@ import com.agit.crm.common.application.KomentarForumService;
 import com.agit.crm.common.dto.crm.ForumDTOBuilder;
 import com.agit.crm.common.dto.crm.ForumDTO;
 import com.agit.crm.common.dto.crm.KomentarForumDTO;
-import com.agit.crm.common.dto.crm.KomentarForumDTOBuilder;
 import com.agit.crm.common.security.SecurityUtil;
-import com.agit.crm.domain.crm.KomentarForumBuilder;
 import com.agit.crm.shared.status.Status;
 import com.agit.crm.shared.zul.CommonViewModel;
 import static com.agit.crm.shared.zul.CommonViewModel.showInformationMessagebox;
@@ -37,6 +35,7 @@ import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.io.Files;
 import org.zkoss.util.media.Media;
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.UploadEvent;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 import org.zkoss.zul.ListModelList;
@@ -98,7 +97,7 @@ public class ForumVM {
     }
 
     private void initData() {
-        src = "/crm/admin/forum/view_forums.zul";
+        src = "/crm/mahasiswa/view_forums.zul";
 
         forumDTOs = forumService.findAll();
         if (forumDTOs.isEmpty()) {
@@ -131,6 +130,12 @@ public class ForumVM {
             this.forumDTO = forum;
             idForum = forumDTO.getIdForum();
             this.previous = previous;
+        }
+        if (komentarForum != null) {
+            this.komentarForumDTO = komentarForum;
+            komentarID = komentarForum.getIdForum();
+            this.previous = previous;
+
         }
     }
 
@@ -267,44 +272,6 @@ public class ForumVM {
         window.detach();
     }
 
-    /* Function upload File Forum */
-//    @Command("buttonUploadFileForum")
-//    @NotifyChange({"mediaNameUploadFileForum", "pathLocationUploadFileForum"})
-//    public void buttonUploadFileForum(@ContextParam(ContextType.BIND_CONTEXT) BindContext ctx) throws IOException {
-//        UploadEvent upEvent = null;
-//        Object objUploadEvent = ctx.getTriggerEvent();
-//
-//        if (objUploadEvent != null && (objUploadEvent instanceof UploadEvent)) {
-//            upEvent = (UploadEvent) objUploadEvent;
-//        }
-//
-//        if (upEvent != null) {
-//            mediaUploadFileForum = upEvent.getMedia();
-//            Calendar now = Calendar.getInstance();
-//            int year = now.get(Calendar.YEAR);
-//            int month = now.get(Calendar.MONTH);
-//            int day = now.get(Calendar.DAY_OF_MONTH);
-//            filePathUploadFileForum = Executions.getCurrent().getDesktop().getWebApp().getRealPath("/");
-//            filePathUploadFileForum = filePathUploadFileForum + "\\" + "files" + "\\" + "crm-cv" + "\\" + year + "\\" + month + "\\" + day + "\\";
-//
-//            File baseDir = new File(filePathUploadFileForum);
-//            if (!baseDir.exists()) {
-//                baseDir.mkdirs();
-//            }
-//
-//            Files.copy(new File(filePathUploadFileForum + mediaUploadFileForum.getName()), mediaUploadFileForum.getStreamData());
-//            setMediaNameUploadFileForum(filePathUploadFileForum + mediaUploadFileForum.getName());
-//            pathLocationUploadFileForum = "/" + "files" + "/" + "crm-cv" + "/" + year + "/" + month + "/" + day + "/" + mediaUploadFileForum.getName();
-//        } else {
-//            Calendar now = Calendar.getInstance();
-//            int year = now.get(Calendar.YEAR);
-//            int month = now.get(Calendar.MONTH);
-//            int day = now.get(Calendar.DAY_OF_MONTH);
-//            mediaNameUploadFileForum = "";
-//            pathLocationUploadFileForum = "/" + "files" + "/" + "crm-cv" + "/" + year + "/" + month + "/" + day + "/" + mediaUploadFileForum.getName();
-//            Messagebox.show("File : " + mediaUploadFileForum + " Bukan File PDF", "Error", Messagebox.OK, Messagebox.ERROR);
-//        }
-//    }
     @Command("buttonSaveForum")
     @NotifyChange({"forumDTO", "forumDTOs"})
     public void buttonSaveForum(@BindingParam("object") ForumDTO obj, @ContextParam(ContextType.VIEW) Window window) {
@@ -314,18 +281,47 @@ public class ForumVM {
         window.detach();
     }
 
-    /*------------------------------------------------------------- functonality Comment ----------------------------------------------------*/
-    @Command("komentari")
+    @Command("komentariOnAdmin")
     @NotifyChange("forumDTO")
-    public void komentari(@BindingParam("object") ForumDTO obj, @ContextParam(ContextType.VIEW) Window window) {
+    public void komentariOnAdmin(@BindingParam("object") ForumDTO obj, @ContextParam(ContextType.VIEW) Window window) {
         Map<String, Object> params = new HashMap<>();
         params.put("forumDTO", obj);
         CommonViewModel.navigateToWithoutDetach("/crm/admin/forum/dashboard_komentar.zul", window, params);
         BindUtils.postGlobalCommand(null, null, "refreshKomentarForum", null);
     }
 
+    @Command("deleteKomentar")
+    @NotifyChange({"komentarForumDTO", "komentarForumDTOs", "komentar", "forumuserDTOs"})
+    public void deleteKomentar(@BindingParam("object") KomentarForumDTO obj, @ContextParam(ContextType.VIEW) Window window) {
+        komentarForumDTO = (KomentarForumDTO) obj;
+        Messagebox.show("Apakah anda yakin ingin menghapus Lowongan?", "Konfirmasi", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION,
+                new org.zkoss.zk.ui.event.EventListener() {
+                    @Override
+                    public void onEvent(Event evt) throws InterruptedException {
+                        if (evt.getName().equals("onOK")) {
+                            komentarForumService.delete(komentarForumDTO);
+                            showInformationMessagebox("Lowongan Berhasil Dihapus");
+                            BindUtils.postGlobalCommand(null, null, "refreshKomentarForum", null);
+                        } else {
+                            System.out.println("Operation Canceled !");
+                        }
+                    }
+                }
+        );
+    }
+
+    /*------------------------------------------------------------- functonality Comment ----------------------------------------------------*/
+    @Command("komentari")
+    @NotifyChange("forumDTO")
+    public void komentari(@BindingParam("object") ForumDTO obj, @ContextParam(ContextType.VIEW) Window window) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("forumDTO", obj);
+        CommonViewModel.navigateToWithoutDetach("/crm/mahasiswa/dashboard_komentar.zul", window, params);
+        BindUtils.postGlobalCommand(null, null, "refreshKomentarForum", null);
+    }
+
     @Command("buttonComment")
-    @NotifyChange({"forumDTO", "forumDTOs", "komentarForumDTO", "komentarForumDTOs", "komentar"})
+    @NotifyChange({"forumDTO", "forumDTOs", "komentarForumDTO", "komentarForumDTOs", "komentar", "forumuserDTOs"})
     public void buttonComment(@BindingParam("object") KomentarForumDTO obj, @ContextParam(ContextType.VIEW) Window window) {
         komentarForumDTO.setKomentarID(UUID.randomUUID().toString());
         komentarForumDTO.setUserName(SecurityUtil.getUserName());
