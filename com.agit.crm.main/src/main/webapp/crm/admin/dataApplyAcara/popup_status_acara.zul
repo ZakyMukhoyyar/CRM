@@ -1,5 +1,5 @@
     <window border="30" apply="org.zkoss.bind.BindComposer" width="400px"
-            viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.admin.LowonganVM')"
+            viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.admin.EventAgitVM')"
             form="@id('fx') @load(vm) @save(vm, before='buttonBackStatusPelamar')">
     <!--riwayatApplyMahasiswaDTO-->
     <groupbox closable="false" mold="3d">
@@ -33,9 +33,9 @@
         <separator/>
         <groupbox contentStyle="border:0; padding-left:20%; ">
             <hbox align="center">
-                <a sclass="btn btn-info" label="Kembali" width="100px" onClick="@command('buttonKembaliStatusPelamar')"/>
+                <a sclass="btn btn-info" label="Kembali" width="100px" onClick="@command('buttonBackPopupAcara')"/>
                 <space width="1%"/>
-                <a sclass="btn btn-info" label="Simpan" width="100px" onClick="@command('buttonSimpanStatusPelamar', object=vm.riwayatApplyMahasiswaDTO)"/>
+                <a sclass="btn btn-info" label="Simpan" width="100px" onClick="@command('buttonSimpanStatusPeserta', object=vm.riwayatApplyEventDTO)"/>
             </hbox>
         </groupbox>
     </groupbox>
