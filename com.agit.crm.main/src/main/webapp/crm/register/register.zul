@@ -63,19 +63,8 @@
                                             <label value="@load(vmsgs['fullName'])" style="color:red"/>
                                         </div>
                                     </row>
-                                    <row>
+                                    <!--                                    <row>
                                         <signLabel sclass="isi" value="Assign Role "/>
-                                        <!--                                         <div>
-                                            <combobox autodrop="true" 
-                                                      width="40%"                                                       
-                                                      model="@load(vm.roleDTOs)" 
-                                                      selectedItem="@bind(fx.userDTO.roleDTO.roleName)" 
-                                                      placeholder=" Silahkan Pilih ">
-                                                <template name="model" var="items">
-                                                    <comboitem label="@load(items.getRoleName())" value="@load(items.getRoleName())"/>
-                                                </template>
-                                            </combobox>
-                                        </div>-->
                                         <div>
                                             <listbox model="@load(vm.roleDTOs)" 
                                                      mold="select"
@@ -87,7 +76,7 @@
                                             </listbox>
                                             <label value="@load(vmsgs['roleDTO'])" style="color:red"/>
                                         </div>
-                                    </row>
+                                    </row>-->
                                     <row>
                                         <signLabel sclass="isi" value="Username "/>
                                         <div>

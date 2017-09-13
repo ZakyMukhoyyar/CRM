@@ -131,6 +131,7 @@ public class RegisterVM {
     private ListModelList<JobLocation> listJobLocation = new ListModelList<>();
     private ListModelList<StatusData> listStatus = new ListModelList<>();
     private List<RoleDTO> roleDTOs = new ArrayList<RoleDTO>();
+    private RoleDTO roleDTO = new RoleDTO();
 
     /* Object List */
     private List<MinatDTO> minats = new ArrayList<MinatDTO>();
@@ -168,7 +169,8 @@ public class RegisterVM {
             @ExecutionArgParam("propertyParam") Map<String, Object> prop) {
         searchUserStatus = StatusData.ACTIVE;
 
-        roleDTOs = roleService.findByParameter("Mahasiswa");
+//        roleDTOs = roleService.findByParameter("Mahasiswa");
+        roleDTO = roleService.findByID("MAHASISWA");
 
         initData();
         checkValidity(user, previous);
@@ -555,6 +557,7 @@ public class RegisterVM {
     @Command("buttonSubmit")
     @NotifyChange({"verifyEmail", "verifyKtp", "verifyUserName", "buttonSubmit"})
     public void buttonSubmit(@BindingParam("obj") String userName, @BindingParam("obj1") String ktp, @BindingParam("obj2") String email, @ContextParam(ContextType.VIEW) Window window) {
+        userDTO.setRoleDTO(roleDTO);
         Map<String, Object> params = new HashMap<>();
         params.put("user", userDTO);
         params.put("propertyParam", propertyParam());
@@ -1176,6 +1179,14 @@ public class RegisterVM {
 
     public void setDomisilis(List<DomisiliDTO> domisilis) {
         this.domisilis = domisilis;
+    }
+
+    public RoleDTO getRoleDTO() {
+        return roleDTO;
+    }
+
+    public void setRoleDTO(RoleDTO roleDTO) {
+        this.roleDTO = roleDTO;
     }
 
 }
