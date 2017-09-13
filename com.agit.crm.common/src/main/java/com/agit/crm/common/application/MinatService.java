@@ -1,6 +1,7 @@
 package com.agit.crm.common.application;
 
 import com.agit.crm.common.dto.crm.MinatDTO;
+import com.agit.crm.shared.status.Status;
 import java.util.List;
 import java.util.Map;
 
@@ -9,7 +10,7 @@ import java.util.Map;
  * @author Zaky
  */
 public interface MinatService {
-    
+
     void SaveOrUpdate(MinatDTO minat);
 
     void deleteData(MinatDTO minat);
@@ -21,5 +22,7 @@ public interface MinatService {
     List<MinatDTO> findAll();
 
     List<MinatDTO> findByParams(Map map);
-    
+
+    List<MinatDTO> findAllByStatus(Status status);
+
 }

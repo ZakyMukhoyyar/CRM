@@ -91,4 +91,14 @@ public class DomisiliServiceImpl implements DomisiliService {
         return null;
     }
 
+    @Override
+    public List<DomisiliDTO> findAllByStatus(Status status) {
+        Validate.notNull(domisiliRepository);
+        List<Domisili> listDomisili = domisiliRepository.findAllByStatus(status);
+        if (listDomisili != null) {
+            return (List<DomisiliDTO>) domisiliDTOAssembler.toDTOs(listDomisili);
+        }
+        return null;
+    }
+
 }

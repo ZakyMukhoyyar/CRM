@@ -20,6 +20,7 @@ import com.agit.crm.common.dto.usermanagement.UserLoginInfoDTO;
 import com.agit.crm.common.dto.usermanagement.UserSpecificationDTO;
 import com.agit.crm.common.dto.usermanagement.UserSpecificationDTOBuilder;
 import com.agit.crm.common.security.SecurityUtil;
+import com.agit.crm.shared.status.Status;
 import com.agit.crm.shared.status.StatusCode;
 import com.agit.crm.shared.type.JenisKelaminType;
 import com.agit.crm.shared.type.JobDivision;
@@ -232,23 +233,23 @@ public class RegisterVM {
 
 
         /* Load Data */
-        minats = minatService.findAll();
+        minats = minatService.findAllByStatus(Status.ACTIVE);
         for (MinatDTO m : minats) {
             listMinat.add(m.getNamaMinat());
         }
-        ketrampilans = ketrampilanService.findAll();
+        ketrampilans = ketrampilanService.findAllByStatus(Status.ACTIVE);
         for (KetrampilanDTO k : ketrampilans) {
             listKetrampilan.add(k.getNamaKetrampilan());
         }
-        civitass = civitasService.findAll();
+        civitass = civitasService.findAllByStatus(Status.ACTIVE);
         for (CivitasDTO c : civitass) {
             listCivitas.add(c.getNamaCivitas());
         }
-        jurusans = jurusanService.findAll();
+        jurusans = jurusanService.findAllByStatus(Status.ACTIVE);
         for (JurusanDTO j : jurusans) {
             listJurusan.add(j.getNamaJurusan());
         }
-        domisilis = domisiliService.findAll();
+        domisilis = domisiliService.findAllByStatus(Status.ACTIVE);
         for (DomisiliDTO d : domisilis) {
             listDomisili.add(d.getNamaKabupaten());
         }

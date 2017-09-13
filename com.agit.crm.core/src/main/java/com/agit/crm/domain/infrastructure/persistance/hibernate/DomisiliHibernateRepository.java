@@ -2,6 +2,7 @@ package com.agit.crm.domain.infrastructure.persistance.hibernate;
 
 import com.agit.crm.domain.crm.Domisili;
 import com.agit.crm.domain.crm.DomisiliRepository;
+import com.agit.crm.shared.status.Status;
 import com.agit.crm.util.StringUtil;
 import java.util.List;
 import java.util.Map;
@@ -67,4 +68,10 @@ public class DomisiliHibernateRepository extends HibernateRepository implements 
         return criteria.list();
     }
 
+    @Override
+    public List<Domisili> findAllByStatus(Status status) {
+        Criteria criteria = getSession().createCriteria(Domisili.class);
+        criteria.add(Restrictions.eq("status", status));
+        return (List<Domisili>) criteria.list();
+    }
 }

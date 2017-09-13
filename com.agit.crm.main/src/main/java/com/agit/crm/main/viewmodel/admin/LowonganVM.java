@@ -160,7 +160,7 @@ public class LowonganVM {
         if (lowonganStatusDTOs.isEmpty()) {
             lowonganStatusDTOs = Collections.emptyList();
         }
-        minats = minatService.findAll();
+        minats = minatService.findAllByStatus(status.ACTIVE);
         for (MinatDTO m : minats) {
             listNamaMinat.add(m.getNamaMinat());
         }

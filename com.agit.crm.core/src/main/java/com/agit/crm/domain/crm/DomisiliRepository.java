@@ -1,5 +1,6 @@
 package com.agit.crm.domain.crm;
 
+import com.agit.crm.shared.status.Status;
 import java.util.List;
 import java.util.Map;
 
@@ -18,5 +19,7 @@ public interface DomisiliRepository {
     List<Domisili> findAll();
 
     List<Domisili> findByParams(Map map);
+
+    List<Domisili> findAllByStatus(Status status);
 
 }

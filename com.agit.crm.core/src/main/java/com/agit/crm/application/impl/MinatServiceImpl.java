@@ -17,7 +17,7 @@ import org.apache.commons.lang.Validate;
  * @author Zaky
  */
 public class MinatServiceImpl implements MinatService {
-    
+
     private MinatRepository minatRepository;
     private MinatDTOAssembler minatDTOAssembler;
 
@@ -88,6 +88,15 @@ public class MinatServiceImpl implements MinatService {
         }
         return null;
     }
-    
-    
+
+    @Override
+    public List<MinatDTO> findAllByStatus(Status status) {
+        Validate.notNull(minatRepository);
+        List<Minat> listMinat = minatRepository.findAllByStatus(status);
+        if (listMinat != null) {
+            return (List<MinatDTO>) minatDTOAssembler.toDTOs(listMinat);
+        }
+        return null;
+    }
+
 }
