@@ -249,7 +249,7 @@ public class EventAgitVM {
 
     /* =========== for data apply use =========== */
     @Command("buttonBackPopupAcara")
-    @NotifyChange("riwayatApplyEventDTOs")
+    @NotifyChange({"riwayatApplyEventDTOs", "eventStatusDTOs", "eventAgitDTOs"})
     public void buttonBackPopupAcara(@ContextParam(ContextType.VIEW) Window window) {
         window.detach();
     }
@@ -270,39 +270,21 @@ public class EventAgitVM {
     }
 
     @Command("KlikStatusPeserta")
-    @NotifyChange({"userDTO", "userDTOs", "riwayatApplyEventDTO", "riwayatApplyEventDTOs", "listRiwayatApplyEventDTOs"})
+    @NotifyChange({"userDTO", "userDTOs", 
+        "riwayatApplyEventDTO", "riwayatApplyEventDTOs", "listRiwayatApplyEventDTOs"})
     public void KlikStatusPeserta(@BindingParam("object") RiwayatApplyEventDTO obj, @ContextParam(ContextType.VIEW) Window window) {
         Map<String, Object> map = new HashMap<>();
         map.put("riwayatApplyEventDTO", obj);
         riwayatApplyEventDTOs = riwayatApplyEventService.findByParams(map);
         CommonViewModel.navigateToWithoutDetach("/crm/admin/dataApplyAcara/popup_status_acara.zul", window, map);
     }
-
-    /* =========== for popup apply acara =========== */
-    @Command("buttonKonfirmasiApplyAcara")
-    @NotifyChange({"eventAgitDTO", "eventAgitDTOs",
-        "riwayatApplyEventDTO", "riwayatApplyEventDTOs",
-        "eventStatusDTO", "eventStatusDTOs"
-    })
-    public void buttonKonfirmasiApplyAcara(@BindingParam("object") EventAgitDTO obj, @ContextParam(ContextType.VIEW) Window window) {
-        Map<String, Object> params = new HashMap<>();
-        String message = "";
-        riwayatApplyEventDTO.setIdRiwayatEvent(eventAgitDTO.getIdEvent());
-        riwayatApplyEventDTO.setIdUserRiwayat(user.getUserID());
-        riwayatApplyEventDTO.setNamaEvent(eventAgitDTO.getNamaEvent());
-        riwayatApplyEventDTO.setNamaPelamar(user.getUserSpecificationDTO().getFullName());
-        riwayatApplyEventDTO.setLowonganState(LowonganState.APPLY);
-        riwayatApplyEventDTO.setCreatedBy(user.getUserSpecificationDTO().getFullName());
-        riwayatApplyEventDTO.setCreatedDate(new Date());
+    
+    @Command("buttonSimpanStatusPeserta")
+    @NotifyChange({"listRiwayatApplyEventDTOs", "riwayatApplyEventDTO", "riwayatApplyEventDTOs"})
+    public void buttonSimpanStatusPeserta(@BindingParam("object") RiwayatApplyEventDTO obj, @ContextParam(ContextType.VIEW) Window window) {
+        riwayatApplyEventDTO.setLowonganState(lowonganState);
         riwayatApplyEventService.saveOrUpdate(riwayatApplyEventDTO);
-
-        eventStatusDTO.setIdEvent(eventAgitDTO.getIdEvent());
-        eventStatusDTO.setIdUser(user.getUserID());
-        eventStatusDTO.setLowonganState(LowonganState.APPLY);
-        eventStatusDTO.setCreatedBy(user.getUserSpecificationDTO().getFullName());
-        eventStatusDTO.setCreatedDate(new Date());
-        eventStatusService.saveOrUpdate(eventStatusDTO);
-
+        showInformationMessagebox("Data Berhasil Disimpan");
         BindUtils.postGlobalCommand(null, null, "refreshEventAgit", null);
         window.detach();
     }
@@ -372,9 +354,11 @@ public class EventAgitVM {
 
     /* Function refresh data Event */
     @GlobalCommand
-    @NotifyChange("eventAgitDTOs")
-    public void refreshEventAgit() {
+    @NotifyChange({"eventAgitDTOs", "eventStatusDTOs", "riwayatApplyEventDTOs", "listRiwayatApplyEventDTOs"})
+    public void refreshEventAgit() {        
         eventAgitDTOs = eventAgitService.findAll();
+        eventStatusDTOs = eventStatusService.findAll();
+        riwayatApplyEventDTOs = riwayatApplyEventService.findAll();
     }
 
     @Command("buttonKembaliEvent")
@@ -442,7 +426,35 @@ public class EventAgitVM {
     public void buttonClosePreview(@BindingParam("object") EventAgitDTO obj, @ContextParam(ContextType.VIEW) Window window) {
         window.detach();
     }
+    
+    /* =========== for popup apply acara =========== */
+    @Command("buttonKonfirmasiApplyAcara")
+    @NotifyChange({"eventAgitDTO", "eventAgitDTOs",
+        "riwayatApplyEventDTO", "riwayatApplyEventDTOs",
+        "eventStatusDTO", "eventStatusDTOs"
+    })
+    public void buttonKonfirmasiApplyAcara(@BindingParam("object") EventAgitDTO obj, @ContextParam(ContextType.VIEW) Window window) {
+        Map<String, Object> params = new HashMap<>();
+        String message = "";
+        riwayatApplyEventDTO.setIdRiwayatEvent(eventAgitDTO.getIdEvent());
+        riwayatApplyEventDTO.setIdUserRiwayat(user.getUserID());
+        riwayatApplyEventDTO.setNamaEvent(eventAgitDTO.getNamaEvent());
+        riwayatApplyEventDTO.setNamaPelamar(user.getUserSpecificationDTO().getFullName());
+        riwayatApplyEventDTO.setLowonganState(LowonganState.APPLY);
+        riwayatApplyEventDTO.setCreatedBy(user.getUserSpecificationDTO().getFullName());
+        riwayatApplyEventDTO.setCreatedDate(new Date());
+        riwayatApplyEventService.saveOrUpdate(riwayatApplyEventDTO);
 
+        eventStatusDTO.setIdEvent(eventAgitDTO.getIdEvent());
+        eventStatusDTO.setIdUser(user.getUserID());
+        eventStatusDTO.setLowonganState(LowonganState.APPLY);
+        eventStatusDTO.setCreatedBy(user.getUserSpecificationDTO().getFullName());
+        eventStatusDTO.setCreatedDate(new Date());
+        eventStatusService.saveOrUpdate(eventStatusDTO);
+
+        BindUtils.postGlobalCommand(null, null, "refreshEventAgit", null);
+        window.detach();
+    }
 
     /* =========== getter setter =========== */
     protected String getLatestObjectID(ListModelList list, String attribute) {
@@ -637,7 +649,7 @@ public class EventAgitVM {
     }
 
     public ListModelList<LowonganState> getLowonganStates() {
-        return lowonganStates;
+        return new ListModelList<>(LowonganState.values());
     }
 
     public void setLowonganStates(ListModelList<LowonganState> lowonganStates) {
