@@ -66,4 +66,8 @@
     <bean id="eventStatusRepository" class="com.agit.crm.domain.infrastructure.persistance.hibernate.EventStatusHibernateRepository">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
+    
+    <bean id="komentarEventRepository" class="com.agit.crm.domain.infrastructure.persistance.hibernate.KomentarEventHibernateRepository">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
 </beans>

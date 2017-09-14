@@ -94,4 +94,10 @@
         <property name="riwayatApplyEventRepository" ref="riwayatApplyEventRepository"/>
         <property name="riwayatApplyEventDTOAssembler" ref="riwayatApplyEventDTOAssembler"/>
     </bean>
+    
+     <bean id="komentarEventDTOAssembler" class="com.agit.crm.interfaces.web.facade.dto.assembler.crm.KomentarEventDTOAssembler"/>
+    <bean id="komentarEventService" class="com.agit.crm.application.impl.KomentarEventServiceImpl">
+        <property name="komentarEventRepository" ref="komentarEventRepository"/>
+        <property name="komentarEventDTOAssembler" ref="komentarEventDTOAssembler"/>
+    </bean>
 </beans>
