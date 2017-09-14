@@ -86,7 +86,7 @@ public class LowonganVM {
     private List<RiwayatApplyMahasiswaDTO> riwayatApplyMahasiswaDTOs = new ArrayList<>();
     private List<RiwayatApplyMahasiswaDTO> listRiwayatApplyMahasiswaDTOs = new ArrayList<>();
     private List<LowonganStatusDTO> lowonganStatusDTOs = new ArrayList<>();
-    private List<String> listLowonganID = new ArrayList<String>();
+    private List<String> listLowonganNama = new ArrayList<String>();
     private ListModelList<LowonganState> lowonganStates;
     private ListModelList<Status> statuses;
 
@@ -145,7 +145,7 @@ public class LowonganVM {
         lowonganDTOs2 = lowonganService.findAllByStatus(status.ACTIVE);
 
         for (LowonganDTO m : lowonganDTOs) {
-            listLowonganID.add(m.getIdLowongan());
+            listLowonganNama.add(m.getNamaLowongan());
         }
 
         userDTO = userService.findByID(SecurityUtil.getUserName());
@@ -811,12 +811,12 @@ public class LowonganVM {
         this.idRiwayatLowongan = idRiwayatLowongan;
     }
 
-    public List<String> getListLowonganID() {
-        return listLowonganID;
+    public List<String> getListLowonganNama() {
+        return listLowonganNama;
     }
 
-    public void setListLowonganID(List<String> listLowonganID) {
-        this.listLowonganID = listLowonganID;
+    public void setListLowonganNama(List<String> listLowonganNama) {
+        this.listLowonganNama = listLowonganNama;
     }
 
     public ListModelList<LowonganState> getLowonganStates() {

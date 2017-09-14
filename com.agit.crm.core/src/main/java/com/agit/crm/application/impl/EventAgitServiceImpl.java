@@ -116,4 +116,14 @@ public class EventAgitServiceImpl implements EventAgitService {
         }
     }
 
+    @Override
+    public List<EventAgitDTO> findAllByStatus(Status status) {
+        Validate.notNull(eventAgitRepository);
+        List<EventAgit> listEventAgit = eventAgitRepository.findAllByStatus(status);
+        if (listEventAgit != null) {
+            return (List<EventAgitDTO>) eventAgitDTOAssembler.toDTOs(listEventAgit);
+        }
+        return null;
+    }
+
 }

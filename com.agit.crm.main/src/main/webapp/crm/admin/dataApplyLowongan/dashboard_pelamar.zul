@@ -10,19 +10,19 @@
                     <separator width="90%" bar="true"/>
                 </div>
                 <div class="form-group">
-                    <label sclass="labelstyle" value="ID Lowongan" />      
-                    <listbox mold="select" sclass="form-control" model="@load(vm.listLowonganID)" selectedItem="@bind(vm.idRiwayatLowongan)" width="90%">
+                    <label sclass="labelstyle" value="Nama Lowongan" />      
+                    <listbox mold="select" sclass="form-control" model="@load(vm.listLowonganNama)" selectedItem="@bind(vm.namaLowonganApply)" width="90%">
                         <template name="model" var="items" >
                             <listitem label="@load(items)"  value="@load(items)" />
                         </template>
                     </listbox>
                 </div>
-                <div class="form-group">
+<!--                <div class="form-group">
                     <label sclass="labelstyle" value="Nama Lowongan" />
                     <textbox class="form-control" width="90%" value="@bind(vm.namaLowonganApply)" />    
-                </div> 
+                </div> -->
                 <div class="form-group">
-                    <label sclass="labelstyle" value="Nama Apply" />
+                    <label sclass="labelstyle" value="Nama Pelamar" />
                     <textbox class="form-control" width="90%" value="@bind(vm.namaApplyLowongan)" />
                 </div> 
                 <div>

@@ -297,7 +297,7 @@ public class JurusanVM {
         window.detach();
     }
 
-    @Command("detailJurusan")
+    @Command("detailEventAgit")
     @NotifyChange("jurusan")
     public void detailEventAgit(@BindingParam("object") JurusanDTO obj, @ContextParam(ContextType.VIEW) Window window) {
         Map<String, Object> params = new HashMap<>();

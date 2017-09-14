@@ -2,6 +2,7 @@ package com.agit.crm.domain.infrastructure.persistance.hibernate;
 
 import com.agit.crm.domain.crm.EventAgitRepository;
 import com.agit.crm.domain.crm.EventAgit;
+import com.agit.crm.shared.status.Status;
 import com.agit.crm.util.StringUtil;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -65,6 +66,13 @@ public class EventAgitHibernateRepository extends HibernateRepository implements
         }
 
         return criteria.list();
+    }
+
+    @Override
+    public List<EventAgit> findAllByStatus(Status status) {
+        Criteria criteria = getSession().createCriteria(EventAgit.class);
+        criteria.add(Restrictions.eq("status", status));
+        return (List<EventAgit>) criteria.list();
     }
 
 }

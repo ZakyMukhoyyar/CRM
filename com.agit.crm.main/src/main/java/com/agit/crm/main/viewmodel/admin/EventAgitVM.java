@@ -91,9 +91,11 @@ public class EventAgitVM {
     private List<RiwayatApplyEventDTO> riwayatApplyEventDTOs = new ArrayList<>();
     private List<RiwayatApplyEventDTO> listRiwayatApplyEventDTOs = new ArrayList<>();
 
+
     /* for drop down */
     private ListModelList<Status> statuses;
     private ListModelList<LowonganState> lowonganStates;
+    private List<EventAgitDTO> eventUserDTOs;
 
     /* for string list container */
     private List<String> listNamaEvent = new ArrayList<>();
@@ -149,9 +151,10 @@ public class EventAgitVM {
         if (eventStatusDTOs.isEmpty()) {
             eventAgitDTOs = Collections.emptyList();
         }
-        
+
         /* for init user */
         user = userService.findByID(SecurityUtil.getUserName());
+        eventUserDTOs = eventAgitService.findAllByStatus(status.ACTIVE);
 
         /* for init riwayat apply event */
 //        userDTO = userService.findByID(SecurityUtil.getUserName());
@@ -270,7 +273,7 @@ public class EventAgitVM {
     }
 
     @Command("KlikStatusPeserta")
-    @NotifyChange({"userDTO", "userDTOs", 
+    @NotifyChange({"userDTO", "userDTOs",
         "riwayatApplyEventDTO", "riwayatApplyEventDTOs", "listRiwayatApplyEventDTOs"})
     public void KlikStatusPeserta(@BindingParam("object") RiwayatApplyEventDTO obj, @ContextParam(ContextType.VIEW) Window window) {
         Map<String, Object> map = new HashMap<>();
@@ -278,7 +281,7 @@ public class EventAgitVM {
         riwayatApplyEventDTOs = riwayatApplyEventService.findByParams(map);
         CommonViewModel.navigateToWithoutDetach("/crm/admin/dataApplyAcara/popup_status_acara.zul", window, map);
     }
-    
+
     @Command("buttonSimpanStatusPeserta")
     @NotifyChange({"listRiwayatApplyEventDTOs", "riwayatApplyEventDTO", "riwayatApplyEventDTOs"})
     public void buttonSimpanStatusPeserta(@BindingParam("object") RiwayatApplyEventDTO obj, @ContextParam(ContextType.VIEW) Window window) {
@@ -289,17 +292,26 @@ public class EventAgitVM {
         window.detach();
     }
 
+    @Command("KlikDetailDataPeserta")
+    @NotifyChange({"userDTO", "userDTOs",
+        "eventAgitDTO", "eventAgitDTOs",
+        "riwayatApplyEventDTO", "riwayatApplyEventDTOs"})
+    public void KlikDetailDataPeserta(@BindingParam("object") RiwayatApplyEventDTO obj, @ContextParam(ContextType.VIEW) Window window) {
+        if (obj.getIdUserRiwayat() != null) {
+            userDTO = userService.findByUserID(obj.getIdUserRiwayat());
+        }
+
+    }
+
     /* =========== for data event admin use =========== */
     @Command("buttonUploadEventAgit")
     @NotifyChange({"mediaNameUploadEventAgit", "pathLocationUploadEventAgit"})
     public void buttonUploadEventAgit(@ContextParam(ContextType.BIND_CONTEXT) BindContext ctx) throws IOException {
         UploadEvent upEvent = null;
         Object objUploadEvent = ctx.getTriggerEvent();
-
         if (objUploadEvent != null && (objUploadEvent instanceof UploadEvent)) {
             upEvent = (UploadEvent) objUploadEvent;
         }
-
         if (upEvent != null) {
             mediaUploadEventAgit = upEvent.getMedia();
             Calendar now = Calendar.getInstance();
@@ -308,12 +320,10 @@ public class EventAgitVM {
             int day = now.get(Calendar.DAY_OF_MONTH);
             filepathUploadEventAgit = Executions.getCurrent().getDesktop().getWebApp().getRealPath("/");
             filepathUploadEventAgit = filepathUploadEventAgit + "\\" + "files" + "\\" + "crm-event" + "\\" + year + "\\" + month + "\\" + day + "\\";
-
             File baseDir = new File(filepathUploadEventAgit);
             if (!baseDir.exists()) {
                 baseDir.mkdirs();
             }
-
             Files.copy(new File(filepathUploadEventAgit + mediaUploadEventAgit.getName()), mediaUploadEventAgit.getStreamData());
             setMediaNameUploadEventAgit(filepathUploadEventAgit + mediaUploadEventAgit.getName());
             pathLocationUploadEventAgit = "/" + "files" + "/" + "crm-event" + "/" + year + "/" + month + "/" + day + "/" + mediaUploadEventAgit.getName();
@@ -325,7 +335,6 @@ public class EventAgitVM {
             mediaNameUploadEventAgit = "";
             pathLocationUploadEventAgit = "/" + "files" + "/" + "crm-event" + "/" + year + "/" + month + "/" + day + "/" + mediaUploadEventAgit.getName();
             Messagebox.show("File : " + mediaUploadEventAgit + " Bukan File PDF", "Error", Messagebox.OK, Messagebox.ERROR);
-
         }
     }
 
@@ -336,10 +345,8 @@ public class EventAgitVM {
         if (pathLocationUploadEventAgit == null) {
             pathLocationUploadEventAgit = eventAgitDTO.getAttachment();
         }
-
         Date tanggalMulai = eventAgitDTO.getStartDate();
         Date tanggalBerakhir = eventAgitDTO.getEndDate();
-
         if (tanggalMulai != null && tanggalBerakhir != null && tanggalBerakhir.compareTo(tanggalMulai) < 0) {
             Messagebox.show("Format tanggal mulai dan tanggal berakhir salah");
         } else {
@@ -351,11 +358,21 @@ public class EventAgitVM {
             window.detach();
         }
     }
+    
+    @Command("LihatPengumuman")
+    @NotifyChange({"eventAgitDTO", "riwayatApplyEventDTO", "riwayatApplyEventDTOs"})
+    public void LihatPengumuman(@BindingParam("object") EventAgitDTO obj, @ContextParam(ContextType.VIEW) Window window) {
+        
+        Map<String, Object> params = new HashMap<>();
+        params.put("eventAgitDTO", obj);
+        CommonViewModel.navigateToWithoutDetach("/crm/admin/event/dashboard_pengumuman.zul", window, params);
+        BindUtils.postGlobalCommand(null, null, "refreshEventAgit", null);
+    }
 
     /* Function refresh data Event */
     @GlobalCommand
     @NotifyChange({"eventAgitDTOs", "eventStatusDTOs", "riwayatApplyEventDTOs", "listRiwayatApplyEventDTOs"})
-    public void refreshEventAgit() {        
+    public void refreshEventAgit() {
         eventAgitDTOs = eventAgitService.findAll();
         eventStatusDTOs = eventStatusService.findAll();
         riwayatApplyEventDTOs = riwayatApplyEventService.findAll();
@@ -426,7 +443,7 @@ public class EventAgitVM {
     public void buttonClosePreview(@BindingParam("object") EventAgitDTO obj, @ContextParam(ContextType.VIEW) Window window) {
         window.detach();
     }
-    
+
     /* =========== for popup apply acara =========== */
     @Command("buttonKonfirmasiApplyAcara")
     @NotifyChange({"eventAgitDTO", "eventAgitDTOs",
@@ -454,6 +471,16 @@ public class EventAgitVM {
 
         BindUtils.postGlobalCommand(null, null, "refreshEventAgit", null);
         window.detach();
+    }
+
+    /* =========== for Pengumuman Peserta use =========== */
+    @Command("buttonSearchEvent2")
+    @NotifyChange("eventAgitDTOs")
+    public void buttonSearchEvent2(@ContextParam(ContextType.VIEW) Window window) {
+
+        Map params = new HashMap();
+        params.put("status", status.ACTIVE);
+        eventUserDTOs = eventAgitService.findByParams(params);
     }
 
     /* =========== getter setter =========== */
