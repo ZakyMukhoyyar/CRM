@@ -36,9 +36,6 @@
                                         <separator/>
                                         <label sclass="post-time" width="100%" value="@bind(each.tglKomentar) @converter('formatedDate', format='hh:mm:ss dd-MMM-yyyy')"  />
                                     </div>
-                                    <div align="right">
-                                        <button sclass="btn" image="/images/delete_1.gif" onClick="@command('deleteKomentar', object=each)"/>
-                                    </div>
                                 </listcell>
                             </listitem>
                         </template>

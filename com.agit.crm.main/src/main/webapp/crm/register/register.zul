@@ -63,19 +63,8 @@
                                             <label value="@load(vmsgs['fullName'])" style="color:red"/>
                                         </div>
                                     </row>
-                                    <row>
+                                    <!--                                    <row>
                                         <signLabel sclass="isi" value="Assign Role "/>
-                                        <!--                                         <div>
-                                            <combobox autodrop="true" 
-                                                      width="40%"                                                       
-                                                      model="@load(vm.roleDTOs)" 
-                                                      selectedItem="@bind(fx.userDTO.roleDTO.roleName)" 
-                                                      placeholder=" Silahkan Pilih ">
-                                                <template name="model" var="items">
-                                                    <comboitem label="@load(items.getRoleName())" value="@load(items.getRoleName())"/>
-                                                </template>
-                                            </combobox>
-                                        </div>-->
                                         <div>
                                             <listbox model="@load(vm.roleDTOs)" 
                                                      mold="select"
@@ -87,7 +76,7 @@
                                             </listbox>
                                             <label value="@load(vmsgs['roleDTO'])" style="color:red"/>
                                         </div>
-                                    </row>
+                                    </row>-->
                                     <row>
                                         <signLabel sclass="isi" value="Username "/>
                                         <div>
@@ -115,7 +104,7 @@
                                         <signLabel sclass="isi" value="Email"/>
                                         <div>
                                             <textbox id="email" value="@bind(vm.userDTO.userSpecificationDTO.email)" width="40%" constraint="/.+@.+\.[a-z]+/: Format isian salah"/>
-                                            <a sclass="btn btn-primary" label="Verifikasi" width="20%" onClick="@command('verifyEmail', obj=email.getValue())"/>
+                                            <a sclass="btn btn-primary" label="Verifikasi" width="20%" onClick="@command('verifyEmail', obj2=email.getValue())"/>
                                             <label value="@load(vmsgs['email'])" style="color:red"/>
                                         </div>
                                     </row>
@@ -123,7 +112,7 @@
                                         <signLabel sclass="isi" value="KTP"/>
                                         <div>
                                             <textbox id="ktp" value="@bind(vm.userDTO.userSpecificationDTO.ktp)" width="40%" maxlength="16" constraint="/.[0-9]+/: no empty: Format isian salah" />
-                                            <a sclass="btn btn-primary" label="Verifikasi" width="20%" onClick="@command('verifyKtp', obj=ktp.getValue())"/>
+                                            <a sclass="btn btn-primary" label="Verifikasi" width="20%" onClick="@command('verifyKtp', obj1=ktp.getValue())"/>
                                             <label value="@load(vmsgs['ktp'])" style="color:red"/>
                                         </div>
                                     </row><!--
