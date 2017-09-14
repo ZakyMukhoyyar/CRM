@@ -21,6 +21,13 @@
                 <param name="type">12</param>
             </type>
         </property>
-        <property column="statusApprove" name="statusApprove" not-null="false"/>
+        <property column="jurusan" name="jurusan" not-null="false"/>
+        <property column="minat" name="minat" not-null="false"/>
+        <property column="ketrampilan1" name="ketrampilan1" not-null="false"/>
+        <property column="ketrampilan2" name="ketrampilan2" not-null="false"/>
+        <property column="ketrampilan3" name="ketrampilan3" not-null="false"/>
+        <property column="ketrampilan4" name="ketrampilan4" not-null="false"/>
+        <property column="ketrampilan5" name="ketrampilan5" not-null="false"/>
+        <property column="email" name="email" not-null="false"/>
     </class>
 </hibernate-mapping>

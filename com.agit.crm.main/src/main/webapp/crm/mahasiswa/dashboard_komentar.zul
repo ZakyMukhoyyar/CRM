@@ -31,7 +31,7 @@
                                         <separator/>
                                         <label width="100%" value="@bind(each.komentar)" />
                                         <separator/>
-                                        <image width="100%" src="@load(each.picture)" />
+                                        <image width="30%"  src="@load(each.picture)" />
                                         <!--<iframe src="@load(each.picture)" width="400px" height="300px" style="border: 1px solid gray"/>-->
                                         <separator/>
                                         <label sclass="post-time" width="100%" value="@bind(each.tglKomentar) @converter('formatedDate', format='hh:mm:ss dd-MMM-yyyy')"  />

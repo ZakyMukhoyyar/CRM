@@ -8,7 +8,6 @@ package com.agit.crm.common.dto.crm;
 import com.agit.crm.shared.state.LowonganState;
 import java.util.Date;
 
-
 public class RiwayatApplyMahasiswaDTOBuilder {
 
     private String idRiwayatApplyMahasiswa;
@@ -22,6 +21,14 @@ public class RiwayatApplyMahasiswaDTOBuilder {
     private String modifiedBy;
     private Date modifiedDate;
     private String statusApprove;
+    private String jurusan;
+    private String minat;
+    private String ketrampilan1;
+    private String ketrampilan2;
+    private String ketrampilan3;
+    private String ketrampilan4;
+    private String ketrampilan5;
+    private String email;
 
     public RiwayatApplyMahasiswaDTOBuilder() {
     }
@@ -81,8 +88,48 @@ public class RiwayatApplyMahasiswaDTOBuilder {
         return this;
     }
 
-    public RiwayatApplyMahasiswaDTO createRiwayatApplyMahasiswaDTO() {
-        return new RiwayatApplyMahasiswaDTO(idRiwayatApplyMahasiswa, idRiwayatLowongan, lowonganState, idUserRiwayat, namaLowonganApply, namaApplyLowongan, createdBy, createdDate, modifiedBy, modifiedDate, statusApprove);
+    public RiwayatApplyMahasiswaDTOBuilder setJurusan(String jurusan) {
+        this.jurusan = jurusan;
+        return this;
     }
-    
+
+    public RiwayatApplyMahasiswaDTOBuilder setMinat(String minat) {
+        this.minat = minat;
+        return this;
+    }
+
+    public RiwayatApplyMahasiswaDTOBuilder setKetrampilan1(String ketrampilan1) {
+        this.ketrampilan1 = ketrampilan1;
+        return this;
+    }
+
+    public RiwayatApplyMahasiswaDTOBuilder setKetrampilan2(String ketrampilan2) {
+        this.ketrampilan2 = ketrampilan2;
+        return this;
+    }
+
+    public RiwayatApplyMahasiswaDTOBuilder setKetrampilan3(String ketrampilan3) {
+        this.ketrampilan3 = ketrampilan3;
+        return this;
+    }
+
+    public RiwayatApplyMahasiswaDTOBuilder setKetrampilan4(String ketrampilan4) {
+        this.ketrampilan4 = ketrampilan4;
+        return this;
+    }
+
+    public RiwayatApplyMahasiswaDTOBuilder setKetrampilan5(String ketrampilan5) {
+        this.ketrampilan5 = ketrampilan5;
+        return this;
+    }
+
+    public RiwayatApplyMahasiswaDTOBuilder setEmail(String email) {
+        this.email = email;
+        return this;
+    }
+
+    public RiwayatApplyMahasiswaDTO createRiwayatApplyMahasiswaDTO() {
+        return new RiwayatApplyMahasiswaDTO(idRiwayatApplyMahasiswa, idRiwayatLowongan, lowonganState, idUserRiwayat, namaLowonganApply, namaApplyLowongan, createdBy, createdDate, modifiedBy, modifiedDate, statusApprove, jurusan, minat, ketrampilan1, ketrampilan2, ketrampilan3, ketrampilan4, ketrampilan5, email);
+    }
+
 }

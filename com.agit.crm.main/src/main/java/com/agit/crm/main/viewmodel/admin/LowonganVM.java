@@ -1,5 +1,7 @@
 package com.agit.crm.main.viewmodel.admin;
 
+import com.agit.crm.common.application.JurusanService;
+import com.agit.crm.common.application.KetrampilanService;
 import com.agit.crm.common.application.LowonganService;
 import com.agit.crm.common.application.LowonganStatusService;
 import com.agit.crm.common.application.MinatService;
@@ -61,6 +63,12 @@ public class LowonganVM {
     MinatService minatService;
 
     @WireVariable
+    KetrampilanService ketrampilanService;
+
+    @WireVariable
+    JurusanService jurusanService;
+
+    @WireVariable
     UserService userService;
 
     @WireVariable
@@ -89,6 +97,8 @@ public class LowonganVM {
     private List<String> listLowonganNama = new ArrayList<String>();
     private ListModelList<LowonganState> lowonganStates;
     private ListModelList<Status> statuses;
+    private List<String> listNamaJurusan = new ArrayList();
+    private List<String> listKetrampilan = new ArrayList();
 
     /* Function For Seacrh  */
     private String userID;
@@ -104,6 +114,8 @@ public class LowonganVM {
     private String idRiwayatLowongan;
     private LowonganState lowonganState;
     private Status status;
+    private String jurusan;
+    private String ketrampilan;
 
     private PageNavigation previous;
     private boolean checked;
@@ -395,6 +407,14 @@ public class LowonganVM {
         riwayatApplyMahasiswaDTO.setNamaApplyLowongan(user.getUserSpecificationDTO().getFullName());
         riwayatApplyMahasiswaDTO.setLowonganState(LowonganState.APPLY);
         riwayatApplyMahasiswaDTO.setIdUserRiwayat(user.getUserID());
+        riwayatApplyMahasiswaDTO.setEmail(user.getUserSpecificationDTO().getEmail());
+        riwayatApplyMahasiswaDTO.setMinat(user.getUserSpecificationDTO().getMinat());
+        riwayatApplyMahasiswaDTO.setJurusan(user.getUserSpecificationDTO().getJurusan());
+        riwayatApplyMahasiswaDTO.setKetrampilan1(user.getUserSpecificationDTO().getKetrampilan1());
+        riwayatApplyMahasiswaDTO.setKetrampilan2(user.getUserSpecificationDTO().getKetrampilan2());
+        riwayatApplyMahasiswaDTO.setKetrampilan3(user.getUserSpecificationDTO().getKetrampilan3());
+        riwayatApplyMahasiswaDTO.setKetrampilan4(user.getUserSpecificationDTO().getKetrampilan4());
+        riwayatApplyMahasiswaDTO.setKetrampilan5(user.getUserSpecificationDTO().getKetrampilan5());
         riwayatApplyMahasiswaService.SaveOrUpdate(riwayatApplyMahasiswaDTO);
 
         lowonganStatusDTO.setIdLowongan(idLowongan);

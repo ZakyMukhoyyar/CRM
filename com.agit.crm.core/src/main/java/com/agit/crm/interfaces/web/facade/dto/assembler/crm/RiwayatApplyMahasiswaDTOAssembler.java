@@ -13,7 +13,7 @@ import java.util.List;
  * @author Zaky
  */
 public class RiwayatApplyMahasiswaDTOAssembler implements IObjectAssembler<RiwayatApplyMahasiswa, RiwayatApplyMahasiswaDTO> {
-    
+
     @Override
     public RiwayatApplyMahasiswaDTO toDTO(RiwayatApplyMahasiswa domainObject) {
         return new RiwayatApplyMahasiswaDTOBuilder()
@@ -28,9 +28,17 @@ public class RiwayatApplyMahasiswaDTOAssembler implements IObjectAssembler<Riway
                 .setModifiedDate(domainObject.getModifiedDate())
                 .setLowonganState(domainObject.getLowonganState())
                 .setStatusApprove(domainObject.getStatusApprove())
+                .setJurusan(domainObject.getJurusan())
+                .setMinat(domainObject.getMinat())
+                .setKetrampilan1(domainObject.getKetrampilan1())
+                .setKetrampilan2(domainObject.getKetrampilan2())
+                .setKetrampilan3(domainObject.getKetrampilan3())
+                .setKetrampilan4(domainObject.getKetrampilan4())
+                .setKetrampilan5(domainObject.getKetrampilan5())
+                .setEmail(domainObject.getEmail())
                 .createRiwayatApplyMahasiswaDTO();
     }
-    
+
     @Override
     public RiwayatApplyMahasiswa toDomain(RiwayatApplyMahasiswaDTO dtoObject) {
         return new RiwayatApplyMahasiswaBuilder()
@@ -45,9 +53,17 @@ public class RiwayatApplyMahasiswaDTOAssembler implements IObjectAssembler<Riway
                 .setModifiedDate(dtoObject.getModifiedDate())
                 .setLowonganState(dtoObject.getLowonganState())
                 .setStatusApprove(dtoObject.getStatusApprove())
+                .setJurusan(dtoObject.getJurusan())
+                .setMinat(dtoObject.getMinat())
+                .setKetrampilan1(dtoObject.getKetrampilan1())
+                .setKetrampilan2(dtoObject.getKetrampilan2())
+                .setKetrampilan3(dtoObject.getKetrampilan3())
+                .setKetrampilan4(dtoObject.getKetrampilan4())
+                .setKetrampilan5(dtoObject.getKetrampilan5())
+                .setEmail(dtoObject.getEmail())
                 .createRiwayatApplyMahasiswa();
     }
-    
+
     public List<RiwayatApplyMahasiswa> toDomains(List<RiwayatApplyMahasiswaDTO> arg0) {
         List<RiwayatApplyMahasiswa> res = new ArrayList<>();
         for (RiwayatApplyMahasiswaDTO t : arg0) {
@@ -55,7 +71,7 @@ public class RiwayatApplyMahasiswaDTOAssembler implements IObjectAssembler<Riway
         }
         return res;
     }
-    
+
     public List<RiwayatApplyMahasiswaDTO> toDTOs(List<RiwayatApplyMahasiswa> arg0) {
         List<RiwayatApplyMahasiswaDTO> res = new ArrayList<>();
         for (RiwayatApplyMahasiswa t : arg0) {
@@ -63,5 +79,5 @@ public class RiwayatApplyMahasiswaDTOAssembler implements IObjectAssembler<Riway
         }
         return res;
     }
-    
+
 }

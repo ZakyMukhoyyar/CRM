@@ -47,6 +47,14 @@ public class RiwayatApplyMahasiswaServiceImpl implements RiwayatApplyMahasiswaSe
                 .setModifiedDate(new Date())
                 .setLowonganState(LowonganState.APPLY)
                 .setStatusApprove("Approved")
+                .setJurusan("Jurusan")
+                .setMinat("Minat")
+                .setKetrampilan1("Ketrampilan")
+                .setKetrampilan2("Ketrampilan")
+                .setKetrampilan3("Ketrampilan")
+                .setKetrampilan4("Ketrampilan")
+                .setKetrampilan5("Ketrampilan")
+                .setEmail("Email")
                 .createRiwayatApplyMahasiswa();
         return riwayatApplyMahasiswaDTOAssembler.toDTO(riwayatApplyMahasiswa);
     }
