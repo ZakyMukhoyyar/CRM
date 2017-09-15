@@ -441,7 +441,7 @@ public class LowonganVM {
         try {
 
             Message message1 = new MimeMessage(session);
-            message1.setFrom(new InternetAddress("bayuhendra1078@gmail.com"));
+            message1.setFrom(new InternetAddress("bajm.recruitment.agit@gmail.com"));
             message1.setRecipients(Message.RecipientType.TO, InternetAddress.parse(riwayatApplyMahasiswaDTO.getEmail()));
 
             message1.setSubject("Apply Lowongan CRM");
@@ -484,6 +484,7 @@ public class LowonganVM {
         map.put("idUser", userDTO.getUserID());
         map.put("idLowongan", obj.getIdLowongan());
         lowonganStatusDTOs = lowonganStatusService.findByParams2(map);
+
         if (lowonganStatusDTOs.isEmpty()) {
             BindUtils.postGlobalCommand(null, null, "refreshLowongan", null);
             Map<String, Object> params = new HashMap<>();
@@ -492,6 +493,7 @@ public class LowonganVM {
         } else {
             showInformationMessagebox("Anda Sudah Pernah Apply Lowongan Ini");
         }
+
     }
 
     @Command("deleteLowongan")
@@ -586,7 +588,7 @@ public class LowonganVM {
         try {
 
             Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress("bayuhendra1078@gmail.com"));
+            message.setFrom(new InternetAddress("bajm.recruitment.agit@gmail.com"));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(riwayatApplyMahasiswaDTO.getEmail()));
 
             message.setSubject("Update Status CRM");

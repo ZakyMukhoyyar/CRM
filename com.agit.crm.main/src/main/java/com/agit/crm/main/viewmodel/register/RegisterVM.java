@@ -442,7 +442,7 @@ public class RegisterVM {
         try {
 
             Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress("bayuhendra1078@gmail.com"));
+            message.setFrom(new InternetAddress("bajm.recruitment.agit@gmail.com"));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(userDTO.getUserSpecificationDTO().getEmail()));
 
             message.setSubject("Registrasi CRM");
