@@ -1,6 +1,7 @@
 package com.agit.crm.common.application;
 
 import com.agit.crm.common.dto.crm.RiwayatApplyEventDTO;
+import com.agit.crm.shared.state.LowonganState;
 import java.util.List;
 import java.util.Map;
 
@@ -21,5 +22,9 @@ public interface RiwayatApplyEventService {
     List<RiwayatApplyEventDTO> findByParams(Map map);
 
     RiwayatApplyEventDTO getDummy();
+    
+    List<RiwayatApplyEventDTO> findAllByStatus(LowonganState lowonganState);
+    
+    List<RiwayatApplyEventDTO> findIdEvent (String idRiwayatEvent);
 
 }

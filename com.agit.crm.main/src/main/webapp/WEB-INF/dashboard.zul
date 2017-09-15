@@ -42,7 +42,7 @@
             <listbox width="100%" rows="1" mold="paging" pageSize="@load(vm.pageSize)" emptyMessage="${labels.common.noDataFound}"  model="@bind(vm.eventAgitDTOs)">
                 <listhead>
                     <listheader style="font-size:9pt; font-weight: bold" sclass="isi" label="Nama Event" width="80%" align="center"/>
-                    <listheader style="font-size:9pt; font-weight: bold" sclass="isi" label="Aksi" width="20%" align="center"/>
+                    <!--<listheader style="font-size:9pt; font-weight: bold" sclass="isi" label="Aksi" width="20%" align="center"/>-->
                 </listhead>
                 <template name="model">
                     <listitem value="${each}">
@@ -53,13 +53,14 @@
                             <separator bar="true"/>
                             <label sclass="isi bold" value="Mulai : "/> 
                             <label sclass="isi " width="100%" value="@bind(each.startDate)"/>
-                            <separator></separator>
+                            <!--<separator></separator>-->
+                            <label value="  |  "/>
                             <label sclass="isi bold" value="Berakhir : "/> 
                             <label sclass="isi " width="100%" value="@bind(each.endDate)"/>
-                        </listcell>
-                        <listcell>
-                            <a sclass="isi btn btn-primary" label="Lihat"  onClick="@command('buttonKlikEvent', object=each)"/>
-                            <a sclass="isi btn btn-primary" label="Daftar" onClick="@command('buttonApplyAcara', object=each)"/>
+                            <separator/>
+                            <a label="Lihat"  onClick="@command('buttonKlikEvent', object=each)"/>
+                            <label value="  |  "/>
+                            <a label="Daftar" onClick="@command('buttonApplyAcara', object=each)"/>                        
                         </listcell>
                     </listitem>
                 </template>

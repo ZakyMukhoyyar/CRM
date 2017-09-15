@@ -25,7 +25,9 @@
             <separator></separator>
             <div >
                 <groupbox>
-                    <listbox  rows="@load(vm.pageSize)" pageSize="@load(vm.pageSize)" mold="paging" emptyMessage="${labels.common.noDataFound}" model="@bind(vm.lowonganDTOs2)">
+                    <listbox  rows="@load(vm.pageSize)" pageSize="@load(vm.pageSize)" mold="paging" 
+                              emptyMessage="${labels.common.noDataFound}" 
+                              model="@bind(vm.lowonganDTOs2)">
                         <listhead >
                             <listheader sclass="isi" label="Nama Lowongan" width="50%" align="center "/>
                             <listheader sclass="isi" label="Aksi" width="7%" align="center"/>
@@ -45,7 +47,7 @@
                                     <label sclass="isi label label-success" width="100%" value="@bind(each.gaji)" style="text-align: left;"/>
                                     <separator></separator>-->
                                     <label sclass="isi bold" value="Status : "/> 
-                                    <!--<label sclass="isi label label-danger" width="100%" value="@load(vm.concatStateLowongan('Welcome,  ',vm.lowonganStatusDTO.lowonganState))" style="text-align: left;"/>-->
+                                    <!--<label sclass="isi label label-danger" width="100%" value="@bind(vm.lowonganStatusDTO.getLowonganState().toString())" style="text-align: left;"/>-->
                                 </listcell>
                                 <listcell>
                                     <a sclass="isi btn btn-primary" label="Detail"  onClick="@command('buttonDetailLowongan', object=each)"></a>

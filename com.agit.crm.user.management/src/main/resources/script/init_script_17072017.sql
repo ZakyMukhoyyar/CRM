@@ -38,7 +38,7 @@ INSERT INTO "public"."mst_privilege" VALUES ('31', 'MAHASISWA_MANAGEMENT', 'Admi
 INSERT INTO "public"."mst_privilege" VALUES ('32', 'EVENT', 'Beranda Acara', 'ACTIVE', 'MAHASISWA_MANAGEMENT', 't', 'Informasi - Acara', 'Informasi - Acara', null, '/crm/mahasiswa/beranda_pengumuman_acara.zul', '2016-01-01 00:00:00', 'SYSTEM');
 INSERT INTO "public"."mst_privilege" VALUES ('33', 'LOWONGAN', 'Beranda Lowongan', 'ACTIVE', 'MAHASISWA_MANAGEMENT', 't', 'Informasi - Lowongan', 'Informasi - Lowongan', null, '/crm/mahasiswa/beranda_lowongan_mahasiswa.zul', '2016-01-01 00:00:00', 'SYSTEM');
 INSERT INTO "public"."mst_privilege" VALUES ('34', 'PROFILE', 'Update Profile', 'ACTIVE', 'MAHASISWA_MANAGEMENT', 't', 'Profil - Profilku', 'Profil - Profilku', null, '/crm/mahasiswa/beranda_profile_mahasiswa.zul', '2016-01-01 00:00:00', 'SYSTEM');
-INSERT INTO "public"."mst_privilege" VALUES ('35', 'FORUM', 'Beranda Mahasiswa Forum', 'ACTIVE', 'MAHASISWA_MANAGEMENT', 't', 'Informasi - Forum', 'Informasi - Forum', null, '/crm/admin/forum/tab_forum.zul', '2016-01-01 00:00:00', 'SYSTEM');
+INSERT INTO "public"."mst_privilege" VALUES ('35', 'FORUM', 'Beranda Mahasiswa Forum', 'ACTIVE', 'MAHASISWA_MANAGEMENT', 't', 'Informasi - Forum', 'Informasi - Forum', null, '/crm/mahasiswa/tab_forum.zul', '2016-01-01 00:00:00', 'SYSTEM');
 
 INSERT INTO "public"."mst_privilege" VALUES ('36', 'RECRUITER_MANAGEMENT', 'Admin', 'ACTIVE', 'ADMINISTRATOR', 't', 'Pengelolaan Data Pelamar', null, null, null, '2016-01-01 00:00:00', 'SYSTEM');
 INSERT INTO "public"."mst_privilege" VALUES ('37', 'DATA_PELAMAR', 'Data Pelamar', 'ACTIVE', 'RECRUITER_MANAGEMENT', 't', 'Data - Pelamar', 'Data - Pelamar', null, '/crm/recruiter/DashboardRecruiter.zul', '2016-01-01 00:00:00', 'SYSTEM');

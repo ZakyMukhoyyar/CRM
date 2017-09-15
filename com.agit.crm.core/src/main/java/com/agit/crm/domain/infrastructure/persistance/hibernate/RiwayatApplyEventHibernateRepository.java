@@ -1,7 +1,9 @@
 package com.agit.crm.domain.infrastructure.persistance.hibernate;
 
+import com.agit.crm.common.dto.crm.RiwayatApplyEventDTO;
 import com.agit.crm.domain.crm.RiwayatApplyEvent;
 import com.agit.crm.domain.crm.RiwayatApplyEventRepository;
+import com.agit.crm.shared.state.LowonganState;
 import com.agit.crm.util.JDCStringUtil;
 import java.util.List;
 import java.util.Map;
@@ -56,7 +58,24 @@ public class RiwayatApplyEventHibernateRepository extends HibernateRepository im
         if (JDCStringUtil.hasValue(map.get("namaEvent"))) {
             criteria.add(Restrictions.like("namaEvent", map.get("namaEvent")));
         }
+        if (JDCStringUtil.hasValue(map.get("lowonganState"))){
+            criteria.add(Restrictions.eq("lowonganState", map.get("lowonganState")));
+        }
         return criteria.list();
+    }
+
+    @Override
+    public List<RiwayatApplyEvent> findAllByStatus(LowonganState lowonganState) {
+        Criteria criteria = getSession().createCriteria(RiwayatApplyEvent.class);
+        criteria.add(Restrictions.eq("lowonganState", lowonganState));
+        return (List<RiwayatApplyEvent>) criteria.list();
+    }
+
+    @Override
+    public List<RiwayatApplyEvent> findIdEvent(String idRiwayatEvent) {
+        Criteria criteria = getSession().createCriteria(RiwayatApplyEvent.class);
+        criteria.add(Restrictions.eq("idRiwayatEvent", idRiwayatEvent));
+        return (List<RiwayatApplyEvent>) criteria.list();
     }
 
 }

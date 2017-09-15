@@ -1,9 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
 <zk xmlns="http://www.zkoss.org/2005/zul">
     <window apply="org.zkoss.bind.BindComposer"
             viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.admin.EventAgitVM')"
-            form="@id('fx') @load(vm.riwayatApplyEventDTO) @save(vm.riwayatApplyEventDTO, before='LihatPengumuman')">
+            form="@id('fx') @load(vm.eventAgitDTO) @save(vm.eventAgitDTO, before='LihatPengumuman')">
     
         <div>
             <groupbox closable="false" width="600px">
@@ -12,17 +10,12 @@
                          emptyMessage="${labels.common.noDataFound}" 
                          model="@bind(vm.riwayatApplyEventDTOs)">
                     <listhead>
-                        <!--<listheader label="ID Jurusan" width="20%" align="center" sortDirection="ascending" sort="auto(idJurusan)"/>-->
-                        <listheader label="Nama Event" width="60%" align="center"/> 
-                        <listheader label="Nama Peserta" width="60%" align="center"/> 
-                        <listheader label="Status" width="40%" align="center"/>   
-                        <!--<listheader sclass="isi bold" label="Aksi" width="20%" align="center"/>-->                                                                       
+                        <listheader label="Nama Event" width="40%" align="center"/> 
+                        <listheader label="Nama Peserta" width="40%" align="center"/> 
+                        <listheader label="Status" width="20%" align="center"/>                                                                 
                     </listhead>
                     <template name="model">
                         <listitem value="${each}">
-<!--                            <listcell >
-                                <label width="100%" value="@bind(each.idJurusan)"/>
-                            </listcell>-->
                             <listcell>
                                 <label width="100%" value="@bind(each.namaEvent)"/>
                             </listcell>
@@ -32,13 +25,10 @@
                             <listcell>
                                 <label width="100%" value="@bind(each.lowonganState)"/>
                             </listcell>
-<!--                            <listcell >
-                                <a onClick="@command('detailJurusan', object=each)" image="/images/skk_edit.png" sclass="btn btn-default"/>
-                            </listcell>-->
                         </listitem>
                     </template>
                 </listbox>
-                <a label="Kembali" sclass="btn btn-info" width="50%" onClick = "@command('buttonKembaliEvent')"/>
+                <a label="Kembali" sclass="btn btn-info" width="50%" onClick = "@command('buttonClosePreview')"/>
             </groupbox>
         </div>
     </window>

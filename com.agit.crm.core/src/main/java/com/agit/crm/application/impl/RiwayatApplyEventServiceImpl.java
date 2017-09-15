@@ -91,4 +91,20 @@ public class RiwayatApplyEventServiceImpl implements RiwayatApplyEventService {
                 .createRiwayatApplyEventDTO();
     }
 
+    @Override
+    public List<RiwayatApplyEventDTO> findAllByStatus(LowonganState lowonganState) {
+        Validate.notNull(riwayatApplyEventRepository);
+        List<RiwayatApplyEvent> listRiwayatApplyEvent = riwayatApplyEventRepository.findAllByStatus(lowonganState);
+        if (listRiwayatApplyEvent != null) {
+            return (List<RiwayatApplyEventDTO>) riwayatApplyEventDTOAssembler.toDTOs(listRiwayatApplyEvent);
+        }
+        return null;
+    }
+
+    @Override
+    public List<RiwayatApplyEventDTO> findIdEvent(String idRiwayatEvent) {
+        Validate.notNull(riwayatApplyEventRepository);
+        return riwayatApplyEventDTOAssembler.toDTOs(riwayatApplyEventRepository.findIdEvent(idRiwayatEvent));
+    }
+
 }

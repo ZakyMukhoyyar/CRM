@@ -1,14 +1,14 @@
 <zk xmlns="http://www.zkoss.org/2005/zul">
     <window apply="org.zkoss.bind.BindComposer"
             viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.admin.EventAgitVM')"
-            form="@id('fx') @load(vm.eventAgitDTO) @save(vm.eventAgitDTO, before='buttonKonfirmasiApplyAcara')">
+            form="@id('fx') @load(vm.eventAgitDTO) @save(vm.eventAgitDTO, before='buttonSimpanStatusPeserta')">
         
         <groupbox closable="false" style="background:#f5f5f5" sclass="col-md-12 nopadding" >
             <div align="right">
                 <div class="input-group" width="30%">
                     <textbox class="form-control" width="100%" value="@bind(vm.namaEvent)" placeholder="Nama Acara"/>
                     <span class="input-group-btn">
-                        <a sclass="btn btn-primary" width="100%" label="Pencarian" onClick="@command('buttonSearchForum2')"/>
+                        <a sclass="btn btn-primary" width="100%" label="Pencarian" onClick="@command('buttonSearchEvent')"/>
                     </span>
                 </div>
             </div>
