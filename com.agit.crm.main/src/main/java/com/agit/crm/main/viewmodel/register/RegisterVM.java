@@ -426,7 +426,7 @@ public class RegisterVM {
             CommonViewModel.showInformationMessagebox("User Name " + userDTO.getUserName() + " has successfully deleted", UserNavigation.USER_SEARCH, null, window);
         }
 
-        final String username = "bayuhendra1078@gmail.com";
+        final String username = "bajm.recruitment.agit@gmail.com";
         final String passwordEmail = "bayuhendra1993";
         Properties prop = new Properties();
         prop.put("mail.smtp.auth", "true");
@@ -449,10 +449,10 @@ public class RegisterVM {
             message.setText("Dear  " + userDTO.getUserName()
                     + "\n\n Selamat, Anda sudah berhasil mendaftar App Candidate Recruitment di PT. Astra Graphia Information Technology"
                     + "\n "
-                    + "\n Nama Lengkap  : " + userDTO.getUserSpecificationDTO().getFullName()
-                    + "\n Email         : " + userDTO.getUserSpecificationDTO().getEmail()
-                    + "\n No KTP        : " + userDTO.getUserSpecificationDTO().getKtp()
-                    + "\n\n Mohon simpan email ini sebagai referensi atas registrasi CRM anda.. "
+                    + "\n Nama Lengkap      :" + userDTO.getUserSpecificationDTO().getFullName()
+                    + "\n Email             :" + userDTO.getUserSpecificationDTO().getEmail()
+                    + "\n No KTP            :" + userDTO.getUserSpecificationDTO().getKtp()
+                    + "\n\n Mohon simpan email ini sebagai referensi atas registrasi CRM anda. "
                     + "\n\n Terimakasih. "
                     + "\n\n PT. Astra Graphia Information Technology. "
             );

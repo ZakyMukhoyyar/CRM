@@ -32,6 +32,14 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
@@ -417,12 +425,54 @@ public class LowonganVM {
         riwayatApplyMahasiswaDTO.setKetrampilan5(user.getUserSpecificationDTO().getKetrampilan5());
         riwayatApplyMahasiswaService.SaveOrUpdate(riwayatApplyMahasiswaDTO);
 
+        final String username = "bajm.recruitment.agit@gmail.com";
+        final String passwordEmail = "bayuhendra1993";
+        Properties prop = new Properties();
+        prop.put("mail.smtp.auth", "true");
+        prop.put("mail.smtp.starttls.enable", "true");
+        prop.put("mail.smtp.host", "smtp.gmail.com");
+        prop.put("mail.smtp.port", "587");
+
+        Session session = Session.getInstance(prop, new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(username, passwordEmail);
+            }
+        });
+        try {
+
+            Message message1 = new MimeMessage(session);
+            message1.setFrom(new InternetAddress("bayuhendra1078@gmail.com"));
+            message1.setRecipients(Message.RecipientType.TO, InternetAddress.parse(riwayatApplyMahasiswaDTO.getEmail()));
+
+            message1.setSubject("Apply Lowongan CRM");
+            message1.setText("Dear  " + riwayatApplyMahasiswaDTO.getNamaApplyLowongan()
+                    + "\n\n Selamat anda berhasil apply lowongan di App Candidate Recruitment di PT. Astra Graphia Information Technology"
+                    + "\n "
+                    + "\n Nama              :" + riwayatApplyMahasiswaDTO.getNamaApplyLowongan()
+                    + "\n Nama Lowongan     :" + riwayatApplyMahasiswaDTO.getNamaLowonganApply()
+                    + "\n Minat             :" + riwayatApplyMahasiswaDTO.getMinat()
+                    + "\n Status            :" + riwayatApplyMahasiswaDTO.getLowonganState()
+                    + "\n Tanggal           :" + riwayatApplyMahasiswaDTO.getCreatedDate()
+                    + "\n\n Mohon simpan email ini sebagai referensi atas data CRM anda. "
+                    + "\n\n Terimakasih. "
+                    + "\n\n PT. Astra Graphia Information Technology. "
+            );
+            message1.setSentDate(new Date());
+
+            Transport.send(message1);
+
+            System.out.println("Sending Email Done");
+
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        }
         lowonganStatusDTO.setIdLowongan(idLowongan);
         lowonganStatusDTO.setIdUser(user.getUserID());
         lowonganStatusDTO.setLowonganState(LowonganState.APPLY);
         lowonganStatusService.saveOrUpdate(lowonganStatusDTO);
 
         BindUtils.postGlobalCommand(null, null, "refreshLowongan", null);
+        showInformationMessagebox("Berhasil Apply Lowongan");
         window.detach();
     }
 
@@ -450,17 +500,17 @@ public class LowonganVM {
         lowonganDTO = (LowonganDTO) obj;
         Messagebox.show("Apakah anda yakin ingin menghapus Lowongan?", "Konfirmasi", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION,
                 new org.zkoss.zk.ui.event.EventListener() {
-                    @Override
-                    public void onEvent(Event evt) throws InterruptedException {
-                        if (evt.getName().equals("onOK")) {
-                            lowonganService.deleteData(lowonganDTO);
-                            showInformationMessagebox("Lowongan Berhasil Dihapus");
-                            BindUtils.postGlobalCommand(null, null, "refreshLowongan", null);
-                        } else {
-                            System.out.println("Operation Canceled !");
-                        }
-                    }
+            @Override
+            public void onEvent(Event evt) throws InterruptedException {
+                if (evt.getName().equals("onOK")) {
+                    lowonganService.deleteData(lowonganDTO);
+                    showInformationMessagebox("Lowongan Berhasil Dihapus");
+                    BindUtils.postGlobalCommand(null, null, "refreshLowongan", null);
+                } else {
+                    System.out.println("Operation Canceled !");
                 }
+            }
+        }
         );
     }
 
@@ -470,8 +520,8 @@ public class LowonganVM {
         }
         return count;
     }
-    /* --------------------------------------------- for data pelamar functionality ---------------------------------------------------*/
 
+    /* --------------------------------------------- for data pelamar functionality ---------------------------------------------------*/
     @Command("searchPelamar")
     @NotifyChange("listRiwayatApplyMahasiswaDTOs")
     public void searchPelamar(@ContextParam(ContextType.VIEW) Window window) {
@@ -519,6 +569,47 @@ public class LowonganVM {
     public void buttonSimpanStatusPelamar(@BindingParam("object") RiwayatApplyMahasiswaDTO obj, @ContextParam(ContextType.VIEW) Window window) {
         riwayatApplyMahasiswaDTO.setLowonganState(lowonganState);
         riwayatApplyMahasiswaService.SaveOrUpdate(riwayatApplyMahasiswaDTO);
+
+        final String username = "bajm.recruitment.agit@gmail.com";
+        final String passwordEmail = "bayuhendra1993";
+        Properties prop = new Properties();
+        prop.put("mail.smtp.auth", "true");
+        prop.put("mail.smtp.starttls.enable", "true");
+        prop.put("mail.smtp.host", "smtp.gmail.com");
+        prop.put("mail.smtp.port", "587");
+
+        Session session = Session.getInstance(prop, new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(username, passwordEmail);
+            }
+        });
+        try {
+
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress("bayuhendra1078@gmail.com"));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(riwayatApplyMahasiswaDTO.getEmail()));
+
+            message.setSubject("Update Status CRM");
+            message.setText("Dear  " + riwayatApplyMahasiswaDTO.getNamaApplyLowongan()
+                    + "\n\n Update status apply lowongan anda di App Candidate Recruitment di PT. Astra Graphia Information Technology"
+                    + "\n "
+                    + "\n Nama              :" + riwayatApplyMahasiswaDTO.getNamaApplyLowongan()
+                    + "\n Nama Lowongan     :" + riwayatApplyMahasiswaDTO.getNamaLowonganApply()
+                    + "\n Minat             :" + riwayatApplyMahasiswaDTO.getMinat()
+                    + "\n Status            :" + riwayatApplyMahasiswaDTO.getLowonganState()
+                    + "\n\n Mohon simpan email ini sebagai referensi atas data CRM anda.. "
+                    + "\n\n Terimakasih. "
+                    + "\n\n PT. Astra Graphia Information Technology. "
+            );
+            message.setSentDate(new Date());
+
+            Transport.send(message);
+
+            System.out.println("Sending Email Done");
+
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        }
         showInformationMessagebox("Data Berhasil Disimpan");
         BindUtils.postGlobalCommand(null, null, "refreshRAM", null);
         window.detach();
