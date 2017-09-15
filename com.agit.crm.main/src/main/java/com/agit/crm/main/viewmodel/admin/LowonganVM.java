@@ -6,6 +6,8 @@ import com.agit.crm.common.application.LowonganService;
 import com.agit.crm.common.application.LowonganStatusService;
 import com.agit.crm.common.application.MinatService;
 import com.agit.crm.common.application.RiwayatApplyMahasiswaService;
+import com.agit.crm.common.dto.crm.JurusanDTO;
+import com.agit.crm.common.dto.crm.KetrampilanDTO;
 import com.agit.crm.common.dto.crm.LowonganDTO;
 import com.agit.crm.common.dto.crm.LowonganDTOBuilder;
 import com.agit.crm.common.dto.crm.LowonganStatusDTO;
@@ -107,6 +109,9 @@ public class LowonganVM {
     private ListModelList<Status> statuses;
     private List<String> listNamaJurusan = new ArrayList();
     private List<String> listKetrampilan = new ArrayList();
+    private List<KetrampilanDTO> kdtos = new ArrayList<KetrampilanDTO>();
+    private List<JurusanDTO> jdtos = new ArrayList<JurusanDTO>();
+
 
     /* Function For Seacrh  */
     private String userID;
@@ -163,6 +168,15 @@ public class LowonganVM {
         }
 
         lowonganDTOs2 = lowonganService.findAllByStatus(status.ACTIVE);
+
+        jdtos = jurusanService.findAllByStatus(status.ACTIVE);
+        for (JurusanDTO j : jdtos) {
+            listNamaJurusan.add(j.getNamaJurusan());
+        }
+        kdtos = ketrampilanService.findAllByStatus(status.ACTIVE);
+        for (KetrampilanDTO k : kdtos) {
+            listKetrampilan.add(k.getNamaKetrampilan());
+        }
 
         for (LowonganDTO m : lowonganDTOs) {
             listLowonganNama.add(m.getNamaLowongan());
@@ -502,17 +516,17 @@ public class LowonganVM {
         lowonganDTO = (LowonganDTO) obj;
         Messagebox.show("Apakah anda yakin ingin menghapus Lowongan?", "Konfirmasi", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION,
                 new org.zkoss.zk.ui.event.EventListener() {
-            @Override
-            public void onEvent(Event evt) throws InterruptedException {
-                if (evt.getName().equals("onOK")) {
-                    lowonganService.deleteData(lowonganDTO);
-                    showInformationMessagebox("Lowongan Berhasil Dihapus");
-                    BindUtils.postGlobalCommand(null, null, "refreshLowongan", null);
-                } else {
-                    System.out.println("Operation Canceled !");
+                    @Override
+                    public void onEvent(Event evt) throws InterruptedException {
+                        if (evt.getName().equals("onOK")) {
+                            lowonganService.deleteData(lowonganDTO);
+                            showInformationMessagebox("Lowongan Berhasil Dihapus");
+                            BindUtils.postGlobalCommand(null, null, "refreshLowongan", null);
+                        } else {
+                            System.out.println("Operation Canceled !");
+                        }
+                    }
                 }
-            }
-        }
         );
     }
 
@@ -535,6 +549,12 @@ public class LowonganVM {
         count = checkCount(count, namaLowonganApply);
         params.put("namaApplyLowongan", namaApplyLowongan);
         count = checkCount(count, namaApplyLowongan);
+        params.put("jurusan", jurusan);
+        count = checkCount(count, jurusan);
+        params.put("ketrampilan", ketrampilan);
+        count = checkCount(count, ketrampilan);
+        params.put("minatPekerjaan", minatPekerjaan);
+        count = checkCount(count, minatPekerjaan);
         if (count < 1) {
             Messagebox.show("Minimal harus memasukkan 1 parameter pencarian", "Peringatan", Messagebox.OK, Messagebox.EXCLAMATION);
             return;
@@ -970,6 +990,54 @@ public class LowonganVM {
 
     public void setLowonganDTOs2(List<LowonganDTO> lowonganDTOs2) {
         this.lowonganDTOs2 = lowonganDTOs2;
+    }
+
+    public List<String> getListNamaJurusan() {
+        return listNamaJurusan;
+    }
+
+    public void setListNamaJurusan(List<String> listNamaJurusan) {
+        this.listNamaJurusan = listNamaJurusan;
+    }
+
+    public List<String> getListKetrampilan() {
+        return listKetrampilan;
+    }
+
+    public void setListKetrampilan(List<String> listKetrampilan) {
+        this.listKetrampilan = listKetrampilan;
+    }
+
+    public List<KetrampilanDTO> getKdtos() {
+        return kdtos;
+    }
+
+    public void setKdtos(List<KetrampilanDTO> kdtos) {
+        this.kdtos = kdtos;
+    }
+
+    public List<JurusanDTO> getJdtos() {
+        return jdtos;
+    }
+
+    public void setJdtos(List<JurusanDTO> jdtos) {
+        this.jdtos = jdtos;
+    }
+
+    public String getJurusan() {
+        return jurusan;
+    }
+
+    public void setJurusan(String jurusan) {
+        this.jurusan = jurusan;
+    }
+
+    public String getKetrampilan() {
+        return ketrampilan;
+    }
+
+    public void setKetrampilan(String ketrampilan) {
+        this.ketrampilan = ketrampilan;
     }
 
 }

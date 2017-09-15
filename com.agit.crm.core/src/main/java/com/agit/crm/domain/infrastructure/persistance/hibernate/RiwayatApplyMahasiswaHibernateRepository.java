@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
+import org.hibernate.criterion.Disjunction;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -70,23 +71,17 @@ public class RiwayatApplyMahasiswaHibernateRepository extends HibernateRepositor
         if (StringUtil.hasValue(map.get("jurusan"))) {
             criteria.add(Restrictions.like("jurusan", "%" + map.get("jurusan") + "%").ignoreCase());
         }
-        if (StringUtil.hasValue(map.get("minat"))) {
-            criteria.add(Restrictions.like("minat", "%" + map.get("minat") + "%").ignoreCase());
+        if (StringUtil.hasValue(map.get("minatPekerjaan"))) {
+            criteria.add(Restrictions.like("minat", "%" + map.get("minatPekerjaan") + "%").ignoreCase());
         }
         if (StringUtil.hasValue(map.get("ketrampilan"))) {
-            criteria.add(Restrictions.like("ketrampilan1", "%" + map.get("ketrampilan") + "%").ignoreCase());
-        }
-        if (StringUtil.hasValue(map.get("ketrampilan"))) {
-            criteria.add(Restrictions.like("ketrampilan2", "%" + map.get("ketrampilan") + "%").ignoreCase());
-        }
-        if (StringUtil.hasValue(map.get("ketrampilan"))) {
-            criteria.add(Restrictions.like("ketrampilan3", "%" + map.get("ketrampilan") + "%").ignoreCase());
-        }
-        if (StringUtil.hasValue(map.get("ketrampilan"))) {
-            criteria.add(Restrictions.like("ketrampilan4", "%" + map.get("ketrampilan") + "%").ignoreCase());
-        }
-        if (StringUtil.hasValue(map.get("ketrampilan"))) {
-            criteria.add(Restrictions.like("ketrampilan5", "%" + map.get("ketrampilan") + "%").ignoreCase());
+            Disjunction or = Restrictions.disjunction();
+            or.add(Restrictions.like("ketrampilan1", "%" + map.get("ketrampilan") + "%").ignoreCase());
+            or.add(Restrictions.like("ketrampilan2", "%" + map.get("ketrampilan") + "%").ignoreCase());
+            or.add(Restrictions.like("ketrampilan3", "%" + map.get("ketrampilan") + "%").ignoreCase());
+            or.add(Restrictions.like("ketrampilan4", "%" + map.get("ketrampilan") + "%").ignoreCase());
+            or.add(Restrictions.like("ketrampilan5", "%" + map.get("ketrampilan") + "%").ignoreCase());
+            criteria.add(or);
         }
         return criteria.list();
     }
