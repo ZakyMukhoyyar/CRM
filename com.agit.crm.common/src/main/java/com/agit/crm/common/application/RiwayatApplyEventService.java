@@ -22,9 +22,9 @@ public interface RiwayatApplyEventService {
     List<RiwayatApplyEventDTO> findByParams(Map map);
 
     RiwayatApplyEventDTO getDummy();
-    
-    List<RiwayatApplyEventDTO> findAllByStatus(LowonganState lowonganState);
-    
-    List<RiwayatApplyEventDTO> findIdEvent (String idRiwayatEvent);
+
+    List<RiwayatApplyEventDTO> findAllByStatus(String idRiwayatEvent, LowonganState lowonganState);
+
+    List<RiwayatApplyEventDTO> findIdEvent(String idRiwayatEvent);
 
 }

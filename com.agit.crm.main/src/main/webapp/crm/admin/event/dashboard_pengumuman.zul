@@ -1,8 +1,7 @@
 <zk xmlns="http://www.zkoss.org/2005/zul">
     <window apply="org.zkoss.bind.BindComposer"
-            viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.admin.EventAgitVM')"
+            viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.DashboardVM')"
             form="@id('fx') @load(vm.eventAgitDTO) @save(vm.eventAgitDTO, before='LihatPengumuman')">
-    
         <div>
             <groupbox closable="false" width="600px">
                 <!--<paging forward="onPaging" />-->

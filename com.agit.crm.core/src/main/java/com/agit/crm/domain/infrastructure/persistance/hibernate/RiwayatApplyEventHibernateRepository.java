@@ -58,15 +58,16 @@ public class RiwayatApplyEventHibernateRepository extends HibernateRepository im
         if (JDCStringUtil.hasValue(map.get("namaEvent"))) {
             criteria.add(Restrictions.like("namaEvent", map.get("namaEvent")));
         }
-        if (JDCStringUtil.hasValue(map.get("lowonganState"))){
+        if (JDCStringUtil.hasValue(map.get("lowonganState"))) {
             criteria.add(Restrictions.eq("lowonganState", map.get("lowonganState")));
         }
         return criteria.list();
     }
 
     @Override
-    public List<RiwayatApplyEvent> findAllByStatus(LowonganState lowonganState) {
+    public List<RiwayatApplyEvent> findAllByStatus(String idRiwayatEvent, LowonganState lowonganState) {
         Criteria criteria = getSession().createCriteria(RiwayatApplyEvent.class);
+        criteria.add(Restrictions.eq("idRiwayatEvent", idRiwayatEvent));
         criteria.add(Restrictions.eq("lowonganState", lowonganState));
         return (List<RiwayatApplyEvent>) criteria.list();
     }

@@ -155,23 +155,6 @@ public class EventAgitVM {
         /* for init user */
         user = userService.findByID(SecurityUtil.getUserName());
         eventUserDTOs = eventAgitService.findAllByStatus(status.ACTIVE);
-
-        riwayatApplyEventDTOs = riwayatApplyEventService.findAllByStatus(lowonganState.APPLY);
-//        riwayatApplyEventDTOs = riwayatApplyEventService.findIdEvent(eventAgitDTO.get());
-        if (riwayatApplyEventDTOs.isEmpty()) {
-            riwayatApplyEventDTOs = Collections.emptyList();
-        }
-
-
-        /* for init riwayat apply event */
-//        userDTO = userService.findByID(SecurityUtil.getUserName());
-//        Map<String, Object> map = new HashMap();
-//        map.put("idUserRiwayat", userDTO.getUserID());
-//        riwayatApplyEventDTOs = riwayatApplyEventService.findByParams(map);
-//        riwayatApplyEventDTOs = riwayatApplyEventService.findAll();
-//        if (riwayatApplyEventDTOs.isEmpty()) {
-//            riwayatApplyEventDTOs = Collections.emptyList();
-//        }
     }
 
     private void checkValidity(
@@ -370,17 +353,10 @@ public class EventAgitVM {
     @Command("LihatPengumuman")
     @NotifyChange({"eventAgitDTO,riwayatApplyEventDTOs,eventAgitDTOs,riwayatApplyEventDTO"})
     public void LihatPengumuman(@BindingParam("object") EventAgitDTO obj, @ContextParam(ContextType.VIEW) Window window) {
-//asfasf
-
         Map<String, Object> params = new HashMap<>();
         params.put("eventAgitDTO", obj);
-//        params.put("idEvent", obj.getIdEvent());
-//        params.put("lowonganState", riwayatApplyEventDTO.getLowonganState().APPLY);
-//        riwayatApplyEventDTOs = riwayatApplyEventService.findAll();
         CommonViewModel.navigateToWithoutDetach("/crm/admin/event/dashboard_pengumuman.zul", window, params);
         riwayatApplyEventDTOs = riwayatApplyEventService.findIdEvent(eventAgitDTO.getIdEvent());
-//        BindUtils.postGlobalCommand(null, null, "refreshRiwayatApplyEvent", null);
-//        BindUtils.postGlobalCommand(null, null, "refreshRiwayatApplyEvent", null);
     }
 
     @Command("buttonClosePreview")
@@ -493,11 +469,6 @@ public class EventAgitVM {
     @GlobalCommand
     @NotifyChange({"riwayatApplyEventDTOs,eventAgitDTOs"})
     public void refreshRiwayatApplyEvent() {
-
-//        Map params2 = new HashMap();
-//        params2.put("idEvent", eventAgitDTO.getIdEvent());
-//        params2.put("lowonganState", lowonganState.APPLY);
-//        riwayatApplyEventDTOs = riwayatApplyEventService.findByParams(params2);
         riwayatApplyEventDTOs = riwayatApplyEventService.findIdEvent(eventAgitDTO.getIdEvent());
     }
 

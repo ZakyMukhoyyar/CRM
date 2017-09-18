@@ -20,9 +20,9 @@ public interface RiwayatApplyEventRepository {
     List<RiwayatApplyEvent> findAll();
 
     List<RiwayatApplyEvent> findByParams(Map map);
-    
-    List<RiwayatApplyEvent> findAllByStatus(LowonganState lowonganState);
-    
-    List<RiwayatApplyEvent> findIdEvent (String idRiwayatEvent);
-    
+
+    List<RiwayatApplyEvent> findAllByStatus(String idRiwayatEvent, LowonganState lowonganState);
+
+    List<RiwayatApplyEvent> findIdEvent(String idRiwayatEvent);
+
 }

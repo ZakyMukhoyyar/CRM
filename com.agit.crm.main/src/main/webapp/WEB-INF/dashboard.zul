@@ -60,7 +60,9 @@
                             <separator/>
                             <a label="Lihat"  onClick="@command('buttonKlikEvent', object=each)"/>
                             <label value="  |  "/>
-                            <a label="Daftar" onClick="@command('buttonApplyAcara', object=each)"/>                        
+                            <a label="Daftar" onClick="@command('buttonApplyAcara', object=each)"/>  
+                            <label value="  |  "/>
+                            <a label="Pengumuman" onClick="@command('pengumuman', object=each)"/>                       
                         </listcell>
                     </listitem>
                 </template>

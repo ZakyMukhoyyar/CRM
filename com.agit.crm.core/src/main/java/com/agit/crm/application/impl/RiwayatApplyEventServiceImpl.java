@@ -92,9 +92,9 @@ public class RiwayatApplyEventServiceImpl implements RiwayatApplyEventService {
     }
 
     @Override
-    public List<RiwayatApplyEventDTO> findAllByStatus(LowonganState lowonganState) {
+    public List<RiwayatApplyEventDTO> findAllByStatus(String idRiwayatEvent, LowonganState lowonganState) {
         Validate.notNull(riwayatApplyEventRepository);
-        List<RiwayatApplyEvent> listRiwayatApplyEvent = riwayatApplyEventRepository.findAllByStatus(lowonganState);
+        List<RiwayatApplyEvent> listRiwayatApplyEvent = riwayatApplyEventRepository.findAllByStatus(idRiwayatEvent, lowonganState);
         if (listRiwayatApplyEvent != null) {
             return (List<RiwayatApplyEventDTO>) riwayatApplyEventDTOAssembler.toDTOs(listRiwayatApplyEvent);
         }
@@ -104,7 +104,11 @@ public class RiwayatApplyEventServiceImpl implements RiwayatApplyEventService {
     @Override
     public List<RiwayatApplyEventDTO> findIdEvent(String idRiwayatEvent) {
         Validate.notNull(riwayatApplyEventRepository);
-        return riwayatApplyEventDTOAssembler.toDTOs(riwayatApplyEventRepository.findIdEvent(idRiwayatEvent));
+        List<RiwayatApplyEvent> listRiwayatApplyEvent = riwayatApplyEventRepository.findIdEvent(idRiwayatEvent);
+        if (listRiwayatApplyEvent != null) {
+            return (List<RiwayatApplyEventDTO>) riwayatApplyEventDTOAssembler.toDTOs(listRiwayatApplyEvent);
+        }
+        return null;
     }
 
 }
