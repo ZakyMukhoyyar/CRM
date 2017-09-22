@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.agit.crm.common.dto.usermanagement;
 
 import com.agit.crm.shared.type.JenisKelaminType;
@@ -12,8 +7,8 @@ import com.agit.crm.shared.type.PendidikanType;
 import com.agit.crm.shared.type.TingkatanType;
 import java.util.Date;
 
-public class UserSpecificationDTOBuilder {
 
+public class UserSpecificationDTOBuilder {
     private String fullName;
     private String email;
     private String mobilePhone;
@@ -47,6 +42,8 @@ public class UserSpecificationDTOBuilder {
     private String uploadCV;
     private Boolean statusApprove;
     private String jurusan;
+    private String pengalaman;
+    private Boolean freelance;
 
     public UserSpecificationDTOBuilder() {
     }
@@ -216,8 +213,18 @@ public class UserSpecificationDTOBuilder {
         return this;
     }
 
-    public UserSpecificationDTO createUserSpecificationDTO() {
-        return new UserSpecificationDTO(fullName, email, mobilePhone, immediateSupervisorUserName, primaryBranchID, ktp, escute, jobDivision, jobLocation, accessTimeDTO, userLoginInfoDTO, tanggalLahir, domisili, noHP, noKTP, ipk, jenisKelaminType, pendidikanType, namaCivitas, minat, ketrampilan1, ketrampilan2, ketrampilan3, ketrampilan4, ketrampilan5, tingkatanType1, tingkatanType2, tingkatanType3, tingkatanType4, tingkatanType5, uploadCV, statusApprove, jurusan);
+    public UserSpecificationDTOBuilder setPengalaman(String pengalaman) {
+        this.pengalaman = pengalaman;
+        return this;
     }
 
+    public UserSpecificationDTOBuilder setFreelance(Boolean freelance) {
+        this.freelance = freelance;
+        return this;
+    }
+
+    public UserSpecificationDTO createUserSpecificationDTO() {
+        return new UserSpecificationDTO(fullName, email, mobilePhone, immediateSupervisorUserName, primaryBranchID, ktp, escute, jobDivision, jobLocation, accessTimeDTO, userLoginInfoDTO, tanggalLahir, domisili, noHP, noKTP, ipk, jenisKelaminType, pendidikanType, namaCivitas, minat, ketrampilan1, ketrampilan2, ketrampilan3, ketrampilan4, ketrampilan5, tingkatanType1, tingkatanType2, tingkatanType3, tingkatanType4, tingkatanType5, uploadCV, statusApprove, jurusan, pengalaman, freelance);
+    }
+    
 }

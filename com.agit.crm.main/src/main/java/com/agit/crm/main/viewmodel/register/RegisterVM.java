@@ -134,6 +134,8 @@ public class RegisterVM {
     private int activePage;
     private String lockUnlock;
     private String userID;
+    
+    
     private ListModelList<JobDivision> listJobDivision = new ListModelList<>();
     private ListModelList<JobLocation> listJobLocation = new ListModelList<>();
     private ListModelList<StatusData> listStatus = new ListModelList<>();
@@ -160,6 +162,7 @@ public class RegisterVM {
     private List<String> listDomisili = new ArrayList<>();
     private List<String> listCivitas = new ArrayList<>();
     private List<String> listJurusan = new ArrayList<>();
+    private List<String> listPengalaman = new ArrayList<>();
 
     /* attribut for upload file CV */
     Media mediaUploadCV;
@@ -262,6 +265,12 @@ public class RegisterVM {
         for (DomisiliDTO d : domisilis) {
             listDomisili.add(d.getNamaKabupaten());
         }
+
+        /* data pengalaman */
+        listPengalaman.add("0 s/d 1 tahun");
+        listPengalaman.add("1 s/d 2 tahun");
+        listPengalaman.add("2 s/d 3 tahun");
+        listPengalaman.add("diatas 3 tahun");
     }
 
     private void checkValidity(UserDTO user, PageNavigation previous) {
@@ -426,6 +435,7 @@ public class RegisterVM {
             CommonViewModel.showInformationMessagebox("User Name " + userDTO.getUserName() + " has successfully deleted", UserNavigation.USER_SEARCH, null, window);
         }
 
+        
         final String username = "bajm.recruitment.agit@gmail.com";
         final String passwordEmail = "bayuhendra1993";
         Properties prop = new Properties();
@@ -1235,6 +1245,14 @@ public class RegisterVM {
 
     public void setRoleDTO(RoleDTO roleDTO) {
         this.roleDTO = roleDTO;
+    }
+
+    public List<String> getListPengalaman() {
+        return listPengalaman;
+    }
+
+    public void setListPengalaman(List<String> listPengalaman) {
+        this.listPengalaman = listPengalaman;
     }
 
 }

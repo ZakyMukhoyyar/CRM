@@ -24,19 +24,19 @@
                             <signLabel value="Provinsi" style="font-weight: bold"/>
                             <textbox sclass="isi" width="100%" rows="2" 
                                      value="@bind(fx.namaProvinsi)" 
-                                     constraint="/.[a-zA-Z\s]+/, no empty : Format isian salah"/>
+                                     constraint="/.[a-zA-Z\s.]+/, no empty : Format isian salah"/>
                         </row>
                         <row>                            
                             <signLabel value="Kabupaten" style="font-weight: bold"/>
                             <textbox sclass="isi" width="100%" rows="2" 
                                      value="@bind(fx.namaKabupaten)" 
-                                     constraint="/.[a-zA-Z\s]+/, no empty : Format isian salah"/>
+                                     constraint="/.[a-zA-Z\s.]+/, no empty : Format isian salah"/>
                         </row>
                         <row>                            
                             <signLabel value="Kota" style="font-weight: bold"/>
                             <textbox sclass="isi" rows="2"  width="100%" disabled="false" 
                                      value="@bind(fx.namaKota)" 
-                                     constraint="/.[a-zA-Z\s]+/, no empty : Format isian salah"/>
+                                     constraint="/.[a-zA-Z\s.]+/, no empty : Format isian salah"/>
                         </row>
                         <row>
                             <signLabel value="Status"/>

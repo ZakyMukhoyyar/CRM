@@ -45,14 +45,15 @@ public class UserSpecificationDTO implements Serializable {
     private TingkatanType tingkatanType4;
     private TingkatanType tingkatanType5;
     private String uploadCV;
-//    private List<Lowongan> lowongans;
     private Boolean statusApprove;
     private String jurusan;
+    private String pengalaman;
+    private Boolean freelance;
 
     public UserSpecificationDTO() {
     }
 
-    public UserSpecificationDTO(String fullName, String email, String mobilePhone, String immediateSupervisorUserName, String primaryBranchID, String ktp, String escute, JobDivision jobDivision, JobLocation jobLocation, AccessTimeDTO accessTimeDTO, UserLoginInfoDTO userLoginInfoDTO, Date tanggalLahir, String domisili, String noHP, String noKTP, String ipk, JenisKelaminType jenisKelaminType, PendidikanType pendidikanType, String namaCivitas, String minat, String ketrampilan1, String ketrampilan2, String ketrampilan3, String ketrampilan4, String ketrampilan5, TingkatanType tingkatanType1, TingkatanType tingkatanType2, TingkatanType tingkatanType3, TingkatanType tingkatanType4, TingkatanType tingkatanType5, String uploadCV, Boolean statusApprove, String jurusan) {
+    public UserSpecificationDTO(String fullName, String email, String mobilePhone, String immediateSupervisorUserName, String primaryBranchID, String ktp, String escute, JobDivision jobDivision, JobLocation jobLocation, AccessTimeDTO accessTimeDTO, UserLoginInfoDTO userLoginInfoDTO, Date tanggalLahir, String domisili, String noHP, String noKTP, String ipk, JenisKelaminType jenisKelaminType, PendidikanType pendidikanType, String namaCivitas, String minat, String ketrampilan1, String ketrampilan2, String ketrampilan3, String ketrampilan4, String ketrampilan5, TingkatanType tingkatanType1, TingkatanType tingkatanType2, TingkatanType tingkatanType3, TingkatanType tingkatanType4, TingkatanType tingkatanType5, String uploadCV, Boolean statusApprove, String jurusan, String pengalaman, Boolean freelance) {
         this.fullName = fullName;
         this.email = email;
         this.mobilePhone = mobilePhone;
@@ -86,6 +87,8 @@ public class UserSpecificationDTO implements Serializable {
         this.uploadCV = uploadCV;
         this.statusApprove = statusApprove;
         this.jurusan = jurusan;
+        this.pengalaman = pengalaman;
+        this.freelance = freelance;
     }
 
     public String getFullName() {
@@ -352,9 +355,25 @@ public class UserSpecificationDTO implements Serializable {
         this.jurusan = jurusan;
     }
 
+    public String getPengalaman() {
+        return pengalaman;
+    }
+
+    public void setPengalaman(String pengalaman) {
+        this.pengalaman = pengalaman;
+    }
+
+    public Boolean getFreelance() {
+        return freelance;
+    }
+
+    public void setFreelance(Boolean freelance) {
+        this.freelance = freelance;
+    }
+
     @Override
     public String toString() {
-        return "UserSpecificationDTO{" + "fullName=" + fullName + ", email=" + email + ", mobilePhone=" + mobilePhone + ", immediateSupervisorUserName=" + immediateSupervisorUserName + ", primaryBranchID=" + primaryBranchID + ", ktp=" + ktp + ", escute=" + escute + ", jobDivision=" + jobDivision + ", jobLocation=" + jobLocation + ", accessTimeDTO=" + accessTimeDTO + ", userLoginInfoDTO=" + userLoginInfoDTO + ", tanggalLahir=" + tanggalLahir + ", domisili=" + domisili + ", noHP=" + noHP + ", noKTP=" + noKTP + ", ipk=" + ipk + ", jenisKelaminType=" + jenisKelaminType + ", pendidikanType=" + pendidikanType + ", namaCivitas=" + namaCivitas + ", minat=" + minat + ", ketrampilan1=" + ketrampilan1 + ", ketrampilan2=" + ketrampilan2 + ", ketrampilan3=" + ketrampilan3 + ", ketrampilan4=" + ketrampilan4 + ", ketrampilan5=" + ketrampilan5 + ", tingkatanType1=" + tingkatanType1 + ", tingkatanType2=" + tingkatanType2 + ", tingkatanType3=" + tingkatanType3 + ", tingkatanType4=" + tingkatanType4 + ", tingkatanType5=" + tingkatanType5 + ", uploadCV=" + uploadCV + ", statusApprove=" + statusApprove + ", jurusan=" + jurusan + '}';
+        return "UserSpecificationDTO{" + "fullName=" + fullName + ", email=" + email + ", mobilePhone=" + mobilePhone + ", immediateSupervisorUserName=" + immediateSupervisorUserName + ", primaryBranchID=" + primaryBranchID + ", ktp=" + ktp + ", escute=" + escute + ", jobDivision=" + jobDivision + ", jobLocation=" + jobLocation + ", accessTimeDTO=" + accessTimeDTO + ", userLoginInfoDTO=" + userLoginInfoDTO + ", tanggalLahir=" + tanggalLahir + ", domisili=" + domisili + ", noHP=" + noHP + ", noKTP=" + noKTP + ", ipk=" + ipk + ", jenisKelaminType=" + jenisKelaminType + ", pendidikanType=" + pendidikanType + ", namaCivitas=" + namaCivitas + ", minat=" + minat + ", ketrampilan1=" + ketrampilan1 + ", ketrampilan2=" + ketrampilan2 + ", ketrampilan3=" + ketrampilan3 + ", ketrampilan4=" + ketrampilan4 + ", ketrampilan5=" + ketrampilan5 + ", tingkatanType1=" + tingkatanType1 + ", tingkatanType2=" + tingkatanType2 + ", tingkatanType3=" + tingkatanType3 + ", tingkatanType4=" + tingkatanType4 + ", tingkatanType5=" + tingkatanType5 + ", uploadCV=" + uploadCV + ", statusApprove=" + statusApprove + ", jurusan=" + jurusan + ", pengalaman=" + pengalaman + ", freelance=" + freelance + '}';
     }
 
     public static UserSpecificationDTO getInstance() {

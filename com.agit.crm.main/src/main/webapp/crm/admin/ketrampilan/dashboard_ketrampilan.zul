@@ -55,9 +55,10 @@
                                     <label width="100%" value="@bind(each.status)"/>
                                 </listcell>
                                 <listcell>
-                                    <a sclass="btn btn-primary " label="Detail" style="text-decoration:underline ;color:white" onClick="@command('detailKetrampilan', object=each)"></a>
-                                    <!--                                <a label=" | " style="font-size:12pt ;color:black"></a>
-                                    <a label="Delete" style="text-decoration:underline ;color:blue" onClick="@command('deleteDataBank', object=each)"></a>-->
+                                    <a image="/images/skk_edit.png"
+                                       sclass="btn btn-default"
+                                       onClick="@command('detailKetrampilan', object=each)">
+                                    </a>
                                 </listcell>
                             </listitem>
                         </template>

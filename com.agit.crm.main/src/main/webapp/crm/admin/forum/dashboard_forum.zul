@@ -53,8 +53,14 @@
                                     <label width="100%" value="@bind(each.status)" />
                                 </listcell>
                                 <listcell>
-                                    <a sclass="btn btn-primary " label="Detail" style="text-decoration:underline ;color:white" onClick="@command('detailForum', object=each)"></a>
-                                    <a sclass="btn btn-primary " label="Komentari" style="text-decoration:underline ;color:white" onClick="@command('komentariOnAdmin', object=each)"></a>
+                                    <a image="/images/skk_edit.png"
+                                       sclass="btn btn-default"
+                                       onClick="@command('detailForum', object=each)">
+                                    </a>
+                                    <a image="/images/comment.png"
+                                       sclass="btn btn-default"
+                                       onClick="@command('komentariOnAdmin', object=each)">
+                                    </a>
                                 </listcell>
                             </listitem>
                         </template>

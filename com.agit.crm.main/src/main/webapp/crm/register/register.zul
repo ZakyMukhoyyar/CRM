@@ -111,7 +111,9 @@
                                     <row>
                                         <signLabel sclass="isi" value="KTP"/>
                                         <div>
-                                            <textbox id="ktp" value="@bind(vm.userDTO.userSpecificationDTO.ktp)" width="40%" maxlength="16" constraint="/.[0-9]+/: no empty: Format isian salah" />
+                                            <textbox id="ktp" value="@bind(vm.userDTO.userSpecificationDTO.ktp)"
+                                                     width="40%" maxlength="16" 
+                                                     constraint="/.[0-9]+/: no empty: Format isian salah" />
                                             <a sclass="btn btn-primary" label="Verifikasi" width="20%" onClick="@command('verifyKtp', obj1=ktp.getValue())"/>
                                             <label value="@load(vmsgs['ktp'])" style="color:red"/>
                                         </div>
@@ -120,10 +122,9 @@
                                     <row>
                                         <signLabel sclass="isi" value="No HP"/>
                                         <div>
-                                            <textbox 
-                                                width="40%"
-                                                constraint="/.[0-9]+/: Format isian salah"    
-                                                value="@bind(vm.userDTO.userSpecificationDTO.mobilePhone)" />
+                                            <textbox id="noHP" value="@bind(vm.userDTO.userSpecificationDTO.mobilePhone)"
+                                                     width="40%" maxlength="13"
+                                                     constraint="/.[0-9]+/: Format isian salah" />
                                             <label value="@load(vmsgs['mobilePhone'])" style="color:red"/>
                                         </div>
                                     </row>
@@ -152,7 +153,9 @@
                                     <row>
                                         <signLabel sclass="isi" value="IPK"/>
                                         <div>
-                                            <textbox value="@bind(vm.userDTO.userSpecificationDTO.ipk)" constraint= "/[0-4]+.+[0-9]+/, no empty : Format isian salah"  width="40%" />
+                                            <textbox value="@bind(vm.userDTO.userSpecificationDTO.ipk)" 
+                                                     constraint= "/[0-4]+.+[0-9]+/, no empty : Format isian salah"  
+                                                     width="40%" maxlength="4"/>
                                             <label value="@load(vmsgs['ipk'])" style="color:red"/>
                                         </div>
                                     </row>
@@ -238,6 +241,30 @@
                                             <label value="@load(vmsgs['minat'])" style="color:red"/>
                                         </div>
                                     </row>
+                                    
+                                    <row>
+                                        <signLabel sclass="isi" value="Pengalaman"/>
+                                        <div>
+                                            <combobox readonly="true" autodrop="true" 
+                                                      width="40%"                                               
+                                                      model="@load(vm.listPengalaman)" 
+                                                      selectedItem="@bind(fx.userDTO.userSpecificationDTO.pengalaman)"
+                                                      placeholder=" Silahkan pilih "
+                                                      constraint=" no empty : Format isian salah">
+                                                <template name="model" var="items" >
+                                                    <comboitem label="@load(items)"  value="@load(items)" />
+                                                </template>
+                                            </combobox> 
+                                            <label value="@load(vmsgs['minat'])" style="color:red"/>
+                                        </div>
+                                    </row>
+                                    
+                                    <row>
+                                        <label/>
+                                        <checkbox label="Saya bersedia untuk bekerja secara freelance" 
+                                                  checked="@bind(fx.userDTO.userSpecificationDTO.freelance)"/>
+                                    </row>
+                                    
                             
                                 </rows>
                             </grid>

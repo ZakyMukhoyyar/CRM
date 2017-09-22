@@ -48,6 +48,8 @@ public class UserSpecificationDTOAssembler implements IObjectAssembler<UserSpeci
                 .setUploadCV(domainObject.getUploadCV())
                 .setStatusApprove(domainObject.getStatusApprove())
                 .setJurusan(domainObject.getJurusan())
+                .setPengalaman(domainObject.getPengalaman())
+                .setFreelance(domainObject.getFreelance())
                 .createUserSpecificationDTO();
     }
 
@@ -87,6 +89,8 @@ public class UserSpecificationDTOAssembler implements IObjectAssembler<UserSpeci
                 .setUploadCV(dtoObject.getUploadCV())
                 .setStatusApprove(dtoObject.getStatusApprove())
                 .setJurusan(dtoObject.getJurusan())
+                .setPengalaman(dtoObject.getPengalaman())
+                .setFreelance(dtoObject.getFreelance())
                 .createUserSpecification();
     }
 

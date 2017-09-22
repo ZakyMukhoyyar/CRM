@@ -20,7 +20,8 @@
                         </row>
                         <row>                            
                             <signLabel sclass="isi" value="Nama Ketrampilan "/>
-                            <textbox rows="2" value="@bind(fx.namaKetrampilan)" width="100%" disabled="false" constraint="/.[a-zA-Z0-9\s]+/, no empty: Format isian salah"/>
+                            <textbox rows="2" value="@bind(fx.namaKetrampilan)" width="100%" disabled="false" 
+                                     constraint="/.[a-zA-Z0-9\s+.]+/, no empty: Format isian salah"/>
                         </row>
                         <row>
                             <signLabel sclass="isi" value="Status"/>

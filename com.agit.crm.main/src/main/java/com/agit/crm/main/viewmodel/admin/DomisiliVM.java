@@ -68,7 +68,7 @@ public class DomisiliVM {
 
     /* attribut for CRM */
     private PageNavigation previous;
-    private int pageSize = 7;
+    private int pageSize = 10;
 
     /* attribut for upload file Event */
     Media mediaUploadDomisili;

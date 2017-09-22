@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.agit.crm.domain.crm;
 
 import com.agit.crm.shared.status.Status;
@@ -10,7 +5,11 @@ import java.util.Date;
 
 
 public class LowonganBuilder {
-
+    private String createdBy;
+    private Date createdDate;
+    private String modifiedBy;
+    private Date modifiedDate;
+    private Status status;
     private String idLowongan;
     private Long userID;
     private String namaLowongan;
@@ -21,13 +20,34 @@ public class LowonganBuilder {
     private String persyaratan;
     private String lokasiKerja;
     private String gaji;
-    private String createdBy;
-    private Date createdDate;
-    private String modifiedBy;
-    private Date modifiedDate;
-    private Status status;
+    private Boolean freelance;
 
     public LowonganBuilder() {
+    }
+
+    public LowonganBuilder setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+        return this;
+    }
+
+    public LowonganBuilder setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+        return this;
+    }
+
+    public LowonganBuilder setModifiedBy(String modifiedBy) {
+        this.modifiedBy = modifiedBy;
+        return this;
+    }
+
+    public LowonganBuilder setModifiedDate(Date modifiedDate) {
+        this.modifiedDate = modifiedDate;
+        return this;
+    }
+
+    public LowonganBuilder setStatus(Status status) {
+        this.status = status;
+        return this;
     }
 
     public LowonganBuilder setIdLowongan(String idLowongan) {
@@ -80,33 +100,13 @@ public class LowonganBuilder {
         return this;
     }
 
-    public LowonganBuilder setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-        return this;
-    }
-
-    public LowonganBuilder setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
-        return this;
-    }
-
-    public LowonganBuilder setModifiedBy(String modifiedBy) {
-        this.modifiedBy = modifiedBy;
-        return this;
-    }
-
-    public LowonganBuilder setModifiedDate(Date modifiedDate) {
-        this.modifiedDate = modifiedDate;
-        return this;
-    }
-
-    public LowonganBuilder setStatus(Status status) {
-        this.status = status;
+    public LowonganBuilder setFreelance(Boolean freelance) {
+        this.freelance = freelance;
         return this;
     }
 
     public Lowongan createLowongan() {
-        return new Lowongan(idLowongan, userID, namaLowongan, deskripsiLowongan, tanggalMulai, tanggalBerakhir, minatPekerjaan, persyaratan, lokasiKerja, gaji, createdBy, createdDate, modifiedBy, modifiedDate, status);
+        return new Lowongan(createdBy, createdDate, modifiedBy, modifiedDate, status, idLowongan, userID, namaLowongan, deskripsiLowongan, tanggalMulai, tanggalBerakhir, minatPekerjaan, persyaratan, lokasiKerja, gaji, freelance);
     }
     
 }

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.agit.crm.common.dto.crm;
 
 import com.agit.crm.shared.status.Status;
@@ -10,9 +5,13 @@ import java.util.Date;
 
 
 public class LowonganDTOBuilder {
-
-    private String idLowongan;
     private Long userID;
+    private String createdBy;
+    private Date createdDate;
+    private String modifiedBy;
+    private Date modifiedDate;
+    private Status status;
+    private String idLowongan;
     private String namaLowongan;
     private String deskripsiLowongan;
     private Date tanggalMulai;
@@ -21,22 +20,43 @@ public class LowonganDTOBuilder {
     private String persyaratan;
     private String lokasiKerja;
     private String gaji;
-    private String createdBy;
-    private Date createdDate;
-    private String modifiedBy;
-    private Date modifiedDate;
-    private Status status;
+    private Boolean freelance;
 
     public LowonganDTOBuilder() {
     }
 
-    public LowonganDTOBuilder setIdLowongan(String idLowongan) {
-        this.idLowongan = idLowongan;
+    public LowonganDTOBuilder setUserID(Long userID) {
+        this.userID = userID;
         return this;
     }
 
-    public LowonganDTOBuilder setUserID(Long userID) {
-        this.userID = userID;
+    public LowonganDTOBuilder setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+        return this;
+    }
+
+    public LowonganDTOBuilder setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+        return this;
+    }
+
+    public LowonganDTOBuilder setModifiedBy(String modifiedBy) {
+        this.modifiedBy = modifiedBy;
+        return this;
+    }
+
+    public LowonganDTOBuilder setModifiedDate(Date modifiedDate) {
+        this.modifiedDate = modifiedDate;
+        return this;
+    }
+
+    public LowonganDTOBuilder setStatus(Status status) {
+        this.status = status;
+        return this;
+    }
+
+    public LowonganDTOBuilder setIdLowongan(String idLowongan) {
+        this.idLowongan = idLowongan;
         return this;
     }
 
@@ -80,33 +100,13 @@ public class LowonganDTOBuilder {
         return this;
     }
 
-    public LowonganDTOBuilder setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-        return this;
-    }
-
-    public LowonganDTOBuilder setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
-        return this;
-    }
-
-    public LowonganDTOBuilder setModifiedBy(String modifiedBy) {
-        this.modifiedBy = modifiedBy;
-        return this;
-    }
-
-    public LowonganDTOBuilder setModifiedDate(Date modifiedDate) {
-        this.modifiedDate = modifiedDate;
-        return this;
-    }
-
-    public LowonganDTOBuilder setStatus(Status status) {
-        this.status = status;
+    public LowonganDTOBuilder setFreelance(Boolean freelance) {
+        this.freelance = freelance;
         return this;
     }
 
     public LowonganDTO createLowonganDTO() {
-        return new LowonganDTO(idLowongan, userID, namaLowongan, deskripsiLowongan, tanggalMulai, tanggalBerakhir, minatPekerjaan, persyaratan, lokasiKerja, gaji, createdBy, createdDate, modifiedBy, modifiedDate, status);
+        return new LowonganDTO(userID, createdBy, createdDate, modifiedBy, modifiedDate, status, idLowongan, namaLowongan, deskripsiLowongan, tanggalMulai, tanggalBerakhir, minatPekerjaan, persyaratan, lokasiKerja, gaji, freelance);
     }
     
 }

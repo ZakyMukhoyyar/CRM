@@ -11,8 +11,15 @@ import java.util.List;
  */
 public class LowonganDTO {
 
-    private String idLowongan;
     private Long userID;
+    private String createdBy;
+    private Date createdDate;
+    private String modifiedBy;
+    private Date modifiedDate;
+    private Status status;
+    
+    
+    private String idLowongan;
     private String namaLowongan;
     private String deskripsiLowongan;
     private Date tanggalMulai;
@@ -21,18 +28,21 @@ public class LowonganDTO {
     private String persyaratan;
     private String lokasiKerja;
     private String gaji;
-    private String createdBy;
-    private Date createdDate;
-    private String modifiedBy;
-    private Date modifiedDate;
-    private Status status;
+    private Boolean freelance;
+    
+    
 
     public LowonganDTO() {
     }
 
-    public LowonganDTO(String idLowongan, Long userID, String namaLowongan, String deskripsiLowongan, Date tanggalMulai, Date tanggalBerakhir, String minatPekerjaan, String persyaratan, String lokasiKerja, String gaji, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate, Status status) {
-        this.idLowongan = idLowongan;
+    public LowonganDTO(Long userID, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate, Status status, String idLowongan, String namaLowongan, String deskripsiLowongan, Date tanggalMulai, Date tanggalBerakhir, String minatPekerjaan, String persyaratan, String lokasiKerja, String gaji, Boolean freelance) {
         this.userID = userID;
+        this.createdBy = createdBy;
+        this.createdDate = createdDate;
+        this.modifiedBy = modifiedBy;
+        this.modifiedDate = modifiedDate;
+        this.status = status;
+        this.idLowongan = idLowongan;
         this.namaLowongan = namaLowongan;
         this.deskripsiLowongan = deskripsiLowongan;
         this.tanggalMulai = tanggalMulai;
@@ -41,11 +51,47 @@ public class LowonganDTO {
         this.persyaratan = persyaratan;
         this.lokasiKerja = lokasiKerja;
         this.gaji = gaji;
+        this.freelance = freelance;
+    }
+
+    public Long getUserID() {
+        return userID;
+    }
+
+    public void setUserID(Long userID) {
+        this.userID = userID;
+    }
+
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
         this.createdBy = createdBy;
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
+    }
+
+    public String getModifiedBy() {
+        return modifiedBy;
+    }
+
+    public void setModifiedBy(String modifiedBy) {
         this.modifiedBy = modifiedBy;
+    }
+
+    public Date getModifiedDate() {
+        return modifiedDate;
+    }
+
+    public void setModifiedDate(Date modifiedDate) {
         this.modifiedDate = modifiedDate;
-        this.status = status;
     }
 
     public Status getStatus() {
@@ -62,14 +108,6 @@ public class LowonganDTO {
 
     public void setIdLowongan(String idLowongan) {
         this.idLowongan = idLowongan;
-    }
-
-    public Long getUserID() {
-        return userID;
-    }
-
-    public void setUserID(Long userID) {
-        this.userID = userID;
     }
 
     public String getNamaLowongan() {
@@ -136,43 +174,17 @@ public class LowonganDTO {
         this.gaji = gaji;
     }
 
-    public String getCreatedBy() {
-        return createdBy;
+    public Boolean getFreelance() {
+        return freelance;
     }
 
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public Date getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    public String getModifiedBy() {
-        return modifiedBy;
-    }
-
-    public void setModifiedBy(String modifiedBy) {
-        this.modifiedBy = modifiedBy;
-    }
-
-    public Date getModifiedDate() {
-        return modifiedDate;
-    }
-
-    public void setModifiedDate(Date modifiedDate) {
-        this.modifiedDate = modifiedDate;
+    public void setFreelance(Boolean freelance) {
+        this.freelance = freelance;
     }
 
     @Override
     public String toString() {
-        return "LowonganDTO{" + "idLowongan=" + idLowongan + ", userID=" + userID + ", namaLowongan=" + namaLowongan + ", deskripsiLowongan=" + deskripsiLowongan + ", tanggalMulai=" + tanggalMulai + ", tanggalBerakhir=" + tanggalBerakhir + ", minatPekerjaan=" + minatPekerjaan + ", persyaratan=" + persyaratan + ", lokasiKerja=" + lokasiKerja + ", gaji=" + gaji + ", createdBy=" + createdBy + ", createdDate=" + createdDate + ", modifiedBy=" + modifiedBy + ", modifiedDate=" + modifiedDate + ", status=" + status + '}';
+        return "LowonganDTO{" + "userID=" + userID + ", createdBy=" + createdBy + ", createdDate=" + createdDate + ", modifiedBy=" + modifiedBy + ", modifiedDate=" + modifiedDate + ", status=" + status + ", idLowongan=" + idLowongan + ", namaLowongan=" + namaLowongan + ", deskripsiLowongan=" + deskripsiLowongan + ", tanggalMulai=" + tanggalMulai + ", tanggalBerakhir=" + tanggalBerakhir + ", minatPekerjaan=" + minatPekerjaan + ", persyaratan=" + persyaratan + ", lokasiKerja=" + lokasiKerja + ", gaji=" + gaji + ", freelance=" + freelance + '}';
     }
-
     
-
 }

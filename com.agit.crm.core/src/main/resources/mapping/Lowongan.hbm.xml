@@ -16,6 +16,8 @@
         <property column="persyaratan" name="persyaratan" not-null="false" length = "3200"/>
         <property column="lokasiKerja" name="lokasiKerja"/>
         <property column="gaji" name="gaji"/>
+        <property column="freelance" name="freelance" not-null="false"/>
+        
         <property column="createdDate" name="createdDate" not-null="false"/>
         <property column="createdBy" name="createdBy"/>
         <property column="modifiedDate" name="modifiedDate" not-null="false"/>

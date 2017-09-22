@@ -27,6 +27,8 @@ public class LowonganDTOAssembler implements IObjectAssembler<Lowongan, Lowongan
                 .setLokasiKerja(domainObject.getLokasiKerja())
                 .setGaji(domainObject.getGaji())
                 .setUserID(domainObject.getUserID())
+                .setFreelance(domainObject.getFreelance())
+                
                 .setCreatedBy(domainObject.getCreatedBy())
                 .setCreatedDate(domainObject.getCreatedDate())
                 .setModifiedBy(domainObject.getModifiedBy())
@@ -48,6 +50,8 @@ public class LowonganDTOAssembler implements IObjectAssembler<Lowongan, Lowongan
                 .setLokasiKerja(dtoObject.getLokasiKerja())
                 .setGaji(dtoObject.getGaji())
                 .setUserID(dtoObject.getUserID())
+                .setFreelance(dtoObject.getFreelance())
+                
                 .setCreatedBy(dtoObject.getCreatedBy())
                 .setCreatedDate(dtoObject.getCreatedDate())
                 .setModifiedBy(dtoObject.getModifiedBy())

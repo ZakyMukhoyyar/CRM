@@ -41,9 +41,10 @@ public class UserSpecification implements ValueObject<UserSpecification> {
     private TingkatanType tingkatanType4;
     private TingkatanType tingkatanType5;
     private String uploadCV;
-//    private List<Lowongan> lowongans;
     private Boolean statusApprove;
     private String jurusan;
+    private String pengalaman;
+    private Boolean freelance;
 
     private String escute;
     private JobDivision jobDivision;
@@ -55,7 +56,7 @@ public class UserSpecification implements ValueObject<UserSpecification> {
     public UserSpecification() {
     }
 
-    public UserSpecification(String fullName, String email, String mobilePhone, String immediateSupervisorUserName, String primaryBranchID, String ktp, Date tanggalLahir, String domisili, String noHP, String noKTP, String ipk, JenisKelaminType jenisKelaminType, PendidikanType pendidikanType, String namaCivitas, String minat, String ketrampilan1, String ketrampilan2, String ketrampilan3, String ketrampilan4, String ketrampilan5, TingkatanType tingkatanType1, TingkatanType tingkatanType2, TingkatanType tingkatanType3, TingkatanType tingkatanType4, TingkatanType tingkatanType5, String uploadCV, Boolean statusApprove, String jurusan, String escute, JobDivision jobDivision, JobLocation jobLocation, AccessTime accessTime, UserLoginInfo userLoginInfo) {
+    public UserSpecification(String fullName, String email, String mobilePhone, String immediateSupervisorUserName, String primaryBranchID, String ktp, Date tanggalLahir, String domisili, String noHP, String noKTP, String ipk, JenisKelaminType jenisKelaminType, PendidikanType pendidikanType, String namaCivitas, String minat, String ketrampilan1, String ketrampilan2, String ketrampilan3, String ketrampilan4, String ketrampilan5, TingkatanType tingkatanType1, TingkatanType tingkatanType2, TingkatanType tingkatanType3, TingkatanType tingkatanType4, TingkatanType tingkatanType5, String uploadCV, Boolean statusApprove, String jurusan, String pengalaman, Boolean freelance, String escute, JobDivision jobDivision, JobLocation jobLocation, AccessTime accessTime, UserLoginInfo userLoginInfo) {
         this.fullName = fullName;
         this.email = email;
         this.mobilePhone = mobilePhone;
@@ -84,13 +85,15 @@ public class UserSpecification implements ValueObject<UserSpecification> {
         this.uploadCV = uploadCV;
         this.statusApprove = statusApprove;
         this.jurusan = jurusan;
+        this.pengalaman = pengalaman;
+        this.freelance = freelance;
         this.escute = escute;
         this.jobDivision = jobDivision;
         this.jobLocation = jobLocation;
         this.accessTime = accessTime;
         this.userLoginInfo = userLoginInfo;
     }
-
+    
     public String getFullName() {
         return fullName;
     }
@@ -355,42 +358,60 @@ public class UserSpecification implements ValueObject<UserSpecification> {
         this.userLoginInfo = userLoginInfo;
     }
 
+    public String getPengalaman() {
+        return pengalaman;
+    }
+
+    public void setPengalaman(String pengalaman) {
+        this.pengalaman = pengalaman;
+    }
+
+    public Boolean getFreelance() {
+        return freelance;
+    }
+
+    public void setFreelance(Boolean freelance) {
+        this.freelance = freelance;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 83 * hash + Objects.hashCode(this.fullName);
-        hash = 83 * hash + Objects.hashCode(this.email);
-        hash = 83 * hash + Objects.hashCode(this.mobilePhone);
-        hash = 83 * hash + Objects.hashCode(this.immediateSupervisorUserName);
-        hash = 83 * hash + Objects.hashCode(this.primaryBranchID);
-        hash = 83 * hash + Objects.hashCode(this.ktp);
-        hash = 83 * hash + Objects.hashCode(this.tanggalLahir);
-        hash = 83 * hash + Objects.hashCode(this.domisili);
-        hash = 83 * hash + Objects.hashCode(this.noHP);
-        hash = 83 * hash + Objects.hashCode(this.noKTP);
-        hash = 83 * hash + Objects.hashCode(this.ipk);
-        hash = 83 * hash + Objects.hashCode(this.jenisKelaminType);
-        hash = 83 * hash + Objects.hashCode(this.pendidikanType);
-        hash = 83 * hash + Objects.hashCode(this.namaCivitas);
-        hash = 83 * hash + Objects.hashCode(this.minat);
-        hash = 83 * hash + Objects.hashCode(this.ketrampilan1);
-        hash = 83 * hash + Objects.hashCode(this.ketrampilan2);
-        hash = 83 * hash + Objects.hashCode(this.ketrampilan3);
-        hash = 83 * hash + Objects.hashCode(this.ketrampilan4);
-        hash = 83 * hash + Objects.hashCode(this.ketrampilan5);
-        hash = 83 * hash + Objects.hashCode(this.tingkatanType1);
-        hash = 83 * hash + Objects.hashCode(this.tingkatanType2);
-        hash = 83 * hash + Objects.hashCode(this.tingkatanType3);
-        hash = 83 * hash + Objects.hashCode(this.tingkatanType4);
-        hash = 83 * hash + Objects.hashCode(this.tingkatanType5);
-        hash = 83 * hash + Objects.hashCode(this.uploadCV);
-        hash = 83 * hash + Objects.hashCode(this.statusApprove);
-        hash = 83 * hash + Objects.hashCode(this.jurusan);
-        hash = 83 * hash + Objects.hashCode(this.escute);
-        hash = 83 * hash + Objects.hashCode(this.jobDivision);
-        hash = 83 * hash + Objects.hashCode(this.jobLocation);
-        hash = 83 * hash + Objects.hashCode(this.accessTime);
-        hash = 83 * hash + Objects.hashCode(this.userLoginInfo);
+        int hash = 7;
+        hash = 53 * hash + Objects.hashCode(this.fullName);
+        hash = 53 * hash + Objects.hashCode(this.email);
+        hash = 53 * hash + Objects.hashCode(this.mobilePhone);
+        hash = 53 * hash + Objects.hashCode(this.immediateSupervisorUserName);
+        hash = 53 * hash + Objects.hashCode(this.primaryBranchID);
+        hash = 53 * hash + Objects.hashCode(this.ktp);
+        hash = 53 * hash + Objects.hashCode(this.tanggalLahir);
+        hash = 53 * hash + Objects.hashCode(this.domisili);
+        hash = 53 * hash + Objects.hashCode(this.noHP);
+        hash = 53 * hash + Objects.hashCode(this.noKTP);
+        hash = 53 * hash + Objects.hashCode(this.ipk);
+        hash = 53 * hash + Objects.hashCode(this.jenisKelaminType);
+        hash = 53 * hash + Objects.hashCode(this.pendidikanType);
+        hash = 53 * hash + Objects.hashCode(this.namaCivitas);
+        hash = 53 * hash + Objects.hashCode(this.minat);
+        hash = 53 * hash + Objects.hashCode(this.ketrampilan1);
+        hash = 53 * hash + Objects.hashCode(this.ketrampilan2);
+        hash = 53 * hash + Objects.hashCode(this.ketrampilan3);
+        hash = 53 * hash + Objects.hashCode(this.ketrampilan4);
+        hash = 53 * hash + Objects.hashCode(this.ketrampilan5);
+        hash = 53 * hash + Objects.hashCode(this.tingkatanType1);
+        hash = 53 * hash + Objects.hashCode(this.tingkatanType2);
+        hash = 53 * hash + Objects.hashCode(this.tingkatanType3);
+        hash = 53 * hash + Objects.hashCode(this.tingkatanType4);
+        hash = 53 * hash + Objects.hashCode(this.tingkatanType5);
+        hash = 53 * hash + Objects.hashCode(this.uploadCV);
+        hash = 53 * hash + Objects.hashCode(this.statusApprove);
+        hash = 53 * hash + Objects.hashCode(this.jurusan);
+        hash = 53 * hash + Objects.hashCode(this.pengalaman);
+        hash = 53 * hash + Objects.hashCode(this.freelance);
+        hash = 53 * hash + Objects.hashCode(this.escute);
+        hash = 53 * hash + Objects.hashCode(this.jobDivision);
+        hash = 53 * hash + Objects.hashCode(this.jobLocation);
+        hash = 53 * hash + Objects.hashCode(this.accessTime);
+        hash = 53 * hash + Objects.hashCode(this.userLoginInfo);
         return hash;
     }
 
@@ -487,6 +508,12 @@ public class UserSpecification implements ValueObject<UserSpecification> {
         if (!Objects.equals(this.jurusan, other.jurusan)) {
             return false;
         }
+        if (!Objects.equals(this.pengalaman, other.pengalaman)) {
+            return false;
+        }
+        if (!Objects.equals(this.freelance, other.freelance)) {
+            return false;
+        }
         if (!Objects.equals(this.escute, other.escute)) {
             return false;
         }
@@ -504,6 +531,9 @@ public class UserSpecification implements ValueObject<UserSpecification> {
         }
         return true;
     }
+    
+    
+    
 
     @Override
     public boolean sameValueAs(UserSpecification other) {
