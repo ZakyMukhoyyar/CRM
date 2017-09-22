@@ -7,11 +7,28 @@
             <div align="right">
                 <div class="input-group" width="70%">
                     <textbox width="50%" value="@bind(vm.namaLowongan)" placeholder="Nama Lowongan"/>
-                    <combobox width="50%" model="@load(vm.listNamaMinat)"  selectedItem="@bind(vm.minatPekerjaan)" placeholder="Minat">
+                    <!--                    <combobox width="50%" model="@load(vm.listNamaMinat)"  selectedItem="@bind(vm.minatPekerjaan)" placeholder="Minat">
                         <template name="model" var="items" >
                             <comboitem label="@load(items)"  value="@load(items)" />
                         </template>
-                    </combobox>
+                    </combobox>-->
+                    
+                    
+                    <bandbox id="bd" autodrop="true" readonly="true" placeholder="Minat" >  
+                        <bandpopup>
+                            <textbox id="txt" instant="true" value="@bind(vm.searchMinatPekerjaan)" onChange="@command('bandboxMinat')" width="295px" placeholder="search"></textbox>
+                            <listbox height="250px" width="295px" mold="paging" autopaging="true"
+                                     onSelect="bd.value=self.selectedItem.value; bd.close();" model="@load(vm.minats)" selectedItem="@bind(vm.minatPekerjaan)">
+                                <listhead>
+                                    <listheader label="Programming Languages" />
+                                </listhead>
+                                <template name="model" var="items">
+                                    <listitem label="@load(items.getNamaMinat())"  value="@load(items.getNamaMinat())" />
+                                </template>
+                            </listbox>
+                        </bandpopup>
+                    </bandbox>
+                    
                     <span class="input-group-btn">
                         <a sclass="isi btn btn-info" label="Pencarian" onClick="@command('buttonSearchLowonganMahasiswa2')"/>
                     </span>

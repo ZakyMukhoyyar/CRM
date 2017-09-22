@@ -27,11 +27,20 @@
                 </div>
                 <div class="form-group">
                     <label sclass="labelstyle" value="Minat" />      
-                    <listbox mold="select" sclass="form-control" model="@load(vm.listNamaMinat)" selectedItem="@bind(vm.minatPekerjaan)" width="90%">
-                        <template name="model" var="items" >
-                            <listitem label="@load(items)"  value="@load(items)" />
-                        </template>
-                    </listbox>
+                    <bandbox id="bd" autodrop="true" readonly="true" width="90%" >  
+                        <bandpopup>
+                            <textbox id="txt" instant="true" value="@bind(vm.searchMinatPekerjaan)" onChange="@command('bandboxMinat')" width="295px" placeholder="search"></textbox>
+                            <listbox height="250px" width="295px" mold="paging" autopaging="true"
+                                     onSelect="bd.value=self.selectedItem.value; bd.close();" model="@load(vm.minats)" selectedItem="@bind(vm.minatPekerjaan)">
+                                <listhead>
+                                    <listheader label="Programming Languages" />
+                                </listhead>
+                                <template name="model" var="items">
+                                    <listitem label="@load(items.getNamaMinat())"  value="@load(items.getNamaMinat())" />
+                                </template>
+                            </listbox>
+                        </bandpopup>
+                    </bandbox>
                 </div>
                 <div class="form-group">
                     <label sclass="labelstyle" value="Ketrampilan" />      

@@ -22,4 +22,6 @@ public interface MinatRepository {
 
     List<Minat> findAllByStatus(Status status);
 
+    List<Minat> toBandBox(String namaMinat, Status status);
+
 }

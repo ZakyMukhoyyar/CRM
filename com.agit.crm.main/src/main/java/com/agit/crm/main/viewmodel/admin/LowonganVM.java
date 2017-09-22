@@ -118,7 +118,7 @@ public class LowonganVM {
     private Date tanggalBerakhir;
     private String namaLowongan;
     private String idLowonganParams;
-    private String minatPekerjaan;
+    private MinatDTO minatPekerjaan;
     private String namaLowonganApply;
     private String namaLengkap;
     private String namaApplyLowongan;
@@ -129,6 +129,7 @@ public class LowonganVM {
     private Status status;
     private String jurusan;
     private String ketrampilan;
+    private String searchMinatPekerjaan;
 
     private PageNavigation previous;
     private boolean checked;
@@ -367,7 +368,11 @@ public class LowonganVM {
         params.put("idLowongan", idLowongan);
         params.put("namaLowongan", namaLowongan);
         params.put("tanggalBerakhir", tanggalBerakhir);
-        params.put("minatPekerjaan", minatPekerjaan);
+        if (minatPekerjaan == null) {
+            minatPekerjaan = null;
+        } else {
+            params.put("minatPekerjaan", minatPekerjaan.getNamaMinat().toString());
+        }
         params.put("status", status);
         lowonganDTOs = lowonganService.findByParams(params);
     }
@@ -406,9 +411,19 @@ public class LowonganVM {
         Map params = new HashMap();
         params.put("idLowongan", idLowongan);
         params.put("namaLowongan", namaLowongan);
-        params.put("minatPekerjaan", minatPekerjaan);
+        if (minatPekerjaan == null) {
+            minatPekerjaan = null;
+        } else {
+            params.put("minatPekerjaan", minatPekerjaan.getNamaMinat().toString());
+        }
         params.put("status", status.ACTIVE);
         lowonganDTOs2 = lowonganService.findByParams(params);
+    }
+
+    @Command("bandboxMinat")
+    @NotifyChange({"listNamaMinat", "minats", "minatPekerjaan"})
+    public void bandboxMinat(@ContextParam(ContextType.VIEW) Window window) {
+        minats = minatService.toBandBox(searchMinatPekerjaan, status.ACTIVE);
     }
 
     @Command("buttonDetailLowongan")
@@ -553,8 +568,12 @@ public class LowonganVM {
         count = checkCount(count, jurusan);
         params.put("ketrampilan", ketrampilan);
         count = checkCount(count, ketrampilan);
-        params.put("minatPekerjaan", minatPekerjaan);
-        count = checkCount(count, minatPekerjaan);
+        if (minatPekerjaan == null) {
+            minatPekerjaan = null;
+        } else {
+            params.put("minatPekerjaan", minatPekerjaan.getNamaMinat().toString());
+            count = checkCount(count, minatPekerjaan);
+        }
         if (count < 1) {
             Messagebox.show("Minimal harus memasukkan 1 parameter pencarian", "Peringatan", Messagebox.OK, Messagebox.EXCLAMATION);
             return;
@@ -768,11 +787,11 @@ public class LowonganVM {
         this.idLowonganParams = idLowonganParams;
     }
 
-    public String getMinatPekerjaan() {
+    public MinatDTO getMinatPekerjaan() {
         return minatPekerjaan;
     }
 
-    public void setMinatPekerjaan(String minatPekerjaan) {
+    public void setMinatPekerjaan(MinatDTO minatPekerjaan) {
         this.minatPekerjaan = minatPekerjaan;
     }
 
@@ -1038,6 +1057,14 @@ public class LowonganVM {
 
     public void setKetrampilan(String ketrampilan) {
         this.ketrampilan = ketrampilan;
+    }
+
+    public String getSearchMinatPekerjaan() {
+        return searchMinatPekerjaan;
+    }
+
+    public void setSearchMinatPekerjaan(String searchMinatPekerjaan) {
+        this.searchMinatPekerjaan = searchMinatPekerjaan;
     }
 
 }

@@ -69,4 +69,12 @@ public class MinatHibernateRepository extends HibernateRepository implements Min
         return criteria.list();
     }
 
+    @Override
+    public List<Minat> toBandBox(String namaMinat, Status status) {
+        Criteria criteria = getSession().createCriteria(Minat.class);
+        criteria.add(Restrictions.like("namaMinat", "%" + namaMinat + "%").ignoreCase());
+        criteria.add(Restrictions.eq("status", status));
+        return (List<Minat>) criteria.list();
+    }
+
 }

@@ -99,4 +99,14 @@ public class MinatServiceImpl implements MinatService {
         return null;
     }
 
+    @Override
+    public List<MinatDTO> toBandBox(String namaMinat, Status status) {
+        Validate.notNull(minatRepository);
+        List<Minat> listMinat = minatRepository.toBandBox(namaMinat, status);
+        if (listMinat != null) {
+            return (List<MinatDTO>) minatDTOAssembler.toDTOs(listMinat);
+        }
+        return null;
+    }
+
 }

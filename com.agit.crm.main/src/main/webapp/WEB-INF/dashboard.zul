@@ -62,7 +62,9 @@
                             <label value="  |  "/>
                             <a label="Daftar" onClick="@command('buttonApplyAcara', object=each)"/>  
                             <label value="  |  "/>
-                            <a label="Pengumuman" onClick="@command('pengumuman', object=each)"/>                       
+                            <a label="Pengumuman" onClick="@command('pengumuman', object=each)"/>
+                            <label value="  |  "/>
+                            <a label="Komentari" onClick="@command('komentariEvent', object=each)"/>                         
                         </listcell>
                     </listitem>
                 </template>

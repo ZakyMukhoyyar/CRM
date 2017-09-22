@@ -25,4 +25,6 @@ public interface MinatService {
 
     List<MinatDTO> findAllByStatus(Status status);
 
+    List<MinatDTO> toBandBox(String namaMinat, Status status);
+
 }

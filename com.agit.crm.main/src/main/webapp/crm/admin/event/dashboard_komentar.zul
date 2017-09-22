@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul">
+    <window apply="org.zkoss.bind.BindComposer"
+            viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.DashboardVM')"
+            form="@id('fx') @load(vm.eventAgitDTO) @save(vm.eventAgitDTO, before='buttonSaveForum')" 
+            width="60%"  border="normal" closable="true" title="Forum" maximizable="true">
+        <groupbox id="gb" mold="3d" style="background:#f5f5f5;" >
+            <div>
+                <div >
+                    <div class="form-group">
+                        <label sclass="isi" value="Deskkripsi Event" />
+                        <separator bar="true"/>
+                        <textbox class="form-control" rows="3" value="@bind(fx.deskripsiEvent)"  width="100%" readonly="true"/>  
+                    </div>
+                </div>
+            </div>
+            <div >
+                <groupbox closable="false">
+                    <listbox rows="2" emptyMessage="${labels.common.noDataFound}" pageSize="@load(vm.pageSize)" mold="paging" model="@bind(vm.komentarEventDTOs)" >
+                        <listhead>
+                            <listheader label="Komentar" width="100%" align="center"/>
+                        </listhead>
+                        <template name="model">
+                            <listitem value="${each}">
+                                <listcell>
+                                    <div align="left">
+                                        <a width="100%" image="/images/userpic.png" />
+                                        <label style="color:blue" width="100%" value="@bind(each.userName)" />
+                                        <label width="100%" value="" />
+                                        <separator/>
+                                        <label width="100%" value="@bind(each.komentar)" />
+                                        <separator/>
+                                        <image width="30%" src="@load(each.picture)" />
+                                        <separator/>
+                                        <label sclass="post-time" width="100%" value="@bind(each.tglKomentar) @converter('formatedDate', format='hh:mm:ss dd-MMM-yyyy')"  />
+                                    </div>
+                                    <!--                                    <div align="right">
+                                        <button sclass="btn" image="/images/delete_1.gif" onClick="@command('deleteKomentar', object=each)"/>
+                                    </div>-->
+                                </listcell>
+                            </listitem>
+                        </template>
+                    </listbox>
+                </groupbox>
+            </div>
+            <separator></separator>
+            <div class="input-group" >
+                <textbox class="form-control" width="100%" placeholder="Tulis Komentar" value="@bind(vm.komentar)"/>
+                <span class="input-group-btn">
+                    <button class="input-group-addon" width="100%" height="100%" image="/images/attachment_1.gif" upload="true" onUpload="@command('buttonUploadFileKomentar')"/>
+                </span>
+                <span class="input-group-btn">
+                    <a sclass="btn btn-primary" width="100%" label="Komentar" onClick="@command('buttonComment')"/>
+                </span>
+                <span class="input-group-btn">
+                    <a sclass="btn btn-primary" width="100%" label="Refresh" onClick="@command('refreshDataGrid')"/>
+                </span>
+            </div>
+        </groupbox>
+    </window>
+</zk>
