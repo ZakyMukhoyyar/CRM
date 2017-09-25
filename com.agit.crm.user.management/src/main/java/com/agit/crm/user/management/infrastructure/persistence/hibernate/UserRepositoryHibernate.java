@@ -70,8 +70,9 @@ public class UserRepositoryHibernate extends HibernateRepository implements User
     }
 
     @Override
-    public User findByRemote(String remote) {
+    public User findByRemote(String userName, String remote) {
         Criteria criteria = getSession().createCriteria(User.class)
+                .add(Restrictions.eq("userName", userName.toUpperCase()))
                 .add(Restrictions.eq("userSpecification.userLoginInfo.remoteAddress", remote));
         return (User) criteria.uniqueResult();
     }

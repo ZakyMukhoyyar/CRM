@@ -45,7 +45,7 @@ public class CustomAuthenticationProvider extends AbstractUserDetailsAuthenticat
         String ldapDomain = principal[1];
 
         /* Pre checking*/
-        /*check username & password is empty*/
+ /*check username & password is empty*/
         if (username.isEmpty() && userToken.getCredentials().toString().trim().isEmpty()) {
             throw new AuthenticationServiceException(messages.getMessage("AvantradeSecurity.usernamePasswordEmpty", "username and password is empty"));
         }
@@ -60,23 +60,6 @@ public class CustomAuthenticationProvider extends AbstractUserDetailsAuthenticat
             throw new AuthenticationServiceException(messages.getMessage("AvantradeSecurity.passwordEmpty", "password is empty"));
         }
 
-        /* for LDAP*/
-//        if (!ldapDomain.equalsIgnoreCase(ldapDefault)) {
-//            try {
-//                Security sec = new Security(ResourceBundle.getBundle("config").getString("SCORPION_URL"));
-//                String lg = sec.getSecuritySoap().login(ResourceBundle.getBundle("config").getString("SCORPION_APP"), ldapDomain, username, userToken.getCredentials().toString());
-//                if (!lg.equalsIgnoreCase("true")) {
-//                    /* if username not found in ldap*/
-//                    throw new UsernameNotFoundException(messages.getMessage("LDAPSecurity.usernameNotFound", "ldap : username not found"));
-//                }
-//            } catch (MalformedURLException e) {
-//                /* if configuration URL is wrong */
-//                throw new UsernameNotFoundException(messages.getMessage("LDAPSecurity.configurationURLError", "ldap : Error configuration URL"));
-//            } catch (WebServiceException e) {
-//                /* if connection is refused */
-//                throw new AuthenticationServiceException(messages.getMessage("LDAPSecurity.connectionRefuse", "ldap : Connection is refused"));
-//            }
-//        }
         UserDetailsImpl user = (UserDetailsImpl) SecurityCacheHelper.getObjectInCache(SecurityCacheHelper.USER_DETAIL, username);
         if (user == null) {
             try {
@@ -84,15 +67,13 @@ public class CustomAuthenticationProvider extends AbstractUserDetailsAuthenticat
                 SecurityCacheHelper.putObjectInCache(SecurityCacheHelper.USER_DETAIL, username, user);
             } catch (UsernameNotFoundException notFound) {
                 throw new BadCredentialsException(messages.getMessage(notFound.getMessage()));
-//                throw new BadCredentialsException(notFound.getMessage());
-//                throw new AuthenticationServiceException(messages.getMessage("AvantradeSecurity.userEmpty", "user is not found"));
             }
         }
 
         /* check user is found */
-//        if (user.getUserDTO() == null) {
-//            throw new AuthenticationServiceException(messages.getMessage("AvantradeSecurity.userEmpty", "user is not found"));
-//        }
+        if (user.getUserDTO() == null) {
+            throw new AuthenticationServiceException(messages.getMessage("AvantradeSecurity.userEmpty", "user is not found"));
+        }
 
         /*check username is conflict*/
         if (isNotConflictUsername(username)) {
@@ -100,39 +81,36 @@ public class CustomAuthenticationProvider extends AbstractUserDetailsAuthenticat
         }
 
         /*check ipaddress is conflict*/
-//        if (isNotConflictIP(user.getUserDTO().getUserSpecificationDTO().getUserLoginInfoDTO().getRemoteAddress()) == Boolean.FALSE) {
-//            throw new AuthenticationServiceException(messages.getMessage("AvantradeSecurity.sameWorkstation", new String[]{user.getUserDTO().getUserSpecificationDTO().getUserLoginInfoDTO().getRemoteAddress()}, "this workstation is currently being used by another user"));
-//        }
-        
-        if (ldapDomain.equalsIgnoreCase(ldapDefault)) {
-            /*check user status*/
+        if (isNotConflictIP(username, ldapDomain) == Boolean.FALSE) {
+            throw new AuthenticationServiceException(messages.getMessage("AvantradeSecurity.sameWorkstation", new String[]{ldapDomain}, "this workstation is currently being used by another user"));
+        }
 
-            if (user.getUserDTO() == null) {
-                throw new AuthenticationServiceException(messages.getMessage("AvantradeSecurity.userEmpty", "user is not found"));
-            }
+        /*check user status*/
+        if (user.getUserDTO() == null) {
+            throw new AuthenticationServiceException(messages.getMessage("AvantradeSecurity.userEmpty", "user is not found"));
+        }
 
-            if (!user.isEnabled()) {
-                throw new DisabledException(messages.getMessage("AvantradeSecurity.disabled", "User is disabled"));
-            }
+        if (!user.isEnabled()) {
+            throw new DisabledException(messages.getMessage("AvantradeSecurity.disabled", "User is disabled"));
+        }
 
-            /*check password matches*/
-            if (!new BCryptPasswordEncoder().matches(authentication.getCredentials().toString(), user.getPassword())) {
-                int loginAttempt = user.getUserDTO().getUserSpecificationDTO().getUserLoginInfoDTO().getLoginAttempt();
-                user.getUserDTO().getUserSpecificationDTO().getUserLoginInfoDTO().setLoginAttempt(loginAttempt);
-                user.getUserDTO().getUserSpecificationDTO().getUserLoginInfoDTO().setLastLoginFailed(new Date());
-                updateLoginInfo(user.getUserDTO());
-                throw new BadCredentialsException(messages.getMessage("AvantradeSecurity.badCredentials", "Bad credentials"));
-            }
+        /*check password matches*/
+        if (!new BCryptPasswordEncoder().matches(authentication.getCredentials().toString(), user.getPassword())) {
+            int loginAttempt = user.getUserDTO().getUserSpecificationDTO().getUserLoginInfoDTO().getLoginAttempt();
+            user.getUserDTO().getUserSpecificationDTO().getUserLoginInfoDTO().setLoginAttempt(loginAttempt);
+            user.getUserDTO().getUserSpecificationDTO().getUserLoginInfoDTO().setLastLoginFailed(new Date());
+            updateLoginInfo(user.getUserDTO());
+            throw new BadCredentialsException(messages.getMessage("AvantradeSecurity.badCredentials", "Bad credentials"));
+        }
 
-            /*check password expired*/
-            if (!user.isCredentialsNonExpired()) {
-                throw new CredentialsExpiredException(messages.getMessage("AvantradeSecurity.credentialsExpired", "User account has expired"));
-            }
+        /*check password expired*/
+        if (!user.isCredentialsNonExpired()) {
+            throw new CredentialsExpiredException(messages.getMessage("AvantradeSecurity.credentialsExpired", "User account has expired"));
+        }
 
-            /*check account locked*/
-            if (!user.isAccountNonLocked()) {
-                throw new LockedException(messages.getMessage("AvantradeSecurity.locked", "User account is locked"));
-            }
+        /*check account locked*/
+        if (!user.isAccountNonLocked()) {
+            throw new LockedException(messages.getMessage("AvantradeSecurity.locked", "User account is locked"));
         }
 
         /*check role status*/
@@ -161,7 +139,6 @@ public class CustomAuthenticationProvider extends AbstractUserDetailsAuthenticat
             loadedUser = userDetailsService.loadUserByUsername(username.split("@")[0]);
         } catch (Exception e) {
             throw new AuthenticationServiceException(e.getMessage());
-//            throw new AuthenticationServiceException(messages.getMessage(e.getMessage()));
         }
         return loadedUser;
     }
@@ -176,9 +153,9 @@ public class CustomAuthenticationProvider extends AbstractUserDetailsAuthenticat
     }
 
     /* Helper */
-    public boolean isNotConflictIP(String ip) {
+    public boolean isNotConflictIP(String username, String ip) {
         try {
-            return userService.isNotExistIPAddress(ip);
+            return userService.isNotExistIPAddress(username, ip);
         } catch (ResourceAccessException e) {
             /* if connection is refused */
             throw new AuthenticationServiceException(messages.getMessage("AvantradeSecurity", "avantrade : Connection is refused"));

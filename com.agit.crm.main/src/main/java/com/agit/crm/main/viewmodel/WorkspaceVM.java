@@ -12,6 +12,7 @@ import com.agit.crm.common.dto.crm.KetrampilanDTO;
 import com.agit.crm.common.dto.crm.MinatDTO;
 import com.agit.crm.common.dto.usermanagement.PrivilegeDTO;
 import com.agit.crm.common.dto.usermanagement.UserDTO;
+import com.agit.crm.common.dto.usermanagement.UserLoginInfoDTO;
 import com.agit.crm.common.layout.PrivilegeTreeModel;
 import com.agit.crm.common.security.SecurityUtil;
 import com.agit.crm.shared.type.JenisKelaminType;
@@ -24,6 +25,7 @@ import com.agit.crm.user.management.application.RoleService;
 import com.agit.crm.user.management.application.UserService;
 import com.agit.crm.user.management.application.security.SecurityCacheHelper;
 import com.agit.crm.util.DateUtil;
+import com.agit.crm.util.StringUtil;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -327,7 +329,18 @@ public class WorkspaceVM {
 
     @Command("buttonLogout")
     public void buttonLogout(@ContextParam(ContextType.VIEW) Window window) {
-        CommonViewModel.navigateTo("login.zul", window, null);
+        Date now = new Date();
+        UserDTO userInfo = userService.findByID(SecurityUtil.getUserName());
+        if (StringUtil.hasValue(userInfo)) {
+            UserLoginInfoDTO loginInfoDTO = userInfo.getUserSpecificationDTO().getUserLoginInfoDTO();
+            loginInfoDTO.setLastLogin(now);
+            loginInfoDTO.setLogoutDate(now);
+            loginInfoDTO.setRemoteHost(null);
+            loginInfoDTO.setRemoteAddress(null);
+            loginInfoDTO.setSessionID(null);
+            userService.updateLoginInfo(userInfo.getUserName(), loginInfoDTO);
+        }
+        CommonViewModel.navigateToWithoutDetach("/crm/logout.zul", window, null);
     }
 
     @GlobalCommand("closeTab")

@@ -21,13 +21,13 @@ public interface UserService {
 
     UserDTO findByEmail(String email);
 
-    UserDTO findByRemote(String remote);
+    UserDTO findByRemote(String userName, String remote);
 
     List<UserDTO> findAllUser();
 
     List<UserDTO> findByParameter(String fullName, String userName, String roleID, StatusData userStatus);
 
-    StatusCode release(String releaseType, String release);
+    StatusCode release(String userName, String releaseType, String release);
 
     StatusCode releaseAll();
 
@@ -43,7 +43,7 @@ public interface UserService {
 
     Boolean isNotExistUserName(String userName);
 
-    Boolean isNotExistIPAddress(String ipAddress);
+    Boolean isNotExistIPAddress(String userName, String ipAddress);
 
     UserDTO findByUserID(String userID);
 

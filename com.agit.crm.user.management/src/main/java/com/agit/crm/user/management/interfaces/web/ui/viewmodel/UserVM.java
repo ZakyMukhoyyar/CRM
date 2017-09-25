@@ -314,12 +314,10 @@ public class UserVM {
         params.put("propertyParam", propertyParam());
         if (previous == null) {
             params.put("previous", PageNavigation.CREATE);
-        } else {
-            if (previous.equals(PageNavigation.SEARCH) || previous.equals(PageNavigation.CONFIRM)) {
-                params.put("previous", PageNavigation.UPDATE);
-            } else if (previous.equals(PageNavigation.CREATE)) {
-                params.put("previous", PageNavigation.CREATE);
-            }
+        } else if (previous.equals(PageNavigation.SEARCH) || previous.equals(PageNavigation.CONFIRM)) {
+            params.put("previous", PageNavigation.UPDATE);
+        } else if (previous.equals(PageNavigation.CREATE)) {
+            params.put("previous", PageNavigation.CREATE);
         }
         CommonViewModel.navigateTo(UserNavigation.USER_READ, window, params);
     }
@@ -381,7 +379,7 @@ public class UserVM {
                 CommonViewModel.goToGlobalCommandCloseTab();
             }
         } else if (releaseType != null && release != null && !release.trim().isEmpty()) {
-            StatusCode statusCode = userService.release(releaseType.toString(), release);
+            StatusCode statusCode = userService.release(userDTO.getUserName(), releaseType.toString(), release);
             if (statusCode == StatusCode.CREATED) {
                 CommonViewModel.showInformationMessagebox(releaseType.toString() + " : " + release + " has been successfully released");
                 CommonViewModel.goToGlobalCommandCloseTab();
@@ -413,7 +411,8 @@ public class UserVM {
     @Command("buttonSaveLockUnlock")
     public void buttonSaveLockUnlock(@ContextParam(ContextType.VIEW) Window window) {
         try {
-            userService.updateLockUnlock(userDTO.getUserName(), userDTO.getUserSpecificationDTO().getUserLoginInfoDTO().getLoginAttempt());            /* Clear cache */
+            userService.updateLockUnlock(userDTO.getUserName(), userDTO.getUserSpecificationDTO().getUserLoginInfoDTO().getLoginAttempt());
+            /* Clear cache */
 
             SecurityCacheHelper.invalidate(SecurityCacheHelper.USER_DETAIL, userDTO.getUserName());
             if (userDTO.getUserSpecificationDTO().getUserLoginInfoDTO().getLoginAttempt() == 3) {

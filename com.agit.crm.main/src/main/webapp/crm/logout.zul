@@ -1,0 +1,29 @@
+    <window border="30" apply="org.zkoss.bind.BindComposer" width="400px" 
+            closable="true" title="Konfirmasi">
+    <style>
+        .container { text-align:center; margin: 50px 100px; } 
+        .container .z-panel-embedded-cnt { padding:0; } 
+        .txb { border: none; }
+    </style>
+    <groupbox closable="false">
+        <grid style="border:0;">
+            <columns>
+                <column width="18%"/>
+                <column width="50%"/>
+            </columns>
+            <rows>
+                <row>
+                    <image src="/images/download.png;" align="right" />
+                    <label value="Apakah anda yakin logout?" />
+                </row>
+            </rows>
+        </grid>
+    </groupbox>
+    <groupbox>
+        <div align="center">
+            <a href="/processLogout" style="align:center;color:blue;font-weight:bold;font-size:14px" >
+                <label value="OK" style = "align:center"  />
+            </a>
+        </div>
+    </groupbox>
+</window>

@@ -4,11 +4,6 @@ import com.agit.crm.common.dto.usermanagement.UserDTO;
 import com.agit.crm.common.dto.usermanagement.UserLoginInfoDTO;
 import com.agit.crm.domain.crm.Lowongan;
 import com.agit.crm.domain.crm.LowonganBuilder;
-import com.agit.crm.domain.crm.LowonganStatus;
-import com.agit.crm.domain.crm.LowonganStatusBuilder;
-import com.agit.crm.domain.crm.RiwayatApplyMahasiswa;
-import com.agit.crm.domain.crm.RiwayatApplyMahasiswaBuilder;
-import com.agit.crm.shared.state.LowonganState;
 import com.agit.crm.shared.status.StatusCode;
 import com.agit.crm.shared.type.AccessType;
 import com.agit.crm.shared.type.JenisKelaminType;
@@ -36,7 +31,9 @@ import com.agit.crm.user.management.domain.user.UserSpecification;
 import com.agit.crm.user.management.domain.user.UserSpecificationBuilder;
 import com.agit.crm.user.management.interfaces.web.facade.dto.assembler.user.UserDTOAssembler;
 import com.agit.crm.user.management.interfaces.web.facade.dto.assembler.user.UserLoginInfoDTOAssembler;
+import com.agit.crm.util.StringUtil;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -77,9 +74,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDTO findByRemote(String remote) {
+    public UserDTO findByRemote(String userName, String remote) {
         Validate.notNull(userRepository);
-        User user = (User) userRepository.findByRemote(remote);
+        User user = (User) userRepository.findByRemote(userName, remote);
         if (user != null) {
             return userDTOAssembler.toDTO(user);
         }
@@ -106,13 +103,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public StatusCode release(String releaseType, String release) {
+    public StatusCode release(String userName, String releaseType, String release) {
         Validate.notNull(userRepository);
         User user;
         if (releaseType.equals(ReleaseType.USERNAME.name())) {
             user = userRepository.findByID(release);
         } else {
-            user = userRepository.findByRemote(release);
+            user = userRepository.findByRemote(userName, release);
         }
         if (user != null) {
             user.getUserSpecification().getUserLoginInfo().assignDeleteRemote();
@@ -179,10 +176,48 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Boolean isNotExistIPAddress(String ipAddress) {
+    public Boolean isNotExistIPAddress(String userName, String ipAddress) {
         Validate.notNull(userRepository);
-        User user = userRepository.findByRemote(ipAddress);
-        return user.getUserName() == null ? Boolean.TRUE : Boolean.FALSE;
+        User userRemote = userRepository.findByRemote(userName, ipAddress);
+
+        Boolean isResult = Boolean.TRUE;
+        if (!StringUtil.hasValue(userRemote)) {
+            User user = userRepository.findByID(userName);
+            isResult = checkAuthority(user);
+        }
+
+        return isResult;
+    }
+
+    private Boolean checkAuthority(User user) {
+        if (!StringUtil.hasValue(user.getUserSpecification().getUserLoginInfo().getRemoteAddress())
+                && !StringUtil.hasValue(user.getUserSpecification().getUserLoginInfo().getSessionID())) {
+            return Boolean.TRUE;
+        }
+        if (StringUtil.hasValue(user.getUserSpecification().getUserLoginInfo().getLoginDate())) {
+            Calendar cal1 = Calendar.getInstance();
+            cal1.setTime(user.getUserSpecification().getUserLoginInfo().getLoginDate());
+            int day1 = cal1.get(Calendar.DAY_OF_MONTH);
+            int hour1 = cal1.get(Calendar.HOUR);
+
+            Calendar cal2 = Calendar.getInstance();
+            cal2.setTime(new Date());
+            int day2 = cal2.get(Calendar.DAY_OF_MONTH);
+            int hour2 = cal2.get(Calendar.HOUR);
+
+            if (day1 != day2) {
+                return Boolean.TRUE;
+            } else {
+                int diffDate = hour2 - hour1;
+                if (diffDate != 0) {
+                    return Boolean.TRUE;
+                }
+            }
+        } else {
+            return Boolean.TRUE;
+        }
+
+        return Boolean.FALSE;
     }
 
     public void setUserRepository(UserRepository userRepository) {

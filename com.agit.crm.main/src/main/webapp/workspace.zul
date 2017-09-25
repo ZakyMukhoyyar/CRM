@@ -53,7 +53,7 @@
                                                 <menuitem sclass="isi" label="Settings" iconSclass="z-icon-cog"/>
                                                 <menuitem sclass="isi" label="Profile" iconSclass="z-icon-user" onClick="@command('buttonKlikProfile', object=each)"/>
                                                 <menuseparator/>
-                                                <menuitem sclass="isi" label="Logout" iconSclass="z-icon-off" href="/processLogout" style="color:white" onClick="@command('buttonLogout')"/>
+                                                <menuitem sclass="isi" label="Logout" iconSclass="z-icon-off" style="color:white" onClick="@command('buttonLogout')"/>
                                             </menupopup>
                                         </menu>
                                     </menubar>

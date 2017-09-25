@@ -15,9 +15,14 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.security.web.session.HttpSessionCreatedEvent;
 import org.springframework.security.web.session.HttpSessionDestroyedEvent;
 import org.springframework.web.context.support.WebApplicationContextUtils;
+import org.zkoss.zk.ui.select.annotation.VariableResolver;
+import org.zkoss.zk.ui.select.annotation.WireVariable;
+import org.zkoss.zkplus.spring.DelegatingVariableResolver;
 
+@VariableResolver(DelegatingVariableResolver.class)
 public class SecuritySessionHandler implements HttpSessionListener {
-    
+
+    @WireVariable
     UserService userService;
 
     public void setUserService(UserService userService) {
@@ -53,6 +58,7 @@ public class SecuritySessionHandler implements HttpSessionListener {
             loginInfoDTO.setSessionID(null);
             userService.updateLoginInfo(userInfo.getUserName(), loginInfoDTO);
         }
+
         HttpSessionDestroyedEvent e = new HttpSessionDestroyedEvent(se.getSession());
         Log log = LogFactory.getLog(LOGGER_NAME);
 

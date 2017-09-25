@@ -18,7 +18,7 @@ public interface UserRepository {
 
     User findByEmail(String email);
 
-    User findByRemote(String remote);
+    User findByRemote(String userName, String remote);
 
     List<User> findAllUser();
 

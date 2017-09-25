@@ -30,7 +30,8 @@ public class AuthenticationFilter extends AbstractAuthenticationProcessingFilter
         if (postOnly && !request.getMethod().equals("POST")) {
             throw new AuthenticationServiceException("Authentication method not supported: " + request.getMethod());
         }
-        String ldapDomain = request.getParameter(ldapDomainParameter);
+//        String ldapDomain = request.getParameter(ldapDomainParameter);
+        String ldapDomain = request.getRemoteAddr();
         String username = request.getParameter(usernameParameter)==null?"":request.getParameter(usernameParameter);
         String password = request.getParameter(passwordParameter)==null?"":request.getParameter(passwordParameter);
         username = username.concat("@").concat(ldapDomain);

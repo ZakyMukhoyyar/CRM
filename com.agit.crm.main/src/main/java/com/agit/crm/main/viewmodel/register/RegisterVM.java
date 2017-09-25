@@ -134,8 +134,7 @@ public class RegisterVM {
     private int activePage;
     private String lockUnlock;
     private String userID;
-    
-    
+
     private ListModelList<JobDivision> listJobDivision = new ListModelList<>();
     private ListModelList<JobLocation> listJobLocation = new ListModelList<>();
     private ListModelList<StatusData> listStatus = new ListModelList<>();
@@ -435,7 +434,6 @@ public class RegisterVM {
             CommonViewModel.showInformationMessagebox("User Name " + userDTO.getUserName() + " has successfully deleted", UserNavigation.USER_SEARCH, null, window);
         }
 
-        
         final String username = "bajm.recruitment.agit@gmail.com";
         final String passwordEmail = "bayuhendra1993";
         Properties prop = new Properties();
@@ -690,7 +688,7 @@ public class RegisterVM {
                 CommonViewModel.goToGlobalCommandCloseTab();
             }
         } else if (releaseType != null && release != null && !release.trim().isEmpty()) {
-            StatusCode statusCode = userService.release(releaseType.toString(), release);
+            StatusCode statusCode = userService.release(userDTO.getUserName(), releaseType.toString(), release);
             if (statusCode == StatusCode.CREATED) {
                 CommonViewModel.showInformationMessagebox(releaseType.toString() + " : " + release + " has been successfully released");
                 CommonViewModel.goToGlobalCommandCloseTab();
