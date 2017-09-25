@@ -112,11 +112,18 @@ public class RegisterVM {
     private StatusData searchUserStatus;
 
     /* Select ComboBox */
-    private String domisiliSelect;
-    private String minatSelect;
-    private String jurusanSelect;
-    private String ketrampilanSelect;
-    private String civitasSelect;
+    private DomisiliDTO domisiliSelect;
+    private MinatDTO minatSelect;
+    private JurusanDTO jurusanSelect;
+    private KetrampilanDTO ketrampilanSelect;
+    private CivitasDTO civitasSelect;
+
+    /* Search on Bandbox */
+    private String searchDomisili;
+    private String searchMinat;
+    private String searchJurusan;
+    private String searchKetrampilan;
+    private String searchCivitas;
 
     private List<UserDTO> userDTOs;
     private UserDTO userDTO;
@@ -621,6 +628,10 @@ public class RegisterVM {
             pathLocationUploadCV = userDTO.getUserSpecificationDTO().getUploadCV();
         }
         userDTO.getUserSpecificationDTO().setUploadCV(pathLocationUploadCV);
+        userDTO.getUserSpecificationDTO().setMinat(minatSelect.getNamaMinat());
+        userDTO.getUserSpecificationDTO().setDomisili(domisiliSelect.getNamaKabupaten());
+        userDTO.getUserSpecificationDTO().setNamaCivitas(civitasSelect.getNamaCivitas());
+        userDTO.getUserSpecificationDTO().setJurusan(jurusanSelect.getNamaJurusan());
         if (previous == null) {
             params.put("previous", PageNavigation.CREATE);
         } else if (previous.equals(PageNavigation.SEARCH) || previous.equals(PageNavigation.CONFIRM)) {
@@ -836,6 +847,32 @@ public class RegisterVM {
         return params;
     }
 
+    @Command("bandbox")
+    @NotifyChange({"minats", "domisilis", "civitass", "jurusans"})
+    public void bandbox(@ContextParam(ContextType.VIEW) Window window) {
+        Map<String, Object> params = new HashMap<>();
+        if (searchMinat != null) {
+            params.put("namaMinat", searchMinat);
+            params.put("status", Status.ACTIVE);
+            minats = minatService.findByParams(params);
+        }
+        if (searchDomisili != null) {
+            params.put("namaKabupaten", searchDomisili);
+            params.put("status", Status.ACTIVE);
+            domisilis = domisiliService.findByParams(params);
+        }
+        if (searchCivitas != null) {
+            params.put("namaCivitas", searchCivitas);
+            params.put("status", Status.ACTIVE);
+            civitass = civitasService.findByParams(params);
+        }
+        if (searchJurusan != null) {
+            params.put("namaJurusan", searchJurusan);
+            params.put("status", Status.ACTIVE);
+            jurusans = jurusanService.findByParams(params);
+        }
+    }
+
     /* Getter&Setter */
     public List<UserDTO> getUserDTOs() {
         return userDTOs;
@@ -1029,52 +1066,100 @@ public class RegisterVM {
         this.roleName = roleName;
     }
 
-    public String getDomisiliSelect() {
+    public DomisiliDTO getDomisiliSelect() {
         return domisiliSelect;
     }
 
-    public void setDomisiliSelect(String domisiliSelect) {
+    public void setDomisiliSelect(DomisiliDTO domisiliSelect) {
         this.domisiliSelect = domisiliSelect;
     }
 
-    public String getMinatSelect() {
+    public MinatDTO getMinatSelect() {
         return minatSelect;
     }
 
-    public void setMinatSelect(String minatSelect) {
+    public void setMinatSelect(MinatDTO minatSelect) {
         this.minatSelect = minatSelect;
     }
 
-    public String getJurusanSelect() {
+    public JurusanDTO getJurusanSelect() {
         return jurusanSelect;
     }
 
-    public void setJurusanSelect(String jurusanSelect) {
+    public void setJurusanSelect(JurusanDTO jurusanSelect) {
         this.jurusanSelect = jurusanSelect;
     }
 
-    public String getKetrampilanSelect() {
+    public KetrampilanDTO getKetrampilanSelect() {
         return ketrampilanSelect;
     }
 
-    public void setKetrampilanSelect(String ketrampilanSelect) {
+    public void setKetrampilanSelect(KetrampilanDTO ketrampilanSelect) {
         this.ketrampilanSelect = ketrampilanSelect;
     }
 
-    public String getCivitasSelect() {
+    public CivitasDTO getCivitasSelect() {
         return civitasSelect;
     }
 
-    public void setCivitasSelect(String civitasSelect) {
+    public void setCivitasSelect(CivitasDTO civitasSelect) {
         this.civitasSelect = civitasSelect;
     }
 
-    public List<MinatDTO> getMinats() {
-        return minats;
+    public String getSearchDomisili() {
+        return searchDomisili;
+    }
+
+    public void setSearchDomisili(String searchDomisili) {
+        this.searchDomisili = searchDomisili;
+    }
+
+    public String getSearchMinat() {
+        return searchMinat;
+    }
+
+    public void setSearchMinat(String searchMinat) {
+        this.searchMinat = searchMinat;
+    }
+
+    public String getSearchJurusan() {
+        return searchJurusan;
+    }
+
+    public void setSearchJurusan(String searchJurusan) {
+        this.searchJurusan = searchJurusan;
+    }
+
+    public String getSearchKetrampilan() {
+        return searchKetrampilan;
+    }
+
+    public void setSearchKetrampilan(String searchKetrampilan) {
+        this.searchKetrampilan = searchKetrampilan;
+    }
+
+    public String getSearchCivitas() {
+        return searchCivitas;
+    }
+
+    public void setSearchCivitas(String searchCivitas) {
+        this.searchCivitas = searchCivitas;
+    }
+
+    public String getUserID() {
+        return userID;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
     }
 
     public void setMinats(List<MinatDTO> minats) {
         this.minats = minats;
+    }
+
+    public List<MinatDTO> getMinats() {
+        return minats;
     }
 
     public List<KetrampilanDTO> getKetrampilans() {

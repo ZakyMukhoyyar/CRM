@@ -63,20 +63,6 @@
                                             <label value="@load(vmsgs['fullName'])" style="color:red"/>
                                         </div>
                                     </row>
-                                    <!--                                    <row>
-                                        <signLabel sclass="isi" value="Assign Role "/>
-                                        <div>
-                                            <listbox model="@load(vm.roleDTOs)" 
-                                                     mold="select"
-                                                     width="40%"
-                                                     onSelect="@command('selectRole', obj=self.getSelectedItem().getValue())">
-                                                <template name="model">
-                                                    <listitem selected="@load(fx.userDTO.roleDTO.roleID eq each.roleID)" label="@load(each.roleName)" disabled="@load(empty each.roleID)"/>
-                                                </template>
-                                            </listbox>
-                                            <label value="@load(vmsgs['roleDTO'])" style="color:red"/>
-                                        </div>
-                                    </row>-->
                                     <row>
                                         <signLabel sclass="isi" value="Username "/>
                                         <div>
@@ -138,15 +124,20 @@
                                     <row>
                                         <signLabel sclass="isi" value="Domisili"/>
                                         <div>
-                                            <combobox autodrop="true"
-                                                      width="40%"                                                
-                                                      model="@load(vm.listDomisili)" 
-                                                      selectedItem="@bind(fx.userDTO.userSpecificationDTO.domisili)"
-                                                      constraint=" no empty : Format isian salah">
-                                                <template name="model" var="items" >
-                                                    <comboitem label="@load(items)"  value="@load(items)" />
-                                                </template>
-                                            </combobox>
+                                            <bandbox id="bd" autodrop="true" readonly="true" width="40%" placeholder="Silahkan pilih" constraint=" no empty : Format isian salah">  
+                                                <bandpopup>
+                                                    <textbox id="txt" instant="true" value="@bind(fx.searchDomisili)" onChange="@command('bandbox')" width="295px" placeholder="search"></textbox>
+                                                    <listbox height="250px" width="295px" mold="paging" autopaging="true"
+                                                             onSelect="bd.value=self.selectedItem.value; bd.close();" model="@load(fx.domisilis)" selectedItem="@bind(fx.domisiliSelect)">
+                                                        <listhead>
+                                                            <listheader label="Programming Languages" />
+                                                        </listhead>
+                                                        <template name="model" var="items">
+                                                            <listitem label="@load(items.getNamaKabupaten())"  value="@load(items.getNamaKabupaten())" />
+                                                        </template>
+                                                    </listbox>
+                                                </bandpopup>
+                                            </bandbox>
                                             <label value="@load(vmsgs['domisili'])" style="color:red"/>
                                         </div>
                                     </row>
@@ -194,16 +185,20 @@
                                     <row>
                                         <signLabel sclass="isi" value="Civitas"/>
                                         <div>
-                                            <combobox autodrop="true"
-                                                      width="40%"                                               
-                                                      model="@load(vm.listCivitas)" 
-                                                      selectedItem="@bind(fx.userDTO.userSpecificationDTO.namaCivitas)"
-                                                      placeholder = "Silahkan pilih"
-                                                      constraint=" no empty : Format isian salah">
-                                                <template name="model" var="items" >
-                                                    <comboitem label="@load(items)"  value="@load(items)" />
-                                                </template>
-                                            </combobox>
+                                            <bandbox id="bdc" autodrop="true" readonly="true" width="40%" placeholder="Silahkan pilih" constraint=" no empty : Format isian salah">  
+                                                <bandpopup>
+                                                    <textbox id="txtc" instant="true" value="@bind(fx.searchCivitas)" onChange="@command('bandbox')" width="295px" placeholder="search"></textbox>
+                                                    <listbox height="250px" width="295px" mold="paging" autopaging="true"
+                                                             onSelect="bdc.value=self.selectedItem.value; bdc.close();" model="@load(fx.civitass)" selectedItem="@bind(fx.civitasSelect)">
+                                                        <listhead>
+                                                            <listheader label="Programming Languages" />
+                                                        </listhead>
+                                                        <template name="model" var="items">
+                                                            <listitem label="@load(items.getNamaCivitas())"  value="@load(items.getNamaCivitas())" />
+                                                        </template>
+                                                    </listbox>
+                                                </bandpopup>
+                                            </bandbox>
                                             <label value="@load(vmsgs['namaCivitas'])" style="color:red"/>
                                         </div>
                                     </row>
@@ -211,16 +206,20 @@
                                     <row>
                                         <signLabel sclass="isi" value="Jurusan"/>
                                         <div>
-                                            <combobox autodrop="true"
-                                                      width="40%"                                               
-                                                      model="@load(vm.listJurusan)" 
-                                                      selectedItem="@bind(fx.userDTO.userSpecificationDTO.jurusan)"
-                                                      placeholder=" Silahkan pilih "   
-                                                      constraint=" no empty : Format isian salah">
-                                                <template name="model" var="items" >
-                                                    <comboitem label="@load(items)"  value="@load(items)" />
-                                                </template>
-                                            </combobox> 
+                                            <bandbox id="bdj" autodrop="true" readonly="true" width="40%" placeholder="Silahkan pilih" constraint=" no empty : Format isian salah">  
+                                                <bandpopup>
+                                                    <textbox id="txtj" instant="true" value="@bind(fx.searchJurusan)" onChange="@command('bandbox')" width="295px" placeholder="search"></textbox>
+                                                    <listbox height="250px" width="295px" mold="paging" autopaging="true"
+                                                             onSelect="bdj.value=self.selectedItem.value; bdj.close();" model="@load(fx.jurusans)" selectedItem="@bind(fx.jurusanSelect)">
+                                                        <listhead>
+                                                            <listheader label="Programming Languages" />
+                                                        </listhead>
+                                                        <template name="model" var="items">
+                                                            <listitem label="@load(items.getNamaJurusan())"  value="@load(items.getNamaJurusan())" />
+                                                        </template>
+                                                    </listbox>
+                                                </bandpopup>
+                                            </bandbox>
                                             <label value="@load(vmsgs['jurusan'])" style="color:red"/>
                                         </div>
                                     </row>
@@ -228,16 +227,20 @@
                                     <row>
                                         <signLabel sclass="isi" value="Minat"/>
                                         <div>
-                                            <combobox readonly="true" autodrop="true" 
-                                                      width="40%"                                               
-                                                      model="@load(vm.listMinat)" 
-                                                      selectedItem="@bind(fx.userDTO.userSpecificationDTO.minat)"
-                                                      placeholder=" Silahkan pilih "
-                                                      constraint=" no empty : Format isian salah">
-                                                <template name="model" var="items" >
-                                                    <comboitem label="@load(items)"  value="@load(items)" />
-                                                </template>
-                                            </combobox> 
+                                            <bandbox id="bdm" autodrop="true" readonly="true" width="40%" placeholder="Silahkan pilih" constraint=" no empty : Format isian salah">   
+                                                <bandpopup>
+                                                    <textbox id="txtm" instant="true" value="@bind(fx.searchMinat)" onChange="@command('bandbox')" width="295px" placeholder="search"></textbox>
+                                                    <listbox height="250px" width="295px" mold="paging" autopaging="true"
+                                                             onSelect="bdm.value=self.selectedItem.value; bdm.close();" model="@load(fx.minats)" selectedItem="@bind(fx.minatSelect)">
+                                                        <listhead>
+                                                            <listheader label="Programming Languages" />
+                                                        </listhead>
+                                                        <template name="model" var="items">
+                                                            <listitem label="@load(items.getNamaMinat())"  value="@load(items.getNamaMinat())" />
+                                                        </template>
+                                                    </listbox>
+                                                </bandpopup>
+                                            </bandbox>
                                             <label value="@load(vmsgs['minat'])" style="color:red"/>
                                         </div>
                                     </row>
