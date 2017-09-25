@@ -2,19 +2,21 @@
 <zk xmlns="http://www.zkoss.org/2005/zul">
     <window border="0" apply="org.zkoss.bind.BindComposer"
             viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.admin.DataMahasiswaVM')"
-            form="@id('fx') @load(vm.userDTO) @save(vm.userDTO, before='buttonConfirm')">
-        <listbox  emptyMessage="${labels.common.noDataFound}" model="@bind(vm.userDTO2s)" width="99%">
+            form="@id('fx') @load(vm.userDTO) @save(vm.userDTO, before='buttonConfirm')"
+            closable="true" maximizable="true" title="Profile" width="70%">
+        <listbox  emptyMessage="${labels.common.noDataFound}" model="@bind(vm.userDTO2s)" width="100%">
             <listhead >
-                <listheader sclass="isi" width="10%"/>
-                <listheader sclass="isi" width="80%"/>
-                <listheader sclass="isi" width="10%" align="center"/>
-            </listhead>
+                <listheader sclass="isi" width="0%"/>
+                <listheader sclass="isi" width="100%"/>
+                <listheader sclass="isi" width="0%" align="center"/>
+            </listhead>  
             <template name="model">
                 <listitem value="${each}" style="margin-bottom:20px;">
                     <listcell>
                     </listcell>
                     <listcell style="background-color:powderblue;" >
                         <div align="center">
+                            <a width="100%" image="/images/photo.jpg"/> 
                             <label sclass="headerProfile" width="100%"  value="@bind(each.userSpecificationDTO.fullName)" style="text-align: center;"/>
                         </div>
                         <separator ></separator>
