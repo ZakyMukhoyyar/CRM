@@ -111,7 +111,7 @@ public class LowonganVM {
     private List<String> listKetrampilan = new ArrayList();
     private List<KetrampilanDTO> kdtos = new ArrayList<KetrampilanDTO>();
     private List<JurusanDTO> jdtos = new ArrayList<JurusanDTO>();
-
+    private List<UserDTO> listUserFreelance = new ArrayList<>();
 
     /* Function For Seacrh  */
     private String userID;
@@ -132,12 +132,9 @@ public class LowonganVM {
     private String searchMinatPekerjaan;
 
     private PageNavigation previous;
-    private boolean checked;
     private int pageSize = 5;
     private int pageSizeCreateLowongan = 7;
-    private int activePage = 0;
     private int selectedIndex;
-    private int totalSize = 0;
 
     /* Paramater Objek Lowongan */
     private String idLowongan;
@@ -145,6 +142,10 @@ public class LowonganVM {
     /* Function For Objek Disable  */
     private boolean disableButtonSave;
     private boolean disableButtonApply;
+
+    /* Function for object isChecked */
+    private Boolean statusFreelance;
+    private Boolean isFreelanceChecked;
 
     @Init
     public void init(
@@ -163,12 +164,12 @@ public class LowonganVM {
 
     private void initData() {
 
+        lowonganDTOs2 = lowonganService.findAllByStatus(status.ACTIVE);
+
         lowonganDTOs = lowonganService.findAll();
         if (lowonganDTOs.isEmpty()) {
             lowonganDTOs = Collections.emptyList();
         }
-
-        lowonganDTOs2 = lowonganService.findAllByStatus(status.ACTIVE);
 
         jdtos = jurusanService.findAllByStatus(status.ACTIVE);
         for (JurusanDTO j : jdtos) {
@@ -184,12 +185,14 @@ public class LowonganVM {
         }
 
         userDTO = userService.findByID(SecurityUtil.getUserName());
-        Map<String, Object> map = new HashMap();
-        map.put("idUserRiwayat", userDTO.getUserID());
-        riwayatApplyMahasiswaDTOs = riwayatApplyMahasiswaService.findByParams(map);
+        Map<String, Object> map1 = new HashMap();
+        map1.put("idUserRiwayat", userDTO.getUserID());
+        riwayatApplyMahasiswaDTOs = riwayatApplyMahasiswaService.findByParams(map1);
         if (riwayatApplyMahasiswaDTOs.isEmpty()) {
             riwayatApplyMahasiswaDTOs = Collections.emptyList();
         }
+
+        isFreelanceChecked = userDTO.getUserSpecificationDTO().getFreelance();
 
         lowonganStatusDTOs = lowonganStatusService.findAll();
         if (lowonganStatusDTOs.isEmpty()) {
@@ -378,7 +381,7 @@ public class LowonganVM {
     }
 
     @Command("buttonSaveLowongan")
-    @NotifyChange({"lowonganDTO", "lowonganDTOs"})
+    @NotifyChange({"lowonganDTO", "lowonganDTOs", "isFreelanceChecked", "statusFreelance", "UserDTO"})
     public void buttonSaveKetrampilan(@BindingParam("object") LowonganDTO obj, @ContextParam(ContextType.VIEW) Window window) {
         Date tanggalMulai = lowonganDTO.getTanggalMulai();
         Date tanggalBerakhir = lowonganDTO.getTanggalBerakhir();
@@ -386,10 +389,57 @@ public class LowonganVM {
         if (tanggalMulai != null && tanggalBerakhir != null && tanggalBerakhir.compareTo(tanggalMulai) < 0) {
             Messagebox.show("Format tanggal mulai dan tanggal berakhir salah");
         } else {
-//            if (lowonganDTO.getFreelance()==true){
-//                
-//            }            
-            
+            Map<String, Object> map2 = new HashMap();
+            map2.put("freelance", statusFreelance.TRUE);
+            listUserFreelance = userService.findByParamsMap(map2);
+            if (listUserFreelance.isEmpty()) {
+                listUserFreelance = Collections.emptyList();
+            }
+            if (isFreelanceChecked == true) {
+                /* sending email to all freelance member */
+                for (UserDTO uDTO : listUserFreelance) {
+                    /* for sending email */
+                    final String username = "bajm.recruitment.agit@gmail.com";
+                    final String passwordEmail = "bayuhendra1993";
+                    Properties prop = new Properties();
+                    prop.put("mail.smtp.auth", "true");
+                    prop.put("mail.smtp.starttls.enable", "true");
+                    prop.put("mail.smtp.host", "smtp.gmail.com");
+                    prop.put("mail.smtp.port", "587");
+                    Session session = Session.getInstance(prop, new javax.mail.Authenticator() {
+                        protected PasswordAuthentication getPasswordAuthentication() {
+                            return new PasswordAuthentication(username, passwordEmail);
+                        }
+                    });
+                    try {
+
+                        Message message = new MimeMessage(session);
+                        message.setFrom(new InternetAddress("bajm.recruitment.agit@gmail.com"));
+                        message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(uDTO.getUserSpecificationDTO().getEmail()));
+
+                        message.setSubject("Registrasi CRM");
+                        message.setText("Dear  " + uDTO.getUserName()
+                                + "\n\n Selamat, Anda sudah berhasil mendaftar App Candidate Recruitment di PT. Astra Graphia Information Technology"
+                                + "\n "
+                                + "\n Nama Lengkap      :" + uDTO.getUserSpecificationDTO().getFullName()
+                                + "\n Email             :" + uDTO.getUserSpecificationDTO().getEmail()
+                                + "\n No KTP            :" + uDTO.getUserSpecificationDTO().getKtp()
+                                + "\n\n Mohon simpan email ini sebagai referensi atas registrasi CRM anda. "
+                                + "\n\n Terimakasih. "
+                                + "\n\n PT. Astra Graphia Information Technology. "
+                        );
+                        message.setSentDate(new Date());
+
+                        Transport.send(message);
+
+                        System.out.println("Sending Email Done");
+
+                    } catch (MessagingException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+
             lowonganDTO.setStatus(Status.ACTIVE);
             lowonganService.SaveOrUpdate(lowonganDTO);
             showInformationMessagebox("Data Lowongan Berhasil Disimpan");
@@ -847,14 +897,6 @@ public class LowonganVM {
         this.previous = previous;
     }
 
-    public boolean isChecked() {
-        return checked;
-    }
-
-    public void setChecked(boolean checked) {
-        this.checked = checked;
-    }
-
     public int getPageSize() {
         return pageSize;
     }
@@ -871,28 +913,12 @@ public class LowonganVM {
         this.pageSizeCreateLowongan = pageSizeCreateLowongan;
     }
 
-    public int getActivePage() {
-        return activePage;
-    }
-
-    public void setActivePage(int activePage) {
-        this.activePage = activePage;
-    }
-
     public int getSelectedIndex() {
         return selectedIndex;
     }
 
     public void setSelectedIndex(int selectedIndex) {
         this.selectedIndex = selectedIndex;
-    }
-
-    public int getTotalSize() {
-        return totalSize;
-    }
-
-    public void setTotalSize(int totalSize) {
-        this.totalSize = totalSize;
     }
 
     public String getIdLowongan() {
@@ -1069,6 +1095,30 @@ public class LowonganVM {
 
     public void setSearchMinatPekerjaan(String searchMinatPekerjaan) {
         this.searchMinatPekerjaan = searchMinatPekerjaan;
+    }
+
+    public List<UserDTO> getListUserFreelance() {
+        return listUserFreelance;
+    }
+
+    public void setListUserFreelance(List<UserDTO> listUserFreelance) {
+        this.listUserFreelance = listUserFreelance;
+    }
+
+    public Boolean getIsFreelanceChecked() {
+        return isFreelanceChecked;
+    }
+
+    public void setIsFreelanceChecked(Boolean isFreelanceChecked) {
+        this.isFreelanceChecked = isFreelanceChecked;
+    }
+
+    public Boolean getStatusFreelance() {
+        return statusFreelance;
+    }
+
+    public void setStatusFreelance(Boolean statusFreelance) {
+        this.statusFreelance = statusFreelance;
     }
 
 }

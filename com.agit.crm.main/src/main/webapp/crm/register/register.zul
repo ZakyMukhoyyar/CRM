@@ -130,7 +130,7 @@
                                                     <listbox height="250px" width="295px" mold="paging" autopaging="true"
                                                              onSelect="bd.value=self.selectedItem.value; bd.close();" model="@load(fx.domisilis)" selectedItem="@bind(fx.domisiliSelect)">
                                                         <listhead>
-                                                            <listheader label="Programming Languages" />
+                                                            <listheader label="Domisili" />
                                                         </listhead>
                                                         <template name="model" var="items">
                                                             <listitem label="@load(items.getNamaKabupaten())"  value="@load(items.getNamaKabupaten())" />

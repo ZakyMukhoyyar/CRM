@@ -18,7 +18,7 @@
                             <signLabel value="ID Lowongan" style="font-weight: bold"/>
                             <textbox width="100%" disabled="true" value="@bind(fx.idLowongan)"/>                            
                             <checkbox label="Saya bersedia untuk bekerja secara freelance"
-                                      checked="@bind(vm.lowonganDTO.freelance)"/>
+                                      checked="@bind(vm.isFreelanceChecked)"/>
                         </row>
                     </rows>
                 </grid>

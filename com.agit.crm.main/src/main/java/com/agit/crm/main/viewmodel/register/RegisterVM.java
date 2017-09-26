@@ -441,6 +441,7 @@ public class RegisterVM {
             CommonViewModel.showInformationMessagebox("User Name " + userDTO.getUserName() + " has successfully deleted", UserNavigation.USER_SEARCH, null, window);
         }
 
+        /* for sending email */
         final String username = "bajm.recruitment.agit@gmail.com";
         final String passwordEmail = "bayuhendra1993";
         Properties prop = new Properties();

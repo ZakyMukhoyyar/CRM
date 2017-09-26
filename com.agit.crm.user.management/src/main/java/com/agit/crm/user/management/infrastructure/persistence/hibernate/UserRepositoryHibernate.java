@@ -116,6 +116,9 @@ public class UserRepositoryHibernate extends HibernateRepository implements User
         if (StringUtil.hasValue(map.get("minatSelect"))) {
             criteria.add(Restrictions.eq("userSpecification.minat", map.get("minatSelect")));
         }
+        if (StringUtil.hasValue(map.get("freelance"))) {
+            criteria.add(Restrictions.eq("userSpecification.freelance", map.get("freelance")));
+        }
         return (List<User>) criteria.list();
     }
 
