@@ -14,7 +14,7 @@
                     <textbox class="form-control" width="100%" value="@bind(vm.idEvent)"/>  
                 </div>
                        
-<!--                <div class="form-group">
+                <!--                <div class="form-group">
                     <label sclass="isi" value="Tanggal Berakhir" />
                     <datebox width="100%"  readonly="true" placeholder="- Silahkan Pilih -" value="@bind(vm.endDate)"></datebox>
                 </div>-->
@@ -67,8 +67,8 @@
                                 </listcell>
                                 <listcell>
                                     <a onClick="@command('detailEventAgit', object=each)" image="/images/skk_edit.png" sclass="btn btn-default"/>
-                                    <space/>
                                     <a onClick="@command('buttonKlikEvent', object=each)" image="/images/mWindow.png" sclass="btn btn-default"/>
+                                    <a onClick="@command('deleteEvent', object=each)" image="/images/clear_x.png" sclass="btn btn-default"/>
                                 </listcell>
                             </listitem>
                         </template>

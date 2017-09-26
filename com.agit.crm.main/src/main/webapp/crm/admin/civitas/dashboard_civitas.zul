@@ -57,7 +57,7 @@
             <div sclass="col-md-9 nopadding">
                 <groupbox closable="false" sclass="col-md-12">
                     <!--<paging forward="onPaging" />-->
-                    <listbox rows="11" mold="paging" pageSize="@load(vm.pageSize)" emptyMessage="${labels.common.noDataFound}" 
+                    <listbox rows="@load(vm.pageSize)" mold="paging" pageSize="@load(vm.pageSize)" emptyMessage="${labels.common.noDataFound}" 
                              model="@bind(vm.civitasDTOs)">
                         <listhead>
                             <listheader sclass="isi bold" label="ID Civitas" width="11%" sortDirection="ascending" sort="auto(civitasID)"/>
@@ -78,6 +78,7 @@
                                 </listcell>
                                 <listcell >
                                     <a onClick="@command('detailCivitas', object=each)" image="/images/skk_edit.png" sclass="btn btn-default"/>
+                                    <a onClick="@command('deleteCivitas', object=each)" image="/images/clear_x.png" sclass="btn btn-default"/>
                                 </listcell>
                             </listitem>
                         </template>

@@ -72,6 +72,7 @@
                                 </listcell>
                                 <listcell >
                                     <a onClick="@command('detailJurusan', object=each)" image="/images/skk_edit.png" sclass="btn btn-default"/>
+                                    <a onClick="@command('deleteJurusan', object=each)" image="/images/clear_x.png" sclass="btn btn-default"/>
                                 </listcell>
                             </listitem>
                         </template>

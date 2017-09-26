@@ -201,6 +201,28 @@ public class ForumVM {
 
     }
 
+    @Command("deleteForum")
+    @NotifyChange("forumDTOs")
+    public void deleteForum(@BindingParam("object") ForumDTO obj, @ContextParam(ContextType.VIEW) Window window) {
+        forumDTO = (ForumDTO) obj;
+
+        Messagebox.show("Apakah anda yakin ingin menghapus Forum?", "Konfirmasi", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION,
+                new org.zkoss.zk.ui.event.EventListener() {
+            @Override
+            public void onEvent(Event evt) throws InterruptedException {
+                if (evt.getName().equals("onOK")) {
+                    forumService.deleteData(forumDTO);
+                    showInformationMessagebox("Forum Berhasil Dihapus");
+                    BindUtils.postGlobalCommand(null, null, "refreshForum", null);
+                } else {
+                    System.out.println("Operasi dibatalkan");
+                }
+            }
+        }
+        );
+
+    }
+
     @Command("buttonNewForum")
     @NotifyChange("forumDTO")
     public void buttonNewForum(@BindingParam("object") ForumDTO obj, @ContextParam(ContextType.VIEW) Window window) {
@@ -296,17 +318,17 @@ public class ForumVM {
         komentarForumDTO = (KomentarForumDTO) obj;
         Messagebox.show("Apakah anda yakin ingin menghapus Lowongan?", "Konfirmasi", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION,
                 new org.zkoss.zk.ui.event.EventListener() {
-                    @Override
-                    public void onEvent(Event evt) throws InterruptedException {
-                        if (evt.getName().equals("onOK")) {
-                            komentarForumService.delete(komentarForumDTO);
-                            showInformationMessagebox("Lowongan Berhasil Dihapus");
-                            BindUtils.postGlobalCommand(null, null, "refreshKomentarForum", null);
-                        } else {
-                            System.out.println("Operation Canceled !");
-                        }
-                    }
+            @Override
+            public void onEvent(Event evt) throws InterruptedException {
+                if (evt.getName().equals("onOK")) {
+                    komentarForumService.delete(komentarForumDTO);
+                    showInformationMessagebox("Lowongan Berhasil Dihapus");
+                    BindUtils.postGlobalCommand(null, null, "refreshKomentarForum", null);
+                } else {
+                    System.out.println("Operation Canceled !");
                 }
+            }
+        }
         );
     }
 

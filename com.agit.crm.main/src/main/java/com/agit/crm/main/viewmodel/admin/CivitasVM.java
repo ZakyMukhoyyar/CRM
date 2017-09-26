@@ -38,6 +38,7 @@ import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.io.Files;
 import org.zkoss.util.media.Media;
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.UploadEvent;
 import org.zkoss.zk.ui.select.annotation.VariableResolver;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
@@ -65,7 +66,7 @@ public class CivitasVM {
 
     private PageNavigation previous;
     private boolean checked;
-    private int pageSize = 10;
+    private int pageSize = 9;
     private int activePage = 0;
     private int selectedIndex;
     private int totalSize = 0;
@@ -166,6 +167,28 @@ public class CivitasVM {
             count += 1;
         }
         return count;
+    }
+
+    @Command("deleteCivitas")
+    @NotifyChange("civitasDTOs")
+    public void deleteCivitas(@BindingParam("object") CivitasDTO obj, @ContextParam(ContextType.VIEW) Window window) {
+        civitasDTO = (CivitasDTO) obj;
+
+        Messagebox.show("Apakah anda yakin ingin menghapus Civitas?", "Konfirmasi", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION,
+                new org.zkoss.zk.ui.event.EventListener() {
+            @Override
+            public void onEvent(Event evt) throws InterruptedException {
+                if (evt.getName().equals("onOK")) {
+                    civitasService.deleteData(civitasDTO);
+                    showInformationMessagebox("Civitas Berhasil Dihapus");
+                    BindUtils.postGlobalCommand(null, null, "refreshData", null);
+                } else {
+                    System.out.println("Operasi dibatalkan");
+                }
+            }
+        }
+        );
+
     }
 
     @Command("buttonSearchCivitas")

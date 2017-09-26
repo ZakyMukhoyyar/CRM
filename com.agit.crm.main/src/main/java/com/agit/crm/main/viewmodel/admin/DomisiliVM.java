@@ -37,6 +37,7 @@ import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.io.Files;
 import org.zkoss.util.media.Media;
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.UploadEvent;
 import org.zkoss.zk.ui.select.annotation.VariableResolver;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
@@ -68,7 +69,7 @@ public class DomisiliVM {
 
     /* attribut for CRM */
     private PageNavigation previous;
-    private int pageSize = 10;
+    private int pageSize = 9;
 
     /* attribut for upload file Event */
     Media mediaUploadDomisili;
@@ -163,6 +164,28 @@ public class DomisiliVM {
         }
 
         return s + String.format("%0" + count + "d", max + 1);
+    }
+
+    @Command("deleteDomisili")
+    @NotifyChange("domisiliDTOs")
+    public void deleteDomisili(@BindingParam("object") DomisiliDTO obj, @ContextParam(ContextType.VIEW) Window window) {
+        domisiliDTO = (DomisiliDTO) obj;
+
+        Messagebox.show("Apakah anda yakin ingin menghapus Domisili?", "Konfirmasi", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION,
+                new org.zkoss.zk.ui.event.EventListener() {
+            @Override
+            public void onEvent(Event evt) throws InterruptedException {
+                if (evt.getName().equals("onOK")) {
+                    domisiliService.deleteData(domisiliDTO);
+                    showInformationMessagebox("Domisili Berhasil Dihapus");
+                    BindUtils.postGlobalCommand(null, null, "refreshDomisili", null);
+                } else {
+                    System.out.println("Operasi dibatalkan");
+                }
+            }
+        }
+        );
+
     }
 
     @Command("buttonTambahDomisili")

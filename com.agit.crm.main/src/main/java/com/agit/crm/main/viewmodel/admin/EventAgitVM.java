@@ -24,21 +24,15 @@ import com.agit.crm.util.CommonUtil;
 import com.agit.crm.util.StringUtil;
 import java.io.File;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.joda.time.LocalDate;
 import org.zkoss.bind.BindContext;
 import org.zkoss.bind.BindUtils;
-import org.zkoss.bind.ValidationContext;
-import org.zkoss.bind.validator.AbstractValidator;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.ContextParam;
@@ -50,6 +44,7 @@ import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.io.Files;
 import org.zkoss.util.media.Media;
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.UploadEvent;
 import org.zkoss.zk.ui.select.annotation.VariableResolver;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
@@ -326,6 +321,28 @@ public class EventAgitVM {
             pathLocationUploadEventAgit = "/" + "files" + "/" + "crm-event" + "/" + year + "/" + month + "/" + day + "/" + mediaUploadEventAgit.getName();
             Messagebox.show("File : " + mediaUploadEventAgit + " Bukan File PDF", "Error", Messagebox.OK, Messagebox.ERROR);
         }
+    }
+
+    @Command("deleteEvent")
+    @NotifyChange("eventAgitDTOs")
+    public void deleteEvent(@BindingParam("object") EventAgitDTO obj, @ContextParam(ContextType.VIEW) Window window) {
+        eventAgitDTO = (EventAgitDTO) obj;
+
+        Messagebox.show("Apakah anda yakin ingin menghapus Event?", "Konfirmasi", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION,
+                new org.zkoss.zk.ui.event.EventListener() {
+            @Override
+            public void onEvent(Event evt) throws InterruptedException {
+                if (evt.getName().equals("onOK")) {
+                    eventAgitService.deleteData(eventAgitDTO);
+                    showInformationMessagebox("Event Berhasil Dihapus");
+                    BindUtils.postGlobalCommand(null, null, "refreshEventAgit", null);
+                } else {
+                    System.out.println("Operasi dibatalkan");
+                }
+            }
+        }
+        );
+
     }
 
     /* Function button save Event */

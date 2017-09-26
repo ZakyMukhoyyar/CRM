@@ -61,6 +61,7 @@
                                        sclass="btn btn-default"
                                        onClick="@command('komentariOnAdmin', object=each)">
                                     </a>
+                                    <a onClick="@command('deleteForum', object=each)" image="/images/clear_x.png" sclass="btn btn-default"/>
                                 </listcell>
                             </listitem>
                         </template>

@@ -25,6 +25,7 @@ import org.zkoss.bind.annotation.ExecutionArgParam;
 import org.zkoss.bind.annotation.GlobalCommand;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
+import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Messagebox;
@@ -50,7 +51,7 @@ public class MinatVM {
     private ListModelList<Status> statuses;
 
     private PageNavigation previous;
-    private int pageSize = 10;
+    private int pageSize = 9;
 
     @Init
     public void init(
@@ -151,6 +152,28 @@ public class MinatVM {
             count += 1;
         }
         return count;
+    }
+
+    @Command("deleteMinat")
+    @NotifyChange("minatDTOs")
+    public void deleteMinat(@BindingParam("object") MinatDTO obj, @ContextParam(ContextType.VIEW) Window window) {
+        minatDTO = (MinatDTO) obj;
+
+        Messagebox.show("Apakah anda yakin ingin menghapus Minat?", "Konfirmasi", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION,
+                new org.zkoss.zk.ui.event.EventListener() {
+            @Override
+            public void onEvent(Event evt) throws InterruptedException {
+                if (evt.getName().equals("onOK")) {
+                    minatService.deleteData(minatDTO);
+                    showInformationMessagebox("Minat Berhasil Dihapus");
+                    BindUtils.postGlobalCommand(null, null, "refreshMinat", null);
+                } else {
+                    System.out.println("Operasi dibatalkan");
+                }
+            }
+        }
+        );
+
     }
 
     @Command("buttonSearchMinat")

@@ -25,6 +25,7 @@ import org.zkoss.bind.annotation.ExecutionArgParam;
 import org.zkoss.bind.annotation.GlobalCommand;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
+import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.annotation.VariableResolver;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 import org.zkoss.zul.ListModelList;
@@ -53,7 +54,7 @@ public class KetrampilanVM {
 
     private PageNavigation previous;
     private boolean checked;
-    private int pageSize = 10;
+    private int pageSize = 9;
 
     @Init
     public void init(
@@ -157,6 +158,28 @@ public class KetrampilanVM {
             count += 1;
         }
         return count;
+    }
+
+    @Command("deleteKetrampilan")
+    @NotifyChange("forumDTOs")
+    public void deleteKetrampilan(@BindingParam("object") KetrampilanDTO obj, @ContextParam(ContextType.VIEW) Window window) {
+        ketrampilanDTO = (KetrampilanDTO) obj;
+
+        Messagebox.show("Apakah anda yakin ingin menghapus Ketrampilan?", "Konfirmasi", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION,
+                new org.zkoss.zk.ui.event.EventListener() {
+            @Override
+            public void onEvent(Event evt) throws InterruptedException {
+                if (evt.getName().equals("onOK")) {
+                    ketrampilanService.deleteData(ketrampilanDTO);
+                    showInformationMessagebox("Ketrampilan Berhasil Dihapus");
+                    BindUtils.postGlobalCommand(null, null, "refreshKetrampilan", null);
+                } else {
+                    System.out.println("Operasi dibatalkan");
+                }
+            }
+        }
+        );
+
     }
 
     @Command("buttonSearchKetrampilan")

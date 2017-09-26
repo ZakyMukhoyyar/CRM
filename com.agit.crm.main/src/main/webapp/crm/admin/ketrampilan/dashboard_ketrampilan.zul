@@ -59,6 +59,7 @@
                                        sclass="btn btn-default"
                                        onClick="@command('detailKetrampilan', object=each)">
                                     </a>
+                                    <a onClick="@command('deleteKetrampilan', object=each)" image="/images/clear_x.png" sclass="btn btn-default"/>
                                 </listcell>
                             </listitem>
                         </template>

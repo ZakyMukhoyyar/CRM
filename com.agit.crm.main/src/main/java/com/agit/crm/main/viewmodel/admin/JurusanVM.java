@@ -37,6 +37,7 @@ import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.io.Files;
 import org.zkoss.util.media.Media;
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.UploadEvent;
 import org.zkoss.zk.ui.select.annotation.VariableResolver;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
@@ -65,7 +66,7 @@ public class JurusanVM {
 
     /* attribut for UI */
     private PageNavigation previous;
-    private int pageSize = 10;
+    private int pageSize = 9;
 
     /* attribut for File Upload */
     Media mediaJurusan;
@@ -206,6 +207,28 @@ public class JurusanVM {
         Map<String, Object> params = new HashMap<>();
         params.put("jurusanDTO", obj);
         CommonViewModel.navigateToWithoutDetach("/crm/admin/jurusan/add_jurusan.zul", window, params);
+    }
+
+    @Command("deleteJurusan")
+    @NotifyChange("jurusanDTOs")
+    public void deleteJurusan(@BindingParam("object") JurusanDTO obj, @ContextParam(ContextType.VIEW) Window window) {
+        jurusanDTO = (JurusanDTO) obj;
+
+        Messagebox.show("Apakah anda yakin ingin menghapus Jurusan?", "Konfirmasi", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION,
+                new org.zkoss.zk.ui.event.EventListener() {
+            @Override
+            public void onEvent(Event evt) throws InterruptedException {
+                if (evt.getName().equals("onOK")) {
+                    jurusanService.deleteData(jurusanDTO);
+                    showInformationMessagebox("Jurusan Berhasil Dihapus");
+                    BindUtils.postGlobalCommand(null, null, "refreshJurusan", null);
+                } else {
+                    System.out.println("Operasi dibatalkan");
+                }
+            }
+        }
+        );
+
     }
 
     @Command("buttonKembaliJurusan")
