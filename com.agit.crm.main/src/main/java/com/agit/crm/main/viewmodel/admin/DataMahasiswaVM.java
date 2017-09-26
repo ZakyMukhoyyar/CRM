@@ -81,13 +81,7 @@ public class DataMahasiswaVM {
     private UserDTO userDTO = new UserDTO();
     private List<UserDTO> userDTOs = new ArrayList<>();
     private List<UserDTO> userDTO2s = new ArrayList<>();
-    private List<DomisiliDTO> domisilis = new ArrayList<DomisiliDTO>();
-    private List<MinatDTO> minats = new ArrayList<MinatDTO>();
-    private List<String> listMinat = new ArrayList<>();
-    private List<String> listKetrampilan = new ArrayList<>();
-    private List<String> listDomisili = new ArrayList<>();
-    private List<String> listCivitas = new ArrayList<>();
-    private List<String> listJurusan = new ArrayList<>();
+
     private ListModelList<JenisKelaminType> jenisKelaminTypes;
     private ListModelList<PendidikanType> pendidikanTypes;
     private ListModelList<TingkatanType> tingkatanTypes1;
@@ -95,19 +89,28 @@ public class DataMahasiswaVM {
     private ListModelList<TingkatanType> tingkatanTypes3;
     private ListModelList<TingkatanType> tingkatanTypes4;
     private ListModelList<TingkatanType> tingkatanTypes5;
+
     private List<KetrampilanDTO> ketrampilans = new ArrayList<KetrampilanDTO>();
     private List<JurusanDTO> jurusans = new ArrayList<JurusanDTO>();
     private List<CivitasDTO> civitass = new ArrayList<CivitasDTO>();
+    private List<DomisiliDTO> domisilis = new ArrayList<DomisiliDTO>();
+    private List<MinatDTO> minats = new ArrayList<MinatDTO>();
+
+    private List<String> listMinat = new ArrayList<>();
+    private List<String> listKetrampilan = new ArrayList<>();
+    private List<String> listDomisili = new ArrayList<>();
+    private List<String> listCivitas = new ArrayList<>();
+    private List<String> listJurusan = new ArrayList<>();
 
     /*------------------------------------- Parameter Pencarian-------------------------------*/
     private String fullName;
     private String ktp;
+    private String userID;
     private String domisiliSelect;
     private String minatSelect;
     private String jurusanSelect;
     private String ketrampilanSelect;
     private String civitasSelect;
-    private String userID;
 
     /*------------------------------------- Paging--------------------------------------------*/
     private PageNavigation previous;

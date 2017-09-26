@@ -35,135 +35,103 @@
                                     <row>
                                         <signLabel sclass="isi" value="Nama Lengkap "/>
                                         <div>
-                                            <textbox value="@bind(fx.userDTO.userSpecificationDTO.fullName)" width="40%"/>
+                                            <label value="@bind(fx.userDTO.userSpecificationDTO.fullName)" width="40%"/>
                                         </div>
                                     </row>
                                     <row>
                                         <signLabel sclass="isi" value="Username "/>
                                         <div>
-                                            <textbox id="userName" value="@bind(fx.userDTO.userName)" width="40%"/>
+                                            <label id="userName" value="@bind(fx.userDTO.userName)" width="40%"/>
                                         </div>
                                     </row>
                             
                                     <row>
                                         <signLabel sclass="isi" value="Password" width="40%" />
-                                        <textbox type="password" value="xxxxxxxxxxx" width="40%" disabled="true"/>
+                                        <label value="xxxxxxxxxxx" width="40%"/>
                                     </row>
                             
                                     <row>
                                         <signLabel sclass="isi" value="Email"/>
                                         <div>
-                                            <textbox value="@bind(fx.userDTO.userSpecificationDTO.email)" width="40%" />
+                                            <label value="@bind(fx.userDTO.userSpecificationDTO.email)" width="40%" />
                                         </div>
                                     </row>
                                     <row>
                                         <signLabel sclass="isi" value="KTP"/>
                                         <div>
-                                            <textbox value="@bind(fx.userDTO.userSpecificationDTO.ktp)" width="40%" />
+                                            <label value="@bind(fx.userDTO.userSpecificationDTO.ktp)" width="40%" />
                                         </div>
                                     </row>
                                     <row>
                                         <signLabel sclass="isi" value="No HP"/>
                                         <div>
-                                            <textbox value="@bind(fx.userDTO.userSpecificationDTO.mobilePhone)" width="40%" />
+                                            <label value="@bind(fx.userDTO.userSpecificationDTO.mobilePhone)" width="40%" />
                                         </div>
                                     </row>
                                     <row>
                                         <signLabel value="Tanggal Lahir"/>
                                         <div>
-                                            <datebox value="@bind(fx.userDTO.userSpecificationDTO.tanggalLahir)" width="40%" />
+                                            <label value="@bind(fx.userDTO.userSpecificationDTO.tanggalLahir)" width="40%" />
                                         </div>
                                     </row>
                                     <row>
                                         <signLabel sclass="isi" value="Domisili"/>
                                         <div>
-                                            <listbox 
-                                                width="40%"
-                                                mold="select"
-                                                model="@load(vm.listDomisili)" 
-                                                selectedItem="@bind(fx.userDTO.userSpecificationDTO.domisili)" >
-                                                <template name="model" var="items" >
-                                                    <listitem label="@load(items)"  value="@load(items)" />
-                                                </template>
-                                            </listbox> 
+                                            <label 
+                                                width="40%" value="@bind(fx.userDTO.userSpecificationDTO.domisili)" >
+                                            </label> 
                                         </div>
                                     </row>
                                     <row>
                                         <signLabel sclass="isi" value="IPK"/>
                                         <div>
-                                            <textbox value="@bind(fx.userDTO.userSpecificationDTO.ipk)" width="40%" />
+                                            <label value="@bind(fx.userDTO.userSpecificationDTO.ipk)" width="40%" />
                                         </div>
                                     </row>
                                     <row>
                                         <signLabel sclass="isi" value="Jenis Kelamin"/>
                                         <div>
-                                            <listbox 
+                                            <label 
                                                 width="40%"
-                                                mold="select"
-                                                model="@load(vm.jenisKelaminTypes)" 
-                                                selectedItem="@bind(fx.userDTO.userSpecificationDTO.jenisKelaminType)" >
-                                                <template name="model" var="items" >
-                                                    <listitem label="@load(items)"  value="@load(items)" />
-                                                </template>
-                                            </listbox> 
+                                                value="@bind(fx.userDTO.userSpecificationDTO.jenisKelaminType)" >
+                                            </label> 
                                         </div>
                                     </row>
                                     <row>
                                         <signLabel sclass="isi" value="Pendidikan Type"/>
                                         <div>
-                                            <listbox 
-                                                width="40%"
-                                                mold="select"
-                                                model="@load(vm.pendidikanTypes)" 
-                                                selectedItem="@bind(fx.userDTO.userSpecificationDTO.pendidikanType)" >
-                                                <template name="model" var="items" >
-                                                    <listitem label="@load(items)"  value="@load(items)" />
-                                                </template>
-                                            </listbox> 
+                                            <label 
+                                                value="@bind(fx.userDTO.userSpecificationDTO.pendidikanType)" width="40%">
+                                            </label> 
                                         </div>
                                     </row>
                                     <row>
                                         <signLabel sclass="isi" value="Civitas"/>
                                         <div>
-                                            <listbox 
+                                            <label 
                                                 width="40%"
-                                                mold="select"
-                                                model="@load(vm.listCivitas)" 
-                                                selectedItem="@bind(fx.userDTO.userSpecificationDTO.namaCivitas)" >
-                                                <template name="model" var="items" >
-                                                    <listitem label="@load(items)"  value="@load(items)" />
-                                                </template>
-                                            </listbox> 
+                                                value="@bind(fx.userDTO.userSpecificationDTO.namaCivitas)" >
+                                            </label> 
                                         </div>
                                     </row>
 
                                     <row>
                                         <signLabel sclass="isi" value="Jurusan"/>
                                         <div>
-                                            <listbox 
+                                            <label 
                                                 width="40%"
-                                                mold="select"
-                                                model="@load(vm.listJurusan)" 
-                                                selectedItem="@bind(fx.userDTO.userSpecificationDTO.jurusan)" >
-                                                <template name="model" var="items" >
-                                                    <listitem label="@load(items)"  value="@load(items)" />
-                                                </template>
-                                            </listbox> 
+                                                value="@bind(fx.userDTO.userSpecificationDTO.jurusan)" >
+                                            </label> 
                                         </div>
                                     </row>
                             
                                     <row>
                                         <signLabel sclass="isi" value="Minat"/>
                                         <div>
-                                            <listbox 
+                                            <label 
                                                 width="40%"
-                                                mold="select"
-                                                model="@load(vm.listMinat)" 
-                                                selectedItem="@bind(fx.userDTO.userSpecificationDTO.minat)" >
-                                                <template name="model" var="items" >
-                                                    <listitem label="@load(items)"  value="@load(items)" />
-                                                </template>
-                                            </listbox> 
+                                                value="@bind(fx.userDTO.userSpecificationDTO.minat)" >
+                                            </label> 
                                         </div>
                                     </row>
                             
@@ -184,122 +152,74 @@
                                         </row>
                                         <row>
                                             <div>
-                                                <listbox 
+                                                <label 
                                                     width="100%"
-                                                    mold="select"
-                                                    model="@load(vm.listKetrampilan)" 
-                                                    selectedItem="@bind(fx.userDTO.userSpecificationDTO.ketrampilan1)" >
-                                                    <template name="model" var="items" >
-                                                        <listitem label="@load(items)"  value="@load(items)" />
-                                                    </template>
-                                                </listbox> 
+                                                    value="@bind(fx.userDTO.userSpecificationDTO.ketrampilan1)" >
+                                                </label> 
                                             </div>
                                             <div>
-                                                <listbox 
+                                                <label 
                                                     width="100%"
-                                                    mold="select"
-                                                    model="@load(vm.tingkatanTypes1)" 
-                                                    selectedItem="@bind(fx.userDTO.userSpecificationDTO.tingkatanType1)" >
-                                                    <template name="model" var="items" >
-                                                        <listitem label="@load(items)"  value="@load(items)" />
-                                                    </template>
-                                                </listbox> 
+                                                    value="@bind(fx.userDTO.userSpecificationDTO.tingkatanType1)" >
+                                                </label> 
                                             </div>
                                         </row>
                                         <row>
                                             <div>
-                                                <listbox 
+                                                <label 
                                                     width="100%"
-                                                    mold="select"
-                                                    model="@load(vm.listKetrampilan)" 
-                                                    selectedItem="@bind(fx.userDTO.userSpecificationDTO.ketrampilan2)" >
-                                                    <template name="model" var="items" >
-                                                        <listitem label="@load(items)"  value="@load(items)" />
-                                                    </template>
-                                                </listbox> 
+                                                    value="@bind(fx.userDTO.userSpecificationDTO.ketrampilan2)" >
+                                                </label> 
                                             </div>
                                             <div>
-                                                <listbox 
+                                                <label 
                                                     width="100%"
-                                                    mold="select"
-                                                    model="@load(vm.tingkatanTypes2)" 
-                                                    selectedItem="@bind(fx.userDTO.userSpecificationDTO.tingkatanType2)" >
-                                                    <template name="model" var="items" >
-                                                        <listitem label="@load(items)"  value="@load(items)" />
-                                                    </template>
-                                                </listbox> 
+                                                    value="@bind(fx.userDTO.userSpecificationDTO.tingkatanType2)" >
+                                                </label> 
                                             </div>
                                         </row>
                                         <row>
                                             <div>
-                                                <listbox 
+                                                <label 
                                                     width="100%"
-                                                    mold="select"
-                                                    model="@load(vm.listKetrampilan)" 
-                                                    selectedItem="@bind(fx.userDTO.userSpecificationDTO.ketrampilan3)" >
-                                                    <template name="model" var="items" >
-                                                        <listitem label="@load(items)"  value="@load(items)" />
-                                                    </template>
-                                                </listbox> 
+                                                    value="@bind(fx.userDTO.userSpecificationDTO.ketrampilan3)" >
+                                                </label> 
                                             </div>
                                             <div>
-                                                <listbox 
+                                                <label 
                                                     width="100%"
-                                                    mold="select"
-                                                    model="@load(vm.tingkatanTypes3)" 
-                                                    selectedItem="@bind(fx.userDTO.userSpecificationDTO.tingkatanType3)" >
-                                                    <template name="model" var="items" >
-                                                        <listitem label="@load(items)"  value="@load(items)" />
-                                                    </template>
-                                                </listbox> 
+                                                    value="@bind(fx.userDTO.userSpecificationDTO.tingkatanType3)" >
+
+                                                </label> 
                                             </div>
                                         </row>
                                         <row>
                                             <div>
-                                                <listbox 
+                                                <label 
                                                     width="100%"
-                                                    mold="select"
-                                                    model="@load(vm.listKetrampilan)" 
-                                                    selectedItem="@bind(fx.userDTO.userSpecificationDTO.ketrampilan4)" >
-                                                    <template name="model" var="items" >
-                                                        <listitem label="@load(items)"  value="@load(items)" />
-                                                    </template>
-                                                </listbox> 
+                                                    value="@bind(fx.userDTO.userSpecificationDTO.ketrampilan4)" >
+                      
+                                                </label> 
                                             </div>
                                             <div>
-                                                <listbox 
+                                                <label 
                                                     width="100%"
-                                                    mold="select"
-                                                    model="@load(vm.tingkatanTypes4)" 
-                                                    selectedItem="@bind(fx.userDTO.userSpecificationDTO.tingkatanType4)" >
-                                                    <template name="model" var="items" >
-                                                        <listitem label="@load(items)"  value="@load(items)" />
-                                                    </template>
-                                                </listbox> 
+                                                    value="@bind(fx.userDTO.userSpecificationDTO.tingkatanType4)" >
+                                                </label> 
                                             </div>
                                         </row>
                                         <row>
                                             <div>
-                                                <listbox 
+                                                <label 
                                                     width="100%"
-                                                    mold="select"
-                                                    model="@load(vm.listKetrampilan)" 
-                                                    selectedItem="@bind(fx.userDTO.userSpecificationDTO.ketrampilan5)" >
-                                                    <template name="model" var="items" >
-                                                        <listitem label="@load(items)"  value="@load(items)" />
-                                                    </template>
-                                                </listbox> 
+                                                    value="@bind(fx.userDTO.userSpecificationDTO.ketrampilan5)" >
+                                                </label> 
                                             </div>
                                             <div>
-                                                <listbox 
+                                                <label 
                                                     width="100%"
-                                                    mold="select"
-                                                    model="@load(vm.tingkatanTypes5)" 
-                                                    selectedItem="@bind(fx.userDTO.userSpecificationDTO.tingkatanType5)" >
-                                                    <template name="model" var="items" >
-                                                        <listitem label="@load(items)"  value="@load(items)" />
-                                                    </template>
-                                                </listbox> 
+                                                    value="@bind(fx.userDTO.userSpecificationDTO.tingkatanType5)" >
+                                                </label> 
                                             </div>
                                         </row>
                                     </rows>
