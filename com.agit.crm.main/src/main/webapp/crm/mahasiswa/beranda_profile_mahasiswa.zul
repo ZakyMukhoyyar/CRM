@@ -6,6 +6,86 @@
             closable="true" maximizable="true" title="Profile" width="70%">
         <listbox  emptyMessage="${labels.common.noDataFound}" model="@bind(vm.userDTO2s)" width="100%">
             <listhead >
+                <listheader sclass="isi" width="40%"/>
+                <listheader sclass="isi" width="60%"/>
+            </listhead>  
+            <template name="model">
+                <listitem value="${each}" style="margin-bottom:20px;">
+                    <listcell>
+                        <div align="center">
+                            <image width="70%" src="/images/photo.jpg"/> 
+                        </div>
+                        <div align="center">
+                            <label sclass="headerProfile" width="100%"  value="@bind(each.userSpecificationDTO.fullName)" style="text-align: center;"/>
+                        </div>
+                    </listcell>
+                    <listcell style="background-color:#dcdcdc;" >
+                        
+                        <div class="input-group" align="left">
+                            <label sclass="input-group-addon" value="Email" style="text-align: justify;" width="35%"/>
+                            <textbox sclass="form-control" width="225%" value="@bind(each.userSpecificationDTO.email)" readonly="true" />
+                        </div>
+                        <div class="input-group">
+                            <label sclass="input-group-addon" value="No. Telepon" style="text-align: justify;" width="35%"/>        
+                            <textbox sclass="form-control" width="225%" value="@bind(each.userSpecificationDTO.mobilePhone)" readonly="true"/>
+                        </div>
+                        <div class="input-group">
+                            <label sclass="input-group-addon" value="No. KTP" style="text-align: justify;" width="35%"/>            
+                            <textbox sclass="form-control" width="225%" value="@bind(each.userSpecificationDTO.ktp)" readonly="true"/>
+                        </div>
+                       <div class="input-group">
+                            <label sclass="input-group-addon" value="Tgl. Lahir" style="text-align: justify;" width="35%"/>                 
+                            <textbox sclass="form-control" width="225%" value="@bind(each.userSpecificationDTO.tanggalLahir)" readonly="true"/>
+                        </div>
+                        <div class="input-group">
+                            <label sclass="input-group-addon" value="Domisili" style="text-align: justify;" width="35%"/>             
+                            <textbox sclass="form-control" width="225%" value="@bind(each.userSpecificationDTO.domisili)" readonly="true"/>
+                        </div>
+                        <div class="input-group">
+                            <label sclass="input-group-addon" value="IPK" style="text-align: justify;" width="35%"/>               
+                            <textbox sclass="form-control" width="225%" value="@bind(each.userSpecificationDTO.ipk)" readonly="true"/>
+                        </div>
+                        <div class="input-group">
+                            <label sclass="input-group-addon" value="Gender" style="text-align: justify;" width="35%"/>                 
+                            <textbox sclass="form-control" width="225%" value="@bind(each.userSpecificationDTO.jenisKelaminType)" readonly="true"/>
+                        </div>
+                        <div class="input-group">
+                            <label sclass="input-group-addon" value="Pendidikan" style="text-align: justify;" width="35%"/>           
+                            <textbox sclass="form-control" width="225%" value="@bind(each.userSpecificationDTO.pendidikanType)" readonly="true"/>
+                        </div>
+                        <div class="input-group">
+                            <label sclass="input-group-addon" value="Jurusan" style="text-align: justify;" width="35%"/> 
+                            <textbox sclass="form-control" width="225%" value="@bind(each.userSpecificationDTO.jurusan)" readonly="true"/>
+                        </div>
+                        <separator ></separator>
+                        <separator></separator>
+                        <div align="center">
+                            <a sclass="isi btn btn-primary" label="Preview CV" onClick="@command('buttonKlikPreviewCV', object=each)" /> 
+                            
+                            <a sclass="isi btn btn-primary" label="Update"  onClick="@command('buttonDetailProfil', object=each)"></a>  
+                        </div>
+                        <separator></separator>
+                    </listcell>
+                </listitem>
+            </template>
+        </listbox>
+    </window>
+</zk>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<listbox  emptyMessage="${labels.common.noDataFound}" model="@bind(vm.userDTO2s)" width="100%">
+            <listhead >
                 <listheader sclass="isi" width="0%"/>
                 <listheader sclass="isi" width="100%"/>
                 <listheader sclass="isi" width="0%" align="center"/>
@@ -75,6 +155,4 @@
                     </listcell>
                 </listitem>
             </template>
-        </listbox>
-    </window>
-</zk>
+        </listbox>-->
