@@ -41,19 +41,17 @@
             <caption label="Jadwal Event" style="font-size:12pt; font-weight: bold"/>   
             <listbox width="100%" rows="1" mold="paging" pageSize="@load(vm.pageSize)" emptyMessage="${labels.common.noDataFound}"  model="@bind(vm.eventAgitDTOs)">
                 <listhead>
-                    <listheader style="font-size:9pt; font-weight: bold" sclass="isi" label="Nama Event" width="80%" align="center"/>
-                    <!--<listheader style="font-size:9pt; font-weight: bold" sclass="isi" label="Aksi" width="20%" align="center"/>-->
+                    <listheader style="font-size:9pt; font-weight: bold" sclass="isi" label="@bind(each.namaEvent)" width="100%" align="center"/>
                 </listhead>
                 <template name="model">
                     <listitem value="${each}">
                         <listcell>
                             <label sclass="judulLowongan label label-danger" width="100%" value="@bind(each.namaEvent)"/>
                             <separator bar="true"/>
-                            <label sclass="isi " width="100%" value="@bind(each.deskripsiEvent)" style="text-align: justify; display: block; padding:10px;"/>
+                            <html content="${each.deskripsiEvent}" style="text-align: left;"/>
                             <separator bar="true"/>
                             <label sclass="isi bold" value="Mulai : "/> 
                             <label sclass="isi " width="100%" value="@bind(each.startDate)"/>
-                            <!--<separator></separator>-->
                             <label value="  |  "/>
                             <label sclass="isi bold" value="Berakhir : "/> 
                             <label sclass="isi " width="100%" value="@bind(each.endDate)"/>

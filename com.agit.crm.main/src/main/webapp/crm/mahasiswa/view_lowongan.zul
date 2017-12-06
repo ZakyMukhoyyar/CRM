@@ -1,0 +1,35 @@
+<?component name="signLabel" class="com.agit.crm.shared.zul.SignLabel" ?>
+<zk xmlns="http://www.zkoss.org/2005/zul">
+    <window border="normal" apply="org.zkoss.bind.BindComposer"
+            viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.admin.LowonganVM')"
+            form="@id('fx') @load(vm.lowonganDTO) @save(vm.lowonganDTO, before='buttonSaveLowongan')"
+            width="60%" closable="true" title="Forum" maximizable="true">
+        <div >
+            <listbox  rows="1" pageSize="@load(vm.pageSize)" mold="paging" 
+                          emptyMessage="${labels.common.noDataFound}" 
+                          model="@bind(vm.lowonganDTOs)">
+                <listhead >
+                    <listheader sclass="isi" label="@bind(each.namaLowongan)" width="100%" align="center "/>
+                </listhead>
+                <template name="model">
+                    <listitem value="${each}" style="margin-bottom:20px;">
+                        <listcell style="border:1px solid #dcdcdc;">
+                            <separator></separator>
+                            <label sclass="judulLowongan label label-success" width="100%" value="@bind(each.namaLowongan)" style="text-align: left;"/>
+                            <separator></separator>
+                            <html content="${each.deskripsiLowongan}" style="text-align: left;"/>
+                            <separator bar="true"/>
+                            <label sclass="isi" width="100%" value="@bind(each.tanggalMulai)" style="text-align: left;"/>
+                            <label value="  sd  "/>
+                            <label sclass="isi" width="100%" value="@bind(each.tanggalBerakhir)" style="text-align: left;"/>
+                            <separator bar="true"/>
+                            <html content="${each.persyaratan}" style="text-align: left;"/>
+                            <separator bar="true"/> 
+                            <label sclass="isi" width="100%" value="@bind(each.lokasiKerja)" style="text-align: left;"/>
+                        </listcell>
+                    </listitem>
+                </template>
+            </listbox>
+        </div>
+    </window>
+</zk>

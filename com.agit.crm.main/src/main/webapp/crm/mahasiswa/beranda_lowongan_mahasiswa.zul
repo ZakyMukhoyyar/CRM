@@ -7,13 +7,6 @@
             <div align="right">
                 <div class="input-group" width="70%">
                     <textbox width="50%" value="@bind(vm.namaLowongan)" placeholder="Nama Lowongan"/>
-                    <!--                    <combobox width="50%" model="@load(vm.listNamaMinat)"  selectedItem="@bind(vm.minatPekerjaan)" placeholder="Minat">
-                        <template name="model" var="items" >
-                            <comboitem label="@load(items)"  value="@load(items)" />
-                        </template>
-                    </combobox>-->
-                    
-                    
                     <bandbox id="bd" autodrop="true" readonly="true" placeholder="Minat" >  
                         <bandpopup>
                             <textbox id="txt" instant="true" value="@bind(vm.searchMinatPekerjaan)" onChange="@command('bandboxMinat')" width="295px" placeholder="search"></textbox>
@@ -58,17 +51,10 @@
                                     <label sclass="isi bold" value="Penempatan : "/>
                                     <label sclass="isi" width="100%" value="@bind(each.lokasiKerja)" style="text-align: left;"/>
                                     <separator bar="true"/>
-                                    <label sclass="isi" width="100%" value="@bind(each.persyaratan)" style="text-align: justify; display: block; padding:10px;" />
-                                    <separator bar="true"/> 
-                                    <!--                                    <label sclass="isi bold" value="Gaji : "/>                        
-                                    <label sclass="isi label label-success" width="100%" value="@bind(each.gaji)" style="text-align: left;"/>
-                                    <separator></separator>-->
                                     <label sclass="isi bold" value="Status : "/> 
-                                    <!--<label sclass="isi label label-danger" width="100%" value="@bind(vm.lowonganStatusDTO.getLowonganState().toString())" style="text-align: left;"/>-->
                                 </listcell>
                                 <listcell>
-                                    <a sclass="isi btn btn-primary" label="Detail"  onClick="@command('buttonDetailLowongan', object=each)"></a>
-                                    <!--                            <a sclass="s" label=" | "></a>-->
+                                    <a sclass="isi btn btn-primary" label="Detail"  onClick="@command('buttonMahasiswaDetailLowongan', object=each)"></a>
                                     <separator></separator>  
                                     <a sclass="isi btn btn-warning" disabled="@bind(vm.disableButtonApply)" label="Apply"  onClick="@command('buttonApplyLowongan', object=each)"></a>
                                 </listcell>

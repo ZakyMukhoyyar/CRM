@@ -16,7 +16,7 @@
             <div >
                 <panel  sclass="panel-primary">
                     <panelchildren>
-                        <listbox rows="@load(vm.pageSize)" mold="paging" pageSize="@load(vm.pageSize)"  emptyMessage="${labels.common.noDataFound}" model="@bind(vm.forumuserDTOs)">
+                        <listbox rows="1" mold="paging" pageSize="@load(vm.pageSize)"  emptyMessage="${labels.common.noDataFound}" model="@bind(vm.forumuserDTOs)">
                             <listhead>
                                 <listheader width="75%" />
                             </listhead>

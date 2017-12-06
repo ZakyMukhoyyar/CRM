@@ -44,11 +44,8 @@
                             </west>
                             <east border="none" style="background:#7C1442; color:#fff;">
                                 <div style="padding:15px;">
-                                    <!--                            <label value="Logged" style="font-weight:bold"/>-->
-                                    <!--                                    <label value="@load(vm.concat(vm.user.userSpecificationDTO.fullName, vm.concat(' - ',vm.user.roleDTO.roleName)))" style="font-weight:bold" />
-                                    <label value="|"/>-->
                                     <menubar>
-                                        <menu sclass="isi" label="@load(vm.concat(vm.user.userSpecificationDTO.fullName, vm.concat(' - ',vm.user.roleDTO.roleName)))" image="images/assets/avatars/user.jpg">
+                                        <menu sclass="isi" label="@load(vm.concat(vm.user.userSpecificationDTO.fullName, vm.concat(' - ',vm.user.roleDTO.roleName)))">
                                             <menupopup>
                                                 <menuitem sclass="isi" label="Settings" iconSclass="z-icon-cog"/>
                                                 <menuitem sclass="isi" label="Profile" iconSclass="z-icon-user" onClick="@command('buttonKlikProfile', object=each)"/>

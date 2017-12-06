@@ -185,7 +185,6 @@ public class RegisterVM {
             @ExecutionArgParam("propertyParam") Map<String, Object> prop) {
         searchUserStatus = StatusData.ACTIVE;
 
-//        roleDTOs = roleService.findByParameter("Mahasiswa");
         roleDTO = roleService.findByID("MAHASISWA");
 
         initData();
@@ -426,13 +425,6 @@ public class RegisterVM {
                     }
                 }
             }
-
-//            UserDTO user = userService.findByID(userDTO.getUserName() == null ? "" : userDTO.getUserName());
-//            if (user == null) {
-//
-//            } else if (user.getUserName().equals(userDTO.getUserName())) {
-//                CommonViewModel.showErrorMessagebox(Labels.getLabel("error.message.conflict.repository", new String[]{"User Name", userDTO.getUserName()}));
-//            }
         } else if (previous == PageNavigation.UPDATE) {
             userService.saveOrUpdate(userDTO);
             CommonViewModel.showInformationMessagebox("User Name " + userDTO.getUserName() + " has successfully updated", UserNavigation.USER_SEARCH, null, window);
@@ -471,6 +463,8 @@ public class RegisterVM {
                     + "\n\n Mohon simpan email ini sebagai referensi atas registrasi CRM anda. "
                     + "\n\n Terimakasih. "
                     + "\n\n PT. Astra Graphia Information Technology. "
+                    
+                    
             );
             message.setSentDate(new Date());
 

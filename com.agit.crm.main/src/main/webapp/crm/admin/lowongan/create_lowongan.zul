@@ -4,7 +4,7 @@
             viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.admin.LowonganVM')"
             form="@id('fx') @load(vm.lowonganDTO) @save(vm.lowonganDTO, before='buttonSaveLowongan')">
         <separator spacing="5px"/>
-        <groupbox width="700px" closable="true">
+        <groupbox width="800px" closable="true">
             <caption label="Form Tambah Lowongan" style="font-size:16pt; font-weight: bold"/>
             <groupbox>
                 <grid style="border:0">
@@ -39,10 +39,11 @@
                         </row>
                         <row>
                             <signLabel value="Deskripsi " style="font-weight: bold"/>
-                            <textbox rows="10" width="100%" maxlength="2000" disabled="false" 
-                                     readonly="@bind(vm.disableButtonSave)" 
-                                     constraint="no empty : Deskripsi Tidak Boleh Kosong" 
-                                     value="@bind(fx.deskripsiLowongan)"/>
+                            <ckeditor id="htmlEditor" filebrowserImageBrowseUrl="/images"
+                                      filebrowserImageUploadUrl="/images"
+                                      value="@bind(fx.deskripsiLowongan)"
+                                      width="600px" height="300px">
+                            </ckeditor>
                         </row>
                         <row>
                             <signLabel value="Tanggal Mulai" style="font-weight: bold"/>
@@ -66,18 +67,13 @@
                                 </template>
                             </listbox>
                         </row>  
-                        <!--                        <row>
-                            <signLabel value="Perkiraan Gaji" style="font-weight: bold"/>
-                            <listbox width="50%" disabled="@bind(vm.disableButtonSave)" mold="select" sclass="form-control" model="@load(vm.gaji)" selectedItem="@bind(fx.gaji)" >
-                                <template name="model" var="items" >
-                                    <listitem label="@load(items)"  value="@load(items)" />
-                                </template>
-                            </listbox>
-                        </row> -->
                         <row>
                             <signLabel value="Persyaratan " style="font-weight: bold"/>
-                            <textbox readonly="@bind(vm.disableButtonSave)" rows="10" width="100%" 
-                                     constraint="no empty : Persyaratan Tidak Boleh Kosong" value="@bind(fx.persyaratan)"/>
+                            <ckeditor id="htmlEditor1" filebrowserImageBrowseUrl="/images"
+                                      filebrowserImageUploadUrl="/images"
+                                      value="@bind(fx.persyaratan)"
+                                      width="600px" height="300px">
+                            </ckeditor>
                         </row>
                         <row>
                             <signLabel value="Lokasi Kerja" style="font-weight: bold"/>
