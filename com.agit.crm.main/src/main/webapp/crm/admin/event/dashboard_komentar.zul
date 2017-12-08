@@ -6,18 +6,30 @@
             form="@id('fx') @load(vm.eventAgitDTO) @save(vm.eventAgitDTO, before='buttonSaveForum')" 
             width="60%"  border="normal" closable="true" title="Forum" maximizable="true">
         <groupbox id="gb" mold="3d" style="background:#f5f5f5;" >
-            <div>
-                <div >
-                    <div class="form-group">
-                        <label sclass="isi" value="Deskkripsi Event" />
-                        <separator bar="true"/>
-                        <textbox class="form-control" rows="3" value="@bind(fx.deskripsiEvent)"  width="100%" readonly="true"/>  
-                    </div>
-                </div>
+            <div >
+                <panel  sclass="panel-primary">
+                    <panelchildren>
+                        <listbox rows="1" mold="paging" pageSize="@load(vm.pageSize)"  emptyMessage="${labels.common.noDataFound}" model="@bind(vm.eventAgitDTOs)">
+                            <listhead>
+                                <listheader style="font-size:9pt; font-weight: bold" sclass="isi" label="@bind(each.namaEvent)" width="100%" align="center"/>
+                            </listhead>
+                            <template name="model">
+                                <listitem value="${each}">
+                                    <listcell>
+                                        <div>
+                                            <label sclass="judulLowongan label label-danger" width="100%" value="@bind(each.namaEvent)"/>
+                                            <html content="${each.deskripsiEvent}" style="text-align: left;"/>
+                                        </div>
+                                    </listcell>
+                                </listitem>
+                            </template>
+                        </listbox>
+                    </panelchildren>
+                </panel>
             </div>
             <div >
                 <groupbox closable="false">
-                    <listbox rows="2" emptyMessage="${labels.common.noDataFound}" pageSize="@load(vm.pageSize)" mold="paging" model="@bind(vm.komentarEventDTOs)" >
+                    <listbox rows="1" emptyMessage="${labels.common.noDataFound}" pageSize="@load(vm.pageSize)" mold="paging" model="@bind(vm.komentarEventDTOs)" >
                         <listhead>
                             <listheader label="Komentar" width="100%" align="center"/>
                         </listhead>
@@ -35,9 +47,6 @@
                                         <separator/>
                                         <label sclass="post-time" width="100%" value="@bind(each.tglKomentar) @converter('formatedDate', format='hh:mm:ss dd-MMM-yyyy')"  />
                                     </div>
-                                    <!--                                    <div align="right">
-                                        <button sclass="btn" image="/images/delete_1.gif" onClick="@command('deleteKomentar', object=each)"/>
-                                    </div>-->
                                 </listcell>
                             </listitem>
                         </template>
@@ -50,6 +59,7 @@
                 <span class="input-group-btn">
                     <button class="input-group-addon" width="100%" height="100%" image="/images/attachment_1.gif" upload="true" onUpload="@command('buttonUploadFileKomentar')"/>
                 </span>
+              
                 <span class="input-group-btn">
                     <a sclass="btn btn-primary" width="100%" label="Komentar" onClick="@command('buttonComment')"/>
                 </span>

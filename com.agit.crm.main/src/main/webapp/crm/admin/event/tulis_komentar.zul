@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<window apply="org.zkoss.bind.BindComposer"
+        viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.DashboardVM')"
+        form="@id('fx') @load(vm.eventAgitDTO) @save(vm.eventAgitDTO, before='buttonSaveForum')" 
+        width="46%"  border="normal" closable="true" title="Forum" maximizable="true">
+    <groupbox width="600px">
+        <grid style="border:0">           
+            <columns>
+                <column width="50%"></column>
+            </columns>
+            <rows>
+                <row>
+                    <div>
+                        <ckeditor id="htmlEditor"
+                                  value="@bind(vm.komentar)"
+                                  width="100%" height="200%">
+                        </ckeditor>
+                    </div>
+                </row>
+            </rows>
+        </grid>
+        <div class="input-group" >
+            <span class="input-group-btn">
+                <a sclass="btn btn-primary" width="100%" label="Komentar" onClick="@command('buttonComment')"/>
+            </span>
+        </div>
+    </groupbox>
+</window>
