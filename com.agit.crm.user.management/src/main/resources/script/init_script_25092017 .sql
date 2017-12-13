@@ -42,6 +42,8 @@ INSERT INTO "public"."mst_privilege" VALUES ('34', 'FORUM', 'Beranda Mahasiswa F
 INSERT INTO "public"."mst_privilege" VALUES ('35', 'RECRUITER_MANAGEMENT', 'Admin', 'ACTIVE', 'ADMINISTRATOR', 't', 'Pengelolaan Data Pelamar', null, null, null, '2016-01-01 00:00:00', 'SYSTEM');
 INSERT INTO "public"."mst_privilege" VALUES ('36', 'DATA_PELAMAR', 'Data Pelamar', 'ACTIVE', 'RECRUITER_MANAGEMENT', 't', 'Data - Pelamar', 'Data - Pelamar', null, '/crm/recruiter/DashboardRecruiter.zul', '2016-01-01 00:00:00', 'SYSTEM');
 
+INSERT INTO "public"."mst_privilege" VALUES ('37', 'SETUP_EMAIL', 'Dashboard Setup Email', 'ACTIVE', 'ADMIN_MANAGEMENT', 't', 'Beranda - Data Setup Email', 'Beranda - Data Setup Email', null, '/crm/admin/setupEmail/dashboard_email.zul', '2016-01-01 00:00:00', 'SYSTEM');
+
 -- ----------------------------
 -- Records of mst_role
 -- ----------------------------

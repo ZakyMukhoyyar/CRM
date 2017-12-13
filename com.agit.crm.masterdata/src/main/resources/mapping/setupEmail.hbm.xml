@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class mutable="true" name="com.agit.crm.masterdata.domain.SetupEmail" table="AGIT_SETUP_EMAIL">
+        <id column="id" name="id">
+            <generator class="org.hibernate.id.IdentityGenerator"/>
+        </id>
+        
+        <property column="idEmail" name="idEmail" not-null="false"/>
+        <property column="templateTitle" name="templateTitle" not-null="false"/>
+        <property column="parameter" name="parameter" not-null="false"/>
+        <property column="subject" name="subject" not-null="false"/>
+        <property column="content" name="content" not-null="false"/>    
+        <property column="createdBy" name="createdBy" not-null="false"/>
+        <property column="createdDate" name="createdDate" not-null="false"/>
+        <property column="modifiedDate" name="modifiedDate" not-null="false"/>
+        <property column="modifiedBy" name="modifiedBy" not-null="false"/>
+        
+    </class>
+</hibernate-mapping>

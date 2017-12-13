@@ -1,0 +1,66 @@
+<?component name="signLabel" class="com.agit.crm.shared.zul.SignLabel" ?>
+<zk xmlns="http://www.zkoss.org/2005/zul">
+    <window apply="org.zkoss.bind.BindComposer"
+            viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.masterdata.SetupEmailVM')"
+            form="@id('fx') @load(vm.setupEmailDTO) @save(vm.setupEmailDTO, before='buttonSaveEmail')">
+        <separator spacing="5px"/>
+        <groupbox width="500px" closable="true">
+            <caption label="Form Email" style="font-size:16pt; font-weight: bold"/>
+            <groupbox>
+                <grid style="border:0">
+                    <columns>
+                        <column width="30%"></column>
+                        <column width="60%"></column>
+                        <column></column>
+                    </columns>
+                    <rows>
+                        <row>
+                            <signLabel value="ID Email" style="font-weight: bold"/>
+                            <textbox width="20%" disabled="true" value="@bind(fx.idEmail)" />
+                        </row>
+                        <row>
+                            <signLabel value="Tittle " style="font-weight: bold"/>
+                            <textbox rows="2" width="100%" disabled="false" 
+                                     value="@bind(fx.templateTitle)" 
+                                     constraint="/.[a-zA-Z\s.]+/, no empty : Format isian salah"/>
+                        </row>
+                        <row>
+                            <signLabel value="Subject " style="font-weight: bold"/>
+                            <textbox rows="2" width="100%" disabled="false" 
+                                     value="@bind(fx.subject)" 
+                                     constraint="/.[a-zA-Z\s.]+/, no empty : Format isian salah"/>
+                        </row>
+                        <row>
+                            <signLabel value="Parameter " style="font-weight: bold"/>
+                            <textbox rows="2" width="100%" disabled="false" 
+                                     value="@bind(fx.parameter)" 
+                                     constraint="/.[a-zA-Z\s.]+/, no empty : Format isian salah"/>
+                        </row>
+                        
+                        <row>
+                            <signLabel value="Content " style="font-weight: bold"/>
+                            <ckeditor id="htmlEditor" filebrowserImageBrowseUrl="/images"
+                                      filebrowserImageUploadUrl="/images"
+                                      value="@bind(fx.content)"
+                                      width="600px" height="300px">
+                            </ckeditor>
+                        </row>
+    
+                    </rows>
+                </grid>
+                <grid style="border:0">                
+                    <columns>
+                        <column align="right" width="50%"/>
+                        <column align="left" width="50%"/>
+                    </columns>                
+                    <rows>
+                        <row>
+                            <a sclass="btn btn-info" label="Kembali" width="40%" onClick = "@command('buttonKembaliEmail')"/>
+                            <a sclass="btn btn-info" label="Simpan" width="40%" onClick = "@command('buttonSaveEmail')"/>
+                        </row>
+                    </rows>
+                </grid>
+            </groupbox>
+        </groupbox>
+    </window>
+</zk>

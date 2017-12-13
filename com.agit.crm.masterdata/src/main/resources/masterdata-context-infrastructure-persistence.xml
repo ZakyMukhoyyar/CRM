@@ -10,8 +10,8 @@
         http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.2.xsd">
 
     <!--Setting Repository-->
-    
-    
+    <bean id="setupEmailRepository" class="com.agit.crm.masterdata.domain.infrastructure.persistance.hibernate.SetupEmailHibernateRepository">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
   
-    
 </beans>

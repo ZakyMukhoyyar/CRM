@@ -5,6 +5,9 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
     
     <!--setting service apllication-->
-   
-   
+    <bean id="setupEmailDTOAssembler" class="com.agit.crm.masterdata.interfaces.web.facade.dto.assembler.SetupEmailDTOAssembler"/>
+    <bean id="setupEmailService" class="com.agit.crm.masterdata.application.impl.SetupEmailServiceImpl">
+        <property name="setupEmailRepository" ref="setupEmailRepository"/>
+        <property name="setupEmailDTOAssembler" ref="setupEmailDTOAssembler"/>
+    </bean>
 </beans>
