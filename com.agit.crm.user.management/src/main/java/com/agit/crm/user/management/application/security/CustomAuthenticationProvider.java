@@ -119,9 +119,9 @@ public class CustomAuthenticationProvider extends AbstractUserDetailsAuthenticat
         }
 
         /*check is this day accessible*/
-        if (!isThisDayAccessibleForThisUser(user.getUserDTO().getUserSpecificationDTO().getAccessTimeDTO())) {
-            throw new AuthenticationServiceException(messages.getMessage("AvantradeSecurity.noAccess", "No Access"));
-        }
+//        if (!isThisDayAccessibleForThisUser(user.getUserDTO().getUserSpecificationDTO().getAccessTimeDTO())) {
+//            throw new AuthenticationServiceException(messages.getMessage("AvantradeSecurity.noAccess", "No Access"));
+//        }
 
         return createSuccessAuthentication(user, authentication);
     }

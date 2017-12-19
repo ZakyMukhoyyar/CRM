@@ -14,7 +14,7 @@
                     viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.LoginVM')">
                 <h:form id="f" name="f" action="/crm/processLogin" method="POST" xmlns:h="native">
                     <image src="/images/background_crm.jpg" style='position: fixed; top: 0px; left: 0px; width: 100%; z-index: -1;' />
-                    <groupbox mold="3d" style="background-image:url('https://image.freepik.com/free-vector/blue-floral-background-design_1048-5786.jpg');">
+                    <groupbox mold="3d">
                         <vbox width="100%" height="100%" align="center">
                             <image src="/images/logo.png"/>
                             <label sclass="isi" style="font-weight:bold;color:#65001e;font-size:17px" value="Sign In App Candidate Recruitment Management"></label>
@@ -62,6 +62,7 @@
                         <grid style="border:none;">
                             <rows>
                                 <row spans="2">
+                                    <!--<a href="http://localhost:9091/crm/crm/dashboard/dashboard.zul" sclass="isi" label="test" style="font-weight:bold;color:#65001e"/>-->
                                     <a width="100%" label="Lupa Password?" style="font-weight:bold;color:#65001e" onClick="@command('buttonLupaPassword')"/>
                                     <div align="center">
                                         <h:input type="submit" value="${labels.user.label.login}" style="width: 120px; height : 30px" />
