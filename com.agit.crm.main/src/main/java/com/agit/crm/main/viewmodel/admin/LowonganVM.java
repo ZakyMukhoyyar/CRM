@@ -175,6 +175,7 @@ public class LowonganVM {
         for (JurusanDTO j : jdtos) {
             listNamaJurusan.add(j.getNamaJurusan());
         }
+
         kdtos = ketrampilanService.findAllByStatus(status.ACTIVE);
         for (KetrampilanDTO k : kdtos) {
             listKetrampilan.add(k.getNamaKetrampilan());
@@ -191,8 +192,6 @@ public class LowonganVM {
         if (riwayatApplyMahasiswaDTOs.isEmpty()) {
             riwayatApplyMahasiswaDTOs = Collections.emptyList();
         }
-
-        isFreelanceChecked = userDTO.getUserSpecificationDTO().getFreelance();
 
         lowonganStatusDTOs = lowonganStatusService.findAll();
         if (lowonganStatusDTOs.isEmpty()) {
@@ -228,6 +227,11 @@ public class LowonganVM {
         } else {
             this.lowonganDTO = lowongan;
             idLowongan = lowonganDTO.getIdLowongan();
+            if (lowonganDTO.getFreelance() == null) {
+                isFreelanceChecked = lowonganDTO.getFreelance().FALSE;
+            } else {
+                isFreelanceChecked = lowonganDTO.getFreelance();
+            }
             this.previous = previous;
         }
 
@@ -381,10 +385,15 @@ public class LowonganVM {
     }
 
     @Command("buttonSaveLowongan")
-    @NotifyChange({"lowonganDTO", "lowonganDTOs", "isFreelanceChecked", "statusFreelance", "UserDTO"})
+    @NotifyChange({"lowonganDTO", "lowonganDTOs", "statusFreelance", "UserDTO"})
     public void buttonSaveKetrampilan(@BindingParam("object") LowonganDTO obj, @ContextParam(ContextType.VIEW) Window window) {
         Date tanggalMulai = lowonganDTO.getTanggalMulai();
         Date tanggalBerakhir = lowonganDTO.getTanggalBerakhir();
+        lowonganDTO.setStatus(Status.ACTIVE);
+        if (isFreelanceChecked == null) {
+            isFreelanceChecked = Boolean.FALSE;
+        }
+        lowonganDTO.setFreelance(isFreelanceChecked);
 
         if (tanggalMulai != null && tanggalBerakhir != null && tanggalBerakhir.compareTo(tanggalMulai) < 0) {
             Messagebox.show("Format tanggal mulai dan tanggal berakhir salah");
@@ -396,9 +405,8 @@ public class LowonganVM {
                 listUserFreelance = Collections.emptyList();
             }
             if (isFreelanceChecked == true) {
-                /* sending email to all freelance member */
+        /* sending email to all freelance member */
                 for (UserDTO uDTO : listUserFreelance) {
-                    /* for sending email */
                     final String username = "bajm.recruitment.agit@gmail.com";
                     final String passwordEmail = "bayuhendra1993";
                     Properties prop = new Properties();
@@ -439,12 +447,10 @@ public class LowonganVM {
                     }
                 }
             }
-
-            lowonganDTO.setStatus(Status.ACTIVE);
-            lowonganService.SaveOrUpdate(lowonganDTO);
-            showInformationMessagebox("Data Lowongan Berhasil Disimpan");
-            BindUtils.postGlobalCommand(null, null, "refreshLowongan", null);
-            window.detach();
+        lowonganService.SaveOrUpdate(lowonganDTO);
+        showInformationMessagebox("Data Lowongan Berhasil Disimpan");
+        BindUtils.postGlobalCommand(null, null, "refreshLowongan", null);
+        window.detach();
         }
     }
 

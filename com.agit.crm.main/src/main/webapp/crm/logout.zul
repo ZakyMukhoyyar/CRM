@@ -22,7 +22,7 @@
     <groupbox>
         <div align="center">
             <a href="/processLogout" style="align:center;color:blue;font-weight:bold;font-size:14px" >
-                <label value="OK" style = "align:center"  />
+                <button label="OK" style = "align:center"/>
             </a>
         </div>
     </groupbox>

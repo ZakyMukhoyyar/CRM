@@ -126,7 +126,9 @@
                                         </div>
                                         
                                         <div>
-                                            <datebox  class="input-group" placeholder="Tanggal Lahir" value="@bind(vm.userDTO.userSpecificationDTO.tanggalLahir)" constraint=" no empty : Format isian salah" />
+                                            <datebox  class="input-group" placeholder="Tanggal Lahir" 
+                                                      value="@bind(vm.userDTO.userSpecificationDTO.tanggalLahir)" 
+                                                      constraint=" no empty : Format isian salah" />
                                             <label value="@load(vmsgs['tanggalLahir'])" style="color:red"/>
                                         </div>
                                     </row>
