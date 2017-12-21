@@ -5,7 +5,7 @@
     </listener>
     <library-property>
         <name>org.zkoss.bind.DebuggerFactory.enable</name>
-        <value>true</value>
+        <value>false</value>
     </library-property>
     <!--    <system-config>
         <id-generator-class>com.agit.crm.util.loadtest.SequenceIdGenerator</id-generator-class>
