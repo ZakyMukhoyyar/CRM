@@ -5,7 +5,7 @@
     <display-name>Agit-ZK-CRM Application V.1.0.0-SNAPSHOT</display-name>
     
     <!-- Define the welcome page -->
-<!--    <welcome-file-list>
+    <!--    <welcome-file-list>
         <welcome-file>index.html</welcome-file>
     </welcome-file-list>-->
     
@@ -102,4 +102,14 @@
         <welcome-file>workspace.zul</welcome-file>
         <welcome-file>index.html</welcome-file>
     </welcome-file-list>
+	
+<!--    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>crm</web-resource-name>
+            <url-pattern>/*</url-pattern>
+        </web-resource-collection>
+        <user-data-constraint>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>-->
 </web-app>

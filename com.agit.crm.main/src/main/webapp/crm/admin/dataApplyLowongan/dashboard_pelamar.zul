@@ -4,6 +4,10 @@
             form="@id('fx') @load(vm.userDTO) @save(vm.userDTO, before='buttonBackApplicant')">
         <groupbox closable="false" mold="3d">
             <caption label="Daftar Pelamar" />
+            <window apply="com.agit.crm.main.composer.ChartDataPelamar">
+                <charts id="chart" type="line" polar="true"
+                        title="Applicant's rating vs Maximum Value"/>
+            </window>
             <div sclass="col-md-3 nopadding">
                 <div class="form-group" style="font-style:bold;">
                     <label sclass="labelstyle" value="Filter Pencarian :" />

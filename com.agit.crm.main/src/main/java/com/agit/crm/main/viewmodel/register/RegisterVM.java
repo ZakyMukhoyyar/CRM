@@ -619,14 +619,14 @@ public class RegisterVM {
         Map<String, Object> params = new HashMap<>();
         params.put("user", userDTO);
         params.put("propertyParam", propertyParam());
-        if (pathLocationUploadCV == null) {
-            pathLocationUploadCV = userDTO.getUserSpecificationDTO().getUploadCV();
-        }
-        userDTO.getUserSpecificationDTO().setUploadCV(pathLocationUploadCV);
-        userDTO.getUserSpecificationDTO().setMinat(minatSelect.getNamaMinat());
-        userDTO.getUserSpecificationDTO().setDomisili(domisiliSelect.getNamaKabupaten());
-        userDTO.getUserSpecificationDTO().setNamaCivitas(civitasSelect.getNamaCivitas());
-        userDTO.getUserSpecificationDTO().setJurusan(jurusanSelect.getNamaJurusan());
+//        if (pathLocationUploadCV == null) {
+//            pathLocationUploadCV = userDTO.getUserSpecificationDTO().getUploadCV();
+//        }
+//        userDTO.getUserSpecificationDTO().setUploadCV(pathLocationUploadCV);
+//        userDTO.getUserSpecificationDTO().setMinat(minatSelect.getNamaMinat());
+//        userDTO.getUserSpecificationDTO().setDomisili(domisiliSelect.getNamaKabupaten());
+//        userDTO.getUserSpecificationDTO().setNamaCivitas(civitasSelect.getNamaCivitas());
+//        userDTO.getUserSpecificationDTO().setJurusan(jurusanSelect.getNamaJurusan());
         if (previous == null) {
             params.put("previous", PageNavigation.CREATE);
         } else if (previous.equals(PageNavigation.SEARCH) || previous.equals(PageNavigation.CONFIRM)) {

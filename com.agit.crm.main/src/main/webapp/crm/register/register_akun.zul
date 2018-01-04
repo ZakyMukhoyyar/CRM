@@ -210,6 +210,10 @@
                             </grid>
                             <groupbox >
                                 <caption sclass="isi" label="Skills" style="font-size:12pt; font-weight: bold"/>
+                                <window apply="com.agit.crm.main.composer.ChartDataPelamar">
+                                    <charts id="chart" type="line" polar="true"
+                                            title="Applicant's rating vs Maximum Value"/>
+                                </window>
                                 <grid style="border:0">
                                     <columns>
                                         <column width="40%"></column>

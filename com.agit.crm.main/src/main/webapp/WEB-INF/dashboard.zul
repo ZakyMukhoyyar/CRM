@@ -27,7 +27,7 @@
         
     </groupbox>
     <div align="center" style="padding: 50px 5px 0px 0px">
-        <image src="@bind(vm.uriPhoto)" />
+        <flash src="/images/learn.swf" height="300" width="800" />
     </div>
     
     <groupbox mold="3d" contentStyle="border:0">

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<!--<?xml version="1.0" encoding="UTF-8"?>
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
 <?taglib uri="/WEB-INF/security.tld" prefix="sec"?>
 <?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
@@ -11,8 +11,8 @@
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
 <?link rel="stylesheet" type="text/css"	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" ?>
 <?link rel="stylesheet" type="text/css"	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" ?>
-<!--<?link rel="stylesheet" type="text/css"	href="/styles/css/bootstrap.css" ?>-->
-<!--<?link rel="stylesheet" type="text/css"	href="/styles/css/default.css" ?>-->
+<?link rel="stylesheet" type="text/css"	href="/styles/css/bootstrap.css" ?>
+<?link rel="stylesheet" type="text/css"	href="/styles/css/default.css" ?>
 <?script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" if="${zk.ie < 9}" ?>
     <?script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" if="${zk.ie < 9}"?>
 
@@ -238,8 +238,8 @@
                                         <row>
                                             <label value="" />
                                             <textbox  class="form-control" width="100%" readonly="true" value="@bind(vm.mediaNameUploadCV)"/>
-                                            <!--                                            <button sclass="btn btn-info" label="Upload" upload="true" onUpload="@command('uploadFileCV')" width="80%">
-                                            </button>-->
+                                                                                        <button sclass="btn btn-info" label="Upload" upload="true" onUpload="@command('uploadFileCV')" width="80%">
+                                            </button>
                                         </row>
                                     </rows>
                                 </grid>
@@ -364,4 +364,4 @@
                     }
                 </style>
             </window>
-        </zk>
+        </zk>-->
