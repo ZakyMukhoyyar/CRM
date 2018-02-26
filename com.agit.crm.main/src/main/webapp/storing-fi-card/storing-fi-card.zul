@@ -1,0 +1,119 @@
+<?page id="index" title="Dashboad Storing Online FI Card"?>
+<?link rel="icon" type="image/png" href="/images/logoagit-new.png"?>
+<?taglib uri="/WEB-INF/security.tld" prefix="sec"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?link rel="stylesheet" type="text/css"	href="/resources/boostrap/css/bootstrap.min.css" ?>
+<?link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"?>
+<?link href="css/fonts.css" rel="stylesheet" type="text/css"?>
+<?link href="less/index.css.dsp" rel="stylesheet" type="text/css"?>
+<?script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" if="${zk.ie < 9}" ?>
+    <?script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" if="${zk.ie < 9}"?>  
+      
+        
+        <zk xmlns="http://www.zkoss.org/2005/zul">
+            <window apply="org.zkoss.bind.BindComposer"
+                    viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.storing.fi.card.StoringFICardVM')"
+                    form="@id('fx') @load(vm.storingFICardDTO) @save(vm.storingFICardDTO, before='buttonSaveStoringFICard')">
+                <groupbox width="100%" closable="false" mold="3d" style="background:#f5f5f5" sclass="col-md-12 nopadding" >
+                    <script src="/scanner.js" type="text/javascript"></script>  
+                    <script type="text/javascript">      
+                        /** Initiates a scan */
+                        function scanToLocalDisk() {
+                        scanner.scan(displayResponseOnPage,
+                        {
+                        "output_settings": [
+                        {
+                        "use_asprise_dialog": false,
+                        "type": "save",
+                        "format": "jpg",
+                        "save_path": "D:\\BOX\\SCANNER \\${TMS}${EXT}.tif"
+                        }
+                        ]
+                        }
+                        );
+                        }
+                        function displayResponseOnPage(successful, mesg, response) {
+                        if(!successful) { // On error
+                        document.getElementById('response').innerHTML = 'Failed: ' + mesg;
+                        return;
+                        }
+                        if(successful &amp;&amp; mesg != null &amp;&amp; mesg.toLowerCase().indexOf('user cancel') &lt;= 0) { // User cancelled.
+                        document.getElementById('response').innerHTML = 'User cancelled';
+                        return;
+                        }
+                        document.getElementById('response').innerHTML = scanner.getSaveResponse(response);
+                        }</script>  
+                    <caption sclass="isi" label="Dashboard Storing Online FI Card" style="font-size:16pt; font-weight: bold"/>
+                    <div sclass="col-md-3 nopadding">
+                        <div class="form-group">
+                            <label sclass="isi" value="File Upload" />
+                            <textbox class="form-control" width="100%" readonly="true" value="@bind(vm.mediaNameUploadStoringFICard)" />
+                        </div>  
+                        <div>
+                            <button type="button" sclass="btn btn-success" width="100%" label="Browse" upload="true" onUpload="@command('buttonUploadFile')"/>
+                            <separator/>
+                            <a sclass="btn btn-success" label="Upload" width="100%" onClick="@command('buttonSaveStoringFICard')"/>
+                            <separator/>
+                            <a sclass="btn btn-success" label="Scan" width="100%" onClick='Clients.evalJavaScript("scanToLocalDisk()")'/>
+                            <separator/>
+                            <a sclass="btn btn-success" label="Reload" width="100%" onClick="@command('refreshData')"/>
+                        </div>                
+                    </div>
+            
+            
+                    <div sclass="col-md-9 nopadding">
+                        <timer id="timer" delay="5000" repeats="true"/>
+                        <groupbox closable="false" sclass="col-md-12">
+                            <listbox rows="13" model="@bind(vm.storingFICardDTOs)" emptyMessage="${labels.common.noDataFound}">
+                                
+                                <listhead>
+                                    <listheader label="ID" width="3%" align="center" sortDirection="ascending" sort="auto(storingFICardID)" value="@bind(each.storingFICardID)"/>
+                                    <listheader label="Point Check 1" width="12%" align="center" value="@bind(each.pointCheck1)"/>
+                                    <listheader label="Point Check 2" width="12%" align="center" value="@bind(each.pointCheck2)"/>
+                                    <listheader label="Point Check 3" width="12%" align="center" value="@bind(each.pointCheck3)"/>
+                                    <listheader label="Point Check 4" width="12%" align="center" value="@bind(each.pointCheck4)"/> 
+                                    <listheader label="Point Check 5" width="12%" align="center" value="@bind(each.pointCheck5)"/>
+                                    <listheader label="Date" width="20%" align="center" value="@bind(each.pointCheck5)"/>
+                                    <listheader label="Result" width="7%" align="center" value="@bind(each.pointCheck5)"/>
+                                    <listheader sclass="isi bold" label="Acction" width="20%" align="center"/>                                      
+                                </listhead>
+                                <template name="model">
+                                    <listitem value="${each}">
+                                        <listcell >
+                                            <label width="100%" value="@bind(each.storingFICardID)"/>
+                                        </listcell>
+                                        <listcell >
+                                            <label width="100%" value="@bind(each.pointCheck1)"/>
+                                        </listcell>
+                                        <listcell >
+                                            <label width="100%" value="@bind(each.pointCheck2)"/>
+                                        </listcell>
+                                        <listcell >
+                                            <label width="100%" value="@bind(each.pointCheck3)"/>
+                                        </listcell>
+                                        <listcell >
+                                            <label width="100%" value="@bind(each.pointCheck4)"/>
+                                        </listcell>
+                                        <listcell >
+                                            <label width="100%" value="@bind(each.pointCheck5)"/>
+                                        </listcell>
+                                        <listcell >
+                                            <label width="100%" value="@bind(each.createdDate)"/>
+                                        </listcell>
+                                        <listcell >
+                                            <label width="100%" value="@bind(each.statusResult)" style="font-size:10pt; font-weight: bold;color:red"/>
+                                        </listcell>
+                                        <listcell >
+                                            <a onClick="@command('detailStoringFICard', object=each)" image="/images/skk_finish.png" sclass="btn btn-default"/>
+                                            <a onClick="@command('previewImagaeStoringFICardImage', object=each)" image="/images/jpg.png" sclass="btn btn-default"/>
+                                            <a onClick="@command('previewImagaeStoringFICardPDF', object=each)" image="/images/pdf.png" sclass="btn btn-default"/>
+                                        </listcell>
+                                    </listitem>
+                                </template>
+                            </listbox>
+                            
+                        </groupbox>
+                    </div>
+                </groupbox>
+            </window>
+        </zk>

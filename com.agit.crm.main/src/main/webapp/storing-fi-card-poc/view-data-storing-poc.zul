@@ -1,0 +1,187 @@
+<?page id="index" title="Dashboad Storing Online FI Card"?>
+<?link rel="icon" type="image/png" href="/images/logoagit-new.png"?>
+<?taglib uri="/WEB-INF/security.tld" prefix="sec"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?link rel="stylesheet" type="text/css"	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" ?>
+<?link rel="stylesheet" type="text/css"	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" ?>
+<!--<?link rel="stylesheet" type="text/css"	href="/styles/css/bootstrap.css" ?>-->
+<!--<?link rel="stylesheet" type="text/css"	href="/styles/css/default.css" ?>-->
+<!-- Load Bootstrap  -->
+<?link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"?>
+
+<!-- Google Open Sans font -->
+<!-- Load fonts from local -->
+<?link href="css/fonts.css" rel="stylesheet" type="text/css"?>
+
+<!-- Unmark if we want to use fonts from google server
+<?link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400' rel='stylesheet' type='text/css'?>
+-->
+
+<?link href="less/index.css.dsp" rel="stylesheet" type="text/css"?>
+<?script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" if="${zk.ie < 9}" ?>
+    <?script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" if="${zk.ie < 9}"?>  
+
+        <zk xmlns="http://www.zkoss.org/2005/zul">
+            <window apply="org.zkoss.bind.BindComposer"
+                    viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.storing.fi.card.StoringFICardPOCVM')"
+                    form="@id('fx') @load(vm.storingFICardPOCDTO) @save(vm.storingFICardPOCDTO, before='buttonSaveStoringFICardPOC')"
+                    closable="true" title="Dashboad Storing Online FI Card">
+                <groupbox width="100%" closable="true">
+                    <caption sclass="isi" label="View Storing Online FI Card" style="font-size:16pt; font-weight: bold"/>
+                    <groupbox>
+                        <grid style="border:0">
+                            <columns>
+                                <column width="10%"></column>
+                                <column width="30"></column>
+                                <column></column>
+                            </columns>
+                            <rows>
+                                <row>                            
+                                    <label value="Frame Number" style="font-weight: bold;text-align:center"/>
+                                    <textbox sclass="isi" width="30%" readonly="true" style="font-size:10pt; font-weight: bold;color:red"
+                                             value="@bind(fx.storingFICardPocID)" />
+                                </row>
+                            </rows>
+                        </grid>
+                        
+                    </groupbox>
+                    <groupbox>
+                        <grid style="border:0">
+                            <columns>
+                                <column width="5%"></column>
+                                <column width="10%"></column>
+                                <column width="5%"></column>
+                                <column width="10%"></column>
+                                <column width="5%"></column>
+                                <column width="10%"></column>
+                                <column width="5%"></column>
+                                <column width="10%"></column>
+                                <column></column>
+                            </columns>
+                            <rows>
+                                <row>                            
+                                    <label value="Stage 1" style="font-weight: bold;"/>
+                                    <textbox sclass="isi" width="30%" readonly="true" style="font-size:10pt; font-weight: bold;color:black" 
+                                             value="@bind(fx.stage1)" />
+                                    <label value="Stage 2" style="font-weight: bold"/>
+                                    <textbox sclass="isi" width="30%" readonly="true" style="font-size:10pt; font-weight: bold;color:black" 
+                                             value="@bind(fx.stage2)" />
+                                    <label value="Stage 3" style="font-weight: bold"/>
+                                    <textbox sclass="isi" width="30%" readonly="true" style="font-size:10pt; font-weight: bold;color:black" 
+                                             value="@bind(fx.stage3)" />
+                                    <label value="Stage 4" style="font-weight: bold"/>
+                                    <textbox sclass="isi" width="30%" readonly="true" style="font-size:10pt; font-weight: bold;color:black" 
+                                             value="@bind(fx.stage4)" />
+                                </row>
+                            </rows>
+                        </grid>
+                        
+                    </groupbox>
+                    <groupbox>
+                        <grid style="border:0">
+                            <columns>
+                                <column width="10%"></column>
+                                <column width="10%"></column>
+                                <column width="10%"></column>
+                                <column width="20%"></column>
+                                <column width="50%"></column>
+                            </columns>
+                            <rows>
+                                <row>                            
+                                    <label value="4 Point Check 5" style="font-weight: bold;"/>
+                                    <textbox sclass="isi" width="20%" readonly="true" 
+                                             value="@bind(fx.stage4PoinCheck5)" />
+                                    <label value="4 Point Check 1" style="font-weight: bold;"/>
+                                    <textbox sclass="isi" width="20%" readonly="true" 
+                                             value="@bind(fx.stage4PoinCheck1)" />
+                                </row>
+                                <row>                            
+                                    <label value="1 Point Check 1" style="font-weight: bold;"/>
+                                    <textbox sclass="isi" width="20%" readonly="true" 
+                                             value="@bind(fx.stage1PoinCheck1)" />
+                                    <label value="4 Point Check 2" style="font-weight: bold;"/>
+                                    <textbox sclass="isi" width="20%" readonly="true" 
+                                             value="@bind(fx.stage4PoinCheck2)" />
+                                </row>
+                                <row>                            
+                                    <label value="1 Point Check 2" style="font-weight: bold"/>
+                                    <textbox sclass="isi" width="20%" readonly="true" 
+                                             value="@bind(fx.stage1PoinCheck2)" />
+                                    <label value="4 Point Check 3" style="font-weight: bold;"/>
+                                    <textbox sclass="isi" width="20%" readonly="true" 
+                                             value="@bind(fx.stage4PoinCheck3)" />
+                                
+                                </row>
+                                <row>                            
+                                    <label value="1 Point Check 3" style="font-weight: bold"/>
+                                    <textbox sclass="isi" width="20%" readonly="true" 
+                                             value="@bind(fx.stage1PoinCheck3)" />
+                                    <label value="4 Point Check 4" style="font-weight: bold;"/>
+                                    <textbox sclass="isi" width="20%" readonly="true" 
+                                             value="@bind(fx.stage4PoinCheck4)" />
+                                </row>
+                                <row>                            
+                                    <label value="1 Point Check 4" style="font-weight: bold"/>
+                                    <textbox sclass="isi" width="20%" readonly="true" 
+                                             value="@bind(fx.stage1PoinCheck4)" />
+                                    <label value="Path File" style="font-weight: bold;"/>
+                                    <textbox sclass="isi" width="100%" readonly="true" 
+                                             value="@bind(fx.pathFile)" />
+                                </row>
+                                <row>                            
+                                    <label value="1 Point Check 5" style="font-weight: bold"/>
+                                    <textbox sclass="isi" width="20%" readonly="true" 
+                                             value="@bind(fx.stage1PoinCheck5)" />
+                                    <label value="File Name" style="font-weight: bold;"/>
+                                    <textbox sclass="isi" width="100%" readonly="true" 
+                                             value="@bind(fx.frameNumber)" />
+                                </row>
+                                <row>                            
+                                    <label value="1 Point Check 6" style="font-weight: bold"/>
+                                    <textbox sclass="isi" width="20%" readonly="true" 
+                                             value="@bind(fx.stage1PoinCheck6)" />
+                                    <label value="Result" style="font-size:14pt; font-weight: bold;color:red"/>
+                                    <textbox sclass="isi" width="20%" readonly="true" style="font-size:14pt; font-weight: bold;color:red" 
+                                             value="@bind(fx.statusResult)" />
+                                </row>
+                                <row>                            
+                                    <label value="2 Point Check 1" style="font-weight: bold"/>
+                                    <textbox sclass="isi" width="20%" readonly="true" 
+                                             value="@bind(fx.stage2PoinCheck1)" />
+                                </row>
+                                <row>                            
+                                    <label value="2 Point Check 2" style="font-weight: bold"/>
+                                    <textbox sclass="isi" width="20%" readonly="true" 
+                                             value="@bind(fx.stage2PoinCheck2)" />
+                                </row>
+                                <row>                            
+                                    <label value="2 Point Check 3" style="font-weight: bold"/>
+                                    <textbox sclass="isi" width="20%" readonly="true" 
+                                             value="@bind(fx.stage2PoinCheck3)" />
+                                </row>
+                                <row>                            
+                                    <label value="2 Point Check 4" style="font-weight: bold"/>
+                                    <textbox sclass="isi" width="20%" readonly="true" 
+                                             value="@bind(fx.stage2PoinCheck4)" />
+                                </row>
+                                <row>                            
+                                    <label value="2 Point Check 5" style="font-weight: bold"/>
+                                    <textbox sclass="isi" width="20%" readonly="true" 
+                                             value="@bind(fx.stage2PoinCheck5)" />
+                                </row>
+                                <row>
+                                    <label value="3 Point Check 1" style="font-weight: bold;"/>
+                                    <textbox sclass="isi" width="20%" readonly="true" 
+                                             value="@bind(fx.stage3PoinCheck1)" />
+                                </row>
+                                <row>
+                                    <label value="3 Point Check 2" style="font-weight: bold;"/>
+                                    <textbox sclass="isi" width="20%" readonly="true" 
+                                             value="@bind(fx.stage3PoinCheck2)" />
+                                </row>
+                            </rows>
+                        </grid>
+                    </groupbox>
+                </groupbox>
+            </window>
+        </zk>

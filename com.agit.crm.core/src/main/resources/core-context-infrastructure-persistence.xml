@@ -15,6 +15,10 @@
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
     
+    <bean id="storingFICardRepository" class="com.agit.crm.domain.infrastructure.persistance.hibernate.StoringFICardHibernateRepository">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    
     <bean id="forumRepository" class="com.agit.crm.domain.infrastructure.persistance.hibernate.ForumHibernateRepository">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
@@ -68,6 +72,10 @@
     </bean>
     
     <bean id="komentarEventRepository" class="com.agit.crm.domain.infrastructure.persistance.hibernate.KomentarEventHibernateRepository">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    
+    <bean id="storingFICardPOCRepository" class="com.agit.crm.domain.infrastructure.persistance.hibernate.StoringFICardPOCHibernateRepository">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 </beans>

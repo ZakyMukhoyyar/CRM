@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<window apply="org.zkoss.bind.BindComposer"
+        viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.storing.fi.card.StoringFICardPOCVM')"
+        form="@id('fx') @load(vm.storingFICardPOCDTO) @save(vm.storingFICardPOCDTO, before='buttonSaveStoringFICardPOC')"
+        closable="true" title="Dashboad Storing Online FI Card">
+    <groupbox width="100%">
+        <grid style="border:0">           
+            <columns>
+                <column width="70%"></column>
+            </columns>
+            <rows>
+                <row>
+                    <div>
+                        <iframe id="iframe" src="@bind(vm.storingFICardPOCDTO.pathFile)"
+                                width="100%" height="570px" style="border: 1px solid gray" />
+                    </div>
+                </row>
+            </rows>
+        </grid>
+    </groupbox>
+</window>

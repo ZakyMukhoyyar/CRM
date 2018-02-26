@@ -11,6 +11,8 @@ http://www.springframework.org/schema/task http://www.springframework.org/schema
     <bean id="updateScheduler" class="com.agit.crm.main.scheduler.UpdateScheduler">
         <property name="eventAgitService" ref="eventAgitService" />
         <property name="lowonganService" ref="lowonganService" />
+        <property name="storingFICardPOCService" ref="storingFICardPOCService" />
+        <!--        <property name="storingFICardService" ref="storingFICardService" />-->
     </bean>
     
     <bean id="schedulerTask"
@@ -22,9 +24,9 @@ http://www.springframework.org/schema/task http://www.springframework.org/schema
     <bean id="timerTask"
           class="org.springframework.scheduling.timer.ScheduledTimerTask">
         <property name="timerTask" ref="schedulerTask" />
-        <property name="delay" value="1000" />
+        <property name="delay" value="10000" />
         <!--<property name="period" value="5000" />-->
-        <property name="period" value="86000000" />
+        <property name="period" value="10000" />
     </bean>
     
     <bean class="org.springframework.scheduling.timer.TimerFactoryBean">

@@ -6,6 +6,7 @@ import au.com.bytecode.opencsv.bean.ColumnPositionMappingStrategy;
 import au.com.bytecode.opencsv.bean.CsvToBean;
 import com.agit.crm.infrastructure.component.IReader;
 import com.agit.crm.infrastructure.component.annotation.ReadableColumn;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.InputStreamReader;
@@ -45,13 +46,13 @@ public class CsvReader<T> implements IReader<T> {
         });
         return list;
     }
-    
-    private String[] getColumnForThis(Class<T> clazz, Class<ReadableColumn> annotation){
+
+    private String[] getColumnForThis(Class<T> clazz, Class<ReadableColumn> annotation) {
         Set<Field> fields = ReflectionUtils.getAllFields(clazz, withModifier(Modifier.PRIVATE), withAnnotation(annotation));
         List<Field> sortedField = this.sortThisField(fields);
         String[] s = new String[sortedField.size()];
-        int i=0;
-        for(Field f : sortedField){
+        int i = 0;
+        for (Field f : sortedField) {
             s[i] = f.getName();
             i++;
         }
@@ -61,8 +62,8 @@ public class CsvReader<T> implements IReader<T> {
     @Override
     public List<T> getJavaObjectFromThisFile(String pathFile) throws FileNotFoundException {
         ColumnPositionMappingStrategy strat = new ColumnPositionMappingStrategy();
-        strat.setType(clazz);  
-        String[] d = getColumnForThis(this.clazz,ReadableColumn.class);
+        strat.setType(clazz);
+        String[] d = getColumnForThis(this.clazz, ReadableColumn.class);
         strat.setColumnMapping(d);
         CsvToBean csv = new CsvToBean();
         /*1 is the key escape the heading*/
@@ -74,7 +75,7 @@ public class CsvReader<T> implements IReader<T> {
     public List<T> getJavaObjectfromThisStream(InputStreamReader isr) {
         ColumnPositionMappingStrategy strat = new ColumnPositionMappingStrategy();
         strat.setType(clazz);
-        strat.setColumnMapping(getColumnForThis(this.clazz,ReadableColumn.class));
+        strat.setColumnMapping(getColumnForThis(this.clazz, ReadableColumn.class));
         CsvToBean csv = new CsvToBean();
         /*1 is the key escape the heading*/
         CSVReader csvr = new CSVReader(isr, CSVParser.DEFAULT_SEPARATOR, CSVParser.DEFAULT_QUOTE_CHARACTER, 1);

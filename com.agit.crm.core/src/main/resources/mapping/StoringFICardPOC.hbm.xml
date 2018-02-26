@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-access="field">
+    <class mutable="true" name="com.agit.crm.domain.storing.fi.card.poc.StoringFICardPOC" table="AGIT_STORING_FI_CARD_POC">
+        <!--<cache usage="read-only"/>-->
+        <id column="id" name="id">
+            <generator class="org.hibernate.id.IdentityGenerator"/>
+        </id>
+        <property column="storingFICardPocID" name="storingFICardPocID" not-null="false"/>
+        <property column="fiCard" name="fiCard" not-null="false"/>
+        <property column="frameNumber" name="frameNumber" not-null="false"/>
+        <property column="fileName" name="fileName" not-null="false"/>
+        <property column="stage1" name="stage1" not-null="false"/>
+        <property column="stage2" name="stage2" not-null="false"/>
+        <property column="stage3" name="stage3" not-null="false"/>
+        <property column="stage4" name="stage4" not-null="false"/>
+        <property column="stage4PoinCheck5" name="stage4PoinCheck5" not-null="false"/>
+        <property column="stage1PoinCheck1" name="stage1PoinCheck1" not-null="false"/>
+        <property column="stage1PoinCheck2" name="stage1PoinCheck2" not-null="false"/>
+        <property column="stage1PoinCheck3" name="stage1PoinCheck3" not-null="false"/>
+        <property column="stage1PoinCheck4" name="stage1PoinCheck4" not-null="false"/>
+        <property column="stage1PoinCheck5" name="stage1PoinCheck5" not-null="false"/>
+        <property column="stage1PoinCheck6" name="stage1PoinCheck6" not-null="false"/>
+        <property column="stage2PoinCheck1" name="stage2PoinCheck1" not-null="false"/>
+        <property column="stage2PoinCheck2" name="stage2PoinCheck2" not-null="false"/>
+        <property column="stage2PoinCheck3" name="stage2PoinCheck3" not-null="false"/>
+        <property column="stage2PoinCheck4" name="stage2PoinCheck4" not-null="false"/>
+        <property column="stage2PoinCheck5" name="stage2PoinCheck5" not-null="false"/>
+        <property column="stage3PoinCheck1" name="stage3PoinCheck1" not-null="false"/>
+        <property column="stage3PoinCheck2" name="stage3PoinCheck2" not-null="false"/>
+        <property column="stage4PoinCheck1" name="stage4PoinCheck1" not-null="false"/>
+        <property column="stage4PoinCheck2" name="stage4PoinCheck2" not-null="false"/>
+        <property column="stage4PoinCheck3" name="stage4PoinCheck3" not-null="false"/>
+        <property column="stage4PoinCheck4" name="stage4PoinCheck4" not-null="false"/>
+        <property column="pathFile" name="pathFile" not-null="false"/>
+        <property column="createdBy" name="createdBy" not-null="false"/>
+        <property column="createdDate" name="createdDate" not-null="false"/>
+        <property column="modifiedBy" name="modifiedBy" not-null="false"/>
+        <property column="modifiedDate" name="modifiedDate" not-null="false"/>
+        
+        
+        
+        <property column="statusResult" name="statusResult" not-null="false">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">com.agit.crm.shared.status.StatusResult</param>
+                <param name="type">12</param>
+            </type>
+        </property>
+    </class>
+</hibernate-mapping>

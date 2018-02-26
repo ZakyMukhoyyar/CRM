@@ -6,7 +6,7 @@
         <artifactId>com.agit.crm.parent</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <artifactId>crm</artifactId>
+    <artifactId>com.agit.crm.main</artifactId>
     <packaging>war</packaging>
     <properties>
         <maven.compiler.source>1.7</maven.compiler.source>
@@ -82,6 +82,11 @@
         </plugins>
     </build>
     <dependencies>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.39</version>
+        </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>com.agit.crm.util</artifactId>

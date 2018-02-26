@@ -32,7 +32,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 })
 public class InsertDataCivitasFromExcelTest {
 
-    private static final String ABS_FILE_LOC = "E:\\PEKERJAAN\\Agit\\Project\\Project2\\CRM\\template-mapping\\insert-template-civitas.xlsx";
+    private static final String ABS_FILE_LOC = "D:\\AGIT\\Training-Material\\Project\\Project CRM\\Code\\CRM\\template-mapping\\insert-template-civitas.xlsx";
 
     @Autowired
     CivitasRepository dataHistoryRepository;

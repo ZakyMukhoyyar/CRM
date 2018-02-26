@@ -1,0 +1,101 @@
+<?page id="index" title="Dashboad Storing Online FI Card"?>
+<?link rel="icon" type="image/png" href="/images/logoagit-new.png"?>
+<?taglib uri="/WEB-INF/security.tld" prefix="sec"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?link rel="stylesheet" type="text/css"	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" ?>
+<?link rel="stylesheet" type="text/css"	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" ?>
+<!--<?link rel="stylesheet" type="text/css"	href="/styles/css/bootstrap.css" ?>-->
+<!--<?link rel="stylesheet" type="text/css"	href="/styles/css/default.css" ?>-->
+<!-- Load Bootstrap  -->
+<?link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"?>
+
+<!-- Google Open Sans font -->
+<!-- Load fonts from local -->
+<?link href="css/fonts.css" rel="stylesheet" type="text/css"?>
+
+<!-- Unmark if we want to use fonts from google server
+<?link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400' rel='stylesheet' type='text/css'?>
+-->
+
+<?link href="less/index.css.dsp" rel="stylesheet" type="text/css"?>
+<?script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" if="${zk.ie < 9}" ?>
+    <?script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" if="${zk.ie < 9}"?>  
+
+        <zk xmlns="http://www.zkoss.org/2005/zul">
+            <window apply="org.zkoss.bind.BindComposer"
+                    viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.storing.fi.card.StoringFICardVM')"
+                    form="@id('fx') @load(vm.storingFICardDTO) @save(vm.storingFICardDTO, before='buttonSaveStoringFICard')"
+                    closable="true" title="Forum">
+                <groupbox width="500px" closable="true">
+                    <caption sclass="isi" label="View Storing Online FI Card" style="font-size:16pt; font-weight: bold"/>
+                    
+                    <groupbox>
+                        <grid style="border:0">
+                            <columns>
+                                <column width="30%"></column>
+                                <column width="60%"></column>
+                                <column></column>
+                            </columns>
+                            <rows>
+                                <row>                            
+                                    <label value="ID Storing FI Card" style="font-weight: bold;text-align:center"/>
+                                    <textbox sclass="isi" width="10%" readonly="true" 
+                                             value="@bind(fx.storingFICardID)" />
+                                </row>
+                                <row>                            
+                                    <label value="Point Check 1" style="font-weight: bold;"/>
+                                    <textbox sclass="isi" width="10%" readonly="true" 
+                                             value="@bind(fx.pointCheck1)" />
+                                </row>
+                                <row>                            
+                                    <label value="Point Check 2" style="font-weight: bold"/>
+                                    <textbox sclass="isi" width="10%" readonly="true" 
+                                             value="@bind(fx.pointCheck2)" />
+                                </row>
+                                <row>                            
+                                    <label value="Point Check 3" style="font-weight: bold"/>
+                                    <textbox sclass="isi" width="10%" readonly="true" 
+                                             value="@bind(fx.pointCheck3)" />
+                                </row>
+                                <row>                            
+                                    <label value="Point Check 4" style="font-weight: bold"/>
+                                    <textbox sclass="isi" width="10%" readonly="true" 
+                                             value="@bind(fx.pointCheck4)" />
+                                </row>
+                                <row>                            
+                                    <label value="Point Check 5" style="font-weight: bold"/>
+                                    <textbox sclass="isi" width="10%" readonly="true" 
+                                             value="@bind(fx.pointCheck5)" />
+                                </row>
+                            </rows>
+                        </grid>
+                    </groupbox>
+                    <groupbox>
+                        <grid style="border:0">
+                            <columns>
+                                <column width="30%"></column>
+                                <column width="60%"></column>
+                                <column></column>
+                            </columns>
+                            <rows>
+                                <row>                            
+                                    <label value="No Repair" style="font-weight: bold;text-align:center"/>
+                                    <textbox sclass="isi" width="10%" readonly="true" 
+                                             value="" />
+                                </row>
+                                <row>                            
+                                    <label value="Repair Inline" style="font-weight: bold;text-align:center"/>
+                                    <textbox sclass="isi" width="10%" readonly="true" 
+                                             value="" />
+                                </row>
+                                <row>                            
+                                    <label value="Repair Outline" style="font-weight: bold;text-align:center"/>
+                                    <textbox sclass="isi" width="10%" readonly="true" 
+                                             value="" />
+                                </row>
+                            </rows>
+                        </grid>
+                    </groupbox>
+                </groupbox>
+            </window>
+        </zk>

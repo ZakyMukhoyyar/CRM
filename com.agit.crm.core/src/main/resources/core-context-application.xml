@@ -35,6 +35,19 @@
         <property name="minatDTOAssembler" ref="minatDTOAssembler"/>
     </bean>
     
+    <bean id="storingFICardDTOAssembler" class="com.agit.crm.interfaces.web.facade.dto.assembler.storing.fi.card.StoringFICardDTOAssembler"/>
+    <bean id="storingFICardService" class="com.agit.crm.application.impl.StoringFICardServiceImpl">
+        <property name="storingFICardRepository" ref="storingFICardRepository"/>
+        <property name="storingFICardDTOAssembler" ref="storingFICardDTOAssembler"/>
+    </bean>
+    
+    <bean id="storingFICardPOCDTOAssembler" class="com.agit.crm.interfaces.web.facade.dto.assembler.storing.fi.card.poc.StoringFICardPOCDTOAssembler"/>
+    <bean id="storingFICardPOCService" class="com.agit.crm.application.impl.StoringFICardPOCServiceImpl">
+        <property name="storingFICardPOCRepository" ref="storingFICardPOCRepository"/>
+        <property name="storingFICardPOCDTOAssembler" ref="storingFICardPOCDTOAssembler"/>
+    </bean>
+    
+    
     <bean id="ketrampilanDTOAssembler" class="com.agit.crm.interfaces.web.facade.dto.assembler.crm.KetrampilanDTOAssembler"/>
     <bean id="ketrampilanService" class="com.agit.crm.application.impl.KetrampilanServiceImpl">
         <property name="ketrampilanRepository" ref="ketrampilanRepository"/>
@@ -95,7 +108,7 @@
         <property name="riwayatApplyEventDTOAssembler" ref="riwayatApplyEventDTOAssembler"/>
     </bean>
     
-     <bean id="komentarEventDTOAssembler" class="com.agit.crm.interfaces.web.facade.dto.assembler.crm.KomentarEventDTOAssembler"/>
+    <bean id="komentarEventDTOAssembler" class="com.agit.crm.interfaces.web.facade.dto.assembler.crm.KomentarEventDTOAssembler"/>
     <bean id="komentarEventService" class="com.agit.crm.application.impl.KomentarEventServiceImpl">
         <property name="komentarEventRepository" ref="komentarEventRepository"/>
         <property name="komentarEventDTOAssembler" ref="komentarEventDTOAssembler"/>

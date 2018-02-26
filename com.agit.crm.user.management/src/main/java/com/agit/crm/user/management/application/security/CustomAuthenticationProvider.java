@@ -47,17 +47,17 @@ public class CustomAuthenticationProvider extends AbstractUserDetailsAuthenticat
         /* Pre checking*/
  /*check username & password is empty*/
         if (username.isEmpty() && userToken.getCredentials().toString().trim().isEmpty()) {
-            throw new AuthenticationServiceException(messages.getMessage("AvantradeSecurity.usernamePasswordEmpty", "username and password is empty"));
+            throw new AuthenticationServiceException(messages.getMessage("AvantradeSecurity.usernamePasswordEmpty", "Username and Password is empty"));
         }
 
         /*check username is empty*/
         if (username.isEmpty()) {
-            throw new AuthenticationServiceException(messages.getMessage("AvantradeSecurity.usernameEmpty", "username is empty"));
+            throw new AuthenticationServiceException(messages.getMessage("AvantradeSecurity.usernameEmpty", "Username is empty"));
         }
 
         /*check password is empty*/
         if (userToken.getCredentials().toString().trim().isEmpty()) {
-            throw new AuthenticationServiceException(messages.getMessage("AvantradeSecurity.passwordEmpty", "password is empty"));
+            throw new AuthenticationServiceException(messages.getMessage("AvantradeSecurity.passwordEmpty", "Password is empty"));
         }
 
         UserDetailsImpl user = (UserDetailsImpl) SecurityCacheHelper.getObjectInCache(SecurityCacheHelper.USER_DETAIL, username);
@@ -72,12 +72,12 @@ public class CustomAuthenticationProvider extends AbstractUserDetailsAuthenticat
 
         /* check user is found */
         if (user.getUserDTO() == null) {
-            throw new AuthenticationServiceException(messages.getMessage("AvantradeSecurity.userEmpty", "user is not found"));
+            throw new AuthenticationServiceException(messages.getMessage("AvantradeSecurity.userEmpty", "User is not found"));
         }
 
         /*check username is conflict*/
         if (isNotConflictUsername(username)) {
-            throw new AuthenticationServiceException(messages.getMessage("AvantradeSecurity.sameUser", "this username is currently being used by another user"));
+            throw new AuthenticationServiceException(messages.getMessage("AvantradeSecurity.sameUser", "This username is currently being used by another user"));
         }
 
         /*check ipaddress is conflict*/
