@@ -16,6 +16,7 @@ import static com.agit.crm.shared.zul.CommonViewModel.showInformationMessagebox;
 import com.agit.crm.shared.zul.PageNavigation;
 import com.agit.crm.util.CommonUtil;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -81,7 +82,7 @@ public class QuestionVM {
         for (QuestionDTO m : questionDTOs) {
             listQuestion.add(m.getQuestion());
         }
-        
+
         /* get pelayananID*/
         choiceAnswer.add("Sangat Baik Sekali");
         choiceAnswer.add("Sangat Baik");
@@ -304,6 +305,14 @@ public class QuestionVM {
 
     public void setListQuestion(List<String> listQuestion) {
         this.listQuestion = listQuestion;
+    }
+
+    public ListModelList<String> getChoiceAnswer() {
+        return choiceAnswer;
+    }
+
+    public void setChoiceAnswer(ListModelList<String> choiceAnswer) {
+        this.choiceAnswer = choiceAnswer;
     }
 
 }
