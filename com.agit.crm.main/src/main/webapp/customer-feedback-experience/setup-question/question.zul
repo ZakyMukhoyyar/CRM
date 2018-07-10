@@ -1,0 +1,51 @@
+<zk xmlns:w="client" xmlns:n="native">
+    <window apply="org.zkoss.bind.BindComposer"
+            viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.customer.feedback.QuestionVM')"
+            form="@id('fx') @load(vm.questionDTO) @save(vm.questionDTO, before='buttonSaveDataQuestion')">
+        <separator height="5px"/>
+        <div align="left" class="bs-example">
+            <div class="col-lg-6">
+                <div class="input-group" >
+                    <textbox class="form-control" placeholder="Masukkan Parameter" />
+                    <span class="input-group-btn">
+                        <button style="background-color: #022c2f;color:white">
+                            Search
+                        </button>
+                    </span>
+                </div>
+            </div>
+            <button label="Create" style="background-color: #022c2f;color:white" onClick="@command('buttonAddQuestion')"/>
+            <space width="5px"/>
+        </div>
+        <separator width="30px"/>
+        <listbox rows="10" mold="paging" pageSize="10" emptyMessage="${labels.common.noDataFound}" model="@bind(vm.questionDTOs)">
+            <listhead>
+                <listheader label="Question ID" width="7%" align="center"/>
+                <listheader label="Touchpoints" width="10%" align="center"/>
+                <listheader label="Status" width="7%" align="center"/>
+                <listheader label="Question" width="60%" align="center"/>
+                <listheader label="Aksi" width="10%" align="center"/>
+            </listhead>
+            <template name="model">
+                <listitem value="${each}">
+                    <listcell>
+                        <label width="100%" value="@bind(each.questionID)"/>
+                    </listcell>
+                    <listcell>
+                        <label width="100%" value="@bind(each.touchpoints)"/>
+                    </listcell>
+                    <listcell>
+                        <label width="100%" value="@bind(each.status)"/>
+                    </listcell>
+                    <listcell>
+                        <label width="100%" value="@bind(each.question)"/>
+                    </listcell>
+                    <listcell >
+                        <a onClick="@command('detail', object=each)" image="/images/skk_edit.png" sclass="btn btn-default"/>
+                        <a onClick="@command('delete', object=each)" image="/images/clear_x.png" sclass="btn btn-default"/>
+                    </listcell>
+                </listitem>
+            </template>
+        </listbox>
+    </window>
+</zk>

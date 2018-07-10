@@ -22,7 +22,7 @@ INSERT INTO "public"."mst_privilege" VALUES ('17', 'MENU', 'Menu Dashboard', 'AC
 INSERT INTO "public"."mst_privilege" VALUES ('18', 'MENU_MANAGEMENT', 'Menu Dashboard', 'ACTIVE', 'MENU', 't', 'Beranda - Menu', 'Beranda - Menu', null, '~./ui/fnd/menu/dashboard.privilege.zul', '2016-01-01 00:00:00', 'SYSTEM');
 
 INSERT INTO "public"."mst_privilege" VALUES ('19', 'ADMIN_MANAGEMENT', 'Admin', 'ACTIVE', 'ADMINISTRATOR', 't', 'Manage Admin', null, null, null, '2016-01-01 00:00:00', 'SYSTEM');
-INSERT INTO "public"."mst_privilege" VALUES ('20', 'QUESTION_MANAGEMENT', 'Question Management', 'ACTIVE', 'ADMIN_MANAGEMENT', 't', 'Question Management', 'Question Management', null, '/crm/admin/event/dashboard_event.zul', '2016-01-01 00:00:00', 'SYSTEM');
+INSERT INTO "public"."mst_privilege" VALUES ('20', 'QUESTION_MANAGEMENT', 'Question Management', 'ACTIVE', 'ADMIN_MANAGEMENT', 't', 'Question Management', 'Question Management', null, '/customer-feedback-experience/setup-question/question.zul', '2016-01-01 00:00:00', 'SYSTEM');
 
 
 -- ----------------------------

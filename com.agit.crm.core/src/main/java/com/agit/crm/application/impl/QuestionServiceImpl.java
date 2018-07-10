@@ -6,12 +6,14 @@
 package com.agit.crm.application.impl;
 
 import com.agit.crm.common.application.QuestionService;
-import com.agit.crm.common.dto.crm.CivitasDTO;
 import com.agit.crm.common.dto.customer.feedback.QuestionDTO;
 import com.agit.crm.domain.customer.feedback.Question;
+import com.agit.crm.domain.customer.feedback.QuestionBuilder;
 import com.agit.crm.domain.customer.feedback.QuestionRepository;
 import com.agit.crm.interfaces.web.facade.dto.assembler.crm.QuestionDTOAssembler;
 import com.agit.crm.shared.status.Status;
+import com.agit.crm.shared.type.TypeTouchpoints;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import org.apache.commons.lang.Validate;
@@ -54,8 +56,18 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public CivitasDTO getDummyData() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public QuestionDTO getDummyData() {
+        Question question = new QuestionBuilder()
+                .setQuestionID("Question1")
+                .setTouchpoints(TypeTouchpoints.TouchPoint_1)
+                .setQuestion("a")
+                .setCreatedBy("aa")
+                .setCreatedDate(new Date())
+                .setModifiedBy("aa")
+                .setModifiedDate(new Date())
+                .setStatus(Status.ACTIVE)
+                .createQuestion();
+        return questionDTOAssembler.toDTO(question);
     }
 
     @Override

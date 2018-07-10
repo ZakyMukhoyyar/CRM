@@ -5,7 +5,6 @@
  */
 package com.agit.crm.common.application;
 
-import com.agit.crm.common.dto.crm.CivitasDTO;
 import com.agit.crm.common.dto.customer.feedback.QuestionDTO;
 import com.agit.crm.shared.status.Status;
 import java.util.List;
@@ -21,7 +20,7 @@ public interface QuestionService {
 
     void deleteData(QuestionDTO question);
 
-    CivitasDTO getDummyData();
+    QuestionDTO getDummyData();
 
     QuestionDTO findByID(String questionID);
 

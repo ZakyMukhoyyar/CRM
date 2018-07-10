@@ -32,7 +32,10 @@ public class QuestionHibernateRepository extends HibernateRepository implements 
 
     @Override
     public Question findByID(String questionID) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         return (Question) getSession()
+                .createQuery("from com.agit.crm.domain.customer.feedback.Question where questionID = :cid")
+                .setParameter("cid", questionID)
+                .uniqueResult();
     }
 
     @Override
