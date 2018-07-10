@@ -1,12 +1,13 @@
 package com.agit.crm.domain.infrastructure.persistance.hibernate;
 
-import com.agit.crm.domain.crm.Civitas;
 import com.agit.crm.domain.customer.feedback.Question;
 import com.agit.crm.domain.customer.feedback.QuestionRepository;
-import com.agit.crm.shared.status.Status;
+import com.agit.crm.shared.type.TypeTouchpoints;
 import java.util.List;
 import java.util.Map;
+import org.hibernate.Criteria;
 import org.hibernate.Query;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,7 +33,7 @@ public class QuestionHibernateRepository extends HibernateRepository implements 
 
     @Override
     public Question findByID(String questionID) {
-         return (Question) getSession()
+        return (Question) getSession()
                 .createQuery("from com.agit.crm.domain.customer.feedback.Question where questionID = :cid")
                 .setParameter("cid", questionID)
                 .uniqueResult();
@@ -51,8 +52,10 @@ public class QuestionHibernateRepository extends HibernateRepository implements 
     }
 
     @Override
-    public List<Question> findAllByStatus(Status status) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Question> findAllByTypeTouchpoints(TypeTouchpoints touchpoints) {
+        Criteria criteria = getSession().createCriteria(Question.class);
+        criteria.add(Restrictions.eq("touchpoints", touchpoints));
+        return (List<Question>) criteria.list();
     }
 
 }

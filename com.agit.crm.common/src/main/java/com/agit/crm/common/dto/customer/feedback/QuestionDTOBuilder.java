@@ -16,6 +16,7 @@ public class QuestionDTOBuilder {
     private TypeTouchpoints touchpoints;
     private Status status;
     private String question;
+    private String choiceAnswer;
     private String createdBy;
     private Date createdDate;
     private String modifiedBy;
@@ -44,6 +45,11 @@ public class QuestionDTOBuilder {
         return this;
     }
 
+    public QuestionDTOBuilder setChoiceAnswer(String choiceAnswer) {
+        this.choiceAnswer = choiceAnswer;
+        return this;
+    }
+
     public QuestionDTOBuilder setCreatedBy(String createdBy) {
         this.createdBy = createdBy;
         return this;
@@ -65,7 +71,7 @@ public class QuestionDTOBuilder {
     }
 
     public QuestionDTO createQuestionDTO() {
-        return new QuestionDTO(questionID, touchpoints, status, question, createdBy, createdDate, modifiedBy, modifiedDate);
+        return new QuestionDTO(questionID, touchpoints, status, question, choiceAnswer, createdBy, createdDate, modifiedBy, modifiedDate);
     }
     
 }

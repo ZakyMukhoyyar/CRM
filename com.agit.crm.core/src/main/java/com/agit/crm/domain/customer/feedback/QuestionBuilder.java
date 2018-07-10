@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.agit.crm.domain.customer.feedback;
 
 import com.agit.crm.shared.status.Status;
@@ -17,6 +12,7 @@ public class QuestionBuilder {
     private TypeTouchpoints touchpoints;
     private Status status;
     private String question;
+    private String choiceAnswer;
     private String createdBy;
     private Date createdDate;
     private String modifiedBy;
@@ -50,6 +46,11 @@ public class QuestionBuilder {
         return this;
     }
 
+    public QuestionBuilder setChoiceAnswer(String choiceAnswer) {
+        this.choiceAnswer = choiceAnswer;
+        return this;
+    }
+
     public QuestionBuilder setCreatedBy(String createdBy) {
         this.createdBy = createdBy;
         return this;
@@ -71,7 +72,7 @@ public class QuestionBuilder {
     }
 
     public Question createQuestion() {
-        return new Question(id, questionID, touchpoints, status, question, createdBy, createdDate, modifiedBy, modifiedDate);
+        return new Question(id, questionID, touchpoints, status, question, choiceAnswer, createdBy, createdDate, modifiedBy, modifiedDate);
     }
     
 }

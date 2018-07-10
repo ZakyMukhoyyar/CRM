@@ -1,0 +1,43 @@
+<zk xmlns:w="client" xmlns:n="native">
+    <window apply="org.zkoss.bind.BindComposer"
+            viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.customer.feedback.QuestionVM')"
+            form="@id('fx') @load(vm.questionDTO) @save(vm.questionDTO, before='buttonSaveDataQuestion')"
+            width="1200px" height="500px"
+            closable="true" sizable="true">
+        <div height="5px" />
+        FWD Online Survey
+        <radiogroup id="sv1" onCheck="choice1.value = self.selectedItem.label" />
+        <radiogroup id="sv2" onCheck="choice2.value = self.selectedItem.label" />
+        <radiogroup id="sv3" onCheck="choice3.value = self.selectedItem.label" />
+        <grid>
+            <rows>
+                <row spans="5">Which site you like ZK to improve upon?</row>
+                <row>
+                    <radio id="ra1" label="Web IDE Support" radiogroup="sv1" />
+                    <radio id="ra2" label="Bug Fixing" radiogroup="sv1" />
+                    <radio id="ra3" label="Performance" radiogroup="sv1" />
+                    <radio id="ra4" label="Backward Compatibility" radiogroup="sv1" />
+                    <radio id="ra5" label="Styling" radiogroup="sv1" />
+                </row>
+                <row spans="5">Which site you like ZK to improve upon?</row>
+                <row>
+                    <radio label="Offical Web Site" radiogroup="sv2" />
+                    <radio label="ZK Demo" radiogroup="sv2" />
+                    <radio label="ZK Sandbox" radiogroup="sv2" />
+                    <radio label="Forum" radiogroup="sv2" />
+                    <radio label="On-line Training" radiogroup="sv2" />
+                </row>
+                <row spans="5">Which document you have read is best?</row>
+                <row>
+                    <radio label="ZK Essentials" radiogroup="sv3" />
+                    <radio label="Style Guide" radiogroup="sv3" />
+                    <radio label="Developer Guide" radiogroup="sv3" />
+                    <radio label="Developer Reference" radiogroup="sv3" />
+                    <radio label="Installation Guide" radiogroup="sv3" />
+                </row>
+            </rows>
+        </grid>
+    
+    </window>
+
+</zk>

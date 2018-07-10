@@ -92,8 +92,13 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public List<QuestionDTO> findAllByStatus(Status status) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<QuestionDTO> findAllByTypeTouchpoints(TypeTouchpoints touchpoints) {
+        Validate.notNull(questionRepository);
+        List<Question> listQuestion = questionRepository.findAllByTypeTouchpoints(touchpoints);
+        if (listQuestion != null) {
+            return (List<QuestionDTO>) questionDTOAssembler.toDTOs(listQuestion);
+        }
+        return null;
     }
 
 }

@@ -16,6 +16,8 @@
             </div>
             <button label="Create" style="background-color: #022c2f;color:white" onClick="@command('buttonAddQuestion')"/>
             <space width="5px"/>
+            <button label="Touchpoints 1" style="background-color: #022c2f;color:white" onClick="@command('buttonView')"/>
+            <space width="5px"/>
         </div>
         <separator width="30px"/>
         <listbox rows="10" mold="paging" pageSize="10" emptyMessage="${labels.common.noDataFound}" model="@bind(vm.questionDTOs)">

@@ -17,6 +17,7 @@ public class Question implements EntityObject<Question> {
     private TypeTouchpoints touchpoints;
     private Status status;
     private String question;
+    private String choiceAnswer;
     private String createdBy;
     private Date createdDate;
     private String modifiedBy;
@@ -25,12 +26,13 @@ public class Question implements EntityObject<Question> {
     public Question() {
     }
 
-    public Question(long id, String questionID, TypeTouchpoints touchpoints, Status status, String question, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate) {
+    public Question(long id, String questionID, TypeTouchpoints touchpoints, Status status, String question, String choiceAnswer, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate) {
         this.id = id;
         this.questionID = questionID;
         this.touchpoints = touchpoints;
         this.status = status;
         this.question = question;
+        this.choiceAnswer = choiceAnswer;
         this.createdBy = createdBy;
         this.createdDate = createdDate;
         this.modifiedBy = modifiedBy;
@@ -41,6 +43,7 @@ public class Question implements EntityObject<Question> {
         this.questionID = question.questionID;
         this.touchpoints = question.touchpoints;
         this.status = question.status;
+        this.choiceAnswer = question.choiceAnswer;
         this.question = question.question;
         this.createdBy = question.createdBy;
         this.createdDate = question.createdDate;
@@ -118,6 +121,14 @@ public class Question implements EntityObject<Question> {
 
     public void setModifiedDate(Date modifiedDate) {
         this.modifiedDate = modifiedDate;
+    }
+
+    public String getChoiceAnswer() {
+        return choiceAnswer;
+    }
+
+    public void setChoiceAnswer(String choiceAnswer) {
+        this.choiceAnswer = choiceAnswer;
     }
 
     @Override

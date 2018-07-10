@@ -50,8 +50,10 @@ public class QuestionVM {
     private QuestionDTO questionDTO = new QuestionDTO();
     private List<QuestionDTO> questionDTOs = new ArrayList<>();
 
+    private List<String> listQuestion = new ArrayList<String>();
     private ListModelList<Status> statuses = new ListModelList<>();
     private ListModelList<TypeTouchpoints> touchpointses = new ListModelList<>();
+    private ListModelList<String> choiceAnswer = new ListModelList<>();
 
     private String questionID;
     private Status status;
@@ -75,6 +77,17 @@ public class QuestionVM {
         if (questionDTOs.isEmpty()) {
             questionDTOs = Collections.emptyList();
         }
+
+        for (QuestionDTO m : questionDTOs) {
+            listQuestion.add(m.getQuestion());
+        }
+        
+        /* get pelayananID*/
+        choiceAnswer.add("Sangat Baik Sekali");
+        choiceAnswer.add("Sangat Baik");
+        choiceAnswer.add("Cukup Baik");
+        choiceAnswer.add("Tidak Terlalu Baik");
+        choiceAnswer.add("Sangat Buruk");
     }
 
     private void checkValidity(QuestionDTO question, PageNavigation previous) {
@@ -160,6 +173,14 @@ public class QuestionVM {
         Map<String, Object> params = new HashMap<>();
         params.put("questionDTO", obj);
         CommonViewModel.navigateToWithoutDetach("/customer-feedback-experience/setup-question/add-question.zul", window, params);
+    }
+
+    @Command("buttonView")
+    @NotifyChange("question")
+    public void buttonView(@BindingParam("object") QuestionDTO obj, @ContextParam(ContextType.VIEW) Window window) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("questionDTO", obj);
+        CommonViewModel.navigateToWithoutDetach("/customer-feedback-experience/setup-question/view-question.zul", window, params);
     }
 
     @Command("buttonKembali")
@@ -275,6 +296,14 @@ public class QuestionVM {
 
     public void setPrevious(PageNavigation previous) {
         this.previous = previous;
+    }
+
+    public List<String> getListQuestion() {
+        return listQuestion;
+    }
+
+    public void setListQuestion(List<String> listQuestion) {
+        this.listQuestion = listQuestion;
     }
 
 }

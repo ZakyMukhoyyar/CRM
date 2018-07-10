@@ -24,6 +24,7 @@
             </type>
         </property>
         <property column="question" name="question" not-null="false"/>
+        <property column="choiceAnswer" name="choiceAnswer" not-null="false"/>
         <property column="createdBy" name="createdBy" not-null="false"/>
         <property column="createdDate" name="createdDate" not-null="false"/>
         <property column="modifiedBy" name="modifiedBy" not-null="false"/>

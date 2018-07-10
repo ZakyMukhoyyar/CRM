@@ -20,6 +20,7 @@ public class QuestionDTO implements Serializable {
     private TypeTouchpoints touchpoints;
     private Status status;
     private String question;
+    private String choiceAnswer;
     private String createdBy;
     private Date createdDate;
     private String modifiedBy;
@@ -28,11 +29,12 @@ public class QuestionDTO implements Serializable {
     public QuestionDTO() {
     }
 
-    public QuestionDTO(String questionID, TypeTouchpoints touchpoints, Status status, String question, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate) {
+    public QuestionDTO(String questionID, TypeTouchpoints touchpoints, Status status, String question, String choiceAnswer, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate) {
         this.questionID = questionID;
         this.touchpoints = touchpoints;
         this.status = status;
         this.question = question;
+        this.choiceAnswer = choiceAnswer;
         this.createdBy = createdBy;
         this.createdDate = createdDate;
         this.modifiedBy = modifiedBy;
@@ -103,9 +105,17 @@ public class QuestionDTO implements Serializable {
         this.modifiedDate = modifiedDate;
     }
 
+    public String getChoiceAnswer() {
+        return choiceAnswer;
+    }
+
+    public void setChoiceAnswer(String choiceAnswer) {
+        this.choiceAnswer = choiceAnswer;
+    }
+
     @Override
     public String toString() {
-        return "QuestionDTO{" + "questionID=" + questionID + ", touchpoints=" + touchpoints + ", status=" + status + ", question=" + question + ", createdBy=" + createdBy + ", createdDate=" + createdDate + ", modifiedBy=" + modifiedBy + ", modifiedDate=" + modifiedDate + '}';
+        return "QuestionDTO{" + "questionID=" + questionID + ", touchpoints=" + touchpoints + ", status=" + status + ", question=" + question + ", choiceAnswer=" + choiceAnswer + ", createdBy=" + createdBy + ", createdDate=" + createdDate + ", modifiedBy=" + modifiedBy + ", modifiedDate=" + modifiedDate + '}';
     }
 
 }

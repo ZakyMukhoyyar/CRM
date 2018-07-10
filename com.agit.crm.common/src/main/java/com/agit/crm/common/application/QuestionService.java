@@ -1,7 +1,7 @@
 package com.agit.crm.common.application;
 
 import com.agit.crm.common.dto.customer.feedback.QuestionDTO;
-import com.agit.crm.shared.status.Status;
+import com.agit.crm.shared.type.TypeTouchpoints;
 import java.util.List;
 import java.util.Map;
 
@@ -23,5 +23,5 @@ public interface QuestionService {
 
     List<QuestionDTO> findByParams(Map map);
 
-    List<QuestionDTO> findAllByStatus(Status status);
+    List<QuestionDTO> findAllByTypeTouchpoints(TypeTouchpoints touchpoints);
 }
