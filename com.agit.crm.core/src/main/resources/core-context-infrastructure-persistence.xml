@@ -78,4 +78,7 @@
     <bean id="storingFICardPOCRepository" class="com.agit.crm.domain.infrastructure.persistance.hibernate.StoringFICardPOCHibernateRepository">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
+    <bean id="questionHibernateRepository" class="com.agit.crm.domain.infrastructure.persistance.hibernate.QuestionHibernateRepository">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
 </beans>

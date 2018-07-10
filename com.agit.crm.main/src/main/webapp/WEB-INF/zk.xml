@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zk>
     <listener>
-        <listener-class>com.agit.crm.shared.zul.AppInit</listener-class>
+        <listener-class>com.ledger.shared.zul.AppInit</listener-class>
     </listener>
     <library-property>
         <name>org.zkoss.bind.DebuggerFactory.enable</name>
-        <value>false</value>
+        <value>true</value>
     </library-property>
     <!--    <system-config>
-        <id-generator-class>com.agit.crm.util.loadtest.SequenceIdGenerator</id-generator-class>
+        <id-generator-class>com.ledger.util.loadtest.SequenceIdGenerator</id-generator-class>
     </system-config>-->
     <session-config>
         <device-type>ajax</device-type>
@@ -18,7 +18,29 @@
         <device-type>ajax</device-type>
         <timeout-uri>/timeout.zul</timeout-uri>
     </device-config>-->
-    <language-config>
+    <!--    <language-config>
         <addon-uri>/WEB-INF/my-addon.xml</addon-uri>
-    </language-config>	
+    </language-config>	-->
+    
+    <!-- ZK Bootstrap Plugins -->
+    <library-property>
+        <name>org.zkoss.zul.Button.mold</name>
+        <value>bs</value>
+    </library-property>
+    <library-property>
+        <name>org.zkoss.zul.Menupopup.mold</name>
+        <value>bs</value>
+    </library-property>
+    <library-property>
+        <name>org.zkoss.zkmax.zul.Navbar.mold</name>
+        <value>bs</value>
+    </library-property>
+    <library-property>
+        <name>org.zkoss.zul.Paging.mold</name>
+        <value>bs</value>
+    </library-property>
+    <library-property>
+        <name>org.zkoss.zul.Panel.mold</name>
+        <value>bs</value>
+    </library-property>
 </zk>

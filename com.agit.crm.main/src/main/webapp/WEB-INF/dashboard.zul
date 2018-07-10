@@ -1,73 +1,94 @@
-<window border="none"
-        apply="org.zkoss.bind.BindComposer"
-        viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.DashboardVM')">
-    <groupbox mold="3d" style="background-color:white" contentStyle="border:0" visible="@load(not empty vm.user.getUserSpecificationDTO().getFullName() ? true : false)">
-        <separator spacing="5px"/>
-        <vbox width="100%" height="100%" align="left">
-            <label sclass="isi" style="color:blue;font-size:20px" value="@load(vm.concatUsername('Welcome,  ',vm.user.userSpecificationDTO.fullName))"/>
-        </vbox>
-        <style>
-            .z-separator-hor-bar {
-            background: #eeeeee;	
-            height: 5px;		
-            }
-        </style>
-        <separator spacing="10px" />
-        <vbox width="100%" height="100%" align="left">
-            <cell>
-                <label sclass="isi" style="color:black;font-size:15px" value="@load(vm.concatUsername('You are registered in  ',vm.user.userSpecificationDTO.fullName))"/>
-                <label sclass="isi" style="color:black;font-size:15px" value=" - "/>
-                <label sclass="isi" style="color:black;font-size:15px" value="@load(vm.user.roleDTO.roleName)"/>
-            </cell>
-        </vbox>
-        <separator spacing="5px"/>
-        <vbox width="100%" height="100%" align="left">
-            <label style="color:black;font-size:15px" value="@load(vm.concatUsername('Your last sign in activity was on :  ',vm.user.userSpecificationDTO.userLoginInfoDTO.lastLogin))"/>
-        </vbox>
-        
-    </groupbox>
-    <div align="center" style="padding: 50px 5px 0px 0px">
-        <flash src="/images/learn.swf" height="300" width="800" />
-    </div>
-    
-    <groupbox mold="3d" contentStyle="border:0">
-        <vbox width="100%" height="100%" align="left">
-            <label style="color:black;font-size:15px; font-weight: bold"/>
-        </vbox>
-    </groupbox>
+<?xml version="1.0" encoding="UTF-8"?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<?link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" ?>
+<?script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" ?>
+<?script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ?>
+<zk xmlns:w="client" xmlns:n="native">
+    <window border="none"
+            apply="org.zkoss.bind.BindComposer"
+            viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.DashboardVM')">
+        <groupbox mold="3d" style="background-color:white" contentStyle="border:0" visible="@load(not empty vm.user.getUserSpecificationDTO().getFullName() ? true : false)">
+            <separator spacing="5px"/>
+            <style>
+                .z-separator-hor-bar {
+                background: #eeeeee;	
+                height: 5px;		
+                }
+            </style>
+            <separator spacing="10px" />
+            <separator spacing="5px"/>
+            <vbox width="100%" height="100%" align="center">
+                <label style="color:#022c2f;font-size:25px;font-weight: bold;" value="Ingin mengajukan klaim?"/>
+                <label style="color:#022c2f;font-size:15px" value="Klaim mudah dan cepat melalui formulir klaim online yang kami sediakan!"/>
+            </vbox>
+            <separator spacing="20px"/>
+            <vbox width="100%" height="100%" align="center">
+                <html>
+                    <div class="container">
+                        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                            <!-- Indicators -->
+                            <ol class="carousel-indicators">
+                                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                                <li data-target="#myCarousel" data-slide-to="1"></li>
+                            </ol>
 
-    <div sclass="col-md-9 nopadding" width="100%" >
-        <groupbox closable="false" sclass="col-md-12" width="100%">
-            <caption label="Jadwal Event" style="font-size:12pt; font-weight: bold"/>   
-            <listbox width="100%" rows="1" mold="paging" pageSize="@load(vm.pageSize)" emptyMessage="${labels.common.noDataFound}"  model="@bind(vm.eventAgitDTOs)">
-                <listhead>
-                    <listheader style="font-size:9pt; font-weight: bold" sclass="isi" label="@bind(each.namaEvent)" width="100%" align="center"/>
-                </listhead>
-                <template name="model">
-                    <listitem value="${each}">
-                        <listcell>
-                            <label sclass="judulLowongan label label-danger" width="100%" value="@bind(each.namaEvent)"/>
-                            <separator bar="true"/>
-                            <html content="${each.deskripsiEvent}" style="text-align: left;"/>
-                            <separator bar="true"/>
-                            <label sclass="isi bold" value="Mulai : "/> 
-                            <label sclass="isi " width="100%" value="@bind(each.startDate)"/>
-                            <label value="  |  "/>
-                            <label sclass="isi bold" value="Berakhir : "/> 
-                            <label sclass="isi " width="100%" value="@bind(each.endDate)"/>
-                            <separator/>
-                            <a label="Lihat"  onClick="@command('buttonKlikEvent', object=each)"/>
-                            <label value="  |  "/>
-                            <a label="Daftar" onClick="@command('buttonApplyAcara', object=each)"/>  
-                            <label value="  |  "/>
-                            <a label="Pengumuman" onClick="@command('pengumuman', object=each)"/>
-                            <label value="  |  "/>
-                            <a label="Komentari" onClick="@command('komentariEvent', object=each)"/>                         
-                        </listcell>
-                    </listitem>
-                </template>
-            </listbox>
+                            <!-- Wrapper for slides -->
+                            <div class="carousel-inner">
+                                <div class="item active">
+                                    <img src="images/modern-medicine1-2.jpg" alt="Los Angeles" style="width:100%"></img>
+                                    <div class="carousel-caption">
+                                        <h3 style="color:black;font-size:25px;font-weight: bold;">Product 1</h3>
+                                        <p style="color:black;font-size:15px;font-weight: bold;">FWD APro Accident Protector</p>
+                                    </div>
+                                </div>
+
+                                <div class="item">
+                                    <img src="images/doctor-1500x630.jpg" alt="Chicago" style="width:100%;"></img>
+                                    <div class="carousel-caption">
+                                        <h3 style="color:black;font-size:25px;font-weight: bold;">Product 2</h3>
+                                        <p style="color:black;font-size:15px;font-weight: bold;">FWD SPrint Family Health dan Protection</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Left and right controls -->
+                            <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                                <span class="glyphicon glyphicon-chevron-left"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                                <span class="glyphicon glyphicon-chevron-right"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>
+                    </div>
+                </html>
+                <vbox width="100%" height="100%" align="center">
+                    <label style="color:#022c2f;font-size:25px;font-weight: bold;" value="Kamu mungkin tertarik dengan produk ini"/>
+                </vbox>
+                <grid style="border:0">
+                    <columns>
+                        <column align="right" width="50%"/>
+                        <column align="left" width="50%"/>
+                    </columns>
+                    <rows>
+                        <row>
+                            <button label="FWD APro Accident Protector" style="background-color: #022c2f;color:white" width="300px">
+                                <attribute name="onClick"><![CDATA[
+                                     Filedownload.save("/files/FormulirKlaimKecelakaan-AccidentalClaimForm-200715.pdf", null);
+                                ]]></attribute>
+                            </button>
+                            <button label="FWD SPrint Family Health dan Protection" style="background-color: #022c2f;color:white" width="300px">
+                                <attribute name="onClick"><![CDATA[
+                                     Filedownload.save("/files/FormulirKlaimKecelakaan-AccidentalClaimForm-200715.pdf", null);
+                                ]]></attribute>
+                            </button>
+                        </row>
+                    </rows>
+                </grid>
+            </vbox>
         </groupbox>
-    </div>
-</window>
+
+    </window>
+</zk>
 

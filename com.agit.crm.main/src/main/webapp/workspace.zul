@@ -1,229 +1,213 @@
-<?page id="index" title="Candidate Recruitment Management - Project"?>
+<?page id="index" title="FWD Asuransi Hidup"?>
 <?link rel="icon" type="image/png" href="/images/logoagit-new.png"?>
 <?taglib uri="/WEB-INF/security.tld" prefix="sec"?>
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
-<?link rel="stylesheet" type="text/css"	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" ?>
-<?link rel="stylesheet" type="text/css"	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" ?>
-<!--<?link rel="stylesheet" type="text/css"	href="/styles/css/bootstrap.css" ?>-->
-<!--<?link rel="stylesheet" type="text/css"	href="/styles/css/default.css" ?>-->
-<!-- Load Bootstrap  -->
-<?link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"?>
+<?link rel="stylesheet" type="text/css"	href="/bootstrap/css/bootstrap.min.css" ?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
 
-<!-- Google Open Sans font -->
-<!-- Load fonts from local -->
-<?link href="css/fonts.css" rel="stylesheet" type="text/css"?>
-
-<!-- Unmark if we want to use fonts from google server
-<?link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400' rel='stylesheet' type='text/css'?>
--->
-
-<?link href="less/index.css.dsp" rel="stylesheet" type="text/css"?>
-<?script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" if="${zk.ie < 9}" ?>
-    <?script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" if="${zk.ie < 9}"?>
-
-        <zk xmlns="http://www.zkoss.org/2005/zul">
-            <window border="none"
+<zk xmlns="http://www.zkoss.org/2005/zul">
+    <window border="none"
                     apply="org.zkoss.bind.BindComposer"
                     viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.WorkspaceVM')"
                     height="100%" width="100%"  >
         
-                <!-- Right Click Tab -->
-                <menupopup id="popupClose">
-                    <menuitem label="Close" onClick="@command('menuRightTab', popupRight=1)"/>
-                    <menuitem label="Close All" onClick="@command('menuRightTab', popupRight=2)"/>
-                    <menuitem label="Close Other" onClick="@command('menuRightTab', popupRight=3)"/>
-                </menupopup>
-                <!-- Header -->
-                <borderlayout >
-                    <north sclass="isi" height="80px" border="none">
-                        <borderlayout style="background:#7C1442;">
-                            <west border="none" size="40%" style="background:#7C1442;">
-                                <div style="padding:25px;">
-                                    <label sclass="isi" style="color:white;font-size:20px;font-weight:bold" value="Candidate Recruitment Management"/>
-                                </div>
-                            </west>
-                            <east border="none" style="background:#7C1442; color:#fff;">
-                                <div style="padding:15px;">
-                                    <menubar>
-                                        <menu sclass="isi" label="@load(vm.concat(vm.user.userSpecificationDTO.fullName, vm.concat(' - ',vm.user.roleDTO.roleName)))">
-                                            <menupopup>
-                                                <menuitem sclass="isi" label="Settings" iconSclass="z-icon-cog"/>
-                                                <menuitem sclass="isi" label="Profile" iconSclass="z-icon-user" onClick="@command('buttonKlikProfile', object=each)"/>
-                                                <menuseparator/>
-                                                <menuitem sclass="isi" label="Logout" iconSclass="z-icon-off" style="color:white" onClick="@command('buttonLogout')"/>
-                                            </menupopup>
-                                        </menu>
-                                    </menubar>
-                                    
-                                    <!--<label value="Version : ${labels.buildNumber}"/>-->
-                                </div>
-                            </east>
-                        </borderlayout>
-                    </north>
-
-                    <!-- Menu -->
-                    <!--                    <west sclass="isi" splittable="true" width="20%" collapsible="true" border="none"
-                          title="${labels.workspace.label.menu}" flex="true" autoscroll="true">
-                        <tree model="@load(vm.model)" sclass="list-group" style="background:#7C1442;">
-                            <template name="model">
-                                <treeitem label="@load(each.menuName)" onClick="@command('menuClick', obj=each)" visible="${sec:isAllGranted(each.privilegeID)}" />
-                            </template>
-                        </tree>
-                    </west>-->
-                    <west style="font-size:9pt; font-weight: bold" sclass="isi" splittable="true" width="23%" collapsible="true" open="false" border="none"
-                          title="${labels.workspace.label.menu}" flex="true" autoscroll="true">
-                        <tree style="font-size:6pt; font-weight: bold" model="@load(vm.model)" >
-                            <template name="model" >
-                                <treeitem label="@load(each.menuName)" image="@load(each.icon)" open="@load(true)" onClick="@command('menuClick', obj=each)" visible="${sec:isAllGranted(each.privilegeID)}" />
-                            </template>
-                        </tree>
+        <!-- Right Click Tab -->
+        <menupopup id="popupClose">
+            <menuitem label="Close" onClick="@command('menuRightTab', popupRight=1)"/>
+            <menuitem label="Close All" onClick="@command('menuRightTab', popupRight=2)"/>
+            <menuitem label="Close Other" onClick="@command('menuRightTab', popupRight=3)"/>
+        </menupopup>
+        <!-- Header -->
+        <borderlayout >
+            <north sclass="isi" height="80px" border="none">
+                <borderlayout style="background:#022c2f;">
+                    <west border="none" size="40%" style="background:#022c2f;">
+                        <div style="padding:25px;">
+                            <label sclass="isi" style="color:white;font-size:20px;font-weight:bold" value="Customer Feedback Experience"/>
+                        </div>
                     </west>
-
-
-                    <!-- Main -->
-                    <center border="none" autoscroll="true">
-                        <tabbox sclass="isi" id="tabbox" height="100%">
-                            <tabs id="tabs">
-                                <tab label="Dashboard" iconSclass="icon icon-home" />
-                            </tabs>
-                            <tabpanels id="tabPanels">
-                                <tabpanel style="overflow: auto">
-                                    <include src="@load(vm.sourceDashboard)" />
-                                </tabpanel>
-                            </tabpanels>
-                        </tabbox>
-                    </center>
-
-                    <!-- Footer -->
-                    <south border="none" size="25px" >
-                        <borderlayout  style="background:#7C1442;">
-                            <west border="none" style="width:50% ;color:#fff; padding: 5px 10px 0px 10px; background:#7C1442;" sclass="isi">
-                                Copyright 2017 &#169; AGIT - App Candidate Recruitment Management
-                            </west>
-                            <east border="none" style="color:#fff; padding: 5px 5px 0px 0px; background:#7C1442;">
-                                <div align="left">
-                                    <label sclass="isi" value="@load(vm.concatDate('Date: ',vm.user.userSpecificationDTO.userLoginInfoDTO.loginDate))" />
-                                    <space/>
-                                    <label sclass="isi" value="@load(vm.concatDate('Last Login : ',vm.user.userSpecificationDTO.userLoginInfoDTO.lastLogin))" />
-                                    <space/>
-                                    <label sclass="isi" value="@load(vm.concatDate('Last Login Failed: ', vm.user.userSpecificationDTO.userLoginInfoDTO.lastLoginFailed))" />
-                                </div>
-                            </east>
-                        </borderlayout>
-                    </south>
+                    <east border="none" style="background:#022c2f; color:#fff;">
+                        <div style="padding:15px;">
+                            <menubar>
+                                <menu sclass="isi" label="@load(vm.concat(vm.user.userSpecificationDTO.fullName, vm.concat(' - ',vm.user.roleDTO.roleName)))">
+                                    <menupopup>
+                                        <menuitem sclass="isi" label="Settings" iconSclass="z-icon-cog"/>
+                                        <menuitem sclass="isi" label="Profile" iconSclass="z-icon-user" onClick="@command('buttonKlikProfile', object=each)"/>
+                                        <menuseparator/>
+                                        <menuitem sclass="isi" label="Logout" iconSclass="z-icon-off" style="color:white" onClick="@command('buttonLogout')"/>
+                                    </menupopup>
+                                </menu>
+                            </menubar>
+                                    
+                            <!--<label value="Version : ${labels.buildNumber}"/>-->
+                        </div>
+                    </east>
                 </borderlayout>
+            </north>
+
+            <!-- Menu -->
+            <!--                    <west sclass="isi" splittable="true" width="20%" collapsible="true" border="none"
+                  title="${labels.workspace.label.menu}" flex="true" autoscroll="true">
+                <tree model="@load(vm.model)" sclass="list-group" style="background:#7C1442;">
+                    <template name="model">
+                        <treeitem label="@load(each.menuName)" onClick="@command('menuClick', obj=each)" visible="${sec:isAllGranted(each.privilegeID)}" />
+                    </template>
+                </tree>
+            </west>-->
+            <west style="font-size:9pt; font-weight: bold" sclass="isi" splittable="true" width="23%" collapsible="true" open="false" border="none"
+                          title="${labels.workspace.label.menu}" flex="true" autoscroll="true">
+                <tree style="font-size:6pt; font-weight: bold" model="@load(vm.model)" >
+                    <template name="model" >
+                        <treeitem label="@load(each.menuName)" image="@load(each.icon)" open="@load(true)" onClick="@command('menuClick', obj=each)" visible="${sec:isAllGranted(each.privilegeID)}" />
+                    </template>
+                </tree>
+            </west>
+
+
+            <!-- Main -->
+            <center border="none" autoscroll="true">
+                <tabbox sclass="isi" id="tabbox" height="100%">
+                    <tabs id="tabs">
+                        <tab label="Dashboard" iconSclass="icon icon-home" />
+                    </tabs>
+                    <tabpanels id="tabPanels">
+                        <tabpanel style="overflow: auto">
+                            <include src="@load(vm.sourceDashboard)" />
+                        </tabpanel>
+                    </tabpanels>
+                </tabbox>
+            </center>
+
+            <!-- Footer -->
+            <south border="none" size="25px" >
+                <borderlayout  style="background:#022c2f;">
+                    <west border="none" style="width:50% ;color:#fff; padding: 5px 10px 0px 10px; background:#022c2f;" sclass="isi">
+                        Copyright 2018 &#169; Customer Feedback Experience
+                    </west>
+                    <east border="none" style="color:#fff; padding: 5px 5px 0px 0px; background:#022c2f;">
+                        <div align="left">
+                            <label sclass="isi" value="@load(vm.concatDate('Date: ',vm.user.userSpecificationDTO.userLoginInfoDTO.loginDate))" />
+                            <space/>
+                            <label sclass="isi" value="@load(vm.concatDate('Last Login : ',vm.user.userSpecificationDTO.userLoginInfoDTO.lastLogin))" />
+                            <space/>
+                            <label sclass="isi" value="@load(vm.concatDate('Last Login Failed: ', vm.user.userSpecificationDTO.userLoginInfoDTO.lastLoginFailed))" />
+                        </div>
+                    </east>
+                </borderlayout>
+            </south>
+        </borderlayout>
         
-                <style>
-                    @import url('https://fonts.googleapis.com/css?family=Noto+Sans')
-                    @import url('https://fonts.googleapis.com/css?family=Lato');
+        <style>
+            @import url('https://fonts.googleapis.com/css?family=Noto+Sans')
+            @import url('https://fonts.googleapis.com/css?family=Lato');
                     
-                    .judul{
-                    font-family: 'Noto Sans', sans-serif;
-                    text-transform: uppercase;
-                    font-size:18px;
-                    margin-top:10px;
-                    }
-                    .bold{
-                    font-weight:500;
-                    }
-                    .labelstyle {
-                    font-family: 'Open Sans', sans-serif;
-                    color: black
-                    background:#000;
-                    padding-top:10px;
-                    letter-spacing: 1px;
-                    margin-bottom:2px;
-                    }
-                    .labelstylegrid {
-                    font-family: 'Open Sans', sans-serif;
-                    color: black
-                    background:#000;
-                    padding-top:9px;
-                    letter-spacing: 1px;
-                    margin-bottom:1px;
-                    }
-                    .isi{
-                    letter-spacing: 1px;
-                    line-height: 1.3;
-                    font-family: 'Lato', sans-serif;
-                    }
+            .judul{
+            font-family: 'Noto Sans', sans-serif;
+            text-transform: uppercase;
+            font-size:18px;
+            margin-top:10px;
+            }
+            .bold{
+            font-weight:500;
+            }
+            .labelstyle {
+            font-family: 'Open Sans', sans-serif;
+            color: black
+            background:#000;
+            padding-top:10px;
+            letter-spacing: 1px;
+            margin-bottom:2px;
+            }
+            .labelstylegrid {
+            font-family: 'Open Sans', sans-serif;
+            color: black
+            background:#000;
+            padding-top:9px;
+            letter-spacing: 1px;
+            margin-bottom:1px;
+            }
+            .isi{
+            letter-spacing: 1px;
+            line-height: 1.3;
+            font-family: 'Lato', sans-serif;
+            }
                     
-                    .judulLowongan{
-                    letter-spacing: 1px;
-                    line-height: 1.3;
-                    font-family: 'Lato', sans-serif;
-                    font-size:16px;
-                    }
-                    .headerProfile{
-                    letter-spacing: 1px;
-                    line-height: 1.3;
-                    font-family: 'Lato', sans-serif;
-                    font-size:20px;
-                    text-align: center;
-                    }
-                    .nopadding {
-                    padding: 0 !important;
-                    margin: 0 !important;
-                    }
-                    .btn{
-                    border-radius:0px !important;
-                    }
-                    .z-treecell-content{
-                    background:#4f4f4;
-                    border:1px solid #f4f4f4;
-                    height:30px;
-                    }
-                    .z-treecell-content:hover{
-                    background:#D9E0DF;
-                    }
-                    .z-treecell-content:active{
-                    background:#D9E0DF;
-                    color:#fff;
-                    }
-                    .listx:hover {
-                    border-color: #e5f4fb;
-                    background: #333;
-                    position: relative;
-                    }
-                    .z-tabs-content {
-                    display: table;
-                    width: 100%;
-                    border-collapse: separate;
-                    border-spacing: 0;
-                    /* border-bottom: 1px solid #cfcfcf; */
-                    margin: 0;
-                    padding-left: 0;
-                    padding-top: 0;
-                    list-style-image: none;
-                    list-style-position: outside;
-                    list-style-type: none;
-                    zoom: 1;
-                    clear: both;
-                    background: #D9E0DF;
-                    }
-                    .z-north-header, .z-south-header, .z-west-header, .z-center-header, .z-east-header {
-                    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-                    font-size: 12px;
-                    font-weight: bold;
-                    font-style: normal;
-                    color: #555;
-                    height: 32px;
-                    border-bottom: 1px solid #cfcfcf;
-                    padding: 4px 4px 3px;
-                    line-height: 24px;; */
-                    overflow: hidden;
-                    cursor: default;
-                    white-space: nowrap;
-                    background:#D9E0DF;
-                    }
+            .judulLowongan{
+            letter-spacing: 1px;
+            line-height: 1.3;
+            font-family: 'Lato', sans-serif;
+            font-size:16px;
+            }
+            .headerProfile{
+            letter-spacing: 1px;
+            line-height: 1.3;
+            font-family: 'Lato', sans-serif;
+            font-size:20px;
+            text-align: center;
+            }
+            .nopadding {
+            padding: 0 !important;
+            margin: 0 !important;
+            }
+            .btn{
+            border-radius:0px !important;
+            }
+            .z-treecell-content{
+            background:#4f4f4;
+            border:1px solid #f4f4f4;
+            height:30px;
+            }
+            .z-treecell-content:hover{
+            background:#D9E0DF;
+            }
+            .z-treecell-content:active{
+            background:#D9E0DF;
+            color:#fff;
+            }
+            .listx:hover {
+            border-color: #e5f4fb;
+            background: #333;
+            position: relative;
+            }
+            .z-tabs-content {
+            display: table;
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            /* border-bottom: 1px solid #cfcfcf; */
+            margin: 0;
+            padding-left: 0;
+            padding-top: 0;
+            list-style-image: none;
+            list-style-position: outside;
+            list-style-type: none;
+            zoom: 1;
+            clear: both;
+            background: #D9E0DF;
+            }
+            .z-north-header, .z-south-header, .z-west-header, .z-center-header, .z-east-header {
+            font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+            font-size: 12px;
+            font-weight: bold;
+            font-style: normal;
+            color: #555;
+            height: 32px;
+            border-bottom: 1px solid #cfcfcf;
+            padding: 4px 4px 3px;
+            line-height: 24px;; */
+            overflow: hidden;
+            cursor: default;
+            white-space: nowrap;
+            background:#D9E0DF;
+            }
                     
-                    .z-tab {
-                    background:#f5f5f5;
-                    color:#fff;
-                    border-radius:0px;
-                    position:relative;
-                    text-align:center;
-                    }
-                </style>
-            </window>
-        </zk>
+            .z-tab {
+            background:#f5f5f5;
+            color:#fff;
+            border-radius:0px;
+            position:relative;
+            text-align:center;
+            }
+        </style>
+    </window>
+</zk>
