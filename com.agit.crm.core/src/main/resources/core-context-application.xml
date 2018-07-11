@@ -121,4 +121,10 @@
         <property name="questionRepository" ref="questionRepository"/>
         <property name="questionDTOAssembler" ref="questionDTOAssembler"/>
     </bean>
+    
+    <bean id="answerDTOAssembler" class="com.agit.crm.interfaces.web.facade.dto.assembler.crm.AnswerDTOAssembler" />
+    <bean id="answerService" class="com.agit.crm.application.impl.AnswerServiceImpl">
+        <property name="answerRepository" ref="answerRepository"/>
+        <property name="answerDTOAssembler" ref="answerDTOAssembler"/>
+    </bean>
 </beans>
