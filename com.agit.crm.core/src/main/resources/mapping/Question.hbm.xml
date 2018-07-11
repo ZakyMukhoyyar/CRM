@@ -29,5 +29,11 @@
         <property column="createdDate" name="createdDate" not-null="false"/>
         <property column="modifiedBy" name="modifiedBy" not-null="false"/>
         <property column="modifiedDate" name="modifiedDate" not-null="false"/>
+        
+        <list cascade="all" lazy="false" name="answers">
+            <key column="questionID" foreign-key="questionID"/>
+            <index column="lowongan_index"/>
+            <one-to-many class="com.agit.crm.domain.customer.feedback.Answer"/>
+        </list>
     </class>
 </hibernate-mapping>

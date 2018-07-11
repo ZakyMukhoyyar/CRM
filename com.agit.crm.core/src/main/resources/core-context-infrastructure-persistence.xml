@@ -81,4 +81,7 @@
     <bean id="questionRepository" class="com.agit.crm.domain.infrastructure.persistance.hibernate.QuestionHibernateRepository">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
+    <bean id="answerRepository" class="com.agit.crm.domain.infrastructure.persistance.hibernate.AnswerHibernateRepository">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
 </beans>

@@ -114,7 +114,9 @@
         <property name="komentarEventDTOAssembler" ref="komentarEventDTOAssembler"/>
     </bean>
     
-    <bean id="questionDTOAssembler" class="com.agit.crm.interfaces.web.facade.dto.assembler.crm.QuestionDTOAssembler"/>
+    <bean id="questionDTOAssembler" class="com.agit.crm.interfaces.web.facade.dto.assembler.crm.QuestionDTOAssembler">
+        <property name="answerDTOAssembler" ref="answerDTOAssembler"/>
+    </bean>
     <bean id="questionService" class="com.agit.crm.application.impl.QuestionServiceImpl">
         <property name="questionRepository" ref="questionRepository"/>
         <property name="questionDTOAssembler" ref="questionDTOAssembler"/>

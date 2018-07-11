@@ -8,6 +8,7 @@ package com.agit.crm.common.dto.customer.feedback;
 import com.agit.crm.shared.status.Status;
 import com.agit.crm.shared.type.TypeTouchpoints;
 import java.util.Date;
+import java.util.List;
 
 
 public class QuestionDTOBuilder {
@@ -21,6 +22,7 @@ public class QuestionDTOBuilder {
     private Date createdDate;
     private String modifiedBy;
     private Date modifiedDate;
+    private List<AnswerDTO> answerDTOs;
 
     public QuestionDTOBuilder() {
     }
@@ -70,8 +72,13 @@ public class QuestionDTOBuilder {
         return this;
     }
 
+    public QuestionDTOBuilder setAnswerDTOs(List<AnswerDTO> answerDTOs) {
+        this.answerDTOs = answerDTOs;
+        return this;
+    }
+
     public QuestionDTO createQuestionDTO() {
-        return new QuestionDTO(questionID, touchpoints, status, question, choiceAnswer, createdBy, createdDate, modifiedBy, modifiedDate);
+        return new QuestionDTO(questionID, touchpoints, status, question, choiceAnswer, createdBy, createdDate, modifiedBy, modifiedDate, answerDTOs);
     }
     
 }

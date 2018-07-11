@@ -9,6 +9,7 @@ import com.agit.crm.shared.status.Status;
 import com.agit.crm.shared.type.TypeTouchpoints;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -25,11 +26,12 @@ public class QuestionDTO implements Serializable {
     private Date createdDate;
     private String modifiedBy;
     private Date modifiedDate;
+    private List<AnswerDTO> answerDTOs;
 
     public QuestionDTO() {
     }
 
-    public QuestionDTO(String questionID, TypeTouchpoints touchpoints, Status status, String question, String choiceAnswer, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate) {
+    public QuestionDTO(String questionID, TypeTouchpoints touchpoints, Status status, String question, String choiceAnswer, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate, List<AnswerDTO> answerDTOs) {
         this.questionID = questionID;
         this.touchpoints = touchpoints;
         this.status = status;
@@ -39,6 +41,7 @@ public class QuestionDTO implements Serializable {
         this.createdDate = createdDate;
         this.modifiedBy = modifiedBy;
         this.modifiedDate = modifiedDate;
+        this.answerDTOs = answerDTOs;
     }
 
     public String getQuestionID() {
@@ -73,6 +76,14 @@ public class QuestionDTO implements Serializable {
         this.question = question;
     }
 
+    public String getChoiceAnswer() {
+        return choiceAnswer;
+    }
+
+    public void setChoiceAnswer(String choiceAnswer) {
+        this.choiceAnswer = choiceAnswer;
+    }
+
     public String getCreatedBy() {
         return createdBy;
     }
@@ -105,17 +116,17 @@ public class QuestionDTO implements Serializable {
         this.modifiedDate = modifiedDate;
     }
 
-    public String getChoiceAnswer() {
-        return choiceAnswer;
+    public List<AnswerDTO> getAnswerDTOs() {
+        return answerDTOs;
     }
 
-    public void setChoiceAnswer(String choiceAnswer) {
-        this.choiceAnswer = choiceAnswer;
+    public void setAnswerDTOs(List<AnswerDTO> answerDTOs) {
+        this.answerDTOs = answerDTOs;
     }
 
     @Override
     public String toString() {
-        return "QuestionDTO{" + "questionID=" + questionID + ", touchpoints=" + touchpoints + ", status=" + status + ", question=" + question + ", choiceAnswer=" + choiceAnswer + ", createdBy=" + createdBy + ", createdDate=" + createdDate + ", modifiedBy=" + modifiedBy + ", modifiedDate=" + modifiedDate + '}';
+        return "QuestionDTO{" + "questionID=" + questionID + ", touchpoints=" + touchpoints + ", status=" + status + ", question=" + question + ", choiceAnswer=" + choiceAnswer + ", createdBy=" + createdBy + ", createdDate=" + createdDate + ", modifiedBy=" + modifiedBy + ", modifiedDate=" + modifiedDate + ", answerDTOs=" + answerDTOs + '}';
     }
 
 }

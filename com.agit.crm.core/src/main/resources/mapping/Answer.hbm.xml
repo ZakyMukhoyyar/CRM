@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-access="field">
+    <class mutable="true" name="com.agit.crm.domain.customer.feedback.Answer" table="MST_ANSWER">
+        <!--<cache usage="read-only"/>-->
+        <id column="id" name="id">
+            <generator class="org.hibernate.id.IdentityGenerator"/>
+        </id>
+        <property column="answerID" name="answerID" not-null="false"/>
+        <property column="userID" name="userID" not-null="false"/>
+        <property column="answer" name="answer" not-null="false"/>
+        <property column="questionID" name="questionID" not-null="false"/>
+    </class>
+</hibernate-mapping>

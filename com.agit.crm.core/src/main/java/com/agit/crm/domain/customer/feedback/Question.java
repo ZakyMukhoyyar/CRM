@@ -4,6 +4,7 @@ import com.agit.crm.shared.object.EntityObject;
 import com.agit.crm.shared.status.Status;
 import com.agit.crm.shared.type.TypeTouchpoints;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -15,6 +16,7 @@ public class Question implements EntityObject<Question> {
     long id;
     private String questionID;
     private TypeTouchpoints touchpoints;
+    private List<Answer> answers;
     private Status status;
     private String question;
     private String choiceAnswer;
@@ -26,10 +28,11 @@ public class Question implements EntityObject<Question> {
     public Question() {
     }
 
-    public Question(long id, String questionID, TypeTouchpoints touchpoints, Status status, String question, String choiceAnswer, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate) {
+    public Question(long id, String questionID, TypeTouchpoints touchpoints, List<Answer> answers, Status status, String question, String choiceAnswer, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate) {
         this.id = id;
         this.questionID = questionID;
         this.touchpoints = touchpoints;
+        this.answers = answers;
         this.status = status;
         this.question = question;
         this.choiceAnswer = choiceAnswer;
@@ -44,6 +47,7 @@ public class Question implements EntityObject<Question> {
         this.touchpoints = question.touchpoints;
         this.status = question.status;
         this.choiceAnswer = question.choiceAnswer;
+        this.answers = question.answers;
         this.question = question.question;
         this.createdBy = question.createdBy;
         this.createdDate = question.createdDate;
@@ -131,17 +135,27 @@ public class Question implements EntityObject<Question> {
         this.choiceAnswer = choiceAnswer;
     }
 
+    public List<Answer> getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(List<Answer> answers) {
+        this.answers = answers;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 47 * hash + Objects.hashCode(this.questionID);
-        hash = 47 * hash + Objects.hashCode(this.touchpoints);
-        hash = 47 * hash + Objects.hashCode(this.status);
-        hash = 47 * hash + Objects.hashCode(this.question);
-        hash = 47 * hash + Objects.hashCode(this.createdBy);
-        hash = 47 * hash + Objects.hashCode(this.createdDate);
-        hash = 47 * hash + Objects.hashCode(this.modifiedBy);
-        hash = 47 * hash + Objects.hashCode(this.modifiedDate);
+        int hash = 7;
+        hash = 59 * hash + Objects.hashCode(this.questionID);
+        hash = 59 * hash + Objects.hashCode(this.touchpoints);
+        hash = 59 * hash + Objects.hashCode(this.answers);
+        hash = 59 * hash + Objects.hashCode(this.status);
+        hash = 59 * hash + Objects.hashCode(this.question);
+        hash = 59 * hash + Objects.hashCode(this.choiceAnswer);
+        hash = 59 * hash + Objects.hashCode(this.createdBy);
+        hash = 59 * hash + Objects.hashCode(this.createdDate);
+        hash = 59 * hash + Objects.hashCode(this.modifiedBy);
+        hash = 59 * hash + Objects.hashCode(this.modifiedDate);
         return hash;
     }
 

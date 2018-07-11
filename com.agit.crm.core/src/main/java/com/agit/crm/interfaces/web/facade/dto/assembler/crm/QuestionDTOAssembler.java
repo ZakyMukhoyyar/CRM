@@ -11,6 +11,7 @@ import com.agit.crm.domain.customer.feedback.Question;
 import com.agit.crm.domain.customer.feedback.QuestionBuilder;
 import com.agit.crm.shared.object.IObjectAssembler;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -18,6 +19,12 @@ import java.util.List;
  * @author BayuHS
  */
 public class QuestionDTOAssembler implements IObjectAssembler<Question, QuestionDTO> {
+
+    private AnswerDTOAssembler answerDTOAssembler;
+
+    public void setAnswerDTOAssembler(AnswerDTOAssembler answerDTOAssembler) {
+        this.answerDTOAssembler = answerDTOAssembler;
+    }
 
     @Override
     public QuestionDTO toDTO(Question domainObject) {
@@ -31,6 +38,7 @@ public class QuestionDTOAssembler implements IObjectAssembler<Question, Question
                 .setCreatedDate(domainObject.getCreatedDate())
                 .setModifiedBy(domainObject.getModifiedBy())
                 .setModifiedDate(domainObject.getModifiedDate())
+                .setAnswerDTOs(domainObject.getAnswers() == null ? Collections.EMPTY_LIST : answerDTOAssembler.toDTOs(domainObject.getAnswers()))
                 .createQuestionDTO();
     }
 
@@ -46,6 +54,7 @@ public class QuestionDTOAssembler implements IObjectAssembler<Question, Question
                 .setCreatedDate(dtoObject.getCreatedDate())
                 .setModifiedBy(dtoObject.getModifiedBy())
                 .setModifiedDate(dtoObject.getModifiedDate())
+                .setAnswers(dtoObject.getAnswerDTOs() == null ? Collections.EMPTY_LIST : answerDTOAssembler.toDomains(dtoObject.getAnswerDTOs()))
                 .createQuestion();
     }
 
