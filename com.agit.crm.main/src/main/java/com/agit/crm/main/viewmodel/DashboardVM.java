@@ -1,32 +1,23 @@
 package com.agit.crm.main.viewmodel;
 
-import com.agit.crm.common.application.EventAgitService;
-import com.agit.crm.common.application.EventStatusService;
-import com.agit.crm.common.application.KomentarEventService;
-import com.agit.crm.common.application.RiwayatApplyEventService;
-import com.agit.crm.common.dto.crm.EventAgitDTO;
-import com.agit.crm.common.dto.crm.EventStatusDTO;
-import com.agit.crm.common.dto.crm.KomentarEventDTO;
-import com.agit.crm.common.dto.crm.RiwayatApplyEventDTO;
+import com.agit.crm.common.application.QuestionService;
+import com.agit.crm.common.dto.customer.feedback.QuestionDTO;
+import com.agit.crm.common.dto.customer.feedback.QuestionDTOBuilder;
 import com.agit.crm.common.dto.usermanagement.UserDTO;
 import com.agit.crm.common.security.SecurityUtil;
-import com.agit.crm.shared.state.LowonganState;
 import com.agit.crm.shared.status.Status;
+import com.agit.crm.shared.type.TypeTouchpoints;
 import com.agit.crm.shared.zul.CommonViewModel;
 import static com.agit.crm.shared.zul.CommonViewModel.showInformationMessagebox;
 import com.agit.crm.shared.zul.PageNavigation;
+import com.agit.crm.util.CommonUtil;
 import com.agit.crm.util.DateUtil;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
-import org.zkoss.bind.BindContext;
 import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
@@ -36,11 +27,9 @@ import org.zkoss.bind.annotation.ExecutionArgParam;
 import org.zkoss.bind.annotation.GlobalCommand;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
-import org.zkoss.io.Files;
-import org.zkoss.util.media.Media;
-import org.zkoss.zk.ui.Executions;
-import org.zkoss.zk.ui.event.UploadEvent;
+import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
+import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Window;
 
@@ -51,47 +40,15 @@ import org.zkoss.zul.Window;
 public class DashboardVM {
 
     @WireVariable
-    EventAgitService eventAgitService;
-
-    @WireVariable
-    EventStatusService eventStatusService;
-
-    @WireVariable
-    RiwayatApplyEventService riwayatApplyEventService;
-
-    @WireVariable
-    KomentarEventService komentarEventService;
+    QuestionService questionService;
 
     /* data user */
     private UserDTO user;
     private String userNPWP;
     private String role;
     private String uriPhoto;
-    private String idEvent;
-    private String idRiwayatApplyEvent;
-    private String idEventStatus;
-    private String komentarID;
-    private Status status;
-    private String komentar;
 
     private String src;
-
-//    private UserDTO userDTO;
-    private EventAgitDTO eventAgitDTO = new EventAgitDTO();
-    private EventStatusDTO eventStatusDTO = new EventStatusDTO();
-    private RiwayatApplyEventDTO riwayatApplyEventDTO = new RiwayatApplyEventDTO();
-    private KomentarEventDTO komentarEventDTO = new KomentarEventDTO();
-
-//    private List<UserDTO> userDTOs = new ArrayList<>();
-    private List<EventAgitDTO> eventAgitDTOs = new ArrayList<>();
-    private List<EventStatusDTO> eventStatusDTOs = new ArrayList<>();
-    private List<RiwayatApplyEventDTO> riwayatApplyEventDTOs = new ArrayList<>();
-    private List<KomentarEventDTO> komentarEventDTOs = new ArrayList<>();
-
-    Media mediaUploadFileForum;
-    String mediaNameUploadFileForum;
-    private String filePathUploadFileForum;
-    private String pathLocationUploadFileForum;
 
     private PageNavigation previous;
     private boolean checked;
@@ -100,199 +57,293 @@ public class DashboardVM {
     private int selectedIndex;
     private int totalSize = 0;
 
+    private QuestionDTO questionDTO = new QuestionDTO();
+    private List<QuestionDTO> questionDTOs = new ArrayList<>();
+    private List<QuestionDTO> questionDTOsType = new ArrayList<>();
+
+    private List<String> listQuestion = new ArrayList<String>();
+    private ListModelList<Status> statuses = new ListModelList<>();
+    private ListModelList<TypeTouchpoints> touchpointses = new ListModelList<>();
+    private ListModelList<String> choiceAnswer = new ListModelList<>();
+
+    private String questionID;
+    private Status status;
+    private TypeTouchpoints touchpoints;
+
     @Init
-    public void init(@ContextParam(ContextType.COMPONENT) Window window,
-            @ExecutionArgParam("eventAgitDTO") EventAgitDTO eventAgit,
-            @ExecutionArgParam("eventStatusDTO") EventStatusDTO eventStatus,
-            @ExecutionArgParam("riwayatApplyEventDTO") RiwayatApplyEventDTO riwayatApplyEvent,
-            @ExecutionArgParam("komentarEventDTO") KomentarEventDTO komentarEvent,
+    public void init(
+            @ExecutionArgParam("questionDTO") QuestionDTO question,
             @ExecutionArgParam("previous") PageNavigation previous) {
+        Map params = new HashMap();
+        Status status = Status.ACTIVE;
+        params.put("status", status);
 
         userNPWP = SecurityUtil.getUserName();
         role = SecurityUtil.getUser().getRoleDTO().getRoleID();
         user = SecurityUtil.getUser();
         role = SecurityUtil.getUser().getRoleDTO().getRoleID();
-        if (user.getUserSpecificationDTO().getFullName() != null) {
-        } else if (user.getUserSpecificationDTO().getFullName() != null) {
 
-        }
-        switch (role) {
-            default:
-                uriPhoto = "/images/background.png";
-                break;
-        }
         initData();
-        checkValidity(eventAgit, eventStatus, komentarEvent, riwayatApplyEvent, previous);
+
+        checkValidity(question, previous);
 
     }
 
     private void initData() {
-        eventAgitDTOs = eventAgitService.findAllByStatus(status.ACTIVE);
-        if (eventAgitDTO.getIdEvent() != null) {
-            riwayatApplyEventDTOs = riwayatApplyEventService.findIdEvent(eventAgitDTO.getIdEvent());
-            if (riwayatApplyEventDTOs.isEmpty()) {
-                riwayatApplyEventDTOs = Collections.emptyList();
+        questionDTOs = questionService.findAll();
+        if (questionDTOs.isEmpty()) {
+            questionDTOs = Collections.emptyList();
+        }
+
+        questionDTOs = questionService.findAllByTypeTouchpoints(TypeTouchpoints.TouchPoint_1);
+        for (QuestionDTO m : questionDTOs) {
+            listQuestion.add(m.getQuestion());
+        }
+
+        questionDTOsType = questionService.findAllByTypeTouchpoints(TypeTouchpoints.TouchPoint_2);
+        for (QuestionDTO m : questionDTOs) {
+            listQuestion.add(m.getQuestion());
+        }
+
+        choiceAnswer.add("Sangat Baik Sekali");
+        choiceAnswer.add("Sangat Baik");
+        choiceAnswer.add("Cukup Baik");
+        choiceAnswer.add("Tidak Terlalu Baik");
+        choiceAnswer.add("Sangat Buruk");
+    }
+
+    private void checkValidity(QuestionDTO question, PageNavigation previous) {
+        if (question == null) {
+            ListModelList<QuestionDTO> parameterList = new ListModelList<>(questionService.findAll());
+            String questionID = "";
+            if (parameterList.isEmpty()) {
+                questionID = "Question1";
+            } else {
+                questionID = getLatestObjectID(parameterList, "questionID");
             }
-        }
-        komentarEventDTOs = komentarEventService.findAllByID(eventAgitDTO.getIdEvent());
-
-    }
-
-    private void checkValidity(EventAgitDTO eventAgit, EventStatusDTO eventStatus, KomentarEventDTO komentarEvent, RiwayatApplyEventDTO riwayatApplyEvent, PageNavigation previous) {
-        if (eventAgit != null) {
-            this.eventAgitDTO = eventAgit;
-            idEvent = eventAgitDTO.getIdEvent();
-            this.previous = previous;
-        }
-        if (riwayatApplyEvent != null) {
-            this.riwayatApplyEventDTO = riwayatApplyEvent;
-            idRiwayatApplyEvent = riwayatApplyEventDTO.getIdRiwayatApplyEvent();
-            this.previous = previous;
-        }
-        if (eventStatus != null) {
-            this.eventStatusDTO = eventStatus;
-            idEventStatus = eventStatusDTO.getIdEventStatus();
-            this.previous = previous;
-        }
-        if (komentarEvent != null) {
-            this.komentarEventDTO = komentarEvent;
-            komentarID = komentarEventDTO.getKomentarID();
-            this.previous = previous;
-        }
-    }
-
-    @Command("buttonKlikEvent")
-    @NotifyChange({"src", "eventAgitDTOs", "eventAgitDTO"})
-    public void buttonKlikPreview(@BindingParam("object") EventAgitDTO obj, @ContextParam(ContextType.VIEW) Window window) {
-        Map<String, Object> params = new HashMap<>();
-        params.put("eventAgitDTO", obj);
-        CommonViewModel.navigateToWithoutDetach("/crm/admin/event/previewEventAgit.zul", window, params);
-    }
-
-    @Command("buttonApplyAcara")
-    @NotifyChange({"eventAgitDTO", "eventAgitDTOs"})
-    public void buttonApplyAcara(@BindingParam("object") EventAgitDTO obj, @ContextParam(ContextType.VIEW) Window window) {
-
-        Map map = new HashMap();
-        map.put("idUser", user.getUserID());
-        map.put("idEvent", obj.getIdEvent());
-        eventStatusDTOs = eventStatusService.findByParams2(map);
-        if (eventStatusDTOs.isEmpty()) {
-            BindUtils.postGlobalCommand(null, null, "refreshAcara", null);
-            Map<String, Object> params = new HashMap<>();
-            params.put("eventAgitDTO", obj);
-            CommonViewModel.navigateToWithoutDetach("/crm/mahasiswa/popup_apply_acara.zul", window, params);
+            questionDTO = new QuestionDTOBuilder()
+                    .setQuestionID(questionID)
+                    .setCreatedBy(SecurityUtil.getUserName())
+                    .setCreatedDate(new Date())
+                    .createQuestionDTO();
         } else {
-            showInformationMessagebox("Anda Sudah Pernah Menghadiri Acara Ini");
+            this.questionDTO = question;
+            questionID = questionDTO.getQuestionID();
+            this.previous = previous;
         }
     }
 
-    @GlobalCommand
-    @NotifyChange("eventAgitDTOs")
-    public void refreshAcara() {
-        eventAgitDTOs = eventAgitService.findAllByStatus(Status.ACTIVE);
+    protected String getLatestObjectID(ListModelList list, String attribute) {
+        int count = 0;
+        int pointer = 0;
+        int max = 0;
+        String s = "";
+        for (Object obj : list) {
+            Map<String, Object> map = CommonUtil.convertObject2Map(obj);
+            String att = attribute;
+            String[] arr = new String[attribute.length()];
+            String key = "";
+
+            if (att.contains(".")) {
+                arr = att.split("\\.");
+                int f = 1;
+                for (Object x : arr) {
+                    if (f != arr.length) {
+                        map = CommonUtil.convertObject2Map(map.get(x.toString()));
+                    } else {
+                        key = x.toString();
+                    }
+                    f += 1;
+                }
+            } else {
+                key = att;
+            }
+
+            att = map.get(key).toString();
+
+            String temp = "";
+            int countTemp = 0;
+            for (int i = att.length(); i > 0; i--) {
+                if (Character.isLetter(att.charAt(i - 1))) {
+                    pointer = i;
+                    s = att.substring(0, pointer);
+                    break;
+                }
+                countTemp += 1;
+                temp = att.charAt(i - 1) + temp;
+            }
+            if (Integer.parseInt(temp) > max) {
+                max = Integer.parseInt(temp);
+            }
+            count = countTemp;
+        }
+
+        return s + String.format("%0" + count + "d", max + 1);
     }
 
-    @Command("buttonClosePreview")
-    @NotifyChange("eventAgitDTO")
-    public void buttonClosePreview(@BindingParam("object") EventAgitDTO obj, @ContextParam(ContextType.VIEW) Window window) {
+    @Command("buttonAddQuestion")
+    @NotifyChange("questionDTO")
+    public void buttonAddQuestion(@BindingParam("object") QuestionDTO obj, @ContextParam(ContextType.VIEW) Window window) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("questionDTO", obj);
+        CommonViewModel.navigateToWithoutDetach("/customer-feedback-experience/setup-question/add-question.zul", window, params);
+    }
+
+    @Command("detail")
+    @NotifyChange("question")
+    public void detail(@BindingParam("object") QuestionDTO obj, @ContextParam(ContextType.VIEW) Window window) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("questionDTO", obj);
+        CommonViewModel.navigateToWithoutDetach("/customer-feedback-experience/setup-question/add-question.zul", window, params);
+    }
+
+    @Command("buttonView1")
+    @NotifyChange("question")
+    public void buttonView1(@BindingParam("object") QuestionDTO obj, @ContextParam(ContextType.VIEW) Window window) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("questionDTO", obj);
+        CommonViewModel.navigateToWithoutDetach("/customer-feedback-experience/setup-question/view-question-1.zul", window, params);
+    }
+
+    @Command("buttonView2")
+    @NotifyChange("question")
+    public void buttonView2(@BindingParam("object") QuestionDTO obj, @ContextParam(ContextType.VIEW) Window window) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("questionDTO", obj);
+        CommonViewModel.navigateToWithoutDetach("/customer-feedback-experience/setup-question/view-question-2.zul", window, params);
+    }
+
+    @Command("buttonKembali")
+    @NotifyChange({"questionDTO", "questionDTOs"})
+    public void buttonKembali(@BindingParam("object") QuestionDTO obj, @ContextParam(ContextType.VIEW) Window window) {
         window.detach();
     }
 
-    @Command("pengumuman")
-    @NotifyChange("eventAgitDTO")
-    public void pengumuman(@BindingParam("object") EventAgitDTO obj, @ContextParam(ContextType.VIEW) Window window) {
-        Map<String, Object> params = new HashMap<>();
-        params.put("eventAgitDTO", obj);
-        CommonViewModel.navigateToWithoutDetach("/crm/admin/event/dashboard_pengumuman.zul", window, params);
-        BindUtils.postGlobalCommand(null, null, "refreshRiwayatApplyEvent", null);
+    @Command("buttonSaveQuestion")
+    @NotifyChange("questionDTO")
+    public void buttonSaveQuestion(@BindingParam("object") QuestionDTO obj, @ContextParam(ContextType.VIEW) Window window) {
+        questionService.SaveOrUpdate(questionDTO);
+        showInformationMessagebox("Pertanyaan Berhasil Disimpan");
+        BindUtils.postGlobalCommand(null, null, "refreshData", null);
+        window.detach();
     }
 
     @GlobalCommand
-    @NotifyChange("riwayatApplyEventDTOs")
-    public void refreshRiwayatApplyEvent() {
-        riwayatApplyEventDTOs = riwayatApplyEventService.findAllByStatus(eventAgitDTO.getIdEvent(), LowonganState.ACCEPTED);
+    @NotifyChange("questionDTOs")
+    public void refreshData() {
+        questionDTOs = questionService.findAll();
     }
 
-    /*--------------------------------------------------------Komentari-------------------------------------------------------------------*/
-    @Command("komentariEvent")
-    @NotifyChange("eventAgitDTO")
-    public void komentariEvent(@BindingParam("object") EventAgitDTO obj, @ContextParam(ContextType.VIEW) Window window) {
-        Map<String, Object> params = new HashMap<>();
-        params.put("eventAgitDTO", obj);
-        CommonViewModel.navigateToWithoutDetach("/crm/admin/event/dashboard_komentar.zul", window, params);
-        BindUtils.postGlobalCommand(null, null, "refreshKomentarEvent", null);
-    }
+    @Command("delete")
+    @NotifyChange("questionDTO")
+    public void delete(@BindingParam("object") QuestionDTO obj, @ContextParam(ContextType.VIEW) Window window) {
+        questionDTO = (QuestionDTO) obj;
 
-    @GlobalCommand
-    @NotifyChange("komentarEventDTOs")
-    public void refreshKomentarEvent() {
-        komentarEventDTOs = komentarEventService.findAllByID(eventAgitDTO.getIdEvent());
-    }
-
-    @Command("buttonComment")
-    @NotifyChange({"eventAgitDTO", "eventAgitDTOs", "komentarEventDTO", "komentarEventDTOs", "komentar"})
-    public void buttonComment(@BindingParam("object") EventAgitDTO obj, @ContextParam(ContextType.VIEW) Window window) {
-        komentarEventDTO.setKomentarID(UUID.randomUUID().toString());
-        komentarEventDTO.setUserName(SecurityUtil.getUserName());
-        komentarEventDTO.setTglKomentar(new Date());
-        komentarEventDTO.setKomentar(komentar);
-        komentarEventDTO.setIdEvent(eventAgitDTO.getIdEvent());
-
-        if (pathLocationUploadFileForum != null) {
-            komentarEventDTO.setPicture(pathLocationUploadFileForum);
-        } else {
-            komentarEventDTO.setPicture("No Pict");
-        }
-        komentarEventService.saveOrUpdate(komentarEventDTO);
-        komentar = null;
-        pathLocationUploadFileForum = null;
-        BindUtils.postGlobalCommand(null, null, "refreshKomentarEvent", null);
-    }
-
-    @Command("refreshDataGrid")
-    @NotifyChange("komentarEventDTOs")
-    public void refreshDataGrid() {
-        komentarEventDTOs = komentarEventService.findAllByID(eventAgitDTO.getIdEvent());
-    }
-
-    @Command("buttonUploadFileKomentar")
-    @NotifyChange({"mediaNameUploadFileForum", "pathLocationUploadFileForum"})
-    public void buttonUploadFileForum(@ContextParam(ContextType.BIND_CONTEXT) BindContext ctx) throws IOException {
-        UploadEvent upEvent = null;
-        Object objUploadEvent = ctx.getTriggerEvent();
-
-        if (objUploadEvent != null && (objUploadEvent instanceof UploadEvent)) {
-            upEvent = (UploadEvent) objUploadEvent;
-        }
-
-        if (upEvent != null) {
-            mediaUploadFileForum = upEvent.getMedia();
-            Calendar now = Calendar.getInstance();
-            int year = now.get(Calendar.YEAR);
-            int month = now.get(Calendar.MONTH);
-            int day = now.get(Calendar.DAY_OF_MONTH);
-            filePathUploadFileForum = Executions.getCurrent().getDesktop().getWebApp().getRealPath("/");
-            filePathUploadFileForum = filePathUploadFileForum + "\\" + "files" + "\\" + "filekomentar" + "\\" + year + "\\" + month + "\\" + day + "\\";
-
-            File baseDir = new File(filePathUploadFileForum);
-            if (!baseDir.exists()) {
-                baseDir.mkdirs();
+        Messagebox.show("Apakah anda yakin ingin menghapus Pertanyaan?", "Konfirmasi", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION,
+                new org.zkoss.zk.ui.event.EventListener() {
+            @Override
+            public void onEvent(Event evt) throws InterruptedException {
+                if (evt.getName().equals("onOK")) {
+                    questionService.deleteData(questionDTO);
+                    showInformationMessagebox("Pertanyaan Berhasil Dihapus");
+                    BindUtils.postGlobalCommand(null, null, "refreshData", null);
+                } else {
+                    System.out.println("Operasi dibatalkan");
+                }
             }
-
-            Files.copy(new File(filePathUploadFileForum + mediaUploadFileForum.getName()), mediaUploadFileForum.getStreamData());
-            setMediaNameUploadFileForum(filePathUploadFileForum + mediaUploadFileForum.getName());
-            pathLocationUploadFileForum = "/" + "files" + "/" + "filekomentar" + "/" + year + "/" + month + "/" + day + "/" + mediaUploadFileForum.getName();
-        } else {
-            Calendar now = Calendar.getInstance();
-            int year = now.get(Calendar.YEAR);
-            int month = now.get(Calendar.MONTH);
-            int day = now.get(Calendar.DAY_OF_MONTH);
-            mediaNameUploadFileForum = "";
-            pathLocationUploadFileForum = "/" + "files" + "/" + "filekomentar" + "/" + year + "/" + month + "/" + day + "/" + mediaUploadFileForum.getName();
-            Messagebox.show("File : " + mediaUploadFileForum + " Bukan File PDF", "Error", Messagebox.OK, Messagebox.ERROR);
         }
+        );
+
     }
+
+    public QuestionService getQuestionService() {
+        return questionService;
+    }
+
+    public void setQuestionService(QuestionService questionService) {
+        this.questionService = questionService;
+    }
+
+    public QuestionDTO getQuestionDTO() {
+        return questionDTO;
+    }
+
+    public void setQuestionDTO(QuestionDTO questionDTO) {
+        this.questionDTO = questionDTO;
+    }
+
+    public List<QuestionDTO> getQuestionDTOs() {
+        return questionDTOs;
+    }
+
+    public void setQuestionDTOs(List<QuestionDTO> questionDTOs) {
+        this.questionDTOs = questionDTOs;
+    }
+
+    public ListModelList<Status> getStatuses() {
+        return new ListModelList<>(Status.values());
+    }
+
+    public void setStatuses(ListModelList<Status> statuses) {
+        this.statuses = statuses;
+    }
+
+    public ListModelList<TypeTouchpoints> getTouchpointses() {
+        return new ListModelList<>(TypeTouchpoints.values());
+    }
+
+    public void setTouchpointses(ListModelList<TypeTouchpoints> touchpointses) {
+        this.touchpointses = touchpointses;
+    }
+
+    public String getQuestionID() {
+        return questionID;
+    }
+
+    public void setQuestionID(String questionID) {
+        this.questionID = questionID;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public TypeTouchpoints getTouchpoints() {
+        return touchpoints;
+    }
+
+    public void setTouchpoints(TypeTouchpoints touchpoints) {
+        this.touchpoints = touchpoints;
+    }
+
+    public PageNavigation getPrevious() {
+        return previous;
+    }
+
+    public void setPrevious(PageNavigation previous) {
+        this.previous = previous;
+    }
+
+    public List<String> getListQuestion() {
+        return listQuestion;
+    }
+
+    public void setListQuestion(List<String> listQuestion) {
+        this.listQuestion = listQuestion;
+    }
+
+    public ListModelList<String> getChoiceAnswer() {
+        return choiceAnswer;
+    }
+
+    public void setChoiceAnswer(ListModelList<String> choiceAnswer) {
+        this.choiceAnswer = choiceAnswer;
+    }
+
 
     /* helper */
     public String concatUsername(String s1, String s2) {
@@ -309,22 +360,6 @@ public class DashboardVM {
     }
 
     /* Getter&Setter */
-    public RiwayatApplyEventDTO getRiwayatApplyEventDTO() {
-        return riwayatApplyEventDTO;
-    }
-
-    public void setRiwayatApplyEventDTO(RiwayatApplyEventDTO riwayatApplyEventDTO) {
-        this.riwayatApplyEventDTO = riwayatApplyEventDTO;
-    }
-
-    public List<RiwayatApplyEventDTO> getRiwayatApplyEventDTOs() {
-        return riwayatApplyEventDTOs;
-    }
-
-    public void setRiwayatApplyEventDTOs(List<RiwayatApplyEventDTO> riwayatApplyEventDTOs) {
-        this.riwayatApplyEventDTOs = riwayatApplyEventDTOs;
-    }
-
     public String getUserNPWP() {
         return userNPWP;
     }
@@ -363,30 +398,6 @@ public class DashboardVM {
 
     public void setSrc(String src) {
         this.src = src;
-    }
-
-    public List<EventAgitDTO> getEventAgitDTOs() {
-        return eventAgitDTOs;
-    }
-
-    public void setEventAgitDTOs(List<EventAgitDTO> eventAgitDTOs) {
-        this.eventAgitDTOs = eventAgitDTOs;
-    }
-
-    public EventAgitDTO getEventAgitDTO() {
-        return eventAgitDTO;
-    }
-
-    public void setEventAgitDTO(EventAgitDTO eventAgitDTO) {
-        this.eventAgitDTO = eventAgitDTO;
-    }
-
-    public PageNavigation getPrevious() {
-        return previous;
-    }
-
-    public void setPrevious(PageNavigation previous) {
-        this.previous = previous;
     }
 
     public boolean isChecked() {
@@ -429,116 +440,12 @@ public class DashboardVM {
         this.totalSize = totalSize;
     }
 
-    public EventStatusDTO getEventStatusDTO() {
-        return eventStatusDTO;
+    public List<QuestionDTO> getQuestionDTOsType() {
+        return questionDTOsType;
     }
 
-    public void setEventStatusDTO(EventStatusDTO eventStatusDTO) {
-        this.eventStatusDTO = eventStatusDTO;
-    }
-
-    public List<EventStatusDTO> getEventStatusDTOs() {
-        return eventStatusDTOs;
-    }
-
-    public void setEventStatusDTOs(List<EventStatusDTO> eventStatusDTOs) {
-        this.eventStatusDTOs = eventStatusDTOs;
-    }
-
-    public String getIdEvent() {
-        return idEvent;
-    }
-
-    public void setIdEvent(String idEvent) {
-        this.idEvent = idEvent;
-    }
-
-    public String getIdRiwayatApplyEvent() {
-        return idRiwayatApplyEvent;
-    }
-
-    public void setIdRiwayatApplyEvent(String idRiwayatApplyEvent) {
-        this.idRiwayatApplyEvent = idRiwayatApplyEvent;
-    }
-
-    public String getIdEventStatus() {
-        return idEventStatus;
-    }
-
-    public void setIdEventStatus(String idEventStatus) {
-        this.idEventStatus = idEventStatus;
-    }
-
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
-    }
-
-    public String getKomentarID() {
-        return komentarID;
-    }
-
-    public void setKomentarID(String komentarID) {
-        this.komentarID = komentarID;
-    }
-
-    public String getKomentar() {
-        return komentar;
-    }
-
-    public void setKomentar(String komentar) {
-        this.komentar = komentar;
-    }
-
-    public KomentarEventDTO getKomentarEventDTO() {
-        return komentarEventDTO;
-    }
-
-    public void setKomentarEventDTO(KomentarEventDTO komentarEventDTO) {
-        this.komentarEventDTO = komentarEventDTO;
-    }
-
-    public List<KomentarEventDTO> getKomentarEventDTOs() {
-        return komentarEventDTOs;
-    }
-
-    public void setKomentarEventDTOs(List<KomentarEventDTO> komentarEventDTOs) {
-        this.komentarEventDTOs = komentarEventDTOs;
-    }
-
-    public Media getMediaUploadFileForum() {
-        return mediaUploadFileForum;
-    }
-
-    public void setMediaUploadFileForum(Media mediaUploadFileForum) {
-        this.mediaUploadFileForum = mediaUploadFileForum;
-    }
-
-    public String getMediaNameUploadFileForum() {
-        return mediaNameUploadFileForum;
-    }
-
-    public void setMediaNameUploadFileForum(String mediaNameUploadFileForum) {
-        this.mediaNameUploadFileForum = mediaNameUploadFileForum;
-    }
-
-    public String getFilePathUploadFileForum() {
-        return filePathUploadFileForum;
-    }
-
-    public void setFilePathUploadFileForum(String filePathUploadFileForum) {
-        this.filePathUploadFileForum = filePathUploadFileForum;
-    }
-
-    public String getPathLocationUploadFileForum() {
-        return pathLocationUploadFileForum;
-    }
-
-    public void setPathLocationUploadFileForum(String pathLocationUploadFileForum) {
-        this.pathLocationUploadFileForum = pathLocationUploadFileForum;
+    public void setQuestionDTOsType(List<QuestionDTO> questionDTOsType) {
+        this.questionDTOsType = questionDTOsType;
     }
 
 }

@@ -43,4 +43,9 @@
         <name>org.zkoss.zul.Panel.mold</name>
         <value>bs</value>
     </library-property>
+    <library-property>
+        <name>org.zkoss.theme.preferred</name>
+        <value>Sapphire</value>
+        <!--<value>deepsea</value>--> <!-- no whitespace in theme names -->
+    </library-property>
 </zk>

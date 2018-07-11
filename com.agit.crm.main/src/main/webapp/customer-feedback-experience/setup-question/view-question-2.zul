@@ -13,11 +13,11 @@
         <separator></separator>
         <separator></separator>
         <div height="5px" />
-        <listbox rows="7" mold="paging" pageSize="10" emptyMessage="${labels.common.noDataFound}" model="@bind(vm.questionDTOs)">
+        <listbox rows="7" mold="paging" pageSize="10" emptyMessage="${labels.common.noDataFound}" model="@bind(vm.questionDTOsType)">
             <listhead>
-                <listheader label="ID" width="5%" align="left"/>
-                <listheader label="Question" width="55%" align="left"/>
-                <listheader label="Choice" width="40%" align="left"/>
+                <listheader label="" width="5%" align="left"/>
+                <listheader label="" width="55%" align="left"/>
+                <listheader label="" width="40%" align="left"/>
             </listhead>
             <template name="model">
                 <listitem value="${each}">
@@ -28,25 +28,12 @@
                         <label width="100%" value="@bind(each.question)"/>
                     </listcell>
                     <listcell>
-                        <radiogroup>
-                            <hlayout>
-                                <radio label="Sangat Baik Sekali"
-                                       selected="${win$composer.car.autoTransmission}" />
-                                <radio label="Sangat Baik"
-                                       selected="${not win$composer.car.autoTransmission}" />
-                                <radio label="Cukup Baik"
-                                       selected="${not win$composer.car.autoTransmission}" />
-                                <radio label="Tidak Terlalu Baik"
-                                       selected="${not win$composer.car.autoTransmission}" />
-                                <radio label="Sangat Buruk"
-                                       selected="${not win$composer.car.autoTransmission}" />
-                            </hlayout>
+                        <radiogroup id="@bind(each.questionID)" model="@load(vm.choiceAnswer)" selectedItem="@bind(fx.choiceAnswer)">
+                            <template name="model">
+                                <radio label="@load(each)" value="@load(each)"></radio>
+                            </template>
                         </radiogroup>
                     </listcell>
-                    <!--                    <listcell >
-                        <a onClick="@command('detail', object=each)" image="/images/skk_edit.png" sclass="btn btn-default"/>
-                        <a onClick="@command('delete', object=each)" image="/images/clear_x.png" sclass="btn btn-default"/>
-                    </listcell>-->
                 </listitem>
             </template>
         </listbox>
@@ -57,7 +44,7 @@
         <textbox class="form-control" width="100%" value="@bind(fx.question)" rows="5"/>  
         <separator></separator>
         <div class="modal-footer">
-            <button style="background-color: #022c2f;color:white" label="Simpan" onClick="@command('buttonSaveQuestion')" />
+            <button style="background-color: #022c2f;color:white" label="Submit" onClick="@command('buttonSaveQuestion')" />
         </div>
     </window>
 

@@ -73,12 +73,12 @@
                     </columns>
                     <rows>
                         <row>
-                            <button label="FWD APro Accident Protector" style="background-color: #022c2f;color:white" width="300px">
+                            <button label="FWD APro Accident Protector" style="background-color: #022c2f;color:white" width="300px" onClick="@command('buttonView1')">
                                 <attribute name="onClick"><![CDATA[
                                      Filedownload.save("/files/FormulirKlaimKecelakaan-AccidentalClaimForm-200715.pdf", null);
                                 ]]></attribute>
                             </button>
-                            <button label="FWD SPrint Family Health dan Protection" style="background-color: #022c2f;color:white" width="300px">
+                            <button label="FWD SPrint Family Health dan Protection" style="background-color: #022c2f;color:white" width="300px" onClick="@command('buttonView2')">
                                 <attribute name="onClick"><![CDATA[
                                      Filedownload.save("/files/FormulirKlaimKecelakaan-AccidentalClaimForm-200715.pdf", null);
                                 ]]></attribute>

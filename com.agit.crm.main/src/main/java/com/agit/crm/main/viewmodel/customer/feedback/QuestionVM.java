@@ -16,7 +16,6 @@ import static com.agit.crm.shared.zul.CommonViewModel.showInformationMessagebox;
 import com.agit.crm.shared.zul.PageNavigation;
 import com.agit.crm.util.CommonUtil;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -50,6 +49,7 @@ public class QuestionVM {
 
     private QuestionDTO questionDTO = new QuestionDTO();
     private List<QuestionDTO> questionDTOs = new ArrayList<>();
+    private List<QuestionDTO> questionDTOsType = new ArrayList<>();
 
     private List<String> listQuestion = new ArrayList<String>();
     private ListModelList<Status> statuses = new ListModelList<>();
@@ -79,16 +79,21 @@ public class QuestionVM {
             questionDTOs = Collections.emptyList();
         }
 
+        questionDTOs = questionService.findAllByTypeTouchpoints(TypeTouchpoints.TouchPoint_1);
         for (QuestionDTO m : questionDTOs) {
             listQuestion.add(m.getQuestion());
         }
 
-        /* get pelayananID*/
-        choiceAnswer.add("Sangat Baik Sekali");
-        choiceAnswer.add("Sangat Baik");
-        choiceAnswer.add("Cukup Baik");
-        choiceAnswer.add("Tidak Terlalu Baik");
-        choiceAnswer.add("Sangat Buruk");
+        questionDTOsType = questionService.findAllByTypeTouchpoints(TypeTouchpoints.TouchPoint_2);
+        for (QuestionDTO m : questionDTOs) {
+            listQuestion.add(m.getQuestion());
+        }
+
+        choiceAnswer.add(" Sangat Baik Sekali ");
+        choiceAnswer.add(" Sangat Baik ");
+        choiceAnswer.add(" Cukup Baik ");
+        choiceAnswer.add(" Tidak Terlalu Baik ");
+        choiceAnswer.add(" Sangat Buruk ");
     }
 
     private void checkValidity(QuestionDTO question, PageNavigation previous) {
@@ -313,6 +318,14 @@ public class QuestionVM {
 
     public void setChoiceAnswer(ListModelList<String> choiceAnswer) {
         this.choiceAnswer = choiceAnswer;
+    }
+
+    public List<QuestionDTO> getQuestionDTOsType() {
+        return questionDTOsType;
+    }
+
+    public void setQuestionDTOsType(List<QuestionDTO> questionDTOsType) {
+        this.questionDTOsType = questionDTOsType;
     }
 
 }
