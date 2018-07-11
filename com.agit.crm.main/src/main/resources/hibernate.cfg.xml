@@ -15,7 +15,7 @@
         <property name="hibernate.c3p0.idle_test_period">3000</property>
         <property name="hibernate.jdbc.batch_size">20</property>
         <!--<property name="hibernate.dialect">org.hibernate.dialect.OracleDialect</property>-->
-        <property name="hibernate.show_sql">false</property>
+        <property name="hibernate.show_sql">true</property>
         
         <!-- additional hibernate property for websphere-->
 <!--        <property name="hibernate.transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory</property>

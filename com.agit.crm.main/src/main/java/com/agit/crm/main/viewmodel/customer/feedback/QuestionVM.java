@@ -18,6 +18,11 @@ import com.agit.crm.shared.zul.CommonViewModel;
 import static com.agit.crm.shared.zul.CommonViewModel.showInformationMessagebox;
 import com.agit.crm.shared.zul.PageNavigation;
 import com.agit.crm.util.CommonUtil;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -91,6 +96,8 @@ public class QuestionVM {
             questionDTOs = Collections.emptyList();
         }
 
+        Map<String, Object> map1 = new HashMap();
+        map1.put("questionID", questionDTO.getId());
         answerDTOs = answerService.findAll();
         if (answerDTOs.isEmpty()) {
             answerDTOs = Collections.emptyList();
@@ -258,11 +265,55 @@ public class QuestionVM {
     }
 
     @Command("buttonSaveQuestion")
-    @NotifyChange("questionDTO")
+    @NotifyChange({"questionDTO", "answerDTO", "answerDTOs"})
     public void buttonSaveQuestion(@BindingParam("object") QuestionDTO obj, @ContextParam(ContextType.VIEW) Window window) {
         questionDTO.setAnswerDTOs(answerDTOs);
         questionService.SaveOrUpdate(questionDTO);
-        answerService.deleteData(answerDTO);
+        String jdbcUrl = "jdbc:postgresql://localhost:5432/cfe-engine";
+        String username = "postgres";
+        String password = "root";
+
+        Connection conn = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            // Step 1 - Load driver
+            // Class.forName("org.postgresql.Driver"); // Class.forName() is not needed since JDBC 4.0
+
+            // Step 2 - Open connection
+            conn = DriverManager.getConnection(jdbcUrl, username, password);
+
+            // Step 3 - Execute statement
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery("delete from\n"
+                    + "      MST_ANSWER \n"
+                    + "	WHERE (questionid) ISNULL");
+
+            // Step 4 - Get result
+            if (rs.next()) {
+                System.out.println(rs.getString(1));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+
+                // Step 5 Close connection
+                if (stmt != null) {
+                    stmt.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
         showInformationMessagebox("Pertanyaan Berhasil Disimpan");
         BindUtils.postGlobalCommand(null, null, "refreshData", null);
         window.detach();
