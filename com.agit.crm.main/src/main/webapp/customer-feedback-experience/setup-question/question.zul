@@ -16,7 +16,9 @@
             </div>
             <button label="Create" style="background-color: #022c2f;color:white" onClick="@command('buttonAddQuestion')"/>
             <space width="5px"/>
-            <button label="Touchpoints 1" style="background-color: #022c2f;color:white" onClick="@command('buttonView')"/>
+            <button label="Touchpoints 1" style="background-color: #022c2f;color:white" onClick="@command('buttonTp1')"/>
+            <space width="5px"/>
+            <button label="Touchpoints 2" style="background-color: #022c2f;color:white" onClick="@command('buttonTp2')"/>
             <space width="5px"/>
         </div>
         <separator width="30px"/>

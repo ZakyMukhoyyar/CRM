@@ -165,6 +165,12 @@ public class QuestionVM {
         return s + String.format("%0" + count + "d", max + 1);
     }
 
+    @GlobalCommand
+    @NotifyChange("questionDTOs")
+    public void refreshData() {
+        questionDTOs = questionService.findAll();
+    }
+
     @Command("buttonAddQuestion")
     @NotifyChange("questionDTO")
     public void buttonAddQuestion(@BindingParam("object") QuestionDTO obj, @ContextParam(ContextType.VIEW) Window window) {
@@ -181,12 +187,20 @@ public class QuestionVM {
         CommonViewModel.navigateToWithoutDetach("/customer-feedback-experience/setup-question/add-question.zul", window, params);
     }
 
-    @Command("buttonView")
+    @Command("buttonTp1")
     @NotifyChange("question")
-    public void buttonView(@BindingParam("object") QuestionDTO obj, @ContextParam(ContextType.VIEW) Window window) {
+    public void buttonTp1(@BindingParam("object") QuestionDTO obj, @ContextParam(ContextType.VIEW) Window window) {
         Map<String, Object> params = new HashMap<>();
         params.put("questionDTO", obj);
-        CommonViewModel.navigateToWithoutDetach("/customer-feedback-experience/setup-question/view-question.zul", window, params);
+        CommonViewModel.navigateToWithoutDetach("/customer-feedback-experience/setup-question/view-question-1.zul", window, params);
+    }
+    
+    @Command("buttonTp2")
+    @NotifyChange("question")
+    public void buttonTp2(@BindingParam("object") QuestionDTO obj, @ContextParam(ContextType.VIEW) Window window) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("questionDTO", obj);
+        CommonViewModel.navigateToWithoutDetach("/customer-feedback-experience/setup-question/view-question-2.zul", window, params);
     }
 
     @Command("buttonKembali")
@@ -202,12 +216,6 @@ public class QuestionVM {
         showInformationMessagebox("Pertanyaan Berhasil Disimpan");
         BindUtils.postGlobalCommand(null, null, "refreshData", null);
         window.detach();
-    }
-
-    @GlobalCommand
-    @NotifyChange("questionDTOs")
-    public void refreshData() {
-        questionDTOs = questionService.findAll();
     }
 
     @Command("delete")
