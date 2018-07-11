@@ -40,7 +40,7 @@
                             </row>
                             <row>
                                 <n:h5 class="modal-title"> Pertanyaan</n:h5>
-                                <textbox class="form-control" width="100%" value="@bind(fx.question)" rows="5"/>  
+                                <textbox class="form-control" width="100%" value="@bind(fx.question)" rows="3"/>  
                             </row>
                 
                         </rows>
@@ -53,7 +53,7 @@
                     <button label="Create" style="background-color: #022c2f;color:white" onClick="@command('buttonAddAnswer')"/>
                     <separator/>
                 
-                    <listbox rows="5" mold="paging" pageSize="5" emptyMessage="${labels.common.noDataFound}" model="@bind(vm.answerDTOs)">
+                    <listbox rows="5" mold="paging" pageSize="4" emptyMessage="${labels.common.noDataFound}" model="@bind(vm.answerDTOs)">
                         <listhead>
                             <listheader label="Answer" width="75%" align="center"/>
                             <listheader label="Action" width="25%" align="center"/>

@@ -3,6 +3,7 @@ package com.agit.crm.domain.infrastructure.persistance.hibernate;
 import com.agit.crm.domain.customer.feedback.Question;
 import com.agit.crm.domain.customer.feedback.QuestionRepository;
 import com.agit.crm.shared.type.TypeTouchpoints;
+import com.agit.crm.util.StringUtil;
 import java.util.List;
 import java.util.Map;
 import org.hibernate.Criteria;
@@ -48,7 +49,12 @@ public class QuestionHibernateRepository extends HibernateRepository implements 
 
     @Override
     public List<Question> findByParams(Map map) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Criteria criteria = getSession().createCriteria(Question.class);
+
+        if (StringUtil.hasValue(map.get("id"))) {
+            criteria.add(Restrictions.eq("id", map.get("id")));
+        }
+        return criteria.list();
     }
 
     @Override

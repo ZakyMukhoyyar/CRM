@@ -27,5 +27,5 @@ public interface AnswerService {
 
     List<AnswerDTO> findByParams(Map map);
 
-    List<AnswerDTO> findByUserID(Long questionID);
+    List<AnswerDTO> findByQuestionID(Long questionID);
 }

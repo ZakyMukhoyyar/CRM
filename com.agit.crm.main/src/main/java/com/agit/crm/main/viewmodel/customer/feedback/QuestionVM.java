@@ -96,8 +96,6 @@ public class QuestionVM {
             questionDTOs = Collections.emptyList();
         }
 
-        Map<String, Object> map1 = new HashMap();
-        map1.put("questionID", questionDTO.getId());
         answerDTOs = answerService.findAll();
         if (answerDTOs.isEmpty()) {
             answerDTOs = Collections.emptyList();

@@ -78,7 +78,7 @@ public class AnswerServiceImpl implements AnswerService {
     }
 
     @Override
-    public List<AnswerDTO> findByUserID(Long questionID) {
+    public List<AnswerDTO> findByQuestionID(Long questionID) {
         Validate.notNull(answerRepository);
         List<Answer> listAnswer = answerRepository.findByQuestionID(questionID);
         if (listAnswer != null) {

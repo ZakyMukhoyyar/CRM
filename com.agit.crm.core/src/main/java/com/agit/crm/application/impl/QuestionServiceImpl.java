@@ -88,7 +88,12 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Override
     public List<QuestionDTO> findByParams(Map map) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Validate.notNull(questionRepository);
+        List<Question> listLowongan = questionRepository.findByParams(map);
+        if (listLowongan != null) {
+            return (List<QuestionDTO>) questionDTOAssembler.toDTOs(listLowongan);
+        }
+        return null;
     }
 
     @Override
