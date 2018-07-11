@@ -178,7 +178,7 @@ public class QuestionVM {
         params.put("questionDTO", obj);
         CommonViewModel.navigateToWithoutDetach("/customer-feedback-experience/setup-question/add-question.zul", window, params);
     }
-
+    
     @Command("detail")
     @NotifyChange("question")
     public void detail(@BindingParam("object") QuestionDTO obj, @ContextParam(ContextType.VIEW) Window window) {

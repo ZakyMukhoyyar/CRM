@@ -2,13 +2,12 @@
     <window apply="org.zkoss.bind.BindComposer"
             viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.customer.feedback.QuestionVM')"
             form="@id('fx') @load(vm.questionDTO) @save(vm.questionDTO, before='buttonSaveQuestion')"
-            width="800px" height="500px">
+            width="100%" height="100%"
+            closable="true" sizable="true" title="Tambah Pertanyaan"
+    >
         
         <!-- Modal content-->
         <div>
-            <div class="modal-header" align="center">
-                <n:h4 class="modal-title"> Tambah Pertanyaan</n:h4>
-            </div>
             <div class="modal-body">
                 <groupbox>
                     <grid style="border:0">
@@ -19,7 +18,7 @@
                             <column width="35%"></column>
                         </columns>
                         <rows>
-                            <row>  
+                            <row visible="false">  
                                 <n:h5 class="modal-title"> ID</n:h5>
                                 <textbox class="form-control" width="100px" disabled="true" value="@bind(fx.questionID)"/>    
                             </row>
@@ -39,22 +38,6 @@
                                     </template>
                                 </combobox> 
                             </row>
-                
-                        </rows>
-                       
-                    </grid>
-                </groupbox>
-                <separator></separator>
-                <separator></separator>
-                <separator></separator>
-                <separator></separator>
-                <groupbox>
-                    <grid style="border:0">
-                        <columns>
-                            <column width="15%"></column>
-                            <column width="85%"></column>
-                        </columns>
-                        <rows>
                             <row>
                                 <n:h5 class="modal-title"> Pertanyaan</n:h5>
                                 <textbox class="form-control" width="100%" value="@bind(fx.question)" rows="5"/>  
@@ -65,7 +48,29 @@
                     </grid>
                 </groupbox>
                 <separator/>
-                <separator width="3px"/>
+                
+                <groupbox>
+                    <button label="Create" style="background-color: #022c2f;color:white" onClick="@command('buttonAddAnswer')"/>
+                    <separator/>
+                
+                    <listbox rows="5" mold="paging" pageSize="5" emptyMessage="${labels.common.noDataFound}" model="@bind(vm.questionDTOs)">
+                        <listhead>
+                            <listheader label="Answer" width="75%" align="center"/>
+                            <listheader label="Action" width="25%" align="center"/>
+                        </listhead>
+                        <template name="model">
+                            <listitem value="${each}">
+                                <listcell>
+                                    <label width="100%" value="@bind(each.question)"/>
+                                </listcell>
+                                <listcell >
+                                    <a onClick="@command('detail', object=each)" image="/images/skk_edit.png" sclass="btn btn-default"/>
+                                    <a onClick="@command('delete', object=each)" image="/images/clear_x.png" sclass="btn btn-default"/>
+                                </listcell>
+                            </listitem>
+                        </template>
+                    </listbox>
+                </groupbox>
                 
                 <div class="modal-footer">
                     <button style="background-color: #022c2f;color:white" label="Kembali" onClick="@command('buttonKembali')" />
