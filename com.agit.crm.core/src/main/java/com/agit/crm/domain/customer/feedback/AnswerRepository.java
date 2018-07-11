@@ -21,4 +21,6 @@ public interface AnswerRepository {
     List<Answer> findByParams(Map map);
 
     List<Answer> findAllByTypeTouchpoints(TypeTouchpoints touchpoints);
+
+    List<Answer> findByQuestionID(Long questionID);
 }

@@ -47,7 +47,8 @@ public class AnswerServiceImpl implements AnswerService {
 
     @Override
     public void deleteData(AnswerDTO answer) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Answer p = answerDTOAssembler.toDomain(answer);
+        answerRepository.deleteData(p);
     }
 
     @Override
@@ -74,6 +75,16 @@ public class AnswerServiceImpl implements AnswerService {
     @Override
     public List<AnswerDTO> findByParams(Map map) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<AnswerDTO> findByUserID(Long questionID) {
+        Validate.notNull(answerRepository);
+        List<Answer> listAnswer = answerRepository.findByQuestionID(questionID);
+        if (listAnswer != null) {
+            return (List<AnswerDTO>) answerDTOAssembler.toDTOs(listAnswer);
+        }
+        return null;
     }
 
 }

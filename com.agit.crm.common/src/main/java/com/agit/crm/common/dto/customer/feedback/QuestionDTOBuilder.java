@@ -13,6 +13,7 @@ import java.util.List;
 
 public class QuestionDTOBuilder {
 
+    private long id;
     private String questionID;
     private TypeTouchpoints touchpoints;
     private Status status;
@@ -25,6 +26,11 @@ public class QuestionDTOBuilder {
     private List<AnswerDTO> answerDTOs;
 
     public QuestionDTOBuilder() {
+    }
+
+    public QuestionDTOBuilder setId(long id) {
+        this.id = id;
+        return this;
     }
 
     public QuestionDTOBuilder setQuestionID(String questionID) {
@@ -78,7 +84,7 @@ public class QuestionDTOBuilder {
     }
 
     public QuestionDTO createQuestionDTO() {
-        return new QuestionDTO(questionID, touchpoints, status, question, choiceAnswer, createdBy, createdDate, modifiedBy, modifiedDate, answerDTOs);
+        return new QuestionDTO(id, questionID, touchpoints, status, question, choiceAnswer, createdBy, createdDate, modifiedBy, modifiedDate, answerDTOs);
     }
     
 }

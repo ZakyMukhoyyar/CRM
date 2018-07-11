@@ -12,7 +12,7 @@ public class AnswerBuilder {
     private String answerID;
     private String userID;
     private String answer;
-    private String questionID;
+    private Long questionID;
 
     public AnswerBuilder() {
     }
@@ -37,7 +37,7 @@ public class AnswerBuilder {
         return this;
     }
 
-    public AnswerBuilder setQuestionID(String questionID) {
+    public AnswerBuilder setQuestionID(Long questionID) {
         this.questionID = questionID;
         return this;
     }

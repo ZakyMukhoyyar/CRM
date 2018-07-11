@@ -13,7 +13,7 @@
         <separator></separator>
         <separator></separator>
         <div height="5px" />
-        <listbox rows="7" mold="paging" pageSize="10" emptyMessage="${labels.common.noDataFound}" model="@bind(vm.questionDTOs)">
+        <listbox rows="7" mold="paging" pageSize="10" emptyMessage="${labels.common.noDataFound}" model="@bind(vm.questionDTOsType1)">
             <listhead>
                 <listheader label="" width="5%" align="left"/>
                 <listheader label="" width="55%" align="left"/>

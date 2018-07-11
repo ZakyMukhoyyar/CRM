@@ -1,6 +1,5 @@
 package com.agit.crm.domain.customer.feedback;
 
-import com.agit.crm.shared.status.Status;
 import com.agit.crm.shared.type.TypeTouchpoints;
 import java.util.List;
 import java.util.Map;

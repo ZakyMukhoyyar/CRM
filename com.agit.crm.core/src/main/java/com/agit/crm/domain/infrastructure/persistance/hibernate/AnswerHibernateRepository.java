@@ -2,10 +2,10 @@ package com.agit.crm.domain.infrastructure.persistance.hibernate;
 
 import com.agit.crm.domain.customer.feedback.Answer;
 import com.agit.crm.domain.customer.feedback.AnswerRepository;
-import com.agit.crm.domain.customer.feedback.Question;
 import com.agit.crm.shared.type.TypeTouchpoints;
 import java.util.List;
 import java.util.Map;
+import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,7 +24,9 @@ public class AnswerHibernateRepository extends HibernateRepository implements An
 
     @Override
     public void deleteData(Answer answer) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Query query = getSession().createQuery("delete from com.agit.crm.domain.customer.feedback.Answer where questionID = :cid");
+        query.setParameter("cid", null);
+        query.executeUpdate();
     }
 
     @Override
@@ -50,6 +52,14 @@ public class AnswerHibernateRepository extends HibernateRepository implements An
     @Override
     public List<Answer> findAllByTypeTouchpoints(TypeTouchpoints touchpoints) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Answer> findByQuestionID(Long questionID) {
+        return (List<Answer>) getSession()
+                .createQuery("from com.agit.crm.domain.customer.feedback.Answer where questionID = :cid")
+                .setParameter("cid", questionID)
+                .list();
     }
 
 }

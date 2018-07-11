@@ -11,7 +11,7 @@ public class AnswerDTOBuilder {
     private String answerID;
     private String userID;
     private String answer;
-    private String questionID;
+    private Long questionID;
 
     public AnswerDTOBuilder() {
     }
@@ -31,7 +31,7 @@ public class AnswerDTOBuilder {
         return this;
     }
 
-    public AnswerDTOBuilder setQuestionID(String questionID) {
+    public AnswerDTOBuilder setQuestionID(Long questionID) {
         this.questionID = questionID;
         return this;
     }

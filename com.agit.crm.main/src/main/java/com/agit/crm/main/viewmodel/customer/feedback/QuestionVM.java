@@ -5,7 +5,10 @@
  */
 package com.agit.crm.main.viewmodel.customer.feedback;
 
+import com.agit.crm.common.application.AnswerService;
 import com.agit.crm.common.application.QuestionService;
+import com.agit.crm.common.dto.customer.feedback.AnswerDTO;
+import com.agit.crm.common.dto.customer.feedback.AnswerDTOBuilder;
 import com.agit.crm.common.dto.customer.feedback.QuestionDTO;
 import com.agit.crm.common.dto.customer.feedback.QuestionDTOBuilder;
 import com.agit.crm.common.security.SecurityUtil;
@@ -47,9 +50,16 @@ public class QuestionVM {
     @WireVariable
     QuestionService questionService;
 
+    @WireVariable
+    AnswerService answerService;
+
     private QuestionDTO questionDTO = new QuestionDTO();
     private List<QuestionDTO> questionDTOs = new ArrayList<>();
-    private List<QuestionDTO> questionDTOsType = new ArrayList<>();
+    private List<QuestionDTO> questionDTOsType1 = new ArrayList<>();
+    private List<QuestionDTO> questionDTOsType2 = new ArrayList<>();
+
+    private AnswerDTO answerDTO = new AnswerDTO();
+    private List<AnswerDTO> answerDTOs = new ArrayList<>();
 
     private List<String> listQuestion = new ArrayList<String>();
     private ListModelList<Status> statuses = new ListModelList<>();
@@ -57,6 +67,7 @@ public class QuestionVM {
     private ListModelList<String> choiceAnswer = new ListModelList<>();
 
     private String questionID;
+    private String answerID;
     private Status status;
     private TypeTouchpoints touchpoints;
 
@@ -65,11 +76,12 @@ public class QuestionVM {
     @Init
     public void init(
             @ExecutionArgParam("questionDTO") QuestionDTO question,
+            @ExecutionArgParam("answerDTO") AnswerDTO answer,
             @ExecutionArgParam("previous") PageNavigation previous) {
 
         initData();
 
-        checkValidity(question, previous);
+        checkValidity(question, answer, previous);
 
     }
 
@@ -79,12 +91,17 @@ public class QuestionVM {
             questionDTOs = Collections.emptyList();
         }
 
-        questionDTOs = questionService.findAllByTypeTouchpoints(TypeTouchpoints.TouchPoint_1);
+        answerDTOs = answerService.findAll();
+        if (answerDTOs.isEmpty()) {
+            answerDTOs = Collections.emptyList();
+        }
+
+        questionDTOsType1 = questionService.findAllByTypeTouchpoints(TypeTouchpoints.TouchPoint_1);
         for (QuestionDTO m : questionDTOs) {
             listQuestion.add(m.getQuestion());
         }
 
-        questionDTOsType = questionService.findAllByTypeTouchpoints(TypeTouchpoints.TouchPoint_2);
+        questionDTOsType2 = questionService.findAllByTypeTouchpoints(TypeTouchpoints.TouchPoint_2);
         for (QuestionDTO m : questionDTOs) {
             listQuestion.add(m.getQuestion());
         }
@@ -96,7 +113,7 @@ public class QuestionVM {
         choiceAnswer.add(" Sangat Buruk ");
     }
 
-    private void checkValidity(QuestionDTO question, PageNavigation previous) {
+    private void checkValidity(QuestionDTO question, AnswerDTO answer, PageNavigation previous) {
         if (question == null) {
             ListModelList<QuestionDTO> parameterList = new ListModelList<>(questionService.findAll());
             String questionID = "";
@@ -113,6 +130,23 @@ public class QuestionVM {
         } else {
             this.questionDTO = question;
             questionID = questionDTO.getQuestionID();
+            this.previous = previous;
+        }
+
+        if (answer == null) {
+            ListModelList<AnswerDTO> parameterList = new ListModelList<>(answerService.findAll());
+            String answerID = "";
+            if (parameterList.isEmpty()) {
+                answerID = "1";
+            } else {
+                answerID = getLatestObjectID(parameterList, "answerID");
+            }
+            answerDTO = new AnswerDTOBuilder()
+                    .setAnswerID(answerID)
+                    .createAnswerDTO();
+        } else {
+            this.answerDTO = answer;
+            answerID = answerDTO.getAnswerID();
             this.previous = previous;
         }
     }
@@ -171,6 +205,12 @@ public class QuestionVM {
         questionDTOs = questionService.findAll();
     }
 
+    @GlobalCommand
+    @NotifyChange("answerDTOs")
+    public void refreshDataAnswer() {
+        answerDTOs = answerService.findAll();
+    }
+
     @Command("buttonAddQuestion")
     @NotifyChange("questionDTO")
     public void buttonAddQuestion(@BindingParam("object") QuestionDTO obj, @ContextParam(ContextType.VIEW) Window window) {
@@ -178,7 +218,7 @@ public class QuestionVM {
         params.put("questionDTO", obj);
         CommonViewModel.navigateToWithoutDetach("/customer-feedback-experience/setup-question/add-question.zul", window, params);
     }
-    
+
     @Command("buttonAddAnswer")
     @NotifyChange("questionDTO")
     public void buttonAddAnswer(@BindingParam("object") QuestionDTO obj, @ContextParam(ContextType.VIEW) Window window) {
@@ -186,7 +226,7 @@ public class QuestionVM {
         params.put("answerDTO", obj);
         CommonViewModel.navigateToWithoutDetach("/customer-feedback-experience/setup-question/add-answer.zul", window, params);
     }
-    
+
     @Command("detail")
     @NotifyChange("question")
     public void detail(@BindingParam("object") QuestionDTO obj, @ContextParam(ContextType.VIEW) Window window) {
@@ -202,7 +242,7 @@ public class QuestionVM {
         params.put("questionDTO", obj);
         CommonViewModel.navigateToWithoutDetach("/customer-feedback-experience/setup-question/view-question-1.zul", window, params);
     }
-    
+
     @Command("buttonTp2")
     @NotifyChange("question")
     public void buttonTp2(@BindingParam("object") QuestionDTO obj, @ContextParam(ContextType.VIEW) Window window) {
@@ -220,9 +260,20 @@ public class QuestionVM {
     @Command("buttonSaveQuestion")
     @NotifyChange("questionDTO")
     public void buttonSaveQuestion(@BindingParam("object") QuestionDTO obj, @ContextParam(ContextType.VIEW) Window window) {
+        questionDTO.setAnswerDTOs(answerDTOs);
         questionService.SaveOrUpdate(questionDTO);
+        answerService.deleteData(answerDTO);
         showInformationMessagebox("Pertanyaan Berhasil Disimpan");
         BindUtils.postGlobalCommand(null, null, "refreshData", null);
+        window.detach();
+    }
+
+    @Command("buttonSaveAnswer")
+    @NotifyChange({"answerDTO", "questionDTO"})
+    public void buttonSaveAnswer(@BindingParam("object") AnswerDTO obj, @ContextParam(ContextType.VIEW) Window window) {
+        answerService.SaveOrUpdate(answerDTO);
+        showInformationMessagebox("Berhasil Disimpan");
+        BindUtils.postGlobalCommand(null, null, "refreshDataAnswer", null);
         window.detach();
     }
 
@@ -336,12 +387,52 @@ public class QuestionVM {
         this.choiceAnswer = choiceAnswer;
     }
 
-    public List<QuestionDTO> getQuestionDTOsType() {
-        return questionDTOsType;
+    public List<QuestionDTO> getQuestionDTOsType1() {
+        return questionDTOsType1;
     }
 
-    public void setQuestionDTOsType(List<QuestionDTO> questionDTOsType) {
-        this.questionDTOsType = questionDTOsType;
+    public void setQuestionDTOsType1(List<QuestionDTO> questionDTOsType1) {
+        this.questionDTOsType1 = questionDTOsType1;
+    }
+
+    public List<QuestionDTO> getQuestionDTOsType2() {
+        return questionDTOsType2;
+    }
+
+    public void setQuestionDTOsType2(List<QuestionDTO> questionDTOsType2) {
+        this.questionDTOsType2 = questionDTOsType2;
+    }
+
+    public AnswerService getAnswerService() {
+        return answerService;
+    }
+
+    public void setAnswerService(AnswerService answerService) {
+        this.answerService = answerService;
+    }
+
+    public AnswerDTO getAnswerDTO() {
+        return answerDTO;
+    }
+
+    public void setAnswerDTO(AnswerDTO answerDTO) {
+        this.answerDTO = answerDTO;
+    }
+
+    public List<AnswerDTO> getAnswerDTOs() {
+        return answerDTOs;
+    }
+
+    public void setAnswerDTOs(List<AnswerDTO> answerDTOs) {
+        this.answerDTOs = answerDTOs;
+    }
+
+    public String getAnswerID() {
+        return answerID;
+    }
+
+    public void setAnswerID(String answerID) {
+        this.answerID = answerID;
     }
 
 }

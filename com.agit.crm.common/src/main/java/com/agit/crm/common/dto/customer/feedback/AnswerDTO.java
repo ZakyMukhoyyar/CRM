@@ -16,12 +16,12 @@ public class AnswerDTO implements Serializable {
     private String answerID;
     private String userID;
     private String answer;
-    private String questionID;
+    private Long questionID;
 
     public AnswerDTO() {
     }
 
-    public AnswerDTO(String answerID, String userID, String answer, String questionID) {
+    public AnswerDTO(String answerID, String userID, String answer, Long questionID) {
         this.answerID = answerID;
         this.userID = userID;
         this.answer = answer;
@@ -52,11 +52,11 @@ public class AnswerDTO implements Serializable {
         this.answer = answer;
     }
 
-    public String getQuestionID() {
+    public Long getQuestionID() {
         return questionID;
     }
 
-    public void setQuestionID(String questionID) {
+    public void setQuestionID(Long questionID) {
         this.questionID = questionID;
     }
 

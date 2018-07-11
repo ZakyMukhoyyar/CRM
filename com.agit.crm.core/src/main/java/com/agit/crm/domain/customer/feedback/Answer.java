@@ -18,12 +18,12 @@ public class Answer implements EntityObject<Answer> {
     private String answerID;
     private String userID;
     private String answer;
-    private String questionID;
+    private Long questionID;
 
     public Answer() {
     }
 
-    public Answer(long id, String answerID, String userID, String answer, String questionID) {
+    public Answer(long id, String answerID, String userID, String answer, Long questionID) {
         this.id = id;
         this.answerID = answerID;
         this.userID = userID;
@@ -63,11 +63,11 @@ public class Answer implements EntityObject<Answer> {
         this.answer = answer;
     }
 
-    public String getQuestionID() {
+    public Long getQuestionID() {
         return questionID;
     }
 
-    public void setQuestionID(String questionID) {
+    public void setQuestionID(Long questionID) {
         this.questionID = questionID;
     }
 

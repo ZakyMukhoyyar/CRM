@@ -26,4 +26,6 @@ public interface AnswerService {
     List<AnswerDTO> findAll();
 
     List<AnswerDTO> findByParams(Map map);
+
+    List<AnswerDTO> findByUserID(Long questionID);
 }

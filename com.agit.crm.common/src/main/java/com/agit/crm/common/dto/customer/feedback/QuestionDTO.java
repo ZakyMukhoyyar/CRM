@@ -17,6 +17,7 @@ import java.util.List;
  */
 public class QuestionDTO implements Serializable {
 
+    long id;
     private String questionID;
     private TypeTouchpoints touchpoints;
     private Status status;
@@ -31,7 +32,8 @@ public class QuestionDTO implements Serializable {
     public QuestionDTO() {
     }
 
-    public QuestionDTO(String questionID, TypeTouchpoints touchpoints, Status status, String question, String choiceAnswer, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate, List<AnswerDTO> answerDTOs) {
+    public QuestionDTO(long id, String questionID, TypeTouchpoints touchpoints, Status status, String question, String choiceAnswer, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate, List<AnswerDTO> answerDTOs) {
+        this.id = id;
         this.questionID = questionID;
         this.touchpoints = touchpoints;
         this.status = status;
@@ -42,6 +44,14 @@ public class QuestionDTO implements Serializable {
         this.modifiedBy = modifiedBy;
         this.modifiedDate = modifiedDate;
         this.answerDTOs = answerDTOs;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getQuestionID() {
