@@ -77,14 +77,4 @@ public class AnswerServiceImpl implements AnswerService {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public List<AnswerDTO> findByQuestionID(Long questionID) {
-        Validate.notNull(answerRepository);
-        List<Answer> listAnswer = answerRepository.findByQuestionID(questionID);
-        if (listAnswer != null) {
-            return (List<AnswerDTO>) answerDTOAssembler.toDTOs(listAnswer);
-        }
-        return null;
-    }
-
 }

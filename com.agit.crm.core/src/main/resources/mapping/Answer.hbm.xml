@@ -11,8 +11,13 @@
             <generator class="org.hibernate.id.IdentityGenerator"/>
         </id>
         <property column="answerID" name="answerID" not-null="false"/>
-        <property column="userID" name="userID" not-null="false"/>
-        <property column="answer" name="answer" not-null="false"/>
-        <property column="questionID" name="questionID" not-null="false"/>
+        <property column="chooseQuestion" name="chooseQuestion" not-null="false"/>
+        <property column="chooseAnswer" name="chooseAnswer" not-null="false"/>
+        <property column="touchpoints" name="touchpoints" not-null="false">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">com.agit.crm.shared.type.TypeTouchpoints</param>
+                <param name="type">12</param>
+            </type>
+        </property>
     </class>
 </hibernate-mapping>

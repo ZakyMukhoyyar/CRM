@@ -5,13 +5,15 @@
  */
 package com.agit.crm.common.dto.customer.feedback;
 
+import com.agit.crm.shared.type.TypeTouchpoints;
+
 
 public class AnswerDTOBuilder {
 
     private String answerID;
-    private String userID;
-    private String answer;
-    private Long questionID;
+    private String chooseQuestion;
+    private String chooseAnswer;
+    private TypeTouchpoints touchpoints;
 
     public AnswerDTOBuilder() {
     }
@@ -21,23 +23,23 @@ public class AnswerDTOBuilder {
         return this;
     }
 
-    public AnswerDTOBuilder setUserID(String userID) {
-        this.userID = userID;
+    public AnswerDTOBuilder setChooseQuestion(String chooseQuestion) {
+        this.chooseQuestion = chooseQuestion;
         return this;
     }
 
-    public AnswerDTOBuilder setAnswer(String answer) {
-        this.answer = answer;
+    public AnswerDTOBuilder setChooseAnswer(String chooseAnswer) {
+        this.chooseAnswer = chooseAnswer;
         return this;
     }
 
-    public AnswerDTOBuilder setQuestionID(Long questionID) {
-        this.questionID = questionID;
+    public AnswerDTOBuilder setTouchpoints(TypeTouchpoints touchpoints) {
+        this.touchpoints = touchpoints;
         return this;
     }
 
     public AnswerDTO createAnswerDTO() {
-        return new AnswerDTO(answerID, userID, answer, questionID);
+        return new AnswerDTO(answerID, chooseQuestion, chooseAnswer, touchpoints);
     }
     
 }

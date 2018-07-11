@@ -5,6 +5,7 @@
  */
 package com.agit.crm.common.dto.customer.feedback;
 
+import com.agit.crm.shared.type.TypeTouchpoints;
 import java.io.Serializable;
 
 /**
@@ -14,18 +15,18 @@ import java.io.Serializable;
 public class AnswerDTO implements Serializable {
 
     private String answerID;
-    private String userID;
-    private String answer;
-    private Long questionID;
+    private String chooseQuestion;
+    private String chooseAnswer;
+    private TypeTouchpoints touchpoints;
 
     public AnswerDTO() {
     }
 
-    public AnswerDTO(String answerID, String userID, String answer, Long questionID) {
+    public AnswerDTO(String answerID, String chooseQuestion, String chooseAnswer, TypeTouchpoints touchpoints) {
         this.answerID = answerID;
-        this.userID = userID;
-        this.answer = answer;
-        this.questionID = questionID;
+        this.chooseQuestion = chooseQuestion;
+        this.chooseAnswer = chooseAnswer;
+        this.touchpoints = touchpoints;
     }
 
     public String getAnswerID() {
@@ -36,33 +37,33 @@ public class AnswerDTO implements Serializable {
         this.answerID = answerID;
     }
 
-    public String getUserID() {
-        return userID;
+    public String getChooseQuestion() {
+        return chooseQuestion;
     }
 
-    public void setUserID(String userID) {
-        this.userID = userID;
+    public void setChooseQuestion(String chooseQuestion) {
+        this.chooseQuestion = chooseQuestion;
     }
 
-    public String getAnswer() {
-        return answer;
+    public String getChooseAnswer() {
+        return chooseAnswer;
     }
 
-    public void setAnswer(String answer) {
-        this.answer = answer;
+    public void setChooseAnswer(String chooseAnswer) {
+        this.chooseAnswer = chooseAnswer;
     }
 
-    public Long getQuestionID() {
-        return questionID;
+    public TypeTouchpoints getTouchpoints() {
+        return touchpoints;
     }
 
-    public void setQuestionID(Long questionID) {
-        this.questionID = questionID;
+    public void setTouchpoints(TypeTouchpoints touchpoints) {
+        this.touchpoints = touchpoints;
     }
 
     @Override
     public String toString() {
-        return "AnswerDTO{" + "answerID=" + answerID + ", userID=" + userID + ", answer=" + answer + ", questionID=" + questionID + '}';
+        return "AnswerDTO{" + "answerID=" + answerID + ", chooseQuestion=" + chooseQuestion + ", chooseAnswer=" + chooseAnswer + ", touchpoints=" + touchpoints + '}';
     }
 
 }

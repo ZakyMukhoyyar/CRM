@@ -22,5 +22,4 @@ public interface AnswerRepository {
 
     List<Answer> findAllByTypeTouchpoints(TypeTouchpoints touchpoints);
 
-    List<Answer> findByQuestionID(Long questionID);
 }

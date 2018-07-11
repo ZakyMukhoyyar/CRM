@@ -5,14 +5,16 @@
  */
 package com.agit.crm.domain.customer.feedback;
 
+import com.agit.crm.shared.type.TypeTouchpoints;
+
 
 public class AnswerBuilder {
 
     private long id;
     private String answerID;
-    private String userID;
-    private String answer;
-    private Long questionID;
+    private String chooseQuestion;
+    private String chooseAnswer;
+    private TypeTouchpoints touchpoints;
 
     public AnswerBuilder() {
     }
@@ -27,23 +29,23 @@ public class AnswerBuilder {
         return this;
     }
 
-    public AnswerBuilder setUserID(String userID) {
-        this.userID = userID;
+    public AnswerBuilder setChooseQuestion(String chooseQuestion) {
+        this.chooseQuestion = chooseQuestion;
         return this;
     }
 
-    public AnswerBuilder setAnswer(String answer) {
-        this.answer = answer;
+    public AnswerBuilder setChooseAnswer(String chooseAnswer) {
+        this.chooseAnswer = chooseAnswer;
         return this;
     }
 
-    public AnswerBuilder setQuestionID(Long questionID) {
-        this.questionID = questionID;
+    public AnswerBuilder setTouchpoints(TypeTouchpoints touchpoints) {
+        this.touchpoints = touchpoints;
         return this;
     }
 
     public Answer createAnswer() {
-        return new Answer(id, answerID, userID, answer, questionID);
+        return new Answer(id, answerID, chooseQuestion, chooseAnswer, touchpoints);
     }
     
 }

@@ -27,12 +27,11 @@ public class QuestionDTO implements Serializable {
     private Date createdDate;
     private String modifiedBy;
     private Date modifiedDate;
-    private List<AnswerDTO> answerDTOs;
 
     public QuestionDTO() {
     }
 
-    public QuestionDTO(long id, String questionID, TypeTouchpoints touchpoints, Status status, String question, String choiceAnswer, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate, List<AnswerDTO> answerDTOs) {
+    public QuestionDTO(long id, String questionID, TypeTouchpoints touchpoints, Status status, String question, String choiceAnswer, String createdBy, Date createdDate, String modifiedBy, Date modifiedDate) {
         this.id = id;
         this.questionID = questionID;
         this.touchpoints = touchpoints;
@@ -43,7 +42,6 @@ public class QuestionDTO implements Serializable {
         this.createdDate = createdDate;
         this.modifiedBy = modifiedBy;
         this.modifiedDate = modifiedDate;
-        this.answerDTOs = answerDTOs;
     }
 
     public long getId() {
@@ -126,17 +124,9 @@ public class QuestionDTO implements Serializable {
         this.modifiedDate = modifiedDate;
     }
 
-    public List<AnswerDTO> getAnswerDTOs() {
-        return answerDTOs;
-    }
-
-    public void setAnswerDTOs(List<AnswerDTO> answerDTOs) {
-        this.answerDTOs = answerDTOs;
-    }
-
     @Override
     public String toString() {
-        return "QuestionDTO{" + "questionID=" + questionID + ", touchpoints=" + touchpoints + ", status=" + status + ", question=" + question + ", choiceAnswer=" + choiceAnswer + ", createdBy=" + createdBy + ", createdDate=" + createdDate + ", modifiedBy=" + modifiedBy + ", modifiedDate=" + modifiedDate + ", answerDTOs=" + answerDTOs + '}';
+        return "QuestionDTO{" + "id=" + id + ", questionID=" + questionID + ", touchpoints=" + touchpoints + ", status=" + status + ", question=" + question + ", choiceAnswer=" + choiceAnswer + ", createdBy=" + createdBy + ", createdDate=" + createdDate + ", modifiedBy=" + modifiedBy + ", modifiedDate=" + modifiedDate + '}';
     }
 
 }

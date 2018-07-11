@@ -6,6 +6,7 @@
 package com.agit.crm.domain.customer.feedback;
 
 import com.agit.crm.shared.object.EntityObject;
+import com.agit.crm.shared.type.TypeTouchpoints;
 import java.util.Objects;
 
 /**
@@ -16,19 +17,19 @@ public class Answer implements EntityObject<Answer> {
 
     private long id;
     private String answerID;
-    private String userID;
-    private String answer;
-    private Long questionID;
+    private String chooseQuestion;
+    private String chooseAnswer;
+    private TypeTouchpoints touchpoints;
 
     public Answer() {
     }
 
-    public Answer(long id, String answerID, String userID, String answer, Long questionID) {
+    public Answer(long id, String answerID, String chooseQuestion, String chooseAnswer, TypeTouchpoints touchpoints) {
         this.id = id;
         this.answerID = answerID;
-        this.userID = userID;
-        this.answer = answer;
-        this.questionID = questionID;
+        this.chooseQuestion = chooseQuestion;
+        this.chooseAnswer = chooseAnswer;
+        this.touchpoints = touchpoints;
     }
 
     public long getId() {
@@ -47,37 +48,45 @@ public class Answer implements EntityObject<Answer> {
         this.answerID = answerID;
     }
 
-    public String getUserID() {
-        return userID;
+    public String getChooseQuestion() {
+        return chooseQuestion;
     }
 
-    public void setUserID(String userID) {
-        this.userID = userID;
+    public void setChooseQuestion(String chooseQuestion) {
+        this.chooseQuestion = chooseQuestion;
     }
 
-    public String getAnswer() {
-        return answer;
+    public String getChooseAnswer() {
+        return chooseAnswer;
     }
 
-    public void setAnswer(String answer) {
-        this.answer = answer;
+    public void setChooseAnswer(String chooseAnswer) {
+        this.chooseAnswer = chooseAnswer;
     }
 
-    public Long getQuestionID() {
-        return questionID;
+    public TypeTouchpoints getTouchpoints() {
+        return touchpoints;
     }
 
-    public void setQuestionID(Long questionID) {
-        this.questionID = questionID;
+    public void setTouchpoints(TypeTouchpoints touchpoints) {
+        this.touchpoints = touchpoints;
+    }
+
+    public void assignNewAnswer(Answer Answer) {
+        this.id = Answer.id;
+        this.answerID = Answer.answerID;
+        this.chooseQuestion = Answer.chooseQuestion;
+        this.chooseAnswer = Answer.chooseAnswer;
+        this.touchpoints = Answer.touchpoints;
     }
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 79 * hash + Objects.hashCode(this.answerID);
-        hash = 79 * hash + Objects.hashCode(this.userID);
-        hash = 79 * hash + Objects.hashCode(this.answer);
-        hash = 79 * hash + Objects.hashCode(this.questionID);
+        int hash = 7;
+        hash = 83 * hash + Objects.hashCode(this.answerID);
+        hash = 83 * hash + Objects.hashCode(this.chooseQuestion);
+        hash = 83 * hash + Objects.hashCode(this.chooseAnswer);
+        hash = 83 * hash + Objects.hashCode(this.touchpoints);
         return hash;
     }
 
@@ -97,13 +106,6 @@ public class Answer implements EntityObject<Answer> {
             return false;
         }
         return true;
-    }
-
-    public void assignNewAnswer(Answer Answer) {
-        this.answerID = Answer.answerID;
-        this.userID = Answer.userID;
-        this.answer = Answer.answer;
-        this.questionID = Answer.questionID;
     }
 
     @Override

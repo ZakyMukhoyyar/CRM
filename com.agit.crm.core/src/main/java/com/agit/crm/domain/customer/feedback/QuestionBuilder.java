@@ -8,7 +8,6 @@ package com.agit.crm.domain.customer.feedback;
 import com.agit.crm.shared.status.Status;
 import com.agit.crm.shared.type.TypeTouchpoints;
 import java.util.Date;
-import java.util.List;
 
 
 public class QuestionBuilder {
@@ -16,7 +15,6 @@ public class QuestionBuilder {
     private long id;
     private String questionID;
     private TypeTouchpoints touchpoints;
-    private List<Answer> answers;
     private Status status;
     private String question;
     private String choiceAnswer;
@@ -40,11 +38,6 @@ public class QuestionBuilder {
 
     public QuestionBuilder setTouchpoints(TypeTouchpoints touchpoints) {
         this.touchpoints = touchpoints;
-        return this;
-    }
-
-    public QuestionBuilder setAnswers(List<Answer> answers) {
-        this.answers = answers;
         return this;
     }
 
@@ -84,7 +77,7 @@ public class QuestionBuilder {
     }
 
     public Question createQuestion() {
-        return new Question(id, questionID, touchpoints, answers, status, question, choiceAnswer, createdBy, createdDate, modifiedBy, modifiedDate);
+        return new Question(id, questionID, touchpoints, status, question, choiceAnswer, createdBy, createdDate, modifiedBy, modifiedDate);
     }
     
 }

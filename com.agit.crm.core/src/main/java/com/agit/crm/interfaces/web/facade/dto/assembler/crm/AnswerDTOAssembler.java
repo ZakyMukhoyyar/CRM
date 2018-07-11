@@ -23,9 +23,9 @@ public class AnswerDTOAssembler implements IObjectAssembler<Answer, AnswerDTO> {
     public AnswerDTO toDTO(Answer domainObject) {
         return new AnswerDTOBuilder()
                 .setAnswerID(domainObject.getAnswerID())
-                .setUserID(domainObject.getUserID())
-                .setAnswer(domainObject.getAnswer())
-                .setQuestionID(domainObject.getQuestionID())
+                .setChooseAnswer(domainObject.getChooseAnswer())
+                .setChooseQuestion(domainObject.getChooseQuestion())
+                .setTouchpoints(domainObject.getTouchpoints())
                 .createAnswerDTO();
     }
 
@@ -33,9 +33,9 @@ public class AnswerDTOAssembler implements IObjectAssembler<Answer, AnswerDTO> {
     public Answer toDomain(AnswerDTO dtoObject) {
         return new AnswerBuilder()
                 .setAnswerID(dtoObject.getAnswerID())
-                .setUserID(dtoObject.getUserID())
-                .setAnswer(dtoObject.getAnswer())
-                .setQuestionID(dtoObject.getQuestionID())
+                .setChooseAnswer(dtoObject.getChooseAnswer())
+                .setChooseQuestion(dtoObject.getChooseQuestion())
+                .setTouchpoints(dtoObject.getTouchpoints())
                 .createAnswer();
     }
 

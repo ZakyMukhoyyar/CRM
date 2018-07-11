@@ -54,12 +54,4 @@ public class AnswerHibernateRepository extends HibernateRepository implements An
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public List<Answer> findByQuestionID(Long questionID) {
-        return (List<Answer>) getSession()
-                .createQuery("from com.agit.crm.domain.customer.feedback.Answer where questionID = :cid")
-                .setParameter("cid", questionID)
-                .list();
-    }
-
 }
