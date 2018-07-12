@@ -2,9 +2,8 @@
     <window apply="org.zkoss.bind.BindComposer"
             viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.customer.feedback.QuestionVM')"
             form="@id('fx') @load(vm.questionDTO) @save(vm.questionDTO, before='buttonSaveQuestion')"
-            width="100%" height="100%"
-            closable="true" sizable="true" title="Tambah Pertanyaan"
-    >
+            width="50%" height="60%"
+            closable="true" sizable="true" title="Tambah Pertanyaan">
         
         <!-- Modal content-->
         <div>
@@ -38,6 +37,21 @@
                                     </template>
                                 </combobox> 
                             </row>
+                
+                        </rows>
+                       
+                    </grid>
+                </groupbox>
+                <separator> </separator>
+                   <separator> </separator>
+                <groupbox>
+                    <grid style="border:0">
+                        <columns>
+                            <column width="15%"></column>
+                            <column width="65%"></column>
+                            <column width="20%"></column>
+                        </columns>
+                        <rows>
                             <row>
                                 <n:h5 class="modal-title"> Pertanyaan</n:h5>
                                 <textbox class="form-control" width="100%" value="@bind(fx.question)" rows="3"/>  
@@ -49,7 +63,7 @@
                 </groupbox>
                 <separator/>
                 
-                <groupbox>
+<!--                <groupbox>
                     <button label="Create" style="background-color: #022c2f;color:white" onClick="@command('buttonAddAnswer')"/>
                     <separator/>
                 
@@ -70,7 +84,7 @@
                             </listitem>
                         </template>
                     </listbox>
-                </groupbox>
+                </groupbox>-->
                 
                 <div class="modal-footer">
                     <button style="background-color: #022c2f;color:white" label="Kembali" onClick="@command('buttonKembali')" />

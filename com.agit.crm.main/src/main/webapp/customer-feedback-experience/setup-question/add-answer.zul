@@ -19,11 +19,27 @@
                         <rows>
                             <row visible="false">  
                                 <n:h5 class="modal-title">ID</n:h5>
-                                <textbox class="form-control" width="100px" disabled="true" value="@bind(fx.questionID)"/>    
+                                <textbox class="form-control" width="100px" disabled="true" value="@bind(fx.answerID)"/>    
+                            </row>
+                            <row> 
+                                <n:h5 class="modal-title"> Kategori</n:h5>
+                                <combobox width="100%" style="font-size:12px" height="25px" placeholder="-Pilih Jenis TouchPoints-" readonly="true" model="@load(vm.touchpointses)" selectedItem="@bind(fx.touchpoints)">
+                                    <template name="model" var="items">
+                                        <comboitem label="@load(items)" value="@load(items)"/>
+                                    </template>
+                                </combobox>
+                            </row>
+                            <row> 
+                                <n:h5 class="modal-title"> Pertanyaan</n:h5>
+                                <combobox width="100%" style="font-size:12px" height="25px" placeholder="-Pilih Pertanyaan-" readonly="true" model="@load(vm.listQuestion)" selectedItem="@bind(fx.chooseQuestion)">
+                                    <template name="model" var="items">
+                                        <comboitem label="@load(items)" value="@load(items)"/>
+                                    </template>
+                                </combobox>
                             </row>
                             <row>
                                 <n:h5 class="modal-title"> Jawaban </n:h5>
-                                <textbox class="form-control" width="100%" value="@bind(fx.answer)" rows="5"/>  
+                                <textbox class="form-control" width="100%" value="@bind(fx.chooseAnswer)" rows="3"/>  
                             </row>
                 
                         </rows>
@@ -33,7 +49,6 @@
                 <separator/>
                 
                 <div class="modal-footer">
-                    <button style="background-color: #022c2f;color:white" label="Kembali" onClick="@command('buttonKembali')" />
                     <button style="background-color: #022c2f;color:white" label="Simpan" onClick="@command('buttonSaveAnswer')" />
                 </div>
             </div>
