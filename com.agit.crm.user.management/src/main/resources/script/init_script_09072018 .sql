@@ -23,6 +23,7 @@ INSERT INTO "public"."mst_privilege" VALUES ('18', 'MENU_MANAGEMENT', 'Menu Dash
 
 INSERT INTO "public"."mst_privilege" VALUES ('19', 'ADMIN_MANAGEMENT', 'Admin', 'ACTIVE', 'ADMINISTRATOR', 't', 'Manage Admin', null, null, null, '2016-01-01 00:00:00', 'SYSTEM');
 INSERT INTO "public"."mst_privilege" VALUES ('20', 'QUESTION_MANAGEMENT', 'Question Management', 'ACTIVE', 'ADMIN_MANAGEMENT', 't', 'Question Management', 'Question Management', null, '/customer-feedback-experience/setup-question/question.zul', '2016-01-01 00:00:00', 'SYSTEM');
+INSERT INTO "public"."mst_privilege" VALUES ('21', 'DASHBOARD_RESULT', 'Dashboard Result', 'ACTIVE', 'ADMIN_MANAGEMENT', 't', 'Dashboard Result', 'Dashboard Result', null, '/customer-feedback-experience/setup-question/dashboard.zul', '2016-01-01 00:00:00', 'SYSTEM');
 
 
 -- ----------------------------
