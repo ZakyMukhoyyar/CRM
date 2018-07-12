@@ -20,32 +20,32 @@
             <template name="model">
                 <listitem value="${each}">
                     <listcell>
-                        <label width="100%" value="@bind(each.chooseQuestion)"/>
+                        <label width="100%" value="@bind(each.chooseQuestion)" style="color:#022c2f;font-size:12px;font-weight: bold;align:center"/>
                         <separator bar="true" />
                         <separator></separator>
                         <radiogroup selectedItem="@bind(fx.chooseAnswer1)">
                             <radiogroup id="@bind(each.idChooseAnswer1)" onCheck="choice1.value = self.selectedItem.label" />
-                            <radio label="@bind(each.chooseAnswer1)" value="@bind(each.chooseAnswer1)" radiogroup="@bind(each.idChooseAnswer1)"/>
+                            <radio label="@bind(each.chooseAnswer1)" value="@bind(each.chooseAnswer1)" radiogroup="@bind(each.idChooseAnswer1)" style="color:#022c2f;font-size:12px;font-weight: bold;align:center"/>
                         </radiogroup>
                         <separator></separator>
                         <radiogroup selectedItem="@bind(fx.chooseAnswer2)">
                             <radiogroup id="@bind(each.idChooseAnswer2)" onCheck="choice1.value = self.selectedItem.label" />
-                            <radio label="@bind(each.chooseAnswer2)" value="@bind(each.chooseAnswer2)" radiogroup="@bind(each.idChooseAnswer2)"/>
+                            <radio label="@bind(each.chooseAnswer2)" value="@bind(each.chooseAnswer2)" radiogroup="@bind(each.idChooseAnswer2)" style="color:#022c2f;font-size:12px;font-weight: bold;align:center"/>
                         </radiogroup>
                         <separator></separator>
                         <radiogroup selectedItem="@bind(fx.chooseAnswer3)">
                             <radiogroup id="@bind(each.idChooseAnswer3)" onCheck="choice1.value = self.selectedItem.label" />
-                            <radio label="@bind(each.chooseAnswer3)" value="@bind(each.chooseAnswer2)" radiogroup="@bind(each.idChooseAnswer3)"/>
+                            <radio label="@bind(each.chooseAnswer3)" value="@bind(each.chooseAnswer2)" radiogroup="@bind(each.idChooseAnswer3)" style="color:#022c2f;font-size:12px;font-weight: bold;align:center"/>
                         </radiogroup>
                         <separator></separator>
                         <radiogroup selectedItem="@bind(fx.chooseAnswer4)">
                             <radiogroup id="@bind(each.idChooseAnswer4)" onCheck="choice1.value = self.selectedItem.label" />
-                            <radio label="@bind(each.chooseAnswer4)" value="@bind(each.chooseAnswer2)" radiogroup="@bind(each.idChooseAnswer4)"/>
+                            <radio label="@bind(each.chooseAnswer4)" value="@bind(each.chooseAnswer2)" radiogroup="@bind(each.idChooseAnswer4)" style="color:#022c2f;font-size:12px;font-weight: bold;align:center"/>
                         </radiogroup>
                         <separator></separator>
                         <radiogroup selectedItem="@bind(fx.chooseAnswer5)">
                             <radiogroup id="@bind(each.idChooseAnswer5)" onCheck="choice1.value = self.selectedItem.label" />
-                            <radio label="@bind(each.chooseAnswer5)" value="@bind(each.chooseAnswer2)" radiogroup="@bind(each.idChooseAnswer5)"/>
+                            <radio label="@bind(each.chooseAnswer5)" value="@bind(each.chooseAnswer2)" radiogroup="@bind(each.idChooseAnswer5)" style="color:#022c2f;font-size:12px;font-weight: bold;align:center"/>
                         </radiogroup>
                     </listcell>
                     
@@ -53,11 +53,13 @@
             </template>
         </listbox>
         <separator></separator>
+        <separator></separator>
+
         <label style="color:#022c2f;font-size:15px;font-weight: bold;align:center" value="Apakah anda memiliki komentar, pertanyaan atau keluhan ?"/>
         <textbox class="form-control" width="100%" rows="5"/>  
         <separator></separator>
         <div class="modal-footer">
-            <button style="background-color: #022c2f;color:white" label="Submit" onClick="@command('buttonSaveQuestion')" />
+            <button style="background-color: #022c2f;color:white" label="Submit" onClick="@command('buttonFeedback')" />
         </div>
     </window>
 

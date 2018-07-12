@@ -11,12 +11,14 @@ import com.agit.crm.common.dto.customer.feedback.AnswerDTO;
 import com.agit.crm.common.dto.customer.feedback.AnswerDTOBuilder;
 import com.agit.crm.common.dto.customer.feedback.QuestionDTO;
 import com.agit.crm.common.dto.customer.feedback.QuestionDTOBuilder;
+import com.agit.crm.common.dto.usermanagement.UserDTO;
 import com.agit.crm.common.security.SecurityUtil;
 import com.agit.crm.shared.status.Status;
 import com.agit.crm.shared.type.TypeTouchpoints;
 import com.agit.crm.shared.zul.CommonViewModel;
 import static com.agit.crm.shared.zul.CommonViewModel.showInformationMessagebox;
 import com.agit.crm.shared.zul.PageNavigation;
+import com.agit.crm.user.management.application.UserService;
 import com.agit.crm.util.CommonUtil;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -24,7 +26,15 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.UUID;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
@@ -54,6 +64,9 @@ public class QuestionVM {
     @WireVariable
     AnswerService answerService;
 
+    @WireVariable
+    UserService userService;
+
     private QuestionDTO questionDTO = new QuestionDTO();
     private List<QuestionDTO> questionDTOs = new ArrayList<>();
     private List<QuestionDTO> questionDTOsType1 = new ArrayList<>();
@@ -69,6 +82,9 @@ public class QuestionVM {
     private ListModelList<Status> statuses = new ListModelList<>();
     private ListModelList<TypeTouchpoints> touchpointses = new ListModelList<>();
     private ListModelList<String> choiceAnswer = new ListModelList<>();
+
+    private List<UserDTO> userDTOs = new ArrayList<>();
+    private UserDTO userDTO = new UserDTO();
 
     private String questionID;
     private String idChooseAnswer1;
@@ -110,6 +126,9 @@ public class QuestionVM {
 
         answerType1DTOs = answerService.findAnswerByTouchPoints(TypeTouchpoints.TouchPoint_1);
         answerType2DTOs = answerService.findAnswerByTouchPoints(TypeTouchpoints.TouchPoint_2);
+
+        userDTOs = userService.findAllUser();
+        userDTO = userService.findByID(SecurityUtil.getUserName());
     }
 
     private void checkValidity(QuestionDTO question, AnswerDTO answer, PageNavigation previous) {
@@ -268,6 +287,46 @@ public class QuestionVM {
 
         showInformationMessagebox("Pertanyaan Berhasil Disimpan");
         BindUtils.postGlobalCommand(null, null, "refreshData", null);
+        window.detach();
+    }
+
+    @Command("buttonFeedback")
+    @NotifyChange({"questionDTO", "answerDTO", "answerDTOs"})
+    public void buttonFeedback(@BindingParam("object") QuestionDTO obj, @ContextParam(ContextType.VIEW) Window window) {
+        final String username = "bayuhendra1078@gmail.com";
+        final String passwordEmail = "bayuhendra1993";
+        Properties prop = new Properties();
+        prop.put("mail.smtp.auth", "true");
+        prop.put("mail.smtp.starttls.enable", "true");
+        prop.put("mail.smtp.host", "smtp.gmail.com");
+        prop.put("mail.smtp.port", "587");
+        Session session = Session.getInstance(prop, new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(username, passwordEmail);
+            }
+        });
+        try {
+
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress("bayuhendra1078@gmail.com"));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("bayu.setiawan@ag-it.com"));
+
+            message.setSubject("Survei Kepuasan Pelanggan");
+            message.setText("Test"
+            );
+            message.setSentDate(new Date());
+
+            Transport.send(message);
+
+            System.out.println("==================Sending Email Done==================");
+
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        }
+
+        showInformationMessagebox("Teriamaksih atas feedback yang anda berikan");
+        BindUtils.postGlobalCommand(
+                null, null, "refreshData", null);
         window.detach();
     }
 
@@ -508,6 +567,30 @@ public class QuestionVM {
 
     public void setAnswerType2DTOs(List<AnswerDTO> answerType2DTOs) {
         this.answerType2DTOs = answerType2DTOs;
+    }
+
+    public UserService getUserService() {
+        return userService;
+    }
+
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
+
+    public List<UserDTO> getUserDTOs() {
+        return userDTOs;
+    }
+
+    public void setUserDTOs(List<UserDTO> userDTOs) {
+        this.userDTOs = userDTOs;
+    }
+
+    public UserDTO getUserDTO() {
+        return userDTO;
+    }
+
+    public void setUserDTO(UserDTO userDTO) {
+        this.userDTO = userDTO;
     }
 
 }

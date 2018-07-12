@@ -2,7 +2,7 @@
     <window apply="org.zkoss.bind.BindComposer"
             viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.customer.feedback.QuestionVM')"
             form="@id('fx') @load(vm.answerDTO) @save(vm.answerDTO, before='buttonSaveAnswer')"
-            width="85%" height="85%"
+            width="100%" height="100%"
             closable="true" sizable="true" title="Add Answer"
             contentStyle="overflow:auto;">
         
@@ -12,18 +12,18 @@
                 <groupbox>
                     <grid style="border:0">
                         <columns>
-                            <column width="35%"></column>
+                            <column width="10%"></column>
+                            <column width="40%"></column>
                             <column width="50%"></column>
-                            <column width="15%"></column>
                         </columns>
                         <rows>
                             <row visible="false">  
                                 <n:h5 class="modal-title">ID</n:h5>
-                                <textbox class="form-control" width="100px" disabled="true" value="@bind(fx.answerID)"/>    
+                                <textbox class="form-control" width="50px" disabled="true" value="@bind(fx.answerID)"/>    
                             </row>
                             <row> 
                                 <n:h5 class="modal-title"> Kategori</n:h5>
-                                <combobox width="100%" style="font-size:12px" height="25px" placeholder="-Pilih Jenis TouchPoints-" readonly="true" model="@load(vm.touchpointses)" selectedItem="@bind(fx.touchpoints)">
+                                <combobox width="50%" style="font-size:12px" height="25px" placeholder="-Pilih Jenis TouchPoints-" readonly="true" model="@load(vm.touchpointses)" selectedItem="@bind(fx.touchpoints)">
                                     <template name="model" var="items">
                                         <comboitem label="@load(items)" value="@load(items)"/>
                                     </template>
@@ -65,7 +65,7 @@
                     <listbox rows="2" mold="paging" pageSize="2" 
                                  emptyMessage="${labels.common.noDataFound}" model="@bind(vm.answerDTOs)">
                         <listhead>
-                            <listheader label="Question" width="15%" align="center"/>
+                            <listheader label="Question" width="30%" align="center"/>
                             <listheader label="Answer 1" width="15%" align="center"/>
                             <listheader label="Answer 2" width="15%" align="center"/>
                             <listheader label="Answer 3" width="15%" align="center"/>
@@ -76,7 +76,7 @@
                         <template name="model">
                             <listitem value="${each}">
                                 <listcell>
-                                    <label width="100%" value="@bind(each.chooseQuestion)"/>
+                                    <label width="100%" value="@bind(each.chooseQuestion)" />
                                 </listcell>
                                 <listcell>
                                     <label width="100%" value="@bind(each.chooseAnswer1)"/>
