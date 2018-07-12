@@ -11,8 +11,8 @@
                 </columns>
                 <rows>
                     <row>
-                        <charts id="chart" type="pie" title="Summary Feedback"/>
-                        <charts id="chart1" type="pie" title="Summary Feedback"/>
+                        <charts id="chart" type="pie" title="Summary Feedback TouchPoints 1"/>
+                        <charts id="chart1" type="pie" title="Summary Feedback TouchPoints 2"/>
                     </row>
                 </rows>
             </grid>
