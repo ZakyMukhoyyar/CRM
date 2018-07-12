@@ -221,7 +221,7 @@ public class QuestionVM {
     }
 
     @Command("buttonAddAnswer")
-    @NotifyChange("questionDTO")
+    @NotifyChange({"questionDTO", "answerDTOs"})
     public void buttonAddAnswer(@BindingParam("object") AnswerDTO obj, @ContextParam(ContextType.VIEW) Window window) {
         Map<String, Object> params = new HashMap<>();
         params.put("answerDTO", obj);
