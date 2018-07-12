@@ -137,12 +137,6 @@
             <artifactId>com.agit.crm.infrastructure.component</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.zkoss.chart</groupId>
-            <artifactId>zkcharts</artifactId>
-            <version>3.0.0-FL-20170705-Eval</version>
-            <type>jar</type>
-        </dependency>
     </dependencies>
     <name>com.agit.crm.main</name>
 </project>
