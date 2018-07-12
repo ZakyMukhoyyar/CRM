@@ -5,7 +5,9 @@ import com.agit.crm.domain.customer.feedback.AnswerRepository;
 import com.agit.crm.shared.type.TypeTouchpoints;
 import java.util.List;
 import java.util.Map;
+import org.hibernate.Criteria;
 import org.hibernate.Query;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -50,8 +52,10 @@ public class AnswerHibernateRepository extends HibernateRepository implements An
     }
 
     @Override
-    public List<Answer> findAllByTypeTouchpoints(TypeTouchpoints touchpoints) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Answer> findAnswerByTouchPoints(TypeTouchpoints touchpoints) {
+        Criteria criteria = getSession().createCriteria(Answer.class);
+        criteria.add(Restrictions.eq("touchpoints", touchpoints));
+        return (List<Answer>) criteria.list();
     }
 
 }

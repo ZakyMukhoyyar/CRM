@@ -6,8 +6,10 @@
 package com.agit.crm.common.application;
 
 import com.agit.crm.common.dto.customer.feedback.AnswerDTO;
+import com.agit.crm.shared.type.TypeTouchpoints;
 import java.util.List;
 import java.util.Map;
+import javafx.scene.input.TouchPoint;
 
 /**
  *
@@ -26,5 +28,7 @@ public interface AnswerService {
     List<AnswerDTO> findAll();
 
     List<AnswerDTO> findByParams(Map map);
+    
+    List<AnswerDTO> findAnswerByTouchPoints(TypeTouchpoints typeTouchpoints);
 
 }

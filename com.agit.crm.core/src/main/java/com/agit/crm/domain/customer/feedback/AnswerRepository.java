@@ -20,6 +20,6 @@ public interface AnswerRepository {
 
     List<Answer> findByParams(Map map);
 
-    List<Answer> findAllByTypeTouchpoints(TypeTouchpoints touchpoints);
+    List<Answer> findAnswerByTouchPoints(TypeTouchpoints touchpoints);
 
 }

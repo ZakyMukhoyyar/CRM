@@ -10,8 +10,10 @@ import com.agit.crm.common.dto.customer.feedback.AnswerDTO;
 import com.agit.crm.domain.customer.feedback.Answer;
 import com.agit.crm.domain.customer.feedback.AnswerRepository;
 import com.agit.crm.interfaces.web.facade.dto.assembler.crm.AnswerDTOAssembler;
+import com.agit.crm.shared.type.TypeTouchpoints;
 import java.util.List;
 import java.util.Map;
+import javafx.scene.input.TouchPoint;
 import org.apache.commons.lang.Validate;
 
 /**
@@ -75,6 +77,16 @@ public class AnswerServiceImpl implements AnswerService {
     @Override
     public List<AnswerDTO> findByParams(Map map) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<AnswerDTO> findAnswerByTouchPoints(TypeTouchpoints typeTouchpoints) {
+        Validate.notNull(answerRepository);
+        List<Answer> answers = answerRepository.findAnswerByTouchPoints(typeTouchpoints);
+        if (answers != null) {
+            return (List<AnswerDTO>) answerDTOAssembler.toDTOs(answers);
+        }
+        return null;
     }
 
 }
