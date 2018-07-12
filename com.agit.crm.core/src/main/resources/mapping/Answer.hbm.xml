@@ -12,7 +12,16 @@
         </id>
         <property column="answerID" name="answerID" not-null="false"/>
         <property column="chooseQuestion" name="chooseQuestion" not-null="false"/>
-        <property column="chooseAnswer" name="chooseAnswer" not-null="false"/>
+        <property column="idChooseAnswer1" name="idChooseAnswer1" not-null="false"/>
+        <property column="chooseAnswer1" name="chooseAnswer1" not-null="false"/>
+        <property column="idChooseAnswer2" name="idChooseAnswer2" not-null="false"/>
+        <property column="chooseAnswer2" name="chooseAnswer2" not-null="false"/>
+        <property column="idChooseAnswer3" name="idChooseAnswer3" not-null="false"/>
+        <property column="chooseAnswer3" name="chooseAnswer3" not-null="false"/>
+        <property column="idChooseAnswer4" name="idChooseAnswer4" not-null="false"/>
+        <property column="chooseAnswer4" name="chooseAnswer4" not-null="false"/>
+        <property column="idChooseAnswer5" name="idChooseAnswer5" not-null="false"/>
+        <property column="chooseAnswer5" name="chooseAnswer5" not-null="false"/>
         <property column="touchpoints" name="touchpoints" not-null="false">
             <type name="org.hibernate.type.EnumType">
                 <param name="enumClass">com.agit.crm.shared.type.TypeTouchpoints</param>
