@@ -1,7 +1,145 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <zk xmlns="http://www.zkoss.org/2005/zul">
-    <window apply="com.agit.crm.main.viewmodel.DashboardPieChartVM">
+    <!--    <window apply="com.agit.crm.main.viewmodel.DashboardPieChartVM">
         <charts id="chart" type="pie" title="Browser market shares at a specific website, 2010"/>
-    </window>
+    </window>-->
+    
+    <vbox>
+        <grid width="400px" visible="false">
+            <columns>
+                <column label="category" width="150px" />
+                <column label="value" />
+            </columns>
+            <rows>
+                <row>
+                    <label id="c0" value="A" />
+                    <doublebox id="v0" value="21.2" constraint="no empty"
+                               onChange="update(0)" />
+                </row>
+                <row>
+                    <label id="c1" value="B" />
+                    <doublebox id="v1" value="10.2" constraint="no empty"
+                               onChange="update(1)" />
+                </row>
+                <row>
+                    <label id="c2" value="C" />
+                    <doublebox id="v2" value="40.4" constraint="no empty"
+                               onChange="update(2)" />
+                </row>
+                <row>
+                    <label id="c3" value="D" />
+                    <doublebox id="v3" value="28.2" constraint="no empty"
+                               onChange="update(3)" />
+                </row>
+            </rows>
+        </grid>
+        <checkbox label="3D Chart" checked="true"
+                  onCheck="mychart.setThreeD(self.isChecked())" 
+                  visible="false"/>
+        
+        
+        <div align="center">
+            <groupbox width="100%" contentStyle="border:0;">
+                <grid style="border:0;">
+                    <columns>
+                        <column width="50%" align="center"></column>
+                        <column width="50%" align="center"></column>
+                    </columns>
+                    <rows>
+                        <row>
+                            <chart id="chart1" title="Pertanyaan 1" width="500" height="250"
+                                   type="pie" threeD="true" fgAlpha="128">
+                                <attribute name="onClick">
+                                    Area area = event.getAreaComponent();
+                                    if (area != null) {
+                                    alert(""+area.getAttribute("entity")+": "+area.getTooltiptext());
+                                    }
+                                </attribute>
+                                <zscript>
+                                    void update(int rowIndex) {
+                                    Label lb = (Label) self.getFellow("c"+rowIndex);
+                                    Doublebox db = (Doublebox) self.getFellow("v"+rowIndex);
+                                    model.setValue(lb.value, new Double(db.getValue().doubleValue()));
+                                    }  
+                                    PieModel model = new SimplePieModel();
+                                    for(int j=0; j &lt; 4; ++j) {
+                                    update(j);
+                                    }
+                                    chart1.setModel(model);
+                                </zscript>
+                            </chart>
+                            <chart id="chart2" title="Pertanyaan 2" width="500" height="250"
+                                   type="pie" threeD="true" fgAlpha="128">
+                                <attribute name="onClick">
+                                    Area area = event.getAreaComponent();
+                                    if (area != null) {
+                                    alert(""+area.getAttribute("entity")+": "+area.getTooltiptext());
+                                    }
+                                </attribute>
+                                <zscript>
+                                    void update(int rowIndex) {
+                                    Label lb = (Label) self.getFellow("c"+rowIndex);
+                                    Doublebox db = (Doublebox) self.getFellow("v"+rowIndex);
+                                    model.setValue(lb.value, new Double(db.getValue().doubleValue()));
+                                    }  
+                                    PieModel model = new SimplePieModel();
+                                    for(int j=0; j &lt; 4; ++j) {
+                                    update(j);
+                                    }
+                                    chart2.setModel(model);
+                                </zscript>
+                            </chart>
+                        </row>
+                        <row>
+                            <chart id="chart3" title="Pertanyaan 3" width="500" height="250"
+                                   type="pie" threeD="true" fgAlpha="128">
+                                <attribute name="onClick">
+                                    Area area = event.getAreaComponent();
+                                    if (area != null) {
+                                    alert(""+area.getAttribute("entity")+": "+area.getTooltiptext());
+                                    }
+                                </attribute>
+                                <zscript>
+                                    void update(int rowIndex) {
+                                    Label lb = (Label) self.getFellow("c"+rowIndex);
+                                    Doublebox db = (Doublebox) self.getFellow("v"+rowIndex);
+                                    model.setValue(lb.value, new Double(db.getValue().doubleValue()));
+                                    }  
+                                    PieModel model = new SimplePieModel();
+                                    for(int j=0; j &lt; 4; ++j) {
+                                    update(j);
+                                    }
+                                    chart3.setModel(model);
+                                </zscript>
+                            </chart>
+                            <chart id="chart4" title="Pertanyaan 4" width="500" height="250"
+                                   type="pie" threeD="true" fgAlpha="128">
+                                <attribute name="onClick">
+                                    Area area = event.getAreaComponent();
+                                    if (area != null) {
+                                    alert(""+area.getAttribute("entity")+": "+area.getTooltiptext());
+                                    }
+                                </attribute>
+                                <zscript>
+                                    void update(int rowIndex) {
+                                    Label lb = (Label) self.getFellow("c"+rowIndex);
+                                    Doublebox db = (Doublebox) self.getFellow("v"+rowIndex);
+                                    model.setValue(lb.value, new Double(db.getValue().doubleValue()));
+                                    }  
+                                    PieModel model = new SimplePieModel();
+                                    for(int j=0; j &lt; 4; ++j) {
+                                    update(j);
+                                    }
+                                    chart4.setModel(model);
+                                </zscript>
+                            </chart>
+                        </row>
+                    </rows>
+                </grid>
+            </groupbox>
+        </div>
+        
+    </vbox>
+
 </zk>   
