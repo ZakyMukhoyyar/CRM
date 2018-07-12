@@ -24,6 +24,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
@@ -60,13 +61,21 @@ public class QuestionVM {
 
     private AnswerDTO answerDTO = new AnswerDTO();
     private List<AnswerDTO> answerDTOs = new ArrayList<>();
+    private List<AnswerDTO> answerType1DTOs = new ArrayList<>();
+    private List<AnswerDTO> answerType2DTOs = new ArrayList<>();
 
     private List<String> listQuestion = new ArrayList<String>();
+    private List<String> listQuestionFeedback = new ArrayList<String>();
     private ListModelList<Status> statuses = new ListModelList<>();
     private ListModelList<TypeTouchpoints> touchpointses = new ListModelList<>();
     private ListModelList<String> choiceAnswer = new ListModelList<>();
 
     private String questionID;
+    private String idChooseAnswer1;
+    private String idChooseAnswer2;
+    private String idChooseAnswer3;
+    private String idChooseAnswer4;
+    private String idChooseAnswer5;
     private String answerID;
     private String userID;
     private Status status;
@@ -92,26 +101,12 @@ public class QuestionVM {
             questionDTOs = Collections.emptyList();
         }
 
-        answerDTOs = answerService.findAll();
+        questionDTOs = questionService.findAll();
         for (QuestionDTO m : questionDTOs) {
             listQuestion.add(m.getQuestion());
         }
 
-//        questionDTOsType1 = questionService.findAllByTypeTouchpoints(TypeTouchpoints.TouchPoint_1);
-//        for (QuestionDTO m : questionDTOs) {
-//            listQuestion.add(m.getQuestion());
-//        }
-//
-//        questionDTOsType2 = questionService.findAllByTypeTouchpoints(TypeTouchpoints.TouchPoint_2);
-//        for (QuestionDTO m : questionDTOs) {
-//            listQuestion.add(m.getQuestion());
-//        }
-
-        choiceAnswer.add(" Sangat Baik Sekali ");
-        choiceAnswer.add(" Sangat Baik ");
-        choiceAnswer.add(" Cukup Baik ");
-        choiceAnswer.add(" Tidak Terlalu Baik ");
-        choiceAnswer.add(" Sangat Buruk ");
+        answerDTOs = answerService.findAll();
     }
 
     private void checkValidity(QuestionDTO question, AnswerDTO answer, PageNavigation previous) {
@@ -144,11 +139,15 @@ public class QuestionVM {
             }
             answerDTO = new AnswerDTOBuilder()
                     .setAnswerID(answerID)
+                    .setIdChooseAnswer1(UUID.randomUUID().toString())
+                    .setIdChooseAnswer2(UUID.randomUUID().toString())
+                    .setIdChooseAnswer3(UUID.randomUUID().toString())
+                    .setIdChooseAnswer4(UUID.randomUUID().toString())
+                    .setIdChooseAnswer5(UUID.randomUUID().toString())
                     .createAnswerDTO();
         } else {
             this.answerDTO = answer;
             answerID = answerDTO.getAnswerID();
-            userID = questionDTO.getQuestionID();
             this.previous = previous;
         }
     }
@@ -263,7 +262,7 @@ public class QuestionVM {
     @NotifyChange({"questionDTO", "answerDTO", "answerDTOs"})
     public void buttonSaveQuestion(@BindingParam("object") QuestionDTO obj, @ContextParam(ContextType.VIEW) Window window) {
         questionService.SaveOrUpdate(questionDTO);
-       
+
         showInformationMessagebox("Pertanyaan Berhasil Disimpan");
         BindUtils.postGlobalCommand(null, null, "refreshData", null);
         window.detach();
@@ -434,6 +433,62 @@ public class QuestionVM {
 
     public void setAnswerID(String answerID) {
         this.answerID = answerID;
+    }
+
+    public List<String> getListQuestionFeedback() {
+        return listQuestionFeedback;
+    }
+
+    public void setListQuestionFeedback(List<String> listQuestionFeedback) {
+        this.listQuestionFeedback = listQuestionFeedback;
+    }
+
+    public String getUserID() {
+        return userID;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
+
+    public String getIdChooseAnswer1() {
+        return idChooseAnswer1;
+    }
+
+    public void setIdChooseAnswer1(String idChooseAnswer1) {
+        this.idChooseAnswer1 = idChooseAnswer1;
+    }
+
+    public String getIdChooseAnswer2() {
+        return idChooseAnswer2;
+    }
+
+    public void setIdChooseAnswer2(String idChooseAnswer2) {
+        this.idChooseAnswer2 = idChooseAnswer2;
+    }
+
+    public String getIdChooseAnswer3() {
+        return idChooseAnswer3;
+    }
+
+    public void setIdChooseAnswer3(String idChooseAnswer3) {
+        this.idChooseAnswer3 = idChooseAnswer3;
+    }
+
+    public String getIdChooseAnswer4() {
+        return idChooseAnswer4;
+    }
+
+    public void setIdChooseAnswer4(String idChooseAnswer4) {
+        this.idChooseAnswer4 = idChooseAnswer4;
+    }
+
+    public String getIdChooseAnswer5() {
+        return idChooseAnswer5;
+    }
+
+    public void setIdChooseAnswer5(String idChooseAnswer5) {
+        this.idChooseAnswer5 = idChooseAnswer5;
     }
 
 }

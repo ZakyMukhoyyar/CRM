@@ -2,7 +2,7 @@
     <window apply="org.zkoss.bind.BindComposer"
             viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.customer.feedback.QuestionVM')"
             form="@id('fx') @load(vm.answerDTO) @save(vm.answerDTO, before='buttonSaveAnswer')"
-            width="50%" height="50%"
+            width="50%" height="85%"
             closable="true" sizable="true" title="Add Answer"
     >
         
@@ -38,8 +38,24 @@
                                 </combobox>
                             </row>
                             <row>
-                                <n:h5 class="modal-title"> Jawaban </n:h5>
-                                <textbox class="form-control" width="100%" value="@bind(fx.chooseAnswer)" rows="3"/>  
+                                <n:h5 class="modal-title"> Jawaban 1 </n:h5>
+                                <textbox class="form-control" width="100%" value="@bind(fx.chooseAnswer1)" rows="2"/>  
+                            </row>
+                            <row>
+                                <n:h5 class="modal-title"> Jawaban 2</n:h5>
+                                <textbox class="form-control" width="100%" value="@bind(fx.chooseAnswer2)" rows="2"/>  
+                            </row>
+                            <row>
+                                <n:h5 class="modal-title"> Jawaban 3</n:h5>
+                                <textbox class="form-control" width="100%" value="@bind(fx.chooseAnswer3)" rows="2"/>  
+                            </row>
+                            <row>
+                                <n:h5 class="modal-title"> Jawaban 4</n:h5>
+                                <textbox class="form-control" width="100%" value="@bind(fx.chooseAnswer4)" rows="2"/>  
+                            </row>
+                            <row>
+                                <n:h5 class="modal-title"> Jawaban 5</n:h5>
+                                <textbox class="form-control" width="100%" value="@bind(fx.chooseAnswer5)" rows="2"/>  
                             </row>
                 
                         </rows>
