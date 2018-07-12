@@ -13,7 +13,6 @@ import com.agit.crm.interfaces.web.facade.dto.assembler.crm.AnswerDTOAssembler;
 import com.agit.crm.shared.type.TypeTouchpoints;
 import java.util.List;
 import java.util.Map;
-import javafx.scene.input.TouchPoint;
 import org.apache.commons.lang.Validate;
 
 /**

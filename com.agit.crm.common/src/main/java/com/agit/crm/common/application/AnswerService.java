@@ -9,7 +9,6 @@ import com.agit.crm.common.dto.customer.feedback.AnswerDTO;
 import com.agit.crm.shared.type.TypeTouchpoints;
 import java.util.List;
 import java.util.Map;
-import javafx.scene.input.TouchPoint;
 
 /**
  *

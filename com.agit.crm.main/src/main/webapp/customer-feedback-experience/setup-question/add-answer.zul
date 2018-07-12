@@ -4,7 +4,7 @@
             form="@id('fx') @load(vm.answerDTO) @save(vm.answerDTO, before='buttonSaveAnswer')"
             width="85%" height="85%"
             closable="true" sizable="true" title="Add Answer"
-    >
+            contentStyle="overflow:auto;">
         
         <!-- Modal content-->
         <div>
@@ -62,44 +62,44 @@
                 </groupbox>
                 
                 <groupbox>
-                        <listbox rows="10" mold="paging" pageSize="10" 
+                    <listbox rows="2" mold="paging" pageSize="2" 
                                  emptyMessage="${labels.common.noDataFound}" model="@bind(vm.answerDTOs)">
-                            <listhead>
-                                <listheader label="Question" width="15%" align="center"/>
-                                <listheader label="Answer 1" width="15%" align="center"/>
-                                <listheader label="Answer 2" width="15%" align="center"/>
-                                <listheader label="Answer 3" width="15%" align="center"/>
-                                <listheader label="Answer 4" width="15%" align="center"/>
-                                <listheader label="Answer 5" width="15%" align="center"/>
-                                <listheader label="Aksi" width="10%" align="center"/>
-                            </listhead>
-                            <template name="model">
-                                <listitem value="${each}">
-                                    <listcell>
-                                        <label width="100%" value="@bind(each.chooseQuestion)"/>
-                                    </listcell>
-                                    <listcell>
-                                        <label width="100%" value="@bind(each.chooseAnswer1)"/>
-                                    </listcell>
-                                    <listcell>
-                                        <label width="100%" value="@bind(each.chooseAnswer2)"/>
-                                    </listcell>
-                                    <listcell>
-                                        <label width="100%" value="@bind(each.chooseAnswer3)"/>
-                                    </listcell>
-                                    <listcell>
-                                        <label width="100%" value="@bind(each.chooseAnswer4)"/>
-                                    </listcell>
-                                    <listcell>
-                                        <label width="100%" value="@bind(each.chooseAnswer5)"/>
-                                    </listcell>
-                                    <listcell >
-                                        <a onClick="@command('detail', object=each)" image="/images/skk_edit.png" sclass="btn btn-default"/>
-                                        <a onClick="@command('delete', object=each)" image="/images/clear_x.png" sclass="btn btn-default"/>
-                                    </listcell>
-                                </listitem>
-                            </template>
-                        </listbox>
+                        <listhead>
+                            <listheader label="Question" width="15%" align="center"/>
+                            <listheader label="Answer 1" width="15%" align="center"/>
+                            <listheader label="Answer 2" width="15%" align="center"/>
+                            <listheader label="Answer 3" width="15%" align="center"/>
+                            <listheader label="Answer 4" width="15%" align="center"/>
+                            <listheader label="Answer 5" width="15%" align="center"/>
+                            <listheader label="Aksi" width="10%" align="center"/>
+                        </listhead>
+                        <template name="model">
+                            <listitem value="${each}">
+                                <listcell>
+                                    <label width="100%" value="@bind(each.chooseQuestion)"/>
+                                </listcell>
+                                <listcell>
+                                    <label width="100%" value="@bind(each.chooseAnswer1)"/>
+                                </listcell>
+                                <listcell>
+                                    <label width="100%" value="@bind(each.chooseAnswer2)"/>
+                                </listcell>
+                                <listcell>
+                                    <label width="100%" value="@bind(each.chooseAnswer3)"/>
+                                </listcell>
+                                <listcell>
+                                    <label width="100%" value="@bind(each.chooseAnswer4)"/>
+                                </listcell>
+                                <listcell>
+                                    <label width="100%" value="@bind(each.chooseAnswer5)"/>
+                                </listcell>
+                                <listcell >
+                                    <a onClick="@command('detail', object=each)" image="/images/skk_edit.png" sclass="btn btn-default"/>
+                                    <a onClick="@command('delete', object=each)" image="/images/clear_x.png" sclass="btn btn-default"/>
+                                </listcell>
+                            </listitem>
+                        </template>
+                    </listbox>
                 </groupbox>
                 <separator/>
                 

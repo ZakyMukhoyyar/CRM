@@ -107,6 +107,9 @@ public class QuestionVM {
         }
 
         answerDTOs = answerService.findAll();
+
+        answerType1DTOs = answerService.findAnswerByTouchPoints(TypeTouchpoints.TouchPoint_1);
+        answerType2DTOs = answerService.findAnswerByTouchPoints(TypeTouchpoints.TouchPoint_2);
     }
 
     private void checkValidity(QuestionDTO question, AnswerDTO answer, PageNavigation previous) {
@@ -221,7 +224,7 @@ public class QuestionVM {
     }
 
     @Command("buttonAddAnswer")
-    @NotifyChange({"questionDTO", "answerDTOs"})
+    @NotifyChange("questionDTO")
     public void buttonAddAnswer(@BindingParam("object") AnswerDTO obj, @ContextParam(ContextType.VIEW) Window window) {
         Map<String, Object> params = new HashMap<>();
         params.put("answerDTO", obj);
@@ -489,6 +492,22 @@ public class QuestionVM {
 
     public void setIdChooseAnswer5(String idChooseAnswer5) {
         this.idChooseAnswer5 = idChooseAnswer5;
+    }
+
+    public List<AnswerDTO> getAnswerType1DTOs() {
+        return answerType1DTOs;
+    }
+
+    public void setAnswerType1DTOs(List<AnswerDTO> answerType1DTOs) {
+        this.answerType1DTOs = answerType1DTOs;
+    }
+
+    public List<AnswerDTO> getAnswerType2DTOs() {
+        return answerType2DTOs;
+    }
+
+    public void setAnswerType2DTOs(List<AnswerDTO> answerType2DTOs) {
+        this.answerType2DTOs = answerType2DTOs;
     }
 
 }

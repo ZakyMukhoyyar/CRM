@@ -1,10 +1,12 @@
 <zk xmlns:w="client" xmlns:n="native">
     <window apply="org.zkoss.bind.BindComposer"
             viewModel="@id('vm') @init('com.agit.crm.main.viewmodel.customer.feedback.QuestionVM')"
-            form="@id('fx') @load(vm.questionDTO) @save(vm.questionDTO, before='buttonSaveDataQuestion')"
+            form="@id('fx') @load(vm.answerDTO) @save(vm.answerDTO, before='buttonSaveDataQuestion')"
             width="100%" height="100%"
             closable="true" sizable="true"
             title="Feedback">
+       
+
         <separator></separator>
         <separator></separator>
         <separator></separator>
@@ -13,35 +15,48 @@
         <separator></separator>
         <separator></separator>
         <div height="5px" />
-        <listbox rows="7" mold="paging" pageSize="10" emptyMessage="${labels.common.noDataFound}" model="@bind(vm.questionDTOsType2)">
+        <listbox rows="1" mold="paging" pageSize="1" emptyMessage="${labels.common.noDataFound}" model="@bind(vm.answerType2DTOs)" height="43%">
             <listhead>
-                <listheader label="" width="5%" align="left"/>
-                <listheader label="" width="55%" align="left"/>
-                <listheader label="" width="40%" align="left"/>
+                <listheader label="" width="100%" align="left"/>
             </listhead>
             <template name="model">
                 <listitem value="${each}">
                     <listcell>
-                        <label width="100%" value="@bind(each.questionID)"/>
-                    </listcell>
-                    <listcell>
-                        <label width="100%" value="@bind(each.question)"/>
-                    </listcell>
-                    <listcell>
-                        <radiogroup id="@bind(each.questionID)" model="@load(vm.choiceAnswer)" selectedItem="@bind(fx.choiceAnswer)">
-                            <template name="model">
-                                <radio label="@load(each)" value="@load(each)"></radio>
-                            </template>
+                        <label width="100%" value="@bind(each.chooseQuestion)"/>
+                        <separator bar="true" />
+                        <separator></separator>
+                        <radiogroup selectedItem="@bind(fx.chooseAnswer1)">
+                            <radiogroup id="@bind(each.idChooseAnswer1)" onCheck="choice1.value = self.selectedItem.label" />
+                            <radio label="@bind(each.chooseAnswer1)" value="@bind(each.chooseAnswer1)" radiogroup="@bind(each.idChooseAnswer1)"/>
+                        </radiogroup>
+                        <separator></separator>
+                        <radiogroup selectedItem="@bind(fx.chooseAnswer2)">
+                            <radiogroup id="@bind(each.idChooseAnswer2)" onCheck="choice1.value = self.selectedItem.label" />
+                            <radio label="@bind(each.chooseAnswer2)" value="@bind(each.chooseAnswer2)" radiogroup="@bind(each.idChooseAnswer2)"/>
+                        </radiogroup>
+                        <separator></separator>
+                        <radiogroup selectedItem="@bind(fx.chooseAnswer3)">
+                            <radiogroup id="@bind(each.idChooseAnswer3)" onCheck="choice1.value = self.selectedItem.label" />
+                            <radio label="@bind(each.chooseAnswer3)" value="@bind(each.chooseAnswer2)" radiogroup="@bind(each.idChooseAnswer3)"/>
+                        </radiogroup>
+                        <separator></separator>
+                        <radiogroup selectedItem="@bind(fx.chooseAnswer4)">
+                            <radiogroup id="@bind(each.idChooseAnswer4)" onCheck="choice1.value = self.selectedItem.label" />
+                            <radio label="@bind(each.chooseAnswer4)" value="@bind(each.chooseAnswer2)" radiogroup="@bind(each.idChooseAnswer4)"/>
+                        </radiogroup>
+                        <separator></separator>
+                        <radiogroup selectedItem="@bind(fx.chooseAnswer5)">
+                            <radiogroup id="@bind(each.idChooseAnswer5)" onCheck="choice1.value = self.selectedItem.label" />
+                            <radio label="@bind(each.chooseAnswer5)" value="@bind(each.chooseAnswer2)" radiogroup="@bind(each.idChooseAnswer5)"/>
                         </radiogroup>
                     </listcell>
+                    
                 </listitem>
             </template>
         </listbox>
         <separator></separator>
-        <separator></separator>
-        <separator></separator>
         <label style="color:#022c2f;font-size:15px;font-weight: bold;align:center" value="Apakah anda memiliki komentar, pertanyaan atau keluhan ?"/>
-        <textbox class="form-control" width="100%" value="@bind(fx.question)" rows="5"/>  
+        <textbox class="form-control" width="100%" rows="5"/>  
         <separator></separator>
         <div class="modal-footer">
             <button style="background-color: #022c2f;color:white" label="Submit" onClick="@command('buttonSaveQuestion')" />
